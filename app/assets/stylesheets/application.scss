@@ -14,10 +14,22 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
+@import "common";
+@import "main";
+@import "posts";
 
 .clearfix:after {
   content: "";
   clear: both;
   display: block;
+}
+
+.cancel-padding {
+  padding: -15px;
+}
+
+.container-wo-padding{
+  width: 1140px;
+  padding: 0 15px;
+  margin: 0 auto;
 }

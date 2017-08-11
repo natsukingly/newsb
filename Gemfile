@@ -13,6 +13,8 @@ gem 'erb2haml'
 gem "jquery-rails"
 
 gem 'bootstrap-sass'
+
+gem 'nokogiri'
 # ここまで追加したGEM
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

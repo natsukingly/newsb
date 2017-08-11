@@ -1,3 +1,13 @@
+.loaded-news.row
+  .left-news.col-xs-8
+    %p 
+      #{article_site}:
+    %h2=article_title
+    =@article_url
+  .right-news.col-xs-4
+    =image_tag @article_image, class: "article_image img-responsive"
+
+
 = form_with(model: post, local: true) do |form|
   - if post.errors.any?
     #error_explanation
@@ -7,23 +17,16 @@
       %ul
         - post.errors.full_messages.each do |message|
           %li= message
-  .field
-    = form.label :user_id
-    = form.text_field :user_id, id: :post_user_id
-  .field
-    = form.label :title
-    = form.text_field :title, id: :post_title
-  .field
-    = form.label :content
-    = form.text_area :content, id: :post_content
-  .field
-    = form.label :article_title
-    = form.text_field :article_title, id: :post_article_title
-  .field
-    = form.label :article_image
-    = form.text_field :article_image, id: :post_article_image
-  .field
-    = form.label :article_url
-    = form.text_field :article_url, id: :post_article_url
-  .actions
+  .field.form-group
+    = form.text_field :user_id, placeholder: "user_id", id: :post_user_id, class: "form-control"
+  .field.form-group
+    = form.text_field :title, placeholder: "title" , id: :post_title, class: "form-control"
+  .field.form-group
+    = form.text_area :content, placeholder: "content", id: :post_content, class: "form-control"
+  .field.form-group
+    = form.hidden_field :article_title, value: @article_title, id: :post_article_title
+    = form.hidden_field :article_image, value: @article_image, id: :post_article_image
+    = form.hidden_field :article_url, value: @article_url, id: :post_article_url
+    = form.hidden_field :article_site, value: @article_site, id: :post_article_site
+  .actions.default-btn.btn
     = form.submit

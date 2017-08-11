@@ -1,3 +1,29 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.p_block{
+    background-color: white;
+    margin-top: 10px;
+}
+
+.p_top{
+    border-bottom: 2px solid #eee;
+    padding: 10px 5px; 
+    background: white;
+}
+
+.p_article_title{
+}
+
+.p_body{
+    padding: 20px 5px; 
+    background: white;
+}
+
+.p_title{
+    // font-size: 20px;
+}
+
+

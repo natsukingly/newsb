@@ -1,26 +1,34 @@
-%p#notice= notice
-%h1 Posts
-%table
-  %thead
-    %tr
-      %th User
-      %th Title
-      %th Content
-      %th Article title
-      %th Article image
-      %th Article url
-      %th{:colspan => "3"}
-  %tbody
+- if notice 
+  %p#notice= notice
+
+.new-post-form
+  .white-over-lay
+    .container{ :style => "min-height: 500px;"}   
+      .form-wrapper.col-xs-12.col-md-8.col-md-push-2
+        - if @show_form == true
+          .post-form
+            = render 'form', post: @post, article_image: @article_image, article_url: @article_url, article_title: @article_title, article_site: @article_site
+        - else 
+          .url-form
+            = render 'url_form'
+  
+
+.container
+  .p_container.col-md-8.col-md-push-2
     - @posts.each do |post|
-      %tr
-        %td= post.user_id
-        %td= post.title
-        %td= post.content
-        %td= post.article_title
-        %td= post.article_image
-        %td= post.article_url
-        %td= link_to 'Show', post
-        %td= link_to 'Edit', edit_post_path(post)
-        %td= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Post', new_post_path
+      .p_block.col-xs-12
+        =link_to post.article_url do
+          .p_top.row
+            .p_article_title.col-md-12.col-xs-8
+              #{post.article_site}: #{post.article_title}
+            .p_article_mobile_right.visible-xs.col-xs-4
+              =image_tag post.article_image, class: "article_mobile_image img-responsive img-rounded"
+        =link_to post do
+          .p_body.row
+            .p_left_body.col-sm-8.col-xs-12
+              .p_user
+              .p_title
+                =post.title
+              .p_status
+            .p_right_body.col-sm-4.hidden-xs
+              =image_tag post.article_image, class: "article_image img-responsive img-rounded"
