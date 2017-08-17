@@ -3,27 +3,147 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.p_block{
-    background-color: white;
+.post{
     margin-top: 10px;
 }
 
 .p_top{
     border-bottom: 2px solid #eee;
-    padding: 10px 5px; 
+    padding: 20px; 
     background: white;
+    white-space: nowrap;
 }
 
 .p_article_title{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
+.p_article_site{
+    font-size: 8px;
+    color: grey;
+}
+
+
 .p_body{
-    padding: 20px 5px; 
+    padding: 20px 20px; 
     background: white;
 }
 
-.p_title{
-    // font-size: 20px;
+.p_article_image{
+    width: 180px;
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+}
+
+.p_content_main{
+    width: 470px;
+    p {
+    }
 }
 
 
+
+
+// mobile post
+
+
+.m_post{
+    margin-top: 10px;
+}
+
+.m_p_top{
+    border-bottom: 2px solid #eee;
+    background: white;
+    padding: 20px;
+}
+
+.m_p_article_image{
+    width: 70px;
+    height: 70px;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.m_p_article_title p{
+    font-size: 12px;
+}
+
+
+.post_nav_option{
+    padding: 20px;
+}
+
+.post_nav_option.active{
+    border-bottom: 2px solid black;
+}
+
+
+#form_wrapper{
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    overflow: auto;
+}
+
+#form_modal{
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    margin: 100px auto 0;
+    display: none;
+    z-index: 200;
+}
+
+.f_body{
+    min-height: 300px;
+}
+
+
+.post_form{
+    margin-top: 20px;
+    background-color: white;
+    padding: 20px　20px 0 20px;
+    
+    textarea{
+    resize: vertical;
+    width: 100%;
+    white-space: pre-wrap;
+    }
+}
+
+#post_content{
+    min-height: 250px;
+}
+
+.dark_over_lay{
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+
+.form_image{
+    width: 180px;
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+}
+
+.form_btn{
+    background-color: black;
+    color: white;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    border: none;
+}

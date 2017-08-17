@@ -1,34 +1,97 @@
-- if notice 
-  %p#notice= notice
 
-.new-post-form
-  .white-over-lay
-    .container{ :style => "min-height: 500px;"}   
-      .form-wrapper.col-xs-12.col-md-8.col-md-push-2
-        - if @show_form == true
-          .post-form
-            = render 'form', post: @post, article_image: @article_image, article_url: @article_url, article_title: @article_title, article_site: @article_site
-        - else 
-          .url-form
-            = render 'url_form'
+#form_wrapper.dark_over_lay
+#form_modal
+
+.index_nav
+  .index_container.clearfix
+    .post_nav_option.col-xs-6.active
+      %i.fa.fa-address-card-o.fa-2x
+      %br
+        posts 
+    .post_nav_option.col-xs-6
+      %i.fa.fa-bar-chart.fa-2x
+      %br
+        score
+
+.index_container
+  .post_form
+    =form_tag "/posts/load_url", remote: true do
+      .form-group.input-group
+        = url_field_tag :placeholder_url, "", placeholder: "paste url to start your post!", class: "url_form form-control"
+        %span.input-group-btn
+          = button_tag type: :submit, class: "btn" do
+            %i.fa.fa-pencil-square-o
+                
+  
+.index_container.posts.hidden-xs
+  - @posts.each do |post|
+    .post
+      =link_to post.article_url do
+        .p_top
+          .p_article_title= post.article_title
+          .p_article_site= post.article_site
+     
+        .p_body
+          .p_content.clearfix
+            .p_content_main.pull-left
+              =render '/shared/user_profile', user: post.user, object: post
+              =render_with_hashtags(simple_format(post.content))
+            =image_tag post.article_image.index.url, class: "pull-right" 
+          .p_status
+        
+  = paginate @posts     
+.scroller-status.text-center
+  .infinite-scroll-request
+    .loading
+      %i.fa.fa-spinner.fa-spin{ style:"margin-top: 30px;"}
+
+    
+ 
+            
+  
+.m_posts.visible-xs
+  - @posts.each do |post|
+    .m_post
+      =link_to post.article_url do
+        .m_p_top.clearfix
+          .m_p_article_title.pull-left{style: "width: 80%;"}
+            %p #{post.article_site}: 
+            %p #{post.article_title}
+          .m_p_article_image.pull-right{style: "background-image:url(#{post.article_image.index.url});"}
+      .p_body.clearfix
+        = render '/shared/user_profile', user: post.user, object: post
+        =render_with_hashtags(simple_format(post.content))
+ 
+    .scroller-status.text-center
+      .infinite-scroll-request.loader-ellips
+        %p
+          %i.fa.fa-spinner.fa-spin
+      %p.infinite-scroll-last
+        End of content
+      %p.infinite-scroll-error
+        No more pages to load
+    
+    = paginate @posts
+  
   
 
-.container
-  .p_container.col-md-8.col-md-push-2
-    - @posts.each do |post|
-      .p_block.col-xs-12
-        =link_to post.article_url do
-          .p_top.row
-            .p_article_title.col-md-12.col-xs-8
-              #{post.article_site}: #{post.article_title}
-            .p_article_mobile_right.visible-xs.col-xs-4
-              =image_tag post.article_image, class: "article_mobile_image img-responsive img-rounded"
-        =link_to post do
-          .p_body.row
-            .p_left_body.col-sm-8.col-xs-12
-              .p_user
-              .p_title
-                =post.title
-              .p_status
-            .p_right_body.col-sm-4.hidden-xs
-              =image_tag post.article_image, class: "article_image img-responsive img-rounded"
+   
+  
+  
+:javascript
+  $('.posts').infiniteScroll({
+    path: "nav.pagination a[rel=next]",
+    append: '.post',
+    status: '.scroller-status',
+    hideNav: '.pagination'
+    
+  });
+  
+  $('.m_posts').infiniteScroll({
+    path: "nav.pagination a[rel=next]",
+    append: '.m_post',
+    status: '.scroller-status',
+    hideNav: '.pagination'
+  });
+  
+

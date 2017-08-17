@@ -14,22 +14,16 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "reset";
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Serif|Open+Sans');
+@import "font-awesome-sprockets";
+@import "font-awesome";
 @import "common";
-@import "main";
 @import "posts";
+@import "users";
+@import "search";
 
-.clearfix:after {
-  content: "";
-  clear: both;
-  display: block;
-}
 
-.cancel-padding {
-  padding: -15px;
-}
 
-.container-wo-padding{
-  width: 1140px;
-  padding: 0 15px;
-  margin: 0 auto;
-}
+
+

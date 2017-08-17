@@ -1,0 +1,112 @@
+.search_title
+  %h1.text-center Explore: #{@search} 
+
+.search_nav.text-center
+  .nav_container.clearfix
+    .search_nav_option.col-xs-3.active
+      %i.fa.fa-address-card-o.fa-2x
+      %br
+        posts 
+    =link_to "/search_articles/#{@search}" do
+      .search_nav_option.col-xs-3
+        %i.fa.fa-bar-chart.fa-2x
+        %br
+          artciles
+    =link_to "/search_users/#{@search}" do
+      .search_nav_option.col-xs-3
+        %i.fa.fa-bar-chart.fa-2x
+        %br
+          users
+    =link_to "/search_tags/#{@search}" do
+      .search_nav_option.col-xs-3
+        %i.fa.fa-bar-chart.fa-2x
+        %br
+          tags
+        
+.index_content
+  .container.hidden-xs
+    .p_wrapper.col-lg-8.col-lg-push-2.posts
+      - @posts.each do |post|
+        .post
+          .p_block.col-xs-12
+            =link_to post.article_url do
+              .p_top.row
+                .p_article_title.col-xs-12
+                  %p #{post.article_title}
+                  %p.p_article_site #{post.article_site}
+                     
+         
+            .p_body.row
+              .p_left_body.col-xs-8
+                .p_user_block
+                  .p_user_image.col-xs-2
+                    =image_tag post.user.image.profile_sm.url, class: "img-circle"
+                  .p_user_info.col-xs-10
+                    =link_to post.user do
+                      %p= post.user.name
+                    %span= post.user.shoulder_name
+                .p_title.col-xs-12
+                  =render_with_hashtags(simple_format(post.content))
+                .p_status
+              .p_right_body.col-xs-4
+                .p_article_image.pull-right{style:"background-image:url(#{post.article_image});"}
+                
+      .scroller-status.text-center
+        .infinite-scroll-request.loader-ellips
+          %p
+            %i.fa.fa-spinner.fa-spin
+        %p.infinite-scroll-last
+          End of content
+        %p.infinite-scroll-error
+          No more pages to load
+      
+      = paginate @posts         
+  
+  .m_container.visible-xs.m_posts
+    - @posts.each do |post|
+      .m_p_block.m_post
+        =link_to post.article_url do
+          .m_p_top.row
+            .m_p_article_title.pull-left{style: "width: 80%;"}
+              %p #{post.article_site}: 
+              %p #{post.article_title}
+            .m_p_article_image.pull-right{style: "background-image:url(#{post.article_image});"}
+   
+        .m_p_user.row
+          .p_user_block
+            .p_user_image
+              =image_tag post.user.image.profile_sm.url, class: "img-circle pull-left"
+            .m_p_user_info
+              =link_to post.user do
+                %p= post.user.name
+              %p= post.user.shoulder_name
+        .m_p_body.row
+          .m_p_title.col-xs-12
+            =render_with_hashtags(simple_format(post.content))
+  
+    .scroller-status.text-center
+      .infinite-scroll-request.loader-ellips
+        %p
+          %i.fa.fa-spinner.fa-spin
+      %p.infinite-scroll-last
+        End of content
+      %p.infinite-scroll-error
+        No more pages to load
+        
+    = paginate @posts    
+  
+  
+:javascript 
+  $('.posts').infiniteScroll({
+    path: "nav.pagination a[rel=next]",
+    append: '.post',
+    status: '.scroller-status',
+    hideNav: '.pagination'
+  });
+  
+  $('.m_posts').infiniteScroll({
+    path: "nav.pagination a[rel=next]",
+    append: '.m_post',
+    status: '.scroller-status',
+    hideNav: '.pagination'
+  });

@@ -15,6 +15,18 @@ gem "jquery-rails"
 gem 'bootstrap-sass'
 
 gem 'nokogiri'
+
+gem 'devise'
+gem 'omniauth-facebook'
+
+gem 'carrierwave'
+gem 'rmagick'
+
+gem 'font-awesome-sass'
+
+gem "jquery-turbolinks" # Turbolinksで遷移したときもjQuery.ready()を呼び出してくれる
+gem "kaminari"
+
 # ここまで追加したGEM
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

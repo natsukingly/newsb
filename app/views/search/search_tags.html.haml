@@ -1,0 +1,52 @@
+.search_title
+    %h1.text-center Explore: #{@search} 
+  
+.search_nav.text-center
+    .nav_container.clearfix
+        =link_to "/search_posts/#{@search}" do
+            .search_nav_option.col-xs-3
+                %i.fa.fa-address-card-o.fa-2x
+                %br
+                    posts 
+        =link_to "/search_articles/#{@search}" do
+            .search_nav_option.col-xs-3
+                %i.fa.fa-bar-chart.fa-2x
+                %br
+                    articles
+        =link_to "/search_users/#{@search}" do
+            .search_nav_option.col-xs-3
+                %i.fa.fa-bar-chart.fa-2x
+                %br
+                    users
+                
+        .search_nav_option.col-xs-3.active
+            %i.fa.fa-bar-chart.fa-2x
+            %br
+                tags
+
+.index_content
+    .container
+        - @tags.each do |tag|
+            .tag
+                =link_to root_path do
+                    .s_tag_block
+                        %h2 
+                            = tag.name 
+                            %span
+                                [#{tag.posts.count}]
+                  
+  
+  
+    .scroller-status.text-center
+        .infinite-scroll-request.loader-ellips
+            %p
+            %i.fa.fa-spinner.fa-spin
+        %p.infinite-scroll-last
+            End of content
+        %p.infinite-scroll-error
+            No more pages to load
+      
+    = paginate @tags
+
+
+

@@ -1,0 +1,51 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.user_wrapper{
+    background-color: white;
+    min-height: 150px;
+}
+
+
+
+.user_image{
+    width: 100px;
+    height: 100px;
+}
+
+.user_image_block{
+    width: 120px;
+}
+
+.user_inner_bag{
+    padding: 20px 40px;
+}
+
+.user_info, .user_image_block{
+    float: left;
+}
+
+.user_nav{
+    text-align: center;
+    height: 100%;
+    background-color: #fcfcfc;
+}
+
+.user_nav_option{
+    padding: 30px;
+}
+
+
+.user_nav_option.active{
+    border-bottom: 2px solid black;
+}
+
+.user_name, .user_about_title{
+    font-weight: bold;
+}
+
+.user_edit_btn{
+    border: 1px solid grey;
+    padding: 3px 10px 3px 5px;
+    border-radius: 5px;
+}

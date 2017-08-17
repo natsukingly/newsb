@@ -5,10 +5,41 @@
     %title Newsparty
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application'
+    
+    
   %body
     %header
-      .container-wo-padding
-        .header-left
-          = link_to "Newsparty", root_path, id: "logo"
+      .header-left.pull-left
+        .logo.pull-left
+          = link_to "Newsparty", root_path, id: "logo", class: "pull-left"
+        .search_form.pull-left
+          = form_tag "/search" do
+            .form-group.pull-left.search_bar
+              %i.glyphicon.glyphicon-search.search_icon{style: "color: black;"}
+              = text_field_tag :search, "", placeholder: "think together, think better", class: "form-control", style: "background-color: white; border: 0; border-radius: 100px;"
+              
+              
+              
+      .header-right.pull-right
+        %ul.nav.clearfix.pull-right
+          -if user_signed_in?
+            %li.pull-right= link_to 'ログアウト', destroy_user_session_path
+          -else
+            %li.pull-right= link_to "facebookでログイン", user_facebook_omniauth_authorize_path
+          = link_to root_path do
+            %li.pull-right
+              %i.fa.fa-trophy
+            
+    - if notice 
+      %p#notice= notice
+    - if alert
+      %p#alert= alert
     =yield
+    
+    %footer
+      %ul
+        %li Thank you for visiting 
+        %li Natsuki Production
+        %li come back soon!!
+        

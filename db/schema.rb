@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170811155129) do
+ActiveRecord::Schema.define(version: 20170815114810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
-    t.string "title"
     t.text "content"
     t.string "article_title"
     t.string "article_image"
@@ -25,6 +24,43 @@ ActiveRecord::Schema.define(version: 20170811155129) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "article_site"
+    t.datetime "article_published_time"
+    t.string "article_locale"
   end
 
+  create_table "posts_tags", id: false, force: :cascade do |t|
+    t.bigint "post_id"
+    t.bigint "tag_id"
+    t.index ["post_id"], name: "index_posts_tags_on_post_id"
+    t.index ["tag_id"], name: "index_posts_tags_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.string "provider"
+    t.string "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.string "gender"
+    t.string "shoulder_name", default: "Newspartyの村人X"
+    t.text "about", default: ""
+    t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  add_foreign_key "posts_tags", "posts"
+  add_foreign_key "posts_tags", "tags"
 end

@@ -1,0 +1,6 @@
+.user_block.clearfix
+    =image_tag user.image.profile_sm.url, class: "img-circle pull-left"
+    .user_info.pull-left
+        =link_to user.name, user
+        %p.user_shoulder_name
+            =user.shoulder_name

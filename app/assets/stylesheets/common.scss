@@ -1,11 +1,56 @@
 body{
     background-color: #eee;
+    // font-family: 'Noto Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    // font-family: 'Noto Serif', serif;
+    font-size: 16px;
+    color: rgb(29, 33, 41);
+}
+
+html { 
+    font-size: calc(112.5% + 0.25vw); 
+}
+
+
+li {
+    list-style-type: none;
+}
+
+a  {
+        color: #333;
+        text-decoration: none;
+    &:hover{
+        color: #333;
+        text-decoration: none;
+    }
+    &:visited{
+        color: #333;
+        text-decoration: none;
+    }
+    &:link{
+        color: #333;
+        text-decoration: none;
+    }
 }
 
 header{
     height: 70px;
     line-height: 70px;
     background-color: rgba(0,0,0,1);
+    padding: 0 20px;
+    color: white;
+}
+
+header li{
+    float: left;
+}
+
+.header-right li a{
+    padding: 0 20px;
+}
+
+header > div{
+    height: 100%;
 }
 
 #logo{
@@ -14,3 +59,118 @@ header{
 }
 
 a { text-decoration: none !important}
+
+
+footer{
+    height: 200px;
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 40px;
+    margin-top: 40px;
+}
+
+footer ul li{
+    padding: 10px;
+    text-style: none;
+}
+
+
+
+.index_container{
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.nav_container{
+    max-width: 800px;
+    padding: 0 15px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+
+.index_nav{
+    text-align: center;
+    height: 100%;
+    background-color: #fcfcfc;
+}
+
+.grey{
+    color: grey;
+}
+
+.small_grey{
+    font-size: 12px;
+    color: grey;
+}
+
+// user index profile
+
+.user_block{
+    padding-bottom: 20px;
+}
+
+.user_info{
+    padding-left: 20px;
+    span{
+        margin-left: 10px;
+    }
+}
+
+.user_shoulder_name{
+    font-size: 12px;
+    color: grey;
+}
+
+
+.new-post-form{
+    min-height: 500px;
+    background-image: url("/coverphoto3.jpg");
+    background-size: cover;
+    background-position: center;
+}
+.search_bar{
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 200px;
+    position: relative;
+}
+
+.search_icon{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+
+#search{
+    padding-left: 30px;
+}
+
+
+
+.url-form{
+    padding-top: 200px;
+    // max-width: 720px;
+}
+
+.white-over-lay{
+    background-color: rgba(250,250,250,0.5);
+    height: 100%;
+}
+
+// .article_image{
+//     max-width: 170px;
+//     border-radius: 5px;
+// }
+
+.loaded-news{
+    padding: 50px 0;
+}
+
+
+.no_scroll{
+    overflow: hidden;
+}
+

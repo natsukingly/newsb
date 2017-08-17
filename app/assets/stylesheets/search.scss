@@ -1,0 +1,60 @@
+// Place all the styles related to the search controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.search_title{
+    padding: 50px;
+}
+
+.search_nav{
+    background-color: white;
+}
+
+.search_nav_option{
+    padding: 25px 0;
+}
+
+.search_nav_option.active{
+    border-bottom: 2px solid black;
+}
+
+.s_article_image{
+    width: 150px;
+    height: 100px;
+    background-position: center;
+    background-size: cover;
+    margin-left: 5px;
+}
+
+.s_article_title{
+    margin-left: 20px;
+}
+
+.s_user_block{
+    padding: 10px;
+    background-color: white;
+}
+
+.s_user_info{
+    margin-left: 10px;
+}
+
+.s_tag_block{
+    display: inline-block;    
+    background-color: white;
+    padding: 10px;
+    margin: 0 10px 10px 0;
+    box-shadow:5px 5px 0px -2px;
+    border:1px solid #000;
+    float: left;
+    
+    h2{
+        padding: 0;
+        margin: 0;
+        font-size: 16px;
+    }
+    span{
+        margin: 0;
+        font-size: 9px;
+    }
+}

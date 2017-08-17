@@ -1,0 +1,64 @@
+.search_title
+  %h1.text-center Explore: #{@search} 
+  
+.search_nav.text-center
+  .nav_container.clearfix
+    =link_to "/search_posts/#{@search}" do
+      .search_nav_option.col-xs-3
+        %i.fa.fa-address-card-o.fa-2x
+        %br
+          posts 
+    =link_to "/search_articles/#{@search}" do
+      .search_nav_option.col-xs-3
+        %i.fa.fa-bar-chart.fa-2x
+        %br
+          articles
+    .search_nav_option.col-xs-3.active
+      %i.fa.fa-bar-chart.fa-2x
+      %br
+        users
+    =link_to "/search_tags/#{@search}" do
+      .search_nav_option.col-xs-3
+        %i.fa.fa-bar-chart.fa-2x
+        %br
+          tags
+
+.index_content
+  .container.hidden-xs
+    .s_wrapper.col-md-6.col-md-push-3.users
+      - @users.each do |user|
+        .user
+          .s_user_block.col-xs-12{style: "background-color: white;"}
+            =link_to user_path(user) do
+              .s_user_block.clearfix
+                .s_user_image.pull-left
+                  =image_tag user.image.profile_sm.url, class: "img-circle"
+                .s_user_info.pull-left
+                  %p 
+                    #{user.name} #{user.shoulder_name} 124 followers | 125 following | #{user.posts.count} posts
+                  %p 
+                    about
+                  %p 
+                    %i.fa.fa-quote-left
+                    = user.about
+                    %i.fa.fa-quote-right
+                        
+                .s_user_followers.pull-right
+                  %p 
+                    follow 
+          
+      .scroller-status.text-center
+        .infinite-scroll-request.loader-ellips
+          %p
+            %i.fa.fa-spinner.fa-spin
+        %p.infinite-scroll-last
+          End of content
+        %p.infinite-scroll-error
+          No more pages to load
+      
+      = paginate @users
+
+
+
+  
+  

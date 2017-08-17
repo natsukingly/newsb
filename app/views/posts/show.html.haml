@@ -1,22 +1,37 @@
-%p#notice= notice
-%p
-  %strong User:
-  = @post.user_id
-%p
-  %strong Title:
-  = @post.title
-%p
-  %strong Content:
-  = @post.content
-%p
-  %strong Article title:
-  = @post.article_title
-%p
-  %strong Article image:
-  = @post.article_image
-%p
-  %strong Article url:
-  = @post.article_url
+
+
+.post_show_wrapper.hidden-xs
+  .p_block.col-xs-12
+    =link_to @post.article_url do
+      .p_top.row
+        .container
+          .p_article_title.col-xs-12
+            %p #{@post.article_title}
+            %p.p_article_site #{@post.article_site}:
+              
+    .p_body.row
+      .container
+        .p_left_body.col-xs-8
+          .p_user
+          .p_content
+            =simple_format @post.content
+          .p_status
+        .p_right_body.col-xs-4
+          =image_tag @post.article_image, class: "article_image img-responsive img-rounded"
+
+.m_container.visible-xs
+  .m_p_block
+    =link_to @post.article_url do
+      .m_p_top.row
+        .m_p_article_title.pull-left{style: "width: 80%;"}
+          %p #{@post.article_site}: 
+          %p #{@post.article_title}
+        .m_p_article_image.pull-right{style: "background-image:url(#{@post.article_image});"}
+    .m_p_body.row
+      .p_left_body.col-xs-12
+        .p_user
+        .p_status
+
 = link_to 'Edit', edit_post_path(@post)
 |
 = link_to 'Back', root_path

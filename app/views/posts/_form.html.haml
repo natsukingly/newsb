@@ -1,32 +1,59 @@
-.loaded-news.row
-  .left-news.col-xs-8
-    %p 
-      #{article_site}:
-    %h2=article_title
-    =@article_url
-  .right-news.col-xs-4
-    =image_tag @article_image, class: "article_image img-responsive"
 
+.post
+  .p_top
+    .p_article_title= article_title
+    .p_article_site= article_site
 
-= form_with(model: post, local: true) do |form|
-  - if post.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(post.errors.count, "error")
-        prohibited this post from being saved:
-      %ul
-        - post.errors.full_messages.each do |message|
-          %li= message
-  .field.form-group
-    = form.text_field :user_id, placeholder: "user_id", id: :post_user_id, class: "form-control"
-  .field.form-group
-    = form.text_field :title, placeholder: "title" , id: :post_title, class: "form-control"
-  .field.form-group
-    = form.text_area :content, placeholder: "content", id: :post_content, class: "form-control"
-  .field.form-group
-    = form.hidden_field :article_title, value: @article_title, id: :post_article_title
-    = form.hidden_field :article_image, value: @article_image, id: :post_article_image
-    = form.hidden_field :article_url, value: @article_url, id: :post_article_url
-    = form.hidden_field :article_site, value: @article_site, id: :post_article_site
-  .actions.default-btn.btn
-    = form.submit
+  .p_body.f_body
+    .p_content.clearfix
+      .p_content_main.pull-left
+        =render '/shared/user_profile_wo_time', user: current_user, object: post
+        = form_with(model: post, local: true) do |form|
+          - if post.errors.any?
+            #error_explanation
+              %h2
+                = pluralize(post.errors.count, "error")
+                prohibited this post from being saved:
+              %ul
+                - post.errors.full_messages.each do |message|
+                  %li= message
+                  
+          .field.form-group
+            = form.text_area :content, placeholder: "content", id: :post_content, class: "form-control", style: "border: none; box-shadow: none; resize: none;"
+          .field.form-group
+            = form.hidden_field :article_image, value: @article_image
+            = form.hidden_field :article_url, value: @article_url
+            = form.hidden_field :article_site, value: @article_site
+            = form.hidden_field :article_title, value: @article_title
+            = form.hidden_field :article_published_time, value: @article_published_time
+            = form.hidden_field :article_locale, value: @article_locale
+            = form.hidden_field :user_id, value: current_user.id
+          = form.submit class: "form_btn"
+      .article_image.pull-right.form_image{style: "background-image: url(#{@article_image});"} 
+      
+:javascript 
+  // $("#post_content").height(30);//init
+  // $("#post_content").css("lineHeight","20px");//init
+  
+  // $("#post_content").on("input",function(evt){
+  //     if(evt.target.scrollHeight > evt.target.offsetHeight){   
+  //         $(evt.target).height(evt.target.scrollHeight);
+  //     }else{          
+  //         var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
+  //         while (true){
+  //             $(evt.target).height($(evt.target).height() - lineHeight); 
+  //             if(evt.target.scrollHeight > evt.target.offsetHeight){
+  //                 $(evt.target).height(evt.target.scrollHeight);
+  //                 break;
+  //             }
+  //         }
+  //     }
+  // });
+  
+  $('#form_wrapper').click(function(){
+    $('#form_wrapper').fadeOut();
+    $('#form_modal').fadeOut();
+    $('body').removeClass('no_scroll');
+  });
+
+ 

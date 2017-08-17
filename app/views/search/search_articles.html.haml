@@ -1,0 +1,96 @@
+.search_title
+  %h1.text-center Explore: #{@search} 
+  
+.search_nav.text-center
+  .nav_container.clearfix
+    =link_to "/search_posts/#{@search}" do
+      .search_nav_option.col-xs-3
+        %i.fa.fa-address-card-o.fa-2x
+        %br
+        posts 
+    .search_nav_option.col-xs-3.active
+      %i.fa.fa-bar-chart.fa-2x
+      %br
+        artciles
+    =link_to "/search_users/#{@search}" do
+      .search_nav_option.col-xs-3
+        %i.fa.fa-bar-chart.fa-2x
+        %br
+          users
+    =link_to "/search_tags/#{@search}" do
+      .search_nav_option.col-xs-3
+        %i.fa.fa-bar-chart.fa-2x
+        %br
+          tags
+
+.index_content
+  .container.hidden-xs
+    .p_wrapper.col-lg-8.col-lg-push-2.posts
+      - @posts.each do |post|
+        .post
+          .p_block.col-xs-12
+            =link_to post.article_url do
+              .p_top.row
+                .s_article_image.pull-left{style:"background-image:url(#{post.article_image});"}
+                .s_article_title.pull-left
+                  %p #{post.article_title}
+                  %p #{post.article_published_time}
+                  %p #{post.article_locale}
+                  %p.p_article_site #{post.article_site}
+                  %p #{Post.where(article_title: post.article_title).count} people posted shared this article.
+                  
+         
+       
+      .scroller-status.text-center
+        .infinite-scroll-request.loader-ellips
+          %p
+            %i.fa.fa-spinner.fa-spin
+        %p.infinite-scroll-last
+          End of content
+        %p.infinite-scroll-error
+          No more pages to load
+      
+      = paginate @posts         
+  
+  .m_container.visible-xs.m_posts
+    - @posts.each do |post|
+      .m_p_block.m_post
+        =link_to post.article_url do
+          .m_p_top.row
+            .m_p_article_title.pull-left{style: "width: 80%;"}
+              %p #{post.article_site}: 
+              %p #{post.article_title}
+              %p #{post.article_published_time}
+              %p #{post.article_locale}
+            .m_p_article_image.pull-right{style: "background-image:url(#{post.article_image});"}
+   
+    .scroller-status.text-center
+      .infinite-scroll-request.loader-ellips
+        %p
+          %i.fa.fa-spinner.fa-spin
+      %p.infinite-scroll-last
+        End of content
+      %p.infinite-scroll-error
+        No more pages to load
+        
+    = paginate @posts    
+  
+  
+:javascript 
+  $('.posts').infiniteScroll({
+    path: "nav.pagination a[rel=next]",
+    append: '.post',
+    status: '.scroller-status',
+    hideNav: '.pagination'
+  });
+  
+  $('.m_posts').infiniteScroll({
+    path: "nav.pagination a[rel=next]",
+    append: '.m_post',
+    status: '.scroller-status',
+    hideNav: '.pagination'
+  });
+
+
+  
+  

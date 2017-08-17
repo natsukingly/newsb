@@ -15,4 +15,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require autosize
+//= require infinitescroll.js
 //= require_tree .
+
+
+
+
