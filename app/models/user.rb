@@ -5,6 +5,7 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
   
   has_many :posts, dependent: :destroy
+  has_many :likes
   
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
