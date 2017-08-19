@@ -9,14 +9,36 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @post = Post.new
-    @posts = Post.page(params[:page]).order(created_at: :desc)
-    @show_form = false
-    @article_title = ""
-    @article_url = ""
-    @article_published_time = ""
-    @article_locale = ""
-    @article_site=""
+    @posts = Post.order(created_at: :desc)
+    @default_tags = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
+    @tags = Tag.where(name: @default_tags)
+    
+    @users = User.all.limit(5)
+    
   end
+  
+  def optimized_index
+    @tags = Tag.where(id: params[:tag_ids])
+    @post = Post.new
+    @posts = Post.includes(:tags).where('tags.id' => params[:tag_ids]).order(created_at: :desc)
+  end
+  
+  def test 
+    @test = Tag.where(id: params[:tag_ids])
+  end
+
+  
+  def other_posts
+    @original_post = Post.find(params[:id])
+    @other_posts = Post.where(article_title: @original_post.article_title)
+  end
+  
+  
+  
+  def article_index
+    @articles = Post.select('distinct on (article_title) *')
+  end
+  
   
   def hashtags
     tag = Tag.find_by(name: params[:name])
@@ -31,6 +53,7 @@ class PostsController < ApplicationController
   def load_url
     @show_form = true
     @article_url = params[:placeholder_url]
+    @default_tags = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
     
     url = @article_url
     charset = nil
@@ -83,7 +106,12 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    
+    
+    
     @post = Post.new(post_params)
+    @post.content = params[:post][:content] + " " + "#" + params[:post][:tag]
+    
     @post.user_id = current_user.id
     @post.remote_article_image_url = params[:post][:article_image].gsub('http:','https:')
 
@@ -130,6 +158,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:user_id, :content, :article_title, :article_url, :article_site, :article_published_time, :article_locale)
+      params.require(:post).permit(:user_id, :article_title, :article_url, :article_site, :article_published_time, :article_locale)
     end
 end

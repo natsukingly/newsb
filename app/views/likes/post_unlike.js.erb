@@ -1,0 +1,1 @@
+$(".post_<%=@post.id%>").find(".like_link").html('<%= escape_javascript(render("likes/like_post", post: @post))%>');

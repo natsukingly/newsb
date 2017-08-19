@@ -7,12 +7,11 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application'
     
-    
   %body
     %header
-      .header-left.pull-left
+      .header_left.pull-left
         .logo.pull-left
-          = link_to "Newsparty", root_path, id: "logo", class: "pull-left"
+          = link_to "platform", root_path, id: "logo", class: "pull-left"
         .search_form.pull-left
           = form_tag "/search" do
             .form-group.pull-left.search_bar
@@ -21,15 +20,25 @@
               
               
               
-      .header-right.pull-right
-        %ul.nav.clearfix.pull-right
-          -if user_signed_in?
-            %li.pull-right= link_to 'ログアウト', destroy_user_session_path
-          -else
-            %li.pull-right= link_to "facebookでログイン", user_facebook_omniauth_authorize_path
-          = link_to root_path do
-            %li.pull-right
-              %i.fa.fa-trophy
+      .header_right.pull-right  
+        -if user_signed_in?
+          #dropdown_btn.pull-right
+            %i.fa.fa-ellipsis-h.fa-2x.pull-right
+        -else
+          %li.pull-right= link_to "facebookでログイン", user_facebook_omniauth_authorize_path
+    
+    %ul#dropdown_menu
+      %li
+        = link_to "Top", root_path
+      %li
+        = link_to "Users", users_path
+      %li
+        = link_to "News", article_index_path
+      %li
+        = link_to 'Logout', destroy_user_session_path
+            
+     
+              
             
     - if notice 
       %p#notice= notice
@@ -43,3 +52,12 @@
         %li Natsuki Production
         %li come back soon!!
         
+        
+:javascript      
+  $('#dropdown_btn').click(function(){
+    if($('#dropdown_menu').hasClass("open")){
+      $('#dropdown_menu').removeClass("open").fadeIn();
+    } else {
+      $('#dropdown_menu').addClass("open").fadeOut();
+    }
+  });     

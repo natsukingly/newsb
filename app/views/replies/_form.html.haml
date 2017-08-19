@@ -1,0 +1,26 @@
+.c_reply
+  - @reply = Reply.new
+  
+  =image_tag current_user.image.profile_sm.url, class: "profile_xs pull-left r_form_image"
+  
+  = form_with(model: @reply, local: true) do |form|
+    - if @reply.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@reply.errors.count, "error")
+          prohibited this post from being saved:
+        %ul
+          - @reply.errors.full_messages.each do |message|
+            %li= message
+            
+    .field.form-group
+      = form.text_area :content, placeholder: "content", class: "form-control r_content", style: "border: none; box-shadow: none; resize: none;"
+    .field.form-group
+      = form.hidden_field :comment_id, value: comment.id
+      = form.hidden_field :user_id, value: current_user.id
+    .r_form_btn 
+      .close_r_form_btn.black.btn
+        Close
+      = form.submit "Reply", class: "black btn"
+      
+      

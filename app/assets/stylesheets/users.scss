@@ -6,7 +6,22 @@
     min-height: 150px;
 }
 
+.user{
+    background-color: white;
+    padding: 20px;
+}
 
+.user_index_image{
+    margin-top: 5px;
+}
+
+.user_ranking{
+    display: inline-block;
+    margin-right: 20px;
+    line-height: 60px;
+    border:1px solid #eee;
+    width: 30px;
+}
 
 .user_image{
     width: 100px;
@@ -49,3 +64,12 @@
     padding: 3px 10px 3px 5px;
     border-radius: 5px;
 }
+
+
+.follow_btn{
+    border: 1px solid grey;
+    color: grey;
+    border-radius: 5px;
+    padding: 5px 20px;
+}
+

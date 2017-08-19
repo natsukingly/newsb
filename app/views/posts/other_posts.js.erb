@@ -1,0 +1,2 @@
+$(".other_post_<%=@original_post.id%>").html('<%= escape_javascript(render("posts/other_posts", other_posts: @other_posts, original_post: @original_post))%>');
+

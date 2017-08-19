@@ -2,9 +2,54 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// post optimizer
+.feed_optimizer{
+    background-color: white;
+    min-height: 100px;
+    padding: 20px;
+}
+
+
+.tag_content{
+    display: inline-block;
+    background-color: white;
+    border-radius: 100px;
+    padding: 5px 10px;
+    margin: 10px 10px 0 0;
+    cursor: pointer;
+    color: grey;
+}
+input[type=checkbox]:checked + .tag_content{
+    background-color: grey;
+    color: white;
+    border: 1px solid white;
+    
+}
+
+
+input[type=checkbox] + .tag_content:after{
+    content: 'ー';
+} 
+
+input[type=checkbox]:checked + .tag_content:after{
+    content: '＋';
+} 
+
+
+
+
+.give_me_ellipsis {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 2; /* number of lines to show */
+   line-height: 1.2;        /* fallback */
+   max-height: 2*1.2;       /* fallback */
+}
 
 .post{
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .p_top{
@@ -31,6 +76,21 @@
 .p_body{
     padding: 20px 20px; 
     background: white;
+    position: relative;
+    min-height: 150px;
+    border-bottom: 1px solid #eee;
+}
+
+.p_status{
+    position: absolute;
+    font-size: 16px;
+    bottom: 20px;
+    left: 20px;
+}
+
+.p_more_posts{
+    color: grey;
+    margin: 10px 0 -10px 0;
 }
 
 .p_article_image{
@@ -41,9 +101,36 @@
 }
 
 .p_content_main{
-    width: 470px;
-    p {
+    width: 370px;
+    padding-bottom: 40px;
+}
+
+.comment_invite{
+    
+}
+
+.comment_link{
+    cursor: pointer;
+}
+
+.same_article_posts_link{
+    margin-left: 20px;
+}
+
+
+
+
+@media screen and (max-width:768px){
+    .p_content_main{
+        width: 100%;
+        padding-bottom: 40px;
     }
+}
+
+
+.p_status > div{
+    display: inline-block;
+    margin-right: 20px;
 }
 
 
@@ -70,7 +157,7 @@
 }
 
 
-.m_p_article_title p{
+.m_p_article_title{
     font-size: 12px;
 }
 
@@ -83,6 +170,16 @@
     border-bottom: 2px solid black;
 }
 
+
+.tag_selection{
+    border: none;
+    color: grey;
+    padding-left: 10px;
+    box-shadow: none;
+    border-radius: 0;
+    font-size: 12px;
+    text-align: center;
+}
 
 #form_wrapper{
     display: none;
@@ -146,4 +243,108 @@
     bottom: 20px;
     left: 20px;
     border: none;
+}
+
+
+
+// article
+
+
+.article{
+    margin-top: 10px;
+}
+
+.a_top{
+    border-bottom: 2px solid #eee;
+    padding: 20px; 
+    background: white;
+    white-space: nowrap;
+}
+
+.a_title{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.a_site{
+
+}
+
+
+.a_body{
+    padding: 20px 20px; 
+    background: white;
+    position: relative;
+    min-height: 150px;
+    border-bottom: 1px solid #eee;
+}
+
+
+
+.a_info{
+    padding: 0 0 10px 0;
+}
+
+.m_a_image{
+    margin: -20px -20px 10px -20px;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.a_image{
+    width: 180px;
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+}
+
+.a_content_main{
+    width: 370px;
+    padding-bottom: 40px;
+}
+
+
+.a_status{
+    position: absolute;
+    bottom: 20px;
+    left: 210px;
+}
+
+
+@media screen and (max-width:768px){
+    .a_content_main{
+        width: 100%;
+        padding-bottom: 30px;
+    }
+    
+    .a_status{
+        bottom: 10px;
+        left: 20px;
+    }
+}
+
+
+
+.a_status > div{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.a_comment{
+    font-size: 12px;
+}
+
+.a_user_info{
+    font-size: 12px;
+    div{
+        padding-bottom: 5px;
+    }
+}
+
+.a_placeholder{
+    padding-top: 50px;
 }

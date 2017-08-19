@@ -1,0 +1,36 @@
+.index_container.articles
+	- @articles.each do |article|
+		-article_posts = Post.where(article_title: article.article_title)
+		.article{class: "article_#{article.id}"}
+			=link_to article.article_url do
+				.a_body
+					.m_a_image.visible-xs{style: "background-image: url(#{article.article_image.url})"}
+					.a_content.clearfix
+						
+						=image_tag article.article_image.index.url, class: "pull-left hidden-xs"
+								
+						.a_content_main.pull-right
+							.a_info
+								%h2.a_title.give_me_ellipsis= article.article_title
+								%p.a_site.grey.small
+									= article.article_site 
+									%span.fa.fa-clock-o
+									= article.article_published_time
+							-most_liked_post_id = Like.where(post_id: article_posts).group(:post_id).order('count(post_id) desc').limit(1).pluck(:post_id)
+							-best_post = Post.find(most_liked_post_id)
+							- if best_post[0]
+								.a_user_info
+									=render '/shared/user_mini_profile', user: best_post[0].user, object: best_post[0]
+								.a_comment.give_me_ellipsis
+									=best_post[0].content
+							- else 
+								.a_placeholder.grey.text-center
+									coming soon!!
+									
+							.a_status.clearfix
+								.a_like_stat
+									Total
+									%i.fa.fa-thumbs-o-up
+									123 
+							
+					

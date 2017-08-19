@@ -1,25 +1,20 @@
-%h1 Listing users
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Image
-      %th Provider
-      %th Uid
-      %th
-      %th
-      %th
-
-  %tbody
-    - @users.each do |user|
-      %tr
-        %td= user.name
-        %td= user.image
-        %td= user.provider
-        %td= user.uid
-        %td= link_to 'Show', user
-        %td= link_to 'Edit', edit_user_path(user)
-        %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
-
-
+.index_container
+  - @users.each_with_index do |user, i|
+    .user.clearfix
+      .user_ranking.pull-left.text-center
+        #{i+1}
+      =image_tag user.image.profile_sm.url, class: "pull-left user_index_image"
+      .user_info.pull-left
+        =link_to user.name, user
+        %p.user_shoulder_name
+          =user.shoulder_name
+        %p.grey
+          #{Like.where(user_id: user.id).count} total likes
+          %span.hidden-xs
+            |  157 followers  |  33 followings
+            
+      .follow_btn.pull-right
+        %p
+          + follow
+          

@@ -1,11 +1,17 @@
 body{
-    background-color: #eee;
+    background-color: white;
     // font-family: 'Noto Sans', sans-serif;
     font-family: 'Open Sans', sans-serif;
     // font-family: 'Noto Serif', serif;
     font-size: 16px;
     color: rgb(29, 33, 41);
+    position: relative;
 }
+
+#main_contents{
+    position: relative;
+}
+
 
 html { 
     font-size: calc(112.5% + 0.25vw); 
@@ -15,6 +21,8 @@ html {
 li {
     list-style-type: none;
 }
+
+
 
 a  {
         color: #333;
@@ -34,27 +42,51 @@ a  {
 }
 
 header{
+
     height: 70px;
     line-height: 70px;
-    background-color: rgba(0,0,0,1);
+    // background-color: rgba(0,0,0,1);
     padding: 0 20px;
-    color: white;
+    color: grey;
 }
 
-header li{
-    float: left;
+#dropdown_btn{
+    cursor: pointer;
+    height: 70px;
+    line-height: 70px;
+    width: 100px;
+    padding-top: 25px;
+    padding: 25px 20px 0 20px;
 }
 
-.header-right li a{
-    padding: 0 20px;
+.header-right{
+    
 }
+
+
+#dropdown_menu{
+   position: absolute;
+   padding: 10px 40px;
+   top: 70px;
+   right: 40px;
+   z-index: 100;
+   display: none;
+   background-color: white;
+   border-radius: 5px;
+   li{
+        line-height: 30px;
+        height: 30px;
+   }
+}
+
+
 
 header > div{
     height: 100%;
 }
 
 #logo{
-    color: white;
+    color: grey;
     font-size: 30px;
 }
 
@@ -75,11 +107,22 @@ footer ul li{
     text-style: none;
 }
 
+.btn{
+    padding: 5px 10px;
+}
 
+.black{
+    background-color: black;
+    color: white;
+}
+
+span.input-group-btn{
+    background-color: #eee;
+}
 
 .index_container{
-    max-width: 700px;
-    margin: 0 auto;
+    max-width: 600px;
+    margin: 10px auto 0;
 }
 
 .nav_container{
@@ -115,6 +158,13 @@ footer ul li{
     padding-left: 20px;
     span{
         margin-left: 10px;
+    }
+}
+
+.user_info_xs{
+    padding-left: 10px;
+    span{
+        margin-left: 5px;
     }
 }
 

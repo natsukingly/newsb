@@ -2,16 +2,9 @@
 #form_wrapper.dark_over_lay
 #form_modal
 
-.index_nav
-  .index_container.clearfix
-    .post_nav_option.col-xs-6.active
-      %i.fa.fa-address-card-o.fa-2x
-      %br
-        posts 
-    .post_nav_option.col-xs-6
-      %i.fa.fa-bar-chart.fa-2x
-      %br
-        score
+#test{style: "display:none;"}
+  YES IT'S WORKING!!
+
 
 .index_container
   .post_form
@@ -21,77 +14,115 @@
         %span.input-group-btn
           = button_tag type: :submit, class: "btn" do
             %i.fa.fa-pencil-square-o
-                
-  
-.index_container.posts.hidden-xs
-  - @posts.each do |post|
-    .post
-      =link_to post.article_url do
-        .p_top
-          .p_article_title= post.article_title
-          .p_article_site= post.article_site
-     
-        .p_body
-          .p_content.clearfix
-            .p_content_main.pull-left
-              =render '/shared/user_profile', user: post.user, object: post
-              =render_with_hashtags(simple_format(post.content))
-            =image_tag post.article_image.index.url, class: "pull-right" 
-          .p_status
-        
-  = paginate @posts     
-.scroller-status.text-center
-  .infinite-scroll-request
-    .loading
-      %i.fa.fa-spinner.fa-spin{ style:"margin-top: 30px;"}
 
-    
- 
-            
-  
-.m_posts.visible-xs
-  - @posts.each do |post|
-    .m_post
-      =link_to post.article_url do
-        .m_p_top.clearfix
-          .m_p_article_title.pull-left{style: "width: 80%;"}
-            %p #{post.article_site}: 
-            %p #{post.article_title}
-          .m_p_article_image.pull-right{style: "background-image:url(#{post.article_image.index.url});"}
-      .p_body.clearfix
-        = render '/shared/user_profile', user: post.user, object: post
-        =render_with_hashtags(simple_format(post.content))
- 
-    .scroller-status.text-center
-      .infinite-scroll-request.loader-ellips
-        %p
-          %i.fa.fa-spinner.fa-spin
-      %p.infinite-scroll-last
-        End of content
-      %p.infinite-scroll-error
-        No more pages to load
-    
-    = paginate @posts
-  
-  
+  .feed_optimizer
+    =form_tag '/optimized_index', method: :get, remote: true do
+      -@tags.each do |tag|
+        =label_tag do
+          .tag_pill
+            =check_box_tag "tag_ids[]", tag.id, true, style: "display: none;"
+            .tag_content
+              = tag.name
+      =submit_tag "save"
 
-   
+.index_container.posts#main_contents
+  =render "posts/post_index", posts: @posts
   
+  .other_post_block
+  
+  .sidebar
+    .s_user_block
+      - @users.each_with_index do |user, i|
+        .s_user.clearfix
+          .user_ranking.pull-left.text-center
+            #{i+1}
+          =image_tag user.image.profile_sm.url, class: "pull-left profile_xs"
+          .user_info.pull-left
+            =link_to user.name, user
+            %p.user_shoulder_name
+              =user.shoulder_name
+            %p.grey
+              #{Like.where(user_id: user.id).count} total likes
+
+
+  .s_post
+  .s_tag
+          
+// = paginate @posts
+// .scroller-status.text-center.hidden-xs
+//   .infinite-scroll-request
+//     .loading
+//       %i.fa.fa-spinner.fa-spin{ style:"margin-top: 30px;"}
   
 :javascript
-  $('.posts').infiniteScroll({
-    path: "nav.pagination a[rel=next]",
-    append: '.post',
-    status: '.scroller-status',
-    hideNav: '.pagination'
-    
+  
+  
+  
+  
+  $('.comment_invite').click(function(){
+    $(this).parents('.post').find('.comment_form').slideDown();
   });
   
-  $('.m_posts').infiniteScroll({
-    path: "nav.pagination a[rel=next]",
-    append: '.m_post',
-    status: '.scroller-status',
-    hideNav: '.pagination'
+  $('.close_c_form_btn').click(function(){
+    $(this).parents('.post').find('.comment_form').slideUp();
+  });
+
+  $('.reply_invite').click(function(){
+    $(this).parents('.comment').find('.reply_form').slideDown();
+  });
+  
+  $('.close_r_form_btn').click(function(){
+    $(this).parents('.comment').find('.reply_form').slideUp();
+  });
+  
+  $('.comment_link').click(function(){
+    $(this).parents('.post').find('.comments').slideDown();
   });
   
 
+
+  // awesome autosize code
+
+  
+  $(".c_content").height(30);//init
+  $(".c_content").css("lineHeight","20px");//init
+  
+  $(".c_content").on("input",function(evt){
+            if(evt.target.scrollHeight > evt.target.offsetHeight){
+                $(evt.target).height(evt.target.scrollHeight);
+            }else{
+                var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
+                while (true){
+                    $(evt.target).height($(evt.target).height() - lineHeight);
+                    if(evt.target.scrollHeight > evt.target.offsetHeight){
+                        $(evt.target).height(evt.target.scrollHeight);
+                    }
+                    break;
+                }
+            }
+        });
+        
+  $(".r_content").height(30);//init
+  $(".r_content").css("lineHeight","20px");//init
+  
+  $(".r_content").on("input",function(evt){
+            if(evt.target.scrollHeight > evt.target.offsetHeight){
+                $(evt.target).height(evt.target.scrollHeight);
+            }else{
+                var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
+                while (true){
+                    $(evt.target).height($(evt.target).height() - lineHeight);
+                    if(evt.target.scrollHeight > evt.target.offsetHeight){
+                        $(evt.target).height(evt.target.scrollHeight);
+                    }
+                    break;
+                }
+            }
+        });
+        
+  // $('.posts').infiniteScroll({
+  //   path: "nav.pagination a[rel=next]",
+  //   append: '.post',
+  //   status: '.scroller-status',
+  //   hideNav: '.pagination'
+  // });

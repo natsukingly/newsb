@@ -1,0 +1,64 @@
+
+- posts.each do |post|
+  -other_post_count = Post.where(article_title: post.article_title).count - 1
+  -unless other_post_count == 0
+    =link_to "posts/#{post.id}/other_posts", remote: true, class: "same_article_posts_link" do
+      %i.fa.fa-arrow-circle-o-down 
+      View #{other_post_count} other posts about this article
+  .post{class: "post_#{post.id}"}
+    =link_to post.article_url do
+      .p_top.hidden-xs
+        .p_article_title= post.article_title
+        .p_article_site= post.article_site
+      .m_p_top.clearfix.visible-xs
+        .m_p_article_title.pull-left{style: "width: 80%;"}
+          .p_article_title.give_me_ellipsis= post.article_title
+          .p_article_site= post.article_site
+        .m_p_article_image.pull-right{style: "background-image:url(#{post.article_image.index.url});"}
+    .p_body
+      .p_content.clearfix
+        .p_content_main.pull-left
+          =render '/shared/user_profile', user: post.user, object: post
+          =render_with_hashtags(simple_format(post.content))
+          .p_status
+            .like_link
+              =render '/likes/like_post', post: post
+            .comment_link
+              %i.fa.fa-comment-o 
+              =post.comments.count
+            .comment_invite
+              COMMENT
+              %i.fa.fa-pencil
+        =image_tag post.article_image.index.url, class: "pull-right hidden-xs"
+    %div{class:"other_post_#{post.id}", style: "margin-top: 10px"}
+        
+    .comments
+      .comment_form.clearfix
+        = render "comments/form", post: post
+      - post.comments.each do |comment| 
+        .comment.clearfix{class: "comment_#{comment.id}"}
+          .c_body.clearfix
+            .c_body_main.pull-left
+              = render "shared/user_mini_profile", user: comment.user, object: comment
+              =simple_format(comment.content)
+              .c_status.clearfix
+                .c_like_link
+                  =render '/likes/like_comment', comment: comment
+                .reply_link
+                  %i.fa.fa-comment-o 
+                  =comment.replies.count
+                .reply_invite
+                  Reply
+          .replies
+            .reply_form.clearfix
+              = render "replies/form", comment: comment
+            - comment.replies.each do |reply| 
+              .reply.clearfix{class: "reply_#{reply.id}"}
+                .r_content.clearfix
+                  .r_content_main.pull-left
+                    = render "shared/user_mini_profile", user: reply.user, object: reply
+                    =simple_format(comment.content)
+                    .c_status
+                      .r_like_link
+                        =render '/likes/like_reply', reply: reply
+    

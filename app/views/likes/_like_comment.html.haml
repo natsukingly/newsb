@@ -1,0 +1,10 @@
+%ul
+    -if user_signed_in?
+        %li
+            -if Like.find_by(user_id: current_user.id, comment_id: comment.id, target_type: "comment")
+                = link_to comment_unlike_path(comment.id), method: :delete, remote: true do 
+                    %i.fa.fa-thumbs-up
+            -else
+                = link_to comment_like_path(comment.id), method: :post, remote: true do
+                    %i.fa.fa-thumbs-o-up
+            = Like.where(comment_id: comment.id).where(target_type: "comment").count

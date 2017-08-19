@@ -1,0 +1,26 @@
+.p_comment
+  - @comment = Comment.new
+  
+  =image_tag current_user.image.profile_sm.url, class: "profile_xs pull-left c_form_image"
+  
+  = form_with(model: @comment, local: true) do |form|
+    - if @comment.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@comment.errors.count, "error")
+          prohibited this post from being saved:
+        %ul
+          - @comment.errors.full_messages.each do |message|
+            %li= message
+            
+    .field.form-group
+      = form.text_area :content, placeholder: "content", class: "form-control c_content", style: "border: none; box-shadow: none; resize: none;"
+    .field.form-group
+      = form.hidden_field :post_id, value: post.id
+      = form.hidden_field :user_id, value: current_user.id
+    .c_form_btn 
+      .close_c_form_btn.black.btn
+        Close
+      = form.submit "Comment", class: "black btn"
+      
+      
