@@ -7,7 +7,7 @@
 
 
 
-#side_nav
+#side_nav.hidden-xs
   .feed_optimizer
     =form_tag '/optimized_index', method: :get, remote: true do
       -@tags.each do |tag|
@@ -19,9 +19,7 @@
       =submit_tag "save"
 
 
-
-
-.main_container
+#main_container
   .post_form
     =form_tag "/posts/load_url", remote: true do
       .form-group.input-group
@@ -34,7 +32,11 @@
     =render "posts/post_index", posts: @posts
     .other_post_block
     
-    
+#sidebar.hidden-xs.hidden-sm
+  .contents
+    kfjdaklfda
+
+
   
           
 // = paginate @posts
