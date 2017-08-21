@@ -1,0 +1,9 @@
+.user_block.clearfix
+    =image_tag user.image.profile_sm.url, class: "pull-left img-circle"
+    .user_info.pull-left
+        =link_to user do
+            =user.name
+            %span.grey
+                #{time_ago_in_words(object.created_at)} ago
+        %p.user_shoulder_name
+            =user.shoulder_name

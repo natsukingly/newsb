@@ -8,37 +8,54 @@
     = javascript_include_tag 'application'
     
   %body
-    %header
-      .header_left.pull-left
-        .logo.pull-left
-          = link_to "platform", root_path, id: "logo", class: "pull-left"
-        .search_form.pull-left
-          = form_tag "/search" do
-            .form-group.pull-left.search_bar
-              %i.glyphicon.glyphicon-search.search_icon{style: "color: black;"}
-              = text_field_tag :search, "", placeholder: "think together, think better", class: "form-control", style: "background-color: white; border: 0; border-radius: 100px;"
-              
-              
-              
-      .header_right.pull-right  
+    %header.text-center
+      = link_to "Scrolll", root_path, id: "logo"        
+      #menu
+        %i.fa.fa-compass
+      #account
         -if user_signed_in?
-          #dropdown_btn.pull-right
-            %i.fa.fa-ellipsis-h.fa-2x.pull-right
+          =image_tag current_user.image.profile_sm.url, class: "img-circle"
         -else
-          %li.pull-right= link_to "facebookでログイン", user_facebook_omniauth_authorize_path
-    
-    %ul#dropdown_menu
-      %li
-        = link_to "Top", root_path
-      %li
-        = link_to "Users", users_path
-      %li
-        = link_to "News", article_index_path
-      %li
-        = link_to 'Logout', destroy_user_session_path
+          = link_to "facebookでログイン", user_facebook_omniauth_authorize_path
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+    #top
+      .big_container
+        .t_hot_article{style: "background-image: url('#{@top.article_image.url}')"}
+          .dark_over_lay
+            .border.text-center
+              %p
+                = @top.article_site
+                %i.fa.fa-clock-o
+                #{time_ago_in_words(@top.article_published_time)} ago
+              %h2= @top.article_title
+              .t_status
+                %i.fa.fa-thumbs-o-up
+                  =@top.likes.count
+                %i.fa.fa-comment-o
+                  174
+ 
+                
+                
             
-     
-              
+   
+   
+   
+   
+   
+            
+            
+                
+    
+    
             
     - if notice 
       %p#notice= notice

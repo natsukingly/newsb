@@ -1,12 +1,31 @@
 body{
-    background-color: white;
+    background-color: #f7f7f7;
     // font-family: 'Noto Sans', sans-serif;
     font-family: 'Open Sans', sans-serif;
     // font-family: 'Noto Serif', serif;
     font-size: 16px;
-    color: rgb(29, 33, 41);
+    color: #222222;
     position: relative;
 }
+
+.big_container{
+    width: 940px;
+    margin: 0 auto;
+}
+
+.main_container{
+    width: 600px;
+    margin: 0 20px;
+    float: left;
+}
+
+.sub_container{
+    width: 300px;
+    margin: 0;
+    float: left;
+}
+
+
 
 #main_contents{
     position: relative;
@@ -42,13 +61,127 @@ a  {
 }
 
 header{
-
-    height: 70px;
-    line-height: 70px;
-    // background-color: rgba(0,0,0,1);
-    padding: 0 20px;
+    position: relative;
+    height: 80px;
+    line-height: 80px;
+    background-color: white;
     color: grey;
+    #logo{
+        font-size: 50px;
+        font-weight: bold;
+        font-family: 'Karla', sans-serif;
+        color: black;
+    }
+    
+    #menu{
+        position: relative;
+        height: 80px;
+        width: 80px;
+        float: left;
+        color: black;
+        i{
+            font-size: 50px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);    
+        }
+    }
+    #account{
+        height: 80px;
+        width: 80px;
+        float: right;
+        color: black;
+        position: relative;
+        
+        img{
+           position: absolute;
+           top: 50%;
+           left: 50%;
+           -webkit-transform: translate(-50%, -50%);
+           transform: translate(-50%, -50%); 
+        }
+
+    }
+    
 }
+
+#top{
+    background-color: #f9f9f9;
+    height: 440px;
+    padding-top: 20px;
+
+    .border{
+        height: 100%;
+        border: 1px solid white;
+    }
+}
+
+
+.t_hot_article{
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    color: white;
+
+    .dark_over_lay{
+        padding: 20px;
+        height: 100%;
+        width: 100%;
+    }
+    p{
+        margin: 110px 0 10px;
+    }
+    h2{
+        margin: 0 auto;
+        width: 700px;
+        font-size: 25px;
+        margin-bottom: 40px;
+    }
+    .t_status{
+        font-size: 20px;
+    }
+    
+}
+
+.t_title{
+    background-color: black;
+    color: white;
+    padding-left: 10px;
+}
+
+.t_content{
+    background-color: white;
+    padding: 0 10px;
+}
+.t_tags{
+    .t_tag_pill{
+      display: inline-block;  
+    }
+}
+
+.t_articles{
+    margin-top: 20px;
+    .t_article_title{
+        margin-bottom: 10px;
+    }
+    .t_content{
+        height: 250px;
+    }
+}
+
+
+    
+.sidebar{
+    margin-top: 20px;
+}
+
+
+
+
+
 
 #dropdown_btn{
     cursor: pointer;
@@ -59,9 +192,7 @@ header{
     padding: 25px 20px 0 20px;
 }
 
-.header-right{
-    
-}
+
 
 
 #dropdown_menu{
@@ -120,10 +251,7 @@ span.input-group-btn{
     background-color: #eee;
 }
 
-.index_container{
-    max-width: 600px;
-    margin: 10px auto 0;
-}
+
 
 .nav_container{
     max-width: 800px;

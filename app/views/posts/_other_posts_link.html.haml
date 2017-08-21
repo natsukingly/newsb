@@ -1,0 +1,5 @@
+-other_post_count = Post.where(article_title: post.article_title).count - 1
+-unless other_post_count == 0
+  =link_to "posts/#{post.id}/other_posts", remote: true, class: "same_article_posts_link" do
+    %i.fa.fa-arrow-circle-o-down 
+    View #{other_post_count} other posts about this article
