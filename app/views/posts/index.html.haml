@@ -2,72 +2,40 @@
 #form_wrapper.dark_over_lay
 #form_modal
 
-#test{style: "display:none;"}
-  YES IT'S WORKING!!
+// #test{style: "display:none;"}
+//   YES IT'S WORKING!!
 
 
 
-.big_container.clearfix
-  .main_container
-    .post_form
-      =form_tag "/posts/load_url", remote: true do
-        .form-group.input-group
-          = url_field_tag :placeholder_url, "", placeholder: "paste url to start your post!", class: "url_form form-control"
-          %span.input-group-btn
-            = button_tag type: :submit, class: "btn" do
-              %i.fa.fa-pencil-square-o
+#side_nav
+  .feed_optimizer
+    =form_tag '/optimized_index', method: :get, remote: true do
+      -@tags.each do |tag|
+        =label_tag do
+          .tag_pill
+            =check_box_tag "tag_ids[]", tag.id, true, style: "display: none;"
+            .tag_content
+              = tag.name
+      =submit_tag "save"
+
+
+
+
+.main_container
+  .post_form
+    =form_tag "/posts/load_url", remote: true do
+      .form-group.input-group
+        = url_field_tag :placeholder_url, "", placeholder: "paste url to start your post!", class: "url_form form-control"
+        %span.input-group-btn
+          = button_tag type: :submit, class: "btn" do
+            %i.fa.fa-pencil-square-o
+
+  .posts#main_contents
+    =render "posts/post_index", posts: @posts
+    .other_post_block
+    
+    
   
-    .feed_optimizer
-      =form_tag '/optimized_index', method: :get, remote: true do
-        -@tags.each do |tag|
-          =label_tag do
-            .tag_pill
-              =check_box_tag "tag_ids[]", tag.id, true, style: "display: none;"
-              .tag_content
-                = tag.name
-        =submit_tag "save"
-  
-    .posts#main_contents
-      =render "posts/post_index", posts: @posts
-      
-      .other_post_block
-    
-    
-  .sub_container.sidebar
-    .t_tags
-      .t_title
-        %i.fa.fa-hashtag
-        hot tags
-      .t_content
-        -@tags.each do |tag|
-          .t_tag_pill
-            \#
-            #{tag.name} (#{tag.posts.count})
-    .t_articles
-      .t_title
-        %i.fa.fa-fw.fa-paper-plane-o
-        popular articles
-      .t_content
-        -Post.all.limit(3).each do |article|
-          %p=article.article_site
-          %p.give_me_ellipsis.t_article_title=article.article_title
-    
-    .s_user_block
-      .t_title
-        %i.fa.fa-fw.fa-paper-plane-o
-        Users
-      - @users.each_with_index do |user, i|
-        .s_user.clearfix
-          .user_ranking.pull-left.text-center
-            #{i+1}
-          =image_tag user.image.profile_sm.url, class: "pull-left profile_xs"
-          .user_info.pull-left
-            =link_to user.name, user
-            %p.user_shoulder_name
-              =user.shoulder_name
-            %p.grey
-              #{Like.where(user_id: user.id).count} total likes
-
           
 // = paginate @posts
 // .scroller-status.text-center.hidden-xs

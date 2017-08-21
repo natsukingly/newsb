@@ -8,66 +8,26 @@
     = javascript_include_tag 'application'
     
   %body
-    %header.text-center
-      = link_to "Scrolll", root_path, id: "logo"        
-      #menu
-        %i.fa.fa-compass
-      #account
-        -if user_signed_in?
-          =image_tag current_user.image.profile_sm.url, class: "img-circle"
-        -else
-          = link_to "facebookでログイン", user_facebook_omniauth_authorize_path
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-    #top
-      .big_container
-        .t_hot_article{style: "background-image: url('#{@top.article_image.url}')"}
-          .dark_over_lay
-            .border.text-center
-              %p
-                = @top.article_site
-                %i.fa.fa-clock-o
-                #{time_ago_in_words(@top.article_published_time)} ago
-              %h2= @top.article_title
-              .t_status
-                %i.fa.fa-thumbs-o-up
-                  =@top.likes.count
-                %i.fa.fa-comment-o
-                  174
- 
-                
-                
+    .flex_container
+      %header.text-center
+        = link_to "Scrolll", root_path, id: "logo"        
+        #menu
+          %i.fa.fa-compass
+        #account
+          -if user_signed_in?
+            =image_tag current_user.image.profile_sm.url, class: "img-circle"
+          -else
+            = link_to "facebookでログイン", user_facebook_omniauth_authorize_path
             
-   
-   
-   
-   
-   
-            
-            
-                
     
-    
-            
-    - if notice 
-      %p#notice= notice
-    - if alert
-      %p#alert= alert
-    =yield
-    
-    %footer
-      %ul
-        %li Thank you for visiting 
-        %li Natsuki Production
-        %li come back soon!!
+      - if notice 
+        %p#notice= notice
+      - if alert
+        %p#alert= alert
+      .flex_wrapper.clearfix  
+        =yield
+      
+
         
         
 :javascript      

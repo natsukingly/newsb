@@ -1,12 +1,65 @@
 body{
-    background-color: #f7f7f7;
-    // font-family: 'Noto Sans', sans-serif;
+    background-color: #f3f3f3;
     font-family: 'Open Sans', sans-serif;
-    // font-family: 'Noto Serif', serif;
     font-size: 16px;
     color: #222222;
     position: relative;
 }
+
+body{
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    height: 100%;
+}
+.flex_container{
+    min-height: 100vh;
+    height: 100%; /* for IE11 */
+    display: flex;
+    flex-direction: column;
+}
+.flex_wrapper{
+    flex: 1;
+    display: flex;
+}
+
+// side bar ここから
+
+
+#side_nav{
+    width: 200px;
+    background-color: #001E42;
+    padding: 20px;
+}
+
+.feed_optimizer{
+
+}
+
+
+.tag_content{
+    border-radius: 100px;
+    padding: 5px 10px;
+    margin: 0 10px 10px 0;
+    cursor: pointer;
+    color: grey;
+}
+input[type=checkbox]:checked + .tag_content{
+    color: white;
+    font-weight: bold;
+}
+
+
+input[type=checkbox] + .tag_content:after{
+    content: '＋';
+} 
+
+input[type=checkbox]:checked + .tag_content:after{
+    content: 'ー';
+} 
+
+
+
 
 .big_container{
     width: 940px;
@@ -16,7 +69,6 @@ body{
 .main_container{
     width: 600px;
     margin: 0 20px;
-    float: left;
 }
 
 .sub_container{
@@ -351,4 +403,9 @@ span.input-group-btn{
 .no_scroll{
     overflow: hidden;
 }
+
+
+
+
+
 

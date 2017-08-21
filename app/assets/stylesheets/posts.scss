@@ -5,38 +5,6 @@
 
 
 
-// post optimizer
-.feed_optimizer{
-    min-height: 100px;
-}
-
-
-.tag_content{
-    display: inline-block;
-    background-color: white;
-    border-radius: 100px;
-    padding: 5px 10px;
-    margin: 0 10px 10px 0;
-    cursor: pointer;
-    color: grey;
-}
-input[type=checkbox]:checked + .tag_content{
-    background-color: grey;
-    color: white;
-    border: 1px solid white;
-    
-}
-
-
-input[type=checkbox] + .tag_content:after{
-    content: 'ー';
-} 
-
-input[type=checkbox]:checked + .tag_content:after{
-    content: '＋';
-} 
-
-
 
 
 .give_me_ellipsis {
