@@ -9,7 +9,8 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @post = Post.new
-    @top = Post.last
+    @top_articles = Post.all.limit(5)
+    @top_users = User.all.limit(10)
     @posts = Post.order(created_at: :desc)
     @default_tags = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
     @tags = Tag.where(name: @default_tags)

@@ -19,7 +19,7 @@
 
 
 body{
-    background-color: #f3f3f3;
+    background-color: #e2e2e2;
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     color: #222222;
@@ -43,11 +43,58 @@ body{
     flex: 1;
     display: flex;
 }
+
+
+
+// main_container starts here
+
 #main_container{
     flex: 1;
     margin: 0 20px;
     min-width: 0;
 }
+
+#today_article{
+    margin-top: 20px;
+    .today_block{
+        color: white;
+        padding: 10px;
+        .status{
+            font-size: 10px;
+        }
+        // padding-left: 20px;
+        h2{
+            font-size: 20px;
+            font-weight: bold;
+            border-bottom: 1px solid grey;
+        }
+        p{
+            font-size: 10px;
+            color: grey;
+        }
+    }
+    .today_image{
+        height: 300px;
+        background-size: cover;
+        background-position: center;
+        .mini_dark_over_lay{
+            
+        background-color: rgba(0,0,0,.5);
+            
+        }
+        
+    }    
+    
+}
+
+
+
+
+
+
+
+
+
 
 @media(max-width: 768px){
     #main_container{
@@ -57,13 +104,37 @@ body{
 }
 
 
+// main nav
+
+#main_nav{
+    margin-top: 20px;
+    display: flex;
+    div{
+        text-align: center;
+        padding: 5px 0;
+        border: 1px solid rgba(0, 30, 66, .6);
+        flex: 1;
+    }
+    .feed_btn{
+        border-radius: 5px 0 0 5px;
+        border-right: 0;
+    }
+    .ranking_btn{
+        border-radius: 0 5px 5px 0;
+        border-left: 0;
+    }
+    .active{
+        background-color: rgb(0, 30, 66);
+        color: white;
+
+    }
+}
+
+
+
 // side bar ここから
 
-#sidebar{
-    width: 300px;
-    margin: 20px 20px 20px 0;
-    background-color: white;
-}
+
 
 
 
@@ -158,25 +229,28 @@ a  {
 
 header{
     position: relative;
-    height: 80px;
-    line-height: 80px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
     background-color: white;
-    color: grey;
+    color: white;
+    box-shadow: 0 0 2px #666, 0 0 8px #222;
     #logo{
-        font-size: 50px;
-        font-weight: bold;
-        font-family: 'Karla', sans-serif;
-        color: black;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);    
     }
     
     #menu{
         position: relative;
-        height: 80px;
-        width: 80px;
+        height: 50px;
+        width: 50px;
         float: left;
-        color: black;
+        color: #001E42;
         i{
-            font-size: 50px;
+            font-size: 30px;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -185,10 +259,10 @@ header{
         }
     }
     #account{
-        height: 80px;
-        width: 80px;
+        height: 50px;
+        width: 50px;
         float: right;
-        color: black;
+        color: white;
         position: relative;
         
         img{
@@ -202,6 +276,8 @@ header{
     }
     
 }
+
+
 
 @media (max-width: 768px) { 
     #logo{
@@ -281,10 +357,7 @@ header{
 }
 
 
-    
-.sidebar{
-    margin-top: 20px;
-}
+
 
 
 
@@ -324,10 +397,7 @@ header > div{
     height: 100%;
 }
 
-#logo{
-    color: grey;
-    font-size: 30px;
-}
+
 
 a { text-decoration: none !important}
 

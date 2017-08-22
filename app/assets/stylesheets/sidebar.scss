@@ -1,0 +1,50 @@
+
+
+
+#sidebar{
+    width: 300px;
+    margin: 20px 20px 20px 0;
+    background-color: white;
+    .block{
+        border-bottom: 20px solid #e2e2e2;
+
+        .title{
+            background-color: #001E42;
+            font-size: 20px;
+            color: white;
+            margin: 0;
+            padding: 5px 20px;
+            
+        }
+        
+        
+        .list{
+            padding: 20px;
+            li{
+                margin-bottom: 20px;
+                
+                h4{
+                    font-size: 12px;
+                }
+                h4:first-letter{
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+                p{
+                    color: grey;
+                    font-size: 12px;
+                }
+            }
+        }
+        .more {
+            text-align: center;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 2px solid #001E42;
+        }
+        .status{
+            font-size: 14px;
+        }
+    }   
+}

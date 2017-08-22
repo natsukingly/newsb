@@ -20,6 +20,36 @@
 
 
 #main_container
+  #today_article
+    
+       
+          
+    .today_image{style: "background-image: url(#{@top_articles.first.article_image.url});"}
+      .mini_dark_over_lay
+        .today_block
+          %h2.give_me_ellipsis
+            =@top_articles.first.article_title
+          .status
+            %i.fa.fa-thumbs-o-up
+            =@top_articles.first.likes.count
+            %i.fa.fa-comment-o
+            １７６
+            %span.pull-right 
+              =@top_articles.first.article_site
+              #{time_ago_in_words(@top_articles.first.article_published_time)} ago
+
+        
+      
+  #main_nav
+    .feed_btn.active
+      %i.fa.fa-thumbs-o-up
+      feed
+    .news_btn
+      %i.fa.fa-newspaper-o
+      news
+    .ranking_btn
+      %i.fa.fa-line-chart
+      TOP 100
   .post_form
     =form_tag "/posts/load_url", remote: true do
       .form-group.input-group
@@ -33,9 +63,41 @@
     .other_post_block
     
 #sidebar.hidden-xs.hidden-sm
-  .contents
-    kfjdaklfda
-
+  .block
+    .title
+      Viral news
+    %ul.list
+      -@top_articles.each do |article|
+        %li
+          %h4.give_me_ellipsis= article.article_title
+          %p
+            = article.article_site
+            #{time_ago_in_words(article.created_at)} ago
+          .status
+            %i.fa.fa-thumbs-o-up
+              =article.likes.count
+            %i.fa.fa-comment-o
+              174
+    .more
+      Switch to news mode
+      
+  .block
+    .title
+      Hot users
+    %ul.list
+      - @top_users.each_with_index do |user, i|
+        %li.s_user.clearfix
+          .rank.pull-left.text-center
+            #{i+1}
+          =image_tag user.image.profile_sm.url, class: "pull-left profile_xs"
+          .user_info.pull-left
+            =link_to user.name, user
+            %p.user_shoulder_name
+              =user.shoulder_name
+            %p.grey
+              #{Like.where(user_id: user.id).count} total likes
+    .more
+      See user top 100
 
   
           

@@ -10,15 +10,15 @@
   %body
     .flex_container
       %header.text-center
-        = link_to "Scrolll", root_path, id: "logo"        
+        = link_to image_tag("logo.png", style: "width: 150px; margin-top: 20px;"), root_path, id: "logo"   
+        %webicon{icon: "win10:airport"}
         #menu
-          %i.fa.fa-compass
+          %i.fa.fa-bars
         #account
           -if user_signed_in?
-            =image_tag current_user.image.profile_sm.url, class: "img-circle"
+            =image_tag current_user.image.profile_sm.url, class: "profile_xs img-circle"
           -else
             = link_to "facebookでログイン", user_facebook_omniauth_authorize_path
-            
     
       - if notice 
         %p#notice= notice
