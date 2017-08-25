@@ -1,0 +1,103 @@
+
+.article{
+    background-color: white;
+    display: flex;
+    .image_box{
+        display: block;
+        flex: 1;
+        height: 250px;
+        padding: 20px;
+        .image{
+            padding-top: 10px;
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            .status {
+                display: inline-block;
+                position: relative;
+                padding: 5px;
+                margin: 0 0 0 -10px;
+                font-size: 16px;
+                color: white;
+                background: #001E44;
+                box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+            }
+            
+            .status:before {
+                position: absolute;
+                content: '';
+                top: 100%;
+                left: 0;
+                border: none;
+                border-bottom: solid 15px transparent;
+                border-right: solid 10px #6081b7;
+            }
+        }
+    }
+
+    .info{
+        position: relative;
+        padding: 20px 20px 40px 0;
+        flex: 2;
+        h2{
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 20px;
+        }
+        p{
+            font-size: 12px;
+            color: grey;
+        }
+        .related_posts_btn{
+            position: absolute;
+            bottom: 20px;
+            right: 0;
+            left: 0;
+            border-top: 1px solid #e2e2e2;
+            margin-right: 0 5%;
+            width: 95%;
+            padding-top: 5px;
+            text-align: left;
+            color: grey;
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 1200px) {
+  .article {
+    flex-direction: column;
+    padding-bottom: 0;
+    .image_box{
+        padding: 10px;
+        .status {
+                display: inline-block;
+                position: relative;
+                padding: 5px;
+                margin: 0;
+                font-size: 16px;
+                color: white;
+                background: #70a6ff;
+                box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+            }
+            
+            .status:before {
+                display: none;
+            }
+    }
+    .info{
+        flex: 1;
+        padding: 0 10px 50px;
+        h2{
+          font-size: 16px;
+        }
+        .related_posts_btn{
+            bottom: 10px;
+            text-align: center;
+        }
+    }
+  }
+}
+
+

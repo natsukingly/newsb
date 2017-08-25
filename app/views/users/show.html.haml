@@ -1,86 +1,42 @@
-.user_wrapper.clearfix
-  .container
-    .user_inner_bag.col-lg-8.col-lg-push-2
-      .row.clearfix
-        .user_info.col-sm-6
-          .user_image_block
-            =image_tag @user.image.profile_md.url, class: "img-circle user_image"
-          .user_info
-            %p.user_name= @user.name
-            %p.user_shoulder_name= @user.shoulder_name
-            =link_to edit_user_path(@user), class: "user_edit_btn" do
-              %i.fa.fa-cog.fa-fw
-              Edit
-            
-        .user_break.visible-xs
-          .break{style: "height: 20px; clear: both;"}
-        .user_about.col-sm-6
-          %p.user_about_title about
-          - if @user.about == "" 
-            =link_to edit_user_path(@user) do
-              %p time to complete your profile.
-          - else
-            %p= @user.about
-        
-.user_nav
-  .nav_container.clearfix
-    .user_nav_option.col-xs-4.active
-      1990
+#side_nav.hidden-xs
+
+#main_container
+  #user_show_profile.clearfix
+    %div{class: "profile user_#{@user.id}"}
+      .image
+        =image_tag @user.image.url, class: "user_image_lg"
+      .like_status
+        %h4 Like Stats
+        %p
+          Total: #{Like.where(target_user_id: @user.id).count}
+          %br
+          This week: #{Like.where(created_at: Date.today.beginning_of_week-1..Time.now ).where(target_user_id: @user.id).count}
+      .follow_switch
+        =render "shared/follow_form", user: @user
+    .description
+      %h2= @user.name 
+      %p= @user.shoulder_name
       %br
-        posts 
-    .user_nav_option.col-xs-4
-      124 
-      %br
-        followers
-    .user_nav_option.col-xs-4
-      2394 
-      %br
-        followers
-        
-.user_nav_results
-  .container.hidden-xs
-    .p_wrapper.col-lg-8.col-lg-push-2
-      - @user.posts.each do |post|
-        .p_block.col-xs-12
-          =link_to post.article_url do
-            .p_top.row
-              .p_article_title.col-xs-12
-                %p #{post.article_title}
-                %p.p_article_site #{post.article_site}
-                  
-          =link_to post do
-            .p_body.row
-              .p_left_body.col-xs-8
-                .p_user_block
-                  .p_user_image.col-xs-2
-                    =image_tag post.user.image.profile_sm.url, class: "img-circle"
-                  .p_user_info.col-xs-10
-                    %p= post.user.name
-                    %span= post.user.shoulder_name
-                .p_title.col-xs-12
-                  =simple_format(post.content)
-                .p_status
-              .p_right_body.col-xs-4
-                .p_article_image.pull-right{style:"background-image:url(#{post.article_image});"}
-  
-  .m_container.visible-xs
-    - @user.posts.each do |post|
-      .m_p_block
-        =link_to post.article_url do
-          .m_p_top.row
-            .m_p_article_title.pull-left{style: "width: 80%;"}
-              %p #{post.article_site}: 
-              %p #{post.article_title}
-            .m_p_article_image.pull-right{style: "background-image:url(#{post.article_image});"}
-        =link_to post do
-          .m_p_user.row
-            .p_user_block
-              .p_user_image
-                =image_tag post.user.image.profile_sm.url, class: "img-circle pull-left"
-              .m_p_user_info
-                %p= post.user.name
-                %p= post.user.shoulder_name
-          .m_p_body.row
-            .m_p_title.col-xs-12
-              =simple_format post.content
+      .about
+        %h4
+          %i.fa.fa-globe
+          Introduction
+        =@user.about
+
+  #profile_nav
+    .profile_btn
+      %h3= @user.posts.count
+      posts
+    .profile_btn
+      %h3= @user.followers.count
+      follower
+    .profile_btn
+      %h3= @user.following.count
+      following
+      
+  #user_main_contents
+    
+          
+#sidebar.hidden-xs.hidden-sm
+  = render 'sidebars/profile', new_users: @new_users
   

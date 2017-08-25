@@ -5,8 +5,17 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } 
   
+  # follower/folowing
+  get '/users/:id/following' => 'users#following'
+  get '/users/:id/followers' => 'users#followers'
+  
+  post '/:following_id/follow' => 'relationships#follow'
+  post '/:following_id/unfollow' => 'relationships#unfollow'
+  
   root "posts#index"
   resources :users, except: [:create, :new]
+  get '/user_ranking' => "users#user_ranking"
+  
   
   get '/posts/:id/other_posts' => 'posts#other_posts'
   post "/posts/load_url" => "posts#load_url"
@@ -16,6 +25,7 @@ Rails.application.routes.draw do
   get '/test' => "posts#test"
   
   get '/article_index' => 'posts#article_index', as: :article_index
+  get '/post_index' => 'posts#post_index'
   get '/posts/hashtags/:name' => 'posts#hashtags'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

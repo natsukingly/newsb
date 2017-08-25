@@ -1,0 +1,28 @@
+#user_ranking 
+  %h2 Top 100 Users || Weekly 
+  %p
+    %i.fa.fa-users
+    \= # of followers
+  - top_users.each.with_index(1) do |user, i|
+    .user{class: "clearfix user_#{user.id}"}
+      .user_box
+        %p.ranking_index
+          #{i}.
+        =link_to image_tag(user.image.profile_sm.url, class: "img-circle"), user, class: "image"
+        =link_to user, class: "info" do
+          %span.name
+            =user.name
+          %br
+          %span.give_me_ellipsis= user.shoulder_name
+          %i.fa.fa-thumbs-o-up
+          \:
+          =Like.where(target_user_id: user.id).count
+          |
+          %i.fa.fa-users
+          \:
+          172
+        -unless user.about.empty?
+          =link_to user, class: "about hidden-xs hidden-sm hidden-md" do
+            %span.about_title
+            %p.give_me_ellipsis= user.about
+        =render 'shared/follow_form', user: user

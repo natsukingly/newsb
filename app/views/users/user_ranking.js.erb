@@ -1,0 +1,4 @@
+$("#main_contents").html('<%= escape_javascript(render("users/user_ranking", top_users: @top_users))%>');
+$("#main_nav .left").removeClass("active");
+$("#main_nav .middle").removeClass("active");
+$("#main_nav .right").addClass("active");

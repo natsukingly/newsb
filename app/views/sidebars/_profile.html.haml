@@ -1,0 +1,16 @@
+.block
+  .title
+    USERS
+  %ul.list.user_list
+    .list_title
+      new users
+    - new_users.each do |user|
+      %li.s_user.clearfix
+        =image_tag user.image.profile_sm.url, class: "pull-left profile_xs img-circle"
+        .user_info.pull-left
+          =link_to user.name, user, class: "name"
+          %p.shoulder_name.give_me_short_ellipsis
+            =user.shoulder_name
+          %p.grey
+            #{Like.where(user_id: user.id).count} total likes
+

@@ -14,9 +14,14 @@ class PostsController < ApplicationController
     @posts = Post.order(created_at: :desc)
     @default_tags = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
     @tags = Tag.where(name: @default_tags)
-    
+    @all_tags = Tag.all
     @users = User.all.limit(5)
     
+  end
+  
+  
+  def post_index
+    @posts = Post.order(created_at: :desc)
   end
   
   def optimized_index
@@ -38,7 +43,7 @@ class PostsController < ApplicationController
   
   
   def article_index
-    @articles = Post.select('distinct on (article_title) *')
+    @viral_articles = Post.select('distinct on (article_title) *')
   end
   
   
@@ -160,6 +165,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:user_id, :article_title, :article_url, :article_site, :article_published_time, :article_locale)
+      params.require(:post).permit(:user_id, :article_image, :article_title, :article_url, :article_site, :article_published_time, :article_locale)
     end
 end

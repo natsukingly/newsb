@@ -9,8 +9,13 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
+  
+  def user_ranking
+    @top_users = User.where(id: Like.group(:target_user_id).order('count(target_user_id) desc').limit(100).pluck(:target_user_id))
+  end
+  
   def show
-
+    @new_users = User.all.order(created_at: :desc).limit(10)
   end
 
   # GET /users/new
@@ -47,6 +52,18 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def following
+    @user  = User.find(params[:id])
+    @users = @user.following
+  end
+
+  def followers
+    @user  = User.find(params[:id])
+    @users = @user.followers
+  end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

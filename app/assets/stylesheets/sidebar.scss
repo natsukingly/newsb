@@ -10,11 +10,19 @@
 
         .title{
             background-color: #001E42;
-            font-size: 20px;
+            text-align: center;
+            font-size: 16px;
+            letter-spacing: 3px;
             color: white;
             margin: 0;
             padding: 5px 20px;
             
+        }
+        .list_title{
+            color: grey;
+            border-bottom: 1px solid #e2e2e2;
+            padding-bottom: 5px;
+            margin: 0 10px 20px;
         }
         
         
@@ -25,9 +33,6 @@
                 
                 h4{
                     font-size: 12px;
-                }
-                h4:first-letter{
-                    font-size: 16px;
                     font-weight: bold;
                 }
                 p{
@@ -36,6 +41,25 @@
                 }
             }
         }
+        
+        .user_list{
+            padding: 20px 10px;
+            .rank{
+                text-align: right;
+                width: 20px;
+                margin-right: 5px;
+                
+            }
+            .user_info{
+                    width: 210px;
+                    padding-left: 10px;
+                    .name{
+                        font-weight: bold;
+                    }
+                }
+            
+        }
+        
         .more {
             text-align: center;
             padding: 10px;

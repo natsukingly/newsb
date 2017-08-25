@@ -6,6 +6,13 @@ class User < ApplicationRecord
   
   has_many :posts, dependent: :destroy
   has_many :likes
+  has_many :active_relationships, class_name:  "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :passive_relationships, class_name:  "Relationship", foreign_key: "following_id", dependent: :destroy  
+  has_many :following, through: :active_relationships, source: :following
+  has_many :followers, through: :passive_relationships, source: :follower
+  
+  
+  # devise
   
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -28,4 +35,9 @@ class User < ApplicationRecord
       end
     end
   end
+  
+  
+  # relationship
+
+  
 end

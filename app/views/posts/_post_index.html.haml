@@ -2,23 +2,17 @@
 - posts.each do |post|
   .post{class: "post_#{post.id} clearfix"}
     =link_to post.article_url do
-      .p_top.hidden-xs
+      .p_top
         .p_article_title
           = post.article_title
         .p_article_site= post.article_site
-      .m_p_top.clearfix.visible-xs
-        .m_p_article_title.pull-left
-          .p_article_title.give_me_ellipsis= post.article_title
-          .p_article_site= post.article_site
-
-   
- 
-   
+     
+          
     .p_body
       .p_body_main
         .p_content.clearfix
           .user_block.clearfix
-            =image_tag post.user.image.profile_sm.url, class:"pull-left"
+            =image_tag post.user.image.url, class:"pull-left"
             .user_info
               =link_to post.user do
                 =post.user.name

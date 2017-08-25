@@ -27,6 +27,8 @@ gem 'font-awesome-sass'
 gem "jquery-turbolinks" # Turbolinksで遷移したときもjQuery.ready()を呼び出してくれる
 gem "kaminari"
 
+gem 'bootstrap-select-rails'
+
 # ここまで追加したGEM
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

@@ -1,0 +1,26 @@
+
+- viral_articles.each do |article|
+	.article{class: "article_#{article.id} clearfix"}
+		=link_to article.article_url, class: "image_box" do
+			.image{style: "background-image: url(#{article.article_image.url});"}
+				.status
+					- related_posts = Post.where(article_title: article.article_title)
+					- total_like = 0
+					- related_posts.each do |related_post|
+						- total_like = total_like + Like.where(post_id: related_post.id).count
+					Total
+					= total_like
+					%i.fa.fa-thumbs-o-up
+			
+		.info
+			=link_to article.article_url, class: "article_link" do
+				%h2= article.article_title
+			%p
+				= article.article_site
+				- if article.article_published_time
+					#{time_ago_in_words(article.article_published_time)} ago
+			.related_posts_btn
+				View #{Post.where(article_title: article.article_title).count} posts
+		.related_posts
+	
+            

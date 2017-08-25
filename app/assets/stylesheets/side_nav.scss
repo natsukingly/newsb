@@ -1,0 +1,52 @@
+
+
+#side_nav{
+    width: 200px;
+    background-color: #001E42;
+    padding: 20px;
+    label{
+        display: block;
+    }
+    input.save_btn{
+        display: block;
+        color: white;
+        background-color: rgba(0,0,0,0);
+        padding: 5px;
+        text-align: center;
+        border: 1px solid white;
+        width: 100%;
+    }
+}
+
+
+.feed_optimizer{
+    
+}
+
+#more_tag_additional_tag{
+    margin: 100px 0;
+}
+
+
+.tag_content{
+    border-radius: 100px;
+    padding: 5px 10px;
+    margin: 0 10px 10px 0;
+    cursor: pointer;
+    color: grey;
+}
+input[type=checkbox]:checked + .tag_content{
+    color: white;
+    font-weight: bold;
+}
+
+
+input[type=checkbox] + .tag_content:before{
+    content: '＋';
+} 
+
+input[type=checkbox]:checked + .tag_content:before{
+    content: 'ー';
+} 
+
+

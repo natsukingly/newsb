@@ -1,0 +1,8 @@
+- unless current_user.id == user.id
+  .follow_switch
+    -if Relationship.find_by(follower_id: current_user.id, following_id: user.id)
+      =form_tag "/#{user.id}/unfollow", remote:true do
+        =submit_tag "Unfollow", class: "unfollow_btn"
+    -else
+      = form_tag "/#{user.id}/follow", remote: true do
+        =submit_tag "Follow", class: "follow_btn"

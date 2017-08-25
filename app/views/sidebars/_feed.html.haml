@@ -1,0 +1,39 @@
+
+.block
+  .title
+    ARTICLES
+  %ul.list
+    -top_articles.each do |article|
+      %li
+        %h4.give_me_ellipsis= article.article_title
+        %p
+          = article.article_site
+          #{time_ago_in_words(article.created_at)} ago
+        .status
+          %i.fa.fa-thumbs-o-up
+            =article.likes.count
+          %i.fa.fa-comment-o
+            174
+  .more
+    Switch to news mode
+    
+.block
+  .title
+    USERS
+  %ul.list.user_list
+    .list_title
+      weekly ranking
+    - top_users.each_with_index do |user, i|
+      %li.s_user.clearfix
+        .rank.pull-left.text-center
+          #{i+1}.
+        =image_tag user.image.profile_sm.url, class: "pull-left profile_xs img-circle"
+        .user_info.pull-left
+          =link_to user.name, user, class: "name"
+          %p.shoulder_name.give_me_short_ellipsis
+            =user.shoulder_name
+          %p.grey
+            #{Like.where(user_id: user.id).count} total likes
+  .more
+    See user top 100
+

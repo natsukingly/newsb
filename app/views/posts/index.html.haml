@@ -6,48 +6,38 @@
 //   YES IT'S WORKING!!
 
 
-
 #side_nav.hidden-xs
-  .feed_optimizer
-    =form_tag '/optimized_index', method: :get, remote: true do
-      -@tags.each do |tag|
-        =label_tag do
-          .tag_pill
-            =check_box_tag "tag_ids[]", tag.id, true, style: "display: none;"
-            .tag_content
-              = tag.name
-      =submit_tag "save"
+  =render 'layouts/feed_optimizer', tags: @tags
 
 
 #main_container
-  #today_article
-    
-       
-          
-    .today_image{style: "background-image: url(#{@top_articles.first.article_image.url});"}
-      .mini_dark_over_lay
-        .today_block
-          %h2.give_me_ellipsis
-            =@top_articles.first.article_title
-          .status
-            %i.fa.fa-thumbs-o-up
-            =@top_articles.first.likes.count
-            %i.fa.fa-comment-o
-            １７６
-            %span.pull-right 
-              =@top_articles.first.article_site
-              #{time_ago_in_words(@top_articles.first.article_published_time)} ago
-
+  -unless @top_articles.empty?
+    #today_article
+      .today_image{style: "background-image: url(#{@top_articles.first.article_image.url});"}
+        .mini_dark_over_lay
+          .today_block
+            %h2.give_me_ellipsis
+              =@top_articles.first.article_title
+            .status
+              %i.fa.fa-thumbs-o-up
+              =@top_articles.first.likes.count
+              %i.fa.fa-comment-o
+              １７６
+              %span.pull-right 
+                =@top_articles.first.article_site
+                -unless @top_articles.first.article_published_time == nil
+                  #{time_ago_in_words(@top_articles.first.article_published_time)} ago
+ 
         
       
   #main_nav
-    .feed_btn.active
+    =link_to "/post_index", remote: true, class: "left main_btn active" do
       %i.fa.fa-thumbs-o-up
-      feed
-    .news_btn
+      FEED
+    =link_to "/article_index", remote: true, class: "middle main_btn" do
       %i.fa.fa-newspaper-o
-      news
-    .ranking_btn
+      NEWS
+    =link_to "/user_ranking", remote: true, class: "right main_btn" do
       %i.fa.fa-line-chart
       TOP 100
   .post_form
@@ -57,47 +47,16 @@
         %span.input-group-btn
           = button_tag type: :submit, class: "btn" do
             %i.fa.fa-pencil-square-o
+            CREAT NEW POST
 
   .posts#main_contents
     =render "posts/post_index", posts: @posts
     .other_post_block
-    
+ 
+ 
+// sidebar   
 #sidebar.hidden-xs.hidden-sm
-  .block
-    .title
-      Viral news
-    %ul.list
-      -@top_articles.each do |article|
-        %li
-          %h4.give_me_ellipsis= article.article_title
-          %p
-            = article.article_site
-            #{time_ago_in_words(article.created_at)} ago
-          .status
-            %i.fa.fa-thumbs-o-up
-              =article.likes.count
-            %i.fa.fa-comment-o
-              174
-    .more
-      Switch to news mode
-      
-  .block
-    .title
-      Hot users
-    %ul.list
-      - @top_users.each_with_index do |user, i|
-        %li.s_user.clearfix
-          .rank.pull-left.text-center
-            #{i+1}
-          =image_tag user.image.profile_sm.url, class: "pull-left profile_xs"
-          .user_info.pull-left
-            =link_to user.name, user
-            %p.user_shoulder_name
-              =user.shoulder_name
-            %p.grey
-              #{Like.where(user_id: user.id).count} total likes
-    .more
-      See user top 100
+  = render 'sidebars/feed', top_articles: @top_articles, top_users: @top_users
 
   
           

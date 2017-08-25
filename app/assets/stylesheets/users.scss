@@ -1,75 +1,59 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.user_wrapper{
-    background-color: white;
-    min-height: 150px;
-}
 
-.user{
-    background-color: white;
+#user_show_profile{
+    margin: 20px 0 0;
     padding: 20px;
+    background-color: white;
+    display: flex;
+    .profile{
+        text-align: center;
+        flex: 1;
+        .image{
+            margin-bottom: 5px;
+        }
+        .like_status{
+            display: inline-block;
+            width: 100px;
+            margin-bottom: 5px;
+            *{
+                text-align: left;
+            }
+        }
+        .user_image_lg{
+            width: 100px;
+        }
+    }
+    .description{
+        padding-left: 10px;
+        flex: 3;
+        .about{
+            h4{
+                font-size: 16px;
+            }
+        }
+        h2{
+            font-size: 20px;
+            font-weight: bold;
+            color: #001E42;
+            border-bottom:1px double #001E42;
+        }
+    }
 }
-
-.user_index_image{
-    margin-top: 5px;
-}
-
-.user_ranking{
-    display: inline-block;
-    margin-right: 20px;
-    line-height: 60px;
-    border:1px solid #eee;
-    width: 30px;
-}
-
-.user_image{
-    width: 100px;
-    height: 100px;
-}
-
-.user_image_block{
-    width: 120px;
-}
-
-.user_inner_bag{
-    padding: 20px 40px;
-}
-
-.user_info, .user_image_block{
-    float: left;
-}
-
-.user_nav{
-    text-align: center;
-    height: 100%;
-    background-color: #fcfcfc;
-}
-
-.user_nav_option{
-    padding: 30px;
-}
-
-
-.user_nav_option.active{
-    border-bottom: 2px solid black;
-}
-
-.user_name, .user_about_title{
-    font-weight: bold;
-}
-
-.user_edit_btn{
-    border: 1px solid grey;
-    padding: 3px 10px 3px 5px;
-    border-radius: 5px;
+#profile_nav{
+    background-color: white;
+    display: flex;
+    margin-top: 1px;
+    padding: 10px 0;
+    .profile_btn{
+        flex: 1;
+        text-align: center;
+        h3{
+            font-size: 20px;
+        }
+    }
 }
 
 
-.follow_btn{
-    border: 1px solid grey;
-    color: grey;
-    border-radius: 5px;
-    padding: 5px 20px;
-}
 

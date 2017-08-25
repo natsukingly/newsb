@@ -1,0 +1,4 @@
+$("#main_contents").html('<%= escape_javascript(render("posts/article_index", viral_articles: @viral_articles))%>');
+$("#main_nav .left").removeClass("active");
+$("#main_nav .right").removeClass("active");
+$("#main_nav .middle").addClass("active");
