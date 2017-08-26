@@ -1,13 +1,10 @@
 #user_list
-  %h2 Top 100 Users || Weekly 
   %p
     %i.fa.fa-users
     \= # of followers
-  - top_users.each.with_index(1) do |user, i|
+  - users.each do |user|
     .user{class: "clearfix user_#{user.id}"}
       .user_box
-        %p.ranking_index
-          #{i}.
         =link_to image_tag(user.image.profile_sm.url, class: "img-circle"), user, class: "image"
         =link_to user, class: "info" do
           %span.name

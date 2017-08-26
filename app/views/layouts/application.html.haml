@@ -13,6 +13,12 @@
         = link_to image_tag("logo_circle.png", style: "width: 150px; margin-top: 20px;"), root_path, id: "logo"   
         #menu
           %i.fa.fa-bars
+        #search_bar
+          %i.fa.fa-search.form_icon
+          =form_tag "/search_result", method: "get", id: "search" do
+            =text_field_tag :search, params[:search], placeholder: "search here"
+            =submit_tag "", style: "display: none;"
+              
         #account
           -if user_signed_in?
             =link_to destroy_user_session_path, class: "pull-right image_link" do

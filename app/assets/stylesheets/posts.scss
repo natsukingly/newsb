@@ -14,54 +14,51 @@
 
 .post{
     margin-bottom: 10px;
+    .top{
+        border-bottom: 2px solid #eee;
+        padding: 20px; 
+        background: white;
+        white-space: nowrap;
+        .article_title{
+            font-weight: bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .article_site{
+            font-size: 8px;
+            color: grey;
+        }
+    }
+    
+    .body{
+        padding: 20px 20px; 
+        background: white;
+        border-bottom: 1px solid #eee;
+        .main{
+            display: flex;
+            .content{
+                flex: 2;
+                padding-bottom: 20px;
+            }
+            .post_image{
+                background-position: center;
+                background-size: cover;
+                height: 200px;
+                flex: 1;
+            }
+        }
+    }
 }
 
-.p_top{
-    border-bottom: 2px solid #eee;
-    padding: 20px; 
-    background: white;
-    white-space: nowrap;
-
-}
-
-.p_article_title{
-    font-weight: bold;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.p_article_site{
-    font-size: 8px;
-    color: grey;
-}
 
 
-.p_body{
-    padding: 20px 20px; 
-    background: white;
-    border-bottom: 1px solid #eee;
-}
-.p_body_main{
-    display: flex;
-}
-.p_content{
-    flex: 2;
-    padding-bottom: 20px;
-}
 
-
-.p_image{
-    background-position: center;
-    background-size: cover;
-    height: 200px;
-    flex: 1;
-}
 
 @media screen and (max-width: 1200px) {
-  .p_body_main {
+  .main {
     flex-direction: column;
   }
-    .p_content{
+    .content{
         flex: 1;
     }
   
@@ -318,4 +315,69 @@
 
 .a_placeholder{
     padding-top: 50px;
+}
+
+
+
+//show_article
+
+#selected_article_nav{
+    margin: 20px 0;
+    display: flex;
+    text-align: center;
+    .article_btn{
+        font-size: 16px;
+        margin: 0 10px;
+        padding: 5px 0;
+        border-radius: 5px;
+        border: 1px solid #001E42;
+        flex: 1;
+    }
+    .article_btn:hover{
+        background-color: rgba(0,0,0,0.1);
+    }
+    input{
+        width: 100%;
+        display: inline-block;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+    }
+    input:focus{
+        outline: 0;
+    }
+}
+
+
+// show_post
+
+#show_post_block{
+    margin: 20px 0 0;
+    background-color: white;
+    .cover{
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        text-align: center;
+        img{
+            margin-top: 100px;
+            width: 150px;
+            border: 2px solid white;
+        }
+    }
+    .profile{
+        padding: 60px 20px 20px;
+        text-align: center;
+        h2, p{
+            color: grey;
+        }
+        .about{
+            padding: 20px;
+
+            p{
+                color: #001E42;
+            }
+        }
+    }
+    
 }

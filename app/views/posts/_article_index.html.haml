@@ -1,7 +1,7 @@
 
-- viral_articles.each do |article|
-	.article{class: "article_#{article.id} clearfix"}
-		=link_to article.article_url, class: "image_box" do
+- articles.each do |article|
+	=link_to "/posts/#{article.id}/show_article", class: "article article_#{article.id} clearfix", remote: true do
+		.image_box
 			.image{style: "background-image: url(#{article.article_image.url});"}
 				.status
 					- related_posts = Post.where(article_title: article.article_title)
@@ -13,8 +13,7 @@
 					%i.fa.fa-thumbs-o-up
 			
 		.info
-			=link_to article.article_url, class: "article_link" do
-				%h2= article.article_title
+			%h2= article.article_title
 			%p
 				= article.article_site
 				- if article.article_published_time

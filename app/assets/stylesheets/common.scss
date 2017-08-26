@@ -30,6 +30,11 @@ body{
     height: 100%;
 }
 
+input[type="text"]:focus {
+  outline: 0;
+}
+
+
 .flex_container{
     min-height: 100vh;
     height: 100%; /* for IE11 */
@@ -68,9 +73,9 @@ body{
 }
 
 
-#today_article{
+#selected_article{
     margin-top: 20px;
-    .today_image{
+    .image{
         height: 300px;
         background-size: cover;
         background-position: center;
@@ -78,7 +83,7 @@ body{
         .mini_dark_over_lay{
             background-color: rgba(0,0,0,.5);
         
-            .today_block{
+            .block{
                 color: white;
                 padding: 20px 10px 10px;
                 
@@ -207,6 +212,31 @@ header{
     background-color: white;
     color: white;
     box-shadow: 0 0 2px #666, 0 0 8px #222;
+    #search_bar{
+        float: left;
+        position: relative;
+        display: inline-block;
+        .form_icon{
+            position: absolute;
+            z-index: 22;
+            top: 14px;
+            left: 40px;
+            font-size: 20px;
+            color: #222;
+            float: left;
+        }
+        input {
+            z-index: 1;
+            width: 200px;
+            height: 35px;
+            border-radius: 42px;
+            background-color: #f7f7f7;
+            padding: 0 0 0 45px;
+            border: none;
+            font-size: 14px;
+            color: #222;
+        }
+    }
     #logo{
         position: absolute;
         top: 50%;

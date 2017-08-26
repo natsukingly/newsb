@@ -1,26 +1,20 @@
 
 - posts.each do |post|
-  .post{class: "post post_#{post.id} clearfix"}
-    =link_to "/posts/#{post.id}/show_article" do
-      .top
-        .article_title
-          = post.article_title
-        .article_site= post.article_site
-     
-          
-    .body
-      .main
-        .content.clearfix
+  .post{class: "post_#{post.id} clearfix"}
+    .p_body
+      .p_body_main
+        .p_content.clearfix
           .user_block.clearfix
-            =image_tag post.user.image.url, class:"pull-left"
-            =link_to post.user, class: "pull-left" do
-              =post.user.name
-              %span.grey
-                #{time_ago_in_words(post.created_at)} ago
+            =image_tag post.user.image.url, class:"pull-left img-circle"
+            .user_info
+              =link_to post.user do
+                =post.user.name
+                %span.grey
+                  #{time_ago_in_words(post.created_at)} ago
               %p.user_shoulder_name
                 =post.user.shoulder_name
           =render_with_hashtags(simple_format(post.content))
-        .post_image{ style: "background-image: url(#{post.article_image.url});"}
+        .p_image{ style: "background-image: url(#{post.article_image.url});"}
 
       .p_status
         .like_link

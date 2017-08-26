@@ -1,0 +1,3 @@
+$("#main_contents").html('<%= escape_javascript(render("users/user_list", users: @users_search_results))%>');
+$(".search_btn").removeClass("active");
+$(".search_btn.search_users").addClass("active");

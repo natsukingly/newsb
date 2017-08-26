@@ -1,0 +1,3 @@
+$("#main_contents").html('<%= escape_javascript(render("users/user_list", users: @following))%>');
+$(".profile_btn").removeClass("active");
+$(".profile_btn.right").addClass("active");

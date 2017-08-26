@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :show_followers, :show_following, :show_user_posts]
 
   # GET /users
   # GET /users.json
@@ -16,6 +16,19 @@ class UsersController < ApplicationController
   
   def show
     @new_users = User.all.order(created_at: :desc).limit(10)
+    @user_posts = Post.where(user_id: @user.id).order(created_at: :desc)
+  end
+  
+  def show_followers
+    @followers = @user.followers
+  end
+  
+  def show_following
+    @following = @user.following
+  end
+  
+  def show_user_posts
+    @user_posts = Post.where(user_id: @user.id).order(created_at: :desc)
   end
 
   # GET /users/new

@@ -1,0 +1,8 @@
+=render "/shared/selected_article", selected_article: article
+
+#selected_article_nav
+  =link_to "Read the article", article.article_url, class: "article_btn"
+  =form_tag "/posts/load_url", class: "article_btn", remote: true do
+    =hidden_field_tag :placeholder_url, article.article_url
+    =submit_tag "Create your post"
+=render "/posts/post_index_no_title", posts: posts

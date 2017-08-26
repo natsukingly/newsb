@@ -1,57 +1,81 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#main_container{
+}
+
+.user_block{
+    img{
+        margin-right: 10px;
+        width: 50px;
+        height: 50px;
+    }
+}
+
 
 #user_show_profile{
     margin: 20px 0 0;
-    padding: 20px;
     background-color: white;
-    display: flex;
-    .profile{
+    .cover{
+        height: 200px;
+        background-size: cover;
+        background-position: center;
         text-align: center;
-        flex: 1;
-        .image{
-            margin-bottom: 5px;
-        }
-        .like_status{
-            display: inline-block;
-            width: 100px;
-            margin-bottom: 5px;
-            *{
-                text-align: left;
-            }
-        }
-        .user_image_lg{
-            width: 100px;
+        img{
+            margin-top: 100px;
+            width: 150px;
+            border: 2px solid white;
         }
     }
-    .description{
-        padding-left: 10px;
-        flex: 3;
+    .profile{
+        padding: 60px 20px 20px;
+        text-align: center;
+        h2{
+            font-size: 30px;
+        }
+        .like_stats{
+            .like_label{
+            display: inline-block;
+            color: white;
+            background-color: #001E42;
+            border-radius: 5px;
+            padding: 0 10px;
+            }
+            span{
+                margin-right: 10px;
+            }
+        }
         .about{
+            padding: 20px;
             h4{
                 font-size: 16px;
             }
-        }
-        h2{
-            font-size: 20px;
-            font-weight: bold;
-            color: #001E42;
-            border-bottom:1px double #001E42;
+            p{
+                color: grey;
+            }
         }
     }
+    
 }
 #profile_nav{
+    margin-bottom: 20px;
     background-color: white;
     display: flex;
     margin-top: 1px;
-    padding: 10px 0;
     .profile_btn{
+        padding: 10px 0;
         flex: 1;
         text-align: center;
         h3{
             font-size: 20px;
         }
+    }
+    .profile_btn:hover{
+        background-color: rgba(0,0,0,0.05);
+    }
+    
+    .profile_btn.active{
+        border-bottom: 2px solid #001E42;
     }
 }
 

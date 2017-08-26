@@ -11,22 +11,7 @@
 
 
 #main_container
-  -unless @top_articles.empty?
-    #today_article
-      .today_image{style: "background-image: url(#{@top_articles.first.article_image.url});"}
-        .mini_dark_over_lay
-          .today_block
-            %h2.give_me_ellipsis
-              =@top_articles.first.article_title
-            .status
-              %i.fa.fa-thumbs-o-up
-              =@top_articles.first.likes.count
-              %i.fa.fa-comment-o
-              １７６
-              %span.pull-right 
-                =@top_articles.first.article_site
-                -unless @top_articles.first.article_published_time == nil
-                  #{time_ago_in_words(@top_articles.first.article_published_time)} ago
+  =render "/shared/selected_article", selected_article: @selected_article
  
         
       

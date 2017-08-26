@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } 
   
   # follower/folowing
-  get '/users/:id/following' => 'users#following'
-  get '/users/:id/followers' => 'users#followers'
+  get '/users/:id/following' => 'users#show_following'
+  get '/users/:id/followers' => 'users#show_followers'
+  get '/users/:id/user_post_index' => 'users#show_user_posts'
   
   post '/:following_id/follow' => 'relationships#follow'
   post '/:following_id/unfollow' => 'relationships#unfollow'
@@ -17,8 +18,12 @@ Rails.application.routes.draw do
   get '/user_ranking' => "users#user_ranking"
   
   
+  
+  get '/posts/:article/show_article' => 'posts#show_article'
+  
   get '/posts/:id/other_posts' => 'posts#other_posts'
   post "/posts/load_url" => "posts#load_url"
+  post "/posts/:placeholder_url/load_url" => "posts#load_url"
   resources :posts, except: [:index, :new]
   
   get '/optimized_index' => "posts#optimized_index"
@@ -29,8 +34,7 @@ Rails.application.routes.draw do
   get '/posts/hashtags/:name' => 'posts#hashtags'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  
-  post '/search' => "search#search"
+  get '/search_result' => "search#search_posts"
   get '/search_tags/:search' => "search#search_tags"
   get '/search_articles/:search' => "search#search_articles"
   get '/search_posts/:search' => "search#search_posts"

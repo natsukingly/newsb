@@ -1,0 +1,3 @@
+$("#main_contents").html('<%= escape_javascript(render("posts/post_index", posts: @post_search_results))%>');
+$(".search_btn").removeClass("active");
+$(".search_btn.search_posts").addClass("active");

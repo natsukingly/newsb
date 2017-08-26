@@ -9,7 +9,8 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @post = Post.new
-    @top_articles = Post.all.limit(5)
+    @selected_article = Post.last
+    @top_articles = Post.all.limit(10)
     @top_users = User.all.limit(10)
     @posts = Post.order(created_at: :desc)
     @default_tags = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
@@ -19,9 +20,17 @@ class PostsController < ApplicationController
     
   end
   
-  
   def post_index
     @posts = Post.order(created_at: :desc)
+  end
+  
+  def show_article
+    @article = Post.find(params[:article])
+    @posts = Post.where(article_title: @article.article_title)
+  end
+  
+  # show_post
+  def show
   end
   
   def optimized_index

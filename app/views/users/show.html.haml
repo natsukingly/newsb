@@ -2,40 +2,42 @@
 
 #main_container
   #user_show_profile.clearfix
+    .cover{style: "background-image: url(#{@user.cover})"}
+      =image_tag @user.image.profile_md.url, class: "img-circle"
     %div{class: "profile user_#{@user.id}"}
-      .image
-        =image_tag @user.image.url, class: "user_image_lg"
-      .like_status
-        %h4 Like Stats
-        %p
+      %h2= @user.name 
+      %p= @user.shoulder_name
+      %p.like_stats
+        %span.like_label
+          %i.fa.fa-thumbs-o-up
+          Like
+        %span 
           Total: #{Like.where(target_user_id: @user.id).count}
-          %br
+        %span
           This week: #{Like.where(created_at: Date.today.beginning_of_week-1..Time.now ).where(target_user_id: @user.id).count}
       .follow_switch
         =render "shared/follow_form", user: @user
-    .description
-      %h2= @user.name 
-      %p= @user.shoulder_name
-      %br
       .about
         %h4
           %i.fa.fa-globe
           Introduction
-        =@user.about
+        %p
+          =@user.about
 
   #profile_nav
-    .profile_btn
+    =link_to "/users/#{@user.id}/user_post_index", remote: true, class: "profile_btn left active" do
       %h3= @user.posts.count
       posts
-    .profile_btn
+    =link_to "/users/#{@user.id}/followers", remote: true, class: "profile_btn middle" do
       %h3= @user.followers.count
       follower
-    .profile_btn
+    =link_to "/users/#{@user.id}/following", remote: true, class: "profile_btn right" do
       %h3= @user.following.count
       following
       
-  #user_main_contents
-    
+  .posts#main_contents
+    =render "posts/post_index", posts: @user_posts
+    .other_post_block
           
 #sidebar.hidden-xs.hidden-sm
   = render 'sidebars/profile', new_users: @new_users
