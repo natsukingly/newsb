@@ -1,12 +1,41 @@
 
 .feed_optimizer
-  optimize your wall with hashtags!!
+
    
   =form_tag '/optimized_index', method: :get, remote: true do
-    -tags.each do |tag|
-      =label_tag do
-        .tag_pill
-          =check_box_tag "tag_ids[]", tag.id, true, style: "display: none;"
-          .tag_content.give_me_short_ellipsis
-            = tag.name
-    =submit_tag "save change", class: "save_btn"
+    =submit_tag "OPTIMIZE", class: "save_btn"
+    %h2
+      %i.fa.fa-folder-open
+      Categories
+    .category_tags.tag_block  
+      -default_category_tags.each do |tag|
+        =label_tag do
+          .tag_pill
+            - if cookies[:search_preference]
+              - if cookies[:search_preference].include?((tag.id).to_s)
+                =check_box_tag "tag_ids[]", tag.id, true, style: "display: none;"
+              - else
+                =check_box_tag "tag_ids[]", tag.id, false, style: "display: none;"
+            - else
+              =check_box_tag "tag_ids[]", tag.id, false, style: "display: none;"
+            .tag_content.give_me_short_ellipsis
+              = tag.name
+    %h2
+      %i.fa.fa-globe
+      Rigions
+    
+    .rigion_tags.tag_block 
+      -default_rigion_tags.each do |tag|
+        =label_tag do
+          .tag_pill
+            - if cookies[:search_preference]
+              - if cookies[:search_preference].include?((tag.id).to_s)
+                =check_box_tag "tag_ids[]", tag.id, true, style: "display: none;"
+              - else
+                =check_box_tag "tag_ids[]", tag.id, false, style: "display: none;"
+            - else
+              =check_box_tag "tag_ids[]", tag.id, false, style: "display: none;"
+              
+            .tag_content.give_me_short_ellipsis
+              = tag.name
+    

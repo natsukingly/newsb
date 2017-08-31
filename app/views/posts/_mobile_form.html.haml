@@ -1,0 +1,60 @@
+
+= form_with(model: post, local: true) do |form|
+  - if post.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(post.errors.count, "error")
+        prohibited this post from being saved:
+      %ul
+        - post.errors.full_messages.each do |message|
+          %li= message
+  .field.form-group.first_half
+    %h2.form_step choose categories!
+    = form.select :tag, [["business", "business"], ["politics", "politics"], ["entertainment", "entertainment"], ["sports", "sports"], ["health", "health"], ["tech", "tech"], ["education", "education"], ["others", "others"], ["others", "others"]], {:prompt => "Please select"}, class: "form-control selectpicker tag_selection"
+    %p.text-center 
+      scroll
+      %br 
+      %i.fa.fa-angle-double-down
+  
+  .field.form-group.second_half
+    %h2.form_step your contents here!
+    = form.text_area :content, placeholder: "content", id: :post_content, class: "post_textarea form-control", style: "border: none; box-shadow: none; resize: none;"
+    = form.hidden_field :article_image, value: @article_image
+    = form.hidden_field :article_url, value: @article_url
+    = form.hidden_field :article_site, value: @article_site
+    = form.hidden_field :article_title, value: @article_title
+    = form.hidden_field :article_published_time, value: @article_published_time
+    = form.hidden_field :article_locale, value: @article_locale
+    = form.hidden_field :user_id, value: current_user.id
+    = form.submit "SUBMIT", class: "form_btn #post_btn"
+
+:javascript 
+
+  
+  $('#form_wrapper').click(function(){
+    $('#form_wrapper').fadeOut();
+    $('#form_modal').fadeOut();
+    $('body').removeClass('no_scroll');
+  });
+
+ 
+ 
+awesome autosize code 
+ 
+  $("#post_content").height(20);//init
+  $("#post_content").css("lineHeight","20px");//init
+  
+  $("#post_content").on("input",function(evt){
+            if(evt.target.scrollHeight > evt.target.offsetHeight){
+                $(evt.target).height(evt.target.scrollHeight);
+            }else{
+                var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
+                while (true){
+                    $(evt.target).height($(evt.target).height() - lineHeight);
+                    if(evt.target.scrollHeight > evt.target.offsetHeight){
+                        $(evt.target).height(evt.target.scrollHeight);
+                    }
+                    break;
+                }
+            }
+        });

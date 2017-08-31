@@ -1,57 +1,116 @@
 // Place all the styles related to the Comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.comments{
-    display: none;
+.best_comment{
+    .body{
+        background-color: #f9f9f9;
+    }
+
 }
 
-
-.comment{
-    padding: 20px 0px 20px 20px;
+#comment_form{
     background-color: white;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    .comment_submit{
+        float: right;
+        margin-right: 20px;
+    }
 }
 
-.profile_xs{
-    height: 35px;
-    width: 35px;
+@media (max-width:768px){
+    #comment_form{
+        padding: 20px 0;
+        .comment_textarea{
+            width: 95%;
+            margin: 0 auto;  
+            padding: 20px 0;
+        }
+        textarea{
+            margin: 0;
+        }
+        .comment_submit{
+            margin: 0;
+            width: 100%;
+        }
+        .submit_btn{
+            width: 95%;
+            margin: 0 auto;
+            background-color: grey;
+            border: none;
+            color: white;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    }
+
 }
 
 
-.c_form_image{
-    position: absolute;
-    top: 20px;
-    left: 20px;
+
+
+.form_textarea{
+    display: flex;
+    margin-bottom: 0;
+    textarea{
+        flex: 1;
+        margin-left: 20px;
+        outline: 1px solid #eee;
+        &:focus{
+            outline: 1px solid #eee;
+            // height: 100px;
+        }
+    }
 }
 
-textarea.c_content{
-    padding-top: 0;
-    padding-bottom: 0;
+.comment_textarea{
+    padding: 20px;
 }
 
-.c_content{
-    height: 100%;
+.reply_textarea{
+    padding: 20px 0 10px 40px;
+    img{
+        width: 25px;
+        height: 25px;
+    }
 }
 
-.comment_invite{
-    cursor: pointer;
-}
 
-.comment_form{
-    position: relative;
-    padding: 20px 20px 45px 80px;
+#comment_index{
     background-color: white;
-    display: none;
-    border-bottom: 2px solid #eee;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    .title{
+        font-size: 16px;
+        padding: 20px 20px 0;
+    }
+    .comment{
+        padding: 10px 20px 0;
+        .body{
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+        .status > div {
+            display: inline-block;
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+    }
 }
 
-.c_form_btn{
-    position: absolute;
-    bottom: 10px;
-    right: 20px;
+.reply_index{
+    padding-left: 40px;
+    display: block;
+    .user_block{
+        img{
+            width: 25px;
+            height: 25px;
+        }
+    }
+    .reply{
+        margin-top: 10px;
+    }
 }
 
-.c_status > div {
-    display: inline-block;
-    margin-right: 10px;
-    margin-top: 20px;
-}
+

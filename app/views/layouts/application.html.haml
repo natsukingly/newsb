@@ -10,19 +10,48 @@
   %body
     .flex_container
       %header.text-center
+      
+        / LOGO CENTER
         = link_to image_tag("logo_circle.png", style: "width: 150px; margin-top: 20px;"), root_path, id: "logo"   
-        #menu
-          %i.fa.fa-bars
-        #search_bar
+
+        / HEADER LEFT
+        =link_to "/user_ranking" do
+          #ranking.menu_icon.hidden-xs.pull-left
+            %i.fa.fa-trophy
+        =link_to "/article_index" do
+          #article_index_link.menu_icon.hidden-xs.pull-left
+            %i.glyphicon.glyphicon-fire
+            
+        .search_bar.hidden-xs
           %i.fa.fa-search.form_icon
           =form_tag "/search_result", method: "get", id: "search" do
             =text_field_tag :search, params[:search], placeholder: "search here"
             =submit_tag "", style: "display: none;"
-              
-        #account
+      
+        / HEADER LEFT FOR MOBILE      
+        #menu.menu_icon.pull-left
+          %i.fa.fa-bars    
+          
+        #mobile_drop_down_menu
+          =link_to "/user_ranking" do
+            .ranking.menu_icon
+              %i.fa.fa-trophy
+          =link_to "/article_index" do
+            #article_index_link.menu_icon.pull-left
+              %i.glyphicon.glyphicon-fire
+          .search_bar
+            %i.fa.fa-search.form_icon
+            =form_tag "/search_result", method: "get", id: "search" do
+              =text_field_tag :search, params[:search], placeholder: "search here"
+              =submit_tag "", style: "display: none;"    
+
+            
+            
+        / HEADER RIGHT     
+        #account.menu_icon.pull-right 
           -if user_signed_in?
-            =link_to destroy_user_session_path, class: "pull-right image_link" do
-              =image_tag current_user.image.url, class: "profile_xs img-circle"
+            =link_to destroy_user_session_path do
+              =image_tag current_user.image.url, class: "img-circle pull-right profile_xs"
           -else
             = link_to "facebookでログイン", user_facebook_omniauth_authorize_path
     
@@ -44,3 +73,15 @@
       $('#dropdown_menu').addClass("open").fadeOut();
     }
   });     
+  
+  $('#menu').click(function(){
+    if($(this).find('i').hasClass('fa-bars')){
+      $('#mobile_drop_down_menu').slideDown().css("display", "flex");
+      $('#menu').find('i').removeClass('fa-bars').addClass('fa-times');
+      $('body').css("padding-top", "100px");
+    } else {
+      $('#mobile_drop_down_menu').slideUp();
+      $('#menu').find('i').removeClass('fa-times').addClass('fa-bars');
+      $('body').css("padding-top", "50px");      
+    }
+  });

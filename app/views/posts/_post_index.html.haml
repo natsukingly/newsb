@@ -1,7 +1,7 @@
 
 - posts.each do |post|
   .post{class: "post post_#{post.id} clearfix"}
-    =link_to "/posts/#{post.id}/show_article" do
+    =link_to "/posts/#{post.id}/show_article", remote: true do
       .top
         .article_title
           = post.article_title
@@ -22,46 +22,33 @@
           =render_with_hashtags(simple_format(post.content))
         .post_image{ style: "background-image: url(#{post.article_image.url});"}
 
-      .p_status
+      .status
         .like_link
           =render '/likes/like_post', post: post
-        .comment_link
-          %i.fa.fa-comment-o 
-          =post.comments.count
-        .comment_invite
-          COMMENT
-          %i.fa.fa-pencil
-
-
-    %div{class:"other_post_#{post.id}", style: "margin-top: 10px"}
+        .divider
+          ・
+        =link_to "COMMENT", "/posts/#{post.id}", remote: true, class: "post_link" 
+        -if post.comments.count > 1  
+          =link_to "View all #{post.comments.count} comments", "/posts/#{post.id}", remote: true, class: "post_view_link pull-right"
         
-    .comments
-      .comment_form.clearfix
-        = render "comments/form", post: post
-      - post.comments.each do |comment| 
-        .comment.clearfix{class: "comment_#{comment.id}"}
-          .c_body.clearfix
-            .c_body_main.pull-left
-              = render "shared/user_mini_profile", user: comment.user, object: comment
-              =simple_format(comment.content)
-              .c_status.clearfix
-                .c_like_link
-                  =render '/likes/like_comment', comment: comment
-                .reply_link
-                  %i.fa.fa-comment-o 
-                  =comment.replies.count
-                .reply_invite
-                  Reply
-          .replies
-            .reply_form.clearfix
-              = render "replies/form", comment: comment
-            - comment.replies.each do |reply| 
-              .reply.clearfix{class: "reply_#{reply.id}"}
-                .r_content.clearfix
-                  .r_content_main.pull-left
-                    = render "shared/user_mini_profile", user: reply.user, object: reply
-                    =simple_format(comment.content)
-                    .c_status
-                      .r_like_link
-                        =render '/likes/like_reply', reply: reply
+    - best_comments = Comment.where(id: Like.where(post_id: post.id ,target_type: "comment").group(:comment_id).order('count(comment_id) desc').limit(1).pluck(:comment_id))
+    - comment = best_comments[0]
+    - if comment == nil
+      -comment = post.comments.last
     
+    - if comment != nil
+      .best_comment
+        .body
+          .content.clearfix
+            .user_block.clearfix
+              =image_tag comment.user.image.url, class:"pull-left"
+              =link_to comment.user, class: "pull-left" do
+                =comment.user.name
+                %span.grey
+                  #{time_ago_in_words(post.created_at)} ago
+                %p.user_shoulder_name
+                  =comment.user.shoulder_name
+              
+            %p.give_me_ellipsis 
+              =comment.content
+        

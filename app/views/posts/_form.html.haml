@@ -1,36 +1,34 @@
 
-.post
-  .p_top
-    .p_article_title= article_title
-    .p_article_site= article_site
+.post#post_form
+  .top
+    .article_title= article_title
+    .article_site= article_site
 
-  .p_body.f_body
-    .p_content.clearfix
-      .p_content_main.pull-left
-        =render '/shared/user_profile_wo_time', user: current_user, object: post
-        = form_with(model: post, local: true) do |form|
-          - if post.errors.any?
-            #error_explanation
-              %h2
-                = pluralize(post.errors.count, "error")
-                prohibited this post from being saved:
-              %ul
-                - post.errors.full_messages.each do |message|
-                  %li= message
-          .field.form-group
-            = form.select :tag, [["business", "business"], ["politics", "politics"], ["entertainment", "entertainment"], ["sports", "sports"], ["health", "health"], ["tech", "tech"], ["education", "education"], ["others", "others"], ["others", "others"]], {:prompt => "Please select"}, class: "form-control selectpicker tag_selection"
-          .field.form-group
-            = form.text_area :content, placeholder: "content", id: :post_content, class: "form-control", style: "border: none; box-shadow: none; resize: none;"
-          .field.form-group
-            = form.hidden_field :article_image, value: @article_image
-            = form.hidden_field :article_url, value: @article_url
-            = form.hidden_field :article_site, value: @article_site
-            = form.hidden_field :article_title, value: @article_title
-            = form.hidden_field :article_published_time, value: @article_published_time
-            = form.hidden_field :article_locale, value: @article_locale
-            = form.hidden_field :user_id, value: current_user.id
-          = form.submit class: "form_btn"
-      .article_image.pull-right.form_image{style: "background-image: url(#{@article_image});"} 
+  .body
+    .main.clearfix
+      =render '/shared/user_profile_wo_time', user: current_user, object: post
+      = form_with(model: post, local: true) do |form|
+        - if post.errors.any?
+          #error_explanation
+            %h2
+              = pluralize(post.errors.count, "error")
+              prohibited this post from being saved:
+            %ul
+              - post.errors.full_messages.each do |message|
+                %li= message
+        .field.form-group
+          = form.select :tag, [["business", "business"], ["politics", "politics"], ["entertainment", "entertainment"], ["sports", "sports"], ["health", "health"], ["tech", "tech"], ["education", "education"], ["others", "others"], ["others", "others"]], {:prompt => "Please select"}, class: "form-control selectpicker tag_selection"
+        .field.form-group
+          = form.text_area :content, placeholder: "content", id: :post_content, class: "post_textarea form-control", style: "border: none; box-shadow: none; resize: none;"
+          = form.hidden_field :article_image, value: @article_image
+          = form.hidden_field :article_url, value: @article_url
+          = form.hidden_field :article_site, value: @article_site
+          = form.hidden_field :article_title, value: @article_title
+          = form.hidden_field :article_published_time, value: @article_published_time
+          = form.hidden_field :article_locale, value: @article_locale
+          = form.hidden_field :user_id, value: current_user.id
+        = form.submit class: "form_btn #post_btn"
+    .article_image.pull-right.form_image.hidden-xs{style: "background-image: url(#{@article_image});"} 
       
 :javascript 
 
@@ -45,20 +43,20 @@
  
 // awesome autosize code 
  
-  $("#post_content").height(30);//init
-  $("#post_content").css("lineHeight","20px");//init
+  // $("#post_content").height(30);//init
+  // $("#post_content").css("lineHeight","20px");//init
   
-  $("#post_content").on("input",function(evt){
-            if(evt.target.scrollHeight > evt.target.offsetHeight){
-                $(evt.target).height(evt.target.scrollHeight);
-            }else{
-                var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
-                while (true){
-                    $(evt.target).height($(evt.target).height() - lineHeight);
-                    if(evt.target.scrollHeight > evt.target.offsetHeight){
-                        $(evt.target).height(evt.target.scrollHeight);
-                    }
-                    break;
-                }
-            }
-        });
+  // $("#post_content").on("input",function(evt){
+  //           if(evt.target.scrollHeight > evt.target.offsetHeight){
+  //               $(evt.target).height(evt.target.scrollHeight);
+  //           }else{
+  //               var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
+  //               while (true){
+  //                   $(evt.target).height($(evt.target).height() - lineHeight);
+  //                   if(evt.target.scrollHeight > evt.target.offsetHeight){
+  //                       $(evt.target).height(evt.target.scrollHeight);
+  //                   }
+  //                   break;
+  //               }
+  //           }
+  //       });

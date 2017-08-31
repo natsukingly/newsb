@@ -9,16 +9,39 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @post = Post.new
+    
+    # top
     @selected_article = Post.last
+    
+    #sidebar
     @top_articles = Post.all.limit(10)
     @top_users = User.all.limit(10)
-    @posts = Post.order(created_at: :desc)
-    @default_tags = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
-    @tags = Tag.where(name: @default_tags)
-    @all_tags = Tag.all
-    @users = User.all.limit(5)
+
+    #side_nav
+    @default_categories = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
+    @default_rigions = ["U.S.", "China", "Europe", "Africa","Asia","Central America","Middle East","North America","Oceania","South America","The Caribbean"]
     
+    @default_category_tags = Tag.where(name: @default_categories)
+    @default_rigion_tags = Tag.where(name: @default_rigions)
+    
+    
+    #main contents
+    if cookies[:search_preference]
+      @posts = Post.includes(:tags).where('tags.id' => cookies[:search_preference].split("&")).order(created_at: :desc).limit(5)
+    else
+      @posts = Post.order(created_at: :desc).limit(5)
+    end
+
   end
+  
+  def optimized_index
+    @tags = Tag.where(id: params[:tag_ids])
+    cookies[:search_preference] = params[:tag_ids]
+    @post = Post.new
+    @posts = Post.includes(:tags).where('tags.id' => params[:tag_ids]).order(created_at: :desc).limit(5)
+  end
+  
+  
   
   def post_index
     @posts = Post.order(created_at: :desc)
@@ -29,30 +52,44 @@ class PostsController < ApplicationController
     @posts = Post.where(article_title: @article.article_title)
   end
   
+  def mobile_post_form
+  end
+  
+  def load_more_posts
+    
+    already_loaded_posts = params[:already_loaded_posts]
+    
+    if cookies[:search_preference]
+      @posts = Post.includes(:tags).where('tags.id' => cookies[:search_preference].split("&")).order(created_at: :desc).offset(already_loaded_posts).limit(5)
+    else
+      @posts = Post.order(created_at: :desc).offset(already_loaded_posts).limit(5)
+    end
+  end
+  
+  
+  
   # show_post
   def show
   end
   
-  def optimized_index
-    @tags = Tag.where(id: params[:tag_ids])
-    @post = Post.new
-    @posts = Post.includes(:tags).where('tags.id' => params[:tag_ids]).order(created_at: :desc)
-  end
-  
-  def test 
-    @test = Tag.where(id: params[:tag_ids])
-  end
 
-  
-  def other_posts
-    @original_post = Post.find(params[:id])
-    @other_posts = Post.where(article_title: @original_post.article_title)
-  end
-  
-  
+
   
   def article_index
     @viral_articles = Post.select('distinct on (article_title) *')
+    @post = Post.new
+    @top_articles = Post.all.limit(10)
+    @top_users = User.all.limit(10)
+    
+    #side_nav
+    @default_categories = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
+    @default_rigions = ["U.S.", "China", "Europe", "Africa","Asia","Central America","Middle East","North America","Oceania","South America","The Caribbean"]
+    
+    @default_category_tags = Tag.where(name: @default_categories)
+    @default_rigion_tags = Tag.where(name: @default_rigions)
+    
+    #main contents
+    @posts = Post.order(created_at: :desc)
   end
   
   
@@ -67,7 +104,6 @@ class PostsController < ApplicationController
   # GET /posts/new
   
   def load_url
-    @show_form = true
     @article_url = params[:placeholder_url]
     @default_tags = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
     
@@ -114,6 +150,55 @@ class PostsController < ApplicationController
     @posts = Post.page(params[:page])
     
   end
+  
+  def mobile_load_url
+    @article_url = params[:placeholder_url]
+    @default_tags = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
+    
+    url = @article_url
+    charset = nil
+    html = open(url, 'User-Agent' => 'firefox') do |f|
+      charset = f.charset # 文字種別を取得
+      f.read # htmlを読み込んで変数htmlに渡す
+    end
+    # ノコギリを使ってhtmlを解析
+    doc = Nokogiri::HTML.parse(html, charset)
+    
+    if doc.css('//meta[property="og:title"]/@content').empty?
+      @article_title = doc.title.to_s
+    else
+      @article_title = doc.css('//meta[property="og:title"]/@content').to_s
+    end
+    
+    if doc.css('//meta[property="og:site_name"]/@content').empty?
+      @article_site = doc.title.to_s
+    else
+      @article_site = doc.css('//meta[property="og:site_name"]/@content').to_s
+    end
+    
+    if doc.css('//meta[property="og:image"]/@content').empty?
+      @article_image = "noimage.jpg"
+    else
+      @article_image = doc.css('//meta[property="og:image"]/@content').to_s
+    end
+    
+    if doc.css('//meta[property="article:published_time"]/@content').empty?
+      @article_published_time = "unknown"
+    else
+      @article_published_time = doc.css('//meta[property="article:published_time"]/@content').to_s
+    end
+    
+    if doc.css('//meta[property="og:locale"]/@content').empty?
+      @article_locale = "unknown"
+    else
+      @article_locale = doc.css('//meta[property="og:locale"]/@content').to_s
+    end
+    
+    @post = Post.new
+    
+  end
+  
+  
 
   # GET /posts/1/edit
   def edit

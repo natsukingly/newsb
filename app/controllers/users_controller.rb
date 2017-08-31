@@ -11,7 +11,14 @@ class UsersController < ApplicationController
   # GET /users/1.json
   
   def user_ranking
-    @top_users = User.where(id: Like.group(:target_user_id).order('count(target_user_id) desc').limit(100).pluck(:target_user_id))
+    @ranked_users = User.where(id: Like.group(:target_user_id).order('count(target_user_id) desc').limit(100).pluck(:target_user_id))
+    @top_articles = Post.all.limit(10)
+    @top_users = User.all.limit(10)
+    @posts = Post.order(created_at: :desc)
+    @default_tags = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
+    @tags = Tag.where(name: @default_tags)
+    @all_tags = Tag.all
+    @users = User.all.limit(5)
   end
   
   def show

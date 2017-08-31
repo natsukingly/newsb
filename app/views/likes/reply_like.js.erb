@@ -1,1 +1,1 @@
-$(".reply_<%=@reply.id%>").find(".r_like_link").html('<%= escape_javascript(render("likes/like_reply", reply: @reply))%>');
+$(".reply_<%=@reply.id%>").find(".like_link").html('<%= escape_javascript(render("likes/like_reply", reply: @reply))%>');

@@ -16,14 +16,17 @@ Rails.application.routes.draw do
   root "posts#index"
   resources :users, except: [:create, :new]
   get '/user_ranking' => "users#user_ranking"
-  
+  get '/mobile_post_form' => 'posts#mobile_post_form'
   
   
   get '/posts/:article/show_article' => 'posts#show_article'
+  get '/posts/load_more_posts' => 'posts#load_more_posts'
+  
   
   get '/posts/:id/other_posts' => 'posts#other_posts'
   post "/posts/load_url" => "posts#load_url"
   post "/posts/:placeholder_url/load_url" => "posts#load_url"
+  get "/posts/mobile_load_url" => "posts#mobile_load_url"
   resources :posts, except: [:index, :new]
   
   get '/optimized_index' => "posts#optimized_index"
@@ -32,6 +35,9 @@ Rails.application.routes.draw do
   get '/article_index' => 'posts#article_index', as: :article_index
   get '/post_index' => 'posts#post_index'
   get '/posts/hashtags/:name' => 'posts#hashtags'
+  
+  
+  get '/replies/:comment_id/new' => 'replies#new'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/search_result' => "search#search_posts"

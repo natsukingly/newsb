@@ -1,0 +1,17 @@
+
+%h2.form_step
+  correct article?
+  
+
+.loaded_article_box
+  .image{style: "background-image: url(#{@article_image});"}
+  .info
+    .article_title.give_me_ellipsis= article_title
+    .article_site= article_site
+    
+.article_nav
+  .nav_btn
+    YES
+  .nav_btn
+    NO
+

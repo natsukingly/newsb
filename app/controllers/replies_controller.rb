@@ -14,6 +14,7 @@ class RepliesController < ApplicationController
 
   # GET /replies/new
   def new
+    @comment = Comment.find(params[:comment_id])
     @reply = Reply.new
   end
 
@@ -25,16 +26,7 @@ class RepliesController < ApplicationController
   # POST /replies.json
   def create
     @reply = Reply.new(reply_params)
-
-    respond_to do |format|
-      if @reply.save
-        format.html { redirect_to @reply, notice: 'Reply was successfully created.' }
-        format.json { render :show, status: :created, location: @reply }
-      else
-        format.html { render :new }
-        format.json { render json: @reply.errors, status: :unprocessable_entity }
-      end
-    end
+    @reply.save
   end
 
   # PATCH/PUT /replies/1

@@ -1,4 +1,2 @@
 $("#main_contents").html('<%= escape_javascript(render("posts/post_index", posts: @posts))%>');
-$("#main_nav .middle").removeClass("active");
-$("#main_nav .right").removeClass("active");
-$("#main_nav .left").addClass("active");
+$("#main_nav").html('<%= escape_javascript(render("shared/article_index_link"))%>');

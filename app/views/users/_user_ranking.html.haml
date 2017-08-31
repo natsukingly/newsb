@@ -3,7 +3,7 @@
   %p
     %i.fa.fa-users
     \= # of followers
-  - top_users.each.with_index(1) do |user, i|
+  - ranked_users.each.with_index(1) do |user, i|
     .user{class: "clearfix user_#{user.id}"}
       .user_box
         %p.ranking_index

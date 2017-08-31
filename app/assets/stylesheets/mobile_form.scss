@@ -1,0 +1,90 @@
+
+.form_step{
+    font-size: 30px;
+    font-weight: bold;
+    color: #001E42;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+#mobile_loaded_article{
+    height: 800px;
+    margin: 0 auto;
+    background-color: #001E42;
+    color: white;
+    padding: 50px 10px;
+    text-align: center;
+    .loaded_article_box{
+        width: 90%;
+        margin: 0 auto;
+        border: 1px solid white;
+        padding: 20px;
+        .image{
+                height: 200px; 
+                background-size: cover;
+                background-position: center;
+                margin: 0 auto 30px;
+        }
+        .info{
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+    }
+    .article_nav{
+        font-size: 20px;
+        .nav_btn{
+            width: 90%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            color: #001E42;
+            cursor: pointer;
+        }
+    }
+    .form_step{
+        color: white;
+    }
+}
+
+#mobile_main_form{
+    padding-bottom: 200px;
+    background-color: #f3f3f3;
+    color: #001E42;
+    form{ 
+        select{
+            width: 90%;
+            margin: 0 auto 200px;
+            border: auto;
+        }
+        p{
+            font-size: 20px;
+            color: #001E42;
+        }
+        textarea{
+            width: 90%;
+            margin: 0 auto 50px;
+        }
+    }
+    .first_half{
+        background-color: white;
+        padding: 200px 10px 0;
+        height: 800px;
+        margin: 0;
+    }
+    .second_half{
+        background-color: #f3f3f3;
+        padding: 50px 10px;
+        margin: 0;
+    }
+    
+    input[type="submit"]{
+        color: white;
+        width: 90%;
+        margin: 0 auto;
+        display: block;
+        padding: 10px 0;
+        border-radius: 5px;
+        border: none;
+    }
+}

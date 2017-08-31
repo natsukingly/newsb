@@ -6,38 +6,41 @@
 //   YES IT'S WORKING!!
 
 
-#side_nav.hidden-xs
-  =render 'layouts/feed_optimizer', tags: @tags
-
+#side_nav
+  =render 'layouts/feed_optimizer', default_category_tags: @default_category_tags, default_rigion_tags: @default_rigion_tags
+  
+#mobile_side_nav.visible-xs
 
 #main_container
-  =render "/shared/selected_article", selected_article: @selected_article
+
+  #top_articles.hidden-xs
+    =render "/shared/selected_article", selected_article: @selected_article
  
         
-      
-  #main_nav
-    =link_to "/post_index", remote: true, class: "left main_btn active" do
-      %i.fa.fa-thumbs-o-up
-      FEED
-    =link_to "/article_index", remote: true, class: "middle main_btn" do
-      %i.fa.fa-newspaper-o
-      NEWS
-    =link_to "/user_ranking", remote: true, class: "right main_btn" do
-      %i.fa.fa-line-chart
-      TOP 100
-  .post_form
+  .visible-xs#mobile_side_nav_link
+    %i.fa.fa-hashtag
+     
+  .post_form.hidden-xs
     =form_tag "/posts/load_url", remote: true do
       .form-group.input-group
         = url_field_tag :placeholder_url, "", placeholder: "paste url to start your post!", class: "url_form form-control"
         %span.input-group-btn
           = button_tag type: :submit, class: "btn" do
             %i.fa.fa-pencil-square-o
-            CREAT NEW POST
+            NEW POST
+
+  .mobile_post_form.visible-xs
+    =form_tag "/posts/mobile_load_url", remote: true, method: :get do
+      .form-group.input-group
+        = url_field_tag :placeholder_url, "", placeholder: "paste url to start your post!", class: "url_form form-control"
+        %span.input-group-btn
+          = button_tag type: :submit, class: "btn" do
+            %i.fa.fa-pencil-square-o
+            
 
   .posts#main_contents
     =render "posts/post_index", posts: @posts
-    .other_post_block
- 
+
  
 // sidebar   
 #sidebar.hidden-xs.hidden-sm
@@ -53,38 +56,28 @@
   
 :javascript
   
-  
-  
-  
-  $('.comment_invite').click(function(){
-    $(this).parents('.post').find('.comment_form').slideDown();
+  $('#mobile_side_nav_link').click(function(){
+    if($(this).find('i').hasClass('fa-hashtag')){
+      $(this).find('i').removeClass('fa-hashtag').addClass('fa-times');
+      $(this).css("bottom", "auto").css("top", "70px");
+      $('#side_nav').slideDown();
+    } else {
+      $('#side_nav').slideUp();
+      $(this).find('i').removeClass('fa-times').addClass('fa-hashtag')
+      $(this).css("bottom", "20px").css("top", "auto");
+    }
   });
   
-  $('.close_c_form_btn').click(function(){
-    $(this).parents('.post').find('.comment_form').slideUp();
-  });
 
-  $('.reply_invite').click(function(){
-    $(this).parents('.comment').find('.reply_form').slideDown();
-  });
-  
-  $('.close_r_form_btn').click(function(){
-    $(this).parents('.comment').find('.reply_form').slideUp();
-  });
-  
-  $('.comment_link').click(function(){
-    $(this).parents('.post').find('.comments').slideDown();
-  });
-  
 
 
   // awesome autosize code
 
   
-  $(".c_content").height(30);//init
-  $(".c_content").css("lineHeight","20px");//init
+  $(".form_content").height(30);//init
+  $(".form_content").css("lineHeight","20px");//init
   
-  $(".c_content").on("input",function(evt){
+  $(".form_content").on("input",function(evt){
             if(evt.target.scrollHeight > evt.target.offsetHeight){
                 $(evt.target).height(evt.target.scrollHeight);
             }else{
@@ -98,28 +91,31 @@
                 }
             }
         });
-        
-  $(".r_content").height(30);//init
-  $(".r_content").css("lineHeight","20px");//init
-  
-  $(".r_content").on("input",function(evt){
-            if(evt.target.scrollHeight > evt.target.offsetHeight){
-                $(evt.target).height(evt.target.scrollHeight);
-            }else{
-                var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
-                while (true){
-                    $(evt.target).height($(evt.target).height() - lineHeight);
-                    if(evt.target.scrollHeight > evt.target.offsetHeight){
-                        $(evt.target).height(evt.target.scrollHeight);
-                    }
-                    break;
-                }
-            }
-        });
-        
+
   // $('.posts').infiniteScroll({
   //   path: "nav.pagination a[rel=next]",
   //   append: '.post',
   //   status: '.scroller-status',
   //   hideNav: '.pagination'
   // });
+  
+  
+  var win = $(window);
+  
+  // Each time the user scrolls
+  win.scroll(function() {
+      // End of the document reached?
+      if ($(document).height() - win.height() == win.scrollTop()) {
+          // $(‘#loading').show();
+  
+        $.ajax({
+          url: "/posts/load_more_posts",
+          type: "GET",
+          data: {already_loaded_posts : $('#main_contents').find('.post').length },
+          dataType: 'script',
+          // success: function(html) {
+          //     $('#main_contents').append("<%= render('posts/other_posts', posts: @posts) %>");
+          // }
+      });
+      }
+  });

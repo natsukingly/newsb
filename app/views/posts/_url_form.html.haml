@@ -1,4 +1,4 @@
-= form_tag "/posts/load_url" do
+= form_tag "/posts/mobile_load_url", remote: true do
     .form-group.input-group
         = url_field_tag :placeholder_url, "", placeholder: "think together, think better", class: "form-control"
         %span.input-group-btn

@@ -1,0 +1,20 @@
+- best_replies = Reply.where(id: Like.where(comment_id: comment.id ,target_type: "reply").group(:reply_id).order('count(reply_id) desc').limit(2).pluck(:reply_id))
+- if best_replies.empty?
+  - best_replies = Reply.where(comment_id: comment.id).order(created_at: :desc).limit(2)
+- unless best_replies.empty?
+  - best_replies.each do |reply|  
+    .reply{class: "reply_#{reply.id}"}
+      .content.clearfix
+        .user_block.clearfix
+          =image_tag reply.user.image.url, class:"pull-left"
+          =link_to reply.user, class: "pull-left" do
+            =reply.user.name
+            %span.grey
+              #{time_ago_in_words(reply.created_at)} ago
+            %p.user_shoulder_name
+              =reply.user.shoulder_name
+        %p.give_me_ellipsis 
+          =reply.content
+        .status
+          .like_link
+            =render '/likes/like_reply', reply: reply
