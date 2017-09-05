@@ -12,15 +12,12 @@
 #mobile_side_nav.visible-xs
 
 #main_container
-
-  #top_articles.hidden-xs
-    =render "/shared/selected_article", selected_article: @selected_article
- 
         
   .visible-xs#mobile_side_nav_link
     %i.fa.fa-hashtag
-     
-  .post_form.hidden-xs
+  
+  
+  #post_url_form.hidden-xs
     =form_tag "/posts/load_url", remote: true do
       .form-group.input-group
         = url_field_tag :placeholder_url, "", placeholder: "paste url to start your post!", class: "url_form form-control"
@@ -28,6 +25,8 @@
           = button_tag type: :submit, class: "btn" do
             %i.fa.fa-pencil-square-o
             NEW POST
+            
+  #post_form_block
 
   .mobile_post_form.visible-xs
     =form_tag "/posts/mobile_load_url", remote: true, method: :get do
@@ -39,7 +38,7 @@
             
 
   .posts#main_contents
-    =render "posts/post_index", posts: @posts
+    =render @posts
 
  
 // sidebar   
@@ -69,7 +68,8 @@
   });
   
 
-
+  
+ 
 
   // awesome autosize code
 
@@ -113,9 +113,8 @@
           type: "GET",
           data: {already_loaded_posts : $('#main_contents').find('.post').length },
           dataType: 'script',
-          // success: function(html) {
-          //     $('#main_contents').append("<%= render('posts/other_posts', posts: @posts) %>");
-          // }
-      });
+        });
       }
   });
+  
+  

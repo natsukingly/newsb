@@ -11,7 +11,7 @@
     .body
       .main
         .content.clearfix
-          .user_block.clearfix
+          .user_block.clearfix{class: "user_#{post.user.id}"}
             =image_tag post.user.image.url, class:"pull-left"
             =link_to post.user, class: "pull-left" do
               =post.user.name
@@ -19,7 +19,15 @@
                 #{time_ago_in_words(post.created_at)} ago
               %p.user_shoulder_name
                 =post.user.shoulder_name
-          =render_with_hashtags(simple_format(post.content))
+            .follow_switch.pull-right
+              =render "/shared/follow_form_icon.html.haml", user: post.user
+          =render_with_hashtags(post.content.gsub(/\n/, '<br />'))
+          %br
+          -if current_user.id == post.user_id
+            =link_to "EDIT", edit_post_path(post.id), remote: true, class: "edit_link_btn"  
+            |            
+            =link_to "DELETE", post_path(post.id), class: "edit_link_btn" , data: {confirm: "are you sure you want to delete your post?"}, method: :delete  
+
         .post_image{ style: "background-image: url(#{post.article_image.url});"}
 
       .status
@@ -51,4 +59,4 @@
               
             %p.give_me_ellipsis 
               =comment.content
-        
+              

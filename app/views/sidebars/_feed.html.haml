@@ -3,17 +3,21 @@
   .title
     ARTICLES
   %ul.list
-    -top_articles.each do |article|
+    -top_articles.each.with_index(1) do |article, i|
+      .article_label
+        %p
+          #{i}. 
+          %span
+            total #{article.likes.count} likes
       %li
-        %h4.give_me_ellipsis= article.article_title
+        %h4
+          = truncate(article.article_title, length: 40) do
+            %span ...
         %p
           = article.article_site
           #{time_ago_in_words(article.created_at)} ago
-        .status
-          %i.fa.fa-thumbs-o-up
-            =article.likes.count
-          %i.fa.fa-comment-o
-            174
+
+
   .more
     View more articles
     

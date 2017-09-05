@@ -1,4 +1,4 @@
-.user_block.clearfix
+.user_block.clearfix{class: "user_#{user.id}"}
     =image_tag user.image.profile_sm.url, class: "pull-left profile_xs"
     .user_info_xs.pull-left
         =link_to user do
@@ -7,3 +7,5 @@
                 #{time_ago_in_words(object.created_at)} ago
         %p.user_shoulder_name
             =user.shoulder_name
+    .follow_switch.pull-right
+        =render "/shared/follow_form_icon.html.haml", user: user

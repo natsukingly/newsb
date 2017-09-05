@@ -1,0 +1,18 @@
+.comment.clearfix{class: "comment_#{comment.id}"}
+  .body.clearfix
+    = render "shared/user_mini_profile", user: comment.user, object: comment
+    =simple_format(comment.content)
+    - if current_user.id == comment.user_id
+      =link_to "EDIT", edit_comment_path(comment.id), remote: true, class: "edit_link_btn"  
+      |            
+      =link_to "DELETE", comment_path(comment.id), remote: true, class: "edit_link_btn" , data: {confirm: "are you sure you want to delete your post?"}, method: :delete  
+
+    .status.clearfix
+      .like_link
+        =render '/likes/like_comment', comment: comment
+      =link_to "Reply", "/replies/#{comment.id}/new", remote: true, class: "reply_link"
+      %i.fa.fa-ellipsis-h.pull-right
+  .reply_form.clearfix
+        
+  .reply_index
+    =render comment.replies

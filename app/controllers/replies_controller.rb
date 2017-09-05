@@ -27,20 +27,14 @@ class RepliesController < ApplicationController
   def create
     @reply = Reply.new(reply_params)
     @reply.save
+    @new_reply = Reply.new
+    @comment = @reply.comment
   end
 
   # PATCH/PUT /replies/1
   # PATCH/PUT /replies/1.json
   def update
-    respond_to do |format|
-      if @reply.update(reply_params)
-        format.html { redirect_to @reply, notice: 'Reply was successfully updated.' }
-        format.json { render :show, status: :ok, location: @reply }
-      else
-        format.html { render :edit }
-        format.json { render json: @reply.errors, status: :unprocessable_entity }
-      end
-    end
+    @reply.update(reply_params)
   end
 
   # DELETE /replies/1

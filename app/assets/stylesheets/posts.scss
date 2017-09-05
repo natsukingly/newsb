@@ -42,11 +42,18 @@
                 padding-bottom: 20px;
             
             }
+            .follow_switch{
+                font-size: 20px;
+            }
             .post_image{
                 background-position: center;
                 background-size: cover;
                 height: 200px;
                 flex: 1;
+            }
+            .post_menu{
+                font-size: 20px;
+                cursor: pointer;
             }
         }
         .status{
@@ -89,42 +96,24 @@
 }
 
 
-#post_form{
-    .body{
-        display: flex;
-        .main{
-            flex: 2;
-            
-            select{
-            padding: 0 10px;
-            }
-            .form_btn{
-                background-color: black;
-                color: white;
-                border: none;
-            }
-        }
-        .article_image{
-            flex: 1;
-        }
+
+#autocomplete_tags{
+    ul{
+        border: 1px solid #eee;
+        padding: 5px;
+    }
+    li{
+        padding: 5px 20px;
         
-        textarea{
-            height: 300px;
-        }
-
+    }
+    li.selected{
+        color: white;
+        background-color: #001E42;
     }
 }
 
-.post_form{
-    padding: 20px　20px 0 20px;
-    
-    textarea{
-    resize: vertical;
-    width: 100%;
-    white-space: pre-wrap;
-    }
 
-}
+
 
 .mobile_post_form{
     margin-top: -20px;
@@ -141,53 +130,62 @@
 
 
 
-#form_modal{
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 700px;
-    margin: 100px auto 0;
-    display: none;
-    z-index: 200;
-    #post_form{
-        .body{
-            display: flex;
-            .main{
-                flex: 2;
-                
-                select{
+#post_form{
+    .body{
+        font-size: 14px;
+        display: flex;
+        .form_main{
+            flex: 2;
+            form{
+                width: 95%;
+                textarea{
+                    
+                }
+                .form_label{
+                    color: #001E42;
+                    margin-bottom: 10px;
+                }
+                .textarea_label{
+                    border-bottom: 1px solid #f9f9f9;
+                }
+            }
+            
+            select{
                 padding: 0 10px;
-                }
-                .form_btn{
-                    background-color: black;
-                    color: white;
-                    border: none;
+            }
+            select::-webkit-input-placeholder{
+                color: red;
+            }
+            .tag_selection{
+                border: 1px solid #f9f9f9;
+                color: #aaa;
+                box-shadow: none;
+                border-radius: 0;
+                text-align: center;
+                &::placeholder{
+                    color: red;
                 }
             }
-            .article_image{
-                flex: 1;
+            
+            
+            .form_btn{
+                background-color: black;
+                color: white;
+                border: none;
             }
+        }
+        .article_image{
+            flex: 1;
         }
     }
 }
 
-
-
-
-// .more_posts{
-//     color: grey;
-//     margin: 10px 0 -10px 0;post_nav
-// }
-
-// .article_image{
-//     height: 250px;
-//     background-size: cover;
-//     background-position: center;
-// }
-
-
-// post ends here
+#post_url_form{
+    input:focus, button:focus{
+        box-shadow: none;
+        border-color: rgb(204, 204, 204);
+    }
+}
 
 
 
@@ -196,16 +194,10 @@
 }
 
 
-
-
-
 .p_status > div{
     display: inline-block;
     margin-right: 20px;
 }
-
-
-
 
 
 .post_nav_option{
@@ -216,16 +208,6 @@
     border-bottom: 2px solid black;
 }
 
-
-.tag_selection{
-    border: none;
-    color: grey;
-    padding-left: 10px;
-    box-shadow: none;
-    border-radius: 0;
-    font-size: 12px;
-    text-align: center;
-}
 
 #form_wrapper{
     display: none;
@@ -258,120 +240,20 @@
 
 
 
-// // article
-
-
-// .article{
-//     margin-bottom: 20px;
-// }
-
-// .a_top{
-//     border-bottom: 2px solid #eee;
-//     padding: 20px; 
-//     background: white;
-//     white-space: nowrap;
-// }
-
-// .a_title{
-//     padding: 0;
-//     margin: 0;
-//     width: 100%;
-//     overflow: hidden;
-//     text-overflow: ellipsis;
-// }
-
-// .a_site{
-
-// }
-
-
-// .a_body{
-//     padding: 20px 20px; 
-//     background: white;
-//     position: relative;
-//     min-height: 150px;
-//     border-bottom: 1px solid #eee;
-// }
-
-
-
-// .a_info{
-//     padding: 0 0 10px 0;
-// }
-
-// .m_a_image{
-//     margin: -20px -20px 10px -20px;
-//     height: 200px;
-//     background-size: cover;
-//     background-position: center;
-// }
-
-// .a_image{
-//     width: 180px;
-//     height: 180px;
-//     background-size: cover;
-//     background-position: center;
-// }
-
-// .a_content_main{
-//     width: 370px;
-//     padding-bottom: 40px;
-// }
-
-
-// .a_status{
-//     position: absolute;
-//     bottom: 20px;
-//     left: 210px;
-// }
-
-
-// @media (max-width:768px){
-//     .a_content_main{
-//         width: 100%;
-//         padding-bottom: 30px;
-//     }
-    
-//     .a_status{
-//         bottom: 10px;
-//         left: 20px;
-//     }
-// }
-
-
-
-.a_status > div{
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.a_comment{
-    font-size: 12px;
-}
-
-.a_user_info{
-    font-size: 12px;
-    div{
-        padding-bottom: 5px;
-    }
-}
-
-.a_placeholder{
-    padding-top: 50px;
-}
 
 
 
 //show_article
 
 #selected_article_nav{
-    margin: 20px 0;
+    margin: -20px 0 20px 0;
     display: flex;
     text-align: center;
+    background-color: white;
     .article_btn{
         font-size: 16px;
-        margin: 0 10px;
-        padding: 5px 0;
+        margin: 10px;
+        padding: 10px 0;
         border-radius: 5px;
         border: 1px solid #001E42;
         flex: 1;
@@ -425,6 +307,9 @@
 
 #post_nav{
     display: flex;
+    background-color: white;
+    margin: -10px 0 10px;
+    padding: 20px 15px 0;
     .post_btn{
         cursor: pointer;
         font-size: 16px;

@@ -1,0 +1,5 @@
+<% unless @autocomplete_tag_lists.nil? || @autocomplete_tag_lists.empty? %>
+    $('#autocomplete_tags').html('<%= escape_javascript(render("posts/autocomplete_tag_lists"))%>');
+    $('#suggested_tags').find('li').eq(0).addClass("selected");
+<% end %>
+

@@ -1,0 +1,7 @@
+
+-unless autocomplete_tag_lists == nil
+  %ul#suggested_personalized_tags
+    - autocomplete_tag_lists.each do |tag|
+      =link_to "/posts/#{tag.name}/customize_side_nav", remote: true do
+        %li.give_me_short_ellipsis.suggested_tag ##{tag.name}
+        

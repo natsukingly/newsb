@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  before_action :default_tags, only: [:index, :autocomplete_personalized_tags, :autocomplete_tags, :load_url, :edit, :show, :article_index]
+  before_action :sidebar, only: [:index, :show]
 
   
 
@@ -14,20 +15,17 @@ class PostsController < ApplicationController
     @selected_article = Post.last
     
     #sidebar
-    @top_articles = Post.all.limit(10)
-    @top_users = User.all.limit(10)
 
-    #side_nav
-    @default_categories = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
-    @default_rigions = ["U.S.", "China", "Europe", "Africa","Asia","Central America","Middle East","North America","Oceania","South America","The Caribbean"]
-    
-    @default_category_tags = Tag.where(name: @default_categories)
-    @default_rigion_tags = Tag.where(name: @default_rigions)
+
+    if cookies[:personalized_tags]
+      personalized_tags_ids = JSON.parse(cookies[:personalized_tags]).map { |str| str.to_i}
+      @personalized_tags = Tag.where(id: personalized_tags_ids)
+    end
     
     
     #main contents
     if cookies[:search_preference]
-      @posts = Post.includes(:tags).where('tags.id' => cookies[:search_preference].split("&")).order(created_at: :desc).limit(5)
+      @posts = Post.includes(:tags).where('tags.id' => JSON.parse(cookies[:search_preference])).order(created_at: :desc).limit(5)
     else
       @posts = Post.order(created_at: :desc).limit(5)
     end
@@ -36,10 +34,18 @@ class PostsController < ApplicationController
   
   def optimized_index
     @tags = Tag.where(id: params[:tag_ids])
-    cookies[:search_preference] = params[:tag_ids]
-    @post = Post.new
-    @posts = Post.includes(:tags).where('tags.id' => params[:tag_ids]).order(created_at: :desc).limit(5)
+    @show_tags = params[:tag_ids]
+    if params[:tag_ids]
+      cookies[:search_preference] = JSON.generate(params[:tag_ids])
+      @post = Post.new
+      @posts = Post.includes(:tags).where('tags.id' => (params[:tag_ids])).order(created_at: :desc).limit(5)
+    else 
+      cookies.delete :search_preference
+      @posts = Post.order(created_at: :desc).limit(5)
+    end
   end
+  
+
   
   
   
@@ -60,7 +66,7 @@ class PostsController < ApplicationController
     already_loaded_posts = params[:already_loaded_posts]
     
     if cookies[:search_preference]
-      @posts = Post.includes(:tags).where('tags.id' => cookies[:search_preference].split("&")).order(created_at: :desc).offset(already_loaded_posts).limit(5)
+      @posts = Post.includes(:tags).where('tags.id' => cookies[:search_preference]).order(created_at: :desc).offset(already_loaded_posts).limit(5)
     else
       @posts = Post.order(created_at: :desc).offset(already_loaded_posts).limit(5)
     end
@@ -72,21 +78,47 @@ class PostsController < ApplicationController
   def show
   end
   
+  def autocomplete_tags
+    # to deal with consecutive words and new lines without spacing
+    input = params[:input].scan(/#\w+/)
+    @last_word = input[0]
+    
+    @autocomplete_tag_lists = Tag.where('LOWER(name) LIKE(?)', "%#{@last_word.downcase.delete('#')}%").where.not(name: @default_categories).where.not(name: @default_rigions).limit(5)
+  end
+  
+  # because differnt js needs to be applied
+  def autocomplete_personalized_tags
+    @last_word = params[:input]
+    @autocomplete_tag_lists = Tag.where('LOWER(name) LIKE(?)', "%#{@last_word.downcase.delete('#')}%").where.not(name: @default_categories).where.not(name: @default_rigions).limit(5)
+  end
+  
+  def reset_personalized_tags
+    cookies.delete :personalized_tags
+  end
+  
 
+  def customize_side_nav
+    tag = Tag.find_by(name: params[:tag_name])
 
+    if cookies[:personalized_tags]
+      cookies[:personalized_tags] = JSON.generate(Array(tag.id.to_s).push(*JSON.parse(cookies[:personalized_tags])))
+    else 
+      cookies[:personalized_tags] = JSON.generate(Array(tag.id.to_s))
+    end
+    if cookies[:search_preference]
+      cookies[:search_preference] = JSON.generate(Array(tag.id.to_s).push(*JSON.parse(cookies[:search_preference])))
+    else
+      cookies[:search_preference] = JSON.generate(Array(tag.id.to_s))
+    end
+    # personalized_tags_ids = JSON.parse(cookies[:personalized_tags]).map { |str| str.to_i}
+    @personalized_tags = Tag.where(id: JSON.parse(cookies[:personalized_tags]))
+  end
   
   def article_index
     @viral_articles = Post.select('distinct on (article_title) *')
     @post = Post.new
     @top_articles = Post.all.limit(10)
     @top_users = User.all.limit(10)
-    
-    #side_nav
-    @default_categories = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
-    @default_rigions = ["U.S.", "China", "Europe", "Africa","Asia","Central America","Middle East","North America","Oceania","South America","The Caribbean"]
-    
-    @default_category_tags = Tag.where(name: @default_categories)
-    @default_rigion_tags = Tag.where(name: @default_rigions)
     
     #main contents
     @posts = Post.order(created_at: :desc)
@@ -208,8 +240,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     
-    
-    
+
     @post = Post.new(post_params)
     @post.content = params[:post][:content] + " " + "#" + params[:post][:tag]
     
@@ -230,25 +261,14 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
+    @post.update(post_params)
   end
 
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
     @post.destroy
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to root_path
   end
 
   private
@@ -259,6 +279,18 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:user_id, :article_image, :article_title, :article_url, :article_site, :article_published_time, :article_locale)
+      params.require(:post).permit(:user_id, :article_image, :article_title, :article_url, :article_site, :article_published_time, :article_locale, :content)
+    end
+    
+    def default_tags
+      @default_categories = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
+      @default_rigions = ["U.S.", "China", "Europe", "Africa","Asia","Central America","Middle East","North America","Oceania","South America","The Caribbean"]
+      @default_category_tags = Tag.where(name: @default_categories)
+      @default_rigion_tags = Tag.where(name: @default_rigions)
+    end
+    
+    def sidebar
+      @top_articles = Post.where(id: Like.where(created_at: Date.today.beginning_of_week-1..Time.now ).group(:post_id).order('count(post_id) desc').limit(10).pluck(:post_id))
+      @top_users = User.where(id: Like.where(created_at: Date.today.beginning_of_week-1..Time.now ).group(:target_user_id).order('count(target_user_id) desc').limit(10).pluck(:target_user_id))
     end
 end

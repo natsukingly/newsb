@@ -1,0 +1,5 @@
+<% unless @autocomplete_tag_lists.nil? || @autocomplete_tag_lists.empty? %>
+    $('#autocomplete_personalized_tags').html('<%= escape_javascript(render("layouts/autocomplete_personalized_tags", autocomplete_tag_lists: @autocomplete_tag_lists))%>');
+    $('#suggested_personalized_tags').find('a').eq(0).addClass("selected");
+<% end %>
+

@@ -1,0 +1,59 @@
+.post{class: "post post_#{post.id} clearfix"}
+  =link_to "/posts/#{post.id}/show_article", remote: true do
+    .top
+      .article_title
+        = post.article_title
+      .article_site= post.article_site
+       
+          
+    .body
+      .main
+        .content.clearfix
+          .user_block.clearfix{class: "user_#{post.user.id}"}
+            =image_tag post.user.image.url, class:"pull-left"
+            =link_to post.user, class: "pull-left" do
+              =post.user.name
+              %span.grey
+                #{time_ago_in_words(post.created_at)} ago
+              %p.user_shoulder_name
+                =post.user.shoulder_name
+            .follow_switch.pull-right
+              =render "/shared/follow_form_icon.html.haml", user: post.user
+          =render_with_hashtags(post.content.gsub(/\n/, '<br />'))
+          %br
+          -if current_user.id == post.user_id
+            =link_to "EDIT", edit_post_path(post.id), remote: true, class: "edit_link_btn"  
+            |            
+            =link_to "DELETE", post_path(post.id), class: "edit_link_btn" , data: {confirm: "are you sure you want to delete your post?"}, method: :delete  
+  
+        .post_image{ style: "background-image: url(#{post.article_image.url});"}
+  
+      .status
+        .like_link
+          =render '/likes/like_post', post: post
+        .divider
+          ・
+        =link_to "COMMENT", post_path(post.id), class: "post_link" 
+        -if post.comments.count > 1  
+          =link_to "View all #{post.comments.count} comments", post_path(post.id), class: "post_view_link pull-right"
+        
+    - best_comments = Comment.where(id: Like.where(post_id: post.id ,target_type: "comment").group(:comment_id).order('count(comment_id) desc').limit(1).pluck(:comment_id))
+    - comment = best_comments[0]
+    - if comment == nil
+      -comment = post.comments.last
+    
+    - if comment != nil
+      .best_comment
+        .body
+          .content.clearfix
+            .user_block.clearfix
+              =image_tag comment.user.image.url, class:"pull-left"
+              =link_to comment.user, class: "pull-left" do
+                =comment.user.name
+                %span.grey
+                  #{time_ago_in_words(post.created_at)} ago
+                %p.user_shoulder_name
+                  =comment.user.shoulder_name
+              
+            %p.give_me_ellipsis 
+              =comment.content

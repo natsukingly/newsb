@@ -1,0 +1,3 @@
+$('#personalized_tags').html('<%= escape_javascript(render("layouts/personalized_tag_block", personalized_tags: @personalized_tags))%>');
+$('#autocomplete_personalized_tags').html('<%= escape_javascript(render("layouts/autocomplete_personalized_tags", autocomplete_tag_lists: @autocomplete_tag_lists))%>');
+$('#personalized_tag_form').val("");

@@ -9,6 +9,16 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
+  def auto_complete
+    @users = if params[:term] =~ /(@[^\s]+)\s.*/
+             elsif user_name = params[:term].match(/(@[^\s]+)/)
+               users = User.select('name').where('name LIKE ?', "%#{user_name[1].to_s[1..-1]}%")
+
+               users.map {|user| {name: "#@{user.name}"} }
+             end
+    render json: @users.to_json
+  end
+  
   
   def user_ranking
     @ranked_users = User.where(id: Like.group(:target_user_id).order('count(target_user_id) desc').limit(100).pluck(:target_user_id))

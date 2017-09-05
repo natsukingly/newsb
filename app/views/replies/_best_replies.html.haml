@@ -13,6 +13,8 @@
               #{time_ago_in_words(reply.created_at)} ago
             %p.user_shoulder_name
               =reply.user.shoulder_name
+          .follow_switch.pull-right
+            =render "/shared/follow_form_icon.html.haml", user: reply.user
         %p.give_me_ellipsis 
           =reply.content
         .status

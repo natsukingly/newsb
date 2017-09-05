@@ -10,7 +10,7 @@
           %li= message
           
   .field.form-group.form_textarea.reply_textarea
-    =image_tag current_user.image.profile_sm.url, class: "profile_xs pull-left"
+    =image_tag current_user.image.profile_sm.url, class: "reply_image pull-left"
     = form.text_area :content, placeholder: "content", class: "form-control form_content", style: "border: none; box-shadow: none; resize: none;"
     = form.hidden_field :comment_id, value: comment.id
     = form.hidden_field :user_id, value: current_user.id

@@ -7,7 +7,14 @@
     background-color: white;
     .block{
         border-bottom: 20px solid #e2e2e2;
-
+        .article_label{
+            color: grey;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 5px;
+            span{
+                float: right;
+            }
+        }
         .title{
             background-color: #001E42;
             text-align: center;

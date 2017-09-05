@@ -1,1 +1,2 @@
 $("#comment_index").html('<%= escape_javascript(render("comments/comment_index", post: @comment.post))%>');
+$("#comment_form").html('<%= escape_javascript(render("comments/form", post: @comment.post))%>')

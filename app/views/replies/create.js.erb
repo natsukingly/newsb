@@ -1,1 +1,2 @@
-$(".comment_<%=@reply.comment.id%>").find(".reply_index").html('<%= escape_javascript(render("replies/reply_index", comment: @reply.comment))%>');
+$(".comment_<%=@reply.comment.id%>").find(".reply_index").html('<%= escape_javascript(render @comment.replies)%>');
+$(".comment_<%=@reply.comment.id%>").find(".reply_form").html('');

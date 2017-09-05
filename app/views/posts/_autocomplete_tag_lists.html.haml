@@ -1,0 +1,20 @@
+
+-unless @autocomplete_tag_lists == nil
+  %ul#suggested_tags
+    - @autocomplete_tag_lists.each do |tag|
+      %li.suggested_tag ##{tag.name}
+        
+:javascript
+  $('.suggested_tag').click(function(){
+    var $clicked_tag = $(this).text();
+    var $old_value = $('#post_content').val().match(/\S+|\s/g);
+    // two sentences below cannot be joined
+    // matchでの配列は最後に余計な要素が追加されるため二回pop
+    $old_value.pop();
+    $old_value.push($clicked_tag);
+    // need to define new variable to move on
+    $new_value = $old_value.join("") + " ";
+    $('#post_content').val($new_value);
+    $('#post_content').focus();
+    $('#autocomplete_tags').html(" ");
+  });

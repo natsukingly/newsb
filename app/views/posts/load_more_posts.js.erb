@@ -1,1 +1,1 @@
-$('#main_contents').append('<%= escape_javascript(render("posts/post_index", posts: @posts ))%>');
+$('#main_contents').append('<%= escape_javascript(render @posts)%>');

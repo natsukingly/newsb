@@ -26,7 +26,7 @@
 }
 
 
-.feed_optimizer{
+#feed_optimizer{
     h2{
         color: white;
         font-size: 18px;
@@ -75,5 +75,34 @@ input[type=checkbox]:checked + .tag_content:before{
         background-color: #001E42;
         padding: 20px;
         z-index: 100;
+    }
+}
+
+
+// form parts
+#feed_optimizer{
+    #personalized_tag_form{
+        border-radius: 3px;
+        width: 100%;
+        padding: 3px 10px;
+        margin-bottom: 10px;
+        border: none;
+    }
+    #suggested_personalized_tags{
+        background-color: white;
+        width: 100%;
+        padding: 5px;
+        li{
+            padding: 5px;
+            color: black;
+        }
+        a.selected li{
+            color: white;
+            background-color: grey;
+        }
+    }
+    #reset_tags_btn{
+        color: white;
+        font-size: 14px;
     }
 }

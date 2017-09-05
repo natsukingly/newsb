@@ -9,9 +9,13 @@ Rails.application.routes.draw do
   get '/users/:id/following' => 'users#show_following'
   get '/users/:id/followers' => 'users#show_followers'
   get '/users/:id/user_post_index' => 'users#show_user_posts'
+  get '/users/auto_complete' => 'users#auto_complete'
+  
   
   post '/:following_id/follow' => 'relationships#follow'
   post '/:following_id/unfollow' => 'relationships#unfollow'
+  post '/:following_id/follow_icon' => 'relationships#follow_icon'
+  post '/:following_id/unfollow_icon' => 'relationships#unfollow_icon'
   
   root "posts#index"
   resources :users, except: [:create, :new]
@@ -21,7 +25,10 @@ Rails.application.routes.draw do
   
   get '/posts/:article/show_article' => 'posts#show_article'
   get '/posts/load_more_posts' => 'posts#load_more_posts'
-  
+  get '/posts/autocomplete_tags' => 'posts#autocomplete_tags'
+  get '/posts/autocomplete_personalized_tags' => 'posts#autocomplete_personalized_tags'
+  get '/posts/:tag_name/customize_side_nav' => 'posts#customize_side_nav'
+  get '/posts/reset_personalized_tags' => 'posts#reset_personalized_tags'
   
   get '/posts/:id/other_posts' => 'posts#other_posts'
   post "/posts/load_url" => "posts#load_url"
