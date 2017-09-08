@@ -26,6 +26,9 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.save
+    @new_comment = Comment.new
+    @post = @comment.post
+    @comments = @post.comments.order(created_at: :desc)
   end
 
   # PATCH/PUT /comments/1

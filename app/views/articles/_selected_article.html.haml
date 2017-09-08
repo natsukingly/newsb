@@ -1,0 +1,13 @@
+#selected_article
+  .image{style: "background-image: url(#{article.image.url});"}
+    .mini_dark_over_lay
+      .block
+        %h2.give_me_ellipsis
+          =article.title
+        .status
+          %i.fa.fa-thumbs-o-up
+          =article.likes.count
+          %span.pull-right 
+            =article.source
+            -unless article.published_time == nil
+              #{time_ago_in_words(article.published_time)} ago

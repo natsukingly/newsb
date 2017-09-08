@@ -5,6 +5,16 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } 
   
+  resources :articles, only: [:index, :show] do
+    collection do
+      get 'load_more'
+    end
+  end
+  
+  
+  
+  
+  
   # follower/folowing
   get '/users/:id/following' => 'users#show_following'
   get '/users/:id/followers' => 'users#show_followers'
@@ -23,8 +33,6 @@ Rails.application.routes.draw do
   get '/mobile_post_form' => 'posts#mobile_post_form'
   
   
-  get '/posts/:article/show_article' => 'posts#show_article'
-  get '/posts/load_more_posts' => 'posts#load_more_posts'
   get '/posts/autocomplete_tags' => 'posts#autocomplete_tags'
   get '/posts/autocomplete_personalized_tags' => 'posts#autocomplete_personalized_tags'
   get '/posts/:tag_name/customize_side_nav' => 'posts#customize_side_nav'
@@ -34,12 +42,19 @@ Rails.application.routes.draw do
   post "/posts/load_url" => "posts#load_url"
   post "/posts/:placeholder_url/load_url" => "posts#load_url"
   get "/posts/mobile_load_url" => "posts#mobile_load_url"
-  resources :posts, except: [:index, :new]
+  
+  resources :posts, except: [:index, :new] do
+    collection do
+      get 'load_more'
+    end
+  end
+  
+  
+  
   
   get '/optimized_index' => "posts#optimized_index"
   get '/test' => "posts#test"
   
-  get '/article_index' => 'posts#article_index', as: :article_index
   get '/post_index' => 'posts#post_index'
   get '/posts/hashtags/:name' => 'posts#hashtags'
   

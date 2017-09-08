@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :default_tags, only: [:index, :autocomplete_personalized_tags, :autocomplete_tags, :load_url, :edit, :show, :article_index]
-  before_action :sidebar, only: [:index, :show]
+  before_action :sidebar, only: [:index, :show, :article_index]
 
   
 
@@ -10,18 +10,6 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @post = Post.new
-    
-    # top
-    @selected_article = Post.last
-    
-    #sidebar
-
-
-    if cookies[:personalized_tags]
-      personalized_tags_ids = JSON.parse(cookies[:personalized_tags]).map { |str| str.to_i}
-      @personalized_tags = Tag.where(id: personalized_tags_ids)
-    end
-    
     
     #main contents
     if cookies[:search_preference]
@@ -44,31 +32,23 @@ class PostsController < ApplicationController
       @posts = Post.order(created_at: :desc).limit(5)
     end
   end
-  
 
-  
-  
-  
   def post_index
     @posts = Post.order(created_at: :desc)
   end
   
-  def show_article
-    @article = Post.find(params[:article])
-    @posts = Post.where(article_title: @article.article_title)
-  end
   
   def mobile_post_form
   end
   
-  def load_more_posts
+  def load_more
     
-    already_loaded_posts = params[:already_loaded_posts]
+    existing_posts = params[:existing_posts]
     
     if cookies[:search_preference]
-      @posts = Post.includes(:tags).where('tags.id' => cookies[:search_preference]).order(created_at: :desc).offset(already_loaded_posts).limit(5)
+      @posts = Post.includes(:tags).where('tags.id' => cookies[:search_preference]).order(created_at: :desc).offset(existing_posts).limit(5)
     else
-      @posts = Post.order(created_at: :desc).offset(already_loaded_posts).limit(5)
+      @posts = Post.order(created_at: :desc).offset(existing_posts).limit(5)
     end
   end
   
@@ -76,6 +56,7 @@ class PostsController < ApplicationController
   
   # show_post
   def show
+    @comment = Comment.new
   end
   
   def autocomplete_tags
@@ -114,15 +95,7 @@ class PostsController < ApplicationController
     @personalized_tags = Tag.where(id: JSON.parse(cookies[:personalized_tags]))
   end
   
-  def article_index
-    @viral_articles = Post.select('distinct on (article_title) *')
-    @post = Post.new
-    @top_articles = Post.all.limit(10)
-    @top_users = User.all.limit(10)
-    
-    #main contents
-    @posts = Post.order(created_at: :desc)
-  end
+
   
   
   def hashtags
@@ -137,8 +110,7 @@ class PostsController < ApplicationController
   
   def load_url
     @article_url = params[:placeholder_url]
-    @default_tags = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
-    
+
     url = @article_url
     charset = nil
     html = open(url, 'User-Agent' => 'firefox') do |f|
@@ -155,9 +127,9 @@ class PostsController < ApplicationController
     end
     
     if doc.css('//meta[property="og:site_name"]/@content').empty?
-      @article_site = doc.title.to_s
+      @article_source = doc.title.to_s
     else
-      @article_site = doc.css('//meta[property="og:site_name"]/@content').to_s
+      @article_source = doc.css('//meta[property="og:site_name"]/@content').to_s
     end
     
     if doc.css('//meta[property="og:image"]/@content').empty?
@@ -171,15 +143,9 @@ class PostsController < ApplicationController
     else
       @article_published_time = doc.css('//meta[property="article:published_time"]/@content').to_s
     end
-    
-    if doc.css('//meta[property="og:locale"]/@content').empty?
-      @article_locale = "unknown"
-    else
-      @article_locale = doc.css('//meta[property="og:locale"]/@content').to_s
-    end
-    
+
     @post = Post.new
-    @posts = Post.page(params[:page])
+    @article = Article.new
     
   end
   
@@ -239,29 +205,68 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    @article = Article.find_by(title: params[:article][:title])
+    if @article == nil
+      @article = Article.new(article_params)
+      @article.remote_image_url = params[:article][:image].gsub('http:','https:')
+      @article.category = params[:tag][:category]
+      @article.region = params[:tag][:region] 
+      @article.save
+    end
     
-
-    @post = Post.new(post_params)
-    @post.content = params[:post][:content] + " " + "#" + params[:post][:tag]
+    @post = current_user.posts.build(article_id: @article.id)
+    @post.category = params[:tag][:category]
+    @post.region = params[:tag][:region]
+    @post.content = params[:post][:content] + " " + "#" + params[:tag][:category] + " " + "#" + params[:tag][:region]
     
-    @post.user_id = current_user.id
-    @post.remote_article_image_url = params[:post][:article_image].gsub('http:','https:')
-
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to root_path, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+    @post.save
+    if @article.category != @post.category
+      a_category_count = @article.posts.where(category: @article.category).count 
+      p_category_count = @article.posts.where(category: @post.category).count
+      if p_category_count > a_category_count
+        @article.category = @post.category
+        @article.save
       end
     end
+    if @article.region != @post.region
+      a_region_count = @article.posts.where(region: @article.region).count 
+      p_region_count = @article.posts.where(region: @post.region).count
+      if p_region_count > a_region_count
+        @article.region = @post.region
+        @article.save
+      end
+    end
+      
+    # this needs to be optimized
+    @posts = Post.all.order(created_at: :desc)
   end
 
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    @post.update(post_params)
+    @article = @post.article
+
+    @post.category = params[:tag][:category]
+    @post.region = params[:tag][:region]
+    @post.content = params[:post][:content] + " " + "#" + params[:tag][:category] + " " + "#" + params[:tag][:region]
+    
+    @post.save
+    if @article.category != @post.category
+      a_category_count = @article.posts.where(category: @article.category).count 
+      p_category_count = @article.posts.where(category: @post.category).count
+      if p_category_count > a_category_count
+        @article.category = @post.category
+        @article.save
+      end
+    end
+    if @article.region != @post.region
+      a_region_count = @article.posts.where(region: @article.region).count 
+      p_region_count = @article.posts.where(region: @post.region).count
+      if p_region_count > a_region_count
+        @article.region = @post.region
+        @article.save
+      end
+    end
   end
 
   # DELETE /posts/1
@@ -279,18 +284,15 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:user_id, :article_image, :article_title, :article_url, :article_site, :article_published_time, :article_locale, :content)
+      params.require(:post).permit(:content)
     end
     
-    def default_tags
-      @default_categories = ["business", "politics", "entertainment", "sports", "health", "tech", "education", "others"]
-      @default_rigions = ["U.S.", "China", "Europe", "Africa","Asia","Central America","Middle East","North America","Oceania","South America","The Caribbean"]
-      @default_category_tags = Tag.where(name: @default_categories)
-      @default_rigion_tags = Tag.where(name: @default_rigions)
+    def article_params
+      params.require(:article).permit(:title, :source, :url, :published_time)
     end
     
-    def sidebar
-      @top_articles = Post.where(id: Like.where(created_at: Date.today.beginning_of_week-1..Time.now ).group(:post_id).order('count(post_id) desc').limit(10).pluck(:post_id))
-      @top_users = User.where(id: Like.where(created_at: Date.today.beginning_of_week-1..Time.now ).group(:target_user_id).order('count(target_user_id) desc').limit(10).pluck(:target_user_id))
+    def article_image_params
+      params.require(:article).permit(:image)
     end
+    
 end

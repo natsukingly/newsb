@@ -11,10 +11,10 @@
             total #{article.likes.count} likes
       %li
         %h4
-          = truncate(article.article_title, length: 40) do
+          = truncate(article.title, length: 40) do
             %span ...
         %p
-          = article.article_site
+          = article.source
           #{time_ago_in_words(article.created_at)} ago
 
 

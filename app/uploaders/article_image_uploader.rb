@@ -1,5 +1,5 @@
 class ArticleImageUploader < CarrierWave::Uploader::Base
-
+  
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -22,7 +22,7 @@ class ArticleImageUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
   # 画像の上限を700pxにする
-  process :resize_to_limit => [500, 500]
+  process :resize_to_limit => [1000, 1000]
   
   
   process :convert => 'jpg'
@@ -37,16 +37,12 @@ class ArticleImageUploader < CarrierWave::Uploader::Base
   # Create different versions of your uploaded files:
   # version :thumb do
   #   process resize_to_fill: [300, 300, gravity = ::Magick::CenterGravity]
-  # end
-  
-  
-  version :wide do
-    process :resize_to_fill => [150, 100, ::Magick::CenterGravity]
-  end
+  # endふぉrm
   
   version :index do
-    process :resize_to_fill => [180, 180, ::Magick::CenterGravity]
+    process :resize_to_fill => [500, 500, ::Magick::CenterGravity]
   end
+  
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

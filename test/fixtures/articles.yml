@@ -2,14 +2,14 @@
 
 one:
   title: MyString
+  image: MyString
   url: MyString
-  total_likes: 1
-  total_post: 1
-  total_comments_replies: 1
+  source: MyString
+  published_time: 2017-09-05 06:38:45
 
 two:
   title: MyString
+  image: MyString
   url: MyString
-  total_likes: 1
-  total_post: 1
-  total_comments_replies: 1
+  source: MyString
+  published_time: 2017-09-05 06:38:45

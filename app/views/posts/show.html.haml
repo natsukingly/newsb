@@ -1,5 +1,5 @@
 #side_nav
-  =render 'layouts/feed_optimizer', default_category_tags: @default_category_tags, default_rigion_tags: @default_rigion_tags
+  =render 'layouts/feed_optimizer', default_category_tags: @default_category_tags, default_region_tags: @default_region_tags
 
 
 #main_container
@@ -11,8 +11,8 @@
     =link_to "/posts/#{@post.id}/show_article" do
       .top
         .article_title
-          = @post.article_title
-        .article_site= @post.article_site
+          = @post.article.title
+        .article_site= @post.article.source
        
       .body
         .main
@@ -28,7 +28,7 @@
               .follow_switch.pull-right
                 =render "/shared/follow_form_icon.html.haml", user: @post.user
             =render_with_hashtags(simple_format(@post.content))
-          .post_image{ style: "background-image: url(#{@post.article_image.url});"}
+          .post_image{ style: "background-image: url(#{@post.article.image.url});"}
   
         .status
           .like_link
@@ -38,17 +38,19 @@
             =@post.comments.count
             
   #post_nav
-    =link_to "READ THE ARTICLE", @post.article_url, class: "post_btn"
+    =link_to "READ THE ARTICLE", @post.article.url, class: "post_btn"
           
     
       
   #comment_form.clearfix
-    = render "comments/form", post: @post
+    = render "comments/form", post: @post, comment: @comment
   
   #comment_index      
+    %h2.title
+      COMMENTS・
+      %span.comment_count
+        = @post.comments.count
     .comments
-      %h2.title
-        COMMENTS・#{@post.comments.count}
       = render @post.comments
       
 #sidebar.hidden-xs.hidden-sm

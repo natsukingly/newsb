@@ -1,14 +1,12 @@
-- @comment = Comment.new
 
-
-= form_with(model: @comment, data: { remote: true }) do |form|
-  - if @comment.errors.any?
+= form_with(model: comment, data: { remote: true }) do |form|
+  - if comment.errors.any?
     #error_explanation
       %h2
-        = pluralize(@comment.errors.count, "error")
+        = pluralize(comment.errors.count, "error")
         prohibited this post from being saved:
       %ul
-        - @comment.errors.full_messages.each do |message|
+        - comment.errors.full_messages.each do |message|
           %li= message
           
   .field.form-group.form_textarea.comment_textarea

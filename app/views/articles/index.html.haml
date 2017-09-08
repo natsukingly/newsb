@@ -1,11 +1,4 @@
 
-#form_wrapper.dark_over_lay
-#form_modal
-
-// #test{style: "display:none;"}
-//   YES IT'S WORKING!!
-
-
 #side_nav
 	=render 'layouts/feed_optimizer', default_category_tags: @default_category_tags, default_region_tags: @default_region_tags
 	
@@ -15,8 +8,7 @@
 
 	.visible-xs#mobile_side_nav_link
 		%i.fa.fa-hashtag
-	
-	
+		 
 	#post_url_form.hidden-xs
 		=form_tag "/posts/load_url", remote: true do
 			.form-group.input-group
@@ -27,31 +19,16 @@
 						NEW POST
 						
 	#post_form_block
-
-	.mobile_post_form.visible-xs
-		=form_tag "/posts/mobile_load_url", remote: true, method: :get do
-			.form-group.input-group
-				= url_field_tag :placeholder_url, "", placeholder: "paste url to start your post!", class: "url_form form-control"
-				%span.input-group-btn
-					= button_tag type: :submit, class: "btn" do
-						%i.fa.fa-pencil-square-o
-						
-
-	#main_contents.posts
-		=render @posts
+	
+	#main_contents.articles.scrollable
+		=render @articles
+ 
  
 // sidebar   
 #sidebar.hidden-xs.hidden-sm
 	= render 'sidebars/feed', top_articles: @top_articles, top_users: @top_users
 
-	
-					
-// = paginate @posts
-// .scroller-status.text-center.hidden-xs
-//   .infinite-scroll-request
-//     .loading
-//       %i.fa.fa-spinner.fa-spin{ style:"margin-top: 30px;"}
-	
+
 :javascript
 	
 	$('#mobile_side_nav_link').click(function(){
@@ -67,8 +44,7 @@
 	});
 	
 
-	
- 
+
 
 	// awesome autosize code
 
@@ -90,29 +66,28 @@
 								}
 						}
 				});
+				
 
-	
 	var win = $(window);
 	
 	var loading = false;
 	// Each time the user scrolls
 	win.scroll(function() {
 		if ($(document).height() - win.height() == win.scrollTop()) {
-		
-			if (loading){
-				return;
-			}	
-			loading = true;		
-		
-			if ($('.posts').length){
+			if ($('.articles').length){
+			
+				if (loading){
+					return;
+				}	
+				loading = true;
+				
 				$.ajax({
-					url: "/posts/load_more",
+					url: "/articles/load_more",
 					type: "GET",
-					data: {existing_posts : $('#main_contents').find('.post').length },
+					data: {existing_articles : $('#main_contents').find('.article').length },
 					dataType: 'script',
 				})
 			}
 		}
-	});
-	
-	
+	});				
+		

@@ -26,10 +26,10 @@
               = tag.name
     %h2
       %i.fa.fa-globe
-      Rigions
+      Regions
     
     .rigion_tags.tag_block 
-      -default_rigion_tags.each do |tag|
+      -default_region_tags.each do |tag|
         =label_tag do
           .tag_pill
             - if cookies[:search_preference]

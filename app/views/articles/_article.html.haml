@@ -1,0 +1,20 @@
+
+=link_to article_path(article.id), class: "article article_#{article.id} clearfix" do
+	.image_box
+		.image{style: "background-image: url(#{article.image.url});"}
+			.status
+				Total
+				= article.likes.count
+				%i.fa.fa-thumbs-o-up
+		
+	.info
+		%h2= article.title
+		%p
+			= article.source
+			- if article.published_time
+				#{time_ago_in_words(article.published_time)} ago
+		.related_posts_btn
+			View #{article.posts.count} posts
+	.related_posts
+
+            

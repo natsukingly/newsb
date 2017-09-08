@@ -12,38 +12,30 @@
           =current_user.name
           %p.user_shoulder_name
             =current_user.shoulder_name
-      = form_with(model: post, local: true) do |form|
-        - if post.errors.any?
-          #error_explanation
-            %h2
-              = pluralize(post.errors.count, "error")
-              prohibited this post from being saved:
-            %ul
-              - post.errors.full_messages.each do |message|
-                %li= message
+      = form_tag posts_path, remote: true do
         .field.form-group
           .form_label
             1. choose a category
-          = form.select :tag, @default_categories.map{|c| [c, c]}, {:prompt => "Please select"}, class: "form-control selectpicker tag_selection"
-          
+          = select :tag, :category, @default_categories.map{|c| [c, c]}, prompt: "please select", class: "form-control selectpicker tag_selection"
+
         .field.form-group
           .form_label
-            2. choose a rigion
-          = form.select :tag, @default_rigions.map{|r| [r, r]}, {:prompt => "Please select"}, class: "form-control selectpicker tag_selection"  
-          
+            2. choose a region
+          = select :tag, :region, @default_regions.map{|r| [r, r]}, prompt: "please select", class: "form-control selectpicker tag_selection"
+
         .field.form-group#post_textarea
           .textarea_label.form_label
             3. insert your content
-          = form.text_area :content, placeholder: "content", id: :post_content, class: "post_textarea form-control", style: "border: none; box-shadow: none; resize: none;"
-          = form.hidden_field :article_image, value: @article_image
-          = form.hidden_field :article_url, value: @article_url
-          = form.hidden_field :article_site, value: @article_site
-          = form.hidden_field :article_title, value: @article_title
-          = form.hidden_field :article_published_time, value: @article_published_time
-          = form.hidden_field :article_locale, value: @article_locale
-          = form.hidden_field :user_id, value: current_user.id
+          = text_area_tag 'post[content]', '', placeholder: "content", class: "post_textarea form-control", style: "border: none; box-shadow: none; resize: none;"
+          
+          = hidden_field_tag 'article[image]', @article_image
+          = hidden_field_tag 'article[url]', @article_url
+          = hidden_field_tag 'article[source]', @article_source
+          = hidden_field_tag 'article[title]', @article_title
+          = hidden_field_tag 'article[published_time]', value: @article_published_time
+          
           #autocomplete_tags
-        = form.submit class: "form_btn #post_btn"
+        = submit_tag "Submit", class: "form_btn #post_btn"
     .article_image.pull-right.form_image.hidden-xs{style: "background-image: url(#{@article_image});"} 
       
 :javascript

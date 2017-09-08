@@ -1,9 +1,9 @@
 .post{class: "post post_#{post.id} clearfix"}
-  =link_to "/posts/#{post.id}/show_article", remote: true do
+  =link_to article_path(post.article_id) do
     .top
       .article_title
-        = post.article_title
-      .article_site= post.article_site
+        = post.article.title
+      .article_site= post.article.source
        
           
     .body
@@ -26,7 +26,7 @@
             |            
             =link_to "DELETE", post_path(post.id), class: "edit_link_btn" , data: {confirm: "are you sure you want to delete your post?"}, method: :delete  
   
-        .post_image{ style: "background-image: url(#{post.article_image.url});"}
+        .post_image{ style: "background-image: url(#{post.article.image.url});"}
   
       .status
         .like_link

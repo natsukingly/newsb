@@ -1,13 +1,13 @@
 class Post < ApplicationRecord
     belongs_to :user
+    belongs_to :article
     has_many :likes
     has_many :comments
     has_and_belongs_to_many :tags, dependent: :destroy 
     
     attr_accessor :tag
 
-    mount_uploader :article_image, ArticleImageUploader
-    
+
     after_create do
         post = Post.find_by(id: self.id)
         hashtags = self.content.scan(/#\w+/)

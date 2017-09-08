@@ -10,19 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170825221836) do
+ActiveRecord::Schema.define(version: 20170906191818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
+    t.string "image"
     t.string "url"
-    t.integer "total_likes"
-    t.integer "total_post"
-    t.integer "total_comments_replies"
+    t.string "source"
+    t.datetime "published_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "category"
+    t.string "region"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -42,19 +44,17 @@ ActiveRecord::Schema.define(version: 20170825221836) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "target_user_id"
+    t.integer "article_id"
   end
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
     t.text "content"
-    t.string "article_title"
-    t.string "article_image"
-    t.string "article_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "article_site"
-    t.datetime "article_published_time"
-    t.string "article_locale"
+    t.integer "article_id"
+    t.string "category"
+    t.string "region"
   end
 
   create_table "posts_tags", id: false, force: :cascade do |t|

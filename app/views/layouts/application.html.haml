@@ -12,15 +12,12 @@
       %header.text-center
       
         / LOGO CENTER
-        = link_to image_tag("logo_circle.png", style: "width: 150px; margin-top: 20px;"), root_path, id: "logo"   
+        = link_to image_tag("logo_white.png", style: "width: 150px; margin-top: 20px;"), root_path, id: "logo"   
 
         / HEADER LEFT
         =link_to "/user_ranking" do
           #ranking.menu_icon.hidden-xs.pull-left
             %i.fa.fa-trophy
-        =link_to "/article_index" do
-          #article_index_link.menu_icon.hidden-xs.pull-left
-            %i.glyphicon.glyphicon-fire
             
         .search_bar.hidden-xs
           %i.fa.fa-search.form_icon
@@ -36,7 +33,7 @@
           =link_to "/user_ranking" do
             .ranking.menu_icon
               %i.fa.fa-trophy
-          =link_to "/article_index" do
+          =link_to articles_path do
             #article_index_link.menu_icon.pull-left
               %i.glyphicon.glyphicon-fire
           .search_bar

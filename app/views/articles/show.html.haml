@@ -1,0 +1,49 @@
+
+
+#side_nav
+	=render 'layouts/feed_optimizer', default_category_tags: @default_category_tags, default_region_tags: @default_region_tags
+	
+#mobile_side_nav.visible-xs
+
+#main_container
+
+	#main_contents
+		=render "/articles/selected_article", article: @article
+		
+		#selected_article_nav
+			=link_to "Read the article", @article.url, target: "_blank", class: "article_btn"
+			=form_tag "/posts/load_url", class: "article_btn", remote: true do
+				=hidden_field_tag :placeholder_url, @article.url
+				=submit_tag "Create your post"
+		
+		#post_form_block
+		
+		=render "/posts/post_index_no_title", posts: @article.posts
+		
+		 
+ 
+// sidebar   
+#sidebar.hidden-xs.hidden-sm
+	= render 'sidebars/feed', top_articles: @top_articles, top_users: @top_users
+
+	
+					
+// = paginate @posts
+// .scroller-status.text-center.hidden-xs
+//   .infinite-scroll-request
+//     .loading
+//       %i.fa.fa-spinner.fa-spin{ style:"margin-top: 30px;"}
+	
+:javascript
+	
+	$('#mobile_side_nav_link').click(function(){
+		if($(this).find('i').hasClass('fa-hashtag')){
+			$(this).find('i').removeClass('fa-hashtag').addClass('fa-times');
+			$(this).css("bottom", "auto").css("top", "70px");
+			$('#side_nav').slideDown();
+		} else {
+			$('#side_nav').slideUp();
+			$(this).find('i').removeClass('fa-times').addClass('fa-hashtag')
+			$(this).css("bottom", "20px").css("top", "auto");
+		}
+	});
