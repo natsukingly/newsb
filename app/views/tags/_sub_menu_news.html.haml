@@ -1,0 +1,7 @@
+%span.set_period
+    48-HOUR
+%i.fa.fa-caret-down.fa-fw
+.dropdown
+    =link_to "48-HOUR", "/tags/#{tag.id}", class: "period_item active day", remote: true
+    =link_to "WEEK", "/tags/#{tag.id}/articles_week", class: "period_item week", remote: true
+    =link_to "MONTH", "/tags/#{tag.id}/articles_month", class: "period_item month", remote: true

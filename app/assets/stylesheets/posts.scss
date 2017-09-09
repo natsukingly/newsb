@@ -14,31 +14,17 @@
 
 .post{
     margin-bottom: 10px;
-    .top{
-        border-bottom: 2px solid #eee;
-        padding: 20px; 
-        background: white;
-        white-space: nowrap;
-        .article_title{
-            font-weight: bold;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .article_site{
-            font-size: 8px;
-            color: grey;
-        }
-    }
-    
+    border-radius: 5px;
+    background: white;
     .body{
-        padding: 10px 20px; 
-        background: white;
-        border-bottom: 1px solid #eee;
+        padding: 12px; 
+
         .main{
             display: flex;
+            flex-direction: column;
             .content{
-                flex: 2;
-                padding-right: 20px;
+                flex: 1;
+                padding-right: 0;
                 padding-bottom: 20px;
             
             }
@@ -55,12 +41,21 @@
                 font-size: 20px;
                 cursor: pointer;
             }
+            .post_article{
+                border: 1px solid #eee;
+                .article_info{
+                    padding: 10px;
+                    h2{
+                        padding-bottom: 5px;
+                    }
+                }
+            }
         }
         .status{
             padding-top: 10px;
-            font-size: 16px;
-            > div{
+            div{
                 display: inline-block;
+                margin-right: 20px;
             }
             .comment_invite{
                 
@@ -81,17 +76,9 @@
 
 
 
-@media screen and (max-width: 1200px) {
+@media (max-width: 768px) {
     .post{
-        .body{
-            .main {
-                flex-direction: column;
-                .content{
-                    padding-right: 0;
-                    flex: 1;
-                }
-            }
-        }
+        border-radius: 0;
     }
 }
 
@@ -241,37 +228,6 @@
 
 
 
-
-
-//show_article
-
-#selected_article_nav{
-    margin: -20px 0 20px 0;
-    display: flex;
-    text-align: center;
-    background-color: white;
-    .article_btn{
-        font-size: 16px;
-        margin: 10px;
-        padding: 10px 0;
-        border-radius: 5px;
-        border: 1px solid #001E42;
-        flex: 1;
-    }
-    .article_btn:hover{
-        background-color: rgba(0,0,0,0.1);
-    }
-    input{
-        width: 100%;
-        display: inline-block;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-    }
-    input:focus{
-        outline: 0;
-    }
-}
 
 
 // show_post

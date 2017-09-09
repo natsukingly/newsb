@@ -1,13 +1,37 @@
 Rails.application.routes.draw do
   resources :replies
-  resources :comments
+  resources :comments do
+    member do 
+      get 'view_more'
+      get 'view_less'
+    end
+  end
+  
   get '/about' => "home#about"
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } 
   
   resources :articles, only: [:index, :show] do
+    member do
+    end
     collection do
       get 'load_more'
+    end
+  end
+  
+  resources :tags, only: [] do
+    member do
+      get 'articles'
+      get 'articles_week'
+      get 'articles_month'
+      get 'posts'
+      get 'posts_week'
+      get 'posts_month'
+      get 'users'
+      get 'users_week'
+      get 'users_month'
+    end
+    collection do
     end
   end
   

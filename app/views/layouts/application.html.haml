@@ -13,11 +13,6 @@
       
         / LOGO CENTER
         = link_to image_tag("logo_white.png", style: "width: 150px; margin-top: 20px;"), root_path, id: "logo"   
-
-        / HEADER LEFT
-        =link_to "/user_ranking" do
-          #ranking.menu_icon.hidden-xs.pull-left
-            %i.fa.fa-trophy
             
         .search_bar.hidden-xs
           %i.fa.fa-search.form_icon
@@ -51,11 +46,13 @@
               =image_tag current_user.image.url, class: "img-circle pull-right profile_xs"
           -else
             = link_to "facebookでログイン", user_facebook_omniauth_authorize_path
-    
-      - if notice 
-        %p#notice= notice
-      - if alert
-        %p#alert= alert
+      
+      #header_nav
+        .nav_container
+          -@default_category_tags.each do |category|
+            =link_to category.name, articles_tag_path(category.id)
+      
+      
       .flex_wrapper.clearfix  
         =yield
       

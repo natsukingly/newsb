@@ -12,11 +12,8 @@ class PostsController < ApplicationController
     @post = Post.new
     
     #main contents
-    if cookies[:search_preference]
-      @posts = Post.includes(:tags).where('tags.id' => JSON.parse(cookies[:search_preference])).order(created_at: :desc).limit(5)
-    else
-      @posts = Post.order(created_at: :desc).limit(5)
-    end
+
+    @posts = Post.order(created_at: :desc).limit(5)
 
   end
   
@@ -46,7 +43,7 @@ class PostsController < ApplicationController
     existing_posts = params[:existing_posts]
     
     if cookies[:search_preference]
-      @posts = Post.includes(:tags).where('tags.id' => cookies[:search_preference]).order(created_at: :desc).offset(existing_posts).limit(5)
+      @posts = Post.where(category: cookies[:search_preference]).order(created_at: :desc).offset(existing_posts).limit(5)
     else
       @posts = Post.order(created_at: :desc).offset(existing_posts).limit(5)
     end

@@ -1,0 +1,2 @@
+$(".post_<%=@post.id%>").find(".comments").html('<%= escape_javascript(render @comments )%>'); 
+$(".post_<%=@post.id%>").find(".view_link").html('<%=link_to "view all #{@post.comments.count} comments", "/comments/#{@post.id}/view_more", remote: true %>');

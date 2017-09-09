@@ -1,0 +1,4 @@
+$('#main_contents').html('<%= escape_javascript(render @posts)%>');
+$('#main_menu a').removeClass("active");
+$('#main_menu .feed_btn').addClass("active");
+$('#sub_menu').html('<%= escape_javascript(render "/tags/sub_menu_feed", tag: @tag)%>');

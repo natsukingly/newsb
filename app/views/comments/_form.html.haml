@@ -1,4 +1,5 @@
 
+
 = form_with(model: comment, data: { remote: true }) do |form|
   - if comment.errors.any?
     #error_explanation
@@ -10,12 +11,12 @@
           %li= message
           
   .field.form-group.form_textarea.comment_textarea
-    =image_tag current_user.image.profile_sm.url, class: "profile_xs pull-left hidden-xs"
-    = form.text_area :content, placeholder: "content", class: "form-control form_content", style: "border: none; box-shadow: none; resize: none;"
+    =image_tag current_user.image.profile_sm.url, class: "profile_xs pull-left img-circle"
+    = form.text_area :content, placeholder: "comment", class: "form-control form_content", style: "border: none; box-shadow: none; resize: none;"
     = form.hidden_field :post_id, value: post.id
     = form.hidden_field :user_id, value: current_user.id
   .comment_submit
-    = form.submit "Comment", class: "submit_btn"
+    = form.submit "Comment", class: "submit_btn btn navy_bk"
    
 :javascript
 
@@ -36,3 +37,10 @@
                 }
             }
         });
+        
+  $('.comment_form textarea')
+  .focusin(function(e) {
+    $(this).parents('.comment_form').find('.comment_submit').fadeIn();
+  })
+
+  

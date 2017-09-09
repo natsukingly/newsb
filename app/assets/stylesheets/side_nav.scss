@@ -2,7 +2,8 @@
 
 #side_nav{
     width: 200px;
-    background-color: #001E42;
+    background-color: white;
+    margin: 20px 0 20px 20px;
     padding: 20px;
     label{
         display: block;
@@ -10,7 +11,6 @@
     }
     input.save_btn{
         display: block;
-        color: white;
         background-color: rgba(0,0,0,0);
         padding: 3px;
         margin-bottom: 20px;
@@ -21,14 +21,12 @@
     }
     input.save_btn:hover{
         background-color: rgba(255,255,255,.6);
-        color: #001E42;
     }
 }
 
 
 #feed_optimizer{
     h2{
-        color: white;
         font-size: 18px;
         margin-bottom: 10px;
     }
@@ -49,7 +47,6 @@
     color: grey;
 }
 input[type=checkbox]:checked + .tag_content{
-    color: white;
     font-weight: bold;
 }
 
@@ -106,3 +103,5 @@ input[type=checkbox]:checked + .tag_content:before{
         font-size: 14px;
     }
 }
+
+

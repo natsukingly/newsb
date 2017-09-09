@@ -1,59 +1,57 @@
 .post{class: "post post_#{post.id} clearfix"}
-  =link_to article_path(post.article_id) do
-    .top
-      .article_title
-        = post.article.title
-      .article_site= post.article.source
-       
-          
-    .body
-      .main
-        .content.clearfix
-          .user_block.clearfix{class: "user_#{post.user.id}"}
-            =image_tag post.user.image.url, class:"pull-left"
-            =link_to post.user, class: "pull-left" do
-              =post.user.name
-              %span.grey
-                #{time_ago_in_words(post.created_at)} ago
-              %p.user_shoulder_name
-                =post.user.shoulder_name
-            .follow_switch.pull-right
-              =render "/shared/follow_form_icon.html.haml", user: post.user
-          =render_with_hashtags(post.content.gsub(/\n/, '<br />'))
-          %br
-          -if current_user.id == post.user_id
-            =link_to "EDIT", edit_post_path(post.id), remote: true, class: "edit_link_btn"  
-            |            
-            =link_to "DELETE", post_path(post.id), class: "edit_link_btn" , data: {confirm: "are you sure you want to delete your post?"}, method: :delete  
-  
-        .post_image{ style: "background-image: url(#{post.article.image.url});"}
-  
-      .status
-        .like_link
-          =render '/likes/like_post', post: post
-        .divider
-          ・
-        =link_to "COMMENT", post_path(post.id), class: "post_link" 
-        -if post.comments.count > 1  
-          =link_to "View all #{post.comments.count} comments", post_path(post.id), class: "post_view_link pull-right"
-        
-    - best_comments = Comment.where(id: Like.where(post_id: post.id ,target_type: "comment").group(:comment_id).order('count(comment_id) desc').limit(1).pluck(:comment_id))
-    - comment = best_comments[0]
-    - if comment == nil
-      -comment = post.comments.last
-    
-    - if comment != nil
-      .best_comment
-        .body
-          .content.clearfix
-            .user_block.clearfix
-              =image_tag comment.user.image.url, class:"pull-left"
-              =link_to comment.user, class: "pull-left" do
-                =comment.user.name
-                %span.grey
-                  #{time_ago_in_words(post.created_at)} ago
-                %p.user_shoulder_name
-                  =comment.user.shoulder_name
-              
-            %p.give_me_ellipsis 
-              =comment.content
+	.body
+		.main
+			.content.clearfix
+				.user_block.clearfix{class: "user_#{post.user.id}"}
+					=image_tag post.user.image.url, class:"pull-left img-circle"
+					=link_to post.user  do
+						.give_me_short_ellipsis
+							=post.user.name
+					%p.user_shoulder_name
+						=post.user.shoulder_name
+					.follow_switch.pull-right
+						=render "/shared/follow_form_icon.html.haml", user: post.user
+				=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
+				%p.sm.grey
+					#{time_ago_in_words(post.created_at)} ago
+				%br
+				-if current_user.id == post.user_id
+					=link_to "EDIT", edit_post_path(post.id), remote: true, class: "edit_link_btn"  
+					|            
+					=link_to "DELETE", post_path(post.id), class: "edit_link_btn" , data: {confirm: "are you sure you want to delete your post?"}, method: :delete  
+
+			=link_to article_path(post.article_id), class: "post_article" do
+				.post_image{ style: "background-image: url(#{post.article.image.url});"}
+				.article_info
+					%h2
+						= truncate(post.article.title, length: 40) do
+							%span ...
+					%p.xs.grey
+						= post.article.source
+							
+	
+		.status.md
+			.like_link
+				=render '/likes/like_post', post: post
+			.comment_link
+				COMMENT
+				・
+				.comment_count	
+					-if post.comments.count >= 1  
+						= post.comments.count
+					-else
+						0
+	
+	.comment_index		
+		.comment_form.clearfix
+			-comment = Comment.new
+			=render 'comments/form', comment: comment, post: post
+			
+		- best_comments = Comment.where(id: Like.where(post_id: post.id ,target_type: "comment").group(:comment_id).order('count(comment_id) desc').limit(1).pluck(:comment_id))
+		- comment = best_comments[0]
+		- if comment == nil
+			-comment = post.comments.last
+		.view_link
+			=link_to "view all #{post.comments.count} comments", "/comments/#{post.id}/view_more", remote: true
+		.comments
+			=render best_comments

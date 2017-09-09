@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-
   # GET /comments
   # GET /comments.json
   def index
@@ -10,6 +9,20 @@ class CommentsController < ApplicationController
   # GET /comments/1
   # GET /comments/1.json
   def show
+  end
+  
+  def view_more
+    @post = Post.find(params[:id])
+    @comments = @post.comments
+  end
+  
+  def view_less
+    @post = Post.find(params[:id])
+    best_comments = Comment.where(id: Like.where(post_id: @post.id ,target_type: "comment").group(:comment_id).order('count(comment_id) desc').limit(1).pluck(:comment_id))
+		@comments = best_comments[0]
+		if @comments == nil
+		  @comments = @post.comments.last
+		end
   end
 
   # GET /comments/new

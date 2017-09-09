@@ -8,13 +8,35 @@
 				%i.fa.fa-thumbs-o-up
 		
 	.info
-		%h2= article.title
-		%p
-			= article.source
-			- if article.published_time
-				#{time_ago_in_words(article.published_time)} ago
-		.related_posts_btn
-			View #{article.posts.count} posts
+		.title
+			%h2.bold.lg
+				= truncate(article.title, length: 60) do
+					%span ...
+			%p.sm.grey
+				= article.source
+				- if article.published_time
+					#{time_ago_in_words(article.published_time)} ago
+		.best_post
+			- best_post = Post.where(id: Like.where(article_id: article.id ,target_type: "post").group(:comment_id).order('count(comment_id) desc').limit(1).pluck(:comment_id))
+			- post = best_post[0]
+			- if post == nil
+				-post = article.posts.last
+			
+			- if post != nil
+				.body
+					.content.clearfix
+						.user_block.clearfix
+							=image_tag post.user.image.url, class:"pull-left img-circle"
+							.user_details
+								%p.give_me_short_ellipsis
+									%span.bold.sm
+										=post.user.name
+									%span.user_shoulder_name.xs.grey
+										=post.user.shoulder_name
+								%p.sm
+									= truncate(post.content, length: 60) do
+										%span ...
+		
 	.related_posts
 
-            
+						

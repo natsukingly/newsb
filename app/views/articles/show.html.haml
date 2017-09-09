@@ -1,8 +1,7 @@
 
 
 #side_nav
-	=render 'layouts/feed_optimizer', default_category_tags: @default_category_tags, default_region_tags: @default_region_tags
-	
+
 #mobile_side_nav.visible-xs
 
 #main_container
@@ -18,13 +17,9 @@
 		
 		#post_form_block
 		
-		=render "/posts/post_index_no_title", posts: @article.posts
-		
-		 
  
 // sidebar   
 #sidebar.hidden-xs.hidden-sm
-	= render 'sidebars/feed', top_articles: @top_articles, top_users: @top_users
 
 	
 					
