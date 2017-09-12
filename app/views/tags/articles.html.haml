@@ -1,6 +1,7 @@
 
-#side_nav
-
+#sidebar_left.hidden-xs
+    =render "/sidebars/left_profile"
+    
 #main_container
     #main_menu
         .index_nav
@@ -22,11 +23,13 @@
                 
     #main_contents
         =render @articles
- 
+        - if @not_found == true
+        .not_found
+            %h2 no post yet. time to explore!!
  
 // sidebar   
-#sidebar.hidden-xs.hidden-sm
-
+#sidebar_right.hidden-xs.hidden-sm
+    =render '/sidebars/right_ad'
 
 :javascript
     
@@ -83,7 +86,7 @@
                 $.ajax({
                     url: "/articles/load_more",
                     type: "GET",
-                    data: {existing_articles : $('#main_contents').find('.article').length },
+                    data: {existing_articles : $('#main_contents').find('.article').length, period: $('#sub_menu .active').text() },
                     dataType: 'script',
                 })
             } else if($('#main_menu .feed_btn').hasClass("active")){
@@ -116,3 +119,29 @@
             $(this).find("i").addClass("fa-times");
         }
     })
+
+    // fix sidebar positionx
+
+    
+    $(window).scroll(function() {
+        var scrollVolume = $(window).scrollTop();
+        if(scrollVolume > 80){
+            console.log(scrollVolume);
+            $('#ad').css("position", "fixed");
+            
+            var position = $('#sidebar_right').offset();
+            $('#ad').css("left", position.left);
+            $('#ad').css("top", position.top - 80);
+            
+            $(window).resize(function() {
+                var position = $('#sidebar_right').offset();
+                $('#ad').css("left", position.left);
+            });
+            
+        } else {
+            $('#ad').css("position", "static");
+        }
+        
+    });
+ 
+    

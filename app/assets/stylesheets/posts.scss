@@ -2,13 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-
-
-
-
-
-
 // post start here
 
 
@@ -20,10 +13,7 @@
         padding: 12px; 
 
         .main{
-            display: flex;
-            flex-direction: column;
             .content{
-                flex: 1;
                 padding-right: 0;
                 padding-bottom: 20px;
             
@@ -42,9 +32,11 @@
                 cursor: pointer;
             }
             .post_article{
-                border: 1px solid #eee;
+
                 .article_info{
-                    padding: 10px;
+                    border: 1px solid #eee;
+                    padding: 12px;
+                    margin-bottom: 12px;
                     h2{
                         padding-bottom: 5px;
                     }
@@ -52,13 +44,15 @@
             }
         }
         .status{
-            padding-top: 10px;
             div{
                 display: inline-block;
-                margin-right: 20px;
+                margin-right: 12px;
             }
-            .comment_invite{
-                
+            .option{
+                cursor: pointer;
+                i{
+                    font-size: 20px;                    
+                }
             }
             
             .comment_link{
@@ -67,6 +61,8 @@
         }
     }
 }
+
+
 
 .best_comment{
     .content{

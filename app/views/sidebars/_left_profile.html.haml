@@ -1,0 +1,32 @@
+#profile
+    .images{style: "background-image: url(#{current_user.cover})"}
+        .user_image
+            =image_tag current_user.image.url, class: "img-circle"
+    .user_info
+        %p.name.md= current_user.name
+        %p.shoulder_name.grey= current_user.shoulder_name
+        %p.post_count.grey
+            Total posts: #{current_user.posts.count}
+    .follower_stats
+        .follower
+            %h2.bold= current_user.followers.count
+            %p.grey Follower
+        .following
+            %h2.bold= current_user.following.count
+            %p.grey Following
+    .like_stats
+        %h2.bold.md Like Stats
+        %p 
+            Week:
+            %span= Like.where(target_user_id: current_user.id).where(created_at: 48.hours.ago..Time.now).count
+        %p 
+            Month:
+            %span= Like.where(target_user_id: current_user.id).where(created_at: 48.hours.ago..Time.now).count
+        %p 
+            ALL-TIME:
+            %span= Like.where(target_user_id: current_user.id).count
+            
+    
+        
+        
+    

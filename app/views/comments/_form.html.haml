@@ -16,6 +16,8 @@
     = form.hidden_field :post_id, value: post.id
     = form.hidden_field :user_id, value: current_user.id
   .comment_submit
+    .cancel_btn
+      Cancel
     = form.submit "Comment", class: "submit_btn btn navy_bk"
    
 :javascript
@@ -42,5 +44,8 @@
   .focusin(function(e) {
     $(this).parents('.comment_form').find('.comment_submit').fadeIn();
   })
-
+  $('.cancel_btn').click(function(){
+    $(this).parents('.comment_form').find('textarea').val(" ");
+    $(this).parents('.comment_form').find('.comment_submit').hide();
+  });
   

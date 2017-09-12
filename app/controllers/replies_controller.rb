@@ -8,9 +8,19 @@ class RepliesController < ApplicationController
   end
 
   # GET /replies/1
-  # GET /replies/1.json
+  # GET /replies/1.json 
   def show
   end
+  
+  def view_more
+    @comment = Comment.find(params[:id])
+    @replies = @comment.replies
+  end
+  
+  def view_less
+    @comment = Comment.find(params[:id])
+  end  
+  
 
   # GET /replies/new
   def new
@@ -27,7 +37,6 @@ class RepliesController < ApplicationController
   def create
     @reply = Reply.new(reply_params)
     @reply.save
-    @new_reply = Reply.new
     @comment = @reply.comment
   end
 

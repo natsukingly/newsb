@@ -37,4 +37,8 @@ class ApplicationController < ActionController::Base
           @top_articles = Article.where(id: Like.where(created_at: Date.today.beginning_of_week-1..Time.now ).group(:article_id).order('count(article_id) desc').limit(10).pluck(:article_id))
           @top_users = User.where(id: Like.where(created_at: Date.today.beginning_of_week-1..Time.now ).group(:target_user_id).order('count(target_user_id) desc').limit(10).pluck(:target_user_id))
         end
+        
+        def not_found
+          @not_found = false
+        end
 end

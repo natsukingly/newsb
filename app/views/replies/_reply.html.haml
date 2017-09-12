@@ -1,21 +1,22 @@
-.reply{class: "reply_#{reply.id}"}
-  .content.clearfix
-    .user_block.clearfix{class: "user_#{reply.user.id}"}
-      =image_tag reply.user.image.url, class:"pull-left"
-      =link_to reply.user, class: "pull-left" do
-        =reply.user.name
-        %span.grey
-          #{time_ago_in_words(reply.created_at)} ago
-        %p.user_shoulder_name
-          =reply.user.shoulder_name
-      .follow_switch.pull-right
-        =render "/shared/follow_form_icon.html.haml", user: reply.user
-    %p.give_me_ellipsis 
-      =reply.content
-    - if current_user.id == reply.user_id
-      =link_to "EDIT", edit_reply_path(reply.id), remote: true, class: "edit_link_btn"  
-      |            
-      =link_to "DELETE", reply_path(reply.id), class: "edit_link_btn" , data: {confirm: "are you sure you want to delete your post?"}, method: :delete  
-    .status
-      .like_link
-        =render '/likes/like_reply', reply: reply
+.reply.clearfix{class: "reply_#{reply.id}"}
+	.main.clearfix
+		=image_tag reply.user.image.url, class: "img-circle"
+		.body
+			.user_info
+				.user_name
+					=link_to reply.user do
+						%span.user_name.light_navy.bold
+							=reply.user.name
+					%span.user_shoulder_name.sm.grey
+						=reply.user.shoulder_name
+				.option
+					%i.fa.fa-ellipsis-h
+			
+			.content
+				=simple_format(reply.content)
+			.status.clearfix
+				.like_link.grey
+					=render '/likes/like_reply', reply: reply
+					
+					
+					

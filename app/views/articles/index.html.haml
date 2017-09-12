@@ -1,5 +1,6 @@
 
-#side_nav
+#sidebar_left.hidden-xs
+	= render 'sidebars/left_profile'
 
 #mobile_side_nav.visible-xs
 
@@ -25,7 +26,7 @@
  
 // sidebar   
 #sidebar.hidden-xs.hidden-sm
-	= render 'sidebars/feed', top_articles: @top_articles, top_users: @top_users
+	= render 'sidebars/right_ad'
 
 
 :javascript

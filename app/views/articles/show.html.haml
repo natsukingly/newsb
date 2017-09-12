@@ -1,6 +1,7 @@
 
 
-#side_nav
+#sidebar_left
+	=render "sidebars/left_profile"
 
 #mobile_side_nav.visible-xs
 
@@ -19,8 +20,8 @@
 		
  
 // sidebar   
-#sidebar.hidden-xs.hidden-sm
-
+#sidebar_right.hidden-xs.hidden-sm
+	=render "sidebars/right_ad"
 	
 					
 // = paginate @posts

@@ -1,0 +1,29 @@
+.comment.clearfix{class: "comment_#{comment.id}"}
+	.main.clearfix
+		=image_tag comment.user.image.url, class: "profile_xs pull-left img-circle"
+		.body
+			.user_info
+				.user_name
+					=link_to comment.user do
+						%span.user_name.light_navy.bold
+							=comment.user.name
+					%span.user_shoulder_name.sm.grey
+						=comment.user.shoulder_name
+				.option
+					%i.fa.fa-ellipsis-h
+			
+			.content
+				=simple_format(comment.content)
+			.status.clearfix
+				.like_link.grey
+					=render '/likes/like_comment', comment: comment
+				=link_to "Reply", "/replies/#{comment.id}/new", remote: true, class: "reply_link"
+				-unless comment.replies.count == 0
+					.reply_view_link.pull-right
+						=link_to "View all #{comment.replies.count} replies", "/replies/#{comment.id}/view_more", remote: true
+
+
+			.reply_form.clearfix
+			
+			.replies
+

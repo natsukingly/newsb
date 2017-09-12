@@ -20,7 +20,7 @@
 
 body{
     background-color: #e2e2e2;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 12px;
     color: #222222;
     position: relative;
@@ -47,7 +47,7 @@ body{
 }
 
 .bold{
-    font-weight: bold;
+    font-weight: 900;
 }
 
 .navy_bk{
@@ -65,6 +65,9 @@ body{
     color: #001E42;
 }
 
+.light_navy{
+    color: rgb(54, 88, 155);
+}
 
 
 input[type="text"]:focus {
@@ -116,7 +119,7 @@ input[type="text"]:focus {
 
 #main_container{
     flex: 1;
-    margin: 20px;
+    margin: 12px;
     min-width: 0;
     .mobile_post_link{
         text-align: center;
@@ -542,45 +545,11 @@ span.input-group-btn{
 
 
 
-
-
-.grey{
-    color: grey;
-}
-
-.small_grey{
-    font-size: 12px;
-    color: grey;
-}
-
 // user index profile
 .profile_xs{
     height: 35px;
     width: 35px;
 
-}
-
-
-.user_block{
-    padding-bottom: 10px;
-}
-
-.user_info{
-    padding-left: 20px;
-    span{
-        margin-left: 10px;
-    }
-}
-
-.user_info_xs{
-    span{
-        margin-left: 5px;
-    }
-}
-
-.user_shoulder_name{
-    font-size: 12px;
-    color: grey;
 }
 
 

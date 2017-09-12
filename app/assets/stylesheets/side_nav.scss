@@ -1,107 +1,107 @@
 
 
-#side_nav{
-    width: 200px;
-    background-color: white;
-    margin: 20px 0 20px 20px;
-    padding: 20px;
-    label{
-        display: block;
-        margin-left: 10px;
-    }
-    input.save_btn{
-        display: block;
-        background-color: rgba(0,0,0,0);
-        padding: 3px;
-        margin-bottom: 20px;
-        text-align: center;
-        border: 1px solid white;
-        width: 100%;
-        font-size: 18px;
-    }
-    input.save_btn:hover{
-        background-color: rgba(255,255,255,.6);
-    }
-}
+// #sidebar_left{
+//     width: 200px;
+//     background-color: white;
+//     margin: 12px 0 12px 12px;
+//     padding: 20px;
+//     label{
+//         display: block;
+//         margin-left: 10px;
+//     }
+//     input.save_btn{
+//         display: block;
+//         background-color: rgba(0,0,0,0);
+//         padding: 3px;
+//         margin-bottom: 20px;
+//         text-align: center;
+//         border: 1px solid white;
+//         width: 100%;
+//         font-size: 18px;
+//     }
+//     input.save_btn:hover{
+//         background-color: rgba(255,255,255,.6);
+//     }
+// }
 
 
-#feed_optimizer{
-    h2{
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
-    .tag_block{
-        margin-bottom: 20px;
-    }
-}
+// #feed_optimizer{
+//     h2{
+//         font-size: 18px;
+//         margin-bottom: 10px;
+//     }
+//     .tag_block{
+//         margin-bottom: 20px;
+//     }
+// }
 
-#more_tag_additional_tag{
-    margin: 100px 0;
-}
+// #more_tag_additional_tag{
+//     margin: 100px 0;
+// }
 
-.tag_content{
-    border-radius: 100px;
-    padding: 5px 10px;
-    margin: 0 10px 10px 0;
-    cursor: pointer;
-    color: grey;
-}
-input[type=checkbox]:checked + .tag_content{
-    font-weight: bold;
-}
-
-
-input[type=checkbox] + .tag_content:before{
-    content: '＋';
-} 
-
-input[type=checkbox]:checked + .tag_content:before{
-    content: 'ー';
-} 
+// .tag_content{
+//     border-radius: 100px;
+//     padding: 5px 10px;
+//     margin: 0 10px 10px 0;
+//     cursor: pointer;
+//     color: grey;
+// }
+// input[type=checkbox]:checked + .tag_content{
+//     font-weight: bold;
+// }
 
 
-@media(max-width: 768px){
-    #side_nav{
-        display: none;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        background-color: #001E42;
-        padding: 20px;
-        z-index: 100;
-    }
-}
+// input[type=checkbox] + .tag_content:before{
+//     content: '＋';
+// } 
+
+// input[type=checkbox]:checked + .tag_content:before{
+//     content: 'ー';
+// } 
 
 
-// form parts
-#feed_optimizer{
-    #personalized_tag_form{
-        border-radius: 3px;
-        width: 100%;
-        padding: 3px 10px;
-        margin-bottom: 10px;
-        border: none;
-    }
-    #suggested_personalized_tags{
-        background-color: white;
-        width: 100%;
-        padding: 5px;
-        li{
-            padding: 5px;
-            color: black;
-        }
-        a.selected li{
-            color: white;
-            background-color: grey;
-        }
-    }
-    #reset_tags_btn{
-        color: white;
-        font-size: 14px;
-    }
-}
+// @media(max-width: 768px){
+//     #side_nav{
+//         display: none;
+//         width: 100%;
+//         position: absolute;
+//         top: 0;
+//         right: 0;
+//         left: 0;
+//         bottom: 0;
+//         background-color: #001E42;
+//         padding: 20px;
+//         z-index: 100;
+//     }
+// }
+
+
+// // form parts
+// #feed_optimizer{
+//     #personalized_tag_form{
+//         border-radius: 3px;
+//         width: 100%;
+//         padding: 3px 10px;
+//         margin-bottom: 10px;
+//         border: none;
+//     }
+//     #suggested_personalized_tags{
+//         background-color: white;
+//         width: 100%;
+//         padding: 5px;
+//         li{
+//             padding: 5px;
+//             color: black;
+//         }
+//         a.selected li{
+//             color: white;
+//             background-color: grey;
+//         }
+//     }
+//     #reset_tags_btn{
+//         color: white;
+//         font-size: 14px;
+//     }
+// }
 
 

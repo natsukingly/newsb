@@ -4,14 +4,37 @@
 #main_container{
 }
 
+
 .user_block{
-    img{
+    display: flex;
+    padding-bottom: 12px;
+    .user_image{
         margin-right: 10px;
         width: 40px;
         height: 40px;
     }
+    .user_info{
+        flex: 1;
+        .user_name{
+  
+        }
+    }
+    .user_option{
+        width: 40px;
+        height: 40px;
+        line-height: 45px;
+        svg{
+            height: 25px;
+            width: 100%;
+        }
+        .follow svg{
+            fill: grey;
+        }
+        .unfollow svg{
+            fill: #0D2E91;
+        }
+    }
 }
-
 
 #user_show_profile{
     margin: 20px 0 0;

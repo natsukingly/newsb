@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.comment{
+.comment, .reply{
     margin-top: 10px;
     .main{
         background-color: #f9f9f9;
@@ -11,14 +11,38 @@
         .body{
             padding: 0;
             flex: 1;
+            .user_info{
+                display: flex;
+                .user_name{
+                    flex: 1;
+                }
+                .option{
+                    text-align: center;
+                    width: 30px;
+                    height: 16px;
+                    line-height: 16px;
+                    font-size: 16px;
+                    cursor: pointer;
+                }
+            }
             .content{
-                margin-top: 5px;
+                padding: 12px 0;
             }
         }
         img{
             margin-right: 10px;
             width: 40px;
             height: 40px;
+        }
+    }
+}
+
+
+.reply{
+    .main{
+        img{
+            width: 30px;
+            height: 30px;
         }
     }
 }
@@ -57,46 +81,32 @@
     .comment_submit{
         display: none;
         float: right;
-    }
-}
-
-
-
-
-.reply_form{
-    margin-bottom: 0;
-    .form_textarea{
-        width: 100%;        
-
-        img.reply_image{
-            width: 30px;
-            height: 30px;
-            margin-top: 2px;
+        .cancel_btn{
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
         }
     }
 }
 
 
-.reply_textarea{
-    padding: 20px 0 10px 40px;
+.reply_form{
+    margin-bottom: 0;
+    form{
+        margin-top: 12px;
+        .comment_submit{
+            display: block;
+        }
+    }
+    .form_textarea{
+        width: 100%;        
 
-}
-
-
-
-.reply_index{
-    padding-left: 40px;
-    display: block;
-    .user_block{
         img{
             width: 30px;
             height: 30px;
             margin-top: 2px;
         }
     }
-    .reply{
-        margin-top: 10px;
-    }
 }
-
 

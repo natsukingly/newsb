@@ -3,27 +3,23 @@
 		.main
 			.content.clearfix
 				.user_block.clearfix{class: "user_#{post.user.id}"}
-					=image_tag post.user.image.url, class:"pull-left img-circle"
-					=link_to post.user  do
-						.give_me_short_ellipsis
-							=post.user.name
-					%p.user_shoulder_name
-						=post.user.shoulder_name
-					.follow_switch.pull-right
+					=image_tag post.user.image.url, class:"pull-left img-circle user_image"
+					.user_info
+						=link_to post.user  do
+							.give_me_short_ellipsis.light_navy.bold
+								=post.user.name
+						%p.user_shoulder_name.sm.grey
+							=post.user.shoulder_name
+					.user_option.follow_switch.pull-right
 						=render "/shared/follow_form_icon.html.haml", user: post.user
 				=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
 				%p.sm.grey
 					#{time_ago_in_words(post.created_at)} ago
-				%br
-				-if current_user.id == post.user_id
-					=link_to "EDIT", edit_post_path(post.id), remote: true, class: "edit_link_btn"  
-					|            
-					=link_to "DELETE", post_path(post.id), class: "edit_link_btn" , data: {confirm: "are you sure you want to delete your post?"}, method: :delete  
-
+				
 			=link_to article_path(post.article_id), class: "post_article" do
 				.post_image{ style: "background-image: url(#{post.article.image.url});"}
 				.article_info
-					%h2
+					%h2.bold
 						= truncate(post.article.title, length: 40) do
 							%span ...
 					%p.xs.grey
@@ -41,6 +37,8 @@
 						= post.comments.count
 					-else
 						0
+			.option.pull-right
+				%i.fa.fa-ellipsis-h.lg
 	
 	.comment_index		
 		.comment_form.clearfix
@@ -51,7 +49,9 @@
 		- comment = best_comments[0]
 		- if comment == nil
 			-comment = post.comments.last
-		.view_link
-			=link_to "view all #{post.comments.count} comments", "/comments/#{post.id}/view_more", remote: true
+		-if post.comments.count > 1
+			.view_link
+				=link_to "view all #{post.comments.count} comments", "/comments/#{post.id}/view_more", remote: true
 		.comments
-			=render best_comments
+			-best_comments.each do |comment|
+				=render 'comments/comment_wo_replies', comment: comment

@@ -2,24 +2,22 @@
 	.main.clearfix
 		=image_tag comment.user.image.url, class: "profile_xs pull-left img-circle"
 		.body
-			=link_to comment.user  do
-				.give_me_short_ellipsis
+			=link_to comment.user do
+				%span.user_name.light_navy.bold
 					=comment.user.name
-			%p.user_shoulder_name
+			%span.user_shoulder_name.sm.grey
 				=comment.user.shoulder_name
 			.content
 				=simple_format(comment.content)
-				- if current_user.id == comment.user_id
-					=link_to "EDIT", edit_comment_path(comment.id), remote: true, class: "edit_link_btn grey"  
-					|            
-					=link_to "DELETE", comment_path(comment.id), remote: true, class: "edit_link_btn grey" , data: {confirm: "are you sure you want to delete your post?"}, method: :delete  
-
 			.status.clearfix.sm
 				.like_link.grey
 					=render '/likes/like_comment', comment: comment
 				=link_to "Reply", "/replies/#{comment.id}/new", remote: true, class: "reply_link"
-				%i.fa.fa-ellipsis-h.pull-right
+				.option.pull-right
+					%i.fa.fa-ellipsis-h
 			.reply_form.clearfix
-						
-			.reply_index
-				=render comment.replies
+			
+			-unless comment.replies.count == 0
+				.reply_view_link
+					=link_to "view all #{comment.replies.count} replies", "/replies/#{comment.id}/view_more", remote: true
+			.replies
