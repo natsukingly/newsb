@@ -1,3 +1,86 @@
-// Place all the styles related to the tags controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#explore_container{
+    margin: 0 auto;
+    padding: 20px 0;
+    width: 750px;
+}
+
+
+.tags{
+        flex: 1;
+        -webkit-flex-wrap: wrap;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: flex-start;
+    .tag{
+        flex: 1;
+        flex-basis: calc(100% / 4);
+        max-width: calc(100% / 4);
+        position: relative;
+        
+        &:before{
+            display: block;
+            content: '';
+            padding-top: 100%;
+        }
+        .favorite_link{
+            width: 50px;
+            height: 50px;
+            padding: 15px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            fill: white;
+        }
+        .tag_image{
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+
+            top: 5px;
+            left: 5px;
+            width: calc(100% - 10px);
+            height: calc(100% - 10px);
+            .dark_over_lay{
+                background-color: rgba(0,0,0,0.1);
+                padding: 5px;
+                height: 100%;
+                p{
+                    word-wrap: break-word;
+                    color: white;
+                    font-size: 16px;
+                    text-shadow: 2px 2px 5px black;
+                    span{
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    #explore_container{
+        margin: 0;
+        width: auto;
+        .tags{
+            .tag{
+                flex: 1;
+                flex-basis: calc(100% / 3);
+                max-width: calc(100% / 3);
+                position: relative;
+                .tag_image{
+                    border-radius: 0;
+                    top: 1px;
+                    left: 1px;
+                    width: calc(100% - 2px);
+                    height: calc(100% - 2px);
+                    .dark_over_lay{
+                        border-radius: 0;
+                    }
+                }
+            }
+        }
+    }
+}

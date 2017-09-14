@@ -2,22 +2,42 @@
 	.main.clearfix
 		=image_tag comment.user.image.url, class: "profile_xs pull-left img-circle"
 		.body
-			=link_to comment.user do
-				%span.user_name.light_navy.bold
-					=comment.user.name
-			%span.user_shoulder_name.sm.grey
-				=comment.user.shoulder_name
+			.user_info
+				.user_name
+					=link_to comment.user do
+						%span.user_name.light_navy.bold
+							=comment.user.name
+					%span.user_shoulder_name.sm.grey
+						=comment.user.shoulder_name
+				.option
+					%i.fa.fa-ellipsis-h
+			
 			.content
-				=simple_format(comment.content)
-			.status.clearfix.sm
-				.like_link.grey
+				=truncate(comment.content, length: 200) do
+					%span.light_navy.read_more{class: "comment_read_more_#{comment.id}"}
+						Raed more
+			.status.clearfix
+				.comment_like_link.grey
 					=render '/likes/like_comment', comment: comment
 				=link_to "Reply", "/replies/#{comment.id}/new", remote: true, class: "reply_link"
-				.option.pull-right
-					%i.fa.fa-ellipsis-h
+				.reply_count.grey	
+					・
+					-if comment.replies.count >= 1  
+						= comment.replies.count
+					-else
+						0
+				-unless comment.replies.count == 0
+					.reply_view_link.pull-right
+						=link_to "/replies/#{comment.id}/view_more", remote: true do
+							%i.fa.fa-angle-down
+							View all #{comment.replies.count} replies
+							
+			
 			.reply_form.clearfix
 			
-			-unless comment.replies.count == 0
-				.reply_view_link
-					=link_to "view all #{comment.replies.count} replies", "/replies/#{comment.id}/view_more", remote: true
 			.replies
+			
+:javascript 
+	$(".comment_read_more_#{comment.id}").click(function(){
+		$(this).parent('.content').html('#{ simple_format(comment.content)}')
+	});

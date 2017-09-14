@@ -1,13 +1,11 @@
-#side_nav.hidden-xs
 
-#main_container
-  #search_nav.text-center
-    =link_to "/search_posts/#{@search}", remote: true, class: "search_btn search_posts active" do
-      posts
-    =link_to "/search_articles/#{@search}", remote: true, class: "search_btn search_articles" do
-      articles
-    =link_to "/search_users/#{@search}", remote: true, class: "search_btn search_users"  do
-      users
-  #main_contents
-    = render "posts/post_index", posts: @post_search_results
-#sidebar.hidden-xs.hidden-sm
+#search_nav.text-center
+  =link_to "/search_posts/#{@search}", remote: true, class: "search_btn search_posts active" do
+    posts
+  =link_to "/search_articles/#{@search}", remote: true, class: "search_btn search_articles" do
+    articles
+  =link_to "/search_users/#{@search}", remote: true, class: "search_btn search_users"  do
+    users
+#main_contents
+  = render "posts/post_index", posts: @post_search_results
+

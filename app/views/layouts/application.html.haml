@@ -1,81 +1,51 @@
 !!!
 %html
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Newsparty
-    = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application'
-    
-  %body
-    .flex_container
-      %header.text-center
-      
-        / LOGO CENTER
-        = link_to image_tag("logo_white.png", style: "width: 150px; margin-top: 20px;"), root_path, id: "logo"   
-            
-        .search_bar.hidden-xs
-          %i.fa.fa-search.form_icon
-          =form_tag "/search_result", method: "get", id: "search" do
-            =text_field_tag :search, params[:search], placeholder: "search here"
-            =submit_tag "", style: "display: none;"
-      
-        / HEADER LEFT FOR MOBILE      
-        #menu.menu_icon.pull-left
-          %i.fa.fa-bars    
-          
-        #mobile_drop_down_menu
-          =link_to "/user_ranking" do
-            .ranking.menu_icon
-              %i.fa.fa-trophy
-          =link_to articles_path do
-            #article_index_link.menu_icon.pull-left
-              %i.glyphicon.glyphicon-fire
-          .search_bar
-            %i.fa.fa-search.form_icon
-            =form_tag "/search_result", method: "get", id: "search" do
-              =text_field_tag :search, params[:search], placeholder: "search here"
-              =submit_tag "", style: "display: none;"    
+	%head
+		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+		%title Newsparty
+		= csrf_meta_tags
+		= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+		= javascript_include_tag 'application'
+		
+	%body
+		.flex_container
+		
+			=render 'layouts/header'
 
-            
-            
-        / HEADER RIGHT     
-        #account.menu_icon.pull-right 
-          -if user_signed_in?
-            =link_to destroy_user_session_path do
-              =image_tag current_user.image.url, class: "img-circle pull-right profile_xs"
-          -else
-            = link_to "facebookでログイン", user_facebook_omniauth_authorize_path
-      
-      #header_nav
-        .nav_container
-          -@default_category_tags.each do |category|
-            =link_to category.name, articles_tag_path(category.id)
-      
-      
-      .flex_wrapper.clearfix  
-        =yield
-      
+			-unless yield(:profile).empty?
+				=render 'users/profile', user: @user
+			
+			-if yield(:sidebar).empty?
+				.flex_wrapper.clearfix  
+					#sidebar_left.hidden-xs
+						=render "/sidebars/left_profile"
+					#main_container
+						=yield
+					#sidebar_right.hidden-xs.hidden-sm
+						=render '/sidebars/right_ad'
+			-else
+				=yield
+								
 
-        
-        
+				
+				
 :javascript      
-  $('#dropdown_btn').click(function(){
-    if($('#dropdown_menu').hasClass("open")){
-      $('#dropdown_menu').removeClass("open").fadeIn();
-    } else {
-      $('#dropdown_menu').addClass("open").fadeOut();
-    }
-  });     
-  
-  $('#menu').click(function(){
-    if($(this).find('i').hasClass('fa-bars')){
-      $('#mobile_drop_down_menu').slideDown().css("display", "flex");
-      $('#menu').find('i').removeClass('fa-bars').addClass('fa-times');
-      $('body').css("padding-top", "100px");
-    } else {
-      $('#mobile_drop_down_menu').slideUp();
-      $('#menu').find('i').removeClass('fa-times').addClass('fa-bars');
-      $('body').css("padding-top", "50px");      
-    }
-  });
+	$('#dropdown_btn').click(function(){
+		if($('#dropdown_menu').hasClass("open")){
+			$('#dropdown_menu').removeClass("open").fadeIn();
+		} else {
+			$('#dropdown_menu').addClass("open").fadeOut();
+		}
+	});     
+	
+	$('#menu').click(function(){
+		if($(this).find('i').hasClass('fa-bars')){
+			$('#mobile_drop_down_menu').slideDown().css("display", "flex");
+			$('#menu').find('i').removeClass('fa-bars').addClass('fa-times');
+			$('body').css("padding-top", "100px");
+		} else {
+			$('#mobile_drop_down_menu').slideUp();
+			$('#menu').find('i').removeClass('fa-times').addClass('fa-bars');
+			$('body').css("padding-top", "50px");      
+		}
+	});

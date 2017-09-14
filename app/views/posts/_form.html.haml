@@ -2,16 +2,9 @@
 .post#post_form
   .top
     .article_title= article_title
-    .article_site= article_site
 
   .body
     .form_main.clearfix
-      .user_block.clearfix
-        =image_tag current_user.image.url, class:"pull-left"
-        =link_to current_user, class: "pull-left" do
-          =current_user.name
-          %p.user_shoulder_name
-            =current_user.shoulder_name
       = form_tag posts_path, remote: true do
         .field.form-group
           .form_label

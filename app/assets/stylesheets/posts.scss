@@ -44,6 +44,7 @@
             }
         }
         .status{
+            color: grey;
             div{
                 display: inline-block;
                 margin-right: 12px;
@@ -57,6 +58,15 @@
             
             .comment_link{
                 cursor: pointer;
+            }
+            a{
+                color: grey;
+            }
+        }
+        .view_link, .reply_view_link{
+            a {
+                font-weight: 900;
+                color: black;
             }
         }
     }
@@ -114,6 +124,9 @@
 
 
 #post_form{
+    .top{
+        padding: 12px;
+    }
     .body{
         font-size: 14px;
         display: flex;

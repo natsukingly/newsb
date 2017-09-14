@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :default_tags, only: [:index, :autocomplete_personalized_tags, :autocomplete_tags, :load_url, :edit, :show, :article_index]
   before_action :sidebar, only: [:index, :show, :article_index]
-
+  before_action :yes_found
   
 
 
@@ -15,28 +15,29 @@ class PostsController < ApplicationController
 
     @posts = Post.order(created_at: :desc).limit(5)
 
+    not_found
   end
   
-  def optimized_index
-    @tags = Tag.where(id: params[:tag_ids])
-    @show_tags = params[:tag_ids]
-    if params[:tag_ids]
-      cookies[:search_preference] = JSON.generate(params[:tag_ids])
-      @post = Post.new
-      @posts = Post.includes(:tags).where('tags.id' => (params[:tag_ids])).order(created_at: :desc).limit(5)
-    else 
-      cookies.delete :search_preference
-      @posts = Post.order(created_at: :desc).limit(5)
-    end
-  end
+  # def optimized_index
+  #   @tags = Tag.where(id: params[:tag_ids])
+  #   @show_tags = params[:tag_ids]
+  #   if params[:tag_ids]
+  #     cookies[:search_preference] = JSON.generate(params[:tag_ids])
+  #     @post = Post.new
+  #     @posts = Post.includes(:tags).where('tags.id' => (params[:tag_ids])).order(created_at: :desc).limit(5)
+  #   else 
+  #     cookies.delete :search_preference
+  #     @posts = Post.order(created_at: :desc).limit(5)
+  #   end
+  # end
 
   def post_index
     @posts = Post.order(created_at: :desc)
   end
   
   
-  def mobile_post_form
-  end
+  # def mobile_post_form
+  # end
   
   def load_more
     
@@ -47,6 +48,8 @@ class PostsController < ApplicationController
     else
       @posts = Post.order(created_at: :desc).offset(existing_posts).limit(5)
     end
+    
+    not_found
   end
   
   
@@ -65,32 +68,32 @@ class PostsController < ApplicationController
   end
   
   # because differnt js needs to be applied
-  def autocomplete_personalized_tags
-    @last_word = params[:input]
-    @autocomplete_tag_lists = Tag.where('LOWER(name) LIKE(?)', "%#{@last_word.downcase.delete('#')}%").where.not(name: @default_categories).where.not(name: @default_rigions).limit(5)
-  end
+  # def autocomplete_personalized_tags
+  #   @last_word = params[:input]
+  #   @autocomplete_tag_lists = Tag.where('LOWER(name) LIKE(?)', "%#{@last_word.downcase.delete('#')}%").where.not(name: @default_categories).where.not(name: @default_rigions).limit(5)
+  # end
   
-  def reset_personalized_tags
-    cookies.delete :personalized_tags
-  end
+  # def reset_personalized_tags
+  #   cookies.delete :personalized_tags
+  # end
   
 
-  def customize_side_nav
-    tag = Tag.find_by(name: params[:tag_name])
+  # def customize_side_nav
+  #   tag = Tag.find_by(name: params[:tag_name])
 
-    if cookies[:personalized_tags]
-      cookies[:personalized_tags] = JSON.generate(Array(tag.id.to_s).push(*JSON.parse(cookies[:personalized_tags])))
-    else 
-      cookies[:personalized_tags] = JSON.generate(Array(tag.id.to_s))
-    end
-    if cookies[:search_preference]
-      cookies[:search_preference] = JSON.generate(Array(tag.id.to_s).push(*JSON.parse(cookies[:search_preference])))
-    else
-      cookies[:search_preference] = JSON.generate(Array(tag.id.to_s))
-    end
-    # personalized_tags_ids = JSON.parse(cookies[:personalized_tags]).map { |str| str.to_i}
-    @personalized_tags = Tag.where(id: JSON.parse(cookies[:personalized_tags]))
-  end
+  #   if cookies[:personalized_tags]
+  #     cookies[:personalized_tags] = JSON.generate(Array(tag.id.to_s).push(*JSON.parse(cookies[:personalized_tags])))
+  #   else 
+  #     cookies[:personalized_tags] = JSON.generate(Array(tag.id.to_s))
+  #   end
+  #   if cookies[:search_preference]
+  #     cookies[:search_preference] = JSON.generate(Array(tag.id.to_s).push(*JSON.parse(cookies[:search_preference])))
+  #   else
+  #     cookies[:search_preference] = JSON.generate(Array(tag.id.to_s))
+  #   end
+  #   # personalized_tags_ids = JSON.parse(cookies[:personalized_tags]).map { |str| str.to_i}
+  #   @personalized_tags = Tag.where(id: JSON.parse(cookies[:personalized_tags]))
+  # end
   
 
   
@@ -290,6 +293,12 @@ class PostsController < ApplicationController
     
     def article_image_params
       params.require(:article).permit(:image)
+    end
+    
+    def not_found
+      if @posts.empty?
+        @not_found = true
+      end
     end
     
 end

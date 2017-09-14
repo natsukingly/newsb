@@ -1,42 +1,29 @@
-#sidebar_left.hidden-xs
+-content_for(:profile) do
+	"Please show"
+		
+#main_contents
+	=render @user.posts
 
-#main_container
-  #user_show_profile.clearfix
-    .cover{style: "background-image: url(#{@user.cover})"}
-      =image_tag @user.image.profile_md.url, class: "img-circle"
-    %div{class: "profile user_#{@user.id}"}
-      %h2= @user.name 
-      %p= @user.shoulder_name
-      %p.like_stats
-        %span.like_label
-          %i.fa.fa-thumbs-o-up
-          Like
-        %span 
-          Total: #{Like.where(target_user_id: @user.id).count}
-        %span
-          This week: #{Like.where(created_at: Date.today.beginning_of_week-1..Time.now ).where(target_user_id: @user.id).count}
-      .follow_switch
-        =render "shared/follow_form", user: @user
-      .about
-        %h4
-          %i.fa.fa-globe
-          Introduction
-        %p
-          =@user.about
-
-  #profile_nav
-    =link_to "/users/#{@user.id}/user_post_index", remote: true, class: "profile_btn left active" do
-      %h3= @user.posts.count
-      posts
-    =link_to "/users/#{@user.id}/followers", remote: true, class: "profile_btn middle" do
-      %h3= @user.followers.count
-      follower
-    =link_to "/users/#{@user.id}/following", remote: true, class: "profile_btn right" do
-      %h3= @user.following.count
-      following
-      
-  .posts#main_contents
-    .other_post_block
-          
-#sidebar_right.hidden-xs.hidden-sm
-
+:javascript
+	$(window).scroll(function() {
+		var scrollVolume = $(window).scrollTop();
+		var profileHeight = $('#user_show_profile').height() + $('#profile_nav').height();
+		if(scrollVolume > 80 + profileHeight){
+			console.log(scrollVolume);
+			$('#ad').css("position", "fixed");
+			
+			var position = $('#sidebar_right').offset();
+			$('#ad').css("left", position.left);
+			$('#ad').css("top", position.top - 80 - profileHeight);
+			
+			$(window).resize(function() {
+				var position = $('#sidebar_right').offset();
+				$('#ad').css("left", position.left);
+			});
+			
+		} else {
+			$('#ad').css("position", "static");
+		}
+		
+	});
+	

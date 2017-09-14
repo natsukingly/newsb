@@ -13,10 +13,16 @@
 					%i.fa.fa-ellipsis-h
 			
 			.content
-				=simple_format(reply.content)
+				=truncate(reply.content, length: 200) do
+					%span.light_navy.read_more{class: "reply_read_more_#{reply.id}"}
+						Raed more
 			.status.clearfix
-				.like_link.grey
+				.reply_like_link.grey
 					=render '/likes/like_reply', reply: reply
-					
-					
+
+				
+:javascript 
+	$(".reply_read_more_#{reply.id}").click(function(){
+		$(this).parent('.content').html('#{ simple_format(reply.content)}')
+	});
 					

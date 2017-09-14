@@ -1,2 +1,2 @@
 $(".comment_<%=@comment.id%>").find(".replies").html(''); 
-$(".comment_<%=@comment.id%>").find(".reply_view_link").html('<%=link_to "view all #{@comment.replies.count} replies", "/replies/#{@comment.id}/view_more", remote: true %>');
+$(".comment_<%=@comment.id%>").find(".reply_view_link").html('<%= escape_javascript(render("replies/view_more_link", comment: @comment))%>');

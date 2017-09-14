@@ -1,2 +1,2 @@
 $(".post_<%=@post.id%>").find(".comments").html('<%= escape_javascript(render @comments )%>'); 
-$(".post_<%=@post.id%>").find(".view_link").html('<%= link_to "hide comments", "/comments/#{@post.id}/view_less", remote: true%>');
+$(".post_<%=@post.id%>").find(".view_link").html('<%= escape_javascript(render("comments/view_less_link", post: @post))%>');

@@ -1,0 +1,25 @@
+-content_for(:sidebar) do
+    "Don't show"
+
+
+
+#explore_container
+    #main_menu
+        .index_nav
+            =link_to tags_path, class: "index_btn active", remote: true do 
+                %i.fa.fa-th-large
+                %span.sm
+                    HOT 
+            =link_to show_favorite_tags_path, class: "show_favorite_btn", remote: true do
+                %i.fa.fa-check-square-o 
+                %span.sm
+                    YOURS ( #{current_user.favorite_tags.count} )
+       
+    .tags
+        =render @tags
+
+:css 
+    body{
+        background-color: white;
+
+    }

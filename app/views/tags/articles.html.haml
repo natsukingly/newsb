@@ -1,52 +1,43 @@
 
-#sidebar_left.hidden-xs
-    =render "/sidebars/left_profile"
-    
-#main_container
-    #main_menu
-        .index_nav
-            =link_to articles_tag_path(@tag.id), class: "news_btn active", remote: true do 
-                %i.fa.fa-newspaper-o
-                %span.sm
-                    NEWS
-            =link_to posts_tag_path(@tag.id), class: "feed_btn", remote: true do
-                %i.fa.fa-commenting-o 
-                %span.sm
-                    FEED
-            =link_to users_tag_path(@tag.id), class: "users_btn", remote: true do
-                %i.fa.fa-user-circle-o
-                %span.sm
-                    USERS
+#main_menu
+    .index_nav
+        =link_to articles_tag_path(@tag.id), class: "news_btn active", remote: true do 
+            %i.fa.fa-newspaper-o
+            %span.sm
+                NEWS
+        =link_to posts_tag_path(@tag.id), class: "feed_btn", remote: true do
+            %i.fa.fa-commenting-o 
+            %span.sm
+                FEED
+        =link_to users_tag_path(@tag.id), class: "users_btn", remote: true do
+            %i.fa.fa-user-circle-o
+            %span.sm
+                USERS
+        
+        #sub_menu
+            =render "/tags/sub_menu_news", tag: @tag
             
-            #sub_menu
-                =render "/tags/sub_menu_news", tag: @tag
-                
-    #main_contents
-        =render @articles
-        - if @not_found == true
-        .not_found
-            %h2 no post yet. time to explore!!
+#main_contents
+    =render @articles
+-if @not_found == true
+    .not_found
+        %h2 
+            no news yet. 
+            time to explore!!
+        %p
+            or click here to post your own article :)
  
-// sidebar   
-#sidebar_right.hidden-xs.hidden-sm
-    =render '/sidebars/right_ad'
-
 :javascript
     
-    $('#mobile_side_nav_link').click(function(){
-        if($(this).find('i').hasClass('fa-hashtag')){
-            $(this).find('i').removeClass('fa-hashtag').addClass('fa-times');
-            $(this).css("bottom", "auto").css("top", "70px");
-            $('#side_nav').slideDown();
-        } else {
-            $('#side_nav').slideUp();
-            $(this).find('i').removeClass('fa-times').addClass('fa-hashtag')
-            $(this).css("bottom", "20px").css("top", "auto");
-        }
-    });
     
-
-
+    if(#{ @not_found == true }){
+        $.ajax({
+            url: "/tags/articles_not_found",
+            type: "GET",
+            dataType: 'script',
+        })
+        // $('#main_contents').append("#{escape_javascript(render('shared/articles_not_found'))}");
+    }
 
     // awesome autosize code
 

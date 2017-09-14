@@ -32,8 +32,6 @@ class UsersController < ApplicationController
   end
   
   def show
-    @new_users = User.all.order(created_at: :desc).limit(10)
-    @user_posts = Post.where(user_id: @user.id).order(created_at: :desc)
   end
   
   def show_followers
@@ -45,7 +43,7 @@ class UsersController < ApplicationController
   end
   
   def show_user_posts
-    @user_posts = Post.where(user_id: @user.id).order(created_at: :desc)
+    @posts = Post.where(user_id: @user.id).order(created_at: :desc)
   end
 
   # GET /users/new

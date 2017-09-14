@@ -27,7 +27,7 @@
 							
 	
 		.status.md
-			.like_link
+			.post_like_link
 				=render '/likes/like_post', post: post
 			.comment_link
 				COMMENT
@@ -48,10 +48,16 @@
 		- best_comments = Comment.where(id: Like.where(post_id: post.id ,target_type: "comment").group(:comment_id).order('count(comment_id) desc').limit(1).pluck(:comment_id))
 		- comment = best_comments[0]
 		- if comment == nil
-			-comment = post.comments.last
-		-if post.comments.count > 1
+			- comment = post.comments.last
+		- if post.comments.count > 1
 			.view_link
-				=link_to "view all #{post.comments.count} comments", "/comments/#{post.id}/view_more", remote: true
+				=render 'comments/view_more_link', post: post
+	
 		.comments
-			-best_comments.each do |comment|
+			- unless comment == nil
 				=render 'comments/comment_wo_replies', comment: comment
+
+:javascript
+	$('.comment_link').click(function(){
+		$(this).parents('.post').find('.comment_form textarea').focus();
+	});

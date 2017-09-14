@@ -96,6 +96,18 @@ input[type="text"]:focus {
 }
 
 
+.not_found{
+    border-radius: 10px;
+    background-color: white;
+    padding: 50px 20px;
+    font-size: 30px;
+    font-weight: 900;
+    color: grey;
+    p{
+        font-size: 16px;
+    }
+}
+
 
 .give_me_short_ellipsis{
     white-space: nowrap;
@@ -120,7 +132,7 @@ input[type="text"]:focus {
 #main_container{
     flex: 1;
     margin: 12px;
-    min-width: 0;
+    width: 540px;
     .mobile_post_link{
         text-align: center;
         display: block;
@@ -480,6 +492,11 @@ header{
 }
 
 
+.read_more{
+    cursor: pointer;
+}
+
+
 
 #dropdown_btn{
     cursor: pointer;
@@ -589,25 +606,22 @@ span.input-group-btn{
 .no_scroll{
     overflow: hidden;
 }
-
-.follow_btn{
-    border: 1px solid #001E42;
-    background-color: white;
-    color: #001E42;
-    border-radius: 5px;
-    padding: 5px 20px;
-    width: 100px;
-    font-weight: bold;
+.follow_switch{
+    width: 40px;
+    height: 40px;
+    line-height: 45px;
+    svg{
+        height: 25px;
+        width: 100%;
+    }
+    .follow svg{
+        fill: grey;
+    }
+    .unfollow svg{
+        fill: #0D2E91;
+    }
 }
 
-.unfollow_btn{
-    border: 1px solid #001E42;
-    color: white;
-    background-color: #001E42;
-    border-radius: 5px;
-    padding: 5px 20px;
-    width: 100px;
-}
 
 
 

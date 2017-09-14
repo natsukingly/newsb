@@ -1,2 +1,3 @@
 $(".comment_<%=@reply.comment.id%>").find(".replies").html('<%= escape_javascript(render @comment.replies)%>');
 $(".comment_<%=@reply.comment.id%>").find(".reply_form").html('');
+$(".comment_<%=@reply.comment.id%>").find(".reply_count").text("・" + "<%= @comment.replies.count %>");

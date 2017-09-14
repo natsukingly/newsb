@@ -1,45 +1,16 @@
 
 
-#sidebar_left
-	=render "sidebars/left_profile"
-
-#mobile_side_nav.visible-xs
-
-#main_container
-
-	#main_contents
-		=render "/articles/selected_article", article: @article
-		
-		#selected_article_nav
-			=link_to "Read the article", @article.url, target: "_blank", class: "article_btn"
-			=form_tag "/posts/load_url", class: "article_btn", remote: true do
-				=hidden_field_tag :placeholder_url, @article.url
-				=submit_tag "Create your post"
-		
-		#post_form_block
-		
- 
-// sidebar   
-#sidebar_right.hidden-xs.hidden-sm
-	=render "sidebars/right_ad"
+#main_contents
+	=render "/articles/selected_article", article: @article
 	
-					
-// = paginate @posts
-// .scroller-status.text-center.hidden-xs
-//   .infinite-scroll-request
-//     .loading
-//       %i.fa.fa-spinner.fa-spin{ style:"margin-top: 30px;"}
+	#selected_article_nav
+		=link_to "Read the article", @article.url, target: "_blank", class: "article_btn"
+		=form_tag "/posts/load_url", class: "article_btn", remote: true do
+			=hidden_field_tag :placeholder_url, @article.url
+			=submit_tag "Create your post"
 	
-:javascript
+	#post_form_block
 	
-	$('#mobile_side_nav_link').click(function(){
-		if($(this).find('i').hasClass('fa-hashtag')){
-			$(this).find('i').removeClass('fa-hashtag').addClass('fa-times');
-			$(this).css("bottom", "auto").css("top", "70px");
-			$('#side_nav').slideDown();
-		} else {
-			$('#side_nav').slideUp();
-			$(this).find('i').removeClass('fa-times').addClass('fa-hashtag')
-			$(this).css("bottom", "20px").css("top", "auto");
-		}
-	});
+	.posts
+		=render @article.posts
+	

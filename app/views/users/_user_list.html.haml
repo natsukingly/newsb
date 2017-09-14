@@ -1,25 +1,13 @@
 #user_list
-  %p
-    %i.fa.fa-users
-    \= # of followers
-  - users.each do |user|
-    .user{class: "clearfix user_#{user.id}"}
-      .user_box
-        =link_to image_tag(user.image.profile_sm.url, class: "img-circle"), user, class: "image"
-        =link_to user, class: "info" do
-          %span.name
-            =user.name
-          %br
-          %span.give_me_ellipsis= user.shoulder_name
-          %i.fa.fa-thumbs-o-up
-          \:
-          =Like.where(target_user_id: user.id).count
-          |
-          %i.fa.fa-users
-          \:
-          172
-        -unless user.about.empty?
-          =link_to user, class: "about hidden-xs hidden-sm hidden-md" do
-            %span.about_title
-            %p.give_me_ellipsis= user.about
-        =render 'shared/follow_form', user: user
+	- users.each do |user|
+		.user{class: "clearfix user_#{user.id}"}
+			.user_box
+				=link_to image_tag(user.image.profile_sm.url, class: "img-circle"), user, class: "image"
+				=link_to user, class: "info" do
+					%p.name
+						=user.name
+					%p.grey.give_me_shourt_ellipsis= user.shoulder_name
+					%p.grey FOLLOWER: #{user.following.count}
+
+				.user_option.follow_switch.pull-right
+					=render "/shared/follow_form_icon.html.haml", user: user

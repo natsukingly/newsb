@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 		end
 	end
 	
-	resources :tags, only: [] do
+	resources :tags, only: [:index] do
 		member do
 			get 'articles'
 			get 'articles_week'
@@ -38,8 +38,12 @@ Rails.application.routes.draw do
 			get 'users'
 			get 'users_week'
 			get 'users_month'
+			post 'favorite'
+			delete 'unfavorite'
 		end
 		collection do
+			get 'articles_not_found'
+			get 'show_favorite'
 		end
 	end
 	

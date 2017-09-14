@@ -1,0 +1,11 @@
+%ul.text-center
+    -if user_signed_in?
+        %li
+            -if Favorite.find_by(user_id: current_user.id, tag_id: tag.id)
+                = link_to unfavorite_tag_path(tag.id), method: :delete, remote: true do 
+                    %i.unfavorite
+                        =render '/svg/unfavorite'
+            -else
+                = link_to favorite_tag_path(tag.id), method: :post, remote: true do
+                    %i.favorite
+                        =render '/svg/favorite'

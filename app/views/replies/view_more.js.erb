@@ -1,2 +1,2 @@
 $(".comment_<%=@comment.id%>").find(".replies").html('<%= escape_javascript(render @replies )%>'); 
-$(".comment_<%=@comment.id%>").find(".reply_view_link").html('<%= link_to "hide replies", "/replies/#{@comment.id}/view_less", remote: true%>');
+$(".comment_<%=@comment.id%>").find(".reply_view_link").html('<%= escape_javascript(render("replies/view_less_link", comment: @comment))%>');

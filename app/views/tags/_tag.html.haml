@@ -1,0 +1,12 @@
+
+.tag{class: "tag_#{tag.id}"}
+    .tag_image{style: "background-image: url(#{tag.posts.last.article.image.url})"} 
+        .dark_over_lay
+            %p
+                \##{tag.name}
+                %br
+                %span
+                    = tag.posts.count
+                    Posts
+            .favorite_link
+                =render 'tags/favorite_link', tag: tag

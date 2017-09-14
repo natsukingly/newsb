@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :default_tags, only: [:index, :show]
   before_action :sidebar, only: [:index, :show]
+  before_action :yes_found 
 
   def index
     if cookies[:search_preference]
@@ -31,6 +32,16 @@ class ArticlesController < ApplicationController
     else
       @articles = Article.order(created_at: :desc).offset(existing_articles).limit(5)
     end
+    
+    not_found
   end
   
+  
+  
+  private 
+    def not_found
+      if @articles.empty?
+        @not_fount = true
+      end
+    end
 end

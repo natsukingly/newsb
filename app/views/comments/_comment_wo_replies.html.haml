@@ -13,17 +13,32 @@
 					%i.fa.fa-ellipsis-h
 			
 			.content
-				=simple_format(comment.content)
+				=truncate(comment.content, length: 200) do
+					%span.light_navy.read_more{class: "comment_read_more_#{comment.id}"}
+						Raed more
 			.status.clearfix
-				.like_link.grey
+				.comment_like_link.grey
 					=render '/likes/like_comment', comment: comment
 				=link_to "Reply", "/replies/#{comment.id}/new", remote: true, class: "reply_link"
+				
+				.reply_count.grey	
+					・
+					-if comment.replies.count >= 1  
+						= comment.replies.count
+					-else
+						0
 				-unless comment.replies.count == 0
 					.reply_view_link.pull-right
-						=link_to "View all #{comment.replies.count} replies", "/replies/#{comment.id}/view_more", remote: true
+						=link_to "/replies/#{comment.id}/view_more", remote: true do
+							%i.fa.fa-angle-down
+							View all #{comment.replies.count} replies
 
 
 			.reply_form.clearfix
 			
 			.replies
 
+:javascript 
+	$(".comment_read_more_#{comment.id}").click(function(){
+		$(this).parent('.content').html('#{ simple_format(comment.content)}')
+	});
