@@ -253,7 +253,7 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
 
-  if Rails.env.production?
+  if Rails.env.development?
     config.omniauth :facebook, "109242943076975", "845ad636680af08d792f150108523d53", scope: 'email, public_profile', info_fields: 'email, name, gender, cover', :display => "popup", :image_size => 'large'
   else
     config.omniauth :facebook, Rails.configuration.fb_app_id, Rails.configuration.fb_app_secret, scope: 'email, public_profile', info_fields: 'email, name, gender, cover', :display => "popup", :image_size => 'large'

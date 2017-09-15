@@ -87,7 +87,7 @@ Rails.application.configure do
   end
   
   #facebook omniauth app secret
-  config.fb_app_id = 1947456345494105
+  config.fb_app_id = "1947456345494105"
   config.fb_app_secret = "9258ba6663fbe2448c0c45d98841ad22"
   
 
