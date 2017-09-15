@@ -85,6 +85,11 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
+  
+  #facebook omniauth app secret
+  config.fb_app_id = 1947456345494105
+  config.fb_app_secret = "9258ba6663fbe2448c0c45d98841ad22"
+  
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
