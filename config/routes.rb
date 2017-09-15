@@ -81,7 +81,7 @@ Rails.application.routes.draw do
 	post "/posts/:placeholder_url/load_url" => "posts#load_url"
 	get "/posts/mobile_load_url" => "posts#mobile_load_url"
 	
-	resources :posts, except: [:index, :new] do
+	resources :posts, except: [:new] do
 		collection do
 			get 'load_more'
 		end
