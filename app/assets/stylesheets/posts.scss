@@ -15,8 +15,9 @@
         .main{
             .content{
                 padding-right: 0;
-                padding-bottom: 20px;
-            
+                .post_time{
+                    padding-bottom: 12px;
+                }
             }
             .follow_switch{
                 font-size: 20px;

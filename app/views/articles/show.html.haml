@@ -1,5 +1,4 @@
 
-
 #main_contents
 	=render "/articles/selected_article", article: @article
 	
@@ -11,6 +10,7 @@
 	
 	#post_form_block
 	
-	.posts
-		=render @article.posts
+	.posts.wo_articles
+		-@article.posts.each do |post|
+			=render 'posts/post_wo_article', post: post
 	

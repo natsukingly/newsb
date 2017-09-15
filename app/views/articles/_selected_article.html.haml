@@ -5,9 +5,10 @@
         %h2.give_me_ellipsis
           =article.title
         .status
-          %i.fa.fa-thumbs-o-up
-          =article.likes.count
-          %span.pull-right 
+          .source
             =article.source
             -unless article.published_time == nil
               #{time_ago_in_words(article.published_time)} ago
+          .like_count
+            TOTAL LIKE: #{article.likes.count}
+          

@@ -13,18 +13,9 @@
 					.user_option.follow_switch.pull-right
 						=render "/shared/follow_form_icon.html.haml", user: post.user
 				=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
-				%p.post_time.sm.grey
+				%p.sm.grey
 					#{time_ago_in_words(post.created_at)} ago
-			
-				=link_to article_path(post.article_id), class: "post_article" do
-					.post_image{ style: "background-image: url(#{post.article.image.url});"}
-					.article_info
-						%h2.bold
-							= truncate(post.article.title, length: 40) do
-								%span ...
-						%p.xs.grey
-							= post.article.source
-							
+
 		.status.md
 			.post_like_link
 				=render '/likes/like_post', post: post

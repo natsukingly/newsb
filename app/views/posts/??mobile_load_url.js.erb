@@ -1,3 +1,0 @@
-$("#main_container").html('<%= escape_javascript(render("shared/mobile_post_form"))%>').css("margin", "0");
-$('#mobile_main_form').html('<%= escape_javascript(render('posts/mobile_form', post: @post, default_tags: @default_tags))%>');
-$('#mobile_loaded_article').html('<%= escape_javascript(render('posts/mobile_loaded_article', article_title: @article_title, article_url: @article_url, article_site: @article_site, article_published_time: @article_published_time, article_locale: @article_locale))%>');
