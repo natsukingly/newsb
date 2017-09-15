@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+	root "home#about"
+	
 	
 	resources :replies do
 		member do 
@@ -63,7 +65,7 @@ Rails.application.routes.draw do
 	post '/:following_id/follow_icon' => 'relationships#follow_icon'
 	post '/:following_id/unfollow_icon' => 'relationships#unfollow_icon'
 	
-	root "posts#index"
+	
 	resources :users, except: [:create, :new]
 	get '/user_ranking' => "users#user_ranking"
 	get '/mobile_post_form' => 'posts#mobile_post_form'
