@@ -1,45 +1,63 @@
 Rails.application.routes.draw do
 	root "home#about"
-	
-	
-	resources :replies do
-		member do 
-			get 'view_more'
-			get 'view_less'
-		end
-	end
-	
-	
-	resources :comments do
-		member do 
-			get 'view_more'
-			get 'view_less'
-		end
-	end
-	
-	get '/about' => "home#about"
 
-	devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } 
+	resources :categories, only: [:show] do
+		member do
+			get 'articles'
+			get 'posts'
+			get 'load_more'
+		end
+	end	
 	
 	resources :articles, only: [:index, :show] do
 		member do
+			get 'load_more_posts'
 		end
 		collection do
 			get 'load_more'
 		end
 	end
 	
+	resources :posts, except: [:new] do
+		collection do
+			get 'load_more'
+			get 'autocomplete_tags'
+			get 'load_url'
+		end
+	end
+	
+	resources :comments do
+		member do 
+			get 'view_more'
+			get 'view_less'
+		end
+	end	
+	
+	resources :replies, except: [:new] do
+		member do 
+			get 'view_more'
+			get 'view_less'
+		end
+	end
+	get '/replies/:comment_id/new' => 'replies#new'
+	
+	
+	devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } 
+	resources :users, except: [:create, :new] do
+		member do
+			get 'following'
+			get 'followers'
+			get 'posts'
+		end
+		collection do 
+			get 'ranking'
+			get 'auto_complete'
+		end
+	end 
+
+	
 	resources :tags, only: [:index] do
 		member do
-			get 'articles'
-			get 'articles_week'
-			get 'articles_month'
-			get 'posts'
-			get 'posts_week'
-			get 'posts_month'
-			get 'users'
-			get 'users_week'
-			get 'users_month'
 			post 'favorite'
 			delete 'unfavorite'
 		end
@@ -49,56 +67,16 @@ Rails.application.routes.draw do
 		end
 	end
 	
-	
-	
-	
-	
-	# follower/folowing
-	get '/users/:id/following' => 'users#show_following'
-	get '/users/:id/followers' => 'users#show_followers'
-	get '/users/:id/user_post_index' => 'users#show_user_posts'
-	get '/users/auto_complete' => 'users#auto_complete'
-	
-	
-	post '/:following_id/follow' => 'relationships#follow'
-	post '/:following_id/unfollow' => 'relationships#unfollow'
-	post '/:following_id/follow_icon' => 'relationships#follow_icon'
-	post '/:following_id/unfollow_icon' => 'relationships#unfollow_icon'
-	
-	
-	resources :users, except: [:create, :new]
-	get '/user_ranking' => "users#user_ranking"
-	get '/mobile_post_form' => 'posts#mobile_post_form'
-	
-	
-	get '/posts/autocomplete_tags' => 'posts#autocomplete_tags'
-	get '/posts/autocomplete_personalized_tags' => 'posts#autocomplete_personalized_tags'
-	get '/posts/:tag_name/customize_side_nav' => 'posts#customize_side_nav'
-	get '/posts/reset_personalized_tags' => 'posts#reset_personalized_tags'
-	
-	get '/posts/:id/other_posts' => 'posts#other_posts'
-	post "/posts/load_url" => "posts#load_url"
-	post "/posts/:placeholder_url/load_url" => "posts#load_url"
-	get "/posts/mobile_load_url" => "posts#mobile_load_url"
-	
-	resources :posts, except: [:new] do
-		collection do
-			get 'load_more'
+	resources :relationships, only: [] do
+		member do
+			post 'follow'
+			post 'unfollow'
 		end
 	end
 	
-	
-	
-	
-	get '/optimized_index' => "posts#optimized_index"
-	get '/test' => "posts#test"
-	
-	get '/post_index' => 'posts#post_index'
 	get '/posts/hashtags/:name' => 'posts#hashtags'
 	
-	
-	get '/replies/:comment_id/new' => 'replies#new'
-	
+
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 	get '/search_result' => "search#search_posts"
 	get '/search_tags/:search' => "search#search_tags"
@@ -107,7 +85,7 @@ Rails.application.routes.draw do
 	get '/search_users/:search' => "search#search_users"
 	
 	
-	
+	#LIKES
 	post "/comments/params[:comment_id]/like" => "likes#comment_like" , as: :comment_like
 	delete "/comments/params[:comment_id]/unlike" => "likes#comment_unlike", as: :comment_unlike
 	
@@ -116,7 +94,5 @@ Rails.application.routes.draw do
 	
 	post "/replies/params[:reply_id]/like" => "likes#reply_like" , as: :reply_like
 	delete "/replies/params[:reply_id]/unlike" => "likes#reply_unlike", as: :reply_unlike
-	
-	
 	
 end

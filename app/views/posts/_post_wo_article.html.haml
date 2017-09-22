@@ -23,23 +23,18 @@
 				COMMENT
 				・
 				.comment_count	
-					-if post.comments.count >= 1  
-						= post.comments.count
-					-else
-						0
+					= post.comments_count
+
 			.option.pull-right
 				%i.fa.fa-ellipsis-h.lg
 	
-	.comment_index		
+	.comment_index
 		.comment_form.clearfix
 			-comment = Comment.new
 			=render 'comments/form', comment: comment, post: post
-			
-		- best_comments = Comment.where(id: Like.where(post_id: post.id ,target_type: "comment").group(:comment_id).order('count(comment_id) desc').limit(1).pluck(:comment_id))
-		- comment = best_comments[0]
-		- if comment == nil
-			- comment = post.comments.last
-		- if post.comments.count > 1
+
+		- comment = post.comments.last
+		- if post.comments_count > 1
 			.view_link
 				=render 'comments/view_more_link', post: post
 	

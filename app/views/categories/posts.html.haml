@@ -1,0 +1,47 @@
+#index_nav
+	=link_to articles_category_path(@category.id), remote: true do
+		.news_btn
+			=render 'svg/news_icon'
+			%span
+				news
+	=link_to posts_category_path(@category.id), remote: true do
+		.feed_btn.active
+			=render 'svg/feed_icon'
+			%span
+				feed
+
+#post_url_form
+	=render 'layouts/url_form'
+					
+#post_form_block
+
+
+#main_contents.posts
+	=render posts
+ 
+
+= render 'scrolll_js/scroll_posts'
+= render 'scrolll_js/fix_sidebar'
+	
+:javascript
+	// awesome autosize code
+	$(".form_content").height(30);//init
+	$(".form_content").css("lineHeight","20px");//init
+	
+	$(".form_content").on("input",function(evt){
+						if(evt.target.scrollHeight > evt.target.offsetHeight){
+								$(evt.target).height(evt.target.scrollHeight);
+						}else{
+								var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
+								while (true){
+										$(evt.target).height($(evt.target).height() - lineHeight);
+										if(evt.target.scrollHeight > evt.target.offsetHeight){
+												$(evt.target).height(evt.target.scrollHeight);
+										}
+										break;
+								}
+						}
+				});
+	
+	
+	

@@ -1,1 +1,2 @@
 $(".comment_<%=@comment.id%>").find(".comment_like_link").html('<%= escape_javascript(render("likes/like_comment", comment: @comment))%>');
+$(".comment_<%=@comment.id%>").find(".comment_likes_count").html('<%= @comment.like_comments.count %>');

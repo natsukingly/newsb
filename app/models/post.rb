@@ -1,19 +1,24 @@
 class Post < ApplicationRecord
     belongs_to :user
     belongs_to :article
-    has_many :likes
-    has_many :comments
-    has_and_belongs_to_many :tags, dependent: :destroy 
+    counter_culture :article
     
-    attr_accessor :tag
-
+    belongs_to :category
+    has_many :like_posts
+    has_many :comments
+    has_many :tagged_posts, dependent: :destroy
+    has_many :tags, through: :tagged_posts
+    
+    scope :sortByLikes, ->ids {where(id: ids).sort_by{ |o| ids.index(o.id) }}
+    scope :popularTags, ->tag_ids { where(tags: article_ids).group(:tag_id).order('count(article_id) desc').pluck(:tag_id) }
 
     after_create do
         post = Post.find_by(id: self.id)
         hashtags = self.content.scan(/#\w+/)
         hashtags.uniq.map do |hashtag|
           tag = Tag.find_or_create_by(name: hashtag.downcase.delete('#'))
-          post.tags << tag
+          tagged_post = post.tagged_posts.build(tag_id: tag.id)
+          tagged_post.save
         end
     end
   
@@ -24,8 +29,16 @@ class Post < ApplicationRecord
         hashtags = self.content.scan(/#\w+/)
         hashtags.uniq.map do |hashtag|
           tag = Tag.find_or_create_by(name: hashtag.downcase.delete('#'))
-          post.tags << tag
+          tagged_post = post.tagged_posts.build(tag_id: tag.id)
+          tagged_post.save
         end
     end
     
+	def best_comment
+	    #This sentence below returns an array. 
+	    return self.comments.order(likes_count: :asc).first
+		if comment.nil?
+		    return self.comments.last
+		end	
+	end
 end

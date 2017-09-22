@@ -26,9 +26,13 @@ gem 'rmagick'
 gem 'font-awesome-sass'
 
 gem "jquery-turbolinks" # Turbolinksで遷移したときもjQuery.ready()を呼び出してくれる
-gem "kaminari"
 
 gem 'bootstrap-select-rails'
+
+gem 'counter_culture'
+
+gem 'whenever', require: false
+
 
 # ここまで追加したGEM
 
@@ -74,6 +78,10 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  
+  # gems to observe performance
+  gem 'rack-mini-profiler', require: false
+  gem 'bullet'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

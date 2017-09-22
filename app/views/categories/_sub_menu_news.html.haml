@@ -1,0 +1,8 @@
+.menu_block 
+    %span.set_period
+        48-HOUR
+    %i.fa.fa-caret-down.fa-fw
+    .dropdown
+        =link_to "48-HOUR", articles_category_path(category.id), class: "period_item active day", remote: true
+        =link_to "WEEK", articles_week_category_path(category.id), class: "period_item week", remote: true
+        =link_to "MONTH", articles_month_category_path(category.id), class: "period_item month", remote: true

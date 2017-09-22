@@ -7,7 +7,10 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :replies, dependent: :destroy
-  has_many :likes
+ 
+  has_many :post_likes
+  has_many :comment_likes
+  has_many :reply_likes
   
   has_many :active_relationships, class_name:  "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :passive_relationships, class_name:  "Relationship", foreign_key: "following_id", dependent: :destroy  
@@ -17,6 +20,11 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :favorite_tags, through: :favorites, source: :tag
   
+  #SCOPE
+  scope :sortByLikes, ->ids {where(id: ids).sort_by{ |o| ids.index(o.id) }}
+
+  
+  
   # devise
   
   def self.from_omniauth(auth)
@@ -25,7 +33,11 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
       user.name = auth.info.name   # assuming the user model has a name
       user.remote_image_url = auth.info.image.gsub('http:','https:') # assuming the user model has an image
-      user.cover = auth.extra.raw_info.cover.source
+      if auth.extra.raw_info.cover
+        user.cover = auth.extra.raw_info.cover.source 
+      else 
+        user.cover = "/assets/cover.jpg"
+      end 
       user.gender = auth.extra.raw_info.gender
       
       # If you are using confirmable and the provider(s) you use validate emails, 
@@ -43,7 +55,14 @@ class User < ApplicationRecord
   end
   
   
-  # relationship
-
-  
+  class << self
+    
+    def reset_weekly_liked_count
+      self.find_each do |user|
+        user.weekly_liked_count = 0
+        user.save
+      end
+    end
+    
+  end
 end

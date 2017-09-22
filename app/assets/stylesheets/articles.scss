@@ -83,3 +83,11 @@
         outline: 0;
     }
 }
+
+@media (max-width: 576px) {
+    .article{
+        .image_box{
+            height: 150px;
+        }
+    }
+}

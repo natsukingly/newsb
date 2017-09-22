@@ -1,135 +1,137 @@
 
 .post#post_form
-  .top
-    .article_title= article_title
+	.body
+		.post_article
+			.post_image{ style: "background-image: url(#{@article_image});"}
+			.article_info
+				%h2.bold
+					= truncate(@article_title, length: 40) do
+						%span ...
+				%p.xs.grey
+					= @article_source  
+		.form_main.clearfix
+			= form_tag posts_path, remote: true do
+				.field.form-group
+					.form_label
+						1. choose a category
+					= select_tag "post[category_id]", options_from_collection_for_select(@categories, "id", "name"), prompt: "please select", class: "form-control selectpicker tag_selection"
 
-  .body
-    .form_main.clearfix
-      = form_tag posts_path, remote: true do
-        .field.form-group
-          .form_label
-            1. choose a category
-          = select :tag, :category, @default_categories.map{|c| [c, c]}, prompt: "please select", class: "form-control selectpicker tag_selection"
+				.field.form-group#post_textarea
+					.textarea_label.form_label
+						2. insert your content
+					= text_area_tag 'post[content]', '', placeholder: "content", class: "post_textarea form-control", style: "border: none; box-shadow: none; resize: none;"
+					
+					= hidden_field_tag 'article[image]', @article_image
+					= hidden_field_tag 'article[url]', @article_url
+					= hidden_field_tag 'article[source]', @article_source
+					= hidden_field_tag 'article[title]', @article_title
+					= hidden_field_tag 'article[published_time]', value: @article_published_time
+					
+					#autocomplete_tags
+				= submit_tag "Submit", class: "form_btn #post_submit_btn"
 
-        .field.form-group
-          .form_label
-            2. choose a region
-          = select :tag, :region, @default_regions.map{|r| [r, r]}, prompt: "please select", class: "form-control selectpicker tag_selection"
-
-        .field.form-group#post_textarea
-          .textarea_label.form_label
-            3. insert your content
-          = text_area_tag 'post[content]', '', placeholder: "content", class: "post_textarea form-control", style: "border: none; box-shadow: none; resize: none;"
-          
-          = hidden_field_tag 'article[image]', @article_image
-          = hidden_field_tag 'article[url]', @article_url
-          = hidden_field_tag 'article[source]', @article_source
-          = hidden_field_tag 'article[title]', @article_title
-          = hidden_field_tag 'article[published_time]', value: @article_published_time
-          
-          #autocomplete_tags
-        = submit_tag "Submit", class: "form_btn #post_btn"
-    .article_image.pull-right.form_image.hidden-xs{style: "background-image: url(#{@article_image});"} 
-      
+			
+			
+			
 :javascript
 
-  // for autocomplete 
-  
-  // disabling default enter & up key function of keyboard 
-  $('#post_content').keydown(function(e) {
-    if(e.keyCode === 13){
-  	  if($('#autocomplete_tags li').length){
-  	    return false;
-  	  }
-  	}
-  	if(e.keyCode === 38){
-  	  if($('#autocomplete_tags li').length){
-  	    return false;
-  	  }
-  	}
-  });
-  
-  // selecting tags through autocomplete_tag_lists
-  $('#post_content').keyup(function(e) {
-    var $selected_tag = $('#suggested_tags li.selected');
-    var last_index = $('#suggested_tags li').length - 1;
-    var selected_index = $selected_tag.index();
-    // up
-  	if(e.keyCode === 38) {
-  	    $selected_tag.removeClass("selected");
-  	    if(selected_index == 0){
-  	      $('#suggested_tags li').eq(-1).addClass("selected");
-  	      return false;
-  	    } else{
-          selected_index = selected_index - 1;
-          $('#suggested_tags li').eq(selected_index).addClass("selected");
-          return false;
-    	  }
-    // down
-  	} else if(e.keyCode === 40){
-  	    $selected_tag.removeClass("selected");
-  	    if(selected_index == last_index){
-  	      selected_index = 0;
-  	      $('#suggested_tags li').eq(selected_index).addClass("selected");
-  	    } else{
-    	    selected_index = selected_index + 1;
-    	    $('#suggested_tags li').eq(selected_index).addClass("selected");
-    	    return false;
-    	  }
-    // enter
-  	} else if(e.keyCode === 13){
-  	    $selected_tag.trigger("click");
-  	    return false;
-  	}
-  	
-  // 	collecting suggested tags through ajax
-    var hashtag = /#\w+/;
-    var input = $('#post_content').val().split(" ");
-    var last_word = input[input.length - 1].replace(/(\r\n|\n|\r)/gm,"");
+	// for autocomplete 
+	
+	// disabling default enter & up key function of keyboard 
+	$('#post_content').keydown(function(e) {
+		if(e.keyCode === 13){
+			if($('#autocomplete_tags li').length){
+				return false;
+			}
+		}
+		if(e.keyCode === 38){
+			if($('#autocomplete_tags li').length){
+				return false;
+			}
+		}
+	});
+	
+	// selecting tags through autocomplete_tag_lists
+	$('#post_content').keyup(function(e) {
+		var $selected_tag = $('#suggested_tags li.selected');
+		var last_index = $('#suggested_tags li').length - 1;
+		var selected_index = $selected_tag.index();
+		// up
+		if(e.keyCode === 38) {
+				$selected_tag.removeClass("selected");
+				if(selected_index == 0){
+					$('#suggested_tags li').eq(-1).addClass("selected");
+					return false;
+				} else{
+					selected_index = selected_index - 1;
+					$('#suggested_tags li').eq(selected_index).addClass("selected");
+					return false;
+				}
+		// down
+		} else if(e.keyCode === 40){
+				$selected_tag.removeClass("selected");
+				if(selected_index == last_index){
+					selected_index = 0;
+					$('#suggested_tags li').eq(selected_index).addClass("selected");
+				} else{
+					selected_index = selected_index + 1;
+					$('#suggested_tags li').eq(selected_index).addClass("selected");
+					return false;
+				}
+		// enter
+		} else if(e.keyCode === 13){
+				$selected_tag.trigger("click");
+				return false;
+		}
+		
+	// 	collecting suggested tags through ajax
+		var hashtag = /#\w+/;
+		var input = $('#post_content').val().split(" ");
+		var last_word = input[input.length - 1].replace(/(\r\n|\n|\r)/gm,"");
 
-    if( hashtag.test(last_word) && last_word.length > 2){
-      $.ajax({
-        url: "/posts/autocomplete_tags",
-        type: "GET",
-        data: {input : last_word},
-        dataType: 'script',
-      });
-      return false;
-    } 
-    
-    $('#autocomplete_tags').html(" ");
-    return false;
-  });
-  
-  $("#post_content").height(20);//init
-  $("#post_content").css("lineHeight","20px");//init
-  
-  $("#post_content").on("input",function(evt){
-            if(evt.target.scrollHeight > evt.target.offsetHeight){
-                $(evt.target).height(evt.target.scrollHeight);
-            }else{
-                var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
-                while (true){
-                    $(evt.target).height($(evt.target).height() - lineHeight);
-                    if(evt.target.scrollHeight > evt.target.offsetHeight){
-                        $(evt.target).height(evt.target.scrollHeight);
-                    }
-                    break;
-                }
-            }
-        });
-  
+		if( hashtag.test(last_word) && last_word.length > 2){
+			$.ajax({
+				url: "/posts/autocomplete_tags",
+				type: "GET",
+				data: {input : last_word},
+				dataType: 'script',
+			});
+			return false;
+		} 
+		
+		$('#autocomplete_tags').html(" ");
+		return false;
+	});
+	
+	$("#post_content").height(20);//init
+	$("#post_content").css("lineHeight","20px");//init
+	
+	$("#post_content").on("input",function(evt){
+						if(evt.target.scrollHeight > evt.target.offsetHeight){
+								$(evt.target).height(evt.target.scrollHeight);
+						}else{
+								var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
+								while (true){
+										$(evt.target).height($(evt.target).height() - lineHeight);
+										if(evt.target.scrollHeight > evt.target.offsetHeight){
+												$(evt.target).height(evt.target.scrollHeight);
+										}
+										break;
+								}
+						}
+				});
+	
 
-  
-  $('#form_wrapper').click(function(){
-    $('#form_wrapper').fadeOut();
-    $('#form_modal').fadeOut();
-    $('body').removeClass('no_scroll');
-  });
+	
+	$('#form_wrapper').click(function(){
+		$('#form_wrapper').fadeOut();
+		$('#form_modal').fadeOut();
+		$('body').removeClass('no_scroll');
+	});
 
-  // carret position
-  
+	// carret position
+	
 
 
-  
+	
 

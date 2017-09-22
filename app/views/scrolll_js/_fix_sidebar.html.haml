@@ -1,0 +1,22 @@
+:javascript
+	$(window).scroll(function() {
+		var scrollVolume = $(window).scrollTop();
+		if(scrollVolume > 80){
+			console.log(scrollVolume);
+			$('#ad').css("position", "fixed");
+			
+			var position = $('#sidebar_right').offset();
+			$('#ad').css("left", position.left);
+			$('#ad').css("top", position.top - 80);
+			
+			$(window).resize(function() {
+				var position = $('#sidebar_right').offset();
+				$('#ad').css("left", position.left);
+			});
+			
+		} else {
+			$('#ad').css("position", "static");
+		}
+		
+	});
+ 

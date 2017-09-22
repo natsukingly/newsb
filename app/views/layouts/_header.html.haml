@@ -20,7 +20,13 @@
 		-else
 			= link_to "facebookでログイン", user_facebook_omniauth_authorize_path
 
-#header_nav
-	.nav_container
-		-@default_category_tags.each do |category|
-			=link_to category.name, articles_tag_path(category.id)
+- cache "header_nav" do
+	#header_nav
+		.nav_container
+			=link_to "TOP", root_path
+			=link_to posts_path do
+				%i.fa.fa-circle.feed_icon
+				FEED
+			-@categories.each do |category|
+				=link_to category.name, articles_category_path(category.id)
+

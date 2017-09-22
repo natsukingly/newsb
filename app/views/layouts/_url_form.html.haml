@@ -1,0 +1,22 @@
+.url_form_title
+	%i.fa.fa-pencil
+	Make Post | What's happening in the world today?
+	
+=form_tag "/posts/load_url", method: :get, remote: true do
+	= url_field_tag :placeholder_url, "", placeholder: "paste your url to start", class: "url_form form-control"
+
+:css 
+	#post_url_form form input:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0 30px white inset;
+	}
+	
+:javascript
+	$('#post_url_form input').keyup(function(e) {
+		$.ajax({
+			url: "/posts/autocomplete_tags",
+			type: "GET",
+			data: {input : last_word},
+			dataType: 'script',
+		});
+		return false;
+	});

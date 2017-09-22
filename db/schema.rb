@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915112647) do
+ActiveRecord::Schema.define(version: 20170922160540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,8 +23,23 @@ ActiveRecord::Schema.define(version: 20170915112647) do
     t.datetime "published_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "category"
-    t.string "region"
+    t.integer "category_id"
+    t.integer "posts_count", default: 0, null: false
+    t.integer "likes_count", default: 0, null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "category_tables", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "article_id"
+    t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -33,7 +48,39 @@ ActiveRecord::Schema.define(version: 20170915112647) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "likes_count", default: 0, null: false
+    t.integer "replies_count", default: 0, null: false
   end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "tag_id"
+  end
+
+  create_table "like_comments", force: :cascade do |t|
+    t.integer "comment_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "like_posts", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "article_id"
+  end
+
+  create_table "like_replies", force: :cascade do |t|
+    t.integer "reply_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+
+#drop likes table before deploying
 
   create_table "likes", force: :cascade do |t|
     t.integer "user_id"
@@ -53,15 +100,9 @@ ActiveRecord::Schema.define(version: 20170915112647) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "article_id"
-    t.string "category"
-    t.string "region"
-  end
-
-  create_table "posts_tags", id: false, force: :cascade do |t|
-    t.bigint "post_id"
-    t.bigint "tag_id"
-    t.index ["post_id"], name: "index_posts_tags_on_post_id"
-    t.index ["tag_id"], name: "index_posts_tags_on_tag_id"
+    t.integer "category_id"
+    t.integer "likes_count", default: 0, null: false
+    t.integer "comments_count", default: 0, null: false
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -80,12 +121,23 @@ ActiveRecord::Schema.define(version: 20170915112647) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "likes_count", default: 0, null: false
+  end
+
+  create_table "tagged_posts", force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
+    t.integer "post_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "posts_count", default: 0, null: false
+    t.integer "weekly_posts_count", default: 0, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -106,9 +158,11 @@ ActiveRecord::Schema.define(version: 20170915112647) do
     t.string "shoulder_name", default: "Newspartyの村人X"
     t.text "about", default: ""
     t.string "cover"
+    t.integer "followers_count", default: 0, null: false
+    t.integer "following_count", default: 0, null: false
+    t.integer "liked_count", default: 0, null: false
+    t.integer "weekly_liked_count", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "posts_tags", "posts"
-  add_foreign_key "posts_tags", "tags"
 end

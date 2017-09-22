@@ -6,14 +6,24 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-5.times do
+
+
+@default_categories = ["Business", "Tech", "Politics", "Economy", "Markets", "Sports", "Education", "Lifestyle"]
+
+@default_categories.each do |category|
+    Category.create(name: category)
+end
+
+
+
+# 5.times do
     
     # business
-  	Post.create(content: "aad!!!!!!" , article_title: "fuck", article_image: "", article_url: "",article_site: "font awesome", user_id: 12)
-  	Article.create()
+#   	Post.create(content: "aad!!!!!!" , article_title: "fuck", article_image: "", article_url: "",article_site: "font awesome", user_id: 12)
+#   	Article.create()
   	
   	#politics
-  	Post.create
+#   	Post.create
   	
   	#entertainment
   	
@@ -26,4 +36,4 @@
   	#education
   	
   	#others
-end
+# end

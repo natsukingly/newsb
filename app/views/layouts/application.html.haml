@@ -6,7 +6,7 @@
 		= csrf_meta_tags
 		= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
 		= javascript_include_tag 'application'
-		
+
 	%body
 		.flex_container
 		
@@ -18,16 +18,14 @@
 			-if yield(:sidebar).empty?
 				.flex_wrapper.clearfix  
 					#sidebar_left.hidden-xs
-						=render "/sidebars/left_profile"
+						=render "/sidebars/left_profile", user: current_user
 					#main_container
 						=yield
-					#sidebar_right.hidden-xs.hidden-sm
+					#sidebar_right.hidden-xs
 						=render '/sidebars/right_ad'
 			-else
 				=yield
 								
-
-				
 				
 :javascript      
 	$('#dropdown_btn').click(function(){
@@ -49,3 +47,4 @@
 			$('body').css("padding-top", "50px");      
 		}
 	});
+

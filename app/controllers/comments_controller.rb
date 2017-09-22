@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
   
   def view_more
     @post = Post.find(params[:id])
-    @comments = @post.comments
+    @comments = @post.comments.includes([:user]).order(created_at: :asc)
   end
   
   def view_less

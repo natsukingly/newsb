@@ -1,2 +1,2 @@
-$("#main_contents").html('<%= escape_javascript(render @posts)%>');
+$("#main_contents").prepend('<%= escape_javascript(render @post)%>');
 $("#post_form_block").html('');

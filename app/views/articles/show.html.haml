@@ -1,16 +1,16 @@
 
-#main_contents
-	=render "/articles/selected_article", article: @article
-	
-	#selected_article_nav
-		=link_to "Read the article", @article.url, target: "_blank", class: "article_btn"
-		=form_tag "/posts/load_url", class: "article_btn", remote: true do
-			=hidden_field_tag :placeholder_url, @article.url
-			=submit_tag "Create your post"
-	
-	#post_form_block
-	
-	.posts.wo_articles
-		-@article.posts.each do |post|
-			=render 'posts/post_wo_article', post: post
-	
+
+=render "/articles/selected_article", article: @article
+
+#selected_article_nav
+	=link_to "Read the article", @article.url, target: "_blank", class: "article_btn"
+	=form_tag "/posts/load_url", class: "article_btn", remote: true do
+		=hidden_field_tag :placeholder_url, @article.url
+		=submit_tag "Create your post"
+
+#post_form_block
+
+#main_contents.article_posts
+	= render partial: "posts/post_wo_article", collection: @posts, as: :post
+
+= render 'scrolll_js/scroll_article_posts', article: @article

@@ -3,10 +3,12 @@
 	.image_box
 		.image{style: "background-image: url(#{article.image.url});"}
 			.status
-				Total
-				= article.likes.count
+				%i.fa.fa-comments-o
+				#{article.posts_count} 
+				\/
 				%i.fa.fa-thumbs-o-up
-		
+				#{article.likes_count}
+
 	.info
 		.title
 			%h2.bold.lg
@@ -17,10 +19,7 @@
 				- if article.published_time
 					#{time_ago_in_words(article.published_time)} ago
 		.best_post
-			- best_post = Post.where(id: Like.where(article_id: article.id ,target_type: "post").group(:comment_id).order('count(comment_id) desc').limit(1).pluck(:comment_id))
-			- post = best_post[0]
-			- if post == nil
-				-post = article.posts.last
+			-post = article.posts.last
 			
 			- if post != nil
 				.body

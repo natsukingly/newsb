@@ -1,6 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :default_tags, only: [:index, :show]
-  before_action :sidebar, only: [:index, :show]
+  before_action :set_article, only: [:show, :load_more_posts]
   before_action :yes_found 
 
   def index
@@ -13,26 +12,19 @@ class ArticlesController < ApplicationController
   end
   
   def show
-    @article = Article.find(params[:id])
+    @posts = Post.all.includes([:user])
+  end
+  
+  def load_more_posts
+    existing_article_posts = params[:existing_article_posts]
+    @posts = Post.includes([:user]).sortByLikes(Like.recent.offset(existing_article_posts).limit(5).popularPosts(@article.posts.ids))
   end
   
   def load_more
     
     existing_articles = params[:existing_articles]
-    
-    if cookies[:search_preference]
-      case params[:period]
-      when "WEEK"
-        @articles = Article.all.where(category: cookies[:search_preference]).where(published_time: 168.hours.ago..Time.now).order(created_at: :desc).offset(existing_articles).limit(5)
-      when "MONTH"
-        @articles = Article.all.where(category: cookies[:search_preference]).where(published_time: 720.hours.ago..Time.now).order(created_at: :desc).offset(existing_articles).limit(5)
-      else
-        @articles = Article.all.where(category: cookies[:search_preference]).where(published_time: 48.hours.ago..Time.now).order(created_at: :desc).offset(existing_articles).limit(5)
-      end
-    else
-      @articles = Article.order(created_at: :desc).offset(existing_articles).limit(5)
-    end
-    
+    @articles = Article.order(created_at: :desc).offset(existing_articles).limit(5)
+
     not_found
   end
   
@@ -44,4 +36,9 @@ class ArticlesController < ApplicationController
         @not_fount = true
       end
     end
+    
+    def set_article
+      @article = Article.find(params[:id])
+    end
+    
 end

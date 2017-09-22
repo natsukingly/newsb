@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
   
   
-  def user_ranking
+  def ranking
     @ranked_users = User.where(id: Like.group(:target_user_id).order('count(target_user_id) desc').limit(100).pluck(:target_user_id))
     @top_articles = Post.all.limit(10)
     @top_users = User.all.limit(10)
@@ -34,15 +34,7 @@ class UsersController < ApplicationController
   def show
   end
   
-  def show_followers
-    @followers = @user.followers
-  end
-  
-  def show_following
-    @following = @user.following
-  end
-  
-  def show_user_posts
+  def posts
     @posts = Post.where(user_id: @user.id).order(created_at: :desc)
   end
 

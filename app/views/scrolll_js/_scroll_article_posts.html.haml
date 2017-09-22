@@ -1,0 +1,28 @@
+
+:javascript
+	// infinite scroll
+	var win = $(window);
+	var loading = false;
+	var model = $('#main_contents').attr('class');
+
+	win.scroll(function() {
+		// for testing
+		// console.log("scrolltop" + win.scrollTop());
+		// console.log("document" + ($(document).height() - win.height()));
+		
+		// last number to trigger event before reaching the end of the document
+		if(model == "article_posts"){
+			if ($(document).height() - win.height() < win.scrollTop() + 500) {
+				if (loading){
+					return;
+				}	
+				loading = true;
+				$.ajax({
+					url: "/articles/#{article.id}/load_more_posts",
+					type: "GET",
+					data: {existing_article_posts : $('#main_contents').find('.post').length },
+					dataType: 'script',
+				})
+			}
+		}
+	});

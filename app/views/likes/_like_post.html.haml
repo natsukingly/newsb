@@ -1,11 +1,12 @@
 %ul
     -if user_signed_in?
         %li
-            -if Like.find_by(user_id: current_user.id, post_id: post.id, target_type: "post")
+            -if LikePost.find_by(user_id: current_user.id, post_id: post.id)
                 = link_to post_unlike_path(post.id), method: :delete, remote: true do 
                     UNLIKE
             -else
                 = link_to post_like_path(post.id), method: :post, remote: true do
                     LIKE
             ・
-            = Like.where(post_id: post.id).where(target_type: "post").count
+            %span.likes_count
+                = post.likes_count

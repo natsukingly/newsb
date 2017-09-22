@@ -1,11 +1,12 @@
 %ul
     -if user_signed_in?
         %li
-            -if Like.find_by(user_id: current_user.id, reply_id: reply.id, target_type: "reply")
+            -if LikeReply.find_by(user_id: current_user.id, reply_id: reply.id)
                 = link_to reply_unlike_path(reply.id), method: :delete, remote: true do 
                     UNLIKE
             -else
                 = link_to reply_like_path(reply.id), method: :post, remote: true do
                     LIKE
             ・
-            = Like.where(reply_id: reply.id, target_type: "reply").count
+            %span.reply_likes_count
+                = reply.likes_count

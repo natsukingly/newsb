@@ -1,30 +1,27 @@
 #profile
-    .images{style: "background-image: url(#{current_user.cover})"}
+    .images{style: "background-image: url(#{user.cover})"}
         .user_image
-            =image_tag current_user.image.url, class: "img-circle"
+            =image_tag user.image.url, class: "img-circle"
     .user_info
-        %p.name.md= current_user.name
-        %p.shoulder_name.grey= current_user.shoulder_name
+        %p.name.md= user.name
+        %p.shoulder_name.grey= user.shoulder_name
         %p.post_count.grey
-            Total posts: #{current_user.posts.count}
+            Total posts: #{user.posts.count}
     .follower_stats
         .follower
-            %h2.bold= current_user.followers.count
+            %h2.bold= user.followers_count
             %p.grey Follower
         .following
-            %h2.bold= current_user.following.count
+            %h2.bold= user.following_count
             %p.grey Following
     .like_stats
         %h2.bold.md Like Stats
         %p 
-            Week:
-            %span= Like.where(target_user_id: current_user.id).where(created_at: 48.hours.ago..Time.now).count
+            Week: #{user.weekly_liked_count}
+            // %span= Like.where(target_user_id: current_user.id).where(created_at: 48.hours.ago..Time.now).count
+
         %p 
-            Month:
-            %span= Like.where(target_user_id: current_user.id).where(created_at: 48.hours.ago..Time.now).count
-        %p 
-            ALL-TIME:
-            %span= Like.where(target_user_id: current_user.id).count
+            ALL-TIME: #{user.liked_count}
             
     
         

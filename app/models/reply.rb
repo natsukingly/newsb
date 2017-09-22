@@ -1,6 +1,9 @@
 class Reply < ApplicationRecord
     belongs_to :comment
-    belongs_to :user
-    has_many :likes
+    counter_culture :comment
     
+    belongs_to :user
+    has_many :like_replies
+    
+    scope :sortByLikes, ->ids {where(id: ids).sort_by{ |o| ids.index(o.id) }}
 end

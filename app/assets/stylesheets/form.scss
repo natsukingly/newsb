@@ -1,0 +1,104 @@
+
+#post_form{
+    .post_article{
+        padding-bottom: 12px;
+        .post_image{
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        .article_info{
+            padding: 12px;
+            border: 1px solid #eee;
+        }
+    }
+    .body{
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        .form_main{
+            flex: 1;
+            form{
+                padding: 12px;
+                width: 100%;
+                textarea{
+                    
+                }
+                .form_label{
+                    color: #001E42;
+                    margin-bottom: 10px;
+                }
+                .textarea_label{
+                    border-bottom: 1px solid #f9f9f9;
+                }
+            }
+            
+            select{
+                padding: 0 10px;
+            }
+            select::-webkit-input-placeholder{
+                color: red;
+            }
+            .tag_selection{
+                border: 1px solid #f9f9f9;
+                color: #aaa;
+                box-shadow: none;
+                border-radius: 0;
+                text-align: center;
+                &::placeholder{
+                    color: red;
+                }
+            }
+            
+            .form_btn{
+                margin-top: 20px;
+                background-color: #001E42;
+                color: white;
+                border-radius: 5px;
+                border: none;
+                width: 100%;
+                padding: 10px;
+            }
+        }
+    }
+}
+
+#post_url_form{
+    margin: 12px 0;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    border-radius: 5px;
+    input:focus, button:focus{
+        box-shadow: none;
+        border-color: rgb(204, 204, 204);
+    }
+    .url_form_title{
+        padding: 12px 12px;
+        background-color: #f6f7f9;
+        font-size: 14px;
+        color: #4b4f56;
+        letter-spacing: 1px;
+    }
+    
+    form{
+        display: flex;
+        input[type=url]{
+            flex: 1;
+            border: none;
+            outline: none;
+            box-shadow: none;
+            height: 50px;
+        }
+        
+        button[type=submit]{
+            width: 20px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+	#post_url_form{
+		border-radius: 0;
+	}
+}
+

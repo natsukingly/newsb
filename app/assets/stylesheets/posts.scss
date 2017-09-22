@@ -46,6 +46,7 @@
         }
         .status{
             color: grey;
+            font-size: 12px;
             div{
                 display: inline-block;
                 margin-right: 12px;
@@ -88,6 +89,13 @@
         border-radius: 0;
     }
 }
+@media (max-width: 576px) {
+    .post{
+        .post_image{
+            height: 150px;
+        }
+    }
+}
 
 
 
@@ -105,85 +113,6 @@
         background-color: #001E42;
     }
 }
-
-
-
-
-.mobile_post_form{
-    margin-top: -20px;
-    .input-group .form-control:first-child{
-        border-radius: 0;
-
-    }
-    .btn{
-        border-radius: 0;
-        background-color: grey;
-        color: white;
-    }
-}
-
-
-
-#post_form{
-    .top{
-        padding: 12px;
-    }
-    .body{
-        font-size: 14px;
-        display: flex;
-        .form_main{
-            flex: 2;
-            form{
-                width: 95%;
-                textarea{
-                    
-                }
-                .form_label{
-                    color: #001E42;
-                    margin-bottom: 10px;
-                }
-                .textarea_label{
-                    border-bottom: 1px solid #f9f9f9;
-                }
-            }
-            
-            select{
-                padding: 0 10px;
-            }
-            select::-webkit-input-placeholder{
-                color: red;
-            }
-            .tag_selection{
-                border: 1px solid #f9f9f9;
-                color: #aaa;
-                box-shadow: none;
-                border-radius: 0;
-                text-align: center;
-                &::placeholder{
-                    color: red;
-                }
-            }
-            
-            
-            .form_btn{
-                background-color: black;
-                color: white;
-                border: none;
-            }
-        }
-        .article_image{
-            flex: 1;
-        }
-    }
-}
-
-#post_url_form{
-    input:focus, button:focus{
-        box-shadow: none;
-        border-color: rgb(204, 204, 204);
-    }
-}
-
 
 
 .same_article_posts_link{

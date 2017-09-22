@@ -1,7 +1,7 @@
 
 
 #post_url_form.hidden-xs
-	=form_tag "/posts/load_url", remote: true do
+	=form_tag "/posts/load_url", method: :get, remote: true do
 		.form-group.input-group
 			= url_field_tag :placeholder_url, "", placeholder: "paste url to start your post!", class: "url_form form-control"
 			%span.input-group-btn
@@ -11,10 +11,12 @@
 					
 #post_form_block
 
+
 #main_contents.posts
 	=render @posts
  
 
+= render 'scrolll_js/scroll_posts'
 	
 :javascript
 	// awesome autosize code
@@ -35,37 +37,12 @@
 								}
 						}
 				});
-
-	
-	var win = $(window);
-	
-	var loading = false;
-	// Each time the user scrolls
-	win.scroll(function() {
-		if ($(document).height() - win.height() == win.scrollTop()) {
-		
-			if (loading){
-				return;
-			}	
-			loading = true;		
-		
-			if ($('.posts').length){
-				$.ajax({
-					url: "/posts/load_more",
-					type: "GET",
-					data: {existing_posts : $('#main_contents').find('.post').length },
-					dataType: 'script',
-				})
-			}
-		}
-	});
 	
 	
-	
+	// fix sidebar_right
 	$(window).scroll(function() {
 		var scrollVolume = $(window).scrollTop();
 		if(scrollVolume > 80){
-			console.log(scrollVolume);
 			$('#ad').css("position", "fixed");
 			
 			var position = $('#sidebar_right').offset();
