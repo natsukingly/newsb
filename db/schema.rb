@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20170922160540) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "likes_count", default: 0, null: false
-    t.integer "replies_count", default: 0, null: false
+    t.integer "replicdes_count", default: 0, null: false
   end
 
   create_table "favorites", force: :cascade do |t|

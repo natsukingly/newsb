@@ -1,13 +1,13 @@
-#user_list
-	- users.each do |user|
-		.user{class: "clearfix user_#{user.id}"}
-			.user_box
-				=link_to image_tag(user.image.profile_sm.url, class: "img-circle"), user, class: "image"
-				=link_to user, class: "info" do
-					%p.name
-						=user.name
-					%p.grey.give_me_shourt_ellipsis= user.shoulder_name
-					%p.grey FOLLOWER: #{user.following.count}
+.user_list_item{class: "clearfix user_#{user.id}"}
+	=link_to image_tag(user.image.profile_sm.url, class: "img-circle"), user, class: "image"
+	=link_to user, class: "info" do
+		%p.name
+			%span
+				=user.name
+			= user.shoulder_name
+		%p FOLLOWER: #{user.following.count}
+		%p= user.about
+		
 
-				.user_option.follow_switch.pull-right
-					=render "/shared/follow_form_icon.html.haml", user: user
+	.follow_switch
+		=render "/shared/follow_form_icon", user: user

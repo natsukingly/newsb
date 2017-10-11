@@ -1,14 +1,19 @@
-#selected_article
-  .image{style: "background-image: url(#{article.image.url});"}
-    .mini_dark_over_lay
-      .block
-        %h2.give_me_ellipsis
-          =article.title
-        .status
-          .source
-            =article.source
-            -unless article.published_time == nil
-              #{time_ago_in_words(article.published_time)} ago
-          .like_count
-            TOTAL LIKE: #{article.likes_count}
-          
+
+%div{class: "article best_article article_#{article.id} clearfix", id: "selected_article"}
+	.article_block
+		.image{style: "background-image: url(#{article.image.url});"}
+			.stats
+				%span
+					#{article.posts_count} posts
+				#{article.category.name}
+	
+		.info
+			.title
+				%h2.bold.lg
+					= truncate(article.title, length: 60) do
+						%span ...
+				%p.sm.grey
+					= article.source
+					- if article.published_time
+						#{time_ago_in_words(article.published_time)} ago
+	=link_to "Read the article", @article.url, target: "_blank", class: "read_article_btn"

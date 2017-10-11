@@ -21,52 +21,25 @@
     }
 }
 
-#user_show_profile{
-    
+#user_profile{
     background-color: white;
-    h4{
+    text-align: center;
+    padding: 20px;
+    h2{
         font-size: 16px;
-        margin-bottom: 5px;
+        color: #001E42;
+        font-weight: bold;
     }
-    .cover{
-        height: 200px;
-        background-size: cover;
-        background-position: center;
-        text-align: center;
-        img{
-            margin-top: 40px;
-            width: 125px;
-            border: 2px solid white;
-        }
+    img{
+        height: 100px;
     }
-    .profile{
-        padding: 12px;
-        text-align: center;
-        h2{
-            font-size: 30px;
-        }
-        .like_stats{
-            padding: 12px;
-            span{
-                color: grey;
-                margin-right: 10px;
-            }
-        }
-        .about{
-            p{
-                color: grey;
-            }
-        }
-    }
-    
 }
 #profile_nav{
     border-top: 2px solid #eee;
     background-color: white;
-    .profile_nav_wrapper{
+    .nav_wrapper{
         margin-bottom: 20px;
-        background-color: white;
-        max-width: 540px;
+        max-width: 350px;
         margin: 0 auto;
         display: flex;
         .profile_btn{
@@ -82,22 +55,52 @@
         }
         
         .profile_btn.active{
-            border-bottom: 2px solid #001E42;
+            box-shadow: 0 -2px 0 #001E42;
         }
     }
 }
 
-#user_list{
+@media (max-width: 576px) {
+    #profile_nav{
+        .nav_wrapper{
+            max-width: none;
+        }
+    }
+}
+
+.profile_contents{
+    color: #696969;
+    .about{
+        background-color: white;
+        border-radius: 5px;
+        minimum-height: 200px;
+        padding: 12px;
+        p{
+            margin-bottom: 20px;
+        }
+    }
+    h2.profile_title{
+        padding: 12px 12px 12px 0;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    h3{
+        margin-top: 12px;
+        margin-bottom: 5px;
+        color: #000;
+        border-bottom: 1px solid #eee;
+    }
+}
+
+.user_lists{
     background-color: white;
-    padding: 20px;
-    font-size: 12px;
-    .user{
-        padding: 20px 0;
+    border-radius: 5px;
+    padding: 12px;
+    .user_list_item{
+        display: flex;
+        
         &:not(:last-child){
             border-bottom: 1px solid #e2e2e2;
-        }
-        .user_box{
-            display: flex;
         }
         .image{
             height: 50px;
@@ -110,10 +113,14 @@
         .info{
             padding-left: 20px;
             flex: 1;
-            .name{
-                font-size: 14px;
-                font-weight: bold;
-                color: #001E44;
+            .name {
+                border-bottom: 1px solid #eee;
+                margin-bottom: 5px;
+                span{
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: #001E42;
+                }
             }
         }
         .ranking_index{
@@ -124,7 +131,20 @@
             flex: 2;
             color: grey;
         }
-        
     }
-    
 }
+
+
+@media (max-width: 768px) {
+    .profile_contents{
+        margin-top: 12px;
+        .about{
+            border-radius: 0;
+        }
+        h2.profile_title{
+            padding: 12px;
+        }
+    }
+}
+
+

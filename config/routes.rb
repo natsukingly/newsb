@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-	root "home#about"
+	root "categories#top"
 
 	resources :categories, only: [:show] do
 		member do
@@ -26,10 +26,11 @@ Rails.application.routes.draw do
 		end
 	end
 	
-	resources :comments do
+	resources :comments, except: [:new] do
 		member do 
 			get 'view_more'
 			get 'view_less'
+			get 'new'	# new_post_comment
 		end
 	end	
 	
@@ -45,9 +46,10 @@ Rails.application.routes.draw do
 	devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } 
 	resources :users, except: [:create, :new] do
 		member do
+			get 'top'
+			get 'posts'
 			get 'following'
 			get 'followers'
-			get 'posts'
 		end
 		collection do 
 			get 'ranking'

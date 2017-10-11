@@ -36,8 +36,8 @@
         }
         img{
             margin-right: 10px;
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
         }
     }
 }
@@ -58,6 +58,9 @@
     padding: 12px;
     border-radius: 0 0 5px 5px;
 }
+.comment_form{
+    display: none;
+}
 
 .comment_form, .reply_form{
     .form-group{
@@ -67,8 +70,8 @@
         display: flex;
         img{
             margin-right: 10px;
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
         }
         textarea{
             flex: 1;
@@ -83,13 +86,24 @@
         margin: 0;
     }
     .comment_submit{
-        display: none;
-        float: right;
+        margin-left: 50px;
+        color: grey;
+        input[type="submit"]{
+            background-color: rgba(0,0,0,0);
+            border: 1px solid #bbb;
+            &:hover{
+                color: rgb(54, 88, 155);
+                border: 1px solid rgb(54, 88, 155);
+            }
+        }
         .cancel_btn{
             display: inline-block;
             padding: 10px 20px;
             margin-right: 10px;
             cursor: pointer;
+            &:hover{
+                color: rgb(54, 88, 155);
+            }
         }
     }
 }
@@ -100,17 +114,12 @@
     form{
         margin-top: 12px;
         .comment_submit{
+            margin: 0;
             display: block;
         }
     }
     .form_textarea{
         width: 100%;        
-
-        img{
-            width: 30px;
-            height: 30px;
-            margin-top: 2px;
-        }
     }
 }
 

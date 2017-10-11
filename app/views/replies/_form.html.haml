@@ -15,9 +15,10 @@
     = form.hidden_field :comment_id, value: comment.id
     = form.hidden_field :user_id, value: current_user.id
   .comment_submit
+    = form.submit "Reply", class: "btn submit_btn"
     .cancel_btn
       Cancel
-    = form.submit "Reply", class: "black btn submit_btn"
+    
    
 :javascript
 

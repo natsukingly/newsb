@@ -1,0 +1,18 @@
+-content_for(:profile) do
+	"Do show"
+-content_for(:sidebar) do
+	"Don't show"
+
+		
+#main_contents.profile_contents
+				
+	-if @user.followers.empty?
+		.not_found
+			NO POST YET
+	-else
+		.user_lists
+			= render partial: "users/user_list", collection: @user.followers, as: :user
+
+:javascript
+	$(".profile_btn").removeClass("active");
+	$(".profile_btn.middle_right").addClass("active");

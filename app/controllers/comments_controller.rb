@@ -27,6 +27,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
+    @post = Post.find(params[:id])
     @comment = Comment.new
   end
 

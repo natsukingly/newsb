@@ -1,0 +1,16 @@
+-content_for(:profile) do
+	"Do show"
+-content_for(:sidebar) do
+	"Don't show"
+		
+#main_contents.profile_contents
+	.posts			
+		-if @user.posts.empty?
+			.not_found
+				NO POST YET
+		-else
+			= render @user.posts
+
+:javascript
+	$(".profile_btn").removeClass("active");
+	$(".profile_btn.middle_left").addClass("active");

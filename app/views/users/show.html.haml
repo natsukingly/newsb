@@ -1,29 +1,33 @@
 -content_for(:profile) do
-	"Please show"
+	"Do show"
+-content_for(:sidebar) do
+	"Don't show"
 		
-#main_contents
-	=render @user.posts
+#main_contents.profile_contents
+	%h2.profile_title
+		ABOUT
+	.about	
+		%h3
+			INTRODUCTION
+		%p
+			-if !(@user.about.empty?)
+				=@user.about
+			-else
+				N/A
+		%h3
+			LIKES
+		%p
+			WEEK: #{@user.weekly_liked_count}
+			%br
+			All-TIME: #{@user.liked_count}
+			
+				
+	-unless @best_posts.empty?
+		.best_posts
+			%h2
+				BEST POSTS
+			= render @best_posts
 
 :javascript
-	$(window).scroll(function() {
-		var scrollVolume = $(window).scrollTop();
-		var profileHeight = $('#user_show_profile').height() + $('#profile_nav').height();
-		if(scrollVolume > 80 + profileHeight){
-			console.log(scrollVolume);
-			$('#ad').css("position", "fixed");
-			
-			var position = $('#sidebar_right').offset();
-			$('#ad').css("left", position.left);
-			$('#ad').css("top", position.top - 80 - profileHeight);
-			
-			$(window).resize(function() {
-				var position = $('#sidebar_right').offset();
-				$('#ad').css("left", position.left);
-			});
-			
-		} else {
-			$('#ad').css("position", "static");
-		}
-		
-	});
-	
+	$(".profile_btn").removeClass("active");
+	$(".profile_btn.left").addClass("active");

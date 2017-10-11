@@ -1,24 +1,16 @@
 
-
-= form_with(model: comment, data: { remote: true }) do |form|
-  - if comment.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(comment.errors.count, "error")
-        prohibited this post from being saved:
-      %ul
-        - comment.errors.full_messages.each do |message|
-          %li= message
-          
-  .field.form-group.form_textarea.comment_textarea
-    =image_tag current_user.image.profile_sm.url, class: "profile_xs pull-left img-circle"
-    = form.text_area :content, placeholder: "comment", class: "form-control form_content", style: "border: none; box-shadow: none; resize: none;"
-    = form.hidden_field :post_id, value: post.id
-    = form.hidden_field :user_id, value: current_user.id
-  .comment_submit
-    .cancel_btn
-      Cancel
-    = form.submit "Comment", class: "submit_btn btn navy_bk"
+-if current_user
+  = form_tag comments_path remote: true do
+    .field.form-group.form_textarea.comment_textarea
+      = image_tag current_user.image.profile_sm.url, class: "profile_xs pull-left img-circle"
+      = text_area_tag 'comment[content]', "", placeholder: "comment", class: "form-control form_content", style: "border: none; box-shadow: none; resize: none;"
+      = hidden_field_tag 'comment[post_id]', value: post.id
+      = hidden_field_tag 'comment[user_id]', value: current_user.id
+    .comment_submit
+      = submit_tag "Comment", class: "submit_btn btn"
+      .cancel_btn
+        Cancel
+      
    
 :javascript
 
@@ -40,12 +32,11 @@
             }
         });
         
-  $('.comment_form textarea')
-  .focusin(function(e) {
-    $(this).parents('.comment_form').find('.comment_submit').fadeIn();
-  })
+  // $('.comment_form textarea')
+  // .focusin(function(e) {
+  //   $(this).parents('.comment_form').find('.comment_submit').fadeIn();
+  // })
   $('.cancel_btn').click(function(){
-    $(this).parents('.comment_form').find('textarea').val(" ");
-    $(this).parents('.comment_form').find('.comment_submit').hide();
+    $(this).parents('.comment_form').hide();
   });
   

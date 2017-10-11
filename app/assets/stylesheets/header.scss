@@ -1,0 +1,194 @@
+
+header{
+	position: relative;
+	height: 50px;
+	line-height: 50px;
+	padding: 0 20px;
+	background-color: #1D3148;
+	color: white;
+	.menu_icon{
+		font-size: 16px;
+		display: inline-block;
+		width: 36px;
+		height: 36px;
+		border-radius: 36px;
+		line-height: 36px;
+		margin-top: 7px;
+		background-color: white;
+		color: #001E42;
+		cursor: pointer;
+	}
+	.login_icon{
+		svg{
+			background-color: #1D3148;
+			fill: white;
+		}
+	}
+	
+	.search_bar{
+		float: left;
+		position: relative;
+		display: inline-block;
+		margin-left: 20px;
+		.form_icon{
+			position: absolute;
+			z-index: 22;
+			top: 16px;
+			left: 10px;
+			font-size: 16px;
+			color: grey;
+			float: left;
+		}
+		#search{
+
+			input {
+				z-index: 1;
+				width: 160px;
+				height: 30px;
+				border-radius: 5px;
+				background-color: #1D3148;
+				border: 1px solid grey;
+				padding: 0 0 0 35px;
+				font-size: 14px;
+				color: white;
+			}
+			input:hover, input:focus {
+                border: 1px solid white;
+			}
+			input:hover + i, input:focus + i {
+                color: white;
+			}
+		}
+
+	}
+	#logo{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		-webkit-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);    
+	}
+	
+	#menu{
+		display: none;
+	}
+	#article_index_link{
+		margin: 7px 20px;
+		background-color: #CC0000;
+	}
+	
+}
+
+#mobile_header{
+    position: relative;
+	height: 40px;
+	background-color: #001E42;
+	color: white;
+	display: flex;
+	align-items: center;
+	#menu_icon, #profile_icon{
+        font-size: 25px;
+        display: flex;
+        width: 30px;
+        height: 30px;
+        margin: 0 12px;
+        line-height: 30px;
+        color: white;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+		i{
+		    flex: 1;
+		    color: white;
+		    text-align: center;
+		}
+		img{
+		    width: 30px;
+		    height: 30px;
+		    border-radius: 5px;
+		}
+	}
+
+	.search_bar{
+	    flex: 1;
+	    position: relative;
+		.form_icon{
+			position: absolute;
+			z-index: 22;
+			top: 6px;
+			left: 10px;
+			font-size: 16px;
+			color: grey;
+			float: left;
+		}
+		#search{
+			input {
+				z-index: 1;
+				width: 100%;
+				height: 30px;
+				border-radius: 5px;
+				background-color: #1D3148;
+				padding: 0 0 0 35px;
+				border: none;
+				font-size: 14px;
+				color: white;
+			}
+		}
+	}
+	.login_icon{
+		svg{
+		    background-color: #001E42;
+		    fill: white;
+		    width: 25px;
+		    margin: 0 12px;
+		    padding-top: 5px;
+		}
+	}
+}
+
+#header_nav{
+	height: 30px;
+	line-height: 30px;
+	background-color: #001E42;
+	box-shadow: 0 0 2px #666, 0 0 8px #222;
+	overflow: hidden;
+	
+	.nav_container{
+		margin: 0 auto;
+		display: flex;
+		-webkit-justify-content: space-between; /* Safari */
+		justify-content:         space-between;
+		white-space: nowrap;
+		overflow-x: auto;
+		overflow-y: hidden;
+		-webkit-overflow-scrolling: touch;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
+		padding-bottom: 50px;
+		a {
+			flex: 1;
+			margin-right: 20px;
+			letter-spacing: 1px;
+			color: #f9f9f9;
+			display: inline-block;
+			text-align: center;
+			font-size: 12px;
+			text-decoration: none;
+		}
+		a .feed_icon{
+			color: #DC143C;
+			
+		}
+	}
+}
+
+
+
+#mobile_header{
+	display: none;
+}
+
+@media (max-width: 768px) { 
+	#mobile_header{
+		display: flex;
+	}
+}

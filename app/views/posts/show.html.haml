@@ -1,59 +1,49 @@
-#side_nav
-  =render 'layouts/feed_optimizer', default_category_tags: @default_category_tags, default_region_tags: @default_region_tags
+.post{class: "post post_#{@post.id} clearfix"}
+	.body
+		.main
+			.content.clearfix
+			
+				// user information
+				.user_block.clearfix{class: "user_#{@post.user.id}"}
+					=image_tag @post.user.image.url, class:"pull-left img-circle user_image"
+					.user_info
+						=link_to @post.user  do
+							.give_me_short_ellipsis.light_navy.bold
+								=@post.user.name
+						%p.user_shoulder_name.sm.grey
+							=@post.user.shoulder_name
+					.user_option.follow_switch.pull-right
+						=render "/shared/follow_form_icon.html.haml", user: @post.user
+				
+				// post contents		
+				=render_with_hashtags(@post.content.gsub(/\n/, '<br />'))
+				%p.post_time.sm.grey
+					#{time_ago_in_words(@post.created_at)} ago
+			
+				// link to the article
+				=link_to article_path(@post.article_id), class: "post_article" do
+					.image{ style: "background-image: url(#{@post.article.image.url});"}
+					.article_info
+						%h2.bold
+							= truncate(@post.article.title, length: 40) do
+								%span ...
+						%p.xs.grey
+							= @post.article.source
+							
+		.status.md
+			.post_like_link
+				=render '/likes/like_post', post: @post
+			.comment_link
+				COMMENT
+				・
+				.comment_count	
+					= @post.comments_count
+			.option.pull-right
+				%i.fa.fa-ellipsis-h.lg
+	
+	.comment_index		
+		.comment_form.clearfix
+			=render '/comments/form', post: @post 
 
-
-#main_container
-        
-  .visible-xs#mobile_side_nav_link
-    %i.fa.fa-hashtag
-    
-  .post#show_post_block{class: "post post_#{@post.id} clearfix"}
-    =link_to "/posts/#{@post.id}/show_article" do
-      .top
-        .article_title
-          = @post.article.title
-        .article_site= @post.article.source
-       
-      .body
-        .main
-          .content.clearfix
-            .user_block.clearfix{class: "user_#{@post.user.id}"}
-              =image_tag @post.user.image.url, class:"pull-left"
-              =link_to @post.user, class: "pull-left" do
-                =@post.user.name
-                %span.grey
-                  #{time_ago_in_words(@post.created_at)} ago
-                %p.user_shoulder_name
-                  =@post.user.shoulder_name
-              .follow_switch.pull-right
-                =render "/shared/follow_form_icon.html.haml", user: @post.user
-            =render_with_hashtags(simple_format(@post.content))
-          .post_image{ style: "background-image: url(#{@post.article.image.url});"}
-  
-        .status
-          .like_link
-            =render '/likes/like_post', post: @post
-          .comment_link
-            %i.fa.fa-comment-o 
-            =@post.comments.count
-            
-  #post_nav
-    =link_to "READ THE ARTICLE", @post.article.url, class: "post_btn"
-          
-    
-      
-  #comment_form.clearfix
-    = render "comments/form", post: @post, comment: @comment
-  
-  #comment_index      
-    %h2.title
-      COMMENTS・
-      %span.comment_count
-        = @post.comments.count
-    .comments
-      = render @post.comments
-      
-#sidebar.hidden-xs.hidden-sm
-  = render 'sidebars/feed', top_articles: @top_articles, top_users: @top_users
-
-  
+		.comments
+			=render 'comments/comment', comment: @post.best_comment unless @post.best_comment.nil?

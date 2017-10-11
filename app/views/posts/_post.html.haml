@@ -17,7 +17,7 @@
 					#{time_ago_in_words(post.created_at)} ago
 			
 				=link_to article_path(post.article_id), class: "post_article" do
-					.post_image{ style: "background-image: url(#{post.article.image.url});"}
+					.image{ style: "background-image: url(#{post.article.image.url});"}
 					.article_info
 						%h2.bold
 							= truncate(post.article.title, length: 40) do
@@ -38,17 +38,16 @@
 	
 	.comment_index		
 		.comment_form.clearfix
-			=render 'comments/form', comment: Comment.new, post: post
-			
+			=render '/comments/form', post: post 
 		- if post.comments_count > 1
 			.view_link
 				=render 'comments/view_more_link', post: post
-
 
 		.comments
 			=render 'comments/comment_wo_replies', comment: post.best_comment unless post.best_comment.nil?
 
 :javascript
 	$('.comment_link').click(function(){
+		$(this).parents('.post').find('.comment_form').show();
 		$(this).parents('.post').find('.comment_form textarea').focus();
 	});

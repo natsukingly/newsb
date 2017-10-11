@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :show_followers, :show_following, :show_user_posts]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :followers, :following, :posts]
 
   # GET /users
   # GET /users.json
@@ -32,10 +32,16 @@ class UsersController < ApplicationController
   end
   
   def show
+    @best_posts = @user.posts.order(likes_count: :desc).limit(3)
   end
   
   def posts
-    @posts = Post.where(user_id: @user.id).order(created_at: :desc)
+  end
+  
+  def following
+  end
+
+  def followers
   end
 
   # GET /users/new
@@ -73,15 +79,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def following
-    @user  = User.find(params[:id])
-    @users = @user.following
-  end
-
-  def followers
-    @user  = User.find(params[:id])
-    @users = @user.followers
-  end
 
 
 

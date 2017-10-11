@@ -1,16 +1,31 @@
 
-
 =render "/articles/selected_article", article: @article
-
-#selected_article_nav
-	=link_to "Read the article", @article.url, target: "_blank", class: "article_btn"
-	=form_tag "/posts/load_url", class: "article_btn", remote: true do
-		=hidden_field_tag :placeholder_url, @article.url
-		=submit_tag "Create your post"
 
 #post_form_block
 
 #main_contents.article_posts
-	= render partial: "posts/post_wo_article", collection: @posts, as: :post
 
-= render 'scrolll_js/scroll_article_posts', article: @article
+	-unless @your_posts.empty?
+		.your_posts
+			%h2
+				YOUR POSTS
+			= render partial: "posts/post_wo_article", collection: @your_posts, as: :post
+			
+	-unless @best_posts.empty?
+		.best_posts
+			%h2
+				BEST POSTS
+			= render partial: "posts/post_wo_article", collection: @best_posts, as: :post
+			
+	-unless @follower_posts.empty?
+		.follower_posts
+			%h2
+				FOLLOWERS POSTS
+			= render partial: "posts/post_wo_article", collection: @follower_posts, as: :post
+			
+	-unless @new_posts.empty?
+		.new_posts
+			%h2
+				NEW POSTS
+			= render partial: "posts/post_wo_article", collection: @new_posts, as: :post
+

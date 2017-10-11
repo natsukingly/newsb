@@ -1,39 +1,22 @@
 
-#user_show_profile.clearfix
-	.cover{style: "background-image: url(#{@user.cover})"}
-		=image_tag @user.image.profile_md.url, class: "img-circle"
-	%div{class: "profile user_#{@user.id}"}
-		%h2= @user.name 
-		%p.grey= @user.shoulder_name
-		.like_stats
-			%h4
-				%i.fa.fa-thumbs-up
-				Like stats
-			%span
-				WEEK: #{Like.where(created_at: Date.today.beginning_of_week-1..Time.now ).where(target_user_id: @user.id).count}
-			%span 
-				MONTH: #{Like.where(target_user_id: @user.id).count}
-			%span 
-				ALL-TIME: #{Like.where(target_user_id: @user.id).count}    			
-		.about
-			%h4
-				%i.fa.fa-globe
-				Introduction
-			%p
-				-if !(@user.about.empty?)
-					=@user.about
-				-else
-					N/A
-
+#user_profile.clearfix
+	=image_tag @user.image.profile_md.url, class: "img-circle"
+	%h2= @user.name 
+	%p.grey= @user.shoulder_name
+  		
 #profile_nav
-	.profile_nav_wrapper
-		=link_to "/users/#{@user.id}/user_post_index", remote: true, class: "profile_btn left active" do
+	.nav_wrapper
+		=link_to top_user_path(@user.id), class: "profile_btn left active" do
+			%h3.fa.fa-globe 
+			%br
+			top
+		=link_to posts_user_path(@user.id), class: "profile_btn middle_left" do
 			%h3= @user.posts.count
 			posts
-		=link_to "/users/#{@user.id}/followers", remote: true, class: "profile_btn middle" do
+		=link_to followers_user_path(@user.id), class: "profile_btn middle_right" do
 			%h3= @user.followers.count
 			follower
-		=link_to "/users/#{@user.id}/following", remote: true, class: "profile_btn right" do
+		=link_to following_user_path(@user.id), class: "profile_btn right" do
 			%h3= @user.following.count
 			following
 		

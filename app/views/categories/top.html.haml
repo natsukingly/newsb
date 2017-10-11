@@ -1,20 +1,9 @@
-// home/top.html.haml uses the same structure
+// categories/articles.html.haml uses the same structure
 
-#index_nav
-	=link_to articles_category_path(@category.id), remote: true do
-		.news_btn.active
-			=render 'svg/news_icon'
-			%span
-				news
-	=link_to posts_category_path(@category.id), remote: true do
-		.feed_btn
-			=render 'svg/feed_icon'
-			%span
-				feed
-				
 #main_contents.articles
 	=render 'articles/best_article', article: @articles.first
 	=render @articles.offset(1)
+	
 -if @not_found == true
 	.not_found
 		%h2 
@@ -57,8 +46,3 @@
 			$(this).find("i").addClass("fa-times");
 		}
 	})
-
-
-	
-
-	

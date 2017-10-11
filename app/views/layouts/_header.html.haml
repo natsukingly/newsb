@@ -1,16 +1,16 @@
-%header.text-center
+%header.text-center.hidden-xs
 
 	/ LOGO CENTER
-	= link_to image_tag("logo_white.png", style: "width: 150px; margin-top: 20px;"), root_path, id: "logo"   
+	= link_to image_tag("logo_white.png", style: "width: 150px; margin-top: 20px;"), root_path, id: "logo", class: "hidden-xs"   
 	
 	=link_to tags_path do
 		.menu_icon.pull-left
-			%i.glyphicon.glyphicon-fire
-	// .search_bar.hidden-xs
-	//   %i.fa.fa-search.form_icon
-	//   =form_tag "/search_result", method: "get", id: "search" do
-	//     =text_field_tag :search, params[:search], placeholder: "search here"
-	//     =submit_tag "", style: "display: none;"
+			%i.fa.fa-bars 
+	.search_bar
+		=form_tag "/search_result", method: "get", id: "search" do
+			=text_field_tag :search, params[:search], placeholder: "search here"
+			=submit_tag "", style: "display: none;"
+			%i.fa.fa-search.form_icon
 	
 	/ HEADER RIGHT     
 	#account.menu_icon.pull-right 
@@ -18,15 +18,37 @@
 			=link_to destroy_user_session_path do
 				=image_tag current_user.image.url, class: "img-circle pull-right profile_xs"
 		-else
-			= link_to "facebookでログイン", user_facebook_omniauth_authorize_path
+			= link_to user_facebook_omniauth_authorize_path, class: "login_icon" do
+				=render 'svg/profile_icon_bold'
+
+#mobile_header
+
+	=link_to tags_path, id: "menu_icon" do
+		%i.fa.fa-bars
+			
+	.search_bar
+		%i.fa.fa-search.form_icon
+		=form_tag "/search_result", method: "get", id: "search" do
+			=text_field_tag :search, params[:search], placeholder: "search here"
+			=submit_tag "", style: "display: none;"
+	
+	/ HEADER RIGHT     
+	#account.menu_icon
+		-if user_signed_in?
+			=link_to destroy_user_session_path, id: "profile_icon" do
+				=image_tag current_user.image.url
+		-else
+			= link_to user_facebook_omniauth_authorize_path, class: "login_icon" do
+				=render 'svg/profile_icon_bold'
+
+
+
+
 
 - cache "header_nav" do
 	#header_nav
 		.nav_container
 			=link_to "TOP", root_path
-			=link_to posts_path do
-				%i.fa.fa-circle.feed_icon
-				FEED
 			-@categories.each do |category|
 				=link_to category.name, articles_category_path(category.id)
 

@@ -3,7 +3,7 @@
 	Make Post | What's happening in the world today?
 	
 =form_tag "/posts/load_url", method: :get, remote: true do
-	= url_field_tag :placeholder_url, "", placeholder: "paste your url to start", class: "url_form form-control"
+	= url_field_tag :placeholder_url, "", placeholder: "https://paste_your&url.to/start!", class: "url_form"
 
 :css 
 	#post_url_form form input:-webkit-autofill {
@@ -13,9 +13,9 @@
 :javascript
 	$('#post_url_form input').keyup(function(e) {
 		$.ajax({
-			url: "/posts/autocomplete_tags",
+			url: "/posts/load_url",
 			type: "GET",
-			data: {input : last_word},
+			data: {placeholder_url: $(this).val()},
 			dataType: 'script',
 		});
 		return false;

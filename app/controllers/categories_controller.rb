@@ -6,6 +6,10 @@ class CategoriesController < ApplicationController
         
     end
     
+    def top
+        @articles = Article.order(likes_count: :desc).limit(5)
+    end
+    
     def articles
         # @articles = Article.sortByLikes(Like.recent.limit(2).popularArticles(@category.articles.ids))
         @articles = @category.articles.order(likes_count: :desc).limit(5)

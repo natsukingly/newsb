@@ -11,8 +11,7 @@
 				feed
 			
 #main_contents.articles
-	-cache @articles do
-		=render @articles
+	=render @articles
 -if @not_found == true
 	.not_found
 		%h2 

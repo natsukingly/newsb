@@ -22,22 +22,27 @@
             .follow_switch{
                 font-size: 20px;
             }
-            .post_image{
-                background-position: center;
-                background-size: cover;
-                height: 200px;
-                flex: 1;
-            }
             .post_menu{
                 font-size: 20px;
                 cursor: pointer;
             }
             .post_article{
-
+                margin-bottom: 12px;
+                display: flex;
+                border: 1px solid rgba(0,0,0,0.05);
+                &:hover{
+                    border: 1px solid rgba(54, 88, 155, 0.4);
+                }
+                .image{
+                    background-position: center;
+                    background-size: cover;
+                    height: 100px;
+                    width: 100px;
+                }
                 .article_info{
-                    border: 1px solid #eee;
                     padding: 12px;
-                    margin-bottom: 12px;
+                    flex: 1;
+                    transition: .1s;
                     h2{
                         padding-bottom: 5px;
                     }
@@ -89,10 +94,27 @@
         border-radius: 0;
     }
 }
-@media (max-width: 576px) {
+@media (max-width: 400px) {
     .post{
-        .post_image{
-            height: 150px;
+        .body{
+            .main{
+                .post_article{
+                    margin-bottom: 12px;
+                    display: flex;
+                    flex-direction: column;
+                    border: 1px solid rgba(0,0,0,0.2);
+                    &:hover{
+                        border: 1px solid rgba(54, 88, 155, 0.4);
+                    }
+                    .image{
+                        background-position: center;
+                        background-size: cover;
+                        height: 130px;
+                        width: auto;
+                        flex: 1;
+                    }
+                }
+            }
         }
     }
 }

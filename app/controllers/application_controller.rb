@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
     before_action :configure_permitted_parameters, if: :devise_controller?
     before_action :default_categories
-  
+    before_action :trending_tags
   
   
     def configure_permitted_parameters
@@ -23,6 +23,10 @@ class ApplicationController < ActionController::Base
         
         def default_categories
           @categories = Category.all
+        end
+        
+        def trending_tags
+          @trending_tags = Tag.order(:weekly_posts_count).limit(10)
         end
         
         def yes_found

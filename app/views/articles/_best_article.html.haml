@@ -1,6 +1,12 @@
 
-=link_to article_path(article.id), class: "article article_#{article.id} clearfix" do
+=link_to article_path(article.id), class: "article best_article article_#{article.id} clearfix" do
 	.article_block
+		.image{style: "background-image: url(#{article.image.url});"}
+			.stats
+				%span
+					#{article.posts_count} posts
+				#{article.category.name}
+	
 		.info
 			.title
 				%h2.bold.lg
@@ -10,14 +16,7 @@
 					= article.source
 					- if article.published_time
 						#{time_ago_in_words(article.published_time)} ago
-			.stats
-				%span
-					#{article.posts_count} posts
-				#{article.category.name}
-				
-		.image{style: "background-image: url(#{article.image.url});"}
-
-					
+						
 	.best_post
 		-post = article.posts.last
 		
@@ -36,14 +35,4 @@
 								= truncate(post.content, length: 60) do
 									%span ...
 
-
-						
-:javascript
-	$('.article').hover(
-	  function () {
-	    $(this).find('h2').css("color", "rgb(54, 88, 155)");
-	  },
-	  function () {
-	  	$(this).find('h2').css("color", "#000");
-	  }
-	);
+					
