@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 			get 'posts'
 			get 'load_more'
 		end
+		collection do
+			get 'all_posts'
+		end
 	end	
 	
 	resources :articles, only: [:index, :show] do
@@ -46,7 +49,6 @@ Rails.application.routes.draw do
 	devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } 
 	resources :users, except: [:create, :new] do
 		member do
-			get 'top'
 			get 'posts'
 			get 'following'
 			get 'followers'
@@ -58,7 +60,7 @@ Rails.application.routes.draw do
 	end 
 
 	
-	resources :tags, only: [:index] do
+	resources :tags, only: [:index, :show] do
 		member do
 			post 'favorite'
 			delete 'unfavorite'
@@ -73,6 +75,8 @@ Rails.application.routes.draw do
 		member do
 			post 'follow'
 			post 'unfollow'
+			post 'follow_icon'
+			post 'unfollow_icon'
 		end
 	end
 	
@@ -80,11 +84,11 @@ Rails.application.routes.draw do
 	
 
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-	get '/search_result' => "search#search_posts"
-	get '/search_tags/:search' => "search#search_tags"
-	get '/search_articles/:search' => "search#search_articles"
-	get '/search_posts/:search' => "search#search_posts"
-	get '/search_users/:search' => "search#search_users"
+	get '/search' => "search#search"
+	get '/search/:key_word/tags' => "search#tags"
+	get '/search/:key_word/articles' => "search#articles"
+	get '/search/:key_word/posts' => "search#posts"
+	get '/search/:key_word/users' => "search#users"
 	
 	
 	#LIKES

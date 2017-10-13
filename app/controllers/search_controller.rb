@@ -1,24 +1,28 @@
 class SearchController < ApplicationController
-    before_action :set_search
+    before_action :set_key_word
     
-    def search_posts
-        @post_search_results = Post.where('content LIKE(?)', "%#{@search.downcase}%").order(id: :desc)
+    def search
+        redirect_to "/search/#{@key_word}/articles"
     end
     
-    def search_articles
-        @articles_search_results = Post.where('article_title LIKE(?)', "%#{@search.downcase}%")
+    def posts
+        @posts_search_results = Post.where('LOWER(content) LIKE(?)', "%#{@key_word.downcase}%").order(likes_count: :desc)
     end
     
-    def search_users
-        @users_search_results = User.where('LOWER(name) LIKE(?)', "%#{@search.downcase}%")
+    def articles
+        @articles_search_results = Article.where('LOWER(title) LIKE(?)', "%#{@key_word.downcase}%").order(likes_count: :desc)
     end
     
-    def search_tags
-        @tags_search_results = Tag.where('LOWER(name) LIKE(?)', "%#{@search.downcase}%")
+    def users
+        @users_search_results = User.where('LOWER(name) LIKE(?)', "%#{@key_word.downcase}%")
+    end
+    
+    def tags
+        @tags_search_results = Tag.where('LOWER(name) LIKE(?)', "%#{@key_word.downcase}%")
     end
     
     private
-        def set_search
-            @search = params[:search]
+        def set_key_word
+            @key_word = params[:key_word]
         end
 end

@@ -1,3 +1,12 @@
+.icon{
+	display: flex;
+	align-items: center;
+	margin-right: 20px;
+	svg{
+		fill: white;
+		width: 20px;
+	}
+}
 
 header{
 	position: relative;
@@ -6,60 +15,64 @@ header{
 	padding: 0 20px;
 	background-color: #1D3148;
 	color: white;
-	.menu_icon{
-		font-size: 16px;
-		display: inline-block;
-		width: 36px;
-		height: 36px;
-		border-radius: 36px;
-		line-height: 36px;
-		margin-top: 7px;
-		background-color: white;
-		color: #001E42;
-		cursor: pointer;
-	}
-	.login_icon{
-		svg{
-			background-color: #1D3148;
-			fill: white;
+	z-index: 200;
+	.header_container{
+		display: flex;
+		justify-content: space-between;
+		max-width: 1000px;
+		margin: 0 auto;
+		.left, .right{
+			width: 300px;
+			display: flex;
+			align-items: center;
 		}
-	}
-	
-	.search_bar{
-		float: left;
-		position: relative;
-		display: inline-block;
-		margin-left: 20px;
-		.form_icon{
-			position: absolute;
-			z-index: 22;
-			top: 16px;
-			left: 10px;
-			font-size: 16px;
-			color: grey;
-			float: left;
+		.middle{
+			flex: 1;
 		}
-		#search{
-
-			input {
-				z-index: 1;
-				width: 160px;
-				height: 30px;
-				border-radius: 5px;
+		.right{
+			display: flex;
+    		justify-content: flex-end;
+		}
+		
+		.login_icon{
+			svg{
 				background-color: #1D3148;
-				border: 1px solid grey;
-				padding: 0 0 0 35px;
-				font-size: 14px;
-				color: white;
-			}
-			input:hover, input:focus {
-                border: 1px solid white;
-			}
-			input:hover + i, input:focus + i {
-                color: white;
+				fill: white;
 			}
 		}
-
+		.search_bar{
+			position: relative;
+			display: inline-block;
+			.form_icon{
+				position: absolute;
+				z-index: 22;
+				top: 16px;
+				left: 10px;
+				font-size: 16px;
+				color: grey;
+				float: left;
+			}
+			#search{
+	
+				input {
+					z-index: 1;
+					width: 160px;
+					height: 30px;
+					border-radius: 5px;
+					background-color: #1D3148;
+					border: 1px solid grey;
+					padding: 0 0 0 35px;
+					font-size: 14px;
+					color: white;
+				}
+				input:hover, input:focus {
+	                border: 1px solid white;
+				}
+				input:hover + i, input:focus + i {
+	                color: white;
+				}
+			}
+		}
 	}
 	#logo{
 		position: absolute;
@@ -152,6 +165,7 @@ header{
 	background-color: #001E42;
 	box-shadow: 0 0 2px #666, 0 0 8px #222;
 	overflow: hidden;
+	z-index: 100;
 	
 	.nav_container{
 		margin: 0 auto;
@@ -178,6 +192,10 @@ header{
 			color: #DC143C;
 			
 		}
+		span.padding{
+			display: inline-block;
+			width: 50px;
+		}
 	}
 }
 
@@ -185,6 +203,7 @@ header{
 
 #mobile_header{
 	display: none;
+	z-index: 200;
 }
 
 @media (max-width: 768px) { 

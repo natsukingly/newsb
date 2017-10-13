@@ -22,19 +22,19 @@
 		-post = article.posts.last
 		
 		- if post != nil
-			.body
-				.content.clearfix
-					.user_block.clearfix
-						=image_tag post.user.image.url, class:"pull-left img-circle user_image"
-						.user_details
-							%p.give_me_short_ellipsis
-								%span.bold.sm
-									=post.user.name
-								%span.user_shoulder_name.xs.grey
-									=post.user.shoulder_name
-							%p.sm
-								= truncate(post.content, length: 60) do
-									%span ...
+			.body.clearfix
+				.user_block.clearfix
+					=image_tag post.user.image.url, class:"pull-left img-circle user_image"
+					.user_details
+						%p
+							%span
+								=post.user.name
+								\/
+							%span.user_shoulder_name
+								=post.user.shoulder_name
+						%p.content
+							= truncate(post.content, length: 60) do
+								%span ...
 
 
 						

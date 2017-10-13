@@ -1,25 +1,33 @@
-%header.text-center.hidden-xs
+%header.hidden-xs
+	.header_container
 
-	/ LOGO CENTER
-	= link_to image_tag("logo_white.png", style: "width: 150px; margin-top: 20px;"), root_path, id: "logo", class: "hidden-xs"   
+		.left
+			=link_to tags_path do
+				.icon
+					=render "svg/globe_icon"
+			.search_bar
+				=form_tag "/search", method: "get", id: "search" do
+					=text_field_tag :key_word, params[:key_word], placeholder: "search"
+					=submit_tag "", style: "display: none;"
+					%i.fa.fa-search.form_icon
 	
-	=link_to tags_path do
-		.menu_icon.pull-left
-			%i.fa.fa-bars 
-	.search_bar
-		=form_tag "/search_result", method: "get", id: "search" do
-			=text_field_tag :search, params[:search], placeholder: "search here"
-			=submit_tag "", style: "display: none;"
-			%i.fa.fa-search.form_icon
-	
-	/ HEADER RIGHT     
-	#account.menu_icon.pull-right 
-		-if user_signed_in?
-			=link_to destroy_user_session_path do
-				=image_tag current_user.image.url, class: "img-circle pull-right profile_xs"
-		-else
-			= link_to user_facebook_omniauth_authorize_path, class: "login_icon" do
-				=render 'svg/profile_icon_bold'
+		.middle
+			= link_to image_tag("logo_white.png", style: "width: 150px; margin-top: 20px;"), root_path, id: "logo", class: "hidden-xs"   
+
+		
+		.right
+			=link_to root_path, class: "icon" do
+				=render "svg/ranking_icon"	
+			=link_to root_path, class: "icon" do
+				=render "svg/tag_icon"	
+			=link_to root_path, class: "icon" do
+				=render "svg/notification_icon"	
+			-if user_signed_in?
+				=link_to destroy_user_session_path, class: "icon" do
+					=image_tag current_user.image.url, class: "img-circle profile_xs"
+			-else
+				= link_to user_facebook_omniauth_authorize_path, class: "login_icon icon" do
+					=render 'svg/profile_icon_bold'
 
 #mobile_header
 
@@ -28,8 +36,8 @@
 			
 	.search_bar
 		%i.fa.fa-search.form_icon
-		=form_tag "/search_result", method: "get", id: "search" do
-			=text_field_tag :search, params[:search], placeholder: "search here"
+		=form_tag "/search", method: "get", id: "search" do
+			=text_field_tag :key_word, params[:key_word], placeholder: "search"
 			=submit_tag "", style: "display: none;"
 	
 	/ HEADER RIGHT     
@@ -51,4 +59,5 @@
 			=link_to "TOP", root_path
 			-@categories.each do |category|
 				=link_to category.name, articles_category_path(category.id)
+			%span.padding
 

@@ -1,0 +1,7 @@
+%h2.hashtag_title
+    \##{@tag.name}
+    %span
+        ・#{@tag.posts_count} posts
+
+#main_contents.posts
+    =render @tag.posts 

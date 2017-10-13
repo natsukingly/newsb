@@ -86,29 +86,63 @@
     }
     h3{
         margin-top: 12px;
-        margin-bottom: 5px;
+        margin-bottom: 20px;
         color: #000;
+        font-weight: bold;
         border-bottom: 1px solid #eee;
     }
 }
 
 .user_lists{
-    background-color: white;
-    border-radius: 5px;
-    padding: 12px;
     .user_list_item{
         display: flex;
-        
+        background-color: white;
+        padding: 12px;
+        &:hover{
+            background-color: #f9f9f9;
+        }
+        &:first-child{
+            border-radius: 5px 5px 0 0;
+        }
+        &:last-child{
+            border-radius: 0 0 5px 5px;
+        }
+        &:only-child{
+            border-radius: 5px;
+        }
         &:not(:last-child){
             border-bottom: 1px solid #e2e2e2;
+        }
+        a{
+            color: grey;
+            font-size: 12px;
         }
         .image{
             height: 50px;
             width: 50px;
         }
         .follow_switch{
-            width: 40px;
-            line-height: 75px;
+
+            width: 80px;
+            // set to 27px for a slight adjestment 
+            line-height: 27px;
+            text-align: center;
+            &:hover{
+                opacity: 0.6;
+            }
+            a{
+                display: inline-block;
+                width: 100%;
+                border-radius: 5px;
+            }
+            .follow{
+                border: 1px solid #bbb;
+            }
+            .unfollow{
+                font-weight: bold;
+                color: #001E42;
+                border: 2px solid #001E42;
+            }
         }
         .info{
             padding-left: 20px;
@@ -117,7 +151,7 @@
                 border-bottom: 1px solid #eee;
                 margin-bottom: 5px;
                 span{
-                    font-size: 16px;
+                    font-size: 14px;
                     font-weight: bold;
                     color: #001E42;
                 }
@@ -138,7 +172,7 @@
 @media (max-width: 768px) {
     .profile_contents{
         margin-top: 12px;
-        .about{
+        .about, .user_lists{
             border-radius: 0;
         }
         h2.profile_title{

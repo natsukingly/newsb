@@ -1,0 +1,17 @@
+
+#search_nav.text-center
+  =link_to "/search/#{@key_word}/articles", class: "search_btn search_articles" do
+    articles
+  =link_to "/search/#{@key_word}/posts", class: "search_btn search_postse" do
+    posts
+  =link_to "/search/#{@key_word}/users", class: "search_btn search_users active"  do
+    users
+  =link_to "/search/#{@key_word}/tags", class: "search_btn search_tags"  do
+    tags
+  
+#main_contents.user_lists
+  -if @users_search_results.empty?
+    =render 'shared/result_not_found', key_word: @key_word
+  -else
+    =render partial: "users/user_list", collection: @users_search_results, as: :user
+

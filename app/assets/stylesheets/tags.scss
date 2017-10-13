@@ -6,59 +6,71 @@
 
 
 .tags{
-        flex: 1;
-        -webkit-flex-wrap: wrap;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-items: flex-start;
-        align-content: flex-start;
     .tag{
-        flex: 1;
-        flex-basis: calc(100% / 4);
-        max-width: calc(100% / 4);
-        position: relative;
-        
-        &:before{
-            display: block;
-            content: '';
-            padding-top: 100%;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        // not to look weird when hovering a tag
+        &:first-child{
+            border-radius: 5px 5px 0 0;
         }
-        .favorite_link{
-            width: 50px;
-            height: 50px;
-            padding: 15px;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            fill: white;
+        &:last-child{
+            border-radius: 0 0 5px 5px;
         }
-        .tag_image{
-            background-size: cover;
-            background-position: center;
-            position: absolute;
-
-            top: 5px;
-            left: 5px;
-            width: calc(100% - 10px);
-            height: calc(100% - 10px);
-            .dark_over_lay{
-                background-color: rgba(0,0,0,0.1);
-                padding: 5px;
-                height: 100%;
-                p{
-                    word-wrap: break-word;
-                    color: white;
-                    font-size: 16px;
-                    text-shadow: 2px 2px 5px black;
+        &:only-child{
+            border-radius: 5px;
+        }
+        // end
+        &:not(:last-child){
+            border-bottom: 1px solid #eee;
+        }
+        &:hover{
+            background-color: #f9f9f9;
+        }
+        .tag_link{
+            display: flex;
+            flex: 1;
+            align-items: center;
+            .hashtag{
+                
+            }
+            .contents{
+                flex: 1;
+                margin-left: 20px;
+                h2{
+                    font-weight: bold;
                     span{
-                        font-size: 12px;
+                        color: grey;
                     }
                 }
             }
         }
+
+        .favorite_link{
+            width: 80px;
+            /* height: 30px; */
+            line-height: 27px;
+            &:hover{
+                opacity: 0.6;
+            }
+            a{
+                display: inline-block;
+                width: 100%;
+                border-radius: 5px;
+            }
+            .favorite{
+                border: 1px solid #bbb;
+            }
+            .unfavorite{
+                font-weight: bold;
+                color: #001E42;
+                border: 2px solid #001E42;
+            }
+        }
     }
 }
+
 
 @media (max-width: 768px) {
     #explore_container{
@@ -82,5 +94,16 @@
                 }
             }
         }
+    }
+}
+
+
+.hashtag_title{
+    padding: 20px 0;
+    color: #001E42;
+    font-size: 20px;
+    span{
+        color: #696969;
+        font-size: 14px;
     }
 }

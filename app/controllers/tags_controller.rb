@@ -2,6 +2,9 @@ class TagsController < ApplicationController
     before_action :set_tag, except: [:index, :show_favorite]
     before_action :yes_found
     
+    def show
+        
+    end
     
     def index
         # sort them by the number of posts in the future

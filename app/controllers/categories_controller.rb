@@ -2,6 +2,10 @@ class CategoriesController < ApplicationController
     before_action :set_category
     before_action :save_selected_topic, only: [:articles]
     
+    def all_posts
+        @posts = Post.order(created_at: :desc)
+    end
+    
     def show
         
     end

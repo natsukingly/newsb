@@ -19,7 +19,7 @@
 
 
 body{
-	background-color: #e2e2e2;
+	background-color: #f3f3f3;
 	font-family: 'Roboto', sans-serif;
 	font-size: 12px;
 	color: #222222;
@@ -131,7 +131,7 @@ input[type="text"]:focus {
 
 #main_container{
 	flex: 1;
-	margin: 12px;
+	margin: 0 12px 20px;
 	width: 540px;
 	.mobile_post_link{
 		text-align: center;
@@ -146,16 +146,9 @@ input[type="text"]:focus {
 
 
 
-
-
-
-
-
-
-
 @media(max-width: 768px){
 	#main_container{
-		margin: 0 0 10px;
+		margin: 12px 0;
 		#mobile_side_nav_link{
 			display: inline-block;
 			background-color: #001E42;
@@ -194,12 +187,9 @@ input[type="text"]:focus {
 	position: relative;
 	font-size: 14px;
 	padding-bottom: 20px;
-
-
 	.search_btn:hover{
 		background-color: rgba(0,0,0,0.03);
 	}
-
 }
 #main_menu{
 	margin-bottom: 10px;
@@ -270,16 +260,9 @@ input[type="text"]:focus {
 	}
 }
 
-
-
-
-
-
 li {
 	list-style-type: none;
 }
-
-
 
 a  {
 		color: #333;
@@ -298,26 +281,21 @@ a  {
 	}
 }
 
-
 #index_nav{
 	display: flex;
 	font-size: 16px;
 	color: grey;
-	margin-bottom: 5px;
+	margin-bottom: 12px;
 	a{
 		flex: 1;
 	}
-	.news_btn{
-		margin-right: 2px;
-	}
 	div{
-		background-color: white;
 		text-align: left;
-		padding: 5px 12px;
+		padding: 12px;
 		display: flex;
 		align-items: center;
 		cursor: pointer;
-		border-bottom: 2px solid white;
+		border-bottom: 2px solid rgba(0, 30, 66, 0.2);
 
 		&:hover{
 			color: rgb(54, 88, 155);
@@ -338,11 +316,6 @@ a  {
 	}
 	
 } 
-
-
-
-
-
 
 
 #mobile_drop_down_menu{
@@ -511,7 +484,7 @@ span.input-group-btn{
 		fill: grey;
 	}
 	.unfollow svg{
-		fill: #0D2E91;
+		fill: #001E42;
 	}
 }
 
