@@ -1,24 +1,22 @@
 %header.hidden-xs
 	.header_container
-
 		.left
+			= link_to image_tag("logo_white.png", style: "width: 135px"), root_path, id: "logo", class: "hidden-xs"   
+
+		.middle
 			=link_to tags_path do
 				.icon
 					=render "svg/globe_icon"
 			.search_bar
-				=form_tag "/search", method: "get", id: "search" do
+				=form_tag "/search", method: "get" do
 					=text_field_tag :key_word, params[:key_word], placeholder: "search"
 					=submit_tag "", style: "display: none;"
 					%i.fa.fa-search.form_icon
 	
-		.middle
-			= link_to image_tag("logo_white.png", style: "width: 150px; margin-top: 20px;"), root_path, id: "logo", class: "hidden-xs"   
-
-		
 		.right
 			=link_to root_path, class: "icon" do
 				=render "svg/ranking_icon"	
-			=link_to root_path, class: "icon" do
+			=link_to tags_path, class: "icon" do
 				=render "svg/tag_icon"	
 			=link_to root_path, class: "icon" do
 				=render "svg/notification_icon"	
@@ -56,7 +54,7 @@
 - cache "header_nav" do
 	#header_nav
 		.nav_container
-			=link_to "TOP", root_path
+			=link_to "All", root_path, class: "active"
 			-@categories.each do |category|
 				=link_to category.name, articles_category_path(category.id)
 			%span.padding

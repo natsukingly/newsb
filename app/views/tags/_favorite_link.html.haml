@@ -2,6 +2,6 @@
 	-if user_signed_in?
 		%li
 			-if Favorite.find_by(user_id: current_user.id, tag_id: tag.id)
-				= link_to "saved", unfavorite_tag_path(tag.id), method: :delete, class: "unfavorite", remote: true
+				= link_to "remove", unfavorite_tag_path(tag.id), method: :delete, class: "unfavorite", remote: true
 			-else
-				= link_to "favorite", favorite_tag_path(tag.id), method: :post, class: "favorite", remote: true
+				= link_to "add", favorite_tag_path(tag.id), method: :post, class: "favorite", remote: true

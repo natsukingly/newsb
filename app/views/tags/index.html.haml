@@ -1,23 +1,19 @@
--content_for(:sidebar) do
-    "Don't show"
 
-#explore_container
-    #main_menu
-        .index_nav
-            =link_to tags_path, class: "index_btn active", remote: true do 
-                %i.fa.fa-th-large
-                %span.sm
-                    HOT 
-            =link_to show_favorite_tags_path, class: "show_favorite_btn", remote: true do
-                %i.fa.fa-check-square-o 
-                %span.sm
-                    YOURS ( #{current_user.favorite_tags.count} )
+#index_nav
+    =link_to tags_path, remote: true do 
+        .trends_btn.active
+            =render 'svg/hot_icon'
+            %span
+                hot
+    =link_to show_favorite_tags_path, remote: true do
+        .favorite_btn
+            =render 'svg/favorite_icon'
+            %span
+                favorite
+            %span.tag_counts
+                ・#{current_user.favorite_tags.count}
+            
 
-       
-    .tags
-        =render @tags
-
-:css 
-    body{
-        background-color: white;
-    }
+   
+.tags
+    =render @tags

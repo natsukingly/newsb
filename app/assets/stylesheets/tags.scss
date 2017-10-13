@@ -11,6 +11,7 @@
         display: flex;
         align-items: center;
         padding: 12px;
+
         // not to look weird when hovering a tag
         &:first-child{
             border-radius: 5px 5px 0 0;
@@ -40,8 +41,10 @@
                 margin-left: 20px;
                 h2{
                     font-weight: bold;
+                    font-size: 16px;
                     span{
                         color: grey;
+                        font-size: 12px;
                     }
                 }
             }
@@ -107,3 +110,11 @@
         font-size: 14px;
     }
 }
+
+
+// index_nav from common.scss on the tag index page
+// span.tag_counts{
+//     color: grey;
+//     font-size: 12px;
+//     margin-left: 0;
+// }

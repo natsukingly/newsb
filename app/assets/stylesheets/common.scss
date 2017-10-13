@@ -304,9 +304,12 @@ a  {
 			height: 20px;
 		}
 		span{
-			flex: 1;
 			margin-left: 12px;
-
+		}
+		span.tag_counts{
+		    color: grey;
+		    font-size: 12px;
+		    margin-left: 0;
 		}
 	}
 	div.active{
