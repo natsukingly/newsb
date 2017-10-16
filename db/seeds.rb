@@ -14,7 +14,11 @@
     Category.create(name: category)
 end
 
+@available_countries = ["International", "United States", "Japan"]
 
+@available_countries.each do |country|
+    Country.create(name: country)
+end
 
 # 5.times do
     

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171015162644) do
+ActiveRecord::Schema.define(version: 20171016160537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20171015162644) do
     t.integer "category_id"
     t.integer "posts_count", default: 0, null: false
     t.integer "likes_count", default: 0, null: false
+    t.integer "country_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -52,6 +53,12 @@ ActiveRecord::Schema.define(version: 20171015162644) do
     t.integer "replies_count", default: 0, null: false
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "tag_id"
@@ -75,6 +82,7 @@ ActiveRecord::Schema.define(version: 20171015162644) do
     t.integer "category_id"
     t.integer "likes_count", default: 0, null: false
     t.integer "comments_count", default: 0, null: false
+    t.integer "country_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -110,6 +118,7 @@ ActiveRecord::Schema.define(version: 20171015162644) do
     t.datetime "updated_at", null: false
     t.integer "posts_count", default: 0, null: false
     t.integer "weekly_posts_count", default: 0, null: false
+    t.integer "country_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -134,6 +143,7 @@ ActiveRecord::Schema.define(version: 20171015162644) do
     t.integer "following_count", default: 0, null: false
     t.integer "liked_count", default: 0, null: false
     t.integer "weekly_liked_count", default: 0, null: false
+    t.integer "country_id", default: 2
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

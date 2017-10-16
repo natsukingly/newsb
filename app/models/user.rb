@@ -37,7 +37,7 @@ class User < ApplicationRecord
         user.cover = "/assets/cover.jpg"
       end 
       user.gender = auth.extra.raw_info.gender
-      
+
       # If you are using confirmable and the provider(s) you use validate emails, 
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!

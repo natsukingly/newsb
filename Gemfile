@@ -33,6 +33,7 @@ gem 'counter_culture'
 
 gem 'whenever', require: false
 
+gem 'geocoder'
 
 # ここまで追加したGEM
 
