@@ -3,7 +3,7 @@ class Reply < ApplicationRecord
     counter_culture :comment
     
     belongs_to :user
-    has_many :like_replies
+    has_many :likes, as: :likeable
     
     scope :sortByLikes, ->ids {where(id: ids).sort_by{ |o| ids.index(o.id) }}
 end

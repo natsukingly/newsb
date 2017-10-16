@@ -10,11 +10,13 @@
 								=post.user.name
 						%p.user_shoulder_name.sm.grey
 							=post.user.shoulder_name
+							%i.fa.fa-clock-o
+							#{time_ago_in_words_short(post.created_at)}
 					.user_option.follow_switch.pull-right
 						=render "/shared/follow_form_icon.html.haml", user: post.user
-				=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
-				%p.sm.grey
-					#{time_ago_in_words(post.created_at)} ago
+				%p.opinion
+					=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
+
 
 		.status.md
 			.post_like_link
@@ -44,5 +46,7 @@
 
 :javascript
 	$('.comment_link').click(function(){
+		console.log("yeah");
+		$(this).parents('.post').find('.comment_form').show();
 		$(this).parents('.post').find('.comment_form textarea').focus();
 	});

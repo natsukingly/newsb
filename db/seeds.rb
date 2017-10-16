@@ -8,7 +8,7 @@
 
 
 
-@default_categories = ["Business", "Tech", "Politics", "Economy", "Markets", "Sports", "Education", "Lifestyle"]
+@default_categories = ["Business", "Tech", "Politics", "Economics", "Market", "Startup", "Sports", "Education", "Lifestyle"]
 
 @default_categories.each do |category|
     Category.create(name: category)

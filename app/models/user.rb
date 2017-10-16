@@ -8,9 +8,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :replies, dependent: :destroy
  
-  has_many :post_likes
-  has_many :comment_likes
-  has_many :reply_likes
+  has_many :likes
   
   has_many :active_relationships, class_name:  "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :passive_relationships, class_name:  "Relationship", foreign_key: "following_id", dependent: :destroy  

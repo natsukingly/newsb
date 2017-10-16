@@ -21,8 +21,6 @@
 						=render "/sidebars/left_profile", user: current_user, trending_tags: @trending_tags
 					#main_container
 						=yield
-					#sidebar_right.hidden-xs
-						=render '/sidebars/right_ad'
 			-else
 				.flex_wrapper.clearfix 
 					#main_container

@@ -1,7 +1,7 @@
 %header.hidden-xs
 	.header_container
 		.left
-			= link_to image_tag("logo_white.png", style: "width: 135px"), root_path, id: "logo", class: "hidden-xs"   
+			= link_to image_tag("logo_white.png", style: "width: 110px"), root_path, id: "logo", class: "hidden-xs"   
 
 		.middle
 			=link_to tags_path do
@@ -14,7 +14,7 @@
 					%i.fa.fa-search.form_icon
 	
 		.right
-			=link_to root_path, class: "icon" do
+			=link_to ranking_weekly_user_path, class: "icon" do
 				=render "svg/ranking_icon"	
 			=link_to tags_path, class: "icon" do
 				=render "svg/tag_icon"	
@@ -24,7 +24,7 @@
 				=link_to destroy_user_session_path, class: "icon" do
 					=image_tag current_user.image.url, class: "img-circle profile_xs"
 			-else
-				= link_to user_facebook_omniauth_authorize_path, class: "login_icon icon" do
+				= link_to user_facebook_omniauth_authorize_path, class: "login_icon" do
 					=render 'svg/profile_icon_bold'
 
 #mobile_header

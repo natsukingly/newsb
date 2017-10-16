@@ -2,9 +2,9 @@ class Post < ApplicationRecord
     belongs_to :user
     belongs_to :article
     counter_culture :article
+    has_many :likes, as: :likeable
     
     belongs_to :category
-    has_many :like_posts
     has_many :comments
     has_many :tagged_posts, dependent: :destroy
     has_many :tags, through: :tagged_posts

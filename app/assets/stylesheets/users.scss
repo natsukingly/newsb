@@ -7,7 +7,6 @@
 
 .user_block{
     display: flex;
-    padding-bottom: 12px;
     .user_image{
         margin-right: 10px;
         width: 40px;
@@ -127,6 +126,8 @@
             // set to 27px for a slight adjestment 
             line-height: 27px;
             text-align: center;
+            display: flex;
+            align-items: center;
             &:hover{
                 opacity: 0.6;
             }
@@ -145,15 +146,19 @@
             }
         }
         .info{
-            padding-left: 20px;
+            padding: 0 12px;
             flex: 1;
             .name {
-                border-bottom: 1px solid #eee;
                 margin-bottom: 5px;
                 span{
                     font-size: 14px;
                     font-weight: bold;
                     color: #001E42;
+                }
+            }
+            .follower_stats{
+                span{
+                    padding-left: 12px;
                 }
             }
         }

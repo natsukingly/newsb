@@ -1,7 +1,7 @@
 %ul
     -if user_signed_in?
         %li
-            -if LikeComment.find_by(user_id: current_user.id, comment_id: comment.id)
+            -if comment.likes.find_by(user_id: current_user.id)
                 = link_to comment_unlike_path(comment.id), method: :delete, remote: true do 
                     UNLIKE
             -else
@@ -9,4 +9,4 @@
                     LIKE
             ・
             %span.comment_likes_count
-                = comment.likes_count
+                = comment.likes.count

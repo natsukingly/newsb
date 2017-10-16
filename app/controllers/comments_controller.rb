@@ -38,9 +38,8 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    @comment = current_user.comments.build(content: params[:comment][:content], post_id: params[:comment][:post_id] )
     @comment.save
-    @new_comment = Comment.new
     @post = @comment.post
     @comments = @post.comments.order(created_at: :desc)
   end
@@ -69,6 +68,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:user_id, :post_id, :content)
+      params.require(:comment).permit(:post_id, :content)
     end
 end

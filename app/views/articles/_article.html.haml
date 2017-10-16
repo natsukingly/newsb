@@ -1,30 +1,31 @@
 
 =link_to article_path(article.id), class: "article article_#{article.id} clearfix" do
 	.article_block
+		.image{style: "background-image: url(#{article.image.url});"}
+			.stats
+				%p.counts
+					#{article.posts_count}
+					%br
+					%span.unit
+						posts
+	
 		.info
 			.title
-				%h2.bold.lg
-					= truncate(article.title, length: 60) do
-						%span ...
+				%h2.bodld.lg
+					= universal_truncate(article.title)
 				%p.sm.grey
 					= article.source
 					- if article.published_time
-						#{time_ago_in_words(article.published_time)} ago
-			.stats
-				%span
-					#{article.posts_count} posts
-				#{article.category.name}
-				
-		.image{style: "background-image: url(#{article.image.url});"}
-
-					
+						%i.fa.fa-clock-o
+						#{time_ago_in_words_short(article.published_time)}
+						
 	.best_post
 		-post = article.posts.last
 		
 		- if post != nil
 			.body.clearfix
 				.user_block.clearfix
-					=image_tag post.user.image.url, class:"pull-left img-circle user_image"
+					=image_tag post.user.image.url, class:"img-circle user_image"
 					.user_details
 						%p
 							%span
@@ -36,14 +37,4 @@
 							= truncate(post.content, length: 60) do
 								%span ...
 
-
-						
-:javascript
-	$('.article').hover(
-	  function () {
-	    $(this).find('h2').css("color", "rgb(54, 88, 155)");
-	  },
-	  function () {
-	  	$(this).find('h2').css("color", "#000");
-	  }
-	);
+					

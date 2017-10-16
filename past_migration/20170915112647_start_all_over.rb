@@ -8,8 +8,21 @@ class StartAllOver < ActiveRecord::Migration[5.1]
       t.datetime "published_time"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
-      t.string "category"
-      t.string "region"
+      t.integer "category_id"
+    end
+  
+    create_table "categories", force: :cascade do |t|
+      t.string "name"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+    end
+  
+    create_table "category_tables", force: :cascade do |t|
+      t.integer "post_id"
+      t.integer "article_id"
+      t.integer "category_id"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
     end
   
     create_table "comments", force: :cascade do |t|
@@ -18,6 +31,11 @@ class StartAllOver < ActiveRecord::Migration[5.1]
       t.text "content"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
+    end
+  
+    create_table "favorites", force: :cascade do |t|
+      t.integer "user_id"
+      t.integer "tag_id"
     end
   
     create_table "likes", force: :cascade do |t|
@@ -38,15 +56,7 @@ class StartAllOver < ActiveRecord::Migration[5.1]
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
       t.integer "article_id"
-      t.string "category"
-      t.string "region"
-    end
-  
-    create_table "posts_tags", id: false, force: :cascade do |t|
-      t.bigint "post_id"
-      t.bigint "tag_id"
-      t.index ["post_id"], name: "index_posts_tags_on_post_id"
-      t.index ["tag_id"], name: "index_posts_tags_on_tag_id"
+      t.integer "category_id"
     end
   
     create_table "relationships", force: :cascade do |t|
@@ -66,13 +76,7 @@ class StartAllOver < ActiveRecord::Migration[5.1]
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
-  
-    create_table "tags", force: :cascade do |t|
-      t.string "name"
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
-    end
-  
+    
     create_table "users", force: :cascade do |t|
       t.string "name"
       t.string "image"
@@ -93,8 +97,5 @@ class StartAllOver < ActiveRecord::Migration[5.1]
       t.string "cover"
       t.index ["email"], name: "index_users_on_email", unique: true
     end
-  
-    add_foreign_key "posts_tags", "posts"
-    add_foreign_key "posts_tags", "tags"
   end
 end

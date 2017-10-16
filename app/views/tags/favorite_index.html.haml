@@ -1,0 +1,19 @@
+-content_for(:sidebar) do
+    "Do not show"
+
+#index_nav
+    =link_to tags_path do 
+        .trends_btn
+            =render 'svg/hot_icon'
+            %span
+                hot
+    =link_to favorite_index_tags_path do
+        .favorite_btn.active
+            =render 'svg/favorite_icon'
+            %span
+                favorite
+            %span.tag_counts
+                ・#{current_user.favorite_tags.count}
+   
+.tags
+    =render @tags

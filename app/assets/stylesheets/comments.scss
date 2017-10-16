@@ -57,6 +57,12 @@
     background-color: #f9f9f9;
     padding: 12px;
     border-radius: 0 0 5px 5px;
+    .invite_comment{
+        color: navy;
+        display: inline;
+        border-bottom: 1px solid navy;
+        cursor: pointer;
+    }
 }
 .comment_form{
     display: none;

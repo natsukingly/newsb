@@ -5,7 +5,10 @@
 			%span
 				=user.name
 			= user.shoulder_name
-		%p FOLLOWER: #{user.following.count}
+		%p.follower_stats 
+			FOLLOWER: #{user.followers.count} 
+			%span 
+				FOLLOWING: #{user.following.count}
 		%p= user.about
 		
 

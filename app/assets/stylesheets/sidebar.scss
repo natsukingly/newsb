@@ -1,7 +1,7 @@
 
 #sidebar_left{
-    width: 130px;
-    margin: 12px;
+    width: 150px;
+    margin: 62px 12px 12px;
     h2{
         font-size: 16px;
         margin-bottom: 5px;
@@ -13,8 +13,7 @@
     }
     
     .profile{
-        margin-top: 50px;
-        margin-bottom: 12px;
+        margin: 12px 0;
         >div{
             margin-bottom: 20px;
         }
@@ -48,16 +47,20 @@
     
     // for users having not signed in
     .profile.not_signed_in{
-        .images{
-            padding-top: 20px;
-            margin-bottom: 12px;
-            svg{
-                width: 60px;
-            }
+        svg{
+            width: 40px;
         }
         #sign_in{
             font-size: 14px;
             padding: 0 20px 20px;
+        }
+        h2.name{
+            margin-bottom: 5px;
+        }
+        .sign_in_btn a{
+            color: navy;
+            border-bottom: 1px solid navy;
+            font-size: 14px;
         }
      
     } 

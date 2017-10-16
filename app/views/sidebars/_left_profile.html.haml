@@ -1,102 +1,87 @@
--if current_user
-	.profile
-		.user_info
-			=image_tag user.image.url, class: "img-circle"	
-			%h2.name
-				=link_to user.name, user_path(user.id)
-			%p.shoulder_name.grey= user.shoulder_name
-	
-		.stats
-			%h2.section_title
-				Stats
-			.stats_item
+.sidebar_wrapper
+	-if current_user
+		.profile
+			.user_info
+				=image_tag user.image.url, class: "img-circle"	
+				%h2.name
+					=link_to user.name, user_path(user.id)
+				%p.shoulder_name.grey= user.shoulder_name
+		
+			.stats
+				%h2.section_title
+					Stats
+				.stats_item
+					%p 
+						Posts:
+						%span 
+							= user.posts.count
+				.stats_item
+					%p	
+						Follower:
+						%span 
+							= user.followers_count
+				.stats_item
+					%p
+						Following:
+						%span 
+							= user.following_count
+			.like_stats
+				%h2.section_title
+					// %span.icon
+					// 	=render 'svg/blue_like_icon'
+					%span
+						Likes
+					
 				%p 
-					Posts:
-					%span 
-						= user.posts.count
-			.stats_item
-				%p	
-					Follower:
-					%span 
-						= user.followers_count
-			.stats_item
-				%p
-					Following:
-					%span 
-						= user.following_count
-		.like_stats
-			%h2.section_title
-				// %span.icon
-				// 	=render 'svg/blue_like_icon'
-				%span
-					Likes
-				
-			%p 
-				Week: #{user.weekly_liked_count}
-				// %span= Like.where(target_user_id: current_user.id).where(created_at: 48.hours.ago..Time.now).count
-	
-			%p 
-				ALL-TIME: #{user.liked_count}
--else
-	.profile.not_signed_in
-		.images
-			=render 'svg/profile_icon'
-		.user_info
-			%p.name.md
-				No account
-			%p.post_count.grey
-				Total posts: -
-		#sign_in
-			.login_btn
-				Login with Facebook
-		.follower_stats
-			.follower
-				%h2.bold
-					-
-				%p.grey Follower
-			.following
-				%h2.bold
-					-
-				%p.grey Following
-		.like_stats
-			%h2.section_title
-				// %span.icon
-				// 	=render 'svg/blue_like_icon'
-				%span
-					Like Stats
-				
-			%p 
-				Week: -
-
-			%p 
-				ALL-TIME: -
-
-
-#trending_tags
-	%h2.section_title
-		// %span.icon
-		// 	=render 'svg/chart_icon'
-		%span.title
-			Trending Tags
-	.trending_tags_block
-		-trending_tags.each do |tag|
-			%p.tag
-				\##{tag.name}
-			%br
-			
-// #new_users
-// 	%h2.section_title
-// 		%span.icon
-// 			=render 'svg/user_icon'
-// 		%span.title
-// 			New Users
-// 	.new_users_block
-// 		-new_users.each do |user|
-// 			.user.grey
-// 				\##{tag.name}
-// 			%br
-			
-	
+					Week: #{user.weekly_liked_count}
+					// %span= Like.where(target_user_id: current_user.id).where(created_at: 48.hours.ago..Time.now).count
 		
+				%p 
+					ALL-TIME: #{user.liked_count}
+	-else
+		.profile.not_signed_in
+			.user_info
+				=render 'svg/profile_icon_bold'	
+				%h2.name
+					No account
+				.sign_in_btn
+					= link_to "sign-up・log-in", user_facebook_omniauth_authorize_path, class: "login_icon"
 		
+			.stats
+				%h2.section_title
+					Stats
+				.stats_item
+					%p 
+						Posts: -
+				.stats_item
+					%p	
+						Follower: -
+				.stats_item
+					%p
+						Following: -
+			.like_stats
+				%h2.section_title
+					%span
+						Likes
+					
+				%p 
+					Week: -
+				%p 
+					ALL-TIME: -
 	
+	#trending_tags
+		%h2.section_title
+			%span.title
+				Trending Tags
+		.trending_tags_block
+			-trending_tags.each do |tag|
+				%p.tag
+					\##{tag.name}
+				%br
+				
+
+				
+		
+			
+			
+		

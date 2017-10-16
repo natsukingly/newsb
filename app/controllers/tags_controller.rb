@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-    before_action :set_tag, except: [:index, :show_favorite]
+    before_action :set_tag, except: [:index, :favorite_index]
     before_action :yes_found
     
     def show
@@ -11,7 +11,7 @@ class TagsController < ApplicationController
         @tags = Tag.all.order(created_at: :desc)
     end
     
-    def show_favorite
+    def favorite_index
         @tags = current_user.favorite_tags
     end
     

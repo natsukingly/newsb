@@ -10,11 +10,12 @@
 								=post.user.name
 						%p.user_shoulder_name.sm.grey
 							=post.user.shoulder_name
+							%i.fa.fa-clock-o
+							#{time_ago_in_words_short(post.created_at)}
 					.user_option.follow_switch.pull-right
 						=render "/shared/follow_form_icon.html.haml", user: post.user
-				=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
-				%p.post_time.sm.grey
-					#{time_ago_in_words(post.created_at)} ago
+				%p.opinion
+					=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
 			
 				=link_to article_path(post.article_id), class: "post_article" do
 					.image{ style: "background-image: url(#{post.article.image.url});"}
@@ -42,12 +43,16 @@
 		- if post.comments_count > 1
 			.view_link
 				=render 'comments/view_more_link', post: post
-
-		.comments
-			=render 'comments/comment_wo_replies', comment: post.best_comment unless post.best_comment.nil?
+		- if post.comments_count == 0
+			.invite_comment.comment_link
+				Be the first one to comment!!
+		-else
+			.comments
+				=render 'comments/comment_wo_replies', comment: post.best_comment unless post.best_comment.nil?
 
 :javascript
 	$('.comment_link').click(function(){
+		console.log("yeah");
 		$(this).parents('.post').find('.comment_form').show();
 		$(this).parents('.post').find('.comment_form textarea').focus();
 	});

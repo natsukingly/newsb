@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
     before_action :set_category
-    before_action :save_selected_topic, only: [:articles]
+    # before_action :save_selected_topic, only: [:articles]
     
     def all_posts
         @posts = Post.order(created_at: :desc)
@@ -34,8 +34,6 @@ class CategoriesController < ApplicationController
         def set_category
             if params[:id]
                 @category = Category.find(params[:id])
-            else 
-                @category = Category.find(session[:selected_topic])
             end
         end
         

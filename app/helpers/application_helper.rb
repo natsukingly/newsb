@@ -1,4 +1,22 @@
 module ApplicationHelper
     
+    def universal_truncate(words)
+        result = words.match(/[^\x01-\x7E]/)
+        if result.nil?
+            truncate(words, length: 80, separator: ' ')
+        else
+            truncate(words, length: 40, separator: ' ')
+        end
+    end
     
+    TIME_PATTERN = { ' months'=>'mo', ' hours'=>'h', ' minutes'=>'m', ' days'=>'d', ' month'=>'mo', ' hour'=>'h', ' minute'=>'m', ' day'=>'d'}
+    # or make use of locale:
+    # TIME_PATTERN = {' hour'=> I18n.t('h'), ' minute'=> I18n.t('m'), ' day'=> I18n.t('d'), ' hours'=> I18n.t('h'), ' minutes'=> I18n.t('m'), ' days'=> I18n.t('d')}
+    
+    def time_ago_in_words_short(time)
+      word = time_ago_in_words(time)
+      TIME_PATTERN.each_pair{ |k, v| word.gsub!(k, v) }
+      word
+    end
+     
 end

@@ -13,8 +13,8 @@
 				feed
 				
 #main_contents.articles
-	=render 'articles/best_article', article: @articles.first
-	=render @articles.offset(1)
+	=render @articles
+
 -if @not_found == true
 	.not_found
 		%h2 
@@ -23,12 +23,7 @@
 		%p
 			or click here to post your own article :)
  
- 
-//rendering javascript
- 
-= render 'scrolll_js/scroll_articles', category: @category
-= render 'scrolll_js/fix_sidebar'
- 
+
  
 :javascript
 	

@@ -2,7 +2,7 @@
 	%i.fa.fa-pencil
 	Make Post | What's happening in the world today?
 	
-=form_tag "/posts/load_url", method: :get, remote: true do
+=form_tag "/posts/load_url", method: :get, autocomplete: :off, remote: true do
 	= url_field_tag :placeholder_url, "", placeholder: "https://paste_your&url.to/start!", class: "url_form"
 
 :css 

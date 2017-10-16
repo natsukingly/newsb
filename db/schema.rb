@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170922160540) do
+ActiveRecord::Schema.define(version: 20171015162644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20170922160540) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "likes_count", default: 0, null: false
-    t.integer "replicdes_count", default: 0, null: false
+    t.integer "replies_count", default: 0, null: false
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -57,41 +57,13 @@ ActiveRecord::Schema.define(version: 20170922160540) do
     t.integer "tag_id"
   end
 
-  create_table "like_comments", force: :cascade do |t|
-    t.integer "comment_id"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "like_posts", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "article_id"
-  end
-
-  create_table "like_replies", force: :cascade do |t|
-    t.integer "reply_id"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-
-#drop likes table before deploying
-
   create_table "likes", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "comment_id"
-    t.integer "post_id"
-    t.integer "reply_id"
-    t.string "target_type"
+    t.string "likeable_type"
+    t.bigint "likeable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "target_user_id"
-    t.integer "article_id"
+    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
   end
 
   create_table "posts", force: :cascade do |t|

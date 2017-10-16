@@ -1,3 +1,2 @@
 $(".post_<%=@post.id%>").find(".comment_count").text("<%= @post.comments.count %>");
-$(".post_<%=@post.id%>").find(".comment_form").html('<%= escape_javascript(render("comments/form", post: @post, comment: @new_comment ))%>'); 
 $(".post_<%=@post.id%>").find(".comments").html('<%= escape_javascript(render @comments)%>');

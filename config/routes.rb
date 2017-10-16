@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 	root "categories#top"
-
+	
+	
 	resources :categories, only: [:show] do
 		member do
 			get 'articles'
@@ -54,11 +55,9 @@ Rails.application.routes.draw do
 			get 'followers'
 		end
 		collection do 
-			get 'ranking'
 			get 'auto_complete'
 		end
 	end 
-
 	
 	resources :tags, only: [:index, :show] do
 		member do
@@ -67,7 +66,7 @@ Rails.application.routes.draw do
 		end
 		collection do
 			get 'articles_not_found'
-			get 'show_favorite'
+			get 'favorite_index'
 		end
 	end
 	
@@ -89,6 +88,11 @@ Rails.application.routes.draw do
 	get '/search/:key_word/articles' => "search#articles"
 	get '/search/:key_word/posts' => "search#posts"
 	get '/search/:key_word/users' => "search#users"
+	
+	# rankings
+	get '/ranking/weekly_user' => "ranking#user_weekly_ranking"
+	get '/ranking/user' => "ranking#user_ranking"
+	
 	
 	
 	#LIKES

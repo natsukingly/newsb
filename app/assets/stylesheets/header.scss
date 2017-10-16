@@ -3,9 +3,14 @@
 	align-items: center;
 	margin-right: 20px;
 	svg{
-		fill: white;
+		fill: #ccc;
 		width: 20px;
+		height: 20px;
+		&:hover{
+			fill: white;
+		}
 	}
+	
 }
 
 header{
@@ -41,14 +46,19 @@ header{
 		.middle{
 			flex: 1;
 			display: flex;
+			justfify-content: center;
+			align-content: center;
 			.search_bar{
 				flex: 1;
 				position: relative;
 				display: inline-block;
+				form{
+					display: flex;
+				}
 				.form_icon{
 					position: absolute;
 					z-index: 22;
-					top: 16px;
+					top: 7px;
 					left: 10px;
 					font-size: 16px;
 					color: grey;
@@ -58,6 +68,7 @@ header{
 					z-index: 1;
 					width: 95%;
 					height: 30px;
+					line-height: 25px;
 					border-radius: 5px;
 					background-color: #1D3148;
 					border: 1px solid grey;
@@ -79,8 +90,12 @@ header{
     		justify-content: flex-end;
 		}
 		.login_icon{
+			width: 30px;
+			height: 30px;
 			svg{
-				background-color: #1D3148;
+				fill: #eee;
+			}
+			&:hover svg{
 				fill: white;
 			}
 		}
@@ -182,11 +197,15 @@ header{
 			text-align: center;
 			font-size: 12px;
 			text-decoration: none;
+			&:hover{
+				color: white;
+			}
 		}
 		a.active{
 			color: white;
-    		font-size: 25px;
+    		font-size: 20px;
     		line-height: 40px;
+    		pointer-events: none;
 		}
 		a .feed_icon{
 			color: #DC143C;

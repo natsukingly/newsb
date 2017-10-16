@@ -1,11 +1,13 @@
 
-%div{class: "article best_article article_#{article.id} clearfix", id: "selected_article"}
+%div{class: "article article_#{article.id} clearfix", id: "selected_article"}
 	.article_block
 		.image{style: "background-image: url(#{article.image.url});"}
 			.stats
-				%span
-					#{article.posts_count} posts
-				#{article.category.name}
+				%p.counts
+					#{article.posts_count}
+					%br
+					%span.unit
+						posts
 	
 		.info
 			.title
@@ -15,5 +17,6 @@
 				%p.sm.grey
 					= article.source
 					- if article.published_time
-						#{time_ago_in_words(article.published_time)} ago
+						%i.fa.fa-clock-o
+						#{time_ago_in_words_short(article.published_time)}
 	=link_to "Read the article", @article.url, target: "_blank", class: "read_article_btn"
