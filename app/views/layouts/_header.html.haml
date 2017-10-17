@@ -1,12 +1,19 @@
+
 %header.hidden-xs
 	.header_container
 		.left
 			= link_to image_tag("logo_white.png", style: "width: 110px"), root_path, id: "logo", class: "hidden-xs"   
-
-		.middle
-			=link_to tags_path do
-				.icon
+			
+					
+			#locale_link
+				.setting_icon
 					=render "svg/globe_icon"
+				.setting
+					#{@country.name}
+					%br
+					#{@language.name}
+			=render "dropdown/locale" 
+		.middle
 			.search_bar
 				=form_tag "/search", method: "get" do
 					=text_field_tag :key_word, params[:key_word], placeholder: "search"
@@ -54,8 +61,26 @@
 - cache "header_nav" do
 	#header_nav
 		.nav_container
-			=link_to "All", root_path, class: "active"
+			=link_to " ", root_path, class: "selected_topic active", style: "pointer-events: none; display: none;"
+			=link_to "All", root_path, class: "all_nav_btn"
 			-@categories.each do |category|
-				=link_to category.name, articles_category_path(category.id)
+				=link_to category.name, articles_category_path(category.id), class: "#{category.name}_nav_btn"
 			%span.padding
 
+-if @category
+	:javascript
+		$('#header_nav').find( "." + "#{@category.name}" + "_nav_btn").hide();
+		$('#header_nav .selected_topic').text("#{@category.name}").show();
+	
+-elsif @current_topic
+	:javascript
+		$('#header_nav .selected_topic').text("#{@current_topic}").show();
+
+-elsif @all_topic
+	:javascript
+		$('#header_nav').find(".all_nav_btn").addClass("active");
+		
+:javascript
+	$('#locale_link').click(function(){
+		$('#locale_ddm').css("display", "flex");
+	});

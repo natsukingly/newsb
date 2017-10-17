@@ -1,17 +1,23 @@
+-content_for(:sidebar) do
+	"Do not show"
 
-#search_nav.text-center
-  =link_to "/search/#{@key_word}/articles", class: "search_btn search_articles" do
-    articles
-  =link_to "/search/#{@key_word}/posts", class: "search_btn search_posts" do
-    posts
-  =link_to "/search/#{@key_word}/users", class: "search_btn search_users"  do
-    users
-  =link_to "/search/#{@key_word}/tags", class: "search_btn search_tags active"  do
-    tags
-  
+#index_nav.text-center.search_nav
+	=link_to "/search/#{@key_word}/articles", class: "search_articles" do
+		.index_btn
+			articles
+	=link_to "/search/#{@key_word}/posts", class: "search_posts" do
+		.index_btn
+			posts
+	=link_to "/search/#{@key_word}/users", class: "search_users"  do
+		.index_btn
+			users
+	=link_to "/search/#{@key_word}/tags", class: "search_tags"  do
+		.index_btn.active
+			tags
+	
 #main_contents.tags
-  -if @tags_search_results.empty?
-    =render 'shared/result_not_found', key_word: @key_word
-  -else
-    =render partial: "tags/tag", collection: @tags_search_results, as: :tag
+	-if @tags_search_results.empty?
+		=render 'shared/result_not_found', key_word: @key_word
+	-else
+		=render partial: "tags/tag", collection: @tags_search_results, as: :tag
 

@@ -19,44 +19,74 @@
         .form_main{
             flex: 1;
             form{
-                padding: 12px;
+                padding: 12px 0;
                 width: 100%;
-                textarea{
-                    
+
+                .textarea{
+                    min-height: 45px;
+                    border: 0;
+                    border-bottom: 1px solid #bbb;
+                    border-left: 5px solid #bbb;
+                    textarea{
+                        background-color: rgba(0,0,0,0);
+                        border: none; 
+                        box-shadow: none; 
+                        resize: none; 
+                        padding: 12px 12px 0;
+                    }
                 }
                 .form_label{
-                    color: #001E42;
+                    color: #696969;
                     margin-bottom: 10px;
                 }
                 .textarea_label{
                     border-bottom: 1px solid #f9f9f9;
                 }
             }
-            
-            select{
-                padding: 0 10px;
-            }
-            select::-webkit-input-placeholder{
-                color: red;
-            }
-            .tag_selection{
-                border: 1px solid #f9f9f9;
-                box-shadow: none;
-                border-radius: 0;
-                text-align: center;
-                &::placeholder{
+            .select{
+                border-bottom: 1px solid #bbb;
+                border-left: 5px solid #bbb;
+                select{
+                    padding: 0 10px;
+                    border: none;
+                }
+                select::-webkit-input-placeholder{
                     color: red;
                 }
+                .tag_selection{
+                    box-shadow: none;
+                    text-align: center;
+                }  
+                   
             }
-            
-            .form_btn{
-                margin-top: 20px;
-                background-color: #001E42;
-                color: white;
-                border-radius: 5px;
-                border: none;
-                width: 100%;
-                padding: 10px;
+            .post_submit{
+                display: flex;
+                align-items: center;
+                
+                .form_btn{
+                    background-color: white;
+                    color: #001E42;
+                    border-radius: 5px;
+                    border: 1px solid #001E42;
+                    width: 25%;
+                    padding: 5px;
+                    transition: .2s;
+                    &:hover{
+                        background-color: #001E42;
+                        color: white;
+                    }
+                }
+                .cancel_btn{
+                    width: 25%;
+                    text-align: center;
+                    padding: 5px;
+                    cursor: pointer;
+                    transition: .2s;
+                    &:hover{
+                        opacity: .8;
+                    }
+                    
+                }
             }
         }
     }
@@ -103,3 +133,36 @@
 	}
 }
 
+
+#profile_form{
+    padding: 50px;
+    margin-top: 50px;
+    background-color: white;
+    border-radius: 10px;
+    color: #696969;
+    font-size: 14px;
+    display: flex;
+    .community_icon{
+        width: 150px;
+        svg{
+            width: 100px;
+        }
+    }
+    .form_content{
+        h2{
+            font-size: 24px;
+            color: #001E42;
+            margin-bottom: 12px;
+        }
+        p {
+            margin-bottom: 12px;
+        }
+        .form_label{
+            margin-bottom: 5px;
+        }
+        select, input, textarea{
+            margin-bottom: 12px;
+        }
+    }
+    
+}

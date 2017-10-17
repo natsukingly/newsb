@@ -1,10 +1,11 @@
 class Post < ApplicationRecord
     belongs_to :user
+    belongs_to :country
+    belongs_to :category
     belongs_to :article
+    
     counter_culture :article
     has_many :likes, as: :likeable
-    
-    belongs_to :category
     has_many :comments
     has_many :tagged_posts, dependent: :destroy
     has_many :tags, through: :tagged_posts
@@ -16,7 +17,7 @@ class Post < ApplicationRecord
         post = Post.find_by(id: self.id)
         hashtags = self.content.scan(/#\w+/)
         hashtags.uniq.map do |hashtag|
-          tag = Tag.find_or_create_by(name: hashtag.downcase.delete('#'))
+          tag = Tag.find_or_create_by(name: hashtag.downcase.delete('#'), country_id: post.country.id)
           tagged_post = post.tagged_posts.build(tag_id: tag.id)
           tagged_post.save
         end
@@ -28,7 +29,7 @@ class Post < ApplicationRecord
         post.tags.clear
         hashtags = self.content.scan(/#\w+/)
         hashtags.uniq.map do |hashtag|
-          tag = Tag.find_or_create_by(name: hashtag.downcase.delete('#'))
+          tag = Tag.find_or_create_by(name: hashtag.downcase.delete('#'), country_id: post.country.id)
           tagged_post = post.tagged_posts.build(tag_id: tag.id)
           tagged_post.save
         end

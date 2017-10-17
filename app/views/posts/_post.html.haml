@@ -46,13 +46,14 @@
 		- if post.comments_count == 0
 			.invite_comment.comment_link
 				Be the first one to comment!!
+			.comments
 		-else
 			.comments
 				=render 'comments/comment_wo_replies', comment: post.best_comment unless post.best_comment.nil?
 
 :javascript
 	$('.comment_link').click(function(){
-		console.log("yeah");
 		$(this).parents('.post').find('.comment_form').show();
 		$(this).parents('.post').find('.comment_form textarea').focus();
+		$(this).parents('.post').find('.invite_comment').hide();
 	});

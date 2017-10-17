@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 			get 'load_more'
 			get 'autocomplete_tags'
 			get 'load_url'
+			get 'load_url_top'
 		end
 	end
 	
@@ -46,8 +47,8 @@ Rails.application.routes.draw do
 	end
 	get '/replies/:comment_id/new' => 'replies#new'
 	
-	
-	devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } 
+
+	devise_for :users, :controllers => {:registrations => :registrations, omniauth_callbacks: 'users/omniauth_callbacks'} 
 	resources :users, except: [:create, :new] do
 		member do
 			get 'posts'
@@ -56,8 +57,14 @@ Rails.application.routes.draw do
 		end
 		collection do 
 			get 'auto_complete'
+			get 'profile_form'
+			post 'complete_profile'
 		end
 	end 
+	post '/users/:country_id/change_country' => 'users#change_country', as: :change_country
+	post '/users/:language_id/change_language' => 'users#change_language', as: :change_language
+	
+	
 	
 	resources :tags, only: [:index, :show] do
 		member do

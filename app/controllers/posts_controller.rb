@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :yes_found
+  before_action :set_category, only: [:load_url]
   after_action :decide_category, only: [:create, :update]
   after_action :not_found, only: [:index, :load_more]
 
@@ -34,6 +35,13 @@ class PostsController < ApplicationController
     parseURL
     @post = Post.new
     @article = Article.new
+    @category_id = @category.id
+  end
+  
+  def load_url_top
+    parseURL
+    @post = Post.new
+    @article = Article.new
   end
  
   
@@ -42,19 +50,21 @@ class PostsController < ApplicationController
 
 
   def create
-    @article = Article.find_by(title: params[:article][:title])
+    @article = Article.where(country_id: @country.id).find_by(title: params[:article][:title])
     
     #save an article only when it doesnt already exist
     if @article == nil
       @article = Article.new(article_params)
       @article.remote_image_url = params[:article][:image].gsub('http:','https:')
-      @article.category_id = params[:post][:category_id]
+      @article.category_id = params[:post][:category_id].to_i
+      @article.country_id = @country.id
       @article.save
     end
     
     #save post
     @post = current_user.posts.build(article_id: @article.id)
-    @post.category_id = params[:post][:category_id]
+    @post.category_id = params[:post][:category_id].to_i
+    @post.country_id = @country.id
     @post.content = params[:post][:content]
     @post.save
     
@@ -82,6 +92,12 @@ class PostsController < ApplicationController
   private
     def set_post
       @post = Post.find(params[:id])
+    end
+    
+    def set_category
+      if params[:category_id]
+          @category = Category.find(params[:category_id].to_i)
+      end
     end
 
     def post_params

@@ -12,15 +12,19 @@
 		
 			=render 'layouts/header'
 
-			-unless yield(:profile).empty?
-				=render 'users/profile', user: @user
-			
 			-if yield(:sidebar).empty?
 				.flex_wrapper.clearfix  
 					#sidebar_left.hidden-xs
 						=render "/sidebars/left_profile", user: current_user, trending_tags: @trending_tags
 					#main_container
 						=yield
+			
+			-elsif yield(:profile).empty? == false
+				=render 'users/profile', user: @user
+				.user_flex_wrapper.clearfix 
+					#main_container
+						=yield
+			
 			-else
 				.flex_wrapper.clearfix 
 					#main_container
@@ -51,9 +55,6 @@
 	$(window).scroll(function() {
 		var scrollVolume = $(window).scrollTop();
 		var windowWidth = $(window).width();
-		console.log("hello");
-		console.log(windowWidth);
-		console.log(scrollVolume);
 		var headerHeight = $('header').height();
 		var mobileHeaderHeight = $('#mobile_header').height();
 		var navHeight = $('#header_nav').height();
@@ -63,10 +64,12 @@
 				console.log(scrollVolume);
 				$('#header_nav').css("position", "fixed").css("right", "0").css("left", "0");
 				$('.flex_wrapper').css("margin-top", navHeight);
+				$('.user_profile_wrapper').css("margin-top", navHeight);
 				
 			} else {
 				$('#header_nav').css("position", "static");
 				$('.flex_wrapper').css("margin-top", "0");
+				$('.user_profile_wrapper').css("margin-top", "0");
 			}
 		} else{
 			if(scrollVolume > mobileHeaderHeight){

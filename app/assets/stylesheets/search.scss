@@ -12,7 +12,8 @@
         padding: 12px 0;
     }
     .search_btn:hover{
-        background-color: rgba(0,0,0,0.03);
+        box-shadow: 0 2px 0 navy;
+        opacity: 0.8;
     }
     .active{
         pointer-events: none;

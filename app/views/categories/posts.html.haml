@@ -1,4 +1,4 @@
-#index_nav
+#index_nav{class: "#{@category.name}"}
 	=link_to articles_category_path(@category.id), remote: true do
 		.news_btn
 			=render 'svg/news_icon'
@@ -11,13 +11,13 @@
 				feed
 
 #post_url_form
-	=render 'layouts/url_form'
+	=render 'shared/url_form'
 					
 #post_form_block
 
 
 #main_contents.posts
-	=render posts
+	=render @posts
 
 :javascript
 	// awesome autosize code

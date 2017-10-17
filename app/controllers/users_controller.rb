@@ -19,6 +19,22 @@ class UsersController < ApplicationController
     render json: @users.to_json
   end
   
+  def profile_form
+    @countries = Country.all
+    @languages = Language.all
+    
+  end
+  
+  def complete_profile
+    @user = User.find(user_id: current_user.id)
+    @user.country = params[:user][:country_id]
+    @user.language = params[:user][:language_id]
+    @user.shoulder_name = params[:user][:shoulder_name]
+    @user.about = params[:user][:about]
+    @user.save
+    
+    redirect_to root_path
+  end
   
   # def ranking
   #   @ranked_users = User.where(id: Like.group(:target_user_id).order('count(target_user_id) desc').limit(100).pluck(:target_user_id))
@@ -34,7 +50,6 @@ class UsersController < ApplicationController
   def show
     @best_posts = @user.posts.order(likes_count: :desc).limit(3)
   end
-
   
   def posts
   end
@@ -80,7 +95,30 @@ class UsersController < ApplicationController
     end
   end
 
-
+  def change_country
+    country = Country.find(params[:country_id])
+    if current_user
+      @user = User.find(current_user.id)
+      @user.country_id = country.id
+      @user.save
+    else 
+      cookie[:country] = country.name
+    end
+    redirect_to root_path
+  end
+  
+  def change_language
+    language = Language.find(params[:language_id])
+    if current_user
+      @user = User.find(current_user.id)
+      @user.language_id = language.id
+      @user.save
+    else 
+      cookie[:language] = language.code
+    end
+    redirect_to root_path
+  end
+      
 
 
   private

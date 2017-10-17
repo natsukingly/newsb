@@ -1,9 +1,8 @@
 .url_form_title
-	%i.fa.fa-pencil
-	Make Post | What's happening in the world today?
+	Paste your url to start your post.
 	
 =form_tag "/posts/load_url", method: :get, autocomplete: :off, remote: true do
-	= url_field_tag :placeholder_url, "", placeholder: "https://paste_your&url.to/start!", class: "url_form"
+	= url_field_tag :placeholder_url, "", placeholder: "https://awesome_article.here", class: "url_form"
 
 :css 
 	#post_url_form form input:-webkit-autofill {
@@ -15,7 +14,7 @@
 		$.ajax({
 			url: "/posts/load_url",
 			type: "GET",
-			data: {placeholder_url: $(this).val()},
+			data: {placeholder_url: $(this).val(), category_id: #{@category.id}},
 			dataType: 'script',
 		});
 		return false;

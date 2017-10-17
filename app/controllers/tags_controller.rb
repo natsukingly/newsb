@@ -1,6 +1,7 @@
 class TagsController < ApplicationController
     before_action :set_tag, except: [:index, :favorite_index]
     before_action :yes_found
+    before_action :set_current_topic, only: [:show]
     
     def show
         
@@ -39,5 +40,8 @@ class TagsController < ApplicationController
             @tag = Tag.find(params[:id])
         end
         
+        def set_current_topic
+            @current_topic = "#" + @tag.name + "・" + @tag.posts.count.to_s
+        end
             
 end

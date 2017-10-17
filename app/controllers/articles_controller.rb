@@ -6,17 +6,17 @@ class ArticlesController < ApplicationController
     if cookies[:search_preference]
       @articles = Article.all.where(category: cookies[:search_preference]).order(created_at: :desc).limit(5)
     else
-      @articles = Article.order(created_at: :desc).limit(5)
+      @articles = Article.order(created_at: :desc).limit(10)
     end
     @post = Post.new
   end
   
   def show
-    @your_posts = @article.posts.where(user_id: current_user.id)
+    # @your_posts = @article.posts.where(user_id: current_user.id)
     @best_posts = @article.posts.order(likes_count: :desc).limit(3)
     @follower_posts = @article.posts.where(user_id: current_user.followers.ids).where.not(id: @best_posts.ids)
     
-    inapplicable_ids = @your_posts.ids + @best_posts.ids + @follower_posts.ids 
+    inapplicable_ids = @best_posts.ids + @follower_posts.ids 
     @new_posts = @article.posts.where.not(id: inapplicable_ids).order(created_at: :desc)
   end
   

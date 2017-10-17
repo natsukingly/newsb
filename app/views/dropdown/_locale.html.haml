@@ -1,0 +1,21 @@
+#locale_ddm
+	.country
+		- Country.all.each do |country|
+			=link_to country.name, change_country_path(country.id), class: "country_#{country.id}", method: :post
+		.triangle
+		.close_btn
+			=render 'svg/close_icon'
+	.language
+		- Language.all.each do |language|
+			=link_to language.name, change_language_path(language.id), class: "language_#{language.id}", method: :post
+
+
+:javascript
+	$('#locale_ddm').find(".country_" + #{current_user.country.id}).addClass("selected");
+	$('#locale_ddm').find(".language_" + #{current_user.language.id}).addClass("selected");
+	
+	$('.close_btn').click(function(){
+		$('#locale_ddm').hide();
+	});
+
+	

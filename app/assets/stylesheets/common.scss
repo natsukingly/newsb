@@ -14,7 +14,7 @@
 
 
 
-
+// #6699cc nice blue color
 
 
 
@@ -81,7 +81,7 @@ input[type="text"]:focus {
 	display: flex;
 	flex-direction: column;
 }
-.flex_wrapper{
+.flex_wrapper, .user_flex_wrapper{
 	position: relative;
 	flex: 1;
 	max-width: 900px;
@@ -219,6 +219,7 @@ input[type="text"]:focus {
 	}
 }
 
+
 #sub_menu{
 	padding: 10px 0;
 	.menu_block{
@@ -326,11 +327,22 @@ a  {
 	}
 	
 } 
+.search_nav, .tag_nav, .user_nav{
+	margin-top: 20px;
+	div{
+		justify-content: center;
+	}
+}
+
+
 @media (max-width: 600px) {
 	#index_nav{
 		div{
 			justify-content: center;
 		}
+	}
+	.search_nav, .tag_nav, .user_nav{
+		margin-top: 0;
 	}
 }
 

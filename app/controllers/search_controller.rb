@@ -1,5 +1,6 @@
 class SearchController < ApplicationController
     before_action :set_key_word
+    before_action :set_current_topic
     
     def search
         redirect_to "/search/#{@key_word}/articles"
@@ -24,5 +25,9 @@ class SearchController < ApplicationController
     private
         def set_key_word
             @key_word = params[:key_word]
+        end
+        
+        def set_current_topic
+            @current_topic = "Searching..."
         end
 end

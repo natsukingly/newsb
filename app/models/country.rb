@@ -3,4 +3,5 @@ class Country < ApplicationRecord
     has_many :posts
     has_many :tags
     has_many :users
+    belongs_to :language
 end

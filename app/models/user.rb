@@ -18,10 +18,12 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :favorite_tags, through: :favorites, source: :tag
   
+  belongs_to :country
+  belongs_to :language
+  
   #SCOPE
   scope :sortByLikes, ->ids {where(id: ids).sort_by{ |o| ids.index(o.id) }}
 
-  
   
   # devise
   
