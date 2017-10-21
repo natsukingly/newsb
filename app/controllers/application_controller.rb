@@ -28,14 +28,19 @@ class ApplicationController < ActionController::Base
       if user_signed_in?
         @country = current_user.country
         @language = current_user.language
-      elsif cookie[:country]
-        @country = Country.find_by(name: cookie[:country])
-        @language = Language.find_by(name: cookie[:language])
+      elsif cookies[:country]
+        @country = Country.find_by(name: cookies[:country])
+        if cookies[:language]
+          @language = Language.find_by(code: cookies[:language])
+        else
+          @language = @country.language
+          cookies[:language] = @language.code
+        end
       else
-        #this method detect locale and save it to cookie
+        #this method detect locale and save it to cookies
         detect_locale
-        cookie[:language] = @country.language.language_code
-        @language = Language.find_by(name: cookie[:language])
+        cookies[:language] = @country.language.code
+        @language = Language.find_by(code: cookies[:language])
       end
     end
         
@@ -49,12 +54,14 @@ class ApplicationController < ActionController::Base
             country_name = Geocoder.search(ip).first.country
             country = Country.find_by(name: country_name)
             if country 
-              cookie[:country] = country
+              cookies[:country] = country.name
             else 
-              cookie[:country] = "United States"
+              cookies[:country] = "United States"
             end
+            @country = Country.find_by(name: cookies[:country])
+          else
+            @country = Country.find_by(name: "United States")
           end
-          @country = Country.find_by(name: cookie[:country])
         end
     
     

@@ -19,14 +19,13 @@
         .form_main{
             flex: 1;
             form{
-                padding: 12px 0;
-                width: 100%;
+                padding: 12px;
 
                 .textarea{
-                    min-height: 45px;
-                    border: 0;
-                    border-bottom: 1px solid #bbb;
-                    border-left: 5px solid #bbb;
+                    min-height: 80px;
+                    border: 1px solid #bbb;
+                    border-radius: 5px;    
+                        
                     textarea{
                         background-color: rgba(0,0,0,0);
                         border: none; 
@@ -67,8 +66,8 @@
                     background-color: white;
                     color: #001E42;
                     border-radius: 5px;
-                    border: 1px solid #001E42;
-                    width: 25%;
+                    border: 1px solid #bbb;
+                    width: 15%;
                     padding: 5px;
                     transition: .2s;
                     &:hover{
@@ -76,8 +75,8 @@
                         color: white;
                     }
                 }
-                .cancel_btn{
-                    width: 25%;
+                .cancel_btn, .clear_btn{
+                    width: 15%;
                     text-align: center;
                     padding: 5px;
                     cursor: pointer;

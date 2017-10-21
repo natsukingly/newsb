@@ -23,7 +23,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.from_omniauth(request.env["omniauth.auth"])
 
     if @user.persisted?
-      sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+      sign_in @user, :event => :authentication #this will throw if @user is not activated
+      if @user.sign_in_count <= 1
+        redirect_url = profile_form_users_path(@user)
+      else
+        redirect_url = root_path
+      end
+      redirect_to redirect_url
       set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
@@ -41,4 +47,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # def after_omniauth_failure_path_for(scope)
   #   super(scope)
   # end
+  def after_sign_up_path_for(resource)
+    bio_form_users_path(resource)
+  end
+
+  # The path used after sign up for inactive accounts.
+  def after_inactive_sign_up_path_for(resource)
+    bio_form_users_path(resource)
+  end
 end

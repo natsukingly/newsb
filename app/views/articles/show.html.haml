@@ -1,31 +1,38 @@
 
 =render "/articles/selected_article", article: @article
 
-#post_form_block
+// #post_form_block
+// 	=render "posts/form_no_category", article: @article
 
 #main_contents.article_posts
 
-	// -unless @your_posts.empty?
-	// 	.your_posts
-	// 		%h2
-	// 			YOUR POSTS
-	// 		= render partial: "posts/post_wo_article", collection: @your_posts, as: :post
+	-unless @your_posts.empty?
+		.your_posts
+			%h2
+				YOUR POSTS
+			= render partial: "posts/post_wo_article", collection: @your_posts.includes(:user), as: :post
 			
-	-unless @best_posts.empty?
+	-unless @best_posts.where.not(id: @your_posts.ids).empty?
 		.best_posts
 			%h2
 				BEST POSTS
-			= render partial: "posts/post_wo_article", collection: @best_posts, as: :post
+			= render partial: "posts/post_wo_article", collection: @best_posts.where.not(id: @your_posts.ids).includes(:user), as: :post
 			
 	-unless @follower_posts.empty?
 		.follower_posts
 			%h2
 				FOLLOWERS POSTS
-			= render partial: "posts/post_wo_article", collection: @follower_posts, as: :post
+			= render partial: "posts/post_wo_article", collection: @follower_posts.includes(:user), as: :post
 			
 	-unless @new_posts.empty?
 		.new_posts
 			%h2
 				NEW POSTS
-			= render partial: "posts/post_wo_article", collection: @new_posts, as: :post
+			= render partial: "posts/post_wo_article", collection: @new_posts.includes(:user), as: :post
 
+
+- @best_posts.ids.each do |best_id|		
+	:javascript
+		$("#main_contents").find(".post_#{best_id}").find(".user_block .star").css("display","block");
+
+	

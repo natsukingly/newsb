@@ -1,6 +1,7 @@
 
+
 #post_url_form.hidden-xs
-	=form_tag "/posts/load_url", remote: true do
+	=form_tag "/posts/load_url", method: :get, remote: true do
 		.form-group.input-group
 			= url_field_tag :placeholder_url, "", placeholder: "paste url to start your post!", class: "url_form form-control"
 			%span.input-group-btn
@@ -10,8 +11,10 @@
 					
 #post_form_block
 
-#main_contents.articles.scrollable
-	=render @articles
+
+#main_contents.posts
+	=render @posts
+ 
 
 
-		
+

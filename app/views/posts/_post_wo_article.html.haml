@@ -4,6 +4,8 @@
 			.content.clearfix
 				.user_block.clearfix{class: "user_#{post.user.id}"}
 					=image_tag post.user.image.url, class:"pull-left img-circle user_image"
+					.star
+						=render 'svg/star_icon'
 					.user_info
 						=link_to post.user  do
 							.give_me_short_ellipsis.light_navy.bold
@@ -19,9 +21,9 @@
 
 
 		.status.md
-			.post_like_link
+			.post_like_link.link_btn
 				=render '/likes/like_post', post: post
-			.comment_link
+			.comment_link.link_btn
 				COMMENT
 				・
 				.comment_count	
@@ -29,24 +31,19 @@
 
 			.option.pull-right
 				%i.fa.fa-ellipsis-h.lg
+				=render 'dropdown/post_option', post: post
 	
-	.comment_index
+	.comment_index		
 		.comment_form.clearfix
-			-comment = Comment.new
-			=render 'comments/form', comment: comment, post: post
-
-		- comment = post.comments.last
+			=render '/comments/form', post: post 
 		- if post.comments_count > 1
 			.view_link
 				=render 'comments/view_more_link', post: post
-	
-		.comments
-			- unless comment == nil
-				=render 'comments/comment_wo_replies', comment: comment
+		- if post.comments_count == 0
+			.invite_comment.comment_link
+				Be the first one to comment!!
+			.comments
+		-else
+			.comments
+				=render 'comments/comment_wo_replies', comment: post.best_comment unless post.best_comment.nil?
 
-:javascript
-	$('.comment_link').click(function(){
-		console.log("yeah");
-		$(this).parents('.post').find('.comment_form').show();
-		$(this).parents('.post').find('.comment_form textarea').focus();
-	});

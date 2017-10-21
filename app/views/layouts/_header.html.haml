@@ -2,16 +2,19 @@
 %header.hidden-xs
 	.header_container
 		.left
-			= link_to image_tag("logo_white.png", style: "width: 110px"), root_path, id: "logo", class: "hidden-xs"   
+			// = link_to image_tag("logo_white.png", style: "width: 110px"), root_path, id: "logo", class: "hidden-xs"   
+			= link_to root_path, id: "logo", class: "hidden-xs" do
+				=render 'svg/logo_icon'
 			
 					
 			#locale_link
 				.setting_icon
-					=render "svg/globe_icon"
+					=render "svg/location_icon"
 				.setting
 					#{@country.name}
 					%br
 					#{@language.name}
+				
 			=render "dropdown/locale" 
 		.middle
 			.search_bar
@@ -54,23 +57,29 @@
 			= link_to user_facebook_omniauth_authorize_path, class: "login_icon" do
 				=render 'svg/profile_icon_bold'
 
+#header_nav
+	.nav_container
+		=link_to " ", root_path, class: "selected_topic active", style: "pointer-events: none; display: none;"
+		=link_to "All", root_path, class: "all_nav_btn"
+		-@categories.each do |category|
+			=link_to category.name, articles_category_path(category.id), class: "#{category.name}_nav_btn"
+		%span.padding
 
-
-
-
-- cache "header_nav" do
-	#header_nav
-		.nav_container
-			=link_to " ", root_path, class: "selected_topic active", style: "pointer-events: none; display: none;"
-			=link_to "All", root_path, class: "all_nav_btn"
-			-@categories.each do |category|
-				=link_to category.name, articles_category_path(category.id), class: "#{category.name}_nav_btn"
-			%span.padding
+:css
+	a.Lifestyle_nav_btn{
+		padding-right: 20px;
+	}
 
 -if @category
 	:javascript
-		$('#header_nav').find( "." + "#{@category.name}" + "_nav_btn").hide();
-		$('#header_nav .selected_topic').text("#{@category.name}").show();
+		$('#header_nav').find( "." + "#{@category.name}" + "_nav_btn").addClass("active");
+		var	position = $('#header_nav').find( "." + "#{@category.name}" + "_nav_btn").offset();
+		var windowWidth = $(window).width();
+		
+		if(windowWidth - 100 < position.left){
+			$('.nav_container').animate({scrollLeft: position.left - 50}, 500, "swing");
+		}
+		// $('#header_nav .selected_topic').text("#{@category.name}").show();
 	
 -elsif @current_topic
 	:javascript
@@ -79,8 +88,6 @@
 -elsif @all_topic
 	:javascript
 		$('#header_nav').find(".all_nav_btn").addClass("active");
-		
-:javascript
-	$('#locale_link').click(function(){
-		$('#locale_ddm').css("display", "flex");
-	});
+
+	
+	

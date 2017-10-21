@@ -2,6 +2,7 @@
 %html
 	%head
 		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+		%meta{name: "turbolinks-cache-control", content: "no-preview"}
 		%title Newsparty
 		= csrf_meta_tags
 		= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -30,56 +31,3 @@
 					#main_container
 						=yield
 								
-				
-:javascript      
-	$('#dropdown_btn').click(function(){
-		if($('#dropdown_menu').hasClass("open")){
-			$('#dropdown_menu').removeClass("open").fadeIn();
-		} else {
-			$('#dropdown_menu').addClass("open").fadeOut();
-		}
-	});     
-	
-	$('#menu').click(function(){
-		if($(this).find('i').hasClass('fa-bars')){
-			$('#mobile_drop_down_menu').slideDown().css("display", "flex");
-			$('#menu').find('i').removeClass('fa-bars').addClass('fa-times');
-			$('body').css("padding-top", "100px");
-		} else {
-			$('#mobile_drop_down_menu').slideUp();
-			$('#menu').find('i').removeClass('fa-times').addClass('fa-bars');
-			$('body').css("padding-top", "50px");      
-		}
-	});
-
-	$(window).scroll(function() {
-		var scrollVolume = $(window).scrollTop();
-		var windowWidth = $(window).width();
-		var headerHeight = $('header').height();
-		var mobileHeaderHeight = $('#mobile_header').height();
-		var navHeight = $('#header_nav').height();
-
-		if(windowWidth >= 768){
-			if(scrollVolume > headerHeight){
-				console.log(scrollVolume);
-				$('#header_nav').css("position", "fixed").css("right", "0").css("left", "0");
-				$('.flex_wrapper').css("margin-top", navHeight);
-				$('.user_profile_wrapper').css("margin-top", navHeight);
-				
-			} else {
-				$('#header_nav').css("position", "static");
-				$('.flex_wrapper').css("margin-top", "0");
-				$('.user_profile_wrapper').css("margin-top", "0");
-			}
-		} else{
-			if(scrollVolume > mobileHeaderHeight){
-				console.log(scrollVolume);
-				$('#header_nav').css("position", "fixed").css("right", "0").css("left", "0");
-				$('.flex_wrapper').css("margin-top", navHeight);
-				
-			} else {
-				$('#header_nav').css("position", "static");
-				$('.flex_wrapper').css("margin-top", "0");
-			}
-		}
-	});

@@ -36,6 +36,7 @@
 					= post.comments_count
 			.option.pull-right
 				%i.fa.fa-ellipsis-h.lg
+				=render 'dropdown/post_option', post: post
 	
 	.comment_index		
 		.comment_form.clearfix
@@ -51,9 +52,3 @@
 			.comments
 				=render 'comments/comment_wo_replies', comment: post.best_comment unless post.best_comment.nil?
 
-:javascript
-	$('.comment_link').click(function(){
-		$(this).parents('.post').find('.comment_form').show();
-		$(this).parents('.post').find('.comment_form textarea').focus();
-		$(this).parents('.post').find('.invite_comment').hide();
-	});

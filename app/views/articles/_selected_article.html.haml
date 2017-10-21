@@ -8,15 +8,19 @@
 					%br
 					%span.unit
 						posts
-	
-		.info
-			.title
-				%h2.bold.lg
-					= truncate(article.title, length: 60) do
-						%span ...
-				%p.sm.grey
-					= article.source
-					- if article.published_time
-						%i.fa.fa-clock-o
-						#{time_ago_in_words_short(article.published_time)}
-	=link_to "Read the article", @article.url, target: "_blank", class: "read_article_btn"
+				
+
+		=link_to @article.url, target: "_blank" do 
+			.info
+				.title
+					%h2.bold.lg
+						= truncate(article.title, length: 60) do
+							%span ...
+					%p.sm.grey
+						= article.source
+						- if article.published_time
+							%i.fa.fa-clock-o
+							#{time_ago_in_words_short(article.published_time)}
+				=link_to "READ MORE", @article.url, target: "_blank", class: "read_article_btn" 
+	=render "posts/form_no_category", article: @article
+

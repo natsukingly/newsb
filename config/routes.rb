@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 	root "categories#top"
 	
 	
+	
 	resources :categories, only: [:show] do
 		member do
 			get 'articles'
@@ -23,6 +24,9 @@ Rails.application.routes.draw do
 	end
 	
 	resources :posts, except: [:new] do
+		member do
+			post 'create_article_post', as: :create_article	
+		end
 		collection do
 			get 'load_more'
 			get 'autocomplete_tags'

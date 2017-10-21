@@ -1,0 +1,13 @@
+.post_ddm
+    .post_user_menu
+        -if post.user.id == current_user.id
+            =link_to "EDIT", edit_post_path(post.id), remote: true
+            .delete_btn.ddm_btn
+                DELETE
+                
+    .regular_user_menu
+        .report_btn.ddm_btn
+            REPORT
+            
+
+        

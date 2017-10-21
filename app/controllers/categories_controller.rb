@@ -5,9 +5,9 @@ class CategoriesController < ApplicationController
     
     def all_posts
         if @country.id == 1
-            @posts = Post.order(created_at: :desc)
+            @posts = Post.order(created_at: :desc).includes(:user, :article)
         else
-            @posts = Post.where(country_id: @country.id).order(created_at: :desc) 
+            @posts = Post.where(country_id: @country.id).order(created_at: :desc).includes(:user, :article)
         end
     end
     
@@ -16,11 +16,12 @@ class CategoriesController < ApplicationController
     end
     
     def top
-        if @country.id == 1
-            @articles = Article.order(likes_count: :desc).limit(10)
-        else
-            @articles = Article.where(country_id: @country.id).order(likes_count: :desc).limit(10)
-        end
+        @articles = Article.order(likes_count: :desc).limit(10)
+        # if @country.id == 1
+        #     @articles = Article.order(likes_count: :desc).limit(10)
+        # else
+        #     @articles = Article.where(country_id: @country.id).order(likes_count: :desc).limit(10)
+        # end
     end
     
     def articles
@@ -32,7 +33,11 @@ class CategoriesController < ApplicationController
     end
     
     def posts
-       @posts = @category.posts.includes(:user, :article).order(created_at: :desc)
+        if @country.id == 1
+            @posts = @category.posts.includes(:user, :article).order(created_at: :desc)
+        else
+            @posts = @category.posts.where(country_id: @country.id).includes(:user, :article).order(created_at: :desc)
+        end
     end
     
     def load_more

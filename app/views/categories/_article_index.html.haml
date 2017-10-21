@@ -12,6 +12,7 @@
 			
 #main_contents.articles
 	=render @articles
+	
 -if @not_found == true
 	.not_found
 		%h2 
@@ -20,35 +21,6 @@
 		%p
 			or click here to post your own article :)
  
-
- 
-:javascript
-	
-	if(#{ @not_found == true }){
-		$.ajax({
-			url: "/tags/articles_not_found",
-			type: "GET",
-			dataType: 'script',
-		})
-		// $('#main_contents').append("#{escape_javascript(render('shared/articles_not_found'))}");
-	}
-
-
-	var model = $('#main_contents').attr('class');
-
-	$('#sub_menu').click(function(){
-		if($(this).hasClass("open")){
-			$('.dropdown').hide();
-			$(this).removeClass("open");
-			$(this).find("i").removeClass("fa-times");
-			$(this).find("i").addClass("fa-caret-down");
-		} else {
-			$('.dropdown').fadeIn();
-			$(this).addClass("open");
-			$(this).find("i").removeClass("fa-caret-down");
-			$(this).find("i").addClass("fa-times");
-		}
-	})
 
 
 	

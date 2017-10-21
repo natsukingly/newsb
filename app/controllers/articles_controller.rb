@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
   end
   
   def show
-    # @your_posts = @article.posts.where(user_id: current_user.id)
+    @your_posts = @article.posts.where(user_id: current_user.id)
     @best_posts = @article.posts.order(likes_count: :desc).limit(3)
     @follower_posts = @article.posts.where(user_id: current_user.followers.ids).where.not(id: @best_posts.ids)
     

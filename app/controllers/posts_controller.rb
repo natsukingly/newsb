@@ -70,6 +70,15 @@ class PostsController < ApplicationController
     
     decide_category
   end
+  
+  def create_article_post
+    @article = Article.find(params[:id])
+    @post = @article.posts.build(content: params[:post][:content], 
+                                category_id: @article.category_id,
+                                user_id: current_user.id,
+                                country_id: @country.id)
+    @post.save
+  end
 
 
   def update

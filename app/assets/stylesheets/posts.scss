@@ -22,6 +22,7 @@
                 .post_time{
                     padding-bottom: 12px;
                 }
+                
             }
             .follow_switch{
                 font-size: 20px;
@@ -56,12 +57,13 @@
         .status{
             color: grey;
             font-size: 12px;
-            div{
+            .link_btn, .link_btn div{
                 display: inline-block;
                 margin-right: 12px;
             }
             .option{
                 cursor: pointer;
+                position: relative;
                 i{
                     font-size: 20px;                    
                 }
@@ -246,3 +248,4 @@
         }
     }
 }
+
