@@ -1,15 +1,15 @@
 -content_for(:sidebar) do
-    "Do not show"
+	"Do not show"
 
 #index_nav.user_nav
-    =link_to ranking_weekly_user_path do 
-        .weekly_ranking_btn.active
-            %span
-                week
-    =link_to ranking_user_path do
-        .all_time_ranking_btn
-            %span
-                all-time
-        
+	=link_to ranking_weekly_user_path do 
+		.weekly_ranking_btn.active
+			%span
+				week
+	=link_to ranking_user_path do
+		.all_time_ranking_btn
+			%span
+				all-time
+		
 #main_contents.user_lists
-    = render partial: "users/user_list", collection: @users, as: :user
+	= render partial: "users/user_list", collection: @users, as: :user

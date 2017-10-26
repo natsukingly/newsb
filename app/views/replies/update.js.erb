@@ -1,1 +1,1 @@
-$(".reply_<%=@reply.id%>").html('<%= escape_javascript(render("replies/reply", reply: @reply))%>');
+$(".reply_<%=@reply.id%>").find(".content").html("<%= escape_javascript( simple_format(@reply.content)) %>");

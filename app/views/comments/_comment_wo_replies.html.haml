@@ -10,27 +10,28 @@
 					%span.user_shoulder_name.sm.grey
 						=comment.user.shoulder_name
 				.option
-					%i.fa.fa-ellipsis-h
+					%i.fa.fa-ellipsis-h.comment_option_link
+					=render 'dropdown/comment_option', comment: comment
 			
 			.content
-				=truncate(comment.content, length: 200) do
+				=truncate(simple_format(comment.content), escape: false, length: 100) do
 					%span.light_navy.read_more{class: "comment_read_more_#{comment.id}"}
 						Raed more
 			.status.clearfix
-				.comment_like_link.grey
+				.comment_like_link.grey.link_btn
 					=render '/likes/like_comment', comment: comment
-				=link_to "REPLY", "/replies/#{comment.id}/new", remote: true, class: "reply_link"
+				=link_to "REPLY", "/replies/#{comment.id}/new", remote: true, class: "reply_link link_btn"
 				
-				.reply_count.grey	
+				.reply_count.grey.link_btn	
 					・
-					%span.replies_count
+					%span.replies_count.link_btn
 						=comment.replies_count
-						
 				-unless comment.replies_count == 0
-					.reply_view_link.pull-right
+					.reply_view_link
 						=link_to "/replies/#{comment.id}/view_more", remote: true do
+							VIEW ALL #{comment.replies.count} REPLIES
 							%i.fa.fa-angle-down
-							View all #{comment.replies.count} replies
+
 
 
 			.reply_form.clearfix
@@ -39,5 +40,21 @@
 
 :javascript 
 	$(".comment_read_more_#{comment.id}").click(function(){
-		$(this).parent('.content').html('#{ simple_format(comment.content)}')
+		console.log("this");
+		$(this).parents('.content').html("#{ escape_javascript(simple_format(comment.content))}");
+	});
+
+	$('.comment_option_link').click(function () {
+
+			// ボタンが押されたら、モーダルウィンドウを表示
+			$(".ddm").hide();
+			$(this).parents(".comment").find('.comment_ddm').css("display", "flex");
+			
+			return false;
+	});
+	
+	$('body').click(function (event) {
+	  if(!$(event.target).closest('.comment_ddm').length && !$(event.target).is('.comment_ddm')) {
+			$(".comment_ddm").hide();
+	  }     
 	});

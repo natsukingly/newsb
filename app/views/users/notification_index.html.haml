@@ -1,0 +1,16 @@
+-content_for(:sidebar) do
+	"Do not show"
+
+
+.notifications
+	-if current_user.notifications.empty?
+		.notification_empty
+			You haven't received any notifications yet.
+	-else        
+		- current_user.notifications.includes(:target_user).each do |notification|
+			=link_to notification.path, class: "notification" do
+				=image_tag notification.target_user.image, class: "img-circle"
+				.content
+					=notification.message.html_safe
+					%p
+						#{time_ago_in_words(notification.created_at)} ago

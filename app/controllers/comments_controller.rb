@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :set_comment, only: [:show, :edit, :update, :destroy, :cancel_edit_comment]
   # GET /comments
   # GET /comments.json
   def index
@@ -13,16 +13,10 @@ class CommentsController < ApplicationController
   
   def view_more
     @post = Post.find(params[:id])
-    @comments = @post.comments.includes([:user]).order(created_at: :asc)
   end
   
   def view_less
     @post = Post.find(params[:id])
-    best_comments = Comment.where(id: Like.where(post_id: @post.id ,target_type: "comment").group(:comment_id).order('count(comment_id) desc').limit(1).pluck(:comment_id))
-		@comments = best_comments[0]
-		if @comments == nil
-		  @comments = @post.comments.last
-		end
   end
 
   # GET /comments/new
@@ -33,6 +27,9 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+  end
+  
+  def cancel_edit_comment
   end
 
   # POST /comments
@@ -53,9 +50,10 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    post_id = @comment.post_id
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to post_path(post_id), notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

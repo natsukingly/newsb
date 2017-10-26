@@ -68,7 +68,7 @@ class LikesController < ApplicationController
     end
     
     def reply_unlike
-        like = @comment.likes.find_by(user_id: current_user.id)
+        like = @reply.likes.find_by(user_id: current_user.id)
         like.destroy
     end
 

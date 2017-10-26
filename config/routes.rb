@@ -26,6 +26,9 @@ Rails.application.routes.draw do
 	resources :posts, except: [:new] do
 		member do
 			post 'create_article_post', as: :create_article	
+			get 'edit_article_post', as: :edit_article
+			post 'update_article_post', as: :update_article
+			get 'cancel_edit_article_post', as: :cancel_edit_article
 		end
 		collection do
 			get 'load_more'
@@ -37,14 +40,15 @@ Rails.application.routes.draw do
 	
 	resources :comments, except: [:new] do
 		member do 
+			get 'cancel_edit_comment', as: :cancel_edit
 			get 'view_more'
 			get 'view_less'
-			get 'new'	# new_post_comment
 		end
 	end	
 	
 	resources :replies, except: [:new] do
 		member do 
+			get 'cancel_edit_reply', as: :cancel_edit
 			get 'view_more'
 			get 'view_less'
 		end
@@ -61,8 +65,9 @@ Rails.application.routes.draw do
 		end
 		collection do 
 			get 'auto_complete'
-			get 'profile_form'
+			get 'extra_info'
 			post 'complete_profile'
+			get 'notification_index'
 		end
 	end 
 	post '/users/:country_id/change_country' => 'users#change_country', as: :change_country

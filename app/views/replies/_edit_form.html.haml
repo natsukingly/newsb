@@ -1,20 +1,34 @@
-.reply_form
-  = form_with(model: @reply, data: { remote: true }) do |form|
-    - if @reply.errors.any?
-      #error_explanation
-        %h2
-          = pluralize(@reply.errors.count, "error")
-          prohibited this post from being saved:
-        %ul
-          - @reply.errors.full_messages.each do |message|
-            %li= message
-            
-    .field.form-group.form_textarea.edit
-      =image_tag current_user.image.profile_sm.url, class: "pull-left reply_image"
-      = form.text_area :content, placeholder: "content", class: "form-control form_content", style: "border: none; box-shadow: none; resize: none;"
-  
-    .comment_submit
-      = form.submit "Comment", class: "submit_btn pull-right"
-     
-      
-      
+.reply_form.edit_form
+	.body
+		.form_main.clearfix
+			=form_tag "/replies/#{reply.id}", remote: true, method: :patch do
+				.field.form-group.comment_textarea
+					.textarea
+						=text_area_tag 'reply[content]', reply.content, placeholder: "your awesome reply", class: "form_content comment_textarea form-control", style: "border: none; box-shadow: none; resize: none;"
+		
+					.reply_submit.comment_submit
+						= submit_tag "Submit", class: "form_btn btn"
+						.cancel_btn
+							=link_to "Cansel", cancel_edit_reply_path(reply), remote: true
+			
+		
+:javascript
+		$(".form_content").height(30);//init
+		$(".form_content").css("lineHeight","20px");//init
+		
+		$(".form_content").on("input",function(evt){
+						console.log("comment");
+				if(evt.target.scrollHeight > evt.target.offsetHeight){
+						$(evt.target).height(evt.target.scrollHeight);
+				}else{
+						var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
+						while (true){
+								$(evt.target).height($(evt.target).height() - lineHeight);
+								if(evt.target.scrollHeight > evt.target.offsetHeight){
+										$(evt.target).height(evt.target.scrollHeight);
+								}
+								break;
+						}
+				}
+		});
+			

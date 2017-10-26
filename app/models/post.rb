@@ -36,10 +36,10 @@ class Post < ApplicationRecord
     end
     
 	def best_comment
-	    #This sentence below returns an array. 
-	    return self.comments.order(likes_count: :asc).first
-		if comment.nil?
+	    #This sentence below returns an array.
+		if self.comments.nil?
 		    return self.comments.last
 		end	
+		return self.comments.order(likes_count: :asc).first
 	end
 end

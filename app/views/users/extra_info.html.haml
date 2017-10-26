@@ -1,12 +1,13 @@
 -content_for(:sidebar) do
 	"Do not show"
 
-#profile_form
-	.community_icon
-		=render 'svg/community_icon'
-	.form_content
-		%h2.form_title
-			Welcome to Scrolll.
+#extra_info
+	.profile_form_content
+		.form_title
+			.community_icon
+				=render 'svg/community_icon'
+			%h2
+				Welcome to Scrolll.
 		%p
 			scrolll is not just some news app. 
 			%br
@@ -30,5 +31,5 @@
 					About yourself
 				= text_area_tag 'user[about]', '', placeholder: "tell us about yourself", class: "about_textarea form-control", style: "box-shadow: none; resize: none;"
 					
-				= submit_tag "Submit", class: "form_btn #profile_submit_btn"
+				= submit_tag "Submit", class: "form_btn #profile_submit_btn btn"
 			

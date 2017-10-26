@@ -16,12 +16,11 @@ class CategoriesController < ApplicationController
     end
     
     def top
-        @articles = Article.order(likes_count: :desc).limit(10)
-        # if @country.id == 1
-        #     @articles = Article.order(likes_count: :desc).limit(10)
-        # else
-        #     @articles = Article.where(country_id: @country.id).order(likes_count: :desc).limit(10)
-        # end
+        if @country.id == 1
+            @articles = Article.order(likes_count: :desc).limit(10)
+        else
+            @articles = Article.where(country_id: @country.id).order(likes_count: :desc).limit(10)
+        end
     end
     
     def articles

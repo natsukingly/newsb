@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     render json: @users.to_json
   end
   
-  def profile_form
+  def extra_info
     @countries = Country.all
     @languages = Language.all
     
@@ -119,7 +119,9 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
       
-
+  def notification_index
+    @current_topic = "Notifications"
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

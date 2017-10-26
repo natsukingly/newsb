@@ -18,6 +18,7 @@
                     flex: 1;
                 }
                 .option{
+                    position: relative;
                     text-align: center;
                     width: 30px;
                     height: 16px;
@@ -30,8 +31,14 @@
             .content{
                 padding: 5px 0;
             }
+            .status{
+                .reply_link.link_btn{
+                    margin: 0;
+                }
+            }
             .reply_view_link{
                 margin-right: 5px;
+                display: inline-block;
             }
         }
         img{
@@ -46,8 +53,8 @@
 .reply{
     .main{
         img{
-            width: 30px;
-            height: 30px;
+            width: 20px;
+            height: 20px;
         }
     }
 }
@@ -93,8 +100,8 @@
     }
     .comment_submit{
         margin-left: 40px;
-        margin-bottom: 12px;
         color: grey;
+        float: right;
         input[type="submit"]{
             background-color: rgba(0,0,0,0);
             border: 1px solid #bbb;
@@ -106,7 +113,6 @@
         .cancel_btn{
             display: inline-block;
             padding: 10px 20px;
-            margin-right: 10px;
             cursor: pointer;
             &:hover{
                 color: rgb(54, 88, 155);
@@ -120,9 +126,9 @@
     margin-bottom: 0;
     form{
         margin-top: 12px;
-        .comment_submit{
-            margin: 0;
+        .comment_submit.reply_submit{
             display: block;
+            margin: 0;
         }
     }
     .form_textarea{

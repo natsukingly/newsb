@@ -27,15 +27,15 @@
 							= post.article.source
 							
 		.status.md
-			.post_like_link
+			.post_like_link.link_btn
 				=render '/likes/like_post', post: post
-			.comment_link
+			.comment_link.link_btn
 				COMMENT
 				・
 				.comment_count	
 					= post.comments_count
 			.option.pull-right
-				%i.fa.fa-ellipsis-h.lg
+				%i.fa.fa-ellipsis-h.lg.option_link
 				=render 'dropdown/post_option', post: post
 	
 	.comment_index		
@@ -52,3 +52,21 @@
 			.comments
 				=render 'comments/comment_wo_replies', comment: post.best_comment unless post.best_comment.nil?
 
+:javascript
+	// post side menu open close
+
+	$('.option_link').click(function () {
+			var height = $(this).parents(".post").find('.opinion').css("height");
+			$(this).parents(".post").find('.opinion').attr("data-height", height);
+			// ボタンが押されたら、モーダルウィンドウを表示
+			$(".ddm").hide();
+			$(this).parents(".post").find('.post_ddm').css("display", "flex");
+			
+			return false;
+	});
+	
+	$('body').click(function (event) {
+	  if(!$(event.target).closest('.post_ddm').length && !$(event.target).is('.post_ddm')) {
+		 $(".post_ddm").hide();
+	  }     
+	});

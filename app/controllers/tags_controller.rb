@@ -9,10 +9,12 @@ class TagsController < ApplicationController
     
     def index
         # sort them by the number of posts in the future
+        @current_topic = "Tags"
         @tags = Tag.all.order(created_at: :desc)
     end
     
     def favorite_index
+        @current_topic = "Tags"
         @tags = current_user.favorite_tags
     end
     

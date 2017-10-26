@@ -1,1 +1,1 @@
-$(".comment_<%=@comment.id%>").html('<%= escape_javascript(render("comments/comment", comment: @comment))%>');
+$(".comment_<%=@comment.id%>").find(".content").html("<%= escape_javascript( simple_format(@comment.content)) %>");

@@ -7,9 +7,9 @@
 
 .post{
     margin-bottom: 10px;
-    border-radius: 5px;
     background: white;
     box-shadow: 0 0 1px rgba(0,0,0,0.3);
+    font-size: 14px;
     .body{
         padding: 12px; 
 
@@ -76,8 +76,11 @@
                 color: grey;
             }
         }
+    }
+    .comment_index{
         .view_link, .reply_view_link{
             a {
+                font-size: 12px;
                 font-weight: 900;
                 color: black;
             }
@@ -86,6 +89,9 @@
 }
 
 
+.post.show_post{
+    margin-top: 20px;
+}
 
 .best_comment{
     .content{
@@ -198,6 +204,9 @@
 
 
 // show_post
+.show_post_wrapper{
+    margin: 20px 0;
+}
 
 #show_post_block{
     background-color: white;

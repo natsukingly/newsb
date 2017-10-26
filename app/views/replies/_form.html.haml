@@ -1,23 +1,37 @@
 
 = form_with(model: reply, data: { remote: true }) do |form|
-  - if reply.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(reply.errors.count, "error")
-        prohibited this post from being saved:
-      %ul
-        - reply.errors.full_messages.each do |message|
-          %li= message
-          
-  .field.form-group.form_textarea
-    =image_tag current_user.image.profile_sm.url, class: "reply_image pull-left img-circle"
-    = form.text_area :content, placeholder: "content", class: "form-control form_content", style: "border: none; box-shadow: none; resize: none;"
-    = form.hidden_field :comment_id, value: comment.id
-    = form.hidden_field :user_id, value: current_user.id
-  .comment_submit
-    = form.submit "Reply", class: "btn submit_btn"
-    .cancel_btn.cancel_reply
-      Cancel
-    
-   
-  
+
+	.field.form-group.form_textarea
+		=image_tag current_user.image.profile_sm.url, class: "reply_image pull-left img-circle"
+		= form.text_area :content, placeholder: "content", class: "form-control form_content", style: "border: none; box-shadow: none; resize: none;"
+		= form.hidden_field :comment_id, value: comment.id
+		= form.hidden_field :user_id, value: current_user.id
+	.comment_submit
+		= form.submit "Reply", class: "btn submit_btn"
+		.cancel_btn.cancel_reply
+			Cancel
+		
+:javascript
+	$(".form_content").height(30);//init
+	$(".form_content").css("lineHeight","20px");//init
+	
+	$(".form_content").on("input",function(evt){
+					console.log("comment");
+			if(evt.target.scrollHeight > evt.target.offsetHeight){
+					$(evt.target).height(evt.target.scrollHeight);
+			}else{
+					var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
+					while (true){
+							$(evt.target).height($(evt.target).height() - lineHeight);
+							if(evt.target.scrollHeight > evt.target.offsetHeight){
+									$(evt.target).height(evt.target.scrollHeight);
+							}
+							break;
+					}
+			}
+	});
+		
+	$('.cancel_btn.cancel_btn').click(function(){
+		$(this).parents(".reply_form").html("");
+	});
+		

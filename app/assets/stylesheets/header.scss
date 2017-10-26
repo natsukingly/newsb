@@ -4,8 +4,8 @@
 	margin-right: 20px;
 	svg{
 		fill: #ccc;
-		width: 20px;
-		height: 20px;
+		width: 18px;
+		height: 18px;
 		&:hover{
 			fill: white;
 		}
@@ -43,6 +43,7 @@ header{
 			    display: flex;
 			    align-items: center;
 			    margin-left: 12px;
+			    cursor: pointer;
 				.setting{
 					color: #bbb;
 				    margin-left: 5px;
@@ -116,6 +117,35 @@ header{
 		// header right start
 		.right{
     		justify-content: flex-end;
+    		position: relative;
+    		#notification_icon{
+    			position: relative;
+    			.notifications_count{
+				    display: inline-block;
+				    position: absolute;
+				    width: 15px;
+				    height: 15px;
+				    font-size: 10px;
+				    line-height: 15px;
+				    background-color: #cd5c5c;
+				    color: white;
+				    border-radius: 12px;
+				    text-align: center;
+				    top: -8px;
+				    left: 8px;
+    			}
+    			.notification_fire{
+    				position: absolute;
+   	    			width: 17px;
+	    			height: 17px;
+	    			top: -20px;
+	    			left: 7px;
+	    			svg{
+	    				width: 17px;
+	    				height: 17px;
+	    			}
+	    		}
+    		}
 		}
 		.login_icon{
 			width: 30px;
@@ -129,6 +159,7 @@ header{
 		}
 	}
 }
+
 
 #mobile_header{
     position: relative;
@@ -262,3 +293,11 @@ header{
 	}
 }
 
+.notice_bar{
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	background-color: white;
+	font-size: 14px;
+	color: #696969;
+}

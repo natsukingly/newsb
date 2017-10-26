@@ -5,8 +5,10 @@
 // 	=render "posts/form_no_category", article: @article
 
 #main_contents.article_posts
-
-	-unless @your_posts.empty?
+	-if @your_posts.empty?
+		.your_posts
+			%h2
+	-else
 		.your_posts
 			%h2
 				YOUR POSTS
@@ -29,6 +31,12 @@
 			%h2
 				NEW POSTS
 			= render partial: "posts/post_wo_article", collection: @new_posts.includes(:user), as: :post
+			
+	-unless @shared_posts.empty?
+		.shared_posts
+			%h2
+				POSTS without comments
+			= render partial: "posts/post_wo_article", collection: @shared_posts.includes(:user), as: :post
 
 
 - @best_posts.ids.each do |best_id|		

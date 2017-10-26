@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :edit_article_post, :update_article_post, :cancel_edit_article_post]
   before_action :yes_found
   before_action :set_category, only: [:load_url]
   after_action :decide_category, only: [:create, :update]
@@ -47,6 +47,12 @@ class PostsController < ApplicationController
   
   def edit
   end
+  
+  def edit_article_post
+  end
+  
+  def cancel_edit_article_post
+  end
 
 
   def create
@@ -82,18 +88,19 @@ class PostsController < ApplicationController
 
 
   def update
-    @article = @post.article
-
-    @post.category_id = params[:tag][:category_id]
     @post.content = params[:post][:content] 
     @post.save
-    
-    decide_category
+  end
+  
+  def update_article_post
+    @post.content = params[:post][:content] 
+    @post.save
   end
 
 
   def destroy
     @post.destroy
+    flash[:notice] = "Your post has been successfully deleted."
     redirect_to root_path
   end
 

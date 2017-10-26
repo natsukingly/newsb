@@ -28,6 +28,10 @@
             background-size: cover;
             background-position: center;
             width: auto;
+            .overlay{
+                background-color: rgba(#001E42, .05);
+                height: 100%;
+            }
             .stats{
                 text-shadow: 0 0 5px #000;
                 color: white;
@@ -63,8 +67,9 @@
             }
             h2{
                 line-height: 20px;
-                font-size: 14px;
+                font-size: 16px;
                 font-weight: 900;
+                color: rgba(0, 50, 100, 0.8);
             }
             .stats{
                 color: #001E42;
@@ -75,13 +80,16 @@
     .best_post{
         font-size: 12px;
         width: auto;
-        min-height: 80px;
+        min-height: 92px;
         padding: 12px;
         .user_block{
             padding: 0;
         }
         .content{
             color: grey;
+            .shared_message{
+                color: grey;
+            }
         }
     }
 }

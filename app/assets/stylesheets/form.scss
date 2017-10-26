@@ -60,6 +60,7 @@
             }
             .post_submit{
                 display: flex;
+                flex-direction: row-reverse;
                 align-items: center;
                 
                 .form_btn{
@@ -90,6 +91,29 @@
         }
     }
 }
+
+#post_form.edit_form{
+    .body{
+        padding: 0;
+        .form_main form{
+            padding: 0;
+            .textarea{
+                margin-bottom: 12px;
+            }
+        }
+    }
+}
+
+.comment_form.edit_form{
+    .comment_submit{
+        margin: 5px 0;
+        input[type="submit"]{
+            border-radius: 5px;
+        }
+    }
+}
+
+
 
 #post_url_form{
     margin: 0 0 12px;
@@ -132,26 +156,34 @@
 	}
 }
 
-
-#profile_form{
+#extra_info{
+    width: 600px;
     padding: 50px;
-    margin-top: 50px;
+    margin: 50px auto;
     background-color: white;
     border-radius: 10px;
     color: #696969;
     font-size: 14px;
     display: flex;
-    .community_icon{
-        width: 150px;
-        svg{
-            width: 100px;
-        }
-    }
-    .form_content{
-        h2{
-            font-size: 24px;
-            color: #001E42;
-            margin-bottom: 12px;
+    
+    .profile_form_content{
+        width: 100%;
+        .form_title{
+            display: flex;
+            .community_icon{
+                width: 30px;
+                svg{
+                    height: 30px;
+                    width: 30px;
+                }
+            }
+            h2{
+                margin-left: 12px;
+                flex: 1;
+                font-size: 24px;
+                color: #001E42;
+                margin-bottom: 12px;
+            }
         }
         p {
             margin-bottom: 12px;
@@ -164,4 +196,20 @@
         }
     }
     
+}
+
+@media (max-width: 768px) {
+	#extra_info{
+        width: auto;
+        padding: 20px 12px;
+	}
+}
+
+
+@media (max-width: 600px) {
+	#extra_info{
+        width: auto;
+        margin: 0;
+        padding: 20px 12px 200px;
+	}
 }

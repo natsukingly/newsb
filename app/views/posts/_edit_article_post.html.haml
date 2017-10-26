@@ -1,0 +1,49 @@
+#post_form.edit_form
+	.body
+		.form_main.clearfix
+			=form_tag update_article_post_path(post), remote: true, method: :post do
+				.field.form-group#post_textarea
+					.textarea
+						=text_area_tag 'post[content]', post.content, placeholder: "your awesome comment *optional", class: "post_textarea form-control"
+					#autocomplete_tags
+					.post_submit
+						= submit_tag "Submit", class: "form_btn #post_submit_btn"
+						.cancel_btn
+							=link_to "Cansel", cancel_edit_article_post_path(post), remote: true
+			
+
+=render 'js/autocomplete'
+
+:javascript
+	
+	$("#post_textarea textarea").height(30);//init
+	$("#post_textarea textarea").css("lineHeight","20px");//init
+	
+	$("#post_textarea textarea").on("input",function(evt){
+		console.log("post_content");
+		if(evt.target.scrollHeight > evt.target.offsetHeight){
+			$(evt.target).height(evt.target.scrollHeight);
+		}else{
+			var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
+			while (true){
+				$(evt.target).height($(evt.target).height() - lineHeight);
+				if(evt.target.scrollHeight > evt.target.offsetHeight){
+					$(evt.target).height(evt.target.scrollHeight);
+				}
+				break;
+			}
+		}
+	});
+	
+	
+	$("#post_form .cancel_btn").click(function(){
+		$("#post_form textarea").val(""); 
+	});
+
+	
+
+	
+
+
+	
+

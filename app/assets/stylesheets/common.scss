@@ -15,7 +15,12 @@
 
 
 // #6699cc nice blue color
+// #20b2aa clean green
+// #db7093 red pink 
+// indianred #cd5c5c
 
+// facebook testuser
+// otzadcbmoq_1503621559@tfbnw.net
 
 
 body{
@@ -84,7 +89,7 @@ input[type="text"]:focus {
 .flex_wrapper, .user_flex_wrapper{
 	position: relative;
 	flex: 1;
-	max-width: 900px;
+	width: 900px;
 	margin: 0 auto;
 	display: flex;
 }
@@ -92,6 +97,7 @@ input[type="text"]:focus {
 @media(max-width: 768px){
 	.flex_wrapper{
 		margin: 0;
+		width: auto;
 	}
 }
 
@@ -107,7 +113,9 @@ input[type="text"]:focus {
 		font-size: 16px;
 	}
 }
-
+.fa-ellipsis-h:before{
+	padding: 7px;
+}
 
 .give_me_short_ellipsis{
 	white-space: nowrap;
@@ -306,7 +314,7 @@ a  {
 		border-bottom: 2px solid rgba(0, 30, 66, 0.2);
 
 		&:hover{
-			color: rgb(54, 88, 155);
+			border-bottom: 2px solid rgba(#001E42, 0.5);
 		}
 		svg{
 			height: 20px;
@@ -324,6 +332,7 @@ a  {
 		color: #001E42;
 		font-weight: bold;
 		border-bottom: 2px solid #001E42;
+		pointer-events: none;
 	}
 	
 } 

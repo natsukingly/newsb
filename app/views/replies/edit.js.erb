@@ -1,1 +1,7 @@
-$(".reply_<%=@reply.id%>").html('<%= escape_javascript(render("replies/edit_form", reply: @reply))%>');
+$(".reply_<%=@reply.id%>").find(".content").html("<%= escape_javascript(simple_format(h(@reply.content.gsub(/\n/, '<br />')))) %>");
+var height = $(".reply_<%=@reply.id%>").find(".content").css("height");
+console.log(height);
+$(".reply_<%=@reply.id%>").find(".content").html('<%= escape_javascript(render("replies/edit_form", reply: @reply))%>');
+$(".reply_<%=@reply.id%>").find(".reply_ddm").hide();
+$(".reply_<%=@reply.id%>").find('.reply_form.edit_form').css("display", "block");
+$(".reply_<%=@reply.id%>").find("form textarea").css("height", height);

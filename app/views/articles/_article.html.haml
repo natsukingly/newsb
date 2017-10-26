@@ -2,12 +2,13 @@
 =link_to article_path(article.id), class: "article article_#{article.id} clearfix" do
 	.article_block
 		.image{style: "background-image: url(#{article.image.url});"}
-			.stats
-				%p.counts
-					#{article.posts_count}
-					%br
-					%span.unit
-						posts
+			.overlay
+				.stats
+					%p.counts
+						#{article.posts_count}
+						%br
+						%span.unit
+							posts
 	
 		.info
 			.title
@@ -20,7 +21,7 @@
 						#{time_ago_in_words_short(article.published_time)}
 						
 	.best_post
-		-post = article.posts.last
+		-post = article.posts.order(likes_count: :desc).first
 		
 		- if post != nil
 			.body.clearfix
@@ -34,7 +35,11 @@
 							%span.user_shoulder_name
 								=post.user.shoulder_name
 						%p.content
-							= truncate(post.content, length: 60) do
-								%span ...
+							-if post.content.empty?
+								%span.shared_message
+									\-Shared this article-
+							-else
+								= truncate(post.content, length: 60) do
+									%span ...
 
 					

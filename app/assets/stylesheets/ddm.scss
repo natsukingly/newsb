@@ -1,96 +1,309 @@
 
+.ddm{
+	z-index: 100;
+}
+
 // header & post_option ddm
 .triangle{
-    position: absolute;
-    top: -42px;
-    left: 40px;
-    width: 0;
-    height: 0;
-    border-top: 12px solid rgba(0,0,0,0);
-    border-right: 12px solid rgba(0,0,0,0);
-    border-bottom: 12px solid white;
-    border-left: 12px solid rgba(0,0,0,0);
+	position: absolute;
+	top: -42px;
+	left: 40px;
+	width: 0;
+	height: 0;
+	border-top: 12px solid rgba(0,0,0,0);
+	border-right: 12px solid rgba(0,0,0,0);
+	border-bottom: 12px solid white;
+	border-left: 12px solid rgba(0,0,0,0);
+}
+.reverse_triangle{
+	position: absolute;
+	top: -42px;
+	left: 40px;
+	width: 0;
+	height: 0;
+	border-top: 12px solid white;
+	border-right: 12px solid rgba(0,0,0,0);
+	border-bottom: 12px solid rgba(0,0,0,0);
+	border-left: 12px solid rgba(0,0,0,0);
 }
 
 #locale_close_btn{
 	display: inline-block;
 	position: absolute;
-    top: -31px;
-    left: 122px;
-   	width: 25px;
+	top: -31px;
+	left: 122px;
+	width: 25px;
 	height: 25px;
-    z-index: 100;
+	z-index: 100;
 	background-color: #6699cc;
 	padding: 5px;
-    line-height: 0;
-    border-radius: 50px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.2s;
+	line-height: 0;
+	border-radius: 50px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: 0.2s;
 	&:hover{
 		background-color: #99ccff;
 	}
 	svg{
-	    padding: 2px;
-	    fill: white;
-	    transition: 0.2s;
-	    &:hover{
-    		width: 25px;
-    		height: 25px;
-    	}
+		padding: 2px;
+		fill: white;
+		transition: 0.2s;
+		&:hover{
+			width: 25px;
+			height: 25px;
+		}
 	}
 }
 
-#locale_ddm, .post_ddm{
+.ddm{
 	position: absolute;
-    display: none;
-    flex-direction: column;
-    background-color: white;
-    line-height: 25px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    div{
-	    flex: 1;
-	    flex-direction: column;
-	    padding: 5px 0;
-	    h2{
-	    	color: #001E42;
-	    }
-	    a, .ddm_btn{
-	    	padding: 0 12px;
-	    	display: block;
-    		flex: 1;
-       		color: #696969;
-       		&:hover{
-       			background-color: #eee;
-       		}
-       		&.selected:after{
-	       		font-family: FontAwesome;
+	display: none;
+	border-radius: 3px;
+	flex-direction: column;
+	background-color: white;
+	line-height: 25px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+	div{
+		flex: 1;
+		flex-direction: column;
+		padding: 5px 0;
+		h2{
+			color: #001E42;
+		}
+		a, .ddm_btn{
+			padding: 0 12px;
+			display: block;
+			flex: 1;
+			color: #696969;
+			&:hover{
+				background-color: #eee;
+			}
+			&.selected:after{
+				font-family: FontAwesome;
 				content: "\f00c";
 				margin-left: 12px;
 				color: navy;
-       		}
-	    }
+			}
+		}
 	}
 	.country, .post_user_menu{
 		border-bottom: 1px solid #eee;
-	    position: relative;
 	}
+	.reply_user_menu, .comment_user_menu{
+		border-top: 1px solid #eee;
+	}
+	
 	.language{
 	}
 }
 
 #locale_ddm{
-    top: 50px;
-    left: 100px;
-    width: 130px;
+	top: 50px;
+	left: 100px;
+	width: 130px;
 }
-
 
 .post_ddm{
-    bottom: 35px;
-    right: 0;
-    width: 100px;
+	bottom: 35px;
+}
+.comment_ddm, .reply_ddm{
+	top: 30px;
 }
 
+.post_ddm, .comment_ddm, .reply_ddm{
+	right: -12px;
+	width: 100px;
+	font-size: 14px;
+	text-align: left;
+	.option_modal{
+		position: fixed;
+	    display: none;
+	    width: 100%;
+	    height: 100%;
+	    padding-top: 200px;
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+		background-color: rgba(#001E42, .9);
+		z-index: 200;
+		.delete{
+			display: none;
+			width: 450px;
+		    border-radius: 5px;
+		    text-align: center;
+		    background-color: white;
+		    margin-top: 307px;
+		    margin: 0 auto;
+		    padding: 30px 0;
+		    h2{
+		    	font-size: 16px;
+		    	padding: 12px;
+		    	margin: 12px;
+		    }
+		    .delete_option{
+		    	display: flex;
+			    flex-direction: row;
+			    line-height: 50px;
+		    	a, div{
+					border-radius: 50px;
+	 				margin: 0 30px;
+		    	}
+		    }
+		}
+		.report{
+			display: none;
+		}
+	}
+}
+
+
+.post_ddm_wrapper, .comment_ddm_wrapper, .reply_ddm_wrapper{
+	position: relative;
+}
+
+.comment_ddm_wrapper:before, .reply_ddm_wrapper:before,{
+    content: "";
+    position: absolute;
+    top: -16px;
+    right: 15px;
+    margin-left: -15px;
+    border: 8px solid transparent;
+    border-bottom: 8px solid #FFF;
+    z-index: 2;
+}
+
+.comment_ddm_wrapper:after, .reply_ddm_wrapper:after,{
+    content: "";
+    position: absolute;
+    top: -20px;
+    right: 13px;
+    margin-left: -17px;
+    border: 10px solid transparent;
+    border-bottom: 10px solid #bbb;
+    z-index: 1;
+}
+
+.post_ddm_wrapper:before{
+    content: "";
+    position: absolute;
+    bottom: -16px;
+    right: 15px;
+    margin-left: -15px;
+    border: 8px solid transparent;
+    border-top: 8px solid #FFF;
+    z-index: 2;
+}
+
+.post_ddm_wrapper:after{
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    right: 13px;
+    margin-left: -17px;
+    border: 10px solid transparent;
+    border-top: 10px solid #bbb;
+    z-index: 1;
+}
+@media(max-width: 500px){
+
+	.post_ddm_wrapper:before{
+	    bottom: -16px;
+	    right: 18px;
+	}
+
+	.post_ddm_wrapper:after{
+	    bottom: -20px;
+	    right: 17px;
+	}
+	
+	.comment_ddm, .reply_ddm{
+		top: 25px;
+	}
+	.comment_ddm_wrapper:before{
+		bottom: 60px;
+    	right: 17px;
+	}
+
+	.comment_ddm_wrapper:after{
+	    bottom: 60px;
+	    right: 15px;
+	}
+}
+
+
+
+
+@media(max-width: 500px){
+	.post_ddm, .comment_ddm{
+	    width: 150px;
+	    line-height: 40px;
+	   .option_modal{ 
+	   		padding-top: 80px;
+	   		.delete{
+	   			position: fixed;
+	   			bottom: 0;
+				width: 100%;
+			    border-radius: 0;
+			    padding: 40px 0;
+			    .delete_option{
+			    	line-height: 40px;
+			    	flex-direction: column;
+			    	a, div{
+			    		border: 1px solid #bbb;
+						border-radius: 50px;
+		 				margin: 12px 40px 0;
+			    	}
+			    }
+	   		}
+		}
+		.report{
+		}
+	}
+}
+
+
+
+#notification_ddm{
+	top: 50px;
+	right: 60px;
+	width: 400px;
+	div{
+		padding: 0;
+		a{
+		}
+	}
+	.title{
+		h2{
+			padding: 8px 12px;
+		    color: #696969;
+		    font-size: 14px;
+		    border-bottom: 1px solid #eee;
+		}
+	}
+	.notifications {
+		margin-top: 0;
+		height: 400px;
+		overflow: scroll;
+		.notification{ 
+			img{
+				width: 40px;
+				height: 40px;
+			}
+			.content{
+				padding: 0;
+				font-size: 12px;
+				line-height: 16px;
+			}
+		}
+	}	
+	.notification_index_link{
+	    padding: 2px 12px;
+	    font-size: 14px;
+	    border-top: 1px solid #eee;
+	    text-align: center;
+	}
+}

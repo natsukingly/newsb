@@ -1,25 +1,25 @@
-.post{class: "post post_#{@post.id} clearfix"}
+.post{class: "post post_#{@post.id} clearfix show_post"}
 	.body
 		.main
 			.content.clearfix
-			
-				// user information
 				.user_block.clearfix{class: "user_#{@post.user.id}"}
 					=image_tag @post.user.image.url, class:"pull-left img-circle user_image"
+					.star
+						=render 'svg/star_icon'
 					.user_info
 						=link_to @post.user  do
 							.give_me_short_ellipsis.light_navy.bold
 								=@post.user.name
 						%p.user_shoulder_name.sm.grey
 							=@post.user.shoulder_name
+							%i.fa.fa-clock-o
+							#{time_ago_in_words_short(@post.created_at)}
 					.user_option.follow_switch.pull-right
 						=render "/shared/follow_form_icon.html.haml", user: @post.user
+				%p.opinion
+					=render_with_hashtags(@post.content.gsub(/\n/, '<br />'))
+
 				
-				// post contents		
-				=render_with_hashtags(@post.content.gsub(/\n/, '<br />'))
-				%p.post_time.sm.grey
-					#{time_ago_in_words(@post.created_at)} ago
-			
 				// link to the article
 				=link_to article_path(@post.article_id), class: "post_article" do
 					.image{ style: "background-image: url(#{@post.article.image.url});"}
@@ -29,21 +29,48 @@
 								%span ...
 						%p.xs.grey
 							= @post.article.source
-							
+								
 		.status.md
-			.post_like_link
+			.post_like_link.link_btn
 				=render '/likes/like_post', post: @post
-			.comment_link
+			.comment_link.link_btn
 				COMMENT
 				・
-				.comment_count	
+				.comment_count.link_btn
 					= @post.comments_count
 			.option.pull-right
-				%i.fa.fa-ellipsis-h.lg
-	
+				%i.fa.fa-ellipsis-h.lg.option_link
+				=render 'dropdown/post_option', post: @post
+		
 	.comment_index		
 		.comment_form.clearfix
 			=render '/comments/form', post: @post 
+		- if @post.comments_count > 1
+			.view_link
+				=render 'comments/view_more_link', post: @post
+		- if @post.comments_count == 0
+			.invite_comment.comment_link
+				Be the first one to comment!!
+			.comments
+		-else
+			.comments
+				=render 'comments/comment_wo_replies', comment: @post.best_comment unless @post.best_comment.nil?
 
-		.comments
-			=render 'comments/comment', comment: @post.best_comment unless @post.best_comment.nil?
+:javascript
+	// post side menu open close
+	$('.option_link').click(function () {
+			var height = $(this).parents(".post").find('.opinion').css("height");
+			console.log(height);
+			$(this).parents(".post").find('.opinion').attr("data-height", height);
+			// ボタンが押されたら、モーダルウィンドウを表示
+			$(".ddm").hide();
+			$(this).parents(".post").find('.post_ddm').css("display", "flex");
+			
+			return false;
+	});
+	
+	$('body').click(function (event) {
+	  if(!$(event.target).closest('.post_ddm').length && !$(event.target).is('.post_ddm')) {
+		 $(".post_ddm").hide();
+	  }     
+	});

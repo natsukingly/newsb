@@ -1,1 +1,2 @@
 $(".tag_<%=@tag.id%>").find(".favorite_link").html('<%= escape_javascript(render("tags/favorite_link", tag: @tag))%>');
+$(".tag_counts").text("・<%= current_user.favorite_tags.count %>");

@@ -10,10 +10,11 @@
 					%span.user_shoulder_name.sm.grey
 						=reply.user.shoulder_name
 				.option
-					%i.fa.fa-ellipsis-h
-			
+					%i.fa.fa-ellipsis-h.reply_option_link
+					=render '/dropdown/reply_option', reply: reply
+				
 			.content
-				=truncate(reply.content, length: 200) do
+				=truncate(simple_format(reply.content), escape: false, length: 200) do
 					%span.light_navy.read_more{class: "reply_read_more_#{reply.id}"}
 						Raed more
 			.status.clearfix
@@ -23,6 +24,20 @@
 				
 :javascript 
 	$(".reply_read_more_#{reply.id}").click(function(){
-		$(this).parent('.content').html('#{ simple_format(reply.content)}')
+		$(this).parent('.content').html('#{ simple_format(reply.content)}');
 	});
 					
+	$('.reply_option_link').click(function () {
+			console.log("yoyoma");
+			// ボタンが押されたら、モーダルウィンドウを表示
+			$(".ddm").hide();
+			$(this).parents(".reply").find('.reply_ddm').css("display", "flex");
+			
+			return false;
+	});
+	
+	$('body').click(function (event) {
+		if(!$(event.target).closest('.reply_ddm').length && !$(event.target).is('.reply_ddm')) {
+			$(".reply_ddm").hide();
+		}     
+	});

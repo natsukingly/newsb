@@ -1,0 +1,45 @@
+.comment_ddm.ddm
+	.comment_ddm_wrapper
+		.regular_user_menu
+			.report_btn.ddm_btn
+				REPORT
+				
+		-if comment.user.id == current_user.id
+			.comment_user_menu
+				=link_to "EDIT", edit_comment_path(comment.id), remote: true, class: "comment_edit_link"
+				.delete_btn.ddm_btn
+					DELETE
+		
+		.option_modal
+			.delete
+				%h2
+					Are you sure you want to delete your comment?
+				.delete_option
+					=link_to "YES", comment_path(comment), method: :delete
+					.cancel_btn.ddm_btn
+						NO
+			.report
+		
+:javascript
+	$(".comment_ddm .delete_btn").click(function(){
+		$(this).parents(".comment_ddm").find(".delete").show();
+		$(this).parents(".comment_ddm").find(".option_modal").fadeIn();
+	});
+	
+	$('.comment_ddm .option_modal').click(function (event) {
+	  if(!$(event.target).closest('.delete').length && !$(event.target).is('.delete')) {
+		 $(".option_modal").hide();
+		 $(".comment_ddm").hide();
+	  }     
+	});
+	
+	$('.comment_ddm .option_modal .cancel_btn').click(function(){
+		$(".option_modal").hide();
+		$(".comment_ddm").hide();	
+	});
+	
+	// $('.comment_edit_link').click(function () {
+	// 	$(this).parent('.comment').find('.content').html("#{ escape_javascript(simple_format(comment.content))}");
+	// 	var height = $(this).parent('.comment').find('.content').css("height");
+	// 	$(this).parent(".comment").find('.content').attr("data-height", height);
+	// });

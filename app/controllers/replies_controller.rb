@@ -1,5 +1,5 @@
 class RepliesController < ApplicationController
-  before_action :set_reply, only: [:show, :edit, :update, :destroy]
+  before_action :set_reply, only: [:show, :edit, :update, :destroy, :cancel_edit_reply]
 
   # GET /replies
   # GET /replies.json
@@ -31,6 +31,9 @@ class RepliesController < ApplicationController
   # GET /replies/1/edit
   def edit
   end
+  
+  def cancel_edit_reply
+  end
 
   # POST /replies
   # POST /replies.json
@@ -49,9 +52,10 @@ class RepliesController < ApplicationController
   # DELETE /replies/1
   # DELETE /replies/1.json
   def destroy
+    post_id = @reply.comment.post_id 
     @reply.destroy
     respond_to do |format|
-      format.html { redirect_to replies_url, notice: 'Reply was successfully destroyed.' }
+      format.html { redirect_to post_path(post_id), notice: 'Your comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

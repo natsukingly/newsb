@@ -28,8 +28,17 @@
 				=render "svg/ranking_icon"	
 			=link_to tags_path, class: "icon" do
 				=render "svg/tag_icon"	
-			=link_to root_path, class: "icon" do
-				=render "svg/notification_icon"	
+			#notification_icon.icon
+				=render "svg/notification_icon"
+				-if current_user && current_user.notifications.count > 0 && current_user.notifications.count < 10
+					.notifications_count
+						=current_user.notifications.count
+				-elsif current_user && current_user.notifications.count >= 10 
+					.notification_fire
+						=render 'svg/fire_icon'
+			=render 'dropdown/notifications'
+						
+				
 			-if user_signed_in?
 				=link_to destroy_user_session_path, class: "icon" do
 					=image_tag current_user.image.url, class: "img-circle profile_xs"
@@ -64,6 +73,10 @@
 		-@categories.each do |category|
 			=link_to category.name, articles_category_path(category.id), class: "#{category.name}_nav_btn"
 		%span.padding
+
+-if flash[:notice]
+	.notice_bar
+		= flash[:notice]
 
 :css
 	a.Lifestyle_nav_btn{

@@ -1,2 +1,3 @@
-$("#main_contents").prepend('<%= escape_javascript(render 'posts/post_wo_article', post: @post)%>');
-$("#post_form textarea").val('');
+$("#main_contents .your_posts h2").after('<%= escape_javascript(render 'posts/post_wo_article', post: @post)%>');
+$("#post_form textarea").val('').height(30);
+

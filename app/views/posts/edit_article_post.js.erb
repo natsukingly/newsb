@@ -1,0 +1,5 @@
+console.log("nemui");
+var height = $(".post_<%=@post.id%>").find("p.opinion").attr("data-height");
+$(".post_<%=@post.id%>").find("p.opinion").html('<%= escape_javascript(render("posts/edit_article_post", post: @post))%>');
+$(".post_<%=@post.id%>").find(".post_ddm").hide();
+$(".post_<%=@post.id%>").find("form textarea").css("height", height);
