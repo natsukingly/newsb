@@ -18,7 +18,7 @@ class Comment < ApplicationRecord
 											post_id: self.post.id,
 											comment_id: self.id)
 			news_title = self.post.article.title.truncate(30)
-			notification.message = "<span> #{self.user.name} </span> commented on your post.<span> #{news_title} </span>"
+			notification.message = "<span> #{self.user.name} </span> commented on your post.<span> \"#{news_title}\" </span>"
 			notification.save
 		end
 	end

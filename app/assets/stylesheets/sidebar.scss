@@ -1,6 +1,6 @@
 
 #sidebar_left{
-    width: 150px;
+    width: 180px;
     margin: 12px;
     h2{
         font-size: 16px;
@@ -10,21 +10,25 @@
     p{
         color: grey;
         margin-bottom: 5px;
+        // margin-left: 12px;
     }
     
     .profile{
         margin: 12px 0;
         >div{
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
         .user_info{
+            display: flex;
             h2.name{
                 margin-bottom: 0;
             }
             img{
-                height: 40px;
-                width: 40px;
+                height: 30px;
+                width: 30px;
+                margin-right: 5px;
             }
+
         }
         
         .stats{
@@ -48,8 +52,16 @@
     
     // for users having not signed in
     .profile.not_signed_in{
+        .user_info{
+            align-items: center;
+            .login_link{
+                border-bottom: 1px solid #bbb;
+            }
+        }
         svg{
-            width: 40px;
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
         }
         #sign_in{
             font-size: 14px;

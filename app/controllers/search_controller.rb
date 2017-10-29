@@ -28,6 +28,6 @@ class SearchController < ApplicationController
         end
         
         def set_current_topic
-            @current_topic = "Searching..."
+            @current_topic = "Search Results"
         end
 end

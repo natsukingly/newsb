@@ -1,15 +1,15 @@
 
-%header.hidden-xs
+%header
 	.header_container
 		.left
 			// = link_to image_tag("logo_white.png", style: "width: 110px"), root_path, id: "logo", class: "hidden-xs"   
-			= link_to root_path, id: "logo", class: "hidden-xs" do
+			= link_to root_path, id: "logo" do
 				=render 'svg/logo_icon'
 			
 					
 			#locale_link
-				.setting_icon
-					=render "svg/location_icon"
+				// .setting_icon
+				// 	=render "svg/location_icon"
 				.setting
 					#{@country.name}
 					%br
@@ -28,29 +28,22 @@
 				=render "svg/ranking_icon"	
 			=link_to tags_path, class: "icon" do
 				=render "svg/tag_icon"	
-			#notification_icon.icon
-				=render "svg/notification_icon"
-				-if current_user && current_user.notifications.count > 0 && current_user.notifications.count < 10
-					.notifications_count
-						=current_user.notifications.count
-				-elsif current_user && current_user.notifications.count >= 10 
-					.notification_fire
-						=render 'svg/fire_icon'
-			=render 'dropdown/notifications'
-						
 				
 			-if user_signed_in?
-				=link_to destroy_user_session_path, class: "icon" do
-					=image_tag current_user.image.url, class: "img-circle profile_xs"
+				#notification_icon.icon
+					=render "shared/notification_icon"
+				= image_tag current_user.image.url, class: "img-circle profile_xs icon", id: "profile_option_link"
 			-else
-				= link_to user_facebook_omniauth_authorize_path, class: "login_icon" do
-					=render 'svg/profile_icon_bold'
+				= link_to "Login/Signup", user_facebook_omniauth_authorize_path, id: "login_signup_link"
+
+			=render 'dropdown/notifications'
+			=render 'dropdown/profile_option'
 
 #mobile_header
 
-	=link_to tags_path, id: "menu_icon" do
-		%i.fa.fa-bars
-			
+	=link_to tags_path, id: "mobile_locale_link" do
+		=render 'svg/globe_icon'
+
 	.search_bar
 		%i.fa.fa-search.form_icon
 		=form_tag "/search", method: "get", id: "search" do
@@ -60,16 +53,18 @@
 	/ HEADER RIGHT     
 	#account.menu_icon
 		-if user_signed_in?
-			=link_to destroy_user_session_path, id: "profile_icon" do
-				=image_tag current_user.image.url
+			=image_tag current_user.image.url, id: "mobile_profile_option_link", class: "img-circle"
 		-else
 			= link_to user_facebook_omniauth_authorize_path, class: "login_icon" do
 				=render 'svg/profile_icon_bold'
+	
+	=render 'dropdown/mobile_locale'
+	=render 'dropdown/mobile_profile_option'
 
 #header_nav
 	.nav_container
 		=link_to " ", root_path, class: "selected_topic active", style: "pointer-events: none; display: none;"
-		=link_to "All", root_path, class: "all_nav_btn"
+		=link_to "TOP", root_path, class: "top_btn"
 		-@categories.each do |category|
 			=link_to category.name, articles_category_path(category.id), class: "#{category.name}_nav_btn"
 		%span.padding
@@ -100,7 +95,39 @@
 
 -elsif @all_topic
 	:javascript
-		$('#header_nav').find(".all_nav_btn").addClass("active");
+		$('#header_nav').find(".top_btn").addClass("active");
 
-	
-	
+
+:javascript	
+	$('#notification_icon').click(function () {
+		// ボタンが押されたら、モーダルウィンドウを表示
+		$(".ddm").hide();
+		$('#notification_ddm').css("display", "block");
+		$('body').addClass("fixed");
+		$.ajax({
+			url: "/users/check_notifications",
+			type: "POST",
+			dataType: 'script',
+		})
+		$('#notification_icon').html("#{escape_javascript(render 'shared/notification_read_icon')}");
+		return false;
+	});
+
+	$('body').click(function (event) {
+		if(!$(event.target).closest('#notification_ddm').length && !$(event.target).is('#notification_ddm')) {
+			$("#notification_ddm").hide();
+			$('body').removeClass("fixed");
+		}
+	});
+		
+	$('#profile_option_link').click(function () {
+		$(".ddm").hide();
+		$('#profile_option_ddm').css("display", "flex");
+		return false;
+	});
+
+	$('body').click(function (event) {
+		if(!$(event.target).closest('#profile_option_ddm').length && !$(event.target).is('#profile_option_ddm')) {
+			$("#profile_option_ddm").hide();
+		}     
+	});

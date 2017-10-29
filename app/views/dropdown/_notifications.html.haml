@@ -1,22 +1,23 @@
-#notification_ddm.ddm
-	.notification_ddm_wrapper
-		.title
-			%h2
-				Notifications
-		
-		.notifications.notification_list_for_ddm
-			-if current_user.notifications.empty?
-				.notification_empty
-					You haven't received any notifications yet.
-			-else        
-				- current_user.notifications.includes(:target_user).each do |notification|
-					=link_to notification.path, class: "notification" do
-						=image_tag notification.target_user.image, class: "img-circle"
-						.content
-							=notification.message.html_safe
-							%p
-								#{time_ago_in_words(notification.created_at)} ago
-		=link_to "see all", notification_index_users_path, class: "notification_index_link"
+-if current_user
+	#notification_ddm.ddm
+		.notification_ddm_wrapper
+			.title
+				%h2
+					Notifications
+			
+			.notifications.notification_list_for_ddm
+				-if current_user.notifications.empty?
+					.notification_empty
+						You haven't received any notifications yet.
+				-else        
+					- current_user.notifications.includes(:target_user).order(created_at: :desc).each do |notification|
+						=link_to notification.path, class: "notification" do
+							=image_tag notification.target_user.image, class: "img-circle"
+							.content
+								=notification.message.html_safe
+								%p
+									#{time_ago_in_words(notification.created_at)} ago
+			=link_to "see all", notification_index_users_path, class: "notification_index_link"
 			
 
 	

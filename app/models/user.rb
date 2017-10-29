@@ -21,9 +21,7 @@ class User < ApplicationRecord
   belongs_to :country
   belongs_to :language
   
-  #SCOPE
-  scope :sortByLikes, ->ids {where(id: ids).sort_by{ |o| ids.index(o.id) }}
-
+  before_destroy :destroy_notifications
   
   # devise
   
@@ -46,6 +44,12 @@ class User < ApplicationRecord
     end
   end
   
+  def destroy_notifications
+    notifications = Notification.where(target_user_id: self.id)
+    notifications.delete_all
+  end
+  
+  
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
@@ -54,6 +58,7 @@ class User < ApplicationRecord
     end
   end
   
+
   
   
   class << self

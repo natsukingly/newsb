@@ -28,7 +28,8 @@
 				-unless comment.replies.count == 0
 					.reply_view_link
 						=link_to "/replies/#{comment.id}/view_more", remote: true do
-							View all #{comment.replies.count} replies
+							%i.fa.fa-comment-o
+							VIEW ALL #{comment.replies.count} REPLIES
 							%i.fa.fa-angle-down
 			
 			.reply_form.clearfix

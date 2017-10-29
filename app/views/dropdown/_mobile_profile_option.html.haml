@@ -1,0 +1,32 @@
+#mobile_profile_option_ddm.ddm
+	.mobile_profile_option_ddm_wrapper
+		=link_to "Profile", current_user, class: "profile_option" 
+		=link_to "Setting", root_path, class: "profile_option" 
+		=link_to "Support", root_path, class: "profile_option" 
+		=link_to "About", root_path, class: "profile_option" 
+		=link_to "Terms", root_path, class: "profile_option" 
+		=link_to "Logout", destroy_user_session_path, class: "profile_option" 
+		&copy; 2017 Twitter
+		.close_ddm_btn
+			=render 'svg/close_icon'
+			
+:javascript
+	
+	$('#mobile_profile_option_link').click(function () {
+		$(".ddm").hide();
+		$('#mobile_profile_option_ddm').css("display", "block");
+		$('body').addClass('fixed');
+		return false;
+	});
+
+	$('body').click(function (event) {
+		if(!$(event.target).closest('.mobile_profile_option_ddm_wrapper').length && !$(event.target).is('.mobile_profile_option_ddm_wrapper')) {
+			$("#mobile_profile_option_ddm").hide();
+			$('body').removeClass('fixed');
+		}     
+	});
+	
+	$('.close_ddm_btn').click(function (event) {
+		$('#mobile_profile_option_ddm').hide();
+		$('body').removeClass('fixed');
+	});

@@ -102,7 +102,7 @@ class UsersController < ApplicationController
       @user.country_id = country.id
       @user.save
     else 
-      cookie[:country] = country.name
+      cookies[:country] = country.name
     end
     redirect_to root_path
   end
@@ -114,7 +114,7 @@ class UsersController < ApplicationController
       @user.language_id = language.id
       @user.save
     else 
-      cookie[:language] = language.code
+      cookies[:language] = language.code
     end
     redirect_to root_path
   end
@@ -122,6 +122,15 @@ class UsersController < ApplicationController
   def notification_index
     @current_topic = "Notifications"
   end
+
+  def check_notifications
+    notifications = current_user.notifications.where(check: false)
+    notifications.each do |notification|
+      notification.check = true
+      notification.save
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

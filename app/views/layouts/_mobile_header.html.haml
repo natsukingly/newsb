@@ -1,0 +1,11 @@
+
+=link_to root_path, class: "icon" do
+	=render "svg/mobile_home_icon"
+=link_to ranking_weekly_user_path, class: "icon" do
+	=render "svg/mobile_ranking_icon"	
+=link_to tags_path, class: "icon" do
+	=render "svg/mobile_tag_icon"
+=link_to notification_index_users_path, id: "notification_icon", class: "icon" do
+	=render "shared/mobile_notification_icon"
+	
+=render 'dropdown/notifications'

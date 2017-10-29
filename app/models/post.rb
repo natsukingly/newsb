@@ -10,8 +10,9 @@ class Post < ApplicationRecord
     has_many :tagged_posts, dependent: :destroy
     has_many :tags, through: :tagged_posts
     
-    scope :sortByLikes, ->ids {where(id: ids).sort_by{ |o| ids.index(o.id) }}
     scope :popularTags, ->tag_ids { where(tags: article_ids).group(:tag_id).order('count(article_id) desc').pluck(:tag_id) }
+
+    before_destroy :destroy_notifications
 
     after_create do
         post = Post.find_by(id: self.id)
@@ -33,6 +34,12 @@ class Post < ApplicationRecord
           tagged_post = post.tagged_posts.build(tag_id: tag.id)
           tagged_post.save
         end
+    end
+    
+    
+    def destroy_notifications
+        notifications = Notification.where(post_id: self.id)
+        notifications.delete_all
     end
     
 	def best_comment

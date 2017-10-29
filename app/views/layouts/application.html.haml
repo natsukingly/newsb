@@ -22,7 +22,7 @@
 			
 			-elsif yield(:profile).empty? == false
 				=render 'users/profile', user: @user
-				.user_flex_wrapper.clearfix 
+				.flex_wrapper.clearfix 
 					#main_container
 						=yield
 			
@@ -30,4 +30,8 @@
 				.flex_wrapper.clearfix 
 					#main_container
 						=yield
+		
+		#mobile_footer
+			=render 'layouts/mobile_header'
+			
 								

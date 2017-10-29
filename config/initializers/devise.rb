@@ -254,9 +254,9 @@ Devise.setup do |config|
 
 
   if Rails.env.development?
-    config.omniauth :facebook, "109242943076975", "845ad636680af08d792f150108523d53", scope: 'email, public_profile', info_fields: 'email, name, gender, cover', :display => "popup", :image_size => 'large'
+    config.omniauth :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], scope: 'email, public_profile', info_fields: 'email, name, gender, cover', :image_size => 'large'
   else
-    config.omniauth :facebook, Rails.configuration.fb_app_id, Rails.configuration.fb_app_secret, scope: 'email, public_profile', info_fields: 'email, name, gender, cover', :display => "popup", :image_size => 'large'
+    config.omniauth :facebook, Rails.configuration.fb_app_id, Rails.configuration.fb_app_secret, scope: 'email, public_profile', info_fields: 'email, name, gender, cover', :image_size => 'large'
   end
 
   # ==> Warden configuration

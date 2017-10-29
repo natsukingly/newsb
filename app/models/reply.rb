@@ -20,7 +20,7 @@ class Reply < ApplicationRecord
 											comment_id: self.comment_id,
 											reply_id: self.id)
 			news_title = self.comment.post.article.title.truncate(30)
-			notification.message = "<span> #{self.user.name} </span> replied to your comment.<span> #{news_title} </span>"
+			notification.message = "<span> #{self.user.name} </span> replied to your comment.<span> \"#{news_title}\" </span>"
 			notification.save
 		end
 	end

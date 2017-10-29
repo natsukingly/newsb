@@ -5,7 +5,11 @@ module ApplicationHelper
         if result.nil?
             truncate(words, length: 80, separator: ' ')
         else
-            truncate(words, length: 40, separator: ' ')
+            if result.length < 10
+                truncate(words, length: 80, separator: ' ')
+            else
+                truncate(words, length: 40, separator: ' ')
+            end
         end
     end
     

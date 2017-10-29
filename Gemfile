@@ -36,6 +36,8 @@ gem 'whenever', require: false
 
 gem 'geocoder'
 
+gem 'dotenv-rails'
+
 # ここまで追加したGEM
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

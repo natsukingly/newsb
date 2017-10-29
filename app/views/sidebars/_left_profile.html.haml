@@ -3,9 +3,10 @@
 		.profile
 			.user_info
 				=image_tag user.image.url, class: "img-circle"	
-				%h2.name
-					=link_to user.name, user_path(user.id)
-				%p.shoulder_name.grey= user.shoulder_name
+				.name
+					%h2
+						=link_to user.name, user_path(user.id)
+					%h3.shoulder_name.grey= user.shoulder_name
 		
 			.stats
 				%h2.section_title
@@ -42,10 +43,10 @@
 		.profile.not_signed_in
 			.user_info
 				=render 'svg/profile_icon_bold'	
-				%h2.name
-					No account
-				.sign_in_btn
-					= link_to "sign-up・log-in", user_facebook_omniauth_authorize_path, class: "login_icon"
+				.name
+					%h2
+						No account
+					= link_to "signup・login", user_facebook_omniauth_authorize_path, class: "login_link"
 		
 			.stats
 				%h2.section_title

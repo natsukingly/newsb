@@ -27,34 +27,7 @@ $(document).on('turbolinks:load', function() {
 	
 	// locales link open close
 	
-	$('#locale_link').click(function () {
-			// ボタンが押されたら、モーダルウィンドウを表示
-			$('#locale_ddm').css("display", "flex");
-			return false;
-	});
 
-	$('body').click(function (event) {
-	   if(!$(event.target).closest('#locale_ddm').length && !$(event.target).is('#locale_ddm')) {
-		 $("#locale_ddm").hide();
-	   }     
-	});
-
-	// notifications ddm open close
-	
-	$('#notification_icon').click(function () {
-			// ボタンが押されたら、モーダルウィンドウを表示
-			$('#notification_ddm').css("display", "block");
-			return false;
-	});
-
-	$('body').click(function (event) {
-	   if(!$(event.target).closest('#notification_ddm').length && !$(event.target).is('#notification_ddm')) {
-		 $("#notification_ddm").hide();
-	   }     
-	});
-	
-	
-	
 
 });
 

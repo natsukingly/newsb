@@ -2,16 +2,15 @@ $(window).scroll(function() {
 	
     var $object = $('.sidebar_wrapper');
 	var scrollVolume = $(window).scrollTop();
+	var windowWidth = $(window).width();
 	var noticeHeight = parseInt($('.notice_bar').css("height"), 10);
 	var offsetAmount = 50;
 	
 	if(noticeHeight){
 		offsetAmount += noticeHeight;
 	}
-	
-	console.log(scrollVolume);
-	console.log(noticeHeight);
-	if(scrollVolume > offsetAmount){
+
+	if( $object.length && scrollVolume > offsetAmount){
 		$object.css("top", "40px").css("position", "fixed").css("width", "150px");
 		
 		var position = $('#sidebar_left').offset();

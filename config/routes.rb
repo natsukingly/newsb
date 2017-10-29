@@ -67,6 +67,7 @@ Rails.application.routes.draw do
 			get 'auto_complete'
 			get 'extra_info'
 			post 'complete_profile'
+			post 'check_notifications'
 			get 'notification_index'
 		end
 	end 
@@ -85,6 +86,8 @@ Rails.application.routes.draw do
 			get 'favorite_index'
 		end
 	end
+	# post '/hashtags/:tag/posts' => 'users#change_country', as: :change_country
+	
 	
 	resources :relationships, only: [] do
 		member do
