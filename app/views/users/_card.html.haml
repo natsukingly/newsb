@@ -1,0 +1,11 @@
+.user_card{class: "clearfix user_#{user.id}"}
+	=link_to image_tag(user.image.profile_sm.url, class: "img-circle"), user, class: "image"
+	.info
+		=link_to user.name, user, class: "user_name"
+		
+		%p.shoulder_name= user.shoulder_name
+		%p.about= universal_truncate( user.about, 80)
+			
+		.follow_link
+			=render "/shared/follow_form", user: user
+			

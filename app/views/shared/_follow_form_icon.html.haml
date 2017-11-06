@@ -1,8 +1,12 @@
 -if current_user
-  - unless current_user.id == user.id
-    -if Relationship.find_by(follower_id: current_user.id, following_id: user.id)
-      =link_to unfollow_icon_relationship_path(user.id), remote:true, method: :post, class: "unfollow" do
-        =render 'svg/unfollow_icon_html'
-    -else
-      = link_to follow_icon_relationship_path(user.id), remote: true, method: :post, class: "follow" do
-        =render 'svg/follow_icon_html'
+	- unless current_user.id == user.id
+		-if Relationship.find_by(follower_id: current_user.id, following_id: user.id)
+			=link_to unfollow_icon_relationship_path(user.id), remote:true, method: :post, class: "unfollow" do
+				=render 'svg/unfollow_icon_html'
+		-else
+			= link_to follow_icon_relationship_path(user.id), remote: true, method: :post, class: "follow" do
+				=render 'svg/follow_icon_html'
+-else
+	%span.follow.login_signup_link 
+		=render 'svg/follow_icon_html'
+		

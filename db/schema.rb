@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171025051615) do
+ActiveRecord::Schema.define(version: 20171105065706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,15 @@ ActiveRecord::Schema.define(version: 20171025051615) do
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "tag_id"
+  end
+
+  create_table "feed_notifications", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.boolean "check", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "country_id"
   end
 
   create_table "languages", force: :cascade do |t|

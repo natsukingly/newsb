@@ -1,46 +1,57 @@
-
-=render "/articles/selected_article", article: @article
-
-// #post_form_block
-// 	=render "posts/form_no_category", article: @article
-
-#main_contents.article_posts
-	-if @your_posts.empty?
-		.your_posts
-			%h2
-	-else
-		.your_posts
-			%h2
-				YOUR POSTS
-			= render partial: "posts/post_wo_article", collection: @your_posts.includes(:user), as: :post
+.article_show_section
+	.article_section
+		=render "/articles/selected_article", article: @article
+		
+		#main_contents.article_posts
+			-if @your_posts.empty?
+				.your_posts
+					%h2
+			-else
+				.your_posts
+					%h2
+						YOUR POSTS
+					= render partial: "posts/post_wo_article", collection: @your_posts.includes(:user), as: :post
+					
+			-if current_user
+				-unless @best_posts.where.not(id: @your_posts.ids).empty?
+					.best_posts
+						%h2
+							BEST POSTS
+						= render partial: "posts/post_wo_article", collection: @best_posts.where.not(id: @your_posts.ids).includes(:user), as: :post
+			-else
+				-unless @best_posts.empty?
+					.best_posts
+						%h2
+							BEST POSTS
+						= render partial: "posts/post_wo_article", collection: @best_posts.includes(:user), as: :post
+					
+			-unless @follower_posts.empty?
+				.follower_posts
+					%h2
+						FOLLOWERS POSTS
+					= render partial: "posts/post_wo_article", collection: @follower_posts.includes(:user), as: :post
+					
+			-unless @new_posts.empty?
+				.new_posts
+					%h2
+						NEW POSTS
+					= render partial: "posts/post_wo_article", collection: @new_posts.includes(:user), as: :post
+					
+			-unless @shared_posts.empty?
+				.shared_posts
+					%h2
+						POSTS without comments
+					= render partial: "posts/post_wo_article", collection: @shared_posts.includes(:user), as: :post
+		
+	.article_show_sidebar
+		%h2 
+			RECOMMENDED
+		.recommended_section
+			-unless @side_articles.empty?
+				= render partial: "articles/side_article", collection: @side_articles, as: :article
 			
-	-unless @best_posts.where.not(id: @your_posts.ids).empty?
-		.best_posts
-			%h2
-				BEST POSTS
-			= render partial: "posts/post_wo_article", collection: @best_posts.where.not(id: @your_posts.ids).includes(:user), as: :post
+	- @best_posts.ids.each do |best_id|		
+		:javascript
+			$("#main_contents").find(".post_#{best_id}").find(".user_block .star").css("display","block");
+					
 			
-	-unless @follower_posts.empty?
-		.follower_posts
-			%h2
-				FOLLOWERS POSTS
-			= render partial: "posts/post_wo_article", collection: @follower_posts.includes(:user), as: :post
-			
-	-unless @new_posts.empty?
-		.new_posts
-			%h2
-				NEW POSTS
-			= render partial: "posts/post_wo_article", collection: @new_posts.includes(:user), as: :post
-			
-	-unless @shared_posts.empty?
-		.shared_posts
-			%h2
-				POSTS without comments
-			= render partial: "posts/post_wo_article", collection: @shared_posts.includes(:user), as: :post
-
-
-- @best_posts.ids.each do |best_id|		
-	:javascript
-		$("#main_contents").find(".post_#{best_id}").find(".user_block .star").css("display","block");
-
-	

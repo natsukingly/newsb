@@ -1,7 +1,11 @@
 
 -if current_user
-  - unless current_user.id == user.id
-    -if Relationship.find_by(follower_id: current_user.id, following_id: user.id)
-      =link_to "following", unfollow_relationship_path(user.id), remote:true, method: :post, class: "unfollow"
-    -else
-      = link_to "follow", follow_relationship_path(user.id), remote: true, method: :post, class: "follow"
+	- unless current_user.id == user.id
+		-if Relationship.find_by(follower_id: current_user.id, following_id: user.id)
+			=link_to "following", unfollow_relationship_path(user.id), remote:true, method: :post, class: "relationship_btn unfollow_btn"
+		-else
+			= link_to "follow", follow_relationship_path(user.id), remote: true, method: :post, class: "relationship_btn follow_btn"
+-else
+	%span.follow_btn.relationship_btn.login_signup_link 
+		follow
+

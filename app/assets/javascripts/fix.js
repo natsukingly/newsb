@@ -4,7 +4,7 @@ $(window).scroll(function() {
 	var scrollVolume = $(window).scrollTop();
 	var windowWidth = $(window).width();
 	var noticeHeight = parseInt($('.notice_bar').css("height"), 10);
-	var offsetAmount = 50;
+	var offsetAmount = 70;
 	
 	if(noticeHeight){
 		offsetAmount += noticeHeight;

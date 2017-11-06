@@ -5,7 +5,7 @@
 			.report_btn.ddm_btn
 				REPORT
 				
-		-if reply.user.id == current_user.id
+		-if current_user && reply.user.id == current_user.id
 			.reply_user_menu
 				=link_to "EDIT", edit_reply_path(reply.id), remote: true
 				.delete_btn.ddm_btn

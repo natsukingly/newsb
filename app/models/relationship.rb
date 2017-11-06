@@ -24,6 +24,8 @@ class Relationship < ApplicationRecord
         notification = Notification.find_by(user_id: self.following_id,
                                         target_user_id: self.follower_id,
                                         notification_type: "Follow")
-        notification.destroy
+        if notification
+            notification.destroy
+        end
     end
 end

@@ -1,6 +1,6 @@
 
 #sidebar_left{
-    width: 180px;
+    width: 160px;
     margin: 12px;
     h2{
         font-size: 16px;
@@ -24,6 +24,7 @@
                 margin-bottom: 0;
             }
             img{
+                display: none;
                 height: 30px;
                 width: 30px;
                 margin-right: 5px;
@@ -80,7 +81,11 @@
     
 }    
     
-    
+@media (max-width: 970px) {
+    #sidebar_left{
+        display: none;
+    }
+}  
 
 
 #sidebar_right{
@@ -91,3 +96,4 @@
         background-color: white;
     }
 }
+

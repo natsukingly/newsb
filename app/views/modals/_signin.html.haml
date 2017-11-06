@@ -1,0 +1,48 @@
+.signin_modal_block
+	.modal_title
+		%h2
+			Hi, welcome to newsbie!!
+	.social_signin_links
+		= link_to user_facebook_omniauth_authorize_path do
+			.facebook_signin_btn
+				%i.fa.fa-facebook
+				Continue with facebook
+	
+	.non_social_signin_link
+		%p or
+		= form_tag root_path do
+			.non_social_signin_form
+				.email_form
+					=text_field_tag 'user[:email]', '', placeholder: "Email"
+				.password_form
+					=password_field_tag 'user[:password]', '', placeholder: "Password"
+				.non_social_submit_btn
+					=submit_tag "Login / Signup"
+		%h2
+			By signing up you indicate that you have read and agree to the Terms of Service and Privacy Policy.
+	.close_modal_btn
+		=render 'svg/close_icon'
+
+:javascript
+
+	
+	$('.login_signup_link').click(function () {
+		if("#{current_user}" == false){
+			$(".ddm").hide();
+			$('#signin_modal').fadeIn();
+			$('body').addClass('fixed');
+			return false;
+		}
+	});
+
+	$('body').click(function (event) {
+		if(!$(event.target).closest('.signin_modal_block').length && !$(event.target).is('.signin_modal_block')) {
+			$("#signin_modal").hide();
+			$('body').removeClass('fixed');
+		}     
+	});
+	
+	$('.close_modal_btn').click(function (event) {
+		$("#signin_modal").hide();
+		$('body').removeClass('fixed');
+	});

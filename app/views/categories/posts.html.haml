@@ -10,14 +10,17 @@
 			%span
 				feed
 
-#post_url_form
-	=render 'shared/url_form'
-					
-#post_form_block
-
-
-#main_contents.posts
-	=render @posts
+.feed_section
+	.post_section
+		#post_url_form
+			=render 'shared/url_form'
+							
+		#post_form_block
+		
+		
+		#main_contents.posts
+			=render @posts
+	.feed_sidebar
 
 	
 	

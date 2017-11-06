@@ -1,17 +1,41 @@
 module ApplicationHelper
     
-    def universal_truncate(words)
-        result = words.match(/[^\x01-\x7E]/)
+    def universal_truncate(words, volume)
+        result = words.scan(/[^\x01-\x7E]/)
+        # 全角だった場合
         if result.nil?
-            truncate(words, length: 80, separator: ' ')
+            truncate(words, length: volume / 2)
         else
-            if result.length < 10
-                truncate(words, length: 80, separator: ' ')
+            if result.length < 5
+                # 半角だった場合
+                truncate(words, length: volume, separator: ' ')
             else
-                truncate(words, length: 40, separator: ' ')
+                # 全角だった場合
+                truncate(words, length: volume / 2)
             end
         end
     end
+    
+    
+    def universal_truncate_with_omission(words, volume, omission)
+        result = words.scan(/[^\x01-\x7E]/)
+        # 全角だった場合
+        if result.nil?
+            truncate(words, length: volume / 2, omission: omission)
+        else
+            if result.length < 5
+                # 半角だった場合
+                truncate(words, length: volume, separator: ' ', omission: omission)
+            else
+                # 全角だった場合
+                truncate(words, length: volume / 2, omission: omission)
+            end
+        end
+    end
+    
+    
+    
+    
     
     TIME_PATTERN = { ' months'=>'mo', ' hours'=>'h', ' minutes'=>'m', ' days'=>'d', ' seconds' => 's', ' month'=>'mo', ' hour'=>'h', ' minute'=>'m', ' day'=>'d', ' second' => 's'}
     # or make use of locale:

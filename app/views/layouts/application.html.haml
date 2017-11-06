@@ -6,6 +6,8 @@
 		%title Newsparty
 		= csrf_meta_tags
 		= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+		= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Nova+Flat"
+		= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Lobster+Two"
 		= javascript_include_tag 'application'
 
 	%body
@@ -15,7 +17,7 @@
 
 			-if yield(:sidebar).empty?
 				.flex_wrapper.clearfix  
-					#sidebar_left.hidden-xs
+					#sidebar_left
 						=render "/sidebars/left_profile", user: current_user, trending_tags: @trending_tags
 					#main_container
 						=yield
@@ -33,5 +35,8 @@
 		
 		#mobile_footer
 			=render 'layouts/mobile_header'
+			
+		#signin_modal
+			=render 'modals/signin'
 			
 								

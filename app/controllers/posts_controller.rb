@@ -186,4 +186,20 @@ class PostsController < ApplicationController
       end
     end
     
+    def set_new_users
+      if current_user
+        @new_users = User.where(country_id: @country.id).where.not(id: current_user.id).order(created_at: :desc).limit(5)
+      else
+        @new_users = User.where(country_id: @country.id).order(created_at: :desc).limit(5)
+      end
+    end
+    
+    def who_to_follow
+      if current_user
+        @new_users = User.where(country_id: @country.id).where.not(id: current_user.id).order(created_at: :desc).limit(5)
+      else
+        @new_users = User.where(country_id: @country.id).order(created_at: :desc).limit(5)
+      end
+    end
+    
 end

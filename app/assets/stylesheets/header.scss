@@ -3,11 +3,11 @@
 	align-items: center;
 	margin-right: 20px;
 	svg{
-		fill: #ccc;
+		fill: #696969;
 		width: 18px;
 		height: 18px;
 		&:hover{
-			fill: white;
+			fill: #001E42;
 		}
 	}
 	
@@ -15,15 +15,15 @@
 
 header{
 	position: relative;
-	height: 50px;
-	line-height: 50px;
+	height: 60px;
+	line-height: 60px;
 	padding: 0 20px;
-	background-color: rgba(0 , 30, 66, 1);
+	background-color: white;
 	color: white;
 	z-index: 200;
 	.header_container{
 		display: flex;
-		max-width: 1000px;
+		max-width: 1200px;
 		margin: 0 auto;
 		
 		// header left start 
@@ -33,10 +33,18 @@ header{
 			display: flex;
 	    	align-items: center;
     		#logo{
+    			font-size: 32px;
+    			font-family: 'Nova Flat', cursive;
+    			// font-family: 'Lobster Two', cursive;
 				display: flex;
 		    	align-items: center;  
+		    	margin-right: 12px;
 		    	svg{
-		    		width: 100px;
+		    		width: 30px;
+		    		margin-right: 5px;
+		    		g{
+		    			// fill: grey;
+		    		}
 		    	}
 			}
 			#locale_link{
@@ -45,7 +53,7 @@ header{
 			    margin-left: 5px;
 			    cursor: pointer;
 				.setting{
-					color: #bbb;
+					color: #696969;
 				    margin-left: 5px;
 				    line-height: 12px;
 				    text-align: left;
@@ -55,13 +63,13 @@ header{
 					display: flex;
    					align-items: center;
 					svg{
-						fill: #bbb;
+						fill: #696969;
 						width: 20px;
 					}	
 				}
 			    &:hover .setting, &:hover svg{
-			    	color: white;
-			    	fill: white;
+			    	color: #001E42;
+			    	fill: #001E42;
 			    }
 			}
 		}
@@ -99,17 +107,17 @@ header{
 					height: 30px;
 					line-height: 25px;
 					border-radius: 5px;
-					background-color: #001E42;
-					border: 1px solid grey;
+					background-color: rgba(0,0,0,0);
+					border: 1px solid #bbb;
 					padding: 0 0 0 35px;
 					font-size: 14px;
 					color: white;
 				}
 				input:hover, input:focus {
-	                border: 1px solid white;
+	                border: 1px solid #001E42;
 				}
 				input:hover + i, input:focus + i {
-	                color: white;
+	                color: #001E42;
 				}
 			}
 		}
@@ -160,27 +168,35 @@ header{
 				fill: white;
 			}
 		}
-	    #login_signup_link{
-			color: #ddd;
-		    border: 1px solid #ddd;
+	    .login_signup_link{
+			color: #696969;
+		    border: 1px solid #696969;
 		    border-radius: 5px;
 		    height: 30px;
 		    line-height: 30px;
 		    padding: 0 12px;
+		    cursor: pointer;
 		    &:hover{
-		    	border: 1px solid white;
-		    	color: white;
+		    	border: 1px solid #001E42;
+		    	color: #001E42;
 		    }
 		}
 	}
 }
-
+#mobile_logo{
+	flex: 1;
+	text-align: center;
+	line-height: 50px;
+	font-size: 30px;
+	font-family: 'Nova Flat', cursive;
+}
 
 #mobile_header{
+	padding: 0 5px;
     position: relative;
-	height: 40px;
-	background-color: #001E42;
-	color: white;
+	height: 50px;
+	background-color: white;
+	color: #001E42;
 	display: flex;
 	align-items: center;
 	#menu_icon, #profile_icon{
@@ -188,15 +204,14 @@ header{
         display: flex;
         width: 30px;
         height: 30px;
-        margin: 0 12px;
         line-height: 30px;
-        color: white;
+        color: #001E42;
         cursor: pointer;
         justify-content: center;
         align-items: center;
 		i{
 		    flex: 1;
-		    color: white;
+		    color: #001E42;
 		    text-align: center;
 		}
 		img{
@@ -207,16 +222,19 @@ header{
 	}
 
 	.search_bar{
-	    flex: 1;
+	    width: 30px;
 	    position: relative;
 		.form_icon{
 			position: absolute;
 			z-index: 22;
-			top: 6px;
-			left: 10px;
+			top: 0;
+			left: 0;
 			font-size: 16px;
-			color: grey;
+			color: #001E42;
 			float: left;
+			.fa-search{ 
+				color: white;
+			}
 		}
 		#search{
 			input {
@@ -224,33 +242,36 @@ header{
 				width: 100%;
 				height: 30px;
 				border-radius: 5px;
-				background-color: #1D3148;
+				background-color: rgba(0,0,0,0);
 				padding: 0 0 0 35px;
 				border: none;
 				font-size: 14px;
-				color: white;
+				color: #001E42;
 			}
 		}
+	}
+	#account{
+		width: 35px;
 	}
 	.login_icon{
 		svg{
 		    background-color: #001E42;
-		    fill: white;
+		    fill: #001E42;
 		    width: 25px;
-		    margin: 0 12px;
 		    padding-top: 5px;
 		}
 	}
 }
 
 #header_nav{
-	height: 30px;
-	background-color: rgba(0, 30, 60, 0.8);
-	box-shadow: 0 0 2px #666, 0 0 8px #222;
+	height: 40px;
+	background-color: rgba(255, 255, 255, 0.8);
+	// box-shadow: 0 0 2px #666, 0 0 8px #222;
 	overflow: hidden;
 	z-index: 100;
 	
 	.nav_container{
+		max-width: 1200px;
 		margin: 0 auto;
 		display: flex;
 		-webkit-justify-content: space-between; /* Safari */
@@ -263,37 +284,54 @@ header{
 		padding-bottom: 50px;
 		a {
 			flex: 1;
-			line-height: 30px;
+			line-height: 40px;
 			padding: 0 12px;
 			letter-spacing: 1px;
-			height: 30px;
-			color: #ccc;
+			height: 40px;
+			color: #696969;
 			display: inline-block;
 			text-align: center;
 			font-size: 11px;
 			text-decoration: none;
 			&:hover{
-				color: white;
+				color: #001E42;
+				background-color: #f1f1f1;
 			}
 		}
 		a:last-child{
 			color: red;
 		}
 		a.active{
-			color: white;
+			color: black;
+			font-weight: 900;
     		pointer-events: none;
-    		border-bottom: 2px solid #eee;
+    		border-bottom: 2px solid #6495ED;
 		}
 		a.active.top_btn{
 			pointer-events: auto;
 		}
 		a .feed_icon{
 			color: #DC143C;
-			
 		}
 		span.padding{
 			display: inline-block;
 			width: 50px;
+		}
+		.feed_btn{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			span.feed_notifications_count{
+				display: inline-block;
+				width: 17px;
+				height: 17px;
+				border-radius: 20px;
+				background-color: #6495ED;
+				color: white;
+				font-size: 10px;
+				line-height: 16px;
+				margin-left: 5px;
+			}
 		}
 	}
 }
@@ -315,7 +353,7 @@ header{
 
 
 
-@media (max-width: 500px) { 
+@media (max-width: 768px) { 
 	header{
 		display: none;
 	}
@@ -323,7 +361,7 @@ header{
 		display: flex;
 	}
 	#header_nav{
-		background-color: #001E42;
+		background-color: #f9f9f9;
 	}
 	
 	#mobile_footer{
@@ -359,7 +397,7 @@ header{
 }
 
 #mobile_locale_link svg{
-	fill: white;
+	fill: #001E42;
 	width: 22px;
 }
 
@@ -367,7 +405,6 @@ header{
     width: 40px;
     height: 40px;
     padding: 5px;
-    margin: 0 5px;
     cursor: pointer;
 }
 

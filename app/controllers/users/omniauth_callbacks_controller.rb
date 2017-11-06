@@ -36,7 +36,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_user_registration_url
     end
   end
-  
 
   def failure
     redirect_to root_path
@@ -47,12 +46,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # def after_omniauth_failure_path_for(scope)
   #   super(scope)
   # end
-  def after_sign_up_path_for(resource)
-    bio_form_users_path(resource)
-  end
+  # def after_sign_up_path_for(resource)
+  #   bio_form_users_path(resource)
+  # end
 
-  # The path used after sign up for inactive accounts.
-  def after_inactive_sign_up_path_for(resource)
-    bio_form_users_path(resource)
-  end
+  # # The path used after sign up for inactive accounts.
+  # def after_inactive_sign_up_path_for(resource)
+  #   bio_form_users_path(resource)
+  # end
 end

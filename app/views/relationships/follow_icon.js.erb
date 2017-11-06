@@ -1,1 +1,2 @@
 $(".user_<%=@user.id%>").find(".follow_switch").html('<%= escape_javascript(render("shared/follow_form_icon", user: @user))%>');
+$(".user_<%=@user.id%>").find(".follow_link").html('<%= escape_javascript(render("shared/follow_form", user: @user))%>');

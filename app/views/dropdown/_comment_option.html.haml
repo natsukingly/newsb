@@ -4,7 +4,7 @@
 			.report_btn.ddm_btn
 				REPORT
 				
-		-if comment.user.id == current_user.id
+		-if current_user && comment.user.id == current_user.id
 			.comment_user_menu
 				=link_to "EDIT", edit_comment_path(comment.id), remote: true, class: "comment_edit_link"
 				.delete_btn.ddm_btn

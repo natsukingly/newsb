@@ -1,19 +1,10 @@
 // home/top.html.haml uses the same structure
 
-#index_nav{class: "#{@category.name}"}
-	=link_to articles_category_path(@category.id) do
-		.news_btn.active
-			=render 'svg/news_icon'
-			%span
-				news
-	=link_to posts_category_path(@category.id) do
-		.feed_btn
-			=render 'svg/feed_icon'
-			%span
-				feed
 				 
 #main_contents.articles
-	=render @articles
-
-
+	-unless @articles.empty?
+		=render 'articles/best_article', article: @articles.first
+		=render @articles.offset(1)
 	
+	// = render partial: "articles/best_article", collection: @articles, as: :article
+	// = render partial: "articles/test_article", collection: @articles, as: :article	

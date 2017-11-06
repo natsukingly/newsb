@@ -3,9 +3,12 @@
 	.header_container
 		.left
 			// = link_to image_tag("logo_white.png", style: "width: 110px"), root_path, id: "logo", class: "hidden-xs"   
+			// = link_to root_path, id: "logo" do
+			// 	=render 'svg/logo_icon'
 			= link_to root_path, id: "logo" do
-				=render 'svg/logo_icon'
-			
+				=render "svg/bee_icon"
+				%span
+					newsbee
 					
 			#locale_link
 				// .setting_icon
@@ -34,21 +37,26 @@
 					=render "shared/notification_icon"
 				= image_tag current_user.image.url, class: "img-circle profile_xs icon", id: "profile_option_link"
 			-else
-				= link_to "Login/Signup", user_facebook_omniauth_authorize_path, id: "login_signup_link"
+				.login_signup_link 
+					Login/Signup
 
 			=render 'dropdown/notifications'
 			=render 'dropdown/profile_option'
 
 #mobile_header
 
-	=link_to tags_path, id: "mobile_locale_link" do
-		=render 'svg/globe_icon'
-
+	-#=link_to tags_path, id: "mobile_locale_link" do
+		-#=render 'svg/globe_icon'
+	/ header left
 	.search_bar
-		%i.fa.fa-search.form_icon
+		%span.fa-stack.fa-lg.form_icon
+			%i.fa.fa-circle.fa-stack-2x
+			%i.fa.fa-search.fa-stack-1x
 		=form_tag "/search", method: "get", id: "search" do
 			=text_field_tag :key_word, params[:key_word], placeholder: "search"
 			=submit_tag "", style: "display: none;"
+	
+	= link_to "newsby", root_path, id: "mobile_logo" 
 	
 	/ HEADER RIGHT     
 	#account.menu_icon
@@ -58,16 +66,23 @@
 			= link_to user_facebook_omniauth_authorize_path, class: "login_icon" do
 				=render 'svg/profile_icon_bold'
 	
-	=render 'dropdown/mobile_locale'
-	=render 'dropdown/mobile_profile_option'
+		=render 'dropdown/mobile_locale'
+		=render 'dropdown/mobile_profile_option'
 
 #header_nav
 	.nav_container
 		=link_to " ", root_path, class: "selected_topic active", style: "pointer-events: none; display: none;"
 		=link_to "TOP", root_path, class: "top_btn"
+		=link_to all_posts_categories_path, class: "feed_btn" do
+			FEED
+			-if current_user
+				%span.feed_notifications_count
+					=current_user.feed_notifications.where(check: false).count
 		-@categories.each do |category|
 			=link_to category.name, articles_category_path(category.id), class: "#{category.name}_nav_btn"
 		%span.padding
+
+
 
 -if flash[:notice]
 	.notice_bar
@@ -92,6 +107,12 @@
 -elsif @current_topic
 	:javascript
 		$('#header_nav .selected_topic').text("#{@current_topic}").show();
+
+-elsif @all_posts
+	:javascript
+		$('#header_nav').find(".feed_btn").addClass("active");
+		$('#header_nav').find(".feed_btn").css("border-bottom", "1px solid #009a00");
+		$('#header_nav').find(".feed_btn .feed_notifications_count").css("background-color", "#009a00");
 
 -elsif @all_topic
 	:javascript

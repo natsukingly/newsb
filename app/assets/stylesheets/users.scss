@@ -4,6 +4,39 @@
 #main_container{
 }
 
+.user_card{
+    display: flex;
+    padding: 12px;
+    background-color: #f9f9f9;
+    margin-bottom: 12px;
+    .image{
+        margin-right: 12px;
+        img{
+            width: 35px;
+            height: 35px;
+        }
+    }
+    .info{
+        flex: 1;
+        .user_name{
+            font-size: 14px;
+            color: #696969;
+            font-weight: bold;
+            &:hover{
+                color: #36589b;
+            }
+        }
+        .shoulder_name{
+            color: #696969;
+        }
+        .about{
+            margin: 12px 0;
+        }
+        .follow_link{
+        }
+    }
+}
+
 
 .user_block{
     display: flex;

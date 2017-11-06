@@ -21,7 +21,7 @@
 					.image{ style: "background-image: url(#{post.article.image.url});"}
 					.article_info
 						%h2.bold
-							= truncate(post.article.title, length: 40) do
+							= universal_truncate(post.article.title, 120) do
 								%span ...
 						%p.xs.grey
 							= post.article.source

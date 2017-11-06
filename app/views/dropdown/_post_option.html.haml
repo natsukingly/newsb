@@ -1,6 +1,6 @@
 .post_ddm.ddm
 	.post_ddm_wrapper
-		-if post.user.id == current_user.id
+		-if current_user && post.user.id == current_user.id
 			.post_user_menu
 				=link_to "EDIT", edit_article_post_path(post.id), remote: true
 				.delete_btn.ddm_btn

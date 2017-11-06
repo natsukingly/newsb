@@ -15,8 +15,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "reset";
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "common";
@@ -35,6 +35,8 @@
 @import "button";
 @import "ddm";
 @import "notification";
+@import "modal";
+@import "relationships";
 
 
 

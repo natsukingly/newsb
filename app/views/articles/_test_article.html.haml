@@ -1,0 +1,124 @@
+
+/ over 500
+=link_to article_path(article.id), class: "article article_#{article.id} clearfix", id: "best_article" do
+	.article_block
+		.image{style: "background-image: url(#{article.image.url});"}
+			.overlay
+				// %span.best_article_title
+				// 	= universal_truncate(article.title)
+				// 	%span.best_article_source
+				// 		= article.source
+				// 		- if article.published_time
+				// 			%i.fa.fa-clock-o
+				// 			#{time_ago_in_words_short(article.published_time)}				
+				.stats
+					%p.counts
+						#{article.posts_count}
+						%span.unit
+							posts
+		.info
+			.title
+				%h2
+					= universal_truncate(article.title)
+				%p.sm.grey
+					= article.source
+					- if article.published_time
+						%i.fa.fa-clock-o
+						#{time_ago_in_words_short(article.published_time)}
+						
+	.best_posts
+		.info
+			.title
+				%h2
+					= universal_truncate(article.title)
+				%p.sm.grey
+					= article.source
+					- if article.published_time
+						%i.fa.fa-clock-o
+						#{time_ago_in_words_short(article.published_time)}
+		-posts = article.posts.order(likes_count: :desc).limit(2)
+		
+		- unless posts.first.nil?
+			-post = posts.first
+			.body.best_post.best_post_first.clearfix
+				.user_block.clearfix
+					=image_tag post.user.image.url, class:"img-circle user_image"
+					.user_details
+						%p
+							%span
+								=post.user.name
+							%br
+							%span.user_shoulder_name
+								=post.user.shoulder_name
+				%p.best_post_content
+					-if post.content.empty?
+						%span.shared_message
+							\-Shared this article-
+					-else
+						= truncate(post.content, length: 60) do
+							%span ...
+		- unless posts.second.nil?
+			-post = posts.second
+			.body.best_post.best_post_second.clearfix
+				.user_block.clearfix
+					=image_tag post.user.image.url, class:"img-circle user_image"
+					.user_details
+						%p
+							%span
+								=post.user.name
+							%br
+							%span.user_shoulder_name
+								=post.user.shoulder_name
+				%p.best_post_content
+					-if post.content.empty?
+						%span.shared_message
+							\-Shared this article-
+					-else
+						= truncate(post.content, length: 60) do
+							%span ...
+
+/Under 500px
+=link_to article_path(article.id), class: "article article_#{article.id} clearfix", id: "best_mobile_article" do
+	.article_block
+		.image{style: "background-image: url(#{article.image.url});"}
+			.overlay
+				.stats
+					%p.counts
+						#{article.posts_count}
+						%br
+						%span.unit
+							posts
+	
+		.info
+			.title
+				%h2
+					= universal_truncate(article.title)
+				%p.sm.grey
+					= article.source
+					- if article.published_time
+						%i.fa.fa-clock-o
+						#{time_ago_in_words_short(article.published_time)}
+						
+	.best_post
+		-post = article.posts.order(likes_count: :desc).first
+		
+		- if post != nil
+			.body.clearfix
+				.user_block.clearfix
+					=image_tag post.user.image.url, class:"img-circle user_image"
+					.user_details
+						%p
+							%span
+								=post.user.name
+								\/
+							%span.user_shoulder_name
+								=post.user.shoulder_name
+						%p.content
+							-if post.content.empty?
+								%span.shared_message
+									\-Shared this article-
+							-else
+								= truncate(post.content, length: 60) do
+									%span ...
+
+					

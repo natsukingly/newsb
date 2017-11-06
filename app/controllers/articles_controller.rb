@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :load_more_posts]
+  before_action :set_side_articles, only: [:show]
   before_action :yes_found 
 
   def index
@@ -12,14 +13,23 @@ class ArticlesController < ApplicationController
   end
   
   def show
-    @shared_posts = @article.posts.where(content: "")
-    shared_posts_ids = @shared_posts.ids
-    @your_posts = @article.posts.where(user_id: current_user.id).where.not(id: shared_posts_ids)
-    @best_posts = @article.posts.where.not(id: shared_posts_ids).order(likes_count: :desc).limit(3)
-    @follower_posts = @article.posts.where(user_id: current_user.followers.ids).where.not(id: shared_posts_ids).where.not(id: @best_posts.ids)
-    
-    inapplicable_ids = @your_posts.ids + @best_posts.ids + @follower_posts.ids + shared_posts_ids
-    @new_posts = @article.posts.where.not(id: inapplicable_ids).order(created_at: :desc)
+    if current_user
+      @shared_posts = @article.posts.where(content: "")
+      shared_posts_ids = @shared_posts.ids
+      @your_posts = @article.posts.where(user_id: current_user.id).where.not(id: shared_posts_ids)
+      @best_posts = @article.posts.where.not(id: shared_posts_ids).order(likes_count: :desc).limit(3)
+      @follower_posts = @article.posts.where(user_id: current_user.followers.ids).where.not(id: shared_posts_ids).where.not(id: @best_posts.ids)
+      inapplicable_ids = @your_posts.ids + @best_posts.ids + @follower_posts.ids + shared_posts_ids
+      @new_posts = @article.posts.where.not(id: inapplicable_ids).order(created_at: :desc)
+    else
+      @shared_posts = @article.posts.where(content: "")
+      shared_posts_ids = @shared_posts.ids
+      @your_posts = []
+      @best_posts = @article.posts.where.not(id: shared_posts_ids).order(likes_count: :desc).limit(3)
+      @follower_posts = []
+      inapplicable_ids = @best_posts.ids + shared_posts_ids
+      @new_posts = @article.posts.where.not(id: inapplicable_ids).order(created_at: :desc)
+    end
   end
   
   def load_more_posts
@@ -48,4 +58,7 @@ class ArticlesController < ApplicationController
       @article = Article.find(params[:id])
     end
     
+    def set_side_articles
+      @side_articles = Article.where(category_id: @article.category_id, country_id: @article.country_id).where.not(id: @article.id).order(likes_count: :desc).limit(5)
+    end
 end

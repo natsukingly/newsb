@@ -3,7 +3,43 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // post start here
+.feed_section{
+    display: flex;
+    .post_section{
+        flex: 1;
+        min-width: 600px;
+    }
+    .feed_sidebar{
+		width: 350px;
+		margin: 0 20px;
+		h2{
+			font-size: 14px;
+		    color: #696969;
+		    margin-bottom: 12px;
+		}
+	}
+}
+@media(max-width: 970px){
+	.feed_section{
+		.post_section{
+			min-width: auto;
+		}
+		.feed_sidebar{
+			display: none;
+		}
+	}
+}
 
+@media(max-width: 1170px){
+    .feed_section{
+        .post_section{
+            margin-left: 0;
+        }
+        .feed_sidebar{
+            display: none;
+        }
+    }
+}
 
 .post{
     margin-bottom: 10px;
@@ -11,7 +47,7 @@
     box-shadow: 0 0 1px rgba(0,0,0,0.3);
     font-size: 14px;
     .body{
-        padding: 12px; 
+        padding: 20px; 
 
         .main{
             .content{
@@ -106,9 +142,10 @@
         border-radius: 0;
     }
 }
-@media (max-width: 400px) {
+@media (max-width: 500px) {
     .post{
         .body{
+            padding: 12px;
             .main{
                 .post_article{
                     margin-bottom: 12px;
@@ -257,4 +294,6 @@
         }
     }
 }
+
+
 

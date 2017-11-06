@@ -1,5 +1,4 @@
-
-#post_form
+#post_form.login_signup_link
 	.body
 		.form_main.clearfix
 			= form_tag create_article_post_path(@article.id), remote: true do
@@ -11,7 +10,8 @@
 					.clear_btn
 						Clear
 					= submit_tag "Submit", class: "form_btn #post_submit_btn"
-				
+
+			
 
 =render 'js/autocomplete'
 

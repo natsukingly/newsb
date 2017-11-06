@@ -11,15 +11,24 @@
 							posts
 	
 		.info
+			.mini_image{style: "background-image: url(#{article.image.url});"}
 			.title
-				%h2.bodld.lg
-					= universal_truncate(article.title)
+				%h2
+					= universal_truncate(article.title, 50)
 				%p.sm.grey
-					= article.source
+					= universal_truncate_with_omission(article.source, 30, "")
 					- if article.published_time
 						%i.fa.fa-clock-o
 						#{time_ago_in_words_short(article.published_time)}
-						
+				
+				.mobile_posts_count
+					-popular_users = User.where(id: article.posts.order(likes_count: :desc).limit(5).uniq.pluck(:user_id))
+					.popular_user_faces
+						-popular_users.each do |user|
+							=image_tag user.image.url, class:"img-circle user_face" 
+					%span
+						#{article.posts_count} posts
+					
 	.best_post
 		-post = article.posts.order(likes_count: :desc).first
 		
@@ -37,7 +46,7 @@
 						%p.content
 							-if post.content.empty?
 								%span.shared_message
-									\-Shared this article-
+									> Shared this article
 							-else
 								= truncate(post.content, length: 60) do
 									%span ...

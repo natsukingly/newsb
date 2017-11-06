@@ -1,23 +1,20 @@
-#index_nav.all
-	=link_to root_path do
-		.news_btn
-			=render 'svg/news_icon'
-			%span
-				news
-	=link_to all_posts_categories_path do
-		.feed_btn.active
-			=render 'svg/feed_icon'
-			%span
-				feed
 
-#post_url_form
-	=render 'shared/url_form_top'
-					
-#post_form_block
-
-
-#main_contents.posts
-	=render @posts
+.feed_section
+	.post_section
+		#post_url_form
+			=render 'shared/url_form_top'
+							
+		#post_form_block
+		
+		
+		#main_contents.posts
+			=render @posts
+	.feed_sidebar
+		%h2
+			who to follow
+		.new_users_section
+			-unless @new_users.empty?
+				= render partial: "users/card", collection: @new_users, as: :user
 
 	
 	

@@ -24,8 +24,8 @@
 
 
 body{
-	background-color: #f3f3f3;
-	font-family: 'Roboto', sans-serif;
+	background-color: #eee;
+ 	font-family: Lato, "Noto Sans JP", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 	font-size: 12px;
 	color: #222222;
 	position: relative;
@@ -33,6 +33,12 @@ body{
 	padding: 0 0 50px 0;
 	min-height: 100%;
 	height: 100%;
+}
+
+@media (max-width: 500px) {
+	body{
+		background-color: #ccc;
+	}
 }
 
 .fixed{
@@ -99,9 +105,20 @@ input[type="text"]:focus {
 .flex_wrapper, .user_flex_wrapper{
 	position: relative;
 	flex: 1;
-	width: 900px;
+	max-width: 1170px;
 	margin: 0 auto;
 	display: flex;
+}
+
+@media(max-width: 1170px){
+	.flex_wrapper{
+	}
+}
+
+@media(max-width: 970px){
+	.flex_wrapper{
+		max-width: 850px;
+	}
 }
 
 @media(max-width: 768px){
@@ -149,8 +166,8 @@ input[type="text"]:focus {
 
 #main_container{
 	flex: 1;
-	min-width: 578px;
-	margin: 0 12px 20px;
+	min-width: 700px;
+	margin: 20px 12px;
 	.mobile_post_link{
 		text-align: center;
 		display: block;
@@ -162,11 +179,9 @@ input[type="text"]:focus {
 	}
 }
 
-
-
 @media(max-width: 768px){
 	#main_container{
-		margin: 0 12px 12px;
+		margin: 0 0 50px;
 		min-width: auto;
 		#mobile_side_nav_link{
 			display: inline-block;
@@ -191,11 +206,6 @@ input[type="text"]:focus {
 	}
 }
 
-@media(max-width: 600px){
-	#main_container{
-		margin: 0 0 12px;
-	}
-}
 
 
 // main nav
@@ -211,7 +221,7 @@ input[type="text"]:focus {
 #main_contents{
 	position: relative;
 	font-size: 14px;
-	padding-bottom: 20px;
+	margin: 0;
 	.search_btn:hover{
 		background-color: rgba(0,0,0,0.03);
 	}
@@ -347,15 +357,15 @@ a  {
 	
 } 
 .search_nav, .tag_nav, .user_nav{
-	margin-top: 20px;
 	div{
 		justify-content: center;
 	}
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
 	#index_nav{
+		background-color: #f3f3f3;
 		div{
 			justify-content: center;
 		}
@@ -471,7 +481,6 @@ span.input-group-btn{
 
 .nav_container{
 	max-width: 800px;
-	padding: 0 15px;
 	margin: 0 auto;
 	height: 100%;
 }
