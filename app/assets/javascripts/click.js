@@ -17,7 +17,6 @@ $(document).on('turbolinks:load', function() {
 	
 	// articles/show post_form form_no_category
 	$("#post_form .textarea").click(function(){
-		console.log("i am aweosme");
 	   $("#post_content").focus(); 
 	});
 	
@@ -25,8 +24,7 @@ $(document).on('turbolinks:load', function() {
 
 	
 	
-	// locales link open close
-	
+
 
 
 });

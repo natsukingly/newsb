@@ -1,0 +1,40 @@
+.post_modal_block.modal_block
+	.modal_title
+		%h2
+			Share knowledge, Ask questions
+	.post_url_form.on_modal
+		=render "shared/url_form_modal"
+	#post_form_block_on_modal
+	
+	.close_modal_btn
+		=render 'svg/close_icon'
+	
+:javascript
+
+	
+	$('#create_post_btn').click(function () {
+		if("#{current_user}" == false){
+			$(".ddm").hide();
+			$('#signin_modal').fadeIn();
+			$('body').addClass('fixed');
+			return false;
+		} else{
+			console.log("not working");
+			$("#post_modal").fadeIn();
+			$('body').addClass('fixed');
+			return false;
+		}
+		console.log("destination fucked");
+	});
+
+	$('#post_modal').click(function (event) {
+		if(!$(event.target).closest('.post_modal_block').length && !$(event.target).is('.post_modal_block')) {
+			$("#post_modal").hide();
+			$('body').removeClass('fixed');
+		}  
+	});
+	
+	$('.close_modal_btn').click(function (event) {
+		$("#post_modal").hide();
+		$('body').removeClass('fixed');
+	});

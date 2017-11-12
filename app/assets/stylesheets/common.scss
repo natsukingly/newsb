@@ -35,9 +35,9 @@ body{
 	height: 100%;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
 	body{
-		background-color: #ccc;
+		// background-color: #ccc;
 	}
 }
 
@@ -110,16 +110,18 @@ input[type="text"]:focus {
 	display: flex;
 }
 
+
 @media(max-width: 1170px){
 	.flex_wrapper{
+		max-width: 1000px;
 	}
 }
 
-@media(max-width: 970px){
-	.flex_wrapper{
-		max-width: 850px;
-	}
-}
+// @media(max-width: 1170px){
+// 	.flex_wrapper{
+// 		max-width: 850px;
+// 	}
+// }
 
 @media(max-width: 768px){
 	.flex_wrapper{
@@ -131,11 +133,11 @@ input[type="text"]:focus {
 
 .not_found{
 	border-radius: 10px;
-	background-color: white;
 	padding: 50px 20px;
-	font-size: 30px;
+	font-size: 24px;
 	font-weight: 900;
 	color: grey;
+	text-align: center;
 	p{
 		font-size: 16px;
 	}
@@ -166,7 +168,7 @@ input[type="text"]:focus {
 
 #main_container{
 	flex: 1;
-	min-width: 700px;
+	display: flex;
 	margin: 20px 12px;
 	.mobile_post_link{
 		text-align: center;

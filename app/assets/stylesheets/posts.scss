@@ -5,46 +5,44 @@
 // post start here
 .feed_section{
     display: flex;
+    flex: 1;
     .post_section{
         flex: 1;
         min-width: 600px;
     }
-    .feed_sidebar{
-		width: 350px;
-		margin: 0 20px;
-		h2{
-			font-size: 14px;
-		    color: #696969;
-		    margin-bottom: 12px;
-		}
+}
+.feed_sidebar{
+	width: 350px;
+	margin: 0 20px;
+	h2{
+		font-size: 14px;
+	    color: #696969;
+	    margin-bottom: 12px;
 	}
 }
-@media(max-width: 970px){
-	.feed_section{
-		.post_section{
-			min-width: auto;
-		}
-		.feed_sidebar{
-			display: none;
-		}
-	}
-}
-
 @media(max-width: 1170px){
     .feed_section{
         .post_section{
             margin-left: 0;
         }
-        .feed_sidebar{
-            display: none;
-        }
     }
+}
+
+@media(max-width: 970px){
+	.feed_section{
+		.post_section{
+			min-width: auto;
+		}
+	}
+	.feed_sidebar{
+		display: none;
+	}
 }
 
 .post{
     margin-bottom: 10px;
     background: white;
-    box-shadow: 0 0 1px rgba(0,0,0,0.3);
+    box-shadow: 0 0 1px #bbb;
     font-size: 14px;
     .body{
         padding: 20px; 
@@ -66,28 +64,6 @@
             .post_menu{
                 font-size: 20px;
                 cursor: pointer;
-            }
-            .post_article{
-                margin-bottom: 12px;
-                display: flex;
-                border: 1px solid rgba(0,0,0,0.05);
-                &:hover{
-                    border: 1px solid rgba(54, 88, 155, 0.4);
-                }
-                .image{
-                    background-position: center;
-                    background-size: cover;
-                    height: 100px;
-                    width: 100px;
-                }
-                .article_info{
-                    padding: 12px;
-                    flex: 1;
-                    transition: .1s;
-                    h2{
-                        padding-bottom: 5px;
-                    }
-                }
             }
         }
         .status{
@@ -124,9 +100,30 @@
     }
 }
 
+.post_article{
+    margin-bottom: 12px;
+    display: flex;
+    border: 1px solid rgba(0,0,0,0.05);
+    &:hover{
+        border: 1px solid rgba(54, 88, 155, 0.4);
+    }
+    .image{
+        background-position: center;
+        background-size: cover;
+        height: 100px;
+        width: 100px;
+    }
+    .article_info{
+        padding: 12px;
+        flex: 1;
+        transition: .1s;
+        h2{
+            padding-bottom: 5px;
+        }
+    }
+}
 
 .post.show_post{
-    margin-top: 20px;
 }
 
 .best_comment{

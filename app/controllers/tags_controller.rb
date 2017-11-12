@@ -2,9 +2,9 @@ class TagsController < ApplicationController
     before_action :set_tag, except: [:index, :favorite_index]
     before_action :yes_found
     before_action :set_current_topic, only: [:show]
+    before_action :set_new_users
     
     def show
-        
     end
     
     def index
@@ -39,7 +39,7 @@ class TagsController < ApplicationController
     
     private 
         def set_tag
-            @tag = Tag.find(params[:id])
+            @tag = Tag.find_by(name: params[:name])
         end
         
         def set_current_topic

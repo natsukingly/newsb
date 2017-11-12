@@ -1,7 +1,8 @@
 
+
 #post_form{
     .post_article{
-        padding-bottom: 12px;
+        flex-direction: column;
         .post_image{
             height: 200px;
             background-size: cover;
@@ -9,7 +10,6 @@
         }
         .article_info{
             padding: 12px;
-            border: 1px solid #eee;
         }
     }
     .body{
@@ -19,8 +19,6 @@
         .form_main{
             flex: 1;
             form{
-                padding: 20px;
-
                 .textarea{
                     min-height: 80px;
                     border: 1px solid #bbb;
@@ -43,11 +41,9 @@
                 }
             }
             .select{
-                border-bottom: 1px solid #bbb;
-                border-left: 5px solid #bbb;
                 select{
-                    padding: 0 10px;
-                    border: none;
+                    width: 180px;
+                    border: 1px solid #bbb;
                 }
                 select::-webkit-input-placeholder{
                     color: red;
@@ -92,6 +88,14 @@
     }
 }
 
+#post_form.on_modal{
+    .post_article{
+        flex-direction: row;
+    }
+}
+
+
+
 #post_form.edit_form{
     .body{
         padding: 0;
@@ -104,6 +108,7 @@
     }
 }
 
+
 .comment_form.edit_form{
     .comment_submit{
         margin: 5px 0;
@@ -115,11 +120,26 @@
 
 
 
-#post_url_form{
+.post_url_form{
     margin: 0 0 12px;
-    border: 1px solid #ddd;
     overflow: hidden;
-    border-radius: 5px;
+    padding: 12px;
+    background-color: #f3f3f3;
+    box-shadow: 0 0 1px rgba(0,0,0,0.3);
+    .form_image{
+        display: flex;
+        align-items: center;
+        width: 54px;
+        height: 50px;
+        padding-left: 20px;
+        background-color: white;
+        // border-radius: 50px 0 0 50px;
+        img{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+        }
+    }
     input:focus, button:focus{
         box-shadow: none;
         border-color: rgb(204, 204, 204);
@@ -139,8 +159,9 @@
             outline: none;
             box-shadow: none;
             height: 50px;
-            padding: 12px;
-            font-size: 14px;
+            padding: 25px 12px;
+            font-size: 20px;
+            // border-radius: 0 50px 50px 0;
         }
         
         button[type=submit]{
@@ -150,7 +171,7 @@
 }
 
 @media (max-width: 768px) {
-	#post_url_form{
+	.post_url_form{
 	    margin: 5px 0;
 		border-radius: 0;
 	}

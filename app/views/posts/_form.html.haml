@@ -2,7 +2,7 @@
 .post#post_form
 	.body
 		.post_article
-			.post_image{ style: "background-image: url(#{@article_image});"}
+			.post_image{ style: "background-image: url(#{article_image_helper @article_image});"}
 			.article_info
 				%h2.bold
 					= truncate(@article_title, length: 40) do
@@ -13,18 +13,17 @@
 			= form_tag posts_path, remote: true do
 				.field.form-group
 					.select
-						= select_tag "post[category_id]", options_from_collection_for_select(@categories, "id", "name", { :selected => @category.id.to_i }), class: "form-control selectpicker tag_selection"
+						= select_tag "post[category_id]", options_from_collection_for_select(@categories, "id", "name"), prompt: "select a category", class: "form-control selectpicker tag_selection"
 
 				.field.form-group#post_textarea
 					.textarea
 						= text_area_tag 'post[content]', '', placeholder: "your awesome comment *optional", class: "post_textarea form-control"
 					
-					= hidden_field_tag 'post[category_id]', @category.id
 					= hidden_field_tag 'article[image]', @article_image
 					= hidden_field_tag 'article[url]', @article_url
 					= hidden_field_tag 'article[source]', @article_source
 					= hidden_field_tag 'article[title]', @article_title
-					= hidden_field_tag 'article[published_time]', @article_published_time
+					= hidden_field_tag 'article[published_time]', value: @article_published_time
 					
 					#autocomplete_tags
 				.post_submit
@@ -35,30 +34,25 @@
 
 =render 'js/autocomplete'
 
+
 :javascript
 	$("#post_textarea textarea").height(30);//init
 	$("#post_textarea textarea").css("lineHeight","20px");//init
 	
 	$("#post_textarea textarea").on("input",function(evt){
 		console.log("post_content");
-		if(evt.target.scrollHeight > evt.target.offsetHeight){
-			$(evt.target).height(evt.target.scrollHeight);
-		}else{
-			var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
-			while (true){
-				$(evt.target).height($(evt.target).height() - lineHeight);
-				if(evt.target.scrollHeight > evt.target.offsetHeight){
-					$(evt.target).height(evt.target.scrollHeight);
-				}
-				break;
-			}
-		}
+	    if(evt.target.scrollHeight > evt.target.offsetHeight){
+	        $(evt.target).height(evt.target.scrollHeight);
+	    }else{
+	        var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
+	        while (true){
+	            $(evt.target).height($(evt.target).height() - lineHeight);
+	            if(evt.target.scrollHeight > evt.target.offsetHeight){
+	                $(evt.target).height(evt.target.scrollHeight);
+	            }
+	            break;
+	        }
+	    }
 	});
-	
-	
-	$("#post_form .cancel_btn").click(function(){
-		$("#post_form").hide(); 
-	});
-
 	
 

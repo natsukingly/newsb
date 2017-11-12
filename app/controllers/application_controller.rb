@@ -86,4 +86,12 @@ class ApplicationController < ActionController::Base
         def yes_found
           @not_found = false
         end
+        
+        def set_new_users
+          if current_user
+            @new_users = User.where(country_id: @country.id).where.not(id: current_user.id).order(created_at: :desc).limit(3)
+          else
+            @new_users = User.where(country_id: @country.id).order(created_at: :desc).limit(3)
+          end
+        end
 end

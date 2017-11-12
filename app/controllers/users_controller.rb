@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :followers, :following, :posts]
-
+  before_action :set_new_users, only: [:notification_index, :show]
   # GET /users
   # GET /users.json
   def index
@@ -49,6 +49,14 @@ class UsersController < ApplicationController
   
   def show
     @best_posts = @user.posts.order(likes_count: :desc).limit(3)
+    
+  end
+  
+  def edit_setting
+    @current_topic = "Profile Setting"
+  end
+  
+  def save_setting
   end
   
   def posts

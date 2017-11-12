@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy, :edit_article_post, :update_article_post, :cancel_edit_article_post]
   before_action :yes_found
   before_action :set_category, only: [:load_url]
+  before_action :set_new_users, only: [:show]
   after_action :decide_category, only: [:create, :update]
   after_action :not_found, only: [:index, :load_more]
 
@@ -38,7 +39,13 @@ class PostsController < ApplicationController
     @category_id = @category.id
   end
   
-  def load_url_top
+  def load_url_feed
+    parseURL
+    @post = Post.new
+    @article = Article.new
+  end
+  
+  def load_url_modal
     parseURL
     @post = Post.new
     @article = Article.new
@@ -61,7 +68,11 @@ class PostsController < ApplicationController
     #save an article only when it doesnt already exist
     if @article == nil
       @article = Article.new(article_params)
-      @article.remote_image_url = params[:article][:image].gsub('http:','https:')
+      if params[:article][:image].to_s == "no_image"
+        @article.image = "no_image.jpeg"
+      else
+        @article.remote_image_url = params[:article][:image].gsub('http:','https:')
+      end
       @article.category_id = params[:post][:category_id].to_i
       @article.country_id = @country.id
       @article.save
@@ -77,6 +88,36 @@ class PostsController < ApplicationController
     decide_category
   end
   
+  def create_from_modal
+    @article = Article.where(country_id: @country.id).find_by(title: params[:article][:title])
+    
+    #save an article only when it doesnt already exist
+    if @article == nil
+      @article = Article.new(article_params)
+      if params[:article][:image].to_s == "no_image"
+        @article.image = "no_image.jpeg"
+      else
+        @article.remote_image_url = params[:article][:image].gsub('http:','https:')
+      end
+      @article.category_id = params[:post][:category_id].to_i
+      @article.country_id = @country.id
+      @article.save
+    end
+    
+    #save post
+    @post = current_user.posts.build(article_id: @article.id)
+    @post.category_id = params[:post][:category_id].to_i
+    @post.country_id = @country.id
+    @post.content = params[:post][:content]
+    @post.save
+    
+    decide_category
+    
+    redirect_to all_posts_categories_path
+  end
+  
+  
+  
   def create_article_post
     @article = Article.find(params[:id])
     @post = @article.posts.build(content: params[:post][:content], 
@@ -84,6 +125,7 @@ class PostsController < ApplicationController
                                 user_id: current_user.id,
                                 country_id: @country.id)
     @post.save
+    redirect_to @article
   end
 
 
@@ -159,16 +201,12 @@ class PostsController < ApplicationController
       end
       
       #SITE_IMAGE
-      if doc.css('//meta[property="og:image"]/@content').empty?
-        @article_image = "noimage.jpg"
-      else
+      unless doc.css('//meta[property="og:image"]/@content').empty? || doc.css('//meta[property="og:image"]/@content').empty?
         @article_image = doc.css('//meta[property="og:image"]/@content').to_s
       end
       
       #PUBLISHED_TIME
-      if doc.css('//meta[property="article:published_time"]/@content').empty?
-        @article_published_time = "unknown"
-      else
+      unless doc.css('//meta[property="article:published_time"]/@content').empty?
         @article_published_time = doc.css('//meta[property="article:published_time"]/@content').to_s
       end
     end

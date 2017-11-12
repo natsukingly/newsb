@@ -1,0 +1,58 @@
+
+.post#post_form.on_modal
+	.body
+		.post_article
+			.image{ style: "background-image: url(#{article_image_helper @article_image});"}
+			.article_info
+				%h2.bold
+					= truncate(@article_title, length: 40) do
+						%span ...
+				%p.xs.grey
+					= @article_source  
+		.form_main.clearfix
+			= form_tag create_from_modal_posts_path do
+				.field.form-group
+					.select
+						= select_tag "post[category_id]", options_from_collection_for_select(@categories, "id", "name"), prompt: "select a category", class: "form-control selectpicker tag_selection"
+
+				.field.form-group#post_textarea
+					.textarea
+						= text_area_tag 'post[content]', '', placeholder: "your awesome comment *optional", class: "post_textarea form-control"
+					
+					= hidden_field_tag 'article[image]', @article_image
+					= hidden_field_tag 'article[url]', @article_url
+					= hidden_field_tag 'article[source]', @article_source
+					= hidden_field_tag 'article[title]', @article_title
+					= hidden_field_tag 'article[published_time]', value: @article_published_time
+					
+					#autocomplete_tags
+				.post_submit
+					.cancel_btn
+						Cancel
+					= submit_tag "Submit", class: "form_btn #post_submit_btn"
+				
+
+=render 'js/autocomplete'
+
+
+:javascript
+	$("#post_textarea textarea").height(30);//init
+	$("#post_textarea textarea").css("lineHeight","20px");//init
+	
+	$("#post_textarea textarea").on("input",function(evt){
+		console.log("post_content");
+	    if(evt.target.scrollHeight > evt.target.offsetHeight){
+	        $(evt.target).height(evt.target.scrollHeight);
+	    }else{
+	        var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
+	        while (true){
+	            $(evt.target).height($(evt.target).height() - lineHeight);
+	            if(evt.target.scrollHeight > evt.target.offsetHeight){
+	                $(evt.target).height(evt.target.scrollHeight);
+	            }
+	            break;
+	        }
+	    }
+	});
+	
+

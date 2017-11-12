@@ -1,23 +1,25 @@
--content_for(:sidebar) do
-	"Do not show"
-
-#index_nav.text-center.search_nav
-	=link_to "/search/#{@key_word}/articles", class: "search_articles" do
-		.index_btn
-			articles
-	=link_to "/search/#{@key_word}/posts", class: "search_posts" do
-		.index_btn
-			posts
-	=link_to "/search/#{@key_word}/users", class: "search_users"  do
-		.index_btn
-			users
-	=link_to "/search/#{@key_word}/tags", class: "search_tags"  do
-		.index_btn.active
-			tags
+.sub_function_wrapper.search
+	.sub_function_main_section
+		.sub_function_nav
+			%h2
+				"#{@keyword}"
+			
+			.nav_options
+				=link_to "ARTICLES", "/search/#{@keyword}/articles", class: "search_articles"
+				=link_to "POSTS", "/search/#{@keyword}/posts", class: "search_posts"
+				=link_to "USERS", "/search/#{@keyword}/users", class: "search_users" 
+				=link_to "TAGS", "/search/#{@keyword}/tags", class: "search_tags active"
+			
+		#main_contents.tags
+			-if @tags_search_results.empty?
+				=render 'shared/result_not_found', keyword: @keyword
+			-else
+				=render partial: "tags/tag", collection: @tags_search_results, as: :tag
 	
-#main_contents.tags
-	-if @tags_search_results.empty?
-		=render 'shared/result_not_found', key_word: @key_word
-	-else
-		=render partial: "tags/tag", collection: @tags_search_results, as: :tag
+	.sub_function_sidebar
+		%h2
+			NEW USERS
+		.new_users_section
+			-unless @new_users.empty?
+				= render partial: "users/card", collection: @new_users, as: :user
 

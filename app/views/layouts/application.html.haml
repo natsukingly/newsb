@@ -18,13 +18,13 @@
 			-if yield(:sidebar).empty?
 				.flex_wrapper.clearfix  
 					#sidebar_left
-						=render "/sidebars/left_profile", user: current_user, trending_tags: @trending_tags
+						=render "/sidebars/left_profile", user: current_user
 					#main_container
 						=yield
-			
+				
 			-elsif yield(:profile).empty? == false
-				=render 'users/profile', user: @user
-				.flex_wrapper.clearfix 
+				=render 'shared/user_profile', user: @user
+				.flex_wrapper.on_user_profile.clearfix 
 					#main_container
 						=yield
 			
@@ -32,11 +32,15 @@
 				.flex_wrapper.clearfix 
 					#main_container
 						=yield
+					
 		
 		#mobile_footer
-			=render 'layouts/mobile_header'
+			=render 'layouts/mobile_footer'
 			
-		#signin_modal
+		#signin_modal.modal
 			=render 'modals/signin'
+			
+		#post_modal.modal
+			=render 'modals/post'
 			
 								

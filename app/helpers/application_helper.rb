@@ -33,6 +33,16 @@ module ApplicationHelper
         end
     end
     
+    def article_image_helper(url)
+        if url && url != ""
+            url
+        else 
+            return asset_path "no_image.jpeg"
+        end
+    end
+            
+        
+    
     
     
     

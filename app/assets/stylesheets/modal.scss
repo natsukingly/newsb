@@ -25,7 +25,7 @@
 	cursor: pointer;
 }
 
-#signin_modal{
+.modal{
 	display: none;
 	z-index: 1000;
 	position: fixed;
@@ -34,21 +34,46 @@
 	right: 0;
 	bottom: 0;
 	background-color: rgba(#001E42, 0.8);
-	.signin_modal_block{
+	.modal_block{
 		margin: 100px auto;
 		width: 420px;
 		position: relative;
 		background-color: white;
 		border-radius: 5px;
-		padding: 12px 30px 50px;
+		padding: 50px 30px;
 		.modal_title{
 			h2{
 				font-size: 20px;
 				text-align: center;
-				padding: 30px 0;
+				margin-bottom: 30px;
 				color: #001E42;
 			}
 		}
+		.close_modal_btn{
+			position: absolute;
+			top: -60px;
+			right: -60px;	
+			height: 70px;
+			width: 70px;
+			align-items: center;
+			justify-content: center;
+			display: flex;
+			cursor: pointer;
+			svg{
+				height: 20px;
+				width: 20px;
+				fill: #6699cc;
+				transition: 0.3;
+				&:hover{
+					fill: white;
+				}
+			}
+		}
+	}
+}
+
+#signin_modal{
+	.signin_modal_block{
 		.social_signin_links{
 			margin-bottom: 20px;
 			.facebook_signin_btn{
@@ -101,24 +126,11 @@
 			}
 		}
 	}
-	.close_modal_btn{
-		position: absolute;
-		top: -60px;
-		right: -60px;	
-		height: 70px;
-		width: 70px;
-		align-items: center;
-		justify-content: center;
-		display: flex;
-		cursor: pointer;
-		svg{
-			height: 20px;
-			width: 20px;
-			fill: #6699cc;
-			transition: 0.3;
-			&:hover{
-				fill: white;
-			}
-		}
+}
+
+
+#post_modal{
+	.post_modal_block.modal_block{
+		width: 600px;
 	}
 }

@@ -1,0 +1,21 @@
+
+=form_tag "/posts/load_url_feed", method: :get, autocomplete: :off, remote: true do
+	.form_image
+		=image_tag current_user.image.url, class: "img-circle"
+	= url_field_tag :placeholder_url, "", placeholder: "https:// paste url to start your post", class: "url_form"
+
+:css 
+	.post_url_form form input:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0 30px white inset;
+	}
+	
+:javascript
+	$('.post_url_form.on_feed input').keyup(function(e) {
+		$.ajax({
+			url: "/posts/load_url_feed",
+			type: "GET",
+			data: {placeholder_url: $(this).val()},
+			dataType: 'script',
+		});
+		return false;
+	});

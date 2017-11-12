@@ -9,8 +9,8 @@
 			FOLLOWER: #{user.followers.count} 
 			%span 
 				FOLLOWING: #{user.following.count}
-		%p= user.about
+		%p= universal_truncate(user.about, 80)
 		
 
-	.follow_switch
+	.follow_link
 		=render "/shared/follow_form", user: user

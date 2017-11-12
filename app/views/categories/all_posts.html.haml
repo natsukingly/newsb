@@ -1,14 +1,15 @@
 
 .feed_section
 	.post_section
-		#post_url_form
-			=render 'shared/url_form_top'
+		.post_url_form.on_feed
+			=render 'shared/url_form_feed'
 							
 		#post_form_block
 		
 		
 		#main_contents.posts
 			=render @posts
+
 	.feed_sidebar
 		%h2
 			who to follow

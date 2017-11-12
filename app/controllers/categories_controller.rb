@@ -26,9 +26,9 @@ class CategoriesController < ApplicationController
 	
 	def top
 		if @country.id == 1
-			@articles = Article.order(likes_count: :desc).limit(10)
+			@articles = Article.order(likes_count: :desc)
 		else
-			@articles = Article.where(country_id: @country.id).order(likes_count: :desc).limit(10)
+			@articles = Article.where(country_id: @country.id).order(likes_count: :desc)
 		end
 	end
 	
@@ -82,9 +82,9 @@ class CategoriesController < ApplicationController
 		
 		def set_new_users
 			if current_user
-				@new_users = User.where(country_id: @country.id).where.not(id: current_user.id).order(created_at: :desc).limit(5)
+				@new_users = User.where(country_id: @country.id).where.not(id: current_user.id).order(created_at: :desc).limit(3)
 			else
-				@new_users = User.where(country_id: @country.id).order(created_at: :desc).limit(5)
+				@new_users = User.where(country_id: @country.id).order(created_at: :desc).limit(3)
 			end
 		end
 end

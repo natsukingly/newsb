@@ -3,30 +3,53 @@
 -content_for(:sidebar) do
 	"Don't show"
 		
-#main_contents.profile_contents
-	%h2.profile_title
-		ABOUT
-	.about	
-		%h3
-			INTRODUCTION
-		%p
-			-if !(@user.about.empty?)
-				=@user.about
-			-else
-				N/A
-		%h3
+.sub_function_wrapper.user_profile
+	.sub_function_sidebar.profile_contents
+		%h2.profile_title
+			ABOUT
+		.about
+			%p
+				-if !(@user.about.empty?)
+					=@user.about
+				-else
+					Not available
+		%h2.profile_title
 			LIKES
-		%p
-			WEEK: #{@user.weekly_liked_count}
-			%br
-			All-TIME: #{@user.liked_count}
+		.likes
+			%p
+				WEEK: #{@user.weekly_liked_count}
+				%span
+					All-TIME: #{@user.liked_count}
 			
-				
-	-unless @best_posts.empty?
-		.best_posts
-			%h2.profile_title
-				BEST POSTS
-			= render @best_posts
+
+	.sub_function_main_section
+		#main_contents.profile_contents
+			%h2.profile_title.for_mobile
+				ABOUT
+			.about.for_mobile
+				%p
+					-if !(@user.about.empty?)
+						=@user.about
+					-else
+						Not available
+						
+			%h2.profile_title.for_mobile
+				LIKES
+			.likes.for_mobile
+				%p
+					WEEK: #{@user.weekly_liked_count}
+					%br
+					All-TIME: #{@user.liked_count}
+					
+						
+			-unless @best_posts.empty?
+				.best_posts
+					%h2.profile_title
+						BEST POSTS
+					= render @best_posts
+		
+
+
 
 :javascript
 	$(".profile_btn").removeClass("active");

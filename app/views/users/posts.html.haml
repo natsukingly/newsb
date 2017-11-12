@@ -2,14 +2,20 @@
 	"Do show"
 -content_for(:sidebar) do
 	"Don't show"
-		
-#main_contents.profile_contents
-	.posts			
-		-if @user.posts.empty?
-			.not_found
-				NO POST YET
-		-else
-			= render @user.posts
+	
+.sub_function_wrapper.user_profile
+
+	.sub_function_main_section
+		#main_contents.profile_contents
+			%h2.profile_title
+			
+			.posts			
+				-if @user.posts.empty?
+					.not_found
+						NO POST YET
+				-else
+					= render @user.posts	
+
 
 :javascript
 	$(".profile_btn").removeClass("active");

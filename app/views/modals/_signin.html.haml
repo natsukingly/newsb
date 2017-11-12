@@ -1,4 +1,4 @@
-.signin_modal_block
+.signin_modal_block.modal_block
 	.modal_title
 		%h2
 			Hi, welcome to newsbie!!
@@ -35,10 +35,11 @@
 		}
 	});
 
-	$('body').click(function (event) {
+	$('#signin_modal').click(function (event) {
 		if(!$(event.target).closest('.signin_modal_block').length && !$(event.target).is('.signin_modal_block')) {
 			$("#signin_modal").hide();
 			$('body').removeClass('fixed');
+			return false;
 		}     
 	});
 	

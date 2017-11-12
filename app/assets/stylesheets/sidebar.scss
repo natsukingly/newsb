@@ -1,7 +1,10 @@
 
 #sidebar_left{
-    width: 160px;
-    margin: 12px;
+    min-width: 200px;
+    width: 200px;
+    .sidebar_wrapper{
+        padding: 12px 20px;
+    }
     h2{
         font-size: 16px;
         margin-bottom: 5px;
@@ -15,6 +18,14 @@
     
     .profile{
         margin: 12px 0;
+        .section_title{
+            display: flex;
+            align-items: center;
+            svg{
+                width: 25px;
+                margin-right: 5px;
+            }
+        }
         >div{
             margin-bottom: 12px;
         }
@@ -42,11 +53,13 @@
             text-align: left;
         }
     }
-    #trending_tags{
-        .trending_tags_block{
+    #favorite_tags{
+        .favorite_tags_block{
             .tag{
-                display: inline-block;
                 margin-bottom: 5px;
+            }
+            .tags_link{
+                border-bottom: 1px solid #aaa;
             }
         }
     }
@@ -62,7 +75,7 @@
         svg{
             width: 30px;
             height: 30px;
-            margin-right: 5px;
+            margin-right: 8px;
         }
         #sign_in{
             font-size: 14px;
@@ -81,7 +94,7 @@
     
 }    
     
-@media (max-width: 970px) {
+@media (max-width: 768px) {
     #sidebar_left{
         display: none;
     }

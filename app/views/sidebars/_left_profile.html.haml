@@ -9,8 +9,10 @@
 					%h3.shoulder_name.grey= user.shoulder_name
 		
 			.stats
-				%h2.section_title
-					Stats
+				%h2.section_title.stats
+					=render 'svg/stats_icon'
+					%span
+						Stats
 				.stats_item
 					%p 
 						Posts:
@@ -27,9 +29,8 @@
 						%span 
 							= user.following_count
 			.like_stats
-				%h2.section_title
-					// %span.icon
-					// 	=render 'svg/blue_like_icon'
+				%h2.section_title.like
+					=render 'svg/like_icon'
 					%span
 						Likes
 					
@@ -39,6 +40,19 @@
 		
 				%p 
 					ALL-TIME: #{user.liked_count}
+					
+			#favorite_tags
+				%h2.section_title.tag
+					=render 'svg/tag_icon_circle'
+					%span
+						Favorite Tags
+				.favorite_tags_block
+					-unless user.favorites.empty?
+						-user.favorites.includes(:tag).each do |favorite|
+							%p.tag
+								=link_to "\##{favorite.tag.name}",tag_path(favorite.tag.name)
+					=link_to "check trending tags", tags_path, class: "tags_link"
+				
 	-else
 		.profile.not_signed_in
 			.user_info
@@ -48,7 +62,8 @@
 					= link_to "signup・login", user_facebook_omniauth_authorize_path, class: "login_link"
 		
 			.stats
-				%h2.section_title
+				%h2.section_title.stats
+					=render 'svg/stats_icon'
 					Stats
 				.stats_item
 					%p 
@@ -68,16 +83,10 @@
 					Week: -
 				%p 
 					ALL-TIME: -
+			
+					
 	
-	#trending_tags
-		%h2.section_title
-			%span.title
-				Trending Tags
-		.trending_tags_block
-			-trending_tags.each do |tag|
-				%p.tag
-					\##{tag.name}
-				%br
+	
 				
 
 				

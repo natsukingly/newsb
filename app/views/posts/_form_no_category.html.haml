@@ -1,7 +1,7 @@
 #post_form.login_signup_link
 	.body
 		.form_main.clearfix
-			= form_tag create_article_post_path(@article.id), remote: true do
+			= form_tag create_article_post_path(@article.id) do
 				.field.form-group#post_textarea
 					.textarea
 						=text_area_tag 'post[content]', '', placeholder: "your awesome comment *optional", class: "post_textarea form-control"

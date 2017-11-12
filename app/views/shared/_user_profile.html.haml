@@ -1,9 +1,34 @@
-.user_block.clearfix
-    =image_tag user.image.profile_sm.url, class: "pull-left"
-    .user_info.pull-left
-        =link_to user do
-            =user.name
-            %span.grey
-                #{time_ago_in_words(object.created_at)} ago
-        %p.user_shoulder_name
-            =user.shoulder_name
+#user_profile_wrapper
+	.user_profile_container
+		=image_tag user.image.url, class: "img-circle"
+		.user_info
+			.user_names
+				%h2
+					=user.name
+				%p
+					=user.shoulder_name
+			.user_profile_option{class: "user_#{user.id}"}
+				-if current_user && current_user.id == user.id
+					=link_to "EDIT SETTING", edit_setting_user_path(current_user.id), class: "edit_link"
+					
+				-elsif current_user
+					.follow_link.on_user_profile
+						=render "/shared/follow_form", user: user
+				-else
+					.follow_link.on_user_profile.login_signup_link 
+						Follow
+#profile_nav
+	.nav_wrapper
+		=link_to @user, class: "profile_btn left active" do
+			%h3.fa.fa-globe 
+			%br
+			top
+		=link_to posts_user_path(@user.id), class: "profile_btn middle_left" do
+			%h3= @user.posts.count
+			posts
+		=link_to followers_user_path(@user.id), class: "profile_btn middle_right" do
+			%h3= @user.followers.count
+			follower
+		=link_to following_user_path(@user.id), class: "profile_btn right" do
+			%h3= @user.following.count
+			following

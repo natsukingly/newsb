@@ -1,3 +1,20 @@
 
-#main_contents.posts
-    // =render @tag.posts 
+.sub_function_wrapper.tagged_posts
+	.sub_function_main_section
+		.sub_function_nav
+			%h2
+				"#{@tag.name}" ・#{@tag.posts.count}
+
+		#main_contents
+			-if @tag.posts.empty?
+				=render 'shared/result_not_found', keyword: @tag.name
+			-else
+				= render partial: "posts/post", collection: @tag.posts, as: :post
+				
+	.sub_function_sidebar
+		%h2
+			NEW USERS
+		.new_users_section
+			-unless @new_users.empty?
+				= render partial: "users/card", collection: @new_users, as: :user
+

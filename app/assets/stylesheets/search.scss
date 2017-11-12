@@ -2,29 +2,62 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#search_nav{
-    display: flex;
-    margin-bottom: 12px;
-    border-bottom: 2px solid rgba(0, 30, 66, 0.3);
-    .search_btn{
-        flex: 1;
-        font-size: 16px;
-        padding: 12px 0;
-    }
-    .search_btn:hover{
-        box-shadow: 0 2px 0 navy;
-        opacity: 0.8;
-    }
-    .active{
-        pointer-events: none;
-        cursor: default;
-        box-shadow: 0 2px 0 #001E42;
-    }
-}
+// #search_nav{
+//     display: flex;
+//     margin-bottom: 12px;
+//     border-bottom: 2px solid rgba(0, 30, 66, 0.3);
+//     .search_btn{
+//         flex: 1;
+//         font-size: 16px;
+//         padding: 12px 0;
+//     }
+//     .search_btn:hover{
+//         box-shadow: 0 2px 0 navy;
+//         opacity: 0.8;
+//     }
+//     .active{
+//         pointer-events: none;
+//         cursor: default;
+//         box-shadow: 0 2px 0 #001E42;
+//     }
+// }
 
 .result_not_found{
     padding-top: 100px;
     color: #696969;
     text-align: center;
     font-size: 20px;
+}
+
+.sub_function_wrapper.search{
+	.article{
+		box-shadow: none;
+		margin-bottom: 0;
+		width: 100%;
+		.article_wrapper{
+			margin-right: 0;
+			.article_block{
+				.image{
+					display: none;
+					
+				}
+				.info{
+					padding: 12px 12px;
+					border-bottom: 1px solid #f3f3f3;
+					.mini_image{
+						display: block;
+					}
+				}
+				.mobile_posts_count{
+					display: flex;
+				}
+			}
+			.best_post{
+				display: none;
+				padding: 12px 20px 20px;
+				background-color: #f9f9f9;
+				min-height: 100px;
+			}
+		}
+	}
 }

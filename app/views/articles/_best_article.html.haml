@@ -1,107 +1,72 @@
-
-/ over 500
-=link_to article_path(article.id), class: "article article_#{article.id} clearfix", id: "best_article" do
-	- best_post = article.posts.order(likes_count: :desc).first
-	.article_block
-		.image{style: "background-image: url(#{article.image.url});"}
-			.overlay
-				.best_article_content
-					%h2.best_article_title
-						= universal_truncate(article.title, 60)
-						%br
-						%span.best_article_source
+- best_post = article.posts.order(likes_count: :desc).first
+-if best_post
+	=link_to article_path(article.id), class: "article article_#{article.id} clearfix", id: "best_article" do
+		.article_wrapper
+			.article_block
+				.image{style: "background-image: url(#{article_image_helper article.image.url});"}
+					.overlay
+						.best_article_content
+							%h2.best_article_title
+								= universal_truncate(article.title, 100)
+								%br
+								%span.best_article_source
+									= article.source
+									- if article.published_time
+										%i.fa.fa-clock-o
+										#{time_ago_in_words_short(article.published_time)}				
+							.best_article_bottom
+								.stats
+									%p.counts
+										#{article.posts_count}
+										%span.unit
+											posts
+											
+									.posts_count.for_best_article
+										-popular_users = User.where(id: article.posts.order(likes_count: :desc).where.not(user_id: best_post.user_id).limit(5).uniq.pluck(:user_id))
+										.popular_user_faces
+											-popular_users.each do |user|
+												=image_tag user.image.url, class:"img-circle user_face" 
+												
+									.mobile_posts_count.for_best_article
+										-popular_users = User.where(id: article.posts.order(likes_count: :desc).limit(5).uniq.pluck(:user_id))
+										.popular_user_faces
+											-popular_users.each do |user|
+												=image_tag user.image.url, class:"img-circle user_face" 
+												
+						.best_post
+							- unless best_post.nil?
+								.body.best_post_first.clearfix
+									.user_block.clearfix
+										=image_tag best_post.user.image.url, class:"img-circle user_image"
+										.user_details
+											%p
+												%span
+													= best_post.user.name
+												%br
+												%span.user_shoulder_name
+													= best_post.user.shoulder_name
+									%p.best_post_content
+										-if best_post.content.empty?
+											%span.shared_message
+												> Shared this article
+										-else
+											%span.comment_large
+												= universal_truncate(best_post.content, 450)
+											%span.comment_small
+												= universal_truncate(best_post.content, 300)
+												
+							
+				.info
+					.title
+						%h2
+							= universal_truncate(article.title, 60)
+						%p.sm.grey
 							= article.source
 							- if article.published_time
 								%i.fa.fa-clock-o
-								#{time_ago_in_words_short(article.published_time)}				
-					.best_article_bottom
-						.stats
-							%p.counts
-								#{article.posts_count}
-								%span.unit
-									posts
-							.mobile_posts_count.for_best_article
-								-popular_users = User.where(id: article.posts.order(likes_count: :desc).where.not(user_id: best_post.user_id).limit(5).uniq.pluck(:user_id))
-								.popular_user_faces
-									-popular_users.each do |user|
-										=image_tag user.image.url, class:"img-circle user_face" 
-										
-				.best_post
-					- unless best_post.nil?
-						.body.best_post_first.clearfix
-							.user_block.clearfix
-								=image_tag best_post.user.image.url, class:"img-circle user_image"
-								.user_details
-									%p
-										%span
-											= best_post.user.name
-										%br
-										%span.user_shoulder_name
-											= best_post.user.shoulder_name
-							%p.best_post_content
-								-if best_post.content.empty?
-									%span.shared_message
-										> Shared this article
-								-else
-									%span.comment_large
-										= universal_truncate(best_post.content, 450)
-									%span.comment_small
-										= universal_truncate(best_post.content, 300)
-										
-					
-		.info
-			.title
-				%h2
-					= universal_truncate(article.title, 60)
-				%p.sm.grey
-					= article.source
-					- if article.published_time
-						%i.fa.fa-clock-o
-						#{time_ago_in_words_short(article.published_time)}
-						
-
-/Under 500px
-=link_to article_path(article.id), class: "article article_#{article.id} clearfix", id: "best_mobile_article" do
-	.article_block
-		.image{style: "background-image: url(#{article.image.url});"}
-			.overlay
-				.stats
-					%p.counts
-						#{article.posts_count}
-						%br
-						%span.unit
-							posts
+								#{time_ago_in_words_short(article.published_time)}
+								
 	
-		.info
-			.title
-				%h2
-					= universal_truncate(article.title, 60)
-				%p.sm.grey
-					= article.source
-					- if article.published_time
-						%i.fa.fa-clock-o
-						#{time_ago_in_words_short(article.published_time)}
-						
-	.best_post
-		-post = article.posts.order(likes_count: :desc).first
+											
 		
-		- if post != nil
-			.body.clearfix
-				.user_block.clearfix
-					=image_tag post.user.image.url, class:"img-circle user_image"
-					.user_details
-						%p
-							%span
-								=post.user.name
-								\/
-							%span.user_shoulder_name
-								=post.user.shoulder_name
-						%p.content
-							-if post.content.empty?
-								%span.shared_message
-									> Shared this article-
-							-else
-								= truncate(post.content, length: 60) do
-									%span ...
-
-					
+							

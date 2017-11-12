@@ -31,10 +31,11 @@ Rails.application.routes.draw do
 			get 'cancel_edit_article_post', as: :cancel_edit_article
 		end
 		collection do
+			post 'create_from_modal'
 			get 'load_more'
 			get 'autocomplete_tags'
-			get 'load_url'
-			get 'load_url_top'
+			get 'load_url_modal'
+			get 'load_url_feed'
 		end
 	end
 	
@@ -62,6 +63,8 @@ Rails.application.routes.draw do
 			get 'posts'
 			get 'following'
 			get 'followers'
+			get 'edit_setting'
+			post 'save_setting'
 		end
 		collection do 
 			get 'auto_complete'
@@ -76,7 +79,7 @@ Rails.application.routes.draw do
 	
 	
 	
-	resources :tags, only: [:index, :show] do
+	resources :tags, only: [:index] do
 		member do
 			post 'favorite'
 			delete 'unfavorite'
@@ -86,6 +89,8 @@ Rails.application.routes.draw do
 			get 'favorite_index'
 		end
 	end
+	get '/tags/:name' => 'tags#show', as: :tag
+
 	# post '/hashtags/:tag/posts' => 'users#change_country', as: :change_country
 	
 	
@@ -103,10 +108,11 @@ Rails.application.routes.draw do
 
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 	get '/search' => "search#search"
-	get '/search/:key_word/tags' => "search#tags"
-	get '/search/:key_word/articles' => "search#articles"
-	get '/search/:key_word/posts' => "search#posts"
-	get '/search/:key_word/users' => "search#users"
+	get '/search/:keyword' => "search#search"
+	get '/search/:keyword/tags' => "search#tags"
+	get '/search/:keyword/articles' => "search#articles"
+	get '/search/:keyword/posts' => "search#posts"
+	get '/search/:keyword/users' => "search#users"
 	
 	# rankings
 	get '/ranking/weekly_user' => "ranking#user_weekly_ranking"

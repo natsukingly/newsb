@@ -1,30 +1,31 @@
 class SearchController < ApplicationController
-    before_action :set_key_word
+    before_action :set_keyword
     before_action :set_current_topic
+    before_action :set_new_users
     
     def search
-        redirect_to "/search/#{@key_word}/articles"
+        redirect_to "/search/#{@keyword}/articles"
     end
     
     def posts
-        @posts_search_results = Post.where('LOWER(content) LIKE(?)', "%#{@key_word.downcase}%").order(likes_count: :desc)
+        @posts_search_results = Post.where('LOWER(content) LIKE(?)', "%#{@keyword.downcase}%").order(likes_count: :desc)
     end
     
     def articles
-        @articles_search_results = Article.where('LOWER(title) LIKE(?)', "%#{@key_word.downcase}%").order(likes_count: :desc)
+        @articles_search_results = Article.where('LOWER(title) LIKE(?)', "%#{@keyword.downcase}%").order(likes_count: :desc)
     end
     
     def users
-        @users_search_results = User.where('LOWER(name) LIKE(?)', "%#{@key_word.downcase}%")
+        @users_search_results = User.where('LOWER(name) LIKE(?)', "%#{@keyword.downcase}%")
     end
     
     def tags
-        @tags_search_results = Tag.where('LOWER(name) LIKE(?)', "%#{@key_word.downcase}%")
+        @tags_search_results = Tag.where('LOWER(name) LIKE(?)', "%#{@keyword.downcase}%")
     end
     
     private
-        def set_key_word
-            @key_word = params[:key_word]
+        def set_keyword
+            @keyword = params[:keyword]
         end
         
         def set_current_topic

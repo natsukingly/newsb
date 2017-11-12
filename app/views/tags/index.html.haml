@@ -1,23 +1,26 @@
--content_for(:sidebar) do
-    "Do not show"
+.sub_function_wrapper.tags
+	.sub_function_main_section
+		.sub_function_nav
+			%h2
+				TAGS
+			
+			.nav_options	
+				=link_to "TRENDING", tags_path, class: "active"
+				-if current_user
+					=link_to favorite_index_tags_path do
+						FAVORITE・#{current_user.favorite_tags.count}
+				-else
+					=link_to favorite_index_tags_path, class: "login_signup_link" do
+						FAVORITE・#{current_user.favorite_tags.count}
 
+		#main_contents
+			=render @tags
+	
+	.sub_function_sidebar
+		%h2
+			NEW USERS
+		.new_users_section
+			-unless @new_users.empty?
+				= render partial: "users/card", collection: @new_users, as: :user
 
-#index_nav.tag_nav
-    =link_to tags_path do 
-        .trends_btn.active
-            =render 'svg/hot_icon'
-            %span
-                hot
-    =link_to favorite_index_tags_path do
-        .favorite_btn
-            =render 'svg/favorite_icon'
-            %span
-                favorite
-            %span.tag_counts
-                ・#{current_user.favorite_tags.count}
-            
-
-  
-.tags
-    =render @tags
-    
+		
