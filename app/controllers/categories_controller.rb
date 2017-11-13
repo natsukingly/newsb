@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
 	before_action :set_category
-	before_action :set_new_users, only: [:all_posts]
+	before_action :set_new_users, only: [:all_posts, :top, :articles]
 	before_action :set_current_topic_for_all, only: [:top]
 	before_action :set_current_topic_for_all_posts, only: [:all_posts]
 	# before_action :save_selected_topic, only: [:articles]

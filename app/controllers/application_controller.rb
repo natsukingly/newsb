@@ -94,4 +94,5 @@ class ApplicationController < ActionController::Base
             @new_users = User.where(country_id: @country.id).order(created_at: :desc).limit(3)
           end
         end
+        
 end

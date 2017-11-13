@@ -1,7 +1,16 @@
 // categories/articles.html.haml uses the same structure
 // index_nav for top page
-
-				
-#main_contents.articles
-	=render 'articles/best_article', article: @articles.first
-	=render @articles.offset(1)
+-content_for(:featured_article) do
+	"show the featured article"
+	
+.sub_function_wrapper
+	.sub_function_main_section
+		#main_contents.articles
+			=render @articles.offset(1)
+			
+	.sub_function_sidebar
+		%h2
+			NEW USERS
+		.new_users_section
+			-unless @new_users.empty?
+				= render partial: "users/card", collection: @new_users, as: :user

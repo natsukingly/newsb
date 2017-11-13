@@ -4,7 +4,6 @@
 	align-content: flex-start;
 	margin-right: -12px;
 }
-
 .article_show_section{
 	display: flex;
 	flex: 1;
@@ -53,6 +52,7 @@
 	margin-bottom: 20px;
 	padding-bottom: 0;
 	width: 33.3%;
+	max-width: 350px;
 	.article_wrapper{
 		display: flex;
 		flex-direction: column;
@@ -378,6 +378,7 @@ span.overlay{
 	.article{
 		box-shadow: none;
 		margin-bottom: 0;
+		max-width: none;
 		width: 100%;
 		.article_wrapper{
 			margin-right: 0;
