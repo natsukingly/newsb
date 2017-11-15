@@ -1,6 +1,7 @@
 .comment.clearfix{class: "comment_#{comment.id}"}
 	.main.clearfix
-		=image_tag comment.user.image.url, class: "profile_xs pull-left img-circle"
+		.user_image_sm
+			=user_image_helper(comment.user)
 		.body
 			.user_info
 				.user_name

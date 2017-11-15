@@ -12,5 +12,6 @@
 		%h2
 			RECENT POST
 		.recent_post_section
-			=render "posts/recent_post", post: @recent_post
+			-if @recent_post
+				=render "posts/recent_post", post: @recent_post
 			

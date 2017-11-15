@@ -11,42 +11,73 @@
 		
 		.non_social_link
 			%p or
-			= form_for(resource, as: resource_name, url: session_path(resource_name), id: "signin_with_email") do |f|
-				.field
-					=f.label :email
-					=f.email_field :email, autofocus: true
-			
-				.field
-					= f.label :password
-					= f.password_field :password, autocomplete: "off"
-			
-				.actions
-					= f.submit "Log in"
+			= form_for(resource, as: resource_name, url: session_path(resource_name), id: "signin_with_email", remote: true) do |f|
+				.non_social_form
+					.email_form
+						=f.email_field :email, placeholder: :Email
+						%i.fa.fa-exclamation-circle.error_icon
+						%ul.error_block
+							-unless resource.errors[:email].empty?
+								-resource.errors[:email].each do |message|
+									%li.error_message
+										Email #{message}
+				
+					.password_form
+						= f.password_field :password, autocomplete: "off", placeholder: :Password
+						%i.fa.fa-exclamation-circle.error_icon
+						%ul.error_block#login_error_message
+							-unless resource.errors[:password].empty?
+								-resource.errors[:password].each do |message|
+									%li.error_message
+										Password #{message}
+					.actions.non_social_submit_btn
+						= f.submit "Log in"
 
-			%h2
-				%span#email_signup_link 
+			%h2.term_confirmation
+				%span.email_signup_link 
 					Continue with Email
 				By signing up, you indicate that you have read and agree to the Terms of Service and Privacy Policy.
 				
 	#signup_with_email_block
 		.modal_title
 			%h2
-				Hi, welcome to newsbie!!
+				Signup via email
 		.non_social_link
-			= form_for(resource, as: resource_name, url: registration_path(resource_name), id: "signup_with_email") do |f|
-				.field
-					=f.label :email
-					=f.email_field :email, autofocus: true
-			
-				.field
-					= f.label :password
-					= f.password_field :password, autocomplete: "off"
-			
-				.actions
-					= f.submit "Sign up"							
+			= form_for(resource, as: resource_name, url: registration_path(resource_name), id: "signup_with_email", remote: true) do |f|
+				.non_social_form
+					.name_form_section
+						=f.text_field :name, placeholder: "Your full name", class: "name_form", autofocus: true
+						%i.fa.fa-exclamation-circle.error_icon
+						%ul.error_block
+							-unless resource.errors[:name].empty?
+								-resource.errors[:name].each do |message|
+									%li.error_message
+										Name #{message}
+					.email_form
+						=f.email_field :email, placeholder: :Email
+						%i.fa.fa-exclamation-circle.error_icon
+						%ul.error_block
+							-unless resource.errors[:email].empty?
+								-resource.errors[:email].each do |message|
+									%li.error_message
+										Email #{message}
+				
+					.password_form
+						=f.password_field :password, autocomplete: "off", placeholder: :Password
+						%i.fa.fa-exclamation-circle.error_icon
+						%ul.error_block
+							-unless resource.errors[:password].empty?
+								-resource.errors[:password].each do |message|
+									%li.error_message
+										Password #{message}
+					
+					
+					.actions.non_social_submit_btn
+						= f.submit "Sign up"	
+						#cancel_email_signup_link
+							Back
 
-			%h2
-				%span#email_signup_link 
+			%h2.term_confirmation
 				By signing up, you indicate that you have read and agree to the Terms of Service and Privacy Policy.		
 				
 	
@@ -54,7 +85,9 @@
 		=render 'svg/close_icon'
 
 :javascript
-
+	$('.actions.non_social_submit_btn').click(function(){
+		$('#login_error_message').text('');	
+	});
 	
 	$('.login_signup_link').click(function () {
 		if("#{current_user}" == false){
@@ -78,14 +111,18 @@
 		$('body').removeClass('fixed');
 	});
 
-	$('#email_signup_link').click(function(){
+	$('.email_signup_link').click(function(){
 		$('#continue_with_social_account_block').hide();
 		$('#signup_with_email_block').show();
+		$('#signin_modal .error_message').text('');
+		$('#signin_modal .field_with_errors').removeClass("field_with_errors");
 	});
 	
 	$('#cancel_email_signup_link').click(function(){
 		$('#continue_with_social_account_block').show();
 		$('#signup_with_email_block').hide();
+		$('#signin_modal .error_message').text('');
+		$('#signin_modal .field_with_errors').removeClass("field_with_errors");
 	});
 	
 	

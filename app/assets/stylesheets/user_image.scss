@@ -13,7 +13,7 @@
 	}
 }
 
-.user_image_xm{
+.user_image_xs{
 	img, svg{
 		margin-right: 10px;
 		width: 25px;
@@ -21,6 +21,24 @@
 	}
 }
 
+.user_image_xl{
+	img, svg{
+		margin-right: 10px;
+		width: 80px;
+		height: 80px;
+	}
+}
+
+.user_faces{
+    img, svg{
+	    width: 25px;
+	    height: 25px;
+	    border: 2px solid white;
+		&:not(:first-child){
+			margin-left: -10px;
+		}
+    }
+}
 
 
 

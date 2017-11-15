@@ -11,7 +11,7 @@
 		flex: 1;
         min-width: 600px;
         h2{
-        	padding: 20px;
+        	margin: 20px;
     		font-size: 16px;
         }
 	}
@@ -189,15 +189,6 @@
 	margin-top: 5px;
     align-items: flex-end;
     height: 25px;
-	img{
-	    width: 25px;
-	    height: 25px;
-	    border: 2px solid white;
-		
-		&:not(:first-child){
-			margin-left: -10px;
-		}
-	}
 	span{
 		display: inline-block;
 		height: 25px;
@@ -211,13 +202,13 @@
 	}
 }
 
-.posts_count.for_best_article, .mobile_posts_count.for_best_article{
-	img{
-		width: 30px;
-	    height: 30px;
-	    border: 1px solid #bbb;
-	}
-}
+// .posts_count.for_best_article, .mobile_posts_count.for_best_article{
+// 	img{
+// 		width: 30px;
+// 	    height: 30px;
+// 	    border: 1px solid #bbb;
+// 	}
+// }
 .posts_count{
 	display: flex;
 }

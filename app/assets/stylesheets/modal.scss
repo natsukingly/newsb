@@ -24,7 +24,7 @@
 .login_signup_link{
 	cursor: pointer;
 }
-#email_signup_link{
+.email_signup_link{
 	color: #001E42;
 	border-bottom: 1px solid #001E42;
 	cursor: pointer;
@@ -62,9 +62,10 @@
 		padding: 50px 30px;
 		.modal_title{
 			h2{
-				font-size: 20px;
+				font-size: 24px;
+				font-weight: 900;
 				text-align: center;
-				margin-bottom: 30px;
+				margin-bottom: 40px;
 				color: #001E42;
 			}
 		}
@@ -126,6 +127,9 @@
 				@extend .lines-on-sides
 			}
 		}
+		.term_confirmation{
+			margin-top: 12px;
+		}
 	}
 }
 
@@ -133,35 +137,16 @@
 .non_social_form{
 	display: flex;
 	flex-direction: column;
-	div{
-		margin-bottom: 12px;
-		input[type="text"], input[type="password"], input[type="submit"]{
-			width: 100%;
-		    border-radius: 5px;
-		    outline: 0px;
-		    border: 1px solid #bbb;
-		    padding: 12px;
-		    font-size: 16px;
-		    &:hover{
-		    	opacity: .95;
-		    }
-		}
-		input[type="submit"]{
-			background-color: #001E42;
-			color: white;
-		}
-	}
 }
+
+
 #signup_with_email_block{
 	.non_social_form{
 		display: flex;
 		flex-direction: column;
 		div{
-			margin-bottom: 12px;
 			&.name_form_section{
-				display: flex;
 				.name_form{
-					flex: 1;
 					&.first_name_form{
 						margin-right: 12px;
 					}
@@ -169,6 +154,7 @@
 			}
 			input[type="submit"]{
 				background-color: #001E42;
+				margin-top: 20px;
 				padding: 8px 30px;
 				width: auto;
 				color: white;

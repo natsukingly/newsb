@@ -281,7 +281,6 @@ header{
 	}
 	.login_icon{
 		svg{
-		    background-color: #001E42;
 		    fill: #001E42;
 		    width: 25px;
 		    padding-top: 5px;
@@ -419,9 +418,9 @@ header{
 	height: 40px;
 	line-height: 40px;
 	text-align: center;
-	background-color: white;
+	background-color: #001E42;
+	color: #eee;
 	font-size: 14px;
-	color: #696969;
 }
 
 #mobile_locale_link{

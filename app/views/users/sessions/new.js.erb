@@ -1,0 +1,7 @@
+$('#login_error_message').html('No account found. Retry, or <span class="email_signup_link">Signup for NEWSB.</span>');
+$('.email_signup_link').click(function(){
+	$('#continue_with_social_account_block').hide();
+	$('#signup_with_email_block').show();
+	$('#signin_modal .error_message').hide();
+	$('#signin_modal .field_with_errors').removeClass("field_with_errors");
+});

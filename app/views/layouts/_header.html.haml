@@ -37,7 +37,7 @@
 			-if user_signed_in?
 				#notification_icon.icon
 					=render "shared/notification_icon"
-				#profile_option_link.user_image
+				#profile_option_link.user_image_sm
 					=user_image_helper(current_user)
 			-else
 				.login_signup_link 
@@ -64,7 +64,7 @@
 	/ HEADER RIGHT     
 	#account.menu_icon
 		-if user_signed_in?
-			#mobile_profile_option_link
+			#mobile_profile_option_link.user_image_sm
 				=user_image_helper(current_user)
 		-else
 			= link_to user_facebook_omniauth_authorize_path, class: "login_icon" do
@@ -94,6 +94,10 @@
 -if flash[:notice]
 	.notice_bar
 		= flash[:notice]
+		
+-if flash[:alert]
+	.notice_bar
+		= flash[:alert]
 
 :css
 	a.Lifestyle_nav_btn{

@@ -1,5 +1,6 @@
 .user_list_item{class: "clearfix user_#{user.id}"}
-	=link_to image_tag(user.image.profile_sm.url, class: "img-circle"), user, class: "image"
+	.user_image
+		=user_image_helper(user)
 	=link_to user, class: "info" do
 		%p.name
 			%span

@@ -12,7 +12,8 @@
 				-else        
 					- current_user.notifications.includes(:target_user).order(created_at: :desc).each do |notification|
 						=link_to notification.path, class: "notification" do
-							=image_tag notification.target_user.image, class: "img-circle"
+							.user_image
+								=user_image_helper(notification.target_user)
 							.content
 								=notification.message.html_safe
 								%p

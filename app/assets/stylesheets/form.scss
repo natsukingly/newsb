@@ -1,5 +1,59 @@
 
 
+.error_block{
+    min-height: 12px;
+    .error_message{
+        padding: 0 12px;
+        color: #8b0000;
+        &:last-child{
+            margin-bottom: 12px;
+        }
+    }
+}
+
+#login_error_message{
+    color: grey;
+    padding: 12px;
+}
+
+form{
+    div{
+        position: relative;
+    	input[type="text"], input[type="password"], input[type="submit"], input[type="email"]{
+    		width: 100%;
+    	    border-radius: 5px;
+    	    outline: 0px;
+    	    border: 1px solid #bbb;
+    	    padding: 10px 12px;
+    	    font-size: 16px;
+    	    &:hover{
+    	    	opacity: .95;
+    	    }
+    	}
+    	input[type="submit"]{
+    		background-color: #001E42;
+    		color: white;
+    	}
+    	.error_icon{
+    	    position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 20px;
+            color: darkred;
+            display: none;
+    	}
+    	&.field_with_errors{
+    	    input[type="text"], input[type="password"], input[type="submit"], input[type="email"]{
+        	    border: 1px solid red;
+    	    }
+    	    & + .error_icon{
+    	        display: inline-block;
+    	    }
+    	}
+    }
+}
+
+
 #post_form{
     .post_article{
         flex-direction: column;

@@ -1,8 +1,9 @@
 
 .feed_section
 	.post_section
-		.post_url_form.on_feed
-			=render 'shared/url_form_feed'
+		-if current_user
+			.post_url_form.on_feed
+				=render 'shared/url_form_feed'
 							
 		#post_form_block
 		

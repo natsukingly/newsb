@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     end
   end
   
-  def extra_info
+  def complete_profile_form
     @countries = Country.all
     @languages = Language.all
     
@@ -45,6 +45,9 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
   
+  def error_message
+    @error_message = "invalid"
+  end
   # def ranking
   #   @ranked_users = User.where(id: Like.group(:target_user_id).order('count(target_user_id) desc').limit(100).pluck(:target_user_id))
   #   @top_articles = Post.all.limit(10)

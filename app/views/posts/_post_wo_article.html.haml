@@ -3,7 +3,8 @@
 		.main
 			.content.clearfix
 				.user_block.clearfix{class: "user_#{post.user.id}"}
-					=image_tag post.user.image.url, class:"pull-left img-circle user_image"
+					.user_image
+						=user_image_helper(post.user)
 					.star
 						=render 'svg/star_icon'
 					.user_info

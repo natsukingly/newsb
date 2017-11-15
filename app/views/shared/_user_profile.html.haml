@@ -1,6 +1,7 @@
 #user_profile_wrapper
 	.user_profile_container
-		=image_tag user.image.url, class: "img-circle"
+		.user_image_xl
+			=user_image_helper(user)
 		.user_info
 			.user_names
 				%h2
