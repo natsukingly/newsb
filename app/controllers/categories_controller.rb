@@ -3,8 +3,7 @@ class CategoriesController < ApplicationController
 	before_action :set_new_users, only: [:all_posts, :top, :articles]
 	before_action :set_current_topic_for_all, only: [:top]
 	before_action :set_current_topic_for_all_posts, only: [:all_posts]
-	# before_action :save_selected_topic, only: [:articles]
-	
+
 	def all_posts
 		if @country.id == 1
 			@posts = Post.order(created_at: :desc).includes(:user, :article)
@@ -25,6 +24,7 @@ class CategoriesController < ApplicationController
 	end
 	
 	def top
+		@recent_post = Post.where(country_id: @country.id).last
 		if @country.id == 1
 			@articles = Article.order(likes_count: :desc)
 		else
@@ -33,6 +33,7 @@ class CategoriesController < ApplicationController
 	end
 	
 	def articles
+		@recent_post = Post.where(country_id: @country.id, category_id: @category.id).last
 		if @country.id == 1
 			@articles = @category.articles.order(likes_count: :desc).limit(10)
 		else 
@@ -87,4 +88,5 @@ class CategoriesController < ApplicationController
 				@new_users = User.where(country_id: @country.id).order(created_at: :desc).limit(3)
 			end
 		end
+
 end

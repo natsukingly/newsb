@@ -37,15 +37,9 @@
 	}
 }
 
-
 .user_block{
 	display: flex;
 	position: relative;
-	.user_image{
-		margin-right: 10px;
-		width: 40px;
-		height: 40px;
-	}
 	.user_info{
 		flex: 1;
 		.user_name{
@@ -107,6 +101,11 @@
 				color: cornflowerblue;
 				border-radius: 3px;
 				cursor: pointer;
+				&:hover{
+					border: none;
+					color: white;
+					background-color: #001E42;
+				}
 			}
 			.follow_link.on_user_profile{
 				a.relationship_btn.follow_btn, a.relationship_btn.unfollow_btn, {

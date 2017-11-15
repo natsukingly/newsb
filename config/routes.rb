@@ -57,7 +57,7 @@ Rails.application.routes.draw do
 	get '/replies/:comment_id/new' => 'replies#new'
 	
 
-	devise_for :users, :controllers => {:registrations => :registrations, omniauth_callbacks: 'users/omniauth_callbacks'} 
+	devise_for :users, :controllers => {registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks'} 
 	resources :users, except: [:create, :new] do
 		member do
 			get 'posts'
@@ -68,7 +68,7 @@ Rails.application.routes.draw do
 		end
 		collection do 
 			get 'auto_complete'
-			get 'extra_info'
+			get 'complete_profile_form'
 			post 'complete_profile'
 			post 'check_notifications'
 			get 'notification_index'

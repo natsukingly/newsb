@@ -1,9 +1,9 @@
-#post_form.login_signup_link
+#post_form
 	.body
 		.form_main.clearfix
 			= form_tag create_article_post_path(@article.id) do
 				.field.form-group#post_textarea
-					.textarea
+					.textarea.login_signup_link
 						=text_area_tag 'post[content]', '', placeholder: "your awesome comment *optional", class: "post_textarea form-control"
 					#autocomplete_tags
 				.post_submit

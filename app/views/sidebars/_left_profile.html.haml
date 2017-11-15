@@ -2,7 +2,6 @@
 	-if current_user
 		.profile
 			.user_info
-				=image_tag user.image.url, class: "img-circle"	
 				.name
 					%h2
 						=link_to user.name, user_path(user.id)

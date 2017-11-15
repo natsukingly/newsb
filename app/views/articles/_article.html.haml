@@ -3,16 +3,9 @@
 	.article_wrapper
 		.article_block
 			.image{style: "background-image: url(#{article_image_helper article.image.url});"}
-				.overlay
-					.stats
-						%p.counts
-							#{article.posts_count}
-							%br
-							%span.unit
-								posts
+
 		
 			.info
-				.mini_image{style: "background-image: url(#{article_image_helper article.image.url});"}
 				.title
 					%h2.give_me_ellipsis
 						=article.title
@@ -23,14 +16,20 @@
 							%i.fa.fa-clock-o
 							#{time_ago_in_words_short(article.published_time)}
 					
-					.mobile_posts_count
+				.sub_info
+					.posts_count	
 						-popular_users = User.where(id: article.posts.order(likes_count: :desc).limit(5).uniq.pluck(:user_id))
 						.popular_user_faces
 							-popular_users.each do |user|
 								=image_tag user.image.url, class:"img-circle user_face" 
 						%span
 							#{article.posts_count} posts
+					.best_post_btn
+						Best post
 						
+						
+		
+			
 		.best_post
 			-post = article.posts.order(likes_count: :desc).first
 			
@@ -50,7 +49,7 @@
 									%span.shared_message
 										> Shared this article
 								-else
-									= truncate(post.content, length: 60) do
+									= universal_truncate(post.content, 400) do
 										%span ...
-	
-						
+		
+							

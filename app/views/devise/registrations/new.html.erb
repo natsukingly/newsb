@@ -27,3 +27,18 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+
+			= form_tag root_path, id: "signup_with_email" do
+				.non_social_form
+					.name_form_section
+						=text_field_tag 'user[:first_name]', '', placeholder: "First name", class: "name_form first_name_form"
+						=text_field_tag 'user[:last_name]', '', placeholder: "Last name", class: "name_form"
+					.email_form
+						=text_field_tag 'user[:email]', '', placeholder: "Email"
+					.password_form
+						=password_field_tag 'user[:password]', '', placeholder: "Password"
+					.non_social_submit_btn
+						=submit_tag "Signup"
+						#cancel_email_signup_link
+							Back

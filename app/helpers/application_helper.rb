@@ -40,7 +40,26 @@ module ApplicationHelper
             return asset_path "no_image.jpeg"
         end
     end
-            
+    
+    def user_image_helper(user)
+        if user.image.nil? 
+            image_tag user.image.url, class: "img-circle"
+        else 
+            render 'svg/user_icon_sub'
+        end
+    end
+           
+    def resource_name
+        :user
+    end
+    
+    def resource
+        @resource ||= User.new
+    end
+    
+    def devise_mapping
+        @devise_mapping ||= Devise.mappings[:user]
+    end            
         
     
     

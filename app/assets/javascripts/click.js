@@ -20,13 +20,25 @@ $(document).on('turbolinks:load', function() {
 	   $("#post_content").focus(); 
 	});
 	
+
+	$('.best_post_btn').click(function(event){
+		event.stopPropagation();
+		console.log(this);
+		if($(this).hasClass('open')){
+			$(this).removeClass('open');
+			$(this).text("Best post");
+			$(this).parents('.article').find('.best_post').slideUp();
+			return false;
+		} else {
+			$(this).addClass('open');
+			$(this).text("close");
+			$(this).parents('.article').find('.best_post').slideDown();
+			return false;
+		}
+		return false;
+	});
 	
-
 	
-	
-
-
-
 });
 
 

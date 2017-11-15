@@ -1,7 +1,7 @@
 
 =form_tag "/posts/load_url_modal", method: :get, autocomplete: :off, remote: true do
 	.form_image
-		=image_tag current_user.image.url, class: "img-circle"
+		=user_image_helper(current_user)
 	= url_field_tag :placeholder_url, "", placeholder: "https:// paste url to start your post", class: "url_form"
 
 :css 

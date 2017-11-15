@@ -4,6 +4,7 @@ var $object = $('.sidebar_wrapper');
 var scrollVolume = $(window).scrollTop();
 var windowWidth = $(window).width();
 var noticeHeight = parseInt($('.notice_bar').css("height"), 10);
+var articleHeight = parseInt($('#featured_article_wrapper').css("height"), 10);
 var offsetAmount = 58;
 
 setTimeout(function(){
@@ -13,6 +14,10 @@ setTimeout(function(){
 
 if(noticeHeight){
 	offsetAmount += noticeHeight;
+}
+
+if(articleHeight){
+	offsetAmount += articleHeight;
 }
 
 if( $object.length && scrollVolume > offsetAmount){
@@ -37,10 +42,15 @@ $(window).scroll(function() {
 	var scrollVolume = $(window).scrollTop();
 	var windowWidth = $(window).width();
 	var noticeHeight = parseInt($('.notice_bar').css("height"), 10);
+	var articleHeight = parseInt($('#featured_article_wrapper').css("height"), 10);
 	var offsetAmount = 58;
+	
 	
 	if(noticeHeight){
 		offsetAmount += noticeHeight;
+	}
+	if(articleHeight){
+		offsetAmount += articleHeight;
 	}
 	
 	if( $object.length && scrollVolume > offsetAmount){
@@ -72,26 +82,18 @@ $(window).scroll(function() {
 	if(windowWidth >= 768){
 		if(scrollVolume > headerHeight){
 			$('#header_nav').css("position", "fixed").css("right", "0").css("left", "0");
-			$('.flex_wrapper').css("margin-top", navHeight);
-			$('.flex_wrapper.on_user_profile').css("margin-top", "0");
-			$('#user_profile_wrapper').css("margin-top", navHeight);
-			
+			$('header').css("margin-bottom", navHeight);
 		} else {
 			$('#header_nav').css("position", "static");
-			$('.flex_wrapper').css("margin-top", "0");
-			$('#user_profile_wrapper').css("margin-top", "0");
+			$('header').css("margin-bottom", "0");
 		}
 	} else{
 		if(scrollVolume > mobileHeaderHeight){
 			$('#header_nav').css("position", "fixed").css("right", "0").css("left", "0");
-			$('.flex_wrapper').css("margin-top", navHeight);
-			$('.flex_wrapper.on_user_profile').css("margin-top", "0");
-			$('#user_profile_wrapper').css("margin-top", navHeight);
-			
+			$('#mobile_header').css("margin-bottom", navHeight);
 		} else {
 			$('#header_nav').css("position", "static");
-			$('.flex_wrapper').css("margin-top", "0");
-			$('#user_profile_wrapper').css("margin-top", "0");
+			$('#mobile_header').css("margin-bottom", "0");
 		}
 	}
 });

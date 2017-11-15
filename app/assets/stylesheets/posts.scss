@@ -292,5 +292,28 @@
     }
 }
 
-
+.sub_function_sidebar{
+    .recent_post_section{
+        .post{
+            .post_article{
+                flex-direction: column;
+                .image{
+                    width: auto;
+                }
+            }
+            .recent_post_link{
+                text-align: center;
+                display: block;
+                border: 1px solid grey;
+                padding: 8px;
+                font-size: 16px;
+                color: grey;
+                &:hover{
+                    color: #001E42;
+                    border: 1px solid #001E42;
+                }
+            }
+        }
+    }
+}
 

@@ -24,6 +24,25 @@
 .login_signup_link{
 	cursor: pointer;
 }
+#email_signup_link{
+	color: #001E42;
+	border-bottom: 1px solid #001E42;
+	cursor: pointer;
+}
+#cancel_email_signup_link{
+	display: inline-block;
+	padding: 8px 20px;
+	width: auto;
+	margin: 0;
+	font-size: 14px;
+	color: grey;
+	cursor: pointer;
+}
+
+
+.textarea.login_signup_link{
+	cursor: text;
+}
 
 .modal{
 	display: none;
@@ -72,6 +91,10 @@
 	}
 }
 
+#signup_with_email_block{
+	display: none;
+}
+
 #signin_modal{
 	.signin_modal_block{
 		.social_signin_links{
@@ -90,7 +113,7 @@
 				font-size: 16px;
 			}
 		}
-		.non_social_signin_link{
+		.non_social_link{
 			h2{
 				font-size: 14px;
     			color: grey;
@@ -102,31 +125,62 @@
 				margin-bottom: 20px;
 				@extend .lines-on-sides
 			}
-			.non_social_signin_form{
+		}
+	}
+}
+
+
+.non_social_form{
+	display: flex;
+	flex-direction: column;
+	div{
+		margin-bottom: 12px;
+		input[type="text"], input[type="password"], input[type="submit"]{
+			width: 100%;
+		    border-radius: 5px;
+		    outline: 0px;
+		    border: 1px solid #bbb;
+		    padding: 12px;
+		    font-size: 16px;
+		    &:hover{
+		    	opacity: .95;
+		    }
+		}
+		input[type="submit"]{
+			background-color: #001E42;
+			color: white;
+		}
+	}
+}
+#signup_with_email_block{
+	.non_social_form{
+		display: flex;
+		flex-direction: column;
+		div{
+			margin-bottom: 12px;
+			&.name_form_section{
 				display: flex;
-				flex-direction: column;
-				div{
-					margin-bottom: 12px;
-					input[type="text"], input[type="password"], input[type="submit"]{
-						width: 100%;
-					    border-radius: 5px;
-					    outline: 0px;
-					    border: 1px solid #bbb;
-					    padding: 12px;
-					    font-size: 16px;
-					    &:hover{
-					    	opacity: .95;
-					    }
-					}
-					input[type="submit"]{
-						background-color: #001E42;
-						color: white;
+				.name_form{
+					flex: 1;
+					&.first_name_form{
+						margin-right: 12px;
 					}
 				}
+			}
+			input[type="submit"]{
+				background-color: #001E42;
+				padding: 8px 30px;
+				width: auto;
+				color: white;
 			}
 		}
 	}
 }
+
+
+
+
+
 
 
 #post_modal{

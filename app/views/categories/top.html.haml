@@ -10,7 +10,7 @@
 			
 	.sub_function_sidebar
 		%h2
-			NEW USERS
-		.new_users_section
-			-unless @new_users.empty?
-				= render partial: "users/card", collection: @new_users, as: :user
+			RECENT POST
+		.recent_post_section
+			=render "posts/recent_post", post: @recent_post
+			

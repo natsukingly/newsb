@@ -1,6 +1,88 @@
-
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    color: cornflowerblue;
+    cursor: pointer;
+    font-weight: normal;
+}
 
 #user_profile_setting_wrapper{
     background-color: white;
-    padding: 20px;
+    padding: 50px;
+    .setting_block{
+        display: flex;
+        margin-bottom: 40px;
+        &.image{
+            align-items: center;
+            .current.content{
+                display: flex;
+                align-items: center;
+                #preview{
+                    display: inline-block;
+                    background-size: cover;
+                    background-position: center;
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                }
+            }
+            .upload_image_btn{
+                border: 1px solid #ccc;
+                display: inline-block;
+                padding: 6px 12px;
+                cursor: pointer;
+            }
+            input[type="file"]{
+                display: none;
+            }
+        }
+        .title{
+            width: 150px;
+            font-size: 16px;
+        }
+        .content{
+            flex: 2;
+            .edit_content_btn{
+                display: inline-block;
+                color: cornflowerblue;
+                margin-left: 12px;
+                cursor: pointer;
+            }
+            textarea#about.form_control{
+                min-height: 120px;
+            }
+        }
+        .new.content{
+            display: none;
+            h3{
+                margin-top: 5px;
+                color: grey;
+            }
+        }
+    }
+    #setting_submit_btn{
+        width: 200px;
+        background-color: white;
+        border: 1px solid #001E42;
+        padding: 8px;
+        border-radius: 0;
+            &:hover{
+                background-color: #001E42;
+                color: #eee;
+            }
+    }
+    #reset_setting_btn{
+        display: inline-block;
+        width: 200px;
+        color: grey;
+        cursor: pointer;
+        padding: 8px;
+        text-align: center;
+        &:hover{
+            color: #001E42;
+        }
+    }
 }

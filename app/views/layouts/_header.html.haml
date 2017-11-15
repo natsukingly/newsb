@@ -6,9 +6,8 @@
 			// = link_to root_path, id: "logo" do
 			// 	=render 'svg/logo_icon'
 			= link_to root_path, id: "logo" do
-				=render "svg/bee_icon"
 				%span
-					newsbee
+					NEWSB
 					
 			#locale_link
 				// .setting_icon
@@ -38,7 +37,8 @@
 			-if user_signed_in?
 				#notification_icon.icon
 					=render "shared/notification_icon"
-				= image_tag current_user.image.url, class: "img-circle profile_xs icon", id: "profile_option_link"
+				#profile_option_link.user_image
+					=user_image_helper(current_user)
 			-else
 				.login_signup_link 
 					Login/Signup
@@ -59,12 +59,13 @@
 			=text_field_tag :keyword, params[:keyword], placeholder: "search"
 			=submit_tag "", style: "display: none;"
 			
-	= link_to "newsbee", root_path, id: "mobile_logo" 
+	= link_to "NEWSB", root_path, id: "mobile_logo" 
 	
 	/ HEADER RIGHT     
 	#account.menu_icon
 		-if user_signed_in?
-			=image_tag current_user.image.url, id: "mobile_profile_option_link", class: "img-circle"
+			#mobile_profile_option_link
+				=user_image_helper(current_user)
 		-else
 			= link_to user_facebook_omniauth_authorize_path, class: "login_icon" do
 				=render 'svg/profile_icon_bold'

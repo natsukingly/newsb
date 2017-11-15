@@ -1,0 +1,29 @@
+.post{class: "post post_#{post.id} clearfix"}
+	.body
+		.main
+			.content.clearfix
+				.user_block.clearfix{class: "user_#{post.user.id}"}
+					=image_tag post.user.image.url, class:"pull-left img-circle user_image"
+					.user_info
+						=link_to post.user  do
+							.give_me_short_ellipsis.light_navy.bold
+								=post.user.name
+						%p.user_shoulder_name.sm.grey
+							=post.user.shoulder_name
+							%i.fa.fa-clock-o
+							#{time_ago_in_words_short(post.created_at)}
+					.user_option.follow_switch.pull-right
+						=render "/shared/follow_form_icon.html.haml", user: post.user
+				%p.opinion
+					=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
+			
+				=link_to article_path(post.article_id), class: "post_article" do
+					.image{ style: "background-image: url(#{article_image_helper post.article.image.url });"}
+					.article_info
+						%h2.bold
+							= universal_truncate(post.article.title, 120) do
+								%span ...
+						%p.xs.grey
+							= post.article.source
+				=link_to "check post", post, class: "recent_post_link" 
+							
