@@ -1,9 +1,10 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
+  devise :database_authenticatable, :registerable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook, :google, :linkedin, :twitter]
   mount_uploader :image, ImageUploader
   
+  has_many :social_profiles, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :replies, dependent: :destroy
@@ -25,9 +26,31 @@ class User < ApplicationRecord
   before_destroy :destroy_notifications
   
   # devise
+  def social_profile(provider)
+    social_profiles.select{ |sp| sp.provider == provider.to_s }.first
+  end
   
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+  # def self.from_omniauth(auth)
+  #   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+  #     user.email = auth.info.email
+  #     user.password = Devise.friendly_token[0,20]
+  #     user.name = auth.info.name   # assuming the user model has a name
+  #     user.remote_image_url = auth.info.image.gsub('http:','https:') # assuming the user model has an image
+  #     if auth.extra.raw_info.cover
+  #       user.cover = auth.extra.raw_info.cover.source 
+  #     else 
+  #       user.cover = "/assets/cover.jpg"
+  #     end 
+  #     user.gender = auth.extra.raw_info.gender
+
+  #     # If you are using confirmable and the provider(s) you use validate emails, 
+  #     # uncomment the line below to skip the confirmation emails.
+  #     # user.skip_confirmation!
+  #   end
+  # end
+  
+  def self.create_from_omniauth(auth)
+    create! do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.name = auth.info.name   # assuming the user model has a name
@@ -44,6 +67,7 @@ class User < ApplicationRecord
       # user.skip_confirmation!
     end
   end
+
   
   def destroy_notifications
     notifications = Notification.where(target_user_id: self.id)

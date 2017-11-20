@@ -39,24 +39,26 @@ class Like < ApplicationRecord
 	end
 	
 	def destroy_notification
-		if self.likeable_type == "Post"
-			notification = Notification.find_by(user_id: self.likeable.user_id,
-											target_user_id: self.user_id,
-											post_id: self.likeable.id,
-											notification_type: "Like-Post")
-		elsif self.likeable_type == "Comment"
-			notification = Notification.find_by(user_id: self.likeable.user_id,
-											target_user_id: self.user_id,
-											comment_id: self.likeable.id,
-											notification_type: "Like-Comment")
-		else
-			notification = Notification.find_by(user_id: self.likeable.user_id,
-											target_user_id: self.user_id,
-											reply_id: self.likeable.id,
-											notification_type: "Like-Reply")
-		end
-		if notification
-			notification.destroy
+		if self.likeable.user_id != nil && self.user_id != nil
+			if self.likeable_type == "Post"
+				notification = Notification.find_by(user_id: self.likeable.user_id,
+												target_user_id: self.user_id,
+												post_id: self.likeable.id,
+												notification_type: "Like-Post")
+			elsif self.likeable_type == "Comment"
+				notification = Notification.find_by(user_id: self.likeable.user_id,
+												target_user_id: self.user_id,
+												comment_id: self.likeable.id,
+												notification_type: "Like-Comment")
+			elsif
+				notification = Notification.find_by(user_id: self.likeable.user_id,
+												target_user_id: self.user_id,
+												reply_id: self.likeable.id,
+												notification_type: "Like-Reply")
+			end
+			if notification
+				notification.destroy
+			end
 		end
 	end
 end

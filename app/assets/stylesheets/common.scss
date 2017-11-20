@@ -21,8 +21,11 @@
 
 // facebook testuser
 // otzadcbmoq_1503621559@tfbnw.net
-
-
+.logo{
+	font-size: 32px;
+	font-family: 'Nova Flat', cursive;
+	// font-family: 'Lobster Two', cursive;
+}
 body{
 	background-color: #eee;
  	font-family: Lato, "Noto Sans JP", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
@@ -132,7 +135,7 @@ input[type="text"]:focus {
 
 
 .not_found{
-	border-radius: 10px;
+	border-radius: 3px;
 	padding: 50px 20px;
 	font-size: 24px;
 	font-weight: 900;
@@ -242,7 +245,7 @@ input[type="text"]:focus {
 		a.active{
 			pointer-events: none;
 			cursor: default;
-			border-radius: 5px;
+			border-radius: 3px;
 			color: #ddd;
 			background-color: rgba(0,0,0,.8);
 		}
@@ -273,7 +276,7 @@ input[type="text"]:focus {
 			left: -25px;
 			a.period_item{
 				color: #ddd;
-				border-radius: 5px;
+				border-radius: 3px;
 				width: 100%;
 				background-color: rgba(0,0,0,.8);
 				margin-right: 10px;
@@ -448,7 +451,7 @@ a  {
    z-index: 100;
    display: none;
    background-color: white;
-   border-radius: 5px;
+   border-radius: 3px;
    li{
 		line-height: 30px;
 		height: 30px;
@@ -522,7 +525,7 @@ span.input-group-btn{
 
 // .article_image{
 //     max-width: 170px;
-//     border-radius: 5px;
+//     border-radius: 3px;
 // }
 
 .loaded-news{

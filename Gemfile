@@ -20,23 +20,22 @@ gem 'nokogiri'
 
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-linkedin'
+gem 'omniauth-twitter'
 
 gem 'carrierwave'
 gem 'rmagick'
 
 gem 'font-awesome-sass'
-
 gem "jquery-turbolinks" # Turbolinksで遷移したときもjQuery.ready()を呼び出してくれる
-
 gem 'bootstrap-select-rails'
-
 gem 'counter_culture'
-
 gem 'whenever', require: false
-
 gem 'geocoder'
-
 gem 'dotenv-rails'
+gem 'koala'
+gem 'meta-tags'
 
 # ここまで追加したGEM
 

@@ -265,7 +265,7 @@
 			border-radius: 0 0 5px 5px;
 		}
 		&:only-child{
-			border-radius: 5px;
+			border-radius: 3px;
 		}
 		&:not(:last-child){
 			border-bottom: 1px solid #e2e2e2;
@@ -291,7 +291,7 @@
 			a{
 				display: inline-block;
 				width: 100%;
-				border-radius: 5px;
+				border-radius: 3px;
 			}
 			.follow{
 				border: 1px solid #bbb;

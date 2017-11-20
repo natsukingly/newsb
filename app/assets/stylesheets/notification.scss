@@ -3,7 +3,7 @@
 .notifications{
 	margin-top: 50px;
 	background-color: white;
-	border-radius: 10px;
+	border-radius: 3px;
 	.notification_empty{
 		font-size: 18px;
 		margin: 30px;
@@ -22,7 +22,7 @@
 			border-radius: 0 0 5px 5px;
 		}
 		&:only-child{
-			border-radius: 5px;
+			border-radius: 3px;
 		}
 		// end
 		&:not(:last-child){

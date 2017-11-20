@@ -45,9 +45,13 @@
 		- if post.comments_count > 1
 			.view_link
 				=render 'comments/view_more_link', post: post
-		- if post.comments_count == 0
-			.invite_comment.comment_link
-				Be the first one to comment!!
+		- if post.comments_count == 0 
+			-if current_user
+				.invite_comment.comment_link
+					Be the first one to comment!!
+			-else
+				.invite_comment.comment_link.login_signup_link
+					Be the first one to comment!!
 			.comments
 		-else
 			.comments

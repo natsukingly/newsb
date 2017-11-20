@@ -1,0 +1,58 @@
+.sns_block.facebook
+	.sns_title
+		.sns_icon.of_facebook
+			%i.fa.fa-facebook
+		%span
+			FACEBOOK
+	-if user.social_profile(:facebook)
+		-if user.facebook_post == true
+			.sns_link
+				=link_to "SHARING", unshare_facebook_snss_path(user.id), class: "sns_btn unshare", method: :post, remote: true
+		-else
+			.sns_link
+				=link_to "SHARE", share_facebook_snss_path(user.id), class: "sns_btn share", method: :post, remote: true
+	-else
+		.sns_link
+			=link_to "CONNECT", user_facebook_omniauth_authorize_path, class: "sns_btn connect"
+
+			
+		
+		
+.sns_block.twitter
+	.sns_title
+		.sns_icon.of_twitter
+			%i.fa.fa-twitter
+		%span
+			TWITTER
+	-if current_user.social_profile(:twitter)
+		.sns_link
+			=link_to "UNCONNECT", root_path, class: "sns_btn unconnect"
+	-else
+		.sns_link
+			=link_to "CONNECT", user_facebook_omniauth_authorize_path, class: "sns_btn connect"
+		
+.sns_block.linkedin
+	.sns_title
+		.sns_icon.of_linkedin
+			%i.fa.fa-linkedin
+		%span
+			LINKEDIN
+	-if current_user.social_profile(:linkedin)
+		.sns_link
+			=link_to "UNCONNECT", root_path, class: "sns_btn unconnect"
+	-else
+		.sns_link
+			=link_to "CONNECT", user_facebook_omniauth_authorize_path, class: "sns_btn connect"
+
+-if user.social_profile(:google)			
+	.sns_block.google
+		.sns_title
+			.sns_icon.of_google
+				%i.fa.fa-google
+			%span
+				GOOGLE
+		.sns_link
+			.sns_btn 
+				CONNECTED
+		
+	

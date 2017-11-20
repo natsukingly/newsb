@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :followers, :following, :posts, :save_setting]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :followers, :following, :posts, :save_setting, :edit_setting, :sns_setting]
   before_action :set_new_users, only: [:notification_index, :show]
   # GET /users
   # GET /users.json
@@ -35,14 +35,14 @@ class UsersController < ApplicationController
   end
   
   def complete_profile
-    @user = User.find(user_id: current_user.id)
-    @user.country = params[:user][:country_id]
-    @user.language = params[:user][:language_id]
+    @user = User.find(current_user.id)
+    @user.country_id = params[:user][:country_id].to_i
+    @user.language_id = params[:user][:language_id].to_i
     @user.shoulder_name = params[:user][:shoulder_name]
     @user.about = params[:user][:about]
     @user.save
     
-    redirect_to root_path
+    redirect_to session[:previous_url] || root_path
   end
   
   def error_message
@@ -74,6 +74,11 @@ class UsersController < ApplicationController
       redirect_to current_user
     end
   end
+  
+  def sns_setting
+    @current_topic = "SNS Setting"
+  end
+  
   
   def posts
   end

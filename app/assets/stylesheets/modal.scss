@@ -55,18 +55,25 @@
 	background-color: rgba(#001E42, 0.8);
 	.modal_block{
 		margin: 100px auto;
-		width: 420px;
+		width: 500px;
 		position: relative;
 		background-color: white;
-		border-radius: 5px;
-		padding: 50px 30px;
+		border-radius: 3px;
+		padding: 40px;
 		.modal_title{
+			display: flex;
+			margin-bottom: 20px;
 			h2{
 				font-size: 24px;
 				font-weight: 900;
-				text-align: center;
-				margin-bottom: 40px;
-				color: #001E42;
+				margin-bottom: 12px;
+			}
+			.logo{
+				font-size: 40px;
+			}
+			.description{
+				padding: 5px;
+				color: #696969;
 			}
 		}
 		.close_modal_btn{
@@ -99,19 +106,24 @@
 #signin_modal{
 	.signin_modal_block{
 		.social_signin_links{
-			margin-bottom: 20px;
-			.facebook_signin_btn{
+			.social_signin_btn{
+				border-radius: 3px;
+				color: white;
+				padding: 12px 16px;
+				font-size: 16px;
+				margin-bottom: 12px;
+				&.facebook_signin_btn{
+					background-color: #3C5B97;
+				}
+				&.google_signin_btn{
+					background-color: #df4930;
+				}
 	    		&:hover{
 			    	opacity: .95;
 			    }
 				i{
 					margin-right: 20px;
 				}
-				background-color: #3C5B97;
-				border-radius: 5px;
-				color: white;
-				padding: 12px 24px;
-				font-size: 16px;
 			}
 		}
 		.non_social_link{

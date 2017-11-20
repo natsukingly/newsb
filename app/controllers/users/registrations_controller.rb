@@ -31,7 +31,8 @@ module Users
 				resource.errors.full_messages.each {|x| flash[x] = x}
 			end
 		end
-	
+		
+			
 	
 		# GET /resource/edit
 		# def edit

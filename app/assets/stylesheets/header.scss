@@ -31,21 +31,6 @@ header{
 			margin-right: 20px;
 			display: flex;
 	    	align-items: center;
-    		#logo{
-    			font-size: 32px;
-    			font-family: 'Nova Flat', cursive;
-    			// font-family: 'Lobster Two', cursive;
-				display: flex;
-		    	align-items: center;  
-		    	margin-right: 12px;
-		    	svg{
-		    		width: 30px;
-		    		margin-right: 5px;
-		    		g{
-		    			// fill: grey;
-		    		}
-		    	}
-			}
 			#locale_link{
 			    display: flex;
 			    align-items: center;
@@ -105,7 +90,7 @@ header{
 					width: 95%;
 					height: 30px;
 					line-height: 25px;
-					border-radius: 5px;
+					border-radius: 3px;
 					background-color: rgba(0,0,0,0);
 					border: 1px solid #bbb;
 					padding: 0 0 0 35px;
@@ -133,7 +118,7 @@ header{
 			    margin-right: 20px;
 			    height: 30px;
 			    background-color: #001E42;
-			    border-radius: 5px;
+			    border-radius: 3px;
 			    cursor: pointer;
 			    &:hover{
 			    	opacity: .9;
@@ -184,7 +169,7 @@ header{
 	    .login_signup_link{
 			color: #696969;
 		    border: 1px solid #696969;
-		    border-radius: 5px;
+		    border-radius: 3px;
 		    height: 30px;
 		    line-height: 30px;
 		    padding: 0 12px;
@@ -258,7 +243,7 @@ header{
 			    z-index: 1;
 			    width: 80%;
 			    height: 30px;
-			    border-radius: 5px;
+			    border-radius: 3px;
 			    padding: 0 0 0 50px;
 			    border: none;
 			    font-size: 24px;
@@ -445,7 +430,7 @@ header{
 
 #profile_option_link{
 	margin-right: 0;
-	height: 40px;
+	height: 35px;
 	cursor: pointer;
 }
 

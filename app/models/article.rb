@@ -6,6 +6,4 @@ class Article < ApplicationRecord
     belongs_to :country
     belongs_to :category
 
-    scope :sortByLikes, ->ids {where(id: ids).sort_by{ |o| ids.index(o.id) }}
-    
 end

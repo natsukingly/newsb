@@ -20,7 +20,7 @@
             border-radius: 0 0 5px 5px;
         }
         &:only-child{
-            border-radius: 5px;
+            border-radius: 3px;
         }
         // end
         &:not(:last-child){
@@ -60,7 +60,7 @@
             a{
                 display: inline-block;
                 width: 100%;
-                border-radius: 5px;
+                border-radius: 3px;
             }
             .favorite{
                 border: 1px solid #bbb;

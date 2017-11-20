@@ -65,6 +65,7 @@ Rails.application.routes.draw do
 			get 'followers'
 			get 'edit_setting'
 			post 'save_setting'
+			get 'sns_setting'
 		end
 		collection do 
 			get 'auto_complete'
@@ -78,6 +79,12 @@ Rails.application.routes.draw do
 	post '/users/:country_id/change_country' => 'users#change_country', as: :change_country
 	post '/users/:language_id/change_language' => 'users#change_language', as: :change_language
 	
+	resources :snss, only: [] do
+		member do 
+			post 'share_facebook'
+			post 'unshare_facebook'
+		end
+	end
 	
 	
 	resources :tags, only: [:index] do

@@ -1,45 +1,47 @@
+- set_meta_tags article_meta_tags(@article)
+
 .article_show_section
 	.article_section
-		=render "/articles/selected_article", article: @article
+		=render "/articles/featured_article_sm", article: @article
 		
 		#main_contents.article_posts
 			-if @your_posts.empty?
 				.your_posts
-					%h2
+					%h3
 			-else
 				.your_posts
-					%h2
+					%h3
 						YOUR POSTS
 					= render partial: "posts/post_wo_article", collection: @your_posts.includes(:user), as: :post
 					
 			-if current_user
 				-unless @best_posts.where.not(id: @your_posts.ids).empty?
 					.best_posts
-						%h2
+						%h3
 							BEST POSTS
 						= render partial: "posts/post_wo_article", collection: @best_posts.where.not(id: @your_posts.ids).includes(:user), as: :post
 			-else
 				-unless @best_posts.empty?
 					.best_posts
-						%h2
+						%h3
 							BEST POSTS
 						= render partial: "posts/post_wo_article", collection: @best_posts.includes(:user), as: :post
 					
 			-unless @follower_posts.empty?
 				.follower_posts
-					%h2
+					%h3
 						FOLLOWERS POSTS
 					= render partial: "posts/post_wo_article", collection: @follower_posts.includes(:user), as: :post
 					
 			-unless @new_posts.empty?
 				.new_posts
-					%h2
+					%h3
 						NEW POSTS
 					= render partial: "posts/post_wo_article", collection: @new_posts.includes(:user), as: :post
 					
 			-unless @shared_posts.empty?
 				.shared_posts
-					%h2
+					%h3
 						POSTS without comments
 					= render partial: "posts/post_wo_article", collection: @shared_posts.includes(:user), as: :post
 		

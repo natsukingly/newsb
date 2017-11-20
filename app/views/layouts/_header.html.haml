@@ -2,12 +2,8 @@
 %header
 	.header_container
 		.left
-			// = link_to image_tag("logo_white.png", style: "width: 110px"), root_path, id: "logo", class: "hidden-xs"   
-			// = link_to root_path, id: "logo" do
-			// 	=render 'svg/logo_icon'
-			= link_to root_path, id: "logo" do
-				%span
-					NEWSB
+			= link_to root_path, class: "logo" do
+				NEWSB
 					
 			#locale_link
 				// .setting_icon
@@ -37,7 +33,7 @@
 			-if user_signed_in?
 				#notification_icon.icon
 					=render "shared/notification_icon"
-				#profile_option_link.user_image_sm
+				#profile_option_link.user_image_md
 					=user_image_helper(current_user)
 			-else
 				.login_signup_link 

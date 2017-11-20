@@ -84,6 +84,21 @@
 	}
 }
 
+#featured_article._compact{
+	.article_wrapper{
+		.overlay{
+			.article_container{
+				.featured_article_content{
+					h2.featured_article_title{
+						font-size: 30px;
+					}
+				}
+			}
+		}
+	}
+}
+
+
 .mobile_posts_count.for_featured_article{
 	display: none;
 }

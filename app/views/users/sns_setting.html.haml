@@ -1,0 +1,28 @@
+-content_for(:sidebar) do
+	"Don't show"
+
+.sub_function_wrapper.setting 
+	.sub_function_main_section
+		.sub_function_nav
+			%h2
+				SNS Setting
+			
+		#main_contents
+			#sns_setting_wrapper
+				=render "users/sns_setting_edit_form", user: current_user
+	
+	
+:javascript
+	$('.edit_content_btn').click(function(){
+		$(this).parents('.setting_block').find('.current.content').hide();
+		$(this).parents('.setting_block').find('.new.content').show();
+	})
+	$('#reset_setting_btn').click(function(){
+		$(".setting_block.name .new.content input").val("#{current_user.name}");
+		$(".setting_block.shoulder_name .content").val("#{current_user.shoulder_name}");
+		$(".setting_block.about .content").val("#{current_user.about}");
+		$(".setting_block.language .new.content select").val("#{current_user.language.id}");
+		$(".setting_block.location .new.content select").val("#{current_user.country.id}");
+		$('.setting_block').find('.current.content').show();
+		$('.setting_block').find('.new.content').hide();
+	})

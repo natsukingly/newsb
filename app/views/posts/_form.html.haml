@@ -26,10 +26,16 @@
 					= hidden_field_tag 'article[published_time]', value: @article_published_time
 					
 					#autocomplete_tags
-				.post_submit
-					.cancel_btn
-						Cancel
-					= submit_tag "Submit", class: "form_btn #post_submit_btn"
+				.post_submit_menu
+					#sns_post_form_menu
+						=render 'snss/sns_post_form_menu', user: current_user
+
+					.submit_btn_group
+						= submit_tag "Submit", class: "form_btn #post_submit_btn"					
+						.cancel_btn
+							Cancel
+
+						
 				
 
 =render 'js/autocomplete'

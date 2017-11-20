@@ -1,13 +1,20 @@
 .signin_modal_block.modal_block
 	#continue_with_social_account_block
 		.modal_title
-			%h2
-				Hi, welcome to newsbie!!
+			.logo
+				NEWSB
+			.description
+				Check news. Share knowledge.
+				Ask questions.
 		.social_signin_links
 			= link_to user_facebook_omniauth_authorize_path do
-				.facebook_signin_btn
+				.facebook_signin_btn.social_signin_btn
 					%i.fa.fa-facebook
 					Continue with facebook
+			= link_to user_google_omniauth_authorize_path do
+				.google_signin_btn.social_signin_btn
+					%i.fa.fa-google
+					Continue with Google
 		
 		.non_social_link
 			%p or
@@ -94,6 +101,7 @@
 			$(".ddm").hide();
 			$('#signin_modal').fadeIn();
 			$('body').addClass('fixed');
+			window.sessionStorage.setItem(['previous_url'],[location.href]);
 			return false;
 		}
 	});

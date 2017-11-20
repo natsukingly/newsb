@@ -21,7 +21,7 @@ form{
         position: relative;
     	input[type="text"], input[type="password"], input[type="submit"], input[type="email"]{
     		width: 100%;
-    	    border-radius: 5px;
+    	    border-radius: 3px;
     	    outline: 0px;
     	    border: 1px solid #bbb;
     	    padding: 10px 12px;
@@ -76,7 +76,7 @@ form{
                 .textarea{
                     min-height: 80px;
                     border: 1px solid #bbb;
-                    border-radius: 5px;    
+                    border-radius: 3px;    
                         
                     textarea{
                         background-color: rgba(0,0,0,0);
@@ -108,17 +108,16 @@ form{
                 }  
                    
             }
-            .post_submit{
+            .post_submit_menu{
                 display: flex;
-                flex-direction: row-reverse;
                 align-items: center;
-                
+                justify-content: space-between;
                 .form_btn{
                     background-color: white;
                     color: #001E42;
-                    border-radius: 5px;
+                    border-radius: 3px;
                     border: 1px solid #bbb;
-                    width: 15%;
+                    width: 90px;
                     padding: 5px;
                     transition: .2s;
                     &:hover{
@@ -126,8 +125,40 @@ form{
                         color: white;
                     }
                 }
+                #sns_post_form_menu{
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    color: grey;
+                    span{
+                        margin-right: 12px;
+                    }
+                    .sns_block{
+                        display: flex;
+                        align-items: center;
+                        .sns_connect_btn{
+                            border-radius: 50%;
+                            width: 35px;
+                            height: 35px;
+                            font-size: 20px;
+                            border: 1px solid #aaa;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            &.facebook.connect, &.facebook.share{
+                                color: grey;
+                            }
+                            &.facebook.unshare{
+                                background-color: $facebook;
+                                border: none;
+                                color: white;
+                            }
+                        }
+                }
+                }
                 .cancel_btn, .clear_btn{
-                    width: 15%;
+                    line-height: 25px;
+                    width: 90px;
                     text-align: center;
                     padding: 5px;
                     cursor: pointer;
@@ -167,7 +198,7 @@ form{
     .comment_submit{
         margin: 5px 0;
         input[type="submit"]{
-            border-radius: 5px;
+            border-radius: 3px;
         }
     }
 }
@@ -231,12 +262,23 @@ form{
 	}
 }
 
+#extra_info_wrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 100px;
+    background-size: cover;
+    background-position: center;
+}
+
 #extra_info{
     width: 600px;
     padding: 50px;
     margin: 50px auto;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 3px;
     color: #696969;
     font-size: 14px;
     display: flex;
@@ -253,11 +295,15 @@ form{
                 }
             }
             h2{
-                margin-left: 12px;
                 flex: 1;
-                font-size: 24px;
+                font-size: 30px;
+                font-weight: 900;
                 color: #001E42;
-                margin-bottom: 12px;
+                margin-bottom: 40px;
+                span{
+                    font-size: 14px;
+                    color: #696969;
+                }
             }
         }
         p {

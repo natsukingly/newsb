@@ -255,7 +255,8 @@ Devise.setup do |config|
 
 
   if Rails.env.development?
-    config.omniauth :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], scope: 'email, public_profile', info_fields: 'email, name, gender, cover', :image_size => 'large'
+    config.omniauth :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], scope: 'email, public_profile, publish_actions', info_fields: 'email, name, gender, cover', :image_size => 'large'
+    config.omniauth :google_oauth2, ENV['GOOGLE_KEY'], ENV['GOOGLE_SECRET'], scope: 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me https://www.google.com/m8/feeds', name: :google
   else
     config.omniauth :facebook, Rails.configuration.fb_app_id, Rails.configuration.fb_app_secret, scope: 'email, public_profile', info_fields: 'email, name, gender, cover', :image_size => 'large'
   end

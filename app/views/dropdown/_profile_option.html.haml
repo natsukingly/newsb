@@ -4,6 +4,7 @@
 			.profile_option_block
 				=link_to "Profile", user_path(current_user), class: "profile_option" 
 				=link_to "Setting", edit_setting_user_path(current_user.id), class: "profile_option" 
+				=link_to "SNS", sns_setting_user_path(current_user.id), class: "profile_option" 
 				=link_to "Support", root_path, class: "profile_option" 
 			.footer
 				=link_to "About", root_path, class: "sub_profile_option" 

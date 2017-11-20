@@ -1,35 +1,63 @@
 -content_for(:sidebar) do
 	"Do not show"
 
-#extra_info
-	.profile_form_content
-		.form_title
-			.community_icon
-				=render 'svg/community_icon'
-			%h2
-				Welcome to Scrolll.
-		%p
-			scrolll is not just some news app. 
-			%br
-			It is a community full of amazing people. And now you are a part of it!!
-		
-		=form_tag complete_profile_users_path do
-			.field.form-group
-				.form_label
-					Country of your interest
-				=select_tag "user[country_id]", options_from_collection_for_select(@countries, "id", "name", @country.id.to_i), class: "form-control country_selection"  
-				
-				.form_label
-					Your native language
-				=select_tag "user[language_id]", options_from_collection_for_select(@languages, "id", "name", @language.id.to_i), prompt: "please select", class: "form-control country_selection"   
-				
-				.form_label	
-					Choose your title 
-				=text_field_tag 'user[shoulder_name]', '', placeholder: "your credential, job title, nickname and so on...", class: "form-control"
-				
-				.form_label
-					About yourself
-				= text_area_tag 'user[about]', '', placeholder: "tell us about yourself", class: "about_textarea form-control", style: "box-shadow: none; resize: none;"
-					
-				= submit_tag "Submit", class: "form_btn #profile_submit_btn btn"
+
+#extra_info_wrapper{style: "background-image: linear-gradient(90deg,rgba(0,30,60,.6), rgba(0,30,60,.6)), url('#{ asset_path "bkg_image.jpeg"}')"}
+	#extra_info
+		.profile_form_content
+			.form_title
+				%h2
+					Welcome. #{current_user.name}
 			
+			=form_tag complete_profile_users_path do
+				.setting_block.shoulder_name
+					.title
+						CREDENTIAL
+					=text_field_tag 'user[shoulder_name]', current_user.shoulder_name, placeholder: "ex) company, job title, school", class: "content form-control"
+				
+				.setting_block.about
+					.title
+						ABOUT
+					=text_area_tag 'user[about]', current_user.about, class: "content form-control", style: "min-height: 120px;"
+				
+				.setting_block.language
+					.title
+						LANGUAGE
+					.current.content 
+						=current_user.language.name
+						.edit_content_btn
+							edit
+					.new.content
+						=select_tag "user[language_id]", options_from_collection_for_select(Language.all, "id", "name", @language.id.to_i), prompt: "please select", class: "content form-control country_selection"   
+				
+				.setting_block.location
+					.title
+						LOCATION
+					.current.content 
+						=current_user.country.name
+						.edit_content_btn
+							edit
+					.new.content
+						=select_tag "user[country_id]", options_from_collection_for_select(Country.all, "id", "name", @country.id.to_i), class: "content form-control country_selection"  
+						%h3
+							*This will affect the index of articles and posts you will see on NEWSB.
+				
+				.submit_btn_group
+					= submit_tag "SAVE", class: "form_btn btn", id: "setting_submit_btn"
+					#skip_setting_btn
+						=link_to "SKIP", root_path 
+						
+:javascript
+	$('.edit_content_btn').click(function(){
+		$(this).parents('.setting_block').find('.current.content').hide();
+		$(this).parents('.setting_block').find('.new.content').show();
+	})
+	$('#reset_setting_btn').click(function(){
+		$(".setting_block.name .new.content input").val("#{current_user.name}");
+		$(".setting_block.shoulder_name .content").val("#{current_user.shoulder_name}");
+		$(".setting_block.about .content").val("#{current_user.about}");
+		$(".setting_block.language .new.content select").val("#{current_user.language.id}");
+		$(".setting_block.location .new.content select").val("#{current_user.country.id}");
+		$('.setting_block').find('.current.content').show();
+		$('.setting_block').find('.new.content').hide();
+	})

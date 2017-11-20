@@ -5,7 +5,7 @@ class Post < ApplicationRecord
 	belongs_to :article
 	
 	counter_culture :article
-	has_many :likes, as: :likeable
+	has_many :likes, as: :likeable, dependent: :destroy
 	has_many :comments
 	has_many :tagged_posts, dependent: :destroy
 	has_many :tags, through: :tagged_posts
@@ -13,7 +13,7 @@ class Post < ApplicationRecord
 	scope :popularTags, ->tag_ids { where(tags: article_ids).group(:tag_id).order('count(article_id) desc').pluck(:tag_id) }
 
 	after_create :issue_feed_notifications
-	before_destroy :destroy_notifications
+	after_create :post_on_sns
 
 	after_create do
 		post = Post.find_by(id: self.id)
@@ -50,10 +50,22 @@ class Post < ApplicationRecord
 		end
 	end
 	
-	def destroy_notifications
-		notifications = Notification.where(post_id: self.id)
-		notifications.delete_all
+	def post_on_sns
+		if self.user.facebook_post == true
+			require "koala"
+			access_token = self.user.social_profile(:facebook).access_token
+			@api = Koala::Facebook::API.new(access_token)
+			@api.put_wall_post(self.content, {
+				"type": "article",
+				"name" => "NEWSB",
+				"link" => "https://news-party-natsukingly.c9users.io/articles/#{article.id}",
+				"caption" => self.article.title,
+				"description" => "NEWSB: The most social news platform in the world",
+				"picture" => "https://news-party-natsukingly.c9users.io#{asset_path_in_model(article.image.url)}"
+			})
+		end
 	end
+	
 	
 	def best_comment
 		#This sentence below returns an array.
@@ -62,4 +74,9 @@ class Post < ApplicationRecord
 		end	
 		return self.comments.order(likes_count: :asc).first
 	end
+	
+	private
+		def asset_path_in_model(url)
+			ActionController::Base.helpers.asset_path(url)
+		end
 end

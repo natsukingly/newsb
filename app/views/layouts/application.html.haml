@@ -1,18 +1,14 @@
 !!!
 %html
 	%head
-		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-		%meta{name: "turbolinks-cache-control", content: "no-preview"}
-		%title Newsparty
+		= render :partial => "layouts/meta_tags"
 		= csrf_meta_tags
 		= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
 		= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Nova+Flat"
 		= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Lobster+Two"
 		= javascript_include_tag 'application'
-
 	%body
 		.flex_container
-		
 			=render 'layouts/header'
 
 			-if  yield(:featured_article).empty? == false

@@ -61,7 +61,39 @@ module ApplicationHelper
         @devise_mapping ||= Devise.mappings[:user]
     end            
         
+    def default_meta_tags
+      {
+        site: "NEWSB",
+        reverse: true,
+        title: "NEWSB: The most social news platform in the world",
+        description: "Share knowledge, ask questions, and report fake news.",
+        keywords: "",
+        og: {
+          title: :title,
+          type: "website",
+          url: request.original_url,
+          site_name: "NEWSB",
+          description: :description,
+        }
+      }
+    end
     
+    def article_meta_tags(article)
+        {
+            title: article.title,
+            description: "NEWSB: The most social news platform in the world",
+            image_src: "https://news-party-natsukingly.c9users.io#{url_for(asset_path article.image.url)}",
+            keywords: "",
+            og: {
+              title: :title,
+              type: "article",
+              url: "https://news-party-natsukingly.c9users.io/articles/#{article.id}",
+              image: "https://news-party-natsukingly.c9users.io#{url_for(asset_path article.image.url)}",
+              site_name: "NEWSB",
+              description: :description,
+            }
+        }
+    end
     
     
     
