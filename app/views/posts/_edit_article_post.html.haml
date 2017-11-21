@@ -2,14 +2,24 @@
 	.body
 		.form_main.clearfix
 			=form_tag update_article_post_path(post), remote: true, method: :post do
+				.field.form-group.form_check_group
+					.check
+						=check_box_tag "post[fake_news_report]", true, post.fake_news_report
+						=label_tag "post[fake_news_report]", 'post as a fake news report'
+				
 				.field.form-group#post_textarea
 					.textarea
-						=text_area_tag 'post[content]', post.content, placeholder: "your awesome comment *optional", class: "post_textarea form-control"
-					#autocomplete_tags
-					.post_submit
-						= submit_tag "Submit", class: "form_btn #post_submit_btn"
+						= text_area_tag 'post[content]', post.content, placeholder: "your awesome comment *optional", class: "post_textarea"
+			
+				.post_submit_menu
+					#sns_post_form_menu
+						=render 'snss/sns_post_form_menu', user: current_user
+			
+					.submit_btn_group
+						= submit_tag "UPDATE", class: "form_btn #post_submit_btn"					
 						.cancel_btn
-							=link_to "Cansel", cancel_edit_article_post_path(post), remote: true
+							CANCEL
+							
 			
 
 =render 'js/autocomplete'

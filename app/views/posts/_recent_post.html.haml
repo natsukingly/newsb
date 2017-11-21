@@ -17,14 +17,19 @@
 						=render "/shared/follow_form_icon.html.haml", user: post.user
 				%p.opinion
 					=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
-			
-				=link_to article_path(post.article_id), class: "post_article" do
-					.image{ style: "background-image: url(#{article_image_helper post.article.image.url });"}
-					.article_info
-						%h2.bold
-							= universal_truncate(post.article.title, 120) do
-								%span ...
-						%p.xs.grey
-							= post.article.source
-				=link_to "see post", post, class: "recent_post_link" 
-							
+				
+				-if post.article == nil
+					%p.deleted_article	
+						This article has been deleted.
+				-else
+					=link_to article_path(post.article_id), class: "post_article" do
+						-if post.article.image
+							.image{ style: "background-image: url(#{article_image_helper post.article.image.url });"}
+						.article_info
+							%h2.bold
+								= universal_truncate(post.article.title, 120) do
+									%span ...
+							%p.xs.grey
+								= post.article.source
+					=link_to "see post", post, class: "recent_post_link" 
+								

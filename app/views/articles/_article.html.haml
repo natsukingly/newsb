@@ -24,6 +24,10 @@
 								=user_image_helper(user) 
 						%span
 							#{article.posts_count} posts
+							-report_count = article.posts.where(fake_news_report: true).count
+							-if report_count != 0
+								%span.fake_news_report_count
+									[#{report_count} reports]
 					.best_post_btn
 						Best post
 						

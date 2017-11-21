@@ -10,8 +10,6 @@ class Post < ApplicationRecord
 	has_many :tagged_posts, dependent: :destroy
 	has_many :tags, through: :tagged_posts
 	
-	scope :popularTags, ->tag_ids { where(tags: article_ids).group(:tag_id).order('count(article_id) desc').pluck(:tag_id) }
-
 	after_create :issue_feed_notifications
 	after_create :post_on_sns
 
@@ -58,12 +56,27 @@ class Post < ApplicationRecord
 			@api.put_wall_post(self.content, {
 				"type": "article",
 				"name" => "NEWSB",
-				"link" => "https://news-party-natsukingly.c9users.io/articles/#{article.id}",
+				"link" => "https://news-party-natsukingly.c9users.io/articles/#{self.article.id}",
 				"caption" => self.article.title,
 				"description" => "NEWSB: The most social news platform in the world",
-				"picture" => "https://news-party-natsukingly.c9users.io#{asset_path_in_model(article.image.url)}"
+				"picture" => "https://news-party-natsukingly.c9users.io#{asset_path_in_model(self.article.image.url)}"
 			})
 		end
+		# linkedin api との協調がとれないので保留中。
+		# if self.user.linkedin_post == true
+		# 	require 'linkedin'
+		# 	require 'json'
+		# 	access_token = self.user.social_profile(:linkedin).access_token
+		# 	access_secret = self.user.social_profile(:linkedin).access_secret
+		# 	client = LinkedIn::Client.new(ENV['LINKEDIN_KEY'], ENV['LINKEDIN_SECRET'])
+		# 	client.add_share({:comment => self.content, :content => {
+		# 			"title"=> self.article.title,
+		# 			"description" => "NEWSB: The most social news platform in the world",
+		# 			"submitted-url" => "https://news-party-natsukingly.c9users.io/articles/#{self.article.id}",
+		# 			"submitted-image-url" => "https://news-party-natsukingly.c9users.io#{asset_path_in_model(self.article.image.url)}",
+		# 		}
+		# 	})
+		# end
 	end
 	
 	

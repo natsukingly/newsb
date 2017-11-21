@@ -13,7 +13,12 @@
 								- if article.published_time
 									%i.fa.fa-clock-o
 									#{time_ago_in_words_short(article.published_time)}	
-							
+					
+						-report_count = article.posts.where(fake_news_report: true).count
+						-if report_count != 0
+							%span.fake_news_report_count
+								[ #{report_count} fake news reports ]	
+								
 						-if article.posts_count != 0
 							.featured_article_bottom
 								.stats
@@ -24,22 +29,23 @@
 								
 									.posts_count.for_featured_article
 										-popular_users = User.where(id: article.posts.order(likes_count: :desc).where.not(user_id: best_post.user_id).limit(5).uniq.pluck(:user_id))
-										.popular_user_faces.user_faces
+										.popular_user_faces.featured_faces
 											-popular_users.each do |user|
 												=user_image_helper(user)
 												
 									.mobile_posts_count.for_featured_article
 										-popular_users = User.where(id: article.posts.order(likes_count: :desc).limit(5).uniq.pluck(:user_id))
-										.popular_user_faces.user_faces
+										.popular_user_faces.featured_faces
 											-popular_users.each do |user|
 												=user_image_helper(user) 
-					
+												
 					.best_post				
 						-if article.posts_count != 0						
 							- unless best_post.nil?
-								.body.best_post_first.clearfix
-									.user_block.user_image
-										=user_image_helper(best_post.user)
+								.body.best_post_first
+									.user_block
+										.user_image
+											=user_image_helper(best_post.user)
 										.user_details
 											%p
 												%span

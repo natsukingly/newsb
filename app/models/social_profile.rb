@@ -34,6 +34,8 @@ class SocialProfile < ApplicationRecord
       self.other[:followers_count] = raw_info['followers_count']
       self.other[:friends_count] = raw_info['friends_count']
       self.other[:statuses_count] = raw_info['statuses_count']
+      self.user.twitter_follower = raw_info['followers_count']
+      self.user.save!
     end
 
     self.raw_info = raw_info.to_json

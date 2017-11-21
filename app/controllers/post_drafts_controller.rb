@@ -1,0 +1,2 @@
+class PostDraftsController < ApplicationController
+end

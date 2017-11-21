@@ -13,22 +13,24 @@ class ArticlesController < ApplicationController
   end
   
   def show
+    @fake_news_reports = @article.posts.where(fake_news_report: true).order(likes_count: :desc)
     if current_user
-      @shared_posts = @article.posts.where(content: "")
+      @shared_posts = @article.posts.where(fake_news_report: false).where(content: "")
+      #よく使われるので変数を使う。
       shared_posts_ids = @shared_posts.ids
-      @your_posts = @article.posts.where(user_id: current_user.id).where.not(id: shared_posts_ids)
-      @best_posts = @article.posts.where.not(id: shared_posts_ids).order(likes_count: :desc).limit(3)
-      @follower_posts = @article.posts.where(user_id: current_user.followers.ids).where.not(id: shared_posts_ids).where.not(id: @best_posts.ids)
+      @your_posts = @article.posts.where(fake_news_report: false).where(user_id: current_user.id).where.not(id: shared_posts_ids)
+      @best_posts = @article.posts.where(fake_news_report: false).where.not(id: shared_posts_ids).order(likes_count: :desc).limit(3)
+      @follower_posts = @article.posts.where(fake_news_report: false).where(user_id: current_user.followers.ids).where.not(id: shared_posts_ids).where.not(id: @best_posts.ids)
       inapplicable_ids = @your_posts.ids + @best_posts.ids + @follower_posts.ids + shared_posts_ids
-      @new_posts = @article.posts.where.not(id: inapplicable_ids).order(created_at: :desc)
+      @new_posts = @article.posts.where(fake_news_report: false).where.not(id: inapplicable_ids).order(created_at: :desc)
     else
-      @shared_posts = @article.posts.where(content: "")
+      @shared_posts = @article.posts.where(fake_news_report: false).where(content: "")
       shared_posts_ids = @shared_posts.ids
       @your_posts = []
-      @best_posts = @article.posts.where.not(id: shared_posts_ids).order(likes_count: :desc).limit(3)
+      @best_posts = @article.posts.where(fake_news_report: false).where.not(id: shared_posts_ids).order(likes_count: :desc).limit(3)
       @follower_posts = []
-      inapplicable_ids = @best_posts.ids + shared_posts_ids
-      @new_posts = @article.posts.where.not(id: inapplicable_ids).order(created_at: :desc)
+      inapplicable_ids = @best_posts.ids + @shared_posts.ids
+      @new_posts = @article.posts.where(fake_news_report: false).where.not(id: inapplicable_ids).order(created_at: :desc)
     end
   end
   

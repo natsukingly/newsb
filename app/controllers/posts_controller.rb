@@ -63,7 +63,7 @@ class PostsController < ApplicationController
 
 
   def create
-    @article = Article.where(country_id: @country.id).find_by(title: params[:article][:title])
+    @article = Article.where(country_id: @country.id).find_by(title: params[:article][:title]) || Article.where(country_id: @country.id).find_by(url: params[:article][:url])
     
     #save an article only when it doesnt already exist
     if @article == nil
@@ -83,13 +83,14 @@ class PostsController < ApplicationController
     @post.category_id = params[:post][:category_id].to_i
     @post.country_id = @country.id
     @post.content = params[:post][:content]
+    @post.fake_news_report = params[:post][:fake_news_report] || false
     @post.save
     
     decide_category
   end
   
   def create_from_modal
-    @article = Article.where(country_id: @country.id).find_by(title: params[:article][:title])
+    @article = Article.where(country_id: @country.id).find_by(title: params[:article][:title]) || Article.where(country_id: @country.id).find_by(url: params[:article][:url])
     
     #save an article only when it doesnt already exist
     if @article == nil
@@ -109,6 +110,7 @@ class PostsController < ApplicationController
     @post.category_id = params[:post][:category_id].to_i
     @post.country_id = @country.id
     @post.content = params[:post][:content]
+    @post.fake_news_report = params[:post][:fake_news_report] || false
     @post.save
     
     decide_category

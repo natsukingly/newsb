@@ -1,19 +1,41 @@
-#post_form
+
+.post#post_form
 	.body
 		.form_main.clearfix
-			= form_tag create_article_post_path(@article.id) do
+			= form_tag posts_path, remote: true do
+				.form_check_group.form-group
+					.title
+						.user_image_xs
+							=user_image_helper(current_user)
+						MAKE POST
+					.check
+						=check_box_tag "post[fake_news_report]", true, false
+						POST AS FAKE NEWS REPORT
 				.field.form-group#post_textarea
-					.textarea.login_signup_link
-						=text_area_tag 'post[content]', '', placeholder: "your awesome comment *optional", class: "post_textarea form-control"
+					.textarea
+						= text_area_tag 'post[content]', '', placeholder: "COMMENT *optional", class: "post_textarea"
+					
+					= hidden_field_tag 'post[category_id]', @article.category_id
+					= hidden_field_tag 'article[image]', @article.image
+					= hidden_field_tag 'article[url]', @article.url
+					= hidden_field_tag 'article[source]', @article.source
+					= hidden_field_tag 'article[title]', @article.title
+					= hidden_field_tag 'article[published_time]', value: @article.published_time
+					
 					#autocomplete_tags
-				.post_submit
-					.clear_btn
-						Clear
-					= submit_tag "Submit", class: "form_btn #post_submit_btn"
+				.post_submit_menu
+					#sns_post_form_menu
+						=render 'snss/sns_post_form_menu', user: current_user
 
-			
+					.submit_btn_group
+						= submit_tag "POST", class: "form_btn .post_submit_btn"					
+						= submit_tag "SAVE", class: "form_btn .post_submit_btn"	
+
+						
+				
 
 =render 'js/autocomplete'
+
 
 :javascript
 	$("#post_textarea textarea").height(30);//init
@@ -21,24 +43,17 @@
 	
 	$("#post_textarea textarea").on("input",function(evt){
 		console.log("post_content");
-		if(evt.target.scrollHeight > evt.target.offsetHeight){
-			$(evt.target).height(evt.target.scrollHeight);
-		}else{
-			var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
-			while (true){
-				$(evt.target).height($(evt.target).height() - lineHeight);
-				if(evt.target.scrollHeight > evt.target.offsetHeight){
-					$(evt.target).height(evt.target.scrollHeight);
-				}
-				break;
-			}
-		}
+	    if(evt.target.scrollHeight > evt.target.offsetHeight){
+	        $(evt.target).height(evt.target.scrollHeight);
+	    }else{
+	        var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
+	        while (true){
+	            $(evt.target).height($(evt.target).height() - lineHeight);
+	            if(evt.target.scrollHeight > evt.target.offsetHeight){
+	                $(evt.target).height(evt.target.scrollHeight);
+	            }
+	            break;
+	        }
+	    }
 	});
 	
-	
-	$("#post_form .clear_btn").click(function(){
-		$("#post_form textarea").val(""); 
-	});
-
-	
-

@@ -12,7 +12,6 @@ gem 'erb2haml'
 
 gem "jquery-rails"
 gem 'jquery-ui-rails'
-gem 'jquery-turbolinks'
 
 gem 'bootstrap-sass'
 
@@ -21,8 +20,13 @@ gem 'nokogiri'
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-gem 'omniauth-linkedin'
+gem 'omniauth-linkedin-oauth2'
 gem 'omniauth-twitter'
+
+
+gem 'koala'
+# gem 'linkedin'
+gem 'linkedin'
 
 gem 'carrierwave'
 gem 'rmagick'
@@ -34,7 +38,6 @@ gem 'counter_culture'
 gem 'whenever', require: false
 gem 'geocoder'
 gem 'dotenv-rails'
-gem 'koala'
 gem 'meta-tags'
 
 # ここまで追加したGEM

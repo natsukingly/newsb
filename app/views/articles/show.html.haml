@@ -3,48 +3,23 @@
 .article_show_section
 	.article_section
 		=render "/articles/featured_article_sm", article: @article
-		
+		=render "/posts/form_no_category", article: @article
+		#fake_news_block
+			.fake_news_container
+				- report_count = @article.posts.where(fake_news_report: true).count
+				-if report_count == 0
+					%p.no_fake_news_report
+						%i.fa.fa-check
+						No fake news report has been submitted.
+				-else
+					%p.yes_fake_news_report
+						%i.fa.fa-exclamation-circle
+						#{report_count} people reported this article as fake news.
+					.show_fake_news_btn
+						READ REPORTS >>
+					
 		#main_contents.article_posts
-			-if @your_posts.empty?
-				.your_posts
-					%h3
-			-else
-				.your_posts
-					%h3
-						YOUR POSTS
-					= render partial: "posts/post_wo_article", collection: @your_posts.includes(:user), as: :post
-					
-			-if current_user
-				-unless @best_posts.where.not(id: @your_posts.ids).empty?
-					.best_posts
-						%h3
-							BEST POSTS
-						= render partial: "posts/post_wo_article", collection: @best_posts.where.not(id: @your_posts.ids).includes(:user), as: :post
-			-else
-				-unless @best_posts.empty?
-					.best_posts
-						%h3
-							BEST POSTS
-						= render partial: "posts/post_wo_article", collection: @best_posts.includes(:user), as: :post
-					
-			-unless @follower_posts.empty?
-				.follower_posts
-					%h3
-						FOLLOWERS POSTS
-					= render partial: "posts/post_wo_article", collection: @follower_posts.includes(:user), as: :post
-					
-			-unless @new_posts.empty?
-				.new_posts
-					%h3
-						NEW POSTS
-					= render partial: "posts/post_wo_article", collection: @new_posts.includes(:user), as: :post
-					
-			-unless @shared_posts.empty?
-				.shared_posts
-					%h3
-						POSTS without comments
-					= render partial: "posts/post_wo_article", collection: @shared_posts.includes(:user), as: :post
-		
+			=render '/articles/post_index'
 	.article_show_sidebar
 		%h2 
 			RECOMMENDED
@@ -56,4 +31,13 @@
 		:javascript
 			$("#main_contents").find(".post_#{best_id}").find(".user_block .star").css("display","block");
 					
-			
+:javascript
+	$('.show_fake_news_btn').click(function(){
+		if($(this).hasClass("open")){
+			$(this).removeClass("open").text("READ REPORTS >>");
+			$('.fake_news_reports').fadeOut();
+		} else{
+			$(this).addClass("open").text("HIDE");
+			$('.fake_news_reports').fadeIn();
+		}
+	})

@@ -30,24 +30,11 @@ class User < ApplicationRecord
     social_profiles.select{ |sp| sp.provider == provider.to_s }.first
   end
   
-  # def self.from_omniauth(auth)
-  #   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-  #     user.email = auth.info.email
-  #     user.password = Devise.friendly_token[0,20]
-  #     user.name = auth.info.name   # assuming the user model has a name
-  #     user.remote_image_url = auth.info.image.gsub('http:','https:') # assuming the user model has an image
-  #     if auth.extra.raw_info.cover
-  #       user.cover = auth.extra.raw_info.cover.source 
-  #     else 
-  #       user.cover = "/assets/cover.jpg"
-  #     end 
-  #     user.gender = auth.extra.raw_info.gender
-
-  #     # If you are using confirmable and the provider(s) you use validate emails, 
-  #     # uncomment the line below to skip the confirmation emails.
-  #     # user.skip_confirmation!
-  #   end
-  # end
+  def linkedin_client
+    client = LinkedIn::Client.new(ENV['LINKEDIN_KEY'], ENV['LINKEDIN_SECRET'])
+    client.authorize_from_access(self.social_profile(:linkedin).access_token)
+    client
+  end
   
   def self.create_from_omniauth(auth)
     create! do |user|

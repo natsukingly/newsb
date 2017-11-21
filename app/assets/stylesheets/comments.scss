@@ -4,7 +4,6 @@
 
 
 .comment, .reply{
-    margin-top: 10px;
     .main{
         background-color: #f9f9f9;
         display: flex;
@@ -62,7 +61,7 @@
 
 .comment_index{
     background-color: #f9f9f9;
-    padding: 20px;
+    padding: 12px 20px;
     border-radius: 0 0 5px 5px;
     .invite_comment{
         color: navy;
@@ -71,54 +70,10 @@
         cursor: pointer;
     }
 }
-.comment_form{
-    display: none;
-}
 
-.comment_form, .reply_form{
-    .form-group{
-        margin-bottom: 5px;
-    }
-    .form_textarea{
-        display: flex;
-        img{
-            margin-right: 10px;
-            width: 30px;
-            height: 30px;
-        }
-        textarea{
-            flex: 1;
-            border: 1px solid #ddd;
-        }
-    }
-    .form_textarea.edit{
-        margin: 0;
-    }
-    .comment_submit{
-        margin-left: 40px;
-        color: grey;
-        float: right;
-        input[type="submit"]{
-            background-color: rgba(0,0,0,0);
-            border: 1px solid #bbb;
-            &:hover{
-                color: rgb(54, 88, 155);
-                border: 1px solid rgb(54, 88, 155);
-            }
-        }
-        .cancel_btn{
-            display: inline-block;
-            padding: 10px 20px;
-            cursor: pointer;
-            &:hover{
-                color: rgb(54, 88, 155);
-            }
-        }
-    }
-}
 @media(max-width: 500px){
     .comment_index{
-        padding: 12px;
+        padding: 12px 12px 20px;
     }
 }
 

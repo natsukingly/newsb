@@ -24,25 +24,33 @@
 			%i.fa.fa-twitter
 		%span
 			TWITTER
-	-if current_user.social_profile(:twitter)
-		.sns_link
-			=link_to "UNCONNECT", root_path, class: "sns_btn unconnect"
+	-if user.social_profile(:twitter)
+		-if user.twitter_post == true
+			.sns_link
+				=link_to "SHARING", unshare_twitter_snss_path(user.id), class: "sns_btn unshare", method: :post, remote: true
+		-else
+			.sns_link
+				=link_to "SHARE", share_twitter_snss_path(user.id), class: "sns_btn share", method: :post, remote: true
 	-else
 		.sns_link
-			=link_to "CONNECT", user_facebook_omniauth_authorize_path, class: "sns_btn connect"
+			=link_to "CONNECT", user_twitter_omniauth_authorize_path, class: "sns_btn connect"
 		
-.sns_block.linkedin
-	.sns_title
-		.sns_icon.of_linkedin
-			%i.fa.fa-linkedin
-		%span
-			LINKEDIN
-	-if current_user.social_profile(:linkedin)
-		.sns_link
-			=link_to "UNCONNECT", root_path, class: "sns_btn unconnect"
-	-else
-		.sns_link
-			=link_to "CONNECT", user_facebook_omniauth_authorize_path, class: "sns_btn connect"
+// .sns_block.linkedin
+// 	.sns_title
+// 		.sns_icon.of_linkedin
+// 			%i.fa.fa-linkedin
+// 		%span
+// 			LINKEDIN
+// 	-if user.social_profile(:linkedin)
+// 		-if user.linkedin_post == true
+// 			.sns_link
+// 				=link_to "SHARING", unshare_linkedin_snss_path(user.id), class: "sns_btn unshare", method: :post, remote: true
+// 		-else
+// 			.sns_link
+// 				=link_to "SHARE", share_linkedin_snss_path(user.id), class: "sns_btn share", method: :post, remote: true
+// 	-else
+// 		.sns_link
+// 			=link_to "CONNECT", user_linkedin_omniauth_authorize_path, class: "sns_btn connect"
 
 -if user.social_profile(:google)			
 	.sns_block.google

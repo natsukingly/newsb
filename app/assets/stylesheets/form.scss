@@ -24,15 +24,13 @@ form{
     	    border-radius: 3px;
     	    outline: 0px;
     	    border: 1px solid #bbb;
-    	    padding: 10px 12px;
-    	    font-size: 16px;
+    	    padding: 5px 12px;
     	    &:hover{
     	    	opacity: .95;
     	    }
     	}
     	input[type="submit"]{
-    		background-color: #001E42;
-    		color: white;
+
     	}
     	.error_icon{
     	    position: absolute;
@@ -70,20 +68,46 @@ form{
         font-size: 14px;
         display: flex;
         flex-direction: column;
+        padding: 20px;
         .form_main{
             flex: 1;
             form{
-                .textarea{
-                    min-height: 80px;
-                    border: 1px solid #bbb;
-                    border-radius: 3px;    
-                        
-                    textarea{
-                        background-color: rgba(0,0,0,0);
-                        border: none; 
-                        box-shadow: none; 
-                        resize: none; 
-                        padding: 12px 12px 0;
+                .form_check_group{
+                    display: flex;
+                    align-items: center;
+                    color: #696969;
+                    .title, .select{
+                        display: flex;
+                        align-items: center;
+                        font-size: 16px;
+                        margin-right: 20px;
+                        color: #001E42;
+                        font-weight: 900;
+                    }
+                    .check{
+                        input{
+                            margin-right: 5px;
+                        }
+                    }
+                }
+                #post_textarea{
+                    
+                    .textarea{
+                        display: flex;
+                        border: 1px solid #aaa;
+                        padding: 12px;
+                        border-radius: 3px;
+                        textarea{
+                            border: none;
+                            box-shadow: none;
+                            flex: 1;
+                            resize: none; 
+                            &:focus{
+                                border: none;
+                                box-shadow: none;
+                                outline: none;
+                            }
+                        }
                     }
                 }
                 .form_label{
@@ -133,25 +157,37 @@ form{
                     span{
                         margin-right: 12px;
                     }
-                    .sns_block{
+                    .sns_block_small{
                         display: flex;
                         align-items: center;
                         .sns_connect_btn{
                             border-radius: 50%;
                             width: 35px;
                             height: 35px;
+                            margin-right: 8px;
                             font-size: 20px;
                             border: 1px solid #aaa;
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            &.facebook.connect, &.facebook.share{
-                                color: grey;
+                            &.connect, &.share{
+                                color: grey; 
+ 
+                            }
+                            &.unshare{
+                                color: white;
                             }
                             &.facebook.unshare{
                                 background-color: $facebook;
                                 border: none;
-                                color: white;
+                            }
+                            &.twitter.unshare{
+                                background-color: $twitter;
+                                border: none;
+                            }                            
+                            &.linkedin.unshare{
+                                background-color: $linkedin;
+                                border: none;
                             }
                         }
                 }
@@ -171,6 +207,12 @@ form{
             }
         }
     }
+}
+
+@media (max-width: 768px) {
+	#post_form .body{
+	    padding: 12px;
+	}
 }
 
 #post_form.on_modal{
@@ -196,6 +238,7 @@ form{
 
 .comment_form.edit_form{
     .comment_submit{
+        display: flex;
         margin: 5px 0;
         input[type="submit"]{
             border-radius: 3px;
@@ -203,7 +246,54 @@ form{
     }
 }
 
+.comment_form{
+    display: none;
+}
 
+.comment_form, .reply_form{
+    .form-group{
+        margin-bottom: 5px;
+    }
+    .form_textarea{
+        display: flex;
+        img{
+            margin-right: 10px;
+            width: 30px;
+            height: 30px;
+        }
+        textarea{
+            flex: 1;
+            border: 1px solid #ddd;
+        }
+    }
+    .form_textarea.edit{
+        margin: 0;
+    }
+    .comment_submit{
+        margin-left: 40px;
+        color: grey;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        input[type="submit"]{
+            background-color: rgba(0,0,0,0);
+            border: 1px solid #bbb;
+            width: 100px;
+            &:hover{
+                color: rgb(54, 88, 155);
+                border: 1px solid rgb(54, 88, 155);
+            }
+        }
+        .cancel_btn{
+            display: inline-block;
+            padding: 8px 12px;
+            cursor: pointer;
+            &:hover{
+                color: rgb(54, 88, 155);
+            }
+        }
+    }
+}
 
 .post_url_form{
     margin: 0 0 12px;

@@ -83,6 +83,10 @@ Rails.application.routes.draw do
 		member do 
 			post 'share_facebook'
 			post 'unshare_facebook'
+			post 'share_linkedin'
+			post 'unshare_linkedin'
+			post 'share_twitter'
+			post 'unshare_twitter'
 		end
 	end
 	
