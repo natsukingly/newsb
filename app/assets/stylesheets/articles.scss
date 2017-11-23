@@ -4,42 +4,33 @@
 	flex-direction: column;
 }
 
-.article_show_section{
-	display: flex;
-	flex: 1;
-	.article_section{
-		flex: 1;
-        min-width: 600px;
-        .title{
-    	    display: flex;
-		    align-items: center;
-		    justify-content: space-between;
-        }
-        h2{
-    		font-size: 16px;
-        }
-        h3{
-        	margin: 20px;
-        	&.fake_news_hide_btn{
-        		cursor: pointer;
-        	}
-        }
-        .fake_news_reports{
-        	display: none;
-        	.post{
-        		border: 2px solid rgba(#8b0000, .5);
-        	}
-        }
-	}
-	.article_show_sidebar{
-		width: 350px;
-		margin: 0 20px;
-		h2{
-			font-size: 14px;
-		    color: #696969;
-		    margin-bottom: 12px;
-		}
-	}
+.sub_function_wrapper.article_show{
+    // #post_form{
+    // }
+    // .title{
+	   // display: flex;
+	   // align-items: center;
+	   // justify-content: space-between;
+    // }
+    h2{
+		font-size: 16px;
+    }
+    h3{
+    	margin: 20px;
+    	font-size: 16px;
+    	&.fake_news_hide_btn{
+    		cursor: pointer;
+    	}
+    	i{
+    		font-size: 20px;
+    	}
+    }
+    .fake_news_reports{
+    	display: none;
+    	.post{
+    		border: 2px solid rgba(#8b0000, .5);
+    	}
+    }
 }
 @media(max-width: 970px){
 	.article_show_section{
@@ -56,9 +47,6 @@
 @media(max-width: 1170px){
 	.article_show_section{
 		.article_section{
-		}
-		.article_show_sidebar{
-			display: none;
 		}
 	}
 }
@@ -85,7 +73,6 @@
 			display: flex;
 			flex: 1;
 			flex-direction: row;
-			align-items: center;
 			.image{
 				display: block;
 				height: 60px;
@@ -124,12 +111,13 @@
 				flex: 1;
 				display: flex;
 				flex-direction: column;
+				justify-content: space-between;
 				.title{   
 					 h2{
 						line-height: 20px;
 						font-size: 16px;
 						font-weight: 900;
-						color: rgba(0,0,0, .7);
+						color: #001E42;
 					}
 				}
 				.stats{
@@ -201,6 +189,19 @@
 		}
 	}
 }
+
+@media(max-width: 768px){
+	.article:hover{
+		.sub_info{
+			.best_post_btn{
+				display: none;
+			}
+		}
+	}
+}
+
+
+
 
 .mobile_posts_count, .posts_count{
 	display: flex;
@@ -321,29 +322,6 @@
 }
 
 
-.side_article{
-	width: auto;
-	background-color: #f9f9f9;
-	margin-bottom: 12px;
-	box-shadow: none;
-	display: block;
-	&:hover{
-		background-color: white;
-		box-shadow: none;
-	}
-	.article_block{
-		.info{
-			padding: 12px;
-			.title h2{
-				font-size: 14px;
-			}
-			.mobile_posts_count{
-				display: flex;
-			}
-		}
-	}
-}
-
 span.overlay{
 	position: absolute;
 	margin: -5px;
@@ -441,6 +419,7 @@ span.overlay{
 				}
 				.info{
 					margin-left: 12px;
+					justify-content: flex-start;
 					.title h2{
 						font-size: 14px;
 					}

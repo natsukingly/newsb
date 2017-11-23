@@ -14,7 +14,7 @@
     Category.create(name: category)
 end
 
-@available_countries = { "International" => 1, "United States" => 1, "Japan" => 2}
+@available_countries = { "United States" => 1, "Japan" => 2}
 
 @available_countries.each do |country, language_id|
     Country.create(name: country, language_id: language_id)

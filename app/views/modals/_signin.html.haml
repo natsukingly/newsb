@@ -1,7 +1,11 @@
 .signin_modal_block.modal_block
-	#continue_with_social_account_block
+	.mobile_modal_back_btn
+		%span
+			<- BACK
+	#continue_with_social_account_block.modal_section
 		.modal_title
 			.logo
+				=render 'svg/logo_glasses'
 				NEWSB
 			.description
 				Check news. Share knowledge.
@@ -38,14 +42,14 @@
 									%li.error_message
 										Password #{message}
 					.actions.non_social_submit_btn
-						= f.submit "Log in"
+						= f.submit "LOG IN"
 
 			%h2.term_confirmation
 				%span.email_signup_link 
 					Continue with Email
 				By signing up, you indicate that you have read and agree to the Terms of Service and Privacy Policy.
 				
-	#signup_with_email_block
+	#signup_with_email_block.modal_section
 		.modal_title
 			%h2
 				Signup via email
@@ -80,9 +84,9 @@
 					
 					
 					.actions.non_social_submit_btn
-						= f.submit "Sign up"	
+						= f.submit "SIGN UP"	
 						#cancel_email_signup_link
-							Back
+							BACK
 
 			%h2.term_confirmation
 				By signing up, you indicate that you have read and agree to the Terms of Service and Privacy Policy.		
@@ -114,7 +118,7 @@
 		}     
 	});
 	
-	$('.close_modal_btn').click(function (event) {
+	$('.close_modal_btn, .mobile_modal_back_btn').click(function (event) {
 		$("#signin_modal").hide();
 		$('body').removeClass('fixed');
 	});

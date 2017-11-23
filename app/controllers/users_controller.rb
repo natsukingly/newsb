@@ -83,6 +83,10 @@ class UsersController < ApplicationController
   def posts
   end
   
+  def drafts
+    @post_drafts = PostDraft.where(user_id: current_user.id)
+  end
+  
   def following
   end
 

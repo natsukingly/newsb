@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 		before_action :configure_permitted_parameters, if: :devise_controller?
 		before_action :default_categories
 		before_action :trending_tags
-		before_action :set_country
+		before_action :set_locale
 	
 		def configure_permitted_parameters
 				devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
@@ -24,20 +24,20 @@ class ApplicationController < ActionController::Base
 
 		#保留中　今はログインモーダルが開くタイミングで保存するようになっている。
 		#_signin.html.hamlのjavascriptを参照
-		def store_location
-			if (request.fullpath != new_user_registration_path &&
-					request.fullpath != new_user_session_path &&
-					request.fullpath != complete_profile_form_users_path &&
-					request.fullpath != user_facebook_omniauth_authorize_path &&
-					# request.fullpath.match(/\/auth\//) == false &&
-					# request.fullpath != "/users/password" &&
-					request.fullpath !~ Regexp.new("\\A/users/password.*\\z") &&
-					!request.xhr?)
-					session[:previous_url] = request.fullpath 
-			end
-		end
+		# def store_location
+		# 	if (request.fullpath != new_user_registration_path &&
+		# 			request.fullpath != new_user_session_path &&
+		# 			request.fullpath != complete_profile_form_users_path &&
+		# 			request.fullpath != user_facebook_omniauth_authorize_path &&
+		# 			# request.fullpath.match(/\/auth\//) == false &&
+		# 			# request.fullpath != "/users/password" &&
+		# 			request.fullpath !~ Regexp.new("\\A/users/password.*\\z") &&
+		# 			!request.xhr?)
+		# 			session[:previous_url] = request.fullpath 
+		# 	end
+		# end
 		
-		def set_country
+		def set_locale
 			if user_signed_in?
 				@country = current_user.country
 				@language = current_user.language

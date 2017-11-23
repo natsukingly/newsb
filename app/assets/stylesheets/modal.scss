@@ -48,6 +48,7 @@
 	display: none;
 	z-index: 1000;
 	position: fixed;
+	overflow: scroll;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -60,8 +61,24 @@
 		background-color: white;
 		border-radius: 3px;
 		padding: 40px;
+		.mobile_modal_back_btn{
+			display: none;
+			justify-content: center;
+			align-items: center;
+			padding: 0 12px 12px;
+			border-bottom: 1px solid #eee;
+			margin-bottom: 12px;
+			font-size: 20px;
+			color: #696969;
+			cursor: pointer;
+			span{
+				
+			}
+		}
 		.modal_title{
 			display: flex;
+			flex-direction: column;
+			align-items: center;
 			margin-bottom: 20px;
 			h2{
 				font-size: 24px;
@@ -98,6 +115,28 @@
 		}
 	}
 }
+
+@media(max-width: 768px){
+	.modal_section{
+		margin: 0 auto;
+		max-width: 500px;
+	}
+	.modal{
+		.modal_block{
+			height: 100%;
+			width: auto;
+			margin: 0;
+			padding: 12px;
+			border-radius: 0;
+			overflow: scroll;
+			.mobile_modal_back_btn{
+				display: flex;
+			}
+		}
+	}
+}
+
+
 
 #signup_with_email_block{
 	display: none;
@@ -145,6 +184,15 @@
 		}
 	}
 }
+
+
+@media(max-width: 768px){
+
+}
+
+
+
+
 
 
 .non_social_form{

@@ -61,6 +61,7 @@ class ArticlesController < ApplicationController
     end
     
     def set_side_articles
-      @side_articles = Article.where(category_id: @article.category_id, country_id: @article.country_id).where.not(id: @article.id).order(likes_count: :desc).limit(3)
+      @side_articles = Article.where(category_id: @article.category_id, country_id: @article.country_id).where.not(id: @article.id).order(likes_count: :desc).limit(5)
     end
+    
 end

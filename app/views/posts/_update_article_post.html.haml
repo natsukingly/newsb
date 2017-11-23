@@ -1,2 +1,1 @@
-=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
-
+$(".post_#{@post.id}").html("#{ escape_javascript( render 'posts/post', post: @post )}");

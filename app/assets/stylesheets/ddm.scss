@@ -73,7 +73,8 @@
 			color: #001E42;
 		}
 		a, .ddm_btn{
-			padding: 0 12px;
+			line-height: 40px;
+			padding: 0 20px;
 			display: block;
 			flex: 1;
 			color: #696969;
@@ -102,7 +103,7 @@
 
 #locale_ddm{
 	top: 70px;
-	left: 120px;
+	left: 105px;
 	width: 200px;
 }
 #locale_ddm:before{
@@ -432,22 +433,24 @@
 
 #profile_option_ddm{
 	position: absolute;
-	right: -5px;
+	right: 3px;
     top: 70px;
-    width: 200px;
+    min-width: 200px;
 	.profile_option_wrapper{
 		padding: 0;
+		.user_info_block{
+			padding: 8px 20px;
+			font-weight: 900;
+			border-bottom: 1px solid #eee;
+		}
 		.profile_option_block{
 			.profile_option{
-				line-height: 40px;
-				padding: 0 20px;
-				font-size: 14px;
 				&:hover{
 				}
 			}
 		}	
 		.footer{
-			padding: 12px 20px;
+			padding: 0 20px 20px;
 			color: #696969;
 			border-radius: 0 0 3px 3px;
 			border-top: 1px solid #eee;

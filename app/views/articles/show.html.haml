@@ -1,7 +1,7 @@
 - set_meta_tags article_meta_tags(@article)
 
-.article_show_section
-	.article_section
+.sub_function_wrapper.article_show
+	.sub_function_main_section
 		=render "/articles/featured_article_sm", article: @article
 		=render "/posts/form_no_category", article: @article
 		#fake_news_block
@@ -20,10 +20,11 @@
 					
 		#main_contents.article_posts
 			=render '/articles/post_index'
-	.article_show_sidebar
+
+	.sub_function_sidebar
 		%h2 
 			RECOMMENDED
-		.recommended_section
+		.side_article_section
 			-unless @side_articles.empty?
 				= render partial: "articles/side_article", collection: @side_articles, as: :article
 			

@@ -1,8 +1,7 @@
 
-=link_to article_path(article.id), class: "article side_article article_#{article.id} clearfix" do
+=link_to article_path(article.id), class: "side_article article_#{article.id} clearfix" do
 	.article_block
 		.info
-			.mini_image{style: "background-image: url(#{article.image.url});"}
 			.title
 				%h2
 					= universal_truncate(article.title, 60)

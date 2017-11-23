@@ -108,9 +108,10 @@ input[type="text"]:focus {
 .flex_wrapper, .user_flex_wrapper{
 	position: relative;
 	flex: 1;
-	max-width: 1170px;
-	margin: 0 auto;
 	display: flex;
+	margin: 0 auto;
+	// justify-content: center;
+	
 }
 
 
@@ -130,6 +131,7 @@ input[type="text"]:focus {
 	.flex_wrapper{
 		margin: 0;
 		width: auto;
+		flex: 1;
 	}
 }
 
@@ -170,7 +172,6 @@ input[type="text"]:focus {
 // main_container starts here
 
 #main_container{
-	flex: 1;
 	display: flex;
 	margin: 20px 12px;
 	.mobile_post_link{
@@ -188,6 +189,7 @@ input[type="text"]:focus {
 	#main_container{
 		margin: 0 0 50px;
 		min-width: auto;
+		flex: 1;
 		#mobile_side_nav_link{
 			display: inline-block;
 			background-color: #001E42;

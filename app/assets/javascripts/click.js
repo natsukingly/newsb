@@ -17,7 +17,7 @@ $(document).on('turbolinks:load', function() {
 	
 	// articles/show post_form form_no_category
 	$("#post_form .textarea").click(function(){
-	   $("#post_content").focus(); 
+	   $(this).find("#post_content").focus(); 
 	});
 	
 
@@ -38,6 +38,10 @@ $(document).on('turbolinks:load', function() {
 		return false;
 	});
 	
+	
+	$(".notice_bar").click(function(){
+		$(this).hide();	
+	});
 	
 });
 

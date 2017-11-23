@@ -1,9 +1,12 @@
 
 =form_tag "/posts/load_url_feed", method: :get, autocomplete: :off, remote: true do
-	.form_image
-		.user_image_xs
+	%span
+		%i.fa.fa-newspaper-o
+		What's happening in the world today?
+	.form_row
+		.user_image
 			=user_image_helper(current_user)
-	= url_field_tag :placeholder_url, "", placeholder: "https:// paste url to start your post", class: "url_form"
+		= url_field_tag :placeholder_url, "", placeholder: "[https://] paste url to start your post", class: "url_form"
 
 :css 
 	.post_url_form form input:-webkit-autofill {

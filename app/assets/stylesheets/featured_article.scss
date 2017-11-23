@@ -2,13 +2,15 @@
 	width: 100%;
 	flex-direction: row;
 	.article_wrapper{
-		height: 270px;
+		min-height: 270px;
+		max-height: 300px;
 		background-size: cover;
 		background-position: center;
+		display: flex;
 		.overlay{
 			background-color: rgba(0, 30, 60, .8);
 			padding: 20px;
-			height: 100%;
+			flex: 1;
 			.article_container{
 				max-width: 1170px;
 				margin: 0 auto;
@@ -38,6 +40,7 @@
 								}
 								span{
 									font-size: 14px;
+						
 								}
 							}
 						}
@@ -55,6 +58,7 @@
 				}
 				span.fake_news_report_count{
 					color: #eee;
+					margin-bottom: 20px;
 				}
 				.best_post{
 					flex: 1;
@@ -63,6 +67,7 @@
 					color: white;
 					display: flex;
 					flex-direction: column;
+					overflow: scroll;
 					&:first-child{
 					}
 					.user_block{
@@ -76,9 +81,6 @@
 						font-size: 12px;
 						.comment_large{
 							
-						}
-						.comment_small{
-							display: none;
 						}
 					}
 				}

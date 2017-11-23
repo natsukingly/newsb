@@ -1,6 +1,7 @@
 
-.feed_section
-	.post_section
+
+.sub_function_wrapper
+	.sub_function_main_section.post_section
 		-if current_user
 			.post_url_form.on_feed
 				=render 'shared/url_form_feed'
@@ -10,15 +11,14 @@
 		
 		#main_contents.posts
 			=render @posts
-
-	.feed_sidebar
+	
+	.sub_function_sidebar
 		%h2
 			WHO TO FOLLOW
 		.new_users_section
 			-unless @new_users.empty?
 				= render partial: "users/card", collection: @new_users, as: :user
 
-	
 	
 	
 

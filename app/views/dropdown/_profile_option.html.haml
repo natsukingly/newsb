@@ -1,11 +1,14 @@
 -if current_user
 	#profile_option_ddm.ddm
 		.profile_option_wrapper
+			.user_info_block
+				=current_user.name
 			.profile_option_block
-				=link_to "Profile", user_path(current_user), class: "profile_option" 
-				=link_to "Setting", edit_setting_user_path(current_user.id), class: "profile_option" 
-				=link_to "SNS", sns_setting_user_path(current_user.id), class: "profile_option" 
-				=link_to "Support", root_path, class: "profile_option" 
+				=link_to "Profile", user_path(current_user), class: "profile_option ddm_btn" 
+				=link_to "Setting", edit_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
+				=link_to "SNS", sns_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
+				=link_to "Drafts", drafts_users_path, class: "profile_option ddm_btn" 
+				=link_to "Support", root_path, class: "profile_option ddm_btn" 
 			.footer
 				=link_to "About", root_path, class: "sub_profile_option" 
 				・

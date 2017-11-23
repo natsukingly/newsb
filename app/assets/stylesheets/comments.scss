@@ -4,6 +4,7 @@
 
 
 .comment, .reply{
+    padding: 12px 0;
     .main{
         background-color: #f9f9f9;
         display: flex;
@@ -64,10 +65,12 @@
     padding: 12px 20px;
     border-radius: 0 0 5px 5px;
     .invite_comment{
-        color: navy;
+        color: #696969;
         display: inline;
-        border-bottom: 1px solid navy;
         cursor: pointer;
+        &:hover{
+            color: #001E42;
+        }
     }
 }
 

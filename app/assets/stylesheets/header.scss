@@ -12,6 +12,17 @@
 	}
 	
 }
+.logo{
+	display: flex;
+	align-items: center;
+	svg{
+		width: 35px;
+		height: 35px;
+		fill: #001E42;
+		margin-right: 5px;
+	}
+}
+
 
 header{
 	position: relative;
@@ -178,6 +189,9 @@ header{
 		    	border: 1px solid #001E42;
 		    	color: #001E42;
 		    }
+		    &.header_btn{
+		    	margin-right: 12px;
+		    }
 		}
 	}
 }
@@ -283,6 +297,7 @@ header{
 	.nav_container{
 		max-width: 1200px;
 		margin: 0 auto;
+		position: relative;
 		display: flex;
 		-webkit-justify-content: space-between; /* Safari */
 		justify-content:         space-between;
@@ -301,7 +316,7 @@ header{
 			color: #696969;
 			display: inline-block;
 			text-align: center;
-			font-size: 11px;
+			font-size: 12px;
 			text-decoration: none;
 			&:hover{
 				color: #001E42;
@@ -400,13 +415,33 @@ header{
 }
 
 .notice_bar{
-	height: 40px;
-	line-height: 40px;
-	text-align: center;
-	background-color: #001E42;
-	color: #eee;
-	font-size: 14px;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    border-radius: 3px;
+    min-width: 500px;
+    line-height: 40px;
+    padding: 0px 30px;
+    background-color: cornflowerblue;
+    color: white;
+    font-size: 14px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: .3s;
+    svg{
+    	width: 16px;
+    	height: 16px;
+    	fill: white;
+    	cursor: pointer;
+    }
 }
+.notice_bar.for_js{
+	display: none;
+}
+
+
 
 #mobile_locale_link{
 	width: 40px;

@@ -1,0 +1,12 @@
+
+=link_to article_path(article.id), class: "side_article article_#{article.id}" do
+	.image{style: "background-image: url(#{article.image.url});"}
+	.title
+		%h2
+			= article.title
+		%p.sm.grey
+			= universal_truncate(article.source, 30)
+			- if article.published_time
+				%i.fa.fa-clock-o
+				#{time_ago_in_words_short(article.published_time)}
+					

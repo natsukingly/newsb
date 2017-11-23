@@ -46,7 +46,7 @@
 				.best_posts
 					%h2.profile_title
 						BEST POSTS
-					= render @best_posts
+					= render @best_posts.includes(:article)
 		
 
 

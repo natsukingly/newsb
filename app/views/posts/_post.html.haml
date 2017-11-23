@@ -17,6 +17,7 @@
 						=render "/shared/follow_form_icon.html.haml", user: post.user
 				%p.opinion
 					=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
+				=render "posts/edit", post: post
 				-if post.article == nil
 					%p.deleted_article	
 						This article has been deleted.
@@ -34,11 +35,19 @@
 		.status.md
 			.post_like_link.link_btn
 				=render '/likes/like_post', post: post
-			.comment_link.link_btn
-				COMMENT
-				・
-				.comment_count	
-					= post.comments_count
+			-if current_user
+				.comment_link.link_btn
+					COMMENT
+					・
+					.comment_count	
+						= post.comments_count
+			-else
+				.comment_dummy_link.link_btn.login_signup_link
+					COMMENT
+					・
+					.comment_count	
+						= post.comments_count	
+						
 			.option.pull-right
 				%i.fa.fa-ellipsis-h.lg.option_link
 				=render 'dropdown/post_option', post: post
@@ -52,10 +61,10 @@
 		- if post.comments_count == 0 
 			-if current_user
 				.invite_comment.comment_link
-					Be the first one to comment!!
+					Be the first one to comment >>
 			-else
 				.invite_comment.comment_link.login_signup_link
-					Be the first one to comment!!
+					Be the first one to comment >>
 			.comments
 		-else
 			.comments

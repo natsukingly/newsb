@@ -24,7 +24,8 @@ form{
     	    border-radius: 3px;
     	    outline: 0px;
     	    border: 1px solid #bbb;
-    	    padding: 5px 12px;
+    	    padding: 12px;
+    	    background-color: white;
     	    &:hover{
     	    	opacity: .95;
     	    }
@@ -91,12 +92,12 @@ form{
                     }
                 }
                 #post_textarea{
-                    
                     .textarea{
                         display: flex;
                         border: 1px solid #aaa;
-                        padding: 12px;
+                        padding: 5px 12px;
                         border-radius: 3px;
+                        min-height: 60px;
                         textarea{
                             border: none;
                             box-shadow: none;
@@ -142,11 +143,22 @@ form{
                     border-radius: 3px;
                     border: 1px solid #bbb;
                     width: 90px;
-                    padding: 5px;
+                    padding: 5px 12px;
                     transition: .2s;
                     &:hover{
                         background-color: #001E42;
                         color: white;
+                    }
+                }
+                .draft_btn{
+                    background-color: white;
+                    color: #696969;
+                    width: 90px;
+                    padding: 5px 12px;
+                    transition: .2s;
+                    border: none;
+                    &:hover{
+                        color: #001E42;
                     }
                 }
                 #sns_post_form_menu{
@@ -226,6 +238,7 @@ form{
 #post_form.edit_form{
     .body{
         padding: 0;
+        margin-bottom: 20px;
         .form_main form{
             padding: 0;
             .textarea{
@@ -298,23 +311,9 @@ form{
 .post_url_form{
     margin: 0 0 12px;
     overflow: hidden;
-    padding: 12px;
-    background-color: #f3f3f3;
+    padding: 12px 20px;
+    background-color: white;
     box-shadow: 0 0 1px rgba(0,0,0,0.3);
-    .form_image{
-        display: flex;
-        align-items: center;
-        width: 54px;
-        height: 50px;
-        padding-left: 20px;
-        background-color: white;
-        // border-radius: 50px 0 0 50px;
-        img{
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-        }
-    }
     input:focus, button:focus{
         box-shadow: none;
         border-color: rgb(204, 204, 204);
@@ -328,15 +327,23 @@ form{
     }
     form{
         display: flex;
+        flex-direction: column;
+        i{
+            margin-right: 5px;
+        }
+        .form_row{
+            display: flex;
+            align-items: center;
+        }
         input[type=url]{
             flex: 1;
             border: none;
             outline: none;
             box-shadow: none;
             height: 50px;
-            padding: 25px 12px;
+            padding: 25px 12px 25px 0;
             font-size: 20px;
-            // border-radius: 0 50px 50px 0;
+            border-bottom: 1px solid #eee;
         }
         
         button[type=submit]{

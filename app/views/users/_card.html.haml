@@ -1,11 +1,10 @@
 .user_card{class: "clearfix user_#{user.id}"}
-	=link_to user_image_helper(user), user, class: "image"
+	.user_image
+		=link_to user_image_helper(user)
 	.info
 		=link_to user.name, user, class: "user_name"
 		
 		%p.shoulder_name= user.shoulder_name
-		%p.about= universal_truncate( user.about, 80)
-			
 		.follow_link
 			=render "/shared/follow_form", user: user
 			

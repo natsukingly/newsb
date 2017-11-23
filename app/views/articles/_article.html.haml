@@ -8,8 +8,9 @@
 			.info
 				.title
 					%h2.give_me_ellipsis
-						=article.title
-						-#= universal_truncate(article.title, 60)
+						= article.title
+						- if article.title.empty?
+							[ This article has been deleted ]
 					%p.sm.grey
 						= universal_truncate_with_omission(article.source, 30, "")
 						- if article.published_time

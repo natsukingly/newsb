@@ -1,7 +1,7 @@
-#post_form.edit_form
+#post_form.edit_form.edit_draft_form
 	.body
 		.form_main.clearfix
-			=form_tag update_article_post_path(post), method: :post do
+			=form_tag publish_post_draft_path(post.id), method: :post do
 				.field.form-group.form_check_group
 					.check
 						=check_box_tag "post[fake_news_report]", true, post.fake_news_report
@@ -16,7 +16,7 @@
 						=render 'snss/sns_post_form_menu', user: current_user
 			
 					.submit_btn_group
-						= submit_tag "UPDATE", class: "form_btn #post_submit_btn"					
+						= submit_tag "PUBLISH", class: "form_btn #post_submit_btn"					
 						.cancel_btn
 							CANCEL
 							
@@ -47,8 +47,9 @@
 	
 	
 	$("#post_form .cancel_btn").click(function(){
-		$(this).parents("#post_form").hide();
-		$(this).parents(".post").find("p.opinion").fadeIn();
+		$(this).parents(".post").find(".edit_form").hide();
+		$(this).parents(".post").find(".opinion").fadeIn();
+		$(".draft_menu").fadeIn();
 	});
 
 	

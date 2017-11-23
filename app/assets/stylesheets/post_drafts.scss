@@ -1,3 +1,26 @@
 // Place all the styles related to the post_drafts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.post_draft{
+    .draft_menu{
+        margin: 12px 0;
+        a, .delete_btn{
+            text-align: center;
+            display: inline-block;
+            padding: 5px 12px;
+            margin-right: 12px;
+            border-radius: 3px;
+            border: 1px solid #bbb;
+            transition: .3s;
+            cursor: pointer;
+            &:hover{
+                background-color: #001E42;
+                color: white;
+            }
+            &.edit_draft_btn{
+                width: 150px;
+            }
+        }
+    }
+}

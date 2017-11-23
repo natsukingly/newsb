@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
 	before_action :set_category
-	before_action :set_new_users, only: [:all_posts, :top, :articles]
+	before_action :set_new_users, only: [:all_posts, :articles]
 	before_action :set_current_topic_for_all, only: [:top]
 	before_action :set_current_topic_for_all_posts, only: [:all_posts]
 
@@ -24,11 +24,12 @@ class CategoriesController < ApplicationController
 	end
 	
 	def top
-		@recent_post = Post.where(country_id: @country.id).last
-		if @country.id == 1
-			@articles = Article.order(likes_count: :desc)
+		if current_user
+			@articles = Article.where(country_id: @country.id).order(likes_count: :desc)
+			@recent_articles = Article.where(country_id: @country.id).order(published_time: :desc).limit(5)
 		else
 			@articles = Article.where(country_id: @country.id).order(likes_count: :desc)
+			@recent_articles = Article.where(country_id: @country.id).order(published_time: :desc).limit(5)
 		end
 	end
 	
@@ -36,8 +37,10 @@ class CategoriesController < ApplicationController
 		@recent_post = Post.where(country_id: @country.id, category_id: @category.id).last
 		if @country.id == 1
 			@articles = @category.articles.order(likes_count: :desc).limit(10)
+			@recent_articles = Article.where(category_id: @category.id).order(published_time: :desc).limit(5)
 		else 
 			@articles = @category.articles.where(country_id: @country.id).order(likes_count: :desc).limit(10)
+			@recent_articles = Article.where(country_id: @country.id, category_id: @category.id).order(published_time: :desc).limit(5)
 		end
 	end
 	
@@ -87,6 +90,9 @@ class CategoriesController < ApplicationController
 			else
 				@new_users = User.where(country_id: @country.id).order(created_at: :desc).limit(3)
 			end
+		end
+		
+		def set_recent_articles
 		end
 
 end

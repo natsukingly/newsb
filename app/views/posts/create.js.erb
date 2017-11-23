@@ -1,3 +1,7 @@
-$("#main_contents").prepend('<%= escape_javascript(render @post)%>');
+$("#main_contents").prepend('<%= escape_javascript(render 'posts/post_wo_article', post: @post)%>');
 $("#post_form_block").html('');
 $(".post_url_form input").val('');
+$("#post_form textarea").val('');
+$("#post_form .check input").prop('checked', false);
+$('.notice_bar.for_js').css("display", "flex").delay(4000).fadeOut('slow');
+$('.notice_bar .notice_content').text("You have successfully published your post.");

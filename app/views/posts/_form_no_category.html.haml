@@ -2,7 +2,7 @@
 .post#post_form
 	.body
 		.form_main.clearfix
-			= form_tag posts_path, remote: true do
+			= form_tag posts_path do
 				.form_check_group.form-group
 					.title
 						.user_image_xs
@@ -29,7 +29,7 @@
 
 					.submit_btn_group
 						= submit_tag "POST", class: "form_btn .post_submit_btn"					
-						= submit_tag "SAVE", class: "form_btn .post_submit_btn"	
+						= submit_tag "SAVE", class: "draft_btn .post_submit_btn"	
 
 						
 				

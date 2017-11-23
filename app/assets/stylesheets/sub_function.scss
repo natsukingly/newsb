@@ -3,23 +3,10 @@
 .sub_function_wrapper{
 	display: flex;
 	flex: 1;
-	.sub_function_sidebar{
-		width: 350px;
-		margin: 0 20px;
-		h2{
-			font-size: 14px;
-		    color: #696969;
-		    margin-bottom: 12px;
-		}
-		h3{
-			font-size: 20px;
-			font-weight: 900;
-		}
-	}
+	width: 990px;
 	.sub_function_main_section{
 		display: flex;
 		flex-direction: column;
-		flex: 1;
 		width: 600px;
 		
 		.sub_function_nav{
@@ -58,7 +45,7 @@
 
 @media(max-width: 970px){
 	.sub_function_wrapper{
-		min-width: auto;
+		width: auto;
 		.sub_function_main_section{
 			width: auto;
 		}
@@ -72,7 +59,7 @@
   .sub_function_wrapper{
   		.sub_function_main_section{
   			min-width: auto;
-  			
+  			flex: 1;
 			.sub_function_nav{
 				padding: 12px;
 				background-color: #f3f3f3;

@@ -3,14 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // post start here
-.feed_section{
-    display: flex;
-    flex: 1;
-    .post_section{
-        flex: 1;
-        min-width: 600px;
-    }
+.post_section{
+
 }
+
 .feed_sidebar{
 	width: 350px;
 	margin: 0 20px;
@@ -29,6 +25,9 @@
 }
 
 @media(max-width: 970px){
+	.main_section{
+	    width: auto;
+	}
 	.feed_section{
 		.post_section{
 			min-width: auto;
@@ -52,6 +51,16 @@
                 padding-right: 0;
                 .opinion{
                     padding: 12px 0;
+                }
+                .edit_form{
+                    display: none;
+                    margin: 20px 0;
+                }
+                .deleted_article{
+                    color: grey;
+                    border: 1px solid grey;
+                    margin-bottom: 20px;
+                    padding : 12px;
                 }
                 .post_time{
                     padding-bottom: 12px;

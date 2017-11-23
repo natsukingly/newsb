@@ -56,6 +56,11 @@ Rails.application.routes.draw do
 	end
 	get '/replies/:comment_id/new' => 'replies#new'
 	
+	resources :post_drafts do
+		member do
+			post 'publish'
+		end
+	end
 
 	devise_for :users, :controllers => {registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions'} 
 	resources :users, except: [:create, :new] do
@@ -74,6 +79,7 @@ Rails.application.routes.draw do
 			post 'check_notifications'
 			get 'notification_index'
 			post 'error_message' 
+			get 'drafts'
 		end
 	end 
 	post '/users/:country_id/change_country' => 'users#change_country', as: :change_country

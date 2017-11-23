@@ -3,8 +3,8 @@
 	.header_container
 		.left
 			= link_to root_path, class: "logo" do
+				=render 'svg/logo_glasses'
 				NEWSB
-					
 			#locale_link
 				// .setting_icon
 				// 	=render "svg/location_icon"
@@ -22,9 +22,6 @@
 					%i.fa.fa-search.form_icon
 	
 		.right
-			#create_post_btn
-				%span
-					POST
 			=link_to ranking_weekly_user_path, class: "icon" do
 				=render "svg/ranking_icon"	
 			=link_to tags_path, class: "icon" do
@@ -36,8 +33,11 @@
 				#profile_option_link.user_image_md
 					=user_image_helper(current_user)
 			-else
-				.login_signup_link 
+				.login_signup_link.header_btn 
 					Login/Signup
+			#create_post_btn
+				%span
+					POST
 
 			=render 'dropdown/notifications'
 			=render 'dropdown/profile_option'
@@ -84,16 +84,23 @@
 		-@categories.each do |category|
 			=link_to category.name, articles_category_path(category.id), class: "#{category.name}_nav_btn"
 		%span.padding
-
-
-
--if flash[:notice]
-	.notice_bar
-		= flash[:notice]
+#flash_wrapper
+	.notice_bar.for_js
+		%span.notice_content
+		=render 'svg/close_icon'
+			
 		
--if flash[:alert]
-	.notice_bar
-		= flash[:alert]
+	-if flash[:notice]
+		.notice_bar
+			%span
+				= flash[:notice]
+			=render 'svg/close_icon'
+			
+	-if flash[:alert]
+		.notice_bar
+			%span
+				= flash[:alert]
+			=render 'svg/close_icon'
 
 :css
 	a.Lifestyle_nav_btn{
