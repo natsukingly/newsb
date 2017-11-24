@@ -31,7 +31,7 @@ form{
     	    }
     	}
     	input[type="submit"]{
-
+            padding: 5px 12px;
     	}
     	.error_icon{
     	    position: absolute;
@@ -368,6 +368,7 @@ form{
     padding-top: 100px;
     background-size: cover;
     background-position: center;
+    overflow: scroll;
 }
 
 #extra_info{

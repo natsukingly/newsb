@@ -416,7 +416,7 @@ header{
 
 .notice_bar{
     position: fixed;
-    top: 60px;
+   	bottom: 20px;
     right: 20px;
     border-radius: 3px;
     min-width: 500px;
@@ -440,6 +440,40 @@ header{
 .notice_bar.for_js{
 	display: none;
 }
+
+@media(max-width: 768px){
+	.notice_bar{
+	    position: fixed;
+	   	bottom: 50px;
+	    right: 0;
+	    border-radius: 3px;
+	    min-width: auto;
+	    width: 96%;
+	    margin: 0 2%;
+	    line-height: 40px;
+	    padding: 0px 12px;
+	    background-color: cornflowerblue;
+	    color: white;
+	    font-size: 14px;
+	    z-index: 1000;
+	    display: flex;
+	    align-items: center;
+	    justify-content: space-between;
+	    transition: .3s;
+	    span{
+	    	flex: 1;
+	    }
+	    svg{
+	    	width: 16px;
+	    	height: 16px;
+	    	fill: white;
+	    	cursor: pointer;
+	    }
+	}
+}
+
+
+
 
 
 

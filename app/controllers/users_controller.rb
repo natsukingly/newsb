@@ -129,15 +129,13 @@ class UsersController < ApplicationController
   end
 
   def change_country
-    country = Country.find(params[:country_id])
+    @country = Country.find(params[:country_id])
     if current_user
       @user = User.find(current_user.id)
-      @user.country_id = country.id
+      @user.country_id = @country.id
       @user.save
-    else 
-      cookies[:country] = country.name
     end
-    redirect_to root_path
+    redirect_to root_path(country: @country.name)
   end
   
   def change_language
@@ -146,11 +144,11 @@ class UsersController < ApplicationController
       @user = User.find(current_user.id)
       @user.language_id = language.id
       @user.save
-    else 
-      cookies[:language] = language.code
     end
-    redirect_to root_path
+    redirect_to root_path(locale: language.code)
   end
+      
+      
       
   def notification_index
     @current_topic = "Notifications"

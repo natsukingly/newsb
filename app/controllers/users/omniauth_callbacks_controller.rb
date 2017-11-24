@@ -61,7 +61,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       else
         if @profile.user.persisted?
           sign_in @profile.user
-          if @profile.user.sign_in_count <= 10
+          if @profile.user.sign_in_count <= 30
             redirect_url = complete_profile_form_users_path
           else
             redirect_url = session[:previous_url] || root_path

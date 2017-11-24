@@ -24,13 +24,8 @@ class CategoriesController < ApplicationController
 	end
 	
 	def top
-		if current_user
-			@articles = Article.where(country_id: @country.id).order(likes_count: :desc)
-			@recent_articles = Article.where(country_id: @country.id).order(published_time: :desc).limit(5)
-		else
-			@articles = Article.where(country_id: @country.id).order(likes_count: :desc)
-			@recent_articles = Article.where(country_id: @country.id).order(published_time: :desc).limit(5)
-		end
+		@articles = Article.where(country_id: @country.id).order(likes_count: :desc)
+		@recent_articles = Article.where(country_id: @country.id).order(published_time: :desc).limit(5)
 	end
 	
 	def articles

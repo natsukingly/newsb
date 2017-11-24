@@ -38,6 +38,7 @@ class User < ApplicationRecord
   end
   
   def self.create_from_omniauth(auth)
+    detect_locale
     create! do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
@@ -49,7 +50,8 @@ class User < ApplicationRecord
         user.cover = "/assets/cover.jpg"
       end 
       user.gender = auth.extra.raw_info.gender
-
+      user.country_id = @county.id
+      user.language_id = @county.language.id
       # If you are using confirmable and the provider(s) you use validate emails, 
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!

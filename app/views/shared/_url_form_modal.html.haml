@@ -16,7 +16,7 @@
 :javascript
 	$('.post_url_form.on_modal input').keyup(function(e) {
 		$.ajax({
-			url: "/posts/load_url_modal",
+			url: "#{load_url_modal_posts_path}",
 			type: "GET",
 			data: {placeholder_url: $(this).val()},
 			dataType: 'script',
