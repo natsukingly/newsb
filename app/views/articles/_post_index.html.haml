@@ -11,7 +11,6 @@
 -else
 	.your_posts
 		%h3
-			%i.fa.fa-pencil-square-o.fa-fw
 			YOUR POSTS
 		= render partial: "posts/post_wo_article", collection: @your_posts.includes(:user), as: :post
 		

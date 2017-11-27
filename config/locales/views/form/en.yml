@@ -1,0 +1,18 @@
+en:
+  form:
+    url:
+      caption: "What's happening in the world today?"
+      placeholder: "paste an url to start"
+    post:
+      title: "Create post"
+      fake_news_checkbox: "POST AS FAKE NEWS REPORT"
+      placeholder: "COMMENT *optional"
+      selectbox_placeholder: "select a category"
+      submit: "POST"
+      save: "SAVE"
+      cancel: "CANCEL"
+    comment:
+      placeholder: "What do you think?"
+      submit: "COMMENT"
+      cancel: "CANCEL"
+    cancel: "CANCEL"

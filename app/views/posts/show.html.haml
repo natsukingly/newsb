@@ -1,72 +1,73 @@
-.feed_section
-	.post_section
-		.post{class: "post post_#{@post.id} clearfix show_post"}
-			.body
-				.main
-					.content.clearfix
-						.user_block.clearfix{class: "user_#{@post.user.id}"}
-							=image_tag @post.user.image.url, class:"pull-left img-circle user_image"
-							.star
-								=render 'svg/star_icon'
-							.user_info
-								=link_to @post.user  do
-									.give_me_short_ellipsis.light_navy.bold
-										=@post.user.name
-								%p.user_shoulder_name.sm.grey
-									=@post.user.shoulder_name
-									%i.fa.fa-clock-o
-									#{time_ago_in_words_short(@post.created_at)}
-							.user_option.follow_switch.pull-right
-								=render "/shared/follow_form_icon.html.haml", user: @post.user
-						%p.opinion
-							=render_with_hashtags(@post.content.gsub(/\n/, '<br />'))
-		
-						
-						// link to the article
-						=link_to article_path(@post.article_id), class: "post_article" do
-							.image{ style: "background-image: url(#{@post.article.image.url});"}
-							.article_info
-								%h2.bold
-									= truncate(@post.article.title, length: 40) do
-										%span ...
-								%p.xs.grey
-									= @post.article.source
-										
-				.status.md
-					.post_like_link.link_btn
-						=render '/likes/like_post', post: @post
-					.comment_link.link_btn
-						COMMENT
-						・
-						.comment_count.link_btn
-							= @post.comments_count
-					.option.pull-right
-						%i.fa.fa-ellipsis-h.lg.option_link
-						=render 'dropdown/post_option', post: @post
-				
-			.comment_index		
-				.comment_form.clearfix
-					=render '/comments/form', post: @post 
-				- if @post.comments_count > 1
-					.view_link
-						=render 'comments/view_more_link', post: @post
-				- if @post.comments_count == 0
-					.invite_comment.comment_link
-						Be the first one to comment!!
-					.comments
-				-else
-					.comments
-						=render partial: 'comments/comment_wo_replies', collection: @post.comments, as: :comment
+.sub_function_wrapper.search
+	.sub_function_main_section
+		#main_contents
+			.post{class: "post post_#{@post.id} clearfix show_post"}
+				.body
+					.main
+						.content.clearfix
+							.user_block.clearfix{class: "user_#{@post.user.id}"}
+								.user_image
+									=user_image_helper(@post.user)
+								.star
+									=render 'svg/star_icon'
+								.user_info
+									=link_to @post.user  do
+										.give_me_short_ellipsis.light_navy.bold
+											=@post.user.name
+									%p.user_shoulder_name.sm.grey
+										=@post.user.shoulder_name
+										%i.fa.fa-clock-o
+										#{time_ago_in_words_short(@post.created_at)}
+								.user_option.follow_switch.pull-right
+									=render "/shared/follow_form_icon.html.haml", user: @post.user
+							%p.opinion
+								=render_with_hashtags(@post.content.gsub(/\n/, '<br />'))
+			
+							
+							// link to the article
+							=link_to article_path(@post.article_id), class: "post_article" do
+								.image{ style: "background-image: url(#{@post.article.image.url});"}
+								.article_info
+									%h2.bold
+										= truncate(@post.article.title, length: 40) do
+											%span ...
+									%p.xs.grey
+										= @post.article.source
+											
+					.status.md
+						.post_like_link.link_btn
+							=render '/likes/like_post', post: @post
+						.comment_link.link_btn
+							COMMENT
+							・
+							.comment_count.link_btn
+								= @post.comments_count
+						.option.pull-right
+							%i.fa.fa-ellipsis-h.lg.option_link
+							=render 'dropdown/post_option', post: @post
+					
+				.comment_index		
+					.comment_form.clearfix
+						=render '/comments/form', post: @post 
+					- if @post.comments_count > 1
+						.view_link
+							=render 'comments/view_more_link', post: @post
+					- if @post.comments_count == 0
+						.invite_comment.comment_link
+							Be the first one to comment!!
+						.comments
+					-else
+						.comments
+							=render partial: 'comments/comment_wo_replies', collection: @post.comments, as: :comment
 
-	.feed_sidebar
-		%h2
-			who to follow
-		.new_users_section
-			-unless @new_users.empty?
-				= render partial: "users/card", collection: @new_users, as: :user
+	.sub_function_sidebar
+		%h2 
+			=t ('sidebar.title.recommended_articles')
+		.side_article_section
+			-unless @side_articles.empty?
+				= render partial: "articles/side_article", collection: @side_articles, as: :article
 				
-	
-
+				
 :javascript
 	// post side menu open close
 	$('.option_link').click(function () {

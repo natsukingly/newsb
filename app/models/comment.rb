@@ -12,7 +12,7 @@ class Comment < ApplicationRecord
 	def issue_notification
 		unless self.user_id == self.post.user_id
 			notification = Notification.new(user_id: self.post.user_id,
-											path: "/posts/#{self.post_id}",
+											path: post_path(self.post.id),
 											notification_type: "Comment",
 											target_user_id: self.user_id,
 											post_id: self.post.id,

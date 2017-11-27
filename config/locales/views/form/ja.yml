@@ -1,0 +1,18 @@
+ja:
+  form:
+    url:
+      caption: "気になる記事をNEWSBの仲間と共有しよう。"
+      placeholder: "URLを入力して開始"
+    post:
+      title: "投稿を作成"
+      fake_news_checkbox: "フェイクニュースとして報告する"
+      placeholder: "コメントする　※任意"
+      selectbox_placeholder: "カテゴリーを選ぶ"
+      submit: "共有"
+      save: "保存"
+      cancel: "キャンセル"
+    comment:
+      placeholder: "コメント"
+      submit: "共有"
+      cancel: "キャンセル"
+    cancel: "キャンセル"

@@ -13,8 +13,28 @@
 					NO USERS YET
 			-else
 				.user_lists
-					= render partial: "users/user_list", collection: @user.followers, as: :user	
+					= render @users
+					.scroll_btn.load_followers
+						LOAD MORE
+
 
 :javascript
 	$(".profile_btn").removeClass("active");
 	$(".profile_btn.middle_right").addClass("active");
+
+	$('.scroll_btn.load_followers').click(function(){
+		var stop_loading = $(this).hasClass('stop_loading');
+		if(!(stop_loading)){
+			$.ajax({
+				url: "#{load_followers_path}",
+				type: "GET",
+				data: {existing_users: $('#main_contents').find('.user').length,
+				user_id: "#{@user.id}"
+				},
+				dataType: 'script',
+			})
+			$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+			$(this).addClass("loading");
+		}
+	})
+

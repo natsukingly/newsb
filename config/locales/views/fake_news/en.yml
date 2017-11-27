@@ -1,0 +1,11 @@
+en:
+  fake_news:
+    title: "Fake news reports"
+    count_description:
+      one: "%{count} person reported this article as fake news."
+      other: "%{count} people reported this article as fake news."
+    no_fake_news: "No fake news report has been received."
+    show:
+      desktop: "READ REPORTS"
+      mobile: "Fake news reports"
+    hide: "HIDE"

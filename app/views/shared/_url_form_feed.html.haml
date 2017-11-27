@@ -2,11 +2,11 @@
 =form_tag "/posts/load_url_feed", method: :get, autocomplete: :off, remote: true do
 	%span
 		%i.fa.fa-newspaper-o
-		What's happening in the world today?
+		=t 'form.url.caption'
 	.form_row
 		.user_image
 			=user_image_helper(current_user)
-		= url_field_tag :placeholder_url, "", placeholder: "[https://] paste url to start your post", class: "url_form"
+		= url_field_tag :placeholder_url, "", placeholder: "[https://] #{t 'form.url.placeholder'}", class: "url_form"
 
 :css 
 	.post_url_form form input:-webkit-autofill {
@@ -16,7 +16,7 @@
 :javascript
 	$('.post_url_form.on_feed input').keyup(function(e) {
 		$.ajax({
-			url: "#{load_url_modal_posts_path}",
+			url: "#{load_url_feed_posts_path}",
 			type: "GET",
 			data: {placeholder_url: $(this).val()},
 			dataType: 'script',

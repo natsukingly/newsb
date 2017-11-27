@@ -1,4 +1,4 @@
-.sub_function_wrapper.tags
+.sub_function_wrapper
 	.sub_function_main_section
 		.sub_function_nav
 			%h2
@@ -9,14 +9,10 @@
 				.notification_empty
 					You haven't received any notifications yet.
 			-else        
-				- current_user.notifications.includes(:target_user).order(created_at: :desc).each do |notification|
-					=link_to notification.path, class: "notification" do
-						.user_image
-							=user_image_helper(notification.target_user)
-						.content
-							=notification.message.html_safe
-							%p
-								#{time_ago_in_words(notification.created_at)} ago
+				=render @notifications
+				.scroll_btn.load_notifications
+					LOAD MORE	
+				
 	
 	.sub_function_sidebar
 		%h2
@@ -24,6 +20,22 @@
 		.new_users_section
 			-unless @new_users.empty?
 				= render partial: "users/card", collection: @new_users, as: :user
+
+:javascript
+	$('.scroll_btn.load_notifications').click(function(){
+		var stop_loading = $(this).hasClass('stop_loading');
+		if(!(stop_loading)){
+			$.ajax({
+				url: "#{load_notifications_path}",
+				type: "GET",
+				data: {existing_notifications: $('#main_contents').find('.notification').length,
+				},
+				dataType: 'script',
+			})
+			$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+			$(this).addClass("loading");
+		}
+	})
 
 
 

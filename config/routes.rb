@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'auto_scroll/article'
+
+  get 'auto_scroll/post'
+
+  get 'auto_scroll/user'
+
 	get '/:locale' => 'categories#top'
 	root 'categories#top'
 	devise_for :users, :controllers => {registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions'} 
@@ -128,11 +134,10 @@ Rails.application.routes.draw do
 	
 		# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 		get '/search' => "search#search"
-		get '/search/:keyword' => "search#search"
-		get '/search/:keyword/tags' => "search#tags"
-		get '/search/:keyword/articles' => "search#articles"
-		get '/search/:keyword/posts' => "search#posts"
-		get '/search/:keyword/users' => "search#users"
+		get '/search/:keyword/tags' => "search#tags", as: :search_tags
+		get '/search/:keyword/articles' => "search#articles", as: :search_articles
+		get '/search/:keyword/posts' => "search#posts", as: :search_posts
+		get '/search/:keyword/users' => "search#users", as: :search_users
 		
 		# rankings
 		get '/ranking/weekly_user' => "ranking#user_weekly_ranking"
@@ -141,13 +146,37 @@ Rails.application.routes.draw do
 		
 		
 		#LIKES
-		post "/comments/params[:comment_id]/like" => "likes#comment_like" , as: :comment_like
-		delete "/comments/params[:comment_id]/unlike" => "likes#comment_unlike", as: :comment_unlike
+		post "/comments/:comment_id/like" => "likes#comment_like" , as: :comment_like
+		delete "/comments/:comment_id/unlike" => "likes#comment_unlike", as: :comment_unlike
 		
-		post "/posts/params[:post_id]/like" => "likes#post_like" , as: :post_like
-		delete "/posts/params[:post_id]/unlike" => "likes#post_unlike", as: :post_unlike
+		post "/posts/:post_id/like" => "likes#post_like" , as: :post_like
+		delete "/posts/:post_id/unlike" => "likes#post_unlike", as: :post_unlike
 		
-		post "/replies/params[:reply_id]/like" => "likes#reply_like" , as: :reply_like
-		delete "/replies/params[:reply_id]/unlike" => "likes#reply_unlike", as: :reply_unlike
+		post "/replies/:reply_id/like" => "likes#reply_like" , as: :reply_like
+		delete "/replies/:reply_id/unlike" => "likes#reply_unlike", as: :reply_unlike
+		
+		
+		# auto scroll routing
+		get "/auto_scroll/load_articles" => "auto_scroll#load_articles", as: :load_articles
+		get "/auto_scroll/load_categorized_articles" => "auto_scroll#load_categorized_articles", as: :load_categorized_articles
+		get "/auto_scroll/load_searched_articles" => "auto_scroll#load_searched_articles", as: :load_searched_articles
+		
+		get "/auto_scroll/load_posts" => "auto_scroll#load_posts", as: :load_posts
+		get "/auto_scroll/load_user_posts" => "auto_scroll#load_user_posts", as: :load_user_posts
+		get "/auto_scroll/load_searched_posts" => "auto_scroll#load_searched_posts", as: :load_searched_posts
+	
+		get "/auto_scroll/load_trending_tags" => "auto_scroll#load_trending_tags", as: :load_trending_tags
+		get "/auto_scroll/load_favorite_tags" => "auto_scroll#load_favorite_tags", as: :load_favorite_tags
+		get "/auto_scroll/load_searched_tags" => "auto_scroll#load_searched_tags", as: :load_searched_tags	
+		
+		get "/auto_scroll/load_notifications" => "auto_scroll#load_notifications", as: :load_notifications
+
+		get "/auto_scroll/load_weekly_users" => "auto_scroll#load_weekly_users", as: :load_weekly_users
+		get "/auto_scroll/load_all_time_users" => "auto_scroll#load_all_time_users", as: :load_all_time_users
+		get "/auto_scroll/load_serached_users" => "auto_scroll#load_searched_users", as: :load_searched_users
+		get "/auto_scroll/load_following" => "auto_scroll#load_following", as: :load_following
+		get "/auto_scroll/load_followers" => "auto_scroll#load_followers", as: :load_followers
+	
+	
 	end	
 end

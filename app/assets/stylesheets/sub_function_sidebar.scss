@@ -1,6 +1,6 @@
 .sub_function_sidebar{
-	width: 350px;
-	margin: 0 20px;
+	width: 320px;
+	margin: 10px 20px;
 	h2{
 		font-size: 14px;
 	    color: #696969;
@@ -18,6 +18,8 @@
 }
 
 
+
+
 .side_article{
 	display: flex;
 	padding: 12px 20px;
@@ -29,7 +31,7 @@
 			flex-direction: column;
 			align-items: flex-start;
 			h2{
-				color: #001E42;
+				color: black;
 				margin-bottom: 0;
 				font-weight: 900;
 			}

@@ -1,0 +1,8 @@
+en:
+  search:
+    nav:
+      item: 
+        articles: "ARTICLES"
+        posts: "POSTS"
+        users: "USERS"
+        tags: "TAGS"

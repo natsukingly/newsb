@@ -1,0 +1,7 @@
+en:
+  ranking:
+    title: "RANKING"
+    nav:
+      item: 
+        weekly: "Weekly"
+        all_time: "All-time"

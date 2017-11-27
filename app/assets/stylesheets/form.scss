@@ -54,6 +54,9 @@ form{
 
 
 #post_form{
+    margin-bottom: 0;
+    border-bottom: 1px solid #eee;
+    background-color: white;
     .post_article{
         flex-direction: column;
         .post_image{
@@ -69,6 +72,7 @@ form{
         font-size: 14px;
         display: flex;
         flex-direction: column;
+        border: none;
         padding: 20px;
         .form_main{
             flex: 1;
@@ -149,6 +153,15 @@ form{
                         background-color: #001E42;
                         color: white;
                     }
+                    &.post_save_btn{
+                        border: none;
+                        color: grey;
+                        &:hover{
+                            background-color: white;
+                            font-weight: 900;
+                            color: #001E42;
+                        }
+                    }
                 }
                 .draft_btn{
                     background-color: white;
@@ -188,21 +201,28 @@ form{
                             }
                             &.unshare{
                                 color: white;
+                                &:hover{
+                                    opacity: .8;
+                                }
                             }
-                            &.facebook.unshare{
+                            &.facebook.connect:hover, &.facebook.share:hover, &.facebook.unshare{
                                 background-color: $facebook;
+                                color: white;
                                 border: none;
                             }
-                            &.twitter.unshare{
+                            &.twitter.connect:hover, &.twitter.share:hover, &.twitter.unshare{
                                 background-color: $twitter;
+                                color: white;
                                 border: none;
                             }                            
-                            &.linkedin.unshare{
+                            &.linkedin.connect:hover, &.linkedin.share:hover,&.linkedin.unshare{
                                 background-color: $linkedin;
+                                color: white;
                                 border: none;
                             }
+        
                         }
-                }
+                    }
                 }
                 .cancel_btn, .clear_btn{
                     line-height: 25px;
@@ -219,6 +239,10 @@ form{
             }
         }
     }
+}
+
+.form_show.on_mobile{
+	@extend .mobile_btn;
 }
 
 @media (max-width: 768px) {
@@ -259,13 +283,12 @@ form{
     }
 }
 
-.comment_form{
-    display: none;
-}
 
 .comment_form, .reply_form{
+    display: none;
+    padding: 12px 0 5px;
     .form-group{
-        margin-bottom: 5px;
+        margin-bottom: 8px;
     }
     .form_textarea{
         display: flex;
@@ -277,6 +300,7 @@ form{
         textarea{
             flex: 1;
             border: 1px solid #ddd;
+            min-height: 46px;
         }
     }
     .form_textarea.edit{
@@ -286,7 +310,6 @@ form{
         margin-left: 40px;
         color: grey;
         display: flex;
-        justify-content: flex-end;
         align-items: center;
         input[type="submit"]{
             background-color: rgba(0,0,0,0);
@@ -354,8 +377,7 @@ form{
 
 @media (max-width: 768px) {
 	.post_url_form{
-	    margin: 5px 0;
-		border-radius: 0;
+	    display: none;
 	}
 }
 

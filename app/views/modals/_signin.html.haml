@@ -105,7 +105,8 @@
 			$(".ddm").hide();
 			$('#signin_modal').fadeIn();
 			$('body').addClass('fixed');
-			window.sessionStorage.setItem(['previous_url'],[location.href]);
+			current_url = location.href 
+			document.cookie = 'previous_url=' + current_url;
 			return false;
 		}
 	});

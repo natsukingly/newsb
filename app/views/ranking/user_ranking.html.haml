@@ -3,18 +3,42 @@
 	.sub_function_main_section
 		.sub_function_nav
 			%h2
-				RANKING
+				=t 'ranking.title'
 			
 			.nav_options	
-				=link_to "WEEKLY", ranking_weekly_user_path 
-				=link_to "ALL-TIME", ranking_user_path, class: "active"
+				=link_to t('ranking.nav.item.weekly'), ranking_weekly_user_path 
+				|
+				=link_to t('ranking.nav.item.all_time'), ranking_user_path, class: "active"
 
 		#main_contents.user_lists
-			= render partial: "users/user_list", collection: @users, as: :user
+			= render @users
+			.scroll_btn.all_time_users
+				LOAD MORE
 	
 	.sub_function_sidebar
 		%h2
-			NEW USERS
+			=t('sidebar.title.new_users')
 		.new_users_section
-			-unless @new_users.empty?
-				= render partial: "users/card", collection: @new_users, as: :user
+			-if @new_users.empty?
+				.new_users_not_found
+					%h4.not_found_content
+						=t('not_found.new_users')
+			-else
+				= render partial: "users/card", collection: @new_users, as: :user 
+				
+:javascript
+	$('.scroll_btn.all_time_users').click(function(){
+		var stop_loading = $(this).hasClass('stop_loading');
+		if(!(stop_loading)){
+			$.ajax({
+				url: "#{load_all_time_users_path}",
+				type: "GET",
+				data: {existing_users: $('#main_contents').find('.user').length,
+				},
+				dataType: 'script',
+			})
+			$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+			$(this).addClass("loading");
+		}
+	})
+

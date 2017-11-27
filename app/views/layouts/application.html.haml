@@ -28,8 +28,11 @@
 						=yield
 				
 			-elsif yield(:profile).empty? == false
-				=render 'shared/user_profile', user: @user
+				.user_profile_container
+					=render 'shared/user_profile', user: @user
 				.flex_wrapper.on_user_profile.clearfix 
+					#sidebar_left
+						=render "/sidebars/left_profile", user: current_user
 					#main_container
 						=yield
 			

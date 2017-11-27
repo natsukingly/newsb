@@ -1,4 +1,4 @@
-=link_to "/comments/#{post.id}/view_more", remote: true do
+=link_to view_more_comment_path(post.id), remote: true do
 	%i.fa.fa-comment-o
 	VIEW ALL #{post.comments_count} COMMENTS 
 	%i.fa.fa-angle-down

@@ -6,15 +6,39 @@
 			
 			.nav_options	
 				=link_to "TRENDING", tags_path
+				|
 				=link_to favorite_index_tags_path, class: "active" do
-					FAVORITE・#{current_user.favorite_tags.count}
+					FAVORITE・
+					%span.tag_counts
+						#{current_user.favorite_tags.count}
 
 		#main_contents
 			=render @tags
+			.scroll_btn.favorite_tags
+				LOAD MORE
 	
 	.sub_function_sidebar
 		%h2
-			NEW USERS
+			=t('sidebar.title.new_users')
 		.new_users_section
-			-unless @new_users.empty?
+			-if @new_users.empty?
+				.new_users_not_found
+					%h4.not_found_content
+						=t('not_found.new_users')
+			-else
 				= render partial: "users/card", collection: @new_users, as: :user
+
+:javascript
+	$('.scroll_btn.favorite_tags').click(function(){
+		var stop_loading = $(this).hasClass('stop_loading');
+		if(!(stop_loading)){
+			$.ajax({
+				url: "#{load_favorite_tags_path}",
+				type: "GET",
+				data: {existing_tags: $('#main_contents').find('.tag').length },
+				dataType: 'script',
+			})
+			$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+			$(this).addClass("loading");
+		}
+	})

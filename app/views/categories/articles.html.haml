@@ -6,12 +6,49 @@
 .sub_function_wrapper
 	.sub_function_main_section
 		#main_contents.articles
-			-unless @articles.empty?
+			.title
+				%span
+					=t ('article_index.title.week')
+				%span.divider
+					\|
+				%span
+					#{@category.name}
+			-if @articles.offset(1).empty?
+				.result_not_found
+					%h4.not_found_content
+						=t('form.url.caption')
+					#create_post_btn.show_post_modal_btn
+						=t ('form.post.title')
+						
+						
+			-else
 				=render @articles.offset(1)
+				.scroll_btn.categorized_articles
+					LOAD MORE
 			
 	.sub_function_sidebar
 		%h2
-			RECENT ARTICLES
+			=t ('sidebar.title.recent_articles')
 		.recent_article_section
-			-if @recent_articles
+			-if @recent_articles.empty?
+				.new_users_not_found
+					%h4.not_found_content
+						=t('not_found.new_articles')
+			-else
 				= render partial: "articles/side_recent_article", collection: @recent_articles, as: :article
+
+:javascript
+	$('.scroll_btn.categorized_articles').click(function(){
+		var stop_loading = $(this).hasClass('stop_loading');
+		if(!(stop_loading)){
+			$.ajax({
+				url: "#{load_categorized_articles_path}",
+				type: "GET",
+				data: {existing_articles : $('#main_contents').find('.article').length,
+						category_id : "#{@category.id}"},
+				dataType: 'script',
+			})
+			$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+			$(this).addClass("loading");
+		}
+	})

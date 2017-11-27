@@ -11,46 +11,51 @@
 				%h2.section_title.stats
 					=render 'svg/stats_icon'
 					%span
-						Stats
+						=t 'sidebar.stats.title'
 				.stats_item
 					%p 
-						Posts:
+						=t 'sidebar.stats.posts'
+						\:
 						%span 
 							= user.posts.count
 				.stats_item
 					%p	
-						Follower:
+						=t 'sidebar.stats.follower'
+						\:
 						%span 
 							= user.followers_count
 				.stats_item
 					%p
-						Following:
+						=t 'sidebar.stats.following'
+						\:
 						%span 
 							= user.following_count
 			.like_stats
 				%h2.section_title.like
 					=render 'svg/like_icon'
 					%span
-						Likes
+						=t 'sidebar.likes.title'
 					
 				%p 
-					Week: #{user.weekly_liked_count}
+					=t 'sidebar.likes.week'
+					\: #{user.weekly_liked_count}
 					// %span= Like.where(target_user_id: current_user.id).where(created_at: 48.hours.ago..Time.now).count
 		
 				%p 
-					ALL-TIME: #{user.liked_count}
+					=t 'sidebar.likes.all_time'
+					\: #{user.liked_count}
 					
 			#favorite_tags
 				%h2.section_title.tag
 					=render 'svg/tag_icon_circle'
 					%span
-						Favorite Tags
+						=t 'sidebar.favorite_tags.title'
 				.favorite_tags_block
 					-unless user.favorites.empty?
 						-user.favorites.includes(:tag).each do |favorite|
 							%p.tag
 								=link_to "\##{favorite.tag.name}",tag_path(favorite.tag.name)
-					=link_to "check trending tags", tags_path, class: "tags_link"
+					=link_to "#{t('sidebar.favorite_tags.link')} >>", tags_path, class: "tags_link"
 				
 	-else
 		.profile.not_signed_in

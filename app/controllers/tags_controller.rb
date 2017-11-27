@@ -10,12 +10,12 @@ class TagsController < ApplicationController
     def index
         # sort them by the number of posts in the future
         @current_topic = "Tags"
-        @tags = Tag.all.order(created_at: :desc)
+        @tags = Tag.where(country_id: @country.id).order(created_at: :desc).limit(1)
     end
     
     def favorite_index
         @current_topic = "Tags"
-        @tags = current_user.favorite_tags
+        @tags = current_user.favorite_tags.order(created_at: :desc).limit(1)
     end
     
     
@@ -39,7 +39,7 @@ class TagsController < ApplicationController
     
     private 
         def set_tag
-            @tag = Tag.find_by(name: params[:name])
+            @tag = Tag.find_by(id: params[:id])
         end
         
         def set_current_topic

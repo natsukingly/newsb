@@ -11,6 +11,8 @@
 		
 		#main_contents.posts
 			=render @posts
+			.scroll_btn.posts
+				LOAD MORE
 	
 	.sub_function_sidebar
 		%h2
@@ -18,7 +20,18 @@
 		.new_users_section
 			-unless @new_users.empty?
 				= render partial: "users/card", collection: @new_users, as: :user
-
-	
-	
-
+				
+:javascript
+	$('.scroll_btn.posts').click(function(){
+		var stop_loading = $(this).hasClass('stop_loading');
+		if(!(stop_loading)){
+			$.ajax({
+				url: "#{load_posts_path}",
+				type: "GET",
+				data: {existing_posts: $('#main_contents').find('.post').length },
+				dataType: 'script',
+			})
+			$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+			$(this).addClass("loading");
+		}
+	})

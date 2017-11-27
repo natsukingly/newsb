@@ -68,7 +68,7 @@
 			.comments
 		-else
 			.comments
-				=render 'comments/comment_wo_replies', comment: post.best_comment unless post.best_comment.nil?
+				=render 'comments/comment', comment: post.best_comment unless post.best_comment.nil?
 
 :javascript
 	// post side menu open close

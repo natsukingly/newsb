@@ -3,27 +3,47 @@
 .sub_function_wrapper.article_show
 	.sub_function_main_section
 		=render "/articles/featured_article_sm", article: @article
+		=link_to @article.url, target: :_blank do
+			.read_article.on_mobile
+				%span.content
+					= t 'article.read_btn' 
+				%span.mobile_btn_icon.svg_icon
+					=render "svg/window_icon"
+		.form_show.on_mobile
+			%span.content
+				=t 'form.post.title'
+			%span.mobile_btn_icon
+				+
 		=render "/posts/form_no_category", article: @article
 		#fake_news_block
 			.fake_news_container
 				- report_count = @article.posts.where(fake_news_report: true).count
+					
 				-if report_count == 0
 					%p.no_fake_news_report
 						%i.fa.fa-check
-						No fake news report has been submitted.
+						=t ('fake_news.no_fake_news')
 				-else
 					%p.yes_fake_news_report
 						%i.fa.fa-exclamation-circle
-						#{report_count} people reported this article as fake news.
-					.show_fake_news_btn
-						READ REPORTS >>
+						=t 'fake_news.count_description', count: report_count
+					.show_fake_news_link
+						=t ('fake_news.show.desktop')
+						>>
+		.show_fake_news_btn.on_mobile
+			%span.content
+				=t ('fake_news.show.mobile')
+				\:
+				= report_count
+			%span.mobile_btn_icon
+				+
 					
 		#main_contents.article_posts
 			=render '/articles/post_index'
 
 	.sub_function_sidebar
 		%h2 
-			RECOMMENDED
+			=t ('sidebar.title.recommended_articles')
 		.side_article_section
 			-unless @side_articles.empty?
 				= render partial: "articles/side_article", collection: @side_articles, as: :article
@@ -33,12 +53,34 @@
 			$("#main_contents").find(".post_#{best_id}").find(".user_block .star").css("display","block");
 					
 :javascript
-	$('.show_fake_news_btn').click(function(){
+	$('.show_fake_news_link').click(function(){
 		if($(this).hasClass("open")){
-			$(this).removeClass("open").text("READ REPORTS >>");
+			$(this).removeClass("open").text("#{t ('fake_news.show.desktop')}" + ">>");
 			$('.fake_news_reports').fadeOut();
 		} else{
-			$(this).addClass("open").text("HIDE");
+			$(this).addClass("open").text("#{t ('fake_news.hide')}");
 			$('.fake_news_reports').fadeIn();
+		}
+	})
+	$('.show_fake_news_btn').click(function(){
+		if($(this).hasClass("open")){
+			$(this).removeClass("open").find('span.content').text("#{t ('fake_news.show.mobile')}" + ":" + "#{report_count}");
+			$(this).find('span.mobile_btn_icon').text("+");
+			$('.fake_news_reports').slideUp();
+		} else{
+			$(this).addClass("open").find('span.content').text("#{t ('fake_news.hide')}");
+			$(this).find('span.mobile_btn_icon').text("ー");
+			$('.fake_news_reports').slideDown();
+		}
+	})
+	$('.form_show.on_mobile').click(function(){
+		if($(this).hasClass("open")){
+			$(this).removeClass("open").find('span.content').text("#{t ('form.post.title')}");
+			$(this).find('span.mobile_btn_icon').text("+");
+			$('#post_form').slideUp();
+		} else{
+			$(this).addClass("open").find('span.content').text("#{t ('form.cancel')}");
+			$(this).find('span.mobile_btn_icon').text("ー");
+			$('#post_form').slideDown();
 		}
 	})

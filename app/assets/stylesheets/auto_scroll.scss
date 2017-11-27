@@ -1,0 +1,29 @@
+.scroll_btn{
+    text-align: center;
+    font-size: 16px;
+    color: grey;
+    padding: 20px;
+    width: 200px;
+    margin: 0 auto;
+    cursor: pointer;
+    &:hover{
+        color: #001E42;
+        font-weight: 900;
+    }
+}
+.scroll_btn.loading{
+    cursor: auto;
+    &:hover{
+        color: grey;
+        font-weight: normal;
+    }
+}
+
+
+.scroll_btn.stop_loading{
+    cursor: auto;
+    &:hover{
+        color: grey;
+        font-weight: normal;
+    }
+}

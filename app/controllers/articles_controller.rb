@@ -39,13 +39,6 @@ class ArticlesController < ApplicationController
     @posts = Post.includes([:user]).sortByLikes(Like.recent.offset(existing_article_posts).limit(5).popularPosts(@article.posts.ids))
   end
   
-  def load_more
-    
-    existing_articles = params[:existing_articles]
-    @articles = Article.order(created_at: :desc).offset(existing_articles).limit(5)
-
-    not_found
-  end
   
   
   

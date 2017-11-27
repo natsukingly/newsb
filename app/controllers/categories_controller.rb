@@ -5,12 +5,8 @@ class CategoriesController < ApplicationController
 	before_action :set_current_topic_for_all_posts, only: [:all_posts]
 
 	def all_posts
-		if @country.id == 1
-			@posts = Post.order(created_at: :desc).includes(:user, :article)
-		else
-			@posts = Post.where(country_id: @country.id).order(created_at: :desc).includes(:user, :article)
-		end
-		
+		@posts = Post.where(country_id: @country.id).order(created_at: :desc).includes(:user, :article).limit(3)
+
 		if current_user && current_user.feed_notifications.any?
 			current_user.feed_notifications.each do |notification|
 				notification.check = "True"
@@ -24,19 +20,14 @@ class CategoriesController < ApplicationController
 	end
 	
 	def top
-		@articles = Article.where(country_id: @country.id).order(likes_count: :desc)
+		@articles = Article.where(country_id: @country.id).order(likes_count: :desc).limit(2)
 		@recent_articles = Article.where(country_id: @country.id).order(published_time: :desc).limit(5)
 	end
 	
 	def articles
 		@recent_post = Post.where(country_id: @country.id, category_id: @category.id).last
-		if @country.id == 1
-			@articles = @category.articles.order(likes_count: :desc).limit(10)
-			@recent_articles = Article.where(category_id: @category.id).order(published_time: :desc).limit(5)
-		else 
-			@articles = @category.articles.where(country_id: @country.id).order(likes_count: :desc).limit(10)
-			@recent_articles = Article.where(country_id: @country.id, category_id: @category.id).order(published_time: :desc).limit(5)
-		end
+		@articles = @category.articles.where(country_id: @country.id).order(likes_count: :desc).limit(1)
+		@recent_articles = Article.where(country_id: @country.id, category_id: @category.id).order(published_time: :desc).limit(5)
 	end
 	
 	def posts

@@ -19,6 +19,7 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "mixin";
 @import "common";
 @import "color";
 @import "sub_function";
@@ -46,6 +47,8 @@
 @import "fake_news";
 @import "post_drafts";
 @import "sub_function_sidebar";
+@import "not_found";
+@import "auto_scroll";
 
 
 

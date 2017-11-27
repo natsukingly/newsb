@@ -1,4 +1,3 @@
-
 %header
 	.header_container
 		.left
@@ -9,14 +8,14 @@
 				// .setting_icon
 				// 	=render "svg/location_icon"
 				.setting
-					#{@country.name}
+					=country_name_helper(@country.name)
 					%br
-					#{@language.name}
+					=language_name_helper(@language.name)
 				
 			=render "dropdown/locale" 
 		.middle
 			.search_bar
-				=form_tag "/search", method: "get" do
+				=form_tag search_path(country: @country.name), method: "get" do
 					=text_field_tag :keyword, params[:keyword], placeholder: "search"
 					=submit_tag "", style: "display: none;"
 					%i.fa.fa-search.form_icon
@@ -30,14 +29,14 @@
 			-if user_signed_in?
 				#notification_icon.icon
 					=render "shared/notification_icon"
-				#profile_option_link.user_image_md
+				#profile_option_link.user_image_sm.align_items_center
 					=user_image_helper(current_user)
 			-else
 				.login_signup_link.header_btn 
 					Login/Signup
-			#create_post_btn
+			#create_post_btn_circle.show_post_modal_btn
 				%span
-					POST
+					+
 
 			=render 'dropdown/notifications'
 			=render 'dropdown/profile_option'
@@ -140,18 +139,19 @@
 		$('#notification_ddm').css("display", "block");
 		$('body').addClass("fixed");
 		$.ajax({
-			url: "/users/check_notifications",
+			url: "#{check_notifications_users_path}",
 			type: "POST",
 			dataType: 'script',
 		})
-		$('#notification_icon').html("#{escape_javascript(render 'shared/notification_read_icon')}");
+		$('#notification_icon .notifications_count').hide();
+		$('#notification_icon .notification_fire').hide();
 		return false;
 	});
 
 	$('body').click(function (event) {
 		if(!$(event.target).closest('#notification_ddm').length && !$(event.target).is('#notification_ddm')) {
 			$("#notification_ddm").hide();
-			$('body').removeClass("fixed");
+			// $('body').removeClass("fixed");
 		}
 	});
 		
@@ -180,4 +180,19 @@
 		$("#mobile_header .search_bar").css("flex", "none");
 		$("#account").show();
 		$("#close_search_bar").hide();
+	});
+	
+	$('#locale_link').click(function () {
+		// ボタンが押されたら、モーダルウィンドウを表示
+		$(".ddm").hide();
+		$('#locale_ddm').css("display", "flex");
+		current_url = location.href 
+		document.cookie = 'previous_url=' + current_url;
+		return false;
+	});
+
+	$('body').click(function (event) {
+		if(!$(event.target).closest('#locale_ddm').length && !$(event.target).is('#locale_ddm')) {
+			$("#locale_ddm").hide();
+		}     
 	});

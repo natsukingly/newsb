@@ -1,5 +1,5 @@
 -if article
-	- best_post = article.posts.order(likes_count: :desc).first
+	- best_posts = article.posts.order(likes_count: :desc).limit(2)
 	=link_to article_path(article.id), class: "article_#{article.id}", id: "featured_article" do
 		.article_wrapper.image{style: "background-image: url(#{article_image_helper article.image.url});"}
 			.overlay
@@ -26,12 +26,6 @@
 										#{article.posts_count}
 										%span.unit
 											posts
-								
-									.posts_count.for_featured_article
-										-popular_users = User.where(id: article.posts.order(likes_count: :desc).where.not(user_id: best_post.user_id).limit(5).uniq.pluck(:user_id))
-										.popular_user_faces.featured_faces
-											-popular_users.each do |user|
-												=user_image_helper(user)
 												
 									.mobile_posts_count.for_featured_article
 										-popular_users = User.where(id: article.posts.order(likes_count: :desc).limit(5).uniq.pluck(:user_id))
@@ -39,27 +33,47 @@
 											-popular_users.each do |user|
 												=user_image_helper(user) 
 												
-					.best_post				
-						-if article.posts_count != 0						
-							- unless best_post.nil?
-								.body.best_post_first
+					.best_posts				
+						-unless best_posts.empty?						
+							- unless best_posts.first.nil?
+								.body
 									.user_block
-										.user_image
-											=user_image_helper(best_post.user)
+										.user_image_sm
+											=user_image_helper(best_posts.first.user)
 										.user_details
 											%p
 												%span
-													= best_post.user.name
+													= best_posts.first.user.name
 												%br
 												%span.user_shoulder_name
-													= best_post.user.shoulder_name
+													= best_posts.first.user.shoulder_name
 									%p.best_post_content
-										-if best_post.content.empty?
+										-if best_posts.first.content.empty?
 											%span.shared_message
 												> Shared this article
 										-else
 											%span.comment_large
-												= best_post.content
+												= best_posts.first.content
+												
+							- unless best_posts.second.nil?
+								.body
+									.user_block
+										.user_image_sm
+											=user_image_helper(best_posts.second.user)
+										.user_details
+											%p
+												%span
+													= best_posts.second.user.name
+												%br
+												%span.user_shoulder_name
+													= best_posts.second.user.shoulder_name
+									%p.best_post_content
+										-if best_posts.second.content.empty?
+											%span.shared_message
+												> Shared this article
+										-else
+											%span.comment_large
+												= best_posts.second.content
 
 												
 

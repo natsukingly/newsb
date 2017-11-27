@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     @user.about = params[:user][:about]
     @user.save
     
-    redirect_to session[:previous_url] || root_path
+    redirect_to cookies[:previous_url] || root_path
   end
   
   def error_message
@@ -81,6 +81,7 @@ class UsersController < ApplicationController
   
   
   def posts
+    @posts = @user.posts.includes(:article).order(created_at: :desc).limit(1)
   end
   
   def drafts
@@ -88,9 +89,11 @@ class UsersController < ApplicationController
   end
   
   def following
+    @users = @user.following.order(liked_count: :desc).limit(1)
   end
 
   def followers
+    @users = @user.followers.order(liked_count: :desc).limit(1)
   end
 
   # GET /users/new
@@ -145,13 +148,17 @@ class UsersController < ApplicationController
       @user.language_id = language.id
       @user.save
     end
-    redirect_to root_path(locale: language.code)
+    redirect_url = cookies[:previous_url]
+    cookies.delete :previous_url
+    redirect_to redirect_url || root_path
   end
       
       
       
   def notification_index
     @current_topic = "Notifications"
+		@notifications = current_user.notifications.includes(:target_user).order(created_at: :desc).limit(1)
+
   end
 
   def check_notifications

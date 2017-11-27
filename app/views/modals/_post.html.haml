@@ -2,7 +2,7 @@
 	.post_modal_block.modal_block
 		.modal_title
 			%h2
-				Share knowledge, Ask questions
+				=t 'form.url.caption'
 		.post_url_form.on_modal
 			=render "shared/url_form_modal"
 		#post_form_block_on_modal
@@ -13,7 +13,7 @@
 :javascript
 
 	
-	$('#create_post_btn').click(function () {
+	$('.show_post_modal_btn').click(function () {
 		if("#{current_user}" == false){
 			$(".ddm").hide();
 			$('#signin_modal').fadeIn();

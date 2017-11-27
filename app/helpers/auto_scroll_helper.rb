@@ -1,0 +1,2 @@
+module AutoScrollHelper
+end

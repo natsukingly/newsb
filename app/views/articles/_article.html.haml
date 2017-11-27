@@ -24,13 +24,15 @@
 							-popular_users.each do |user|
 								=user_image_helper(user) 
 						%span
-							#{article.posts_count} posts
+							-if article.posts_count != 0
+								#{article.posts_count} posts
 							-report_count = article.posts.where(fake_news_report: true).count
 							-if report_count != 0
 								%span.fake_news_report_count
 									[#{report_count} reports]
-					.best_post_btn
-						Best post
+					-if article.posts_count != 0 || report_count != 0
+						.best_post_btn
+							Best post
 						
 						
 		
@@ -47,7 +49,6 @@
 							%p
 								%span
 									=post.user.name
-									\/
 								%span.user_shoulder_name
 									=post.user.shoulder_name
 							%p.content

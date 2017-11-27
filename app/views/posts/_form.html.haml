@@ -16,11 +16,11 @@
 						= select_tag "post[category_id]", options_from_collection_for_select(@categories, "id", "name"), prompt: "select a category", class: "form-control selectpicker tag_selection"
 					.check
 						=check_box_tag "post[fake_news_report]", true, false
-						=label_tag "post[fake_news_report]", 'post as a fake news report'
+						=t ('form.post.fake_news_checkbox')
 
 				.field.form-group#post_textarea
 					.textarea
-						= text_area_tag 'post[content]', '', placeholder: "your awesome comment *optional", class: "post_textarea"
+						= text_area_tag 'post[content]', '', placeholder: "#{t ('form.post.placeholder')}", class: "post_textarea"
 					
 					= hidden_field_tag 'article[image]', @article_image
 					= hidden_field_tag 'article[url]', @article_url
@@ -34,8 +34,8 @@
 						=render 'snss/sns_post_form_menu', user: current_user
 
 					.submit_btn_group
-						= submit_tag "POST", class: "form_btn .post_submit_btn"	
-						= submit_tag "SAVE", class: "form_btn .post_submit_btn"	
+						= submit_tag "#{t ('form.post.submit')}", class: "form_btn post_submit_btn"	
+						= submit_tag "#{t ('form.post.save')}", class: "form_btn post_save_btn"	
 
 						
 				

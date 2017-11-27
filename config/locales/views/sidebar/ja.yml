@@ -1,0 +1,20 @@
+ja:
+  sidebar:
+    title:
+      new_users: "新着ユーザー"
+      recent_articles: "新着記事一覧"
+      recommended_articles: "関連記事一覧"
+      who_to_follow: "注目のユーザー"
+    
+    stats:
+      title: "統計"
+      posts: "投稿"
+      follower: "フォロワー"
+      following: "フォロー中"
+    likes:
+      title: "いいね！"
+      week: "週間"
+      all_time: "総合"
+    favorite_tags:
+      title: "お気に入りのタグ"
+      link: "注目のタグをチェックしよう！"

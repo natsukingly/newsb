@@ -5,21 +5,51 @@
 				"#{@keyword}"
 			
 			.nav_options
-				=link_to "ARTICLES", "/search/#{@keyword}/articles", class: "search_articles"
-				=link_to "POSTS", "/search/#{@keyword}/posts", class: "search_posts"
-				=link_to "USERS", "/search/#{@keyword}/users", class: "search_users" 
-				=link_to "TAGS", "/search/#{@keyword}/tags", class: "search_tags active"
+				=link_to t('search.nav.item.articles'), search_articles_path(@keyword), class: "search_articles"
+				=link_to t('search.nav.item.posts'), search_posts_path(@keyword), class: "search_posts"
+				=link_to t('search.nav.item.users'), search_users_path(@keyword), class: "search_users" 
+				=link_to t('search.nav.item.tags'), search_tags_path(@keyword), class: "search_tags active"
 			
 		#main_contents.tags
 			-if @tags_search_results.empty?
-				=render 'shared/result_not_found', keyword: @keyword
+				.result_not_found
+					%h4.not_found_content
+						=t('not_found.search_result')
+						%br
+						"
+						=@keyword
+						"
 			-else
 				=render partial: "tags/tag", collection: @tags_search_results, as: :tag
+				.scroll_btn.searched_tags
+					LOAD MORE				
+				
 	
 	.sub_function_sidebar
 		%h2
-			NEW USERS
+			=t('sidebar.title.new_users')
 		.new_users_section
-			-unless @new_users.empty?
+			-if @new_users.empty?
+				.new_users_not_found
+					%h4.not_found_content
+						=t('not_found.new_users')
+			-else
 				= render partial: "users/card", collection: @new_users, as: :user
+				
+:javascript
+	$('.scroll_btn.searched_tags').click(function(){
+		var stop_loading = $(this).hasClass('stop_loading');
+		if(!(stop_loading)){
+			$.ajax({
+				url: "#{load_searched_tags_path}",
+				type: "GET",
+				data: {existing_tags: $('#main_contents').find('.tag').length,
+				keyword: "#{@keyword}"
+				},
+				dataType: 'script',
+			})
+			$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+			$(this).addClass("loading");
+		}
+	})
 

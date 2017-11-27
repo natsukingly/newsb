@@ -6,12 +6,37 @@
 .sub_function_wrapper
 	.sub_function_main_section
 		#main_contents.articles
+			.title
+				%span
+					=t ('article_index.title.week')
+				%span.divider
+					\|
+				%span
+					TOP
 			=render @articles.offset(1)
+			.scroll_btn.articles
+				LOAD MORE
+			
 			
 	.sub_function_sidebar
 		%h2
-			RECENT ARTICLES
+			=t ('sidebar.title.recent_articles')
 		.recent_article_section
 			-if @recent_articles
 				= render partial: "articles/side_recent_article", collection: @recent_articles, as: :article
-			
+
+
+:javascript
+	$('.scroll_btn.articles').click(function(){
+		var stop_loading = $(this).hasClass('stop_loading');
+		if(!(stop_loading)){
+			$.ajax({
+				url: "#{load_articles_path}",
+				type: "GET",
+				data: {existing_articles : $('#main_contents').find('.article').length },
+				dataType: 'script',
+			})
+			$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+			$(this).addClass("loading");
+		}
+	})

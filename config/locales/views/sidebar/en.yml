@@ -1,0 +1,20 @@
+en:
+  sidebar:
+    title:
+      new_users: "NEW USERS"
+      recent_articles: "NEW ARRIVALS"
+      recommended_articles: "RECOMMENDED"
+      who_to_follow: "WHO TO FOLLOW"
+      
+    stats:
+      title: "Stats"
+      posts: "Posts"
+      follower: "Follower"
+      following: "Following"
+    likes:
+      title: "Likes"
+      week: "Week"
+      all_time: "All-time"
+    favorite_tags:
+      title: "Favorite tags"
+      link: "check trending tags"

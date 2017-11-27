@@ -4,24 +4,6 @@
 	"Don't show"
 		
 .sub_function_wrapper.user_profile
-	.sub_function_sidebar.profile_contents
-		%h2.profile_title
-			ABOUT
-		.about
-			%p
-				-if !(@user.about.empty?)
-					=@user.about
-				-else
-					Not available
-		%h2.profile_title
-			LIKES
-		.likes
-			%p
-				WEEK: #{@user.weekly_liked_count}
-				%span
-					All-TIME: #{@user.liked_count}
-			
-
 	.sub_function_main_section
 		#main_contents.profile_contents
 			%h2.profile_title.for_mobile
@@ -47,6 +29,24 @@
 					%h2.profile_title
 						BEST POSTS
 					= render @best_posts.includes(:article)
+	.sub_function_sidebar.profile_contents
+		%h2.profile_title
+			ABOUT
+		.about
+			%p
+				-if !(@user.about.empty?)
+					=@user.about
+				-else
+					Not available
+		%h2.profile_title
+			LIKES
+		.likes
+			%p
+				WEEK: #{@user.weekly_liked_count}
+				%span
+					All-TIME: #{@user.liked_count}
+			
+
 		
 
 

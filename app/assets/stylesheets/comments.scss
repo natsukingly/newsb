@@ -4,7 +4,7 @@
 
 
 .comment, .reply{
-    padding: 12px 0;
+    padding: 5px 0;
     .main{
         background-color: #f9f9f9;
         display: flex;
@@ -62,21 +62,24 @@
 
 .comment_index{
     background-color: #f9f9f9;
-    padding: 12px 20px;
+    padding: 5px 20px 5px 60px;
     border-radius: 0 0 5px 5px;
+    .view_link{
+        padding: 5px 0;
+    }
     .invite_comment{
         color: #696969;
-        display: inline;
         cursor: pointer;
+        padding: 3px 0;
         &:hover{
             color: #001E42;
         }
     }
 }
 
-@media(max-width: 500px){
+@media(max-width: 768px){
     .comment_index{
-        padding: 12px 12px 20px;
+        padding: 0 12px;
     }
 }
 

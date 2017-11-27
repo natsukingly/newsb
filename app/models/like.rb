@@ -1,17 +1,18 @@
 class Like < ApplicationRecord
 	belongs_to :likeable, polymorphic: true
+	counter_culture :likeable
 	belongs_to :user
 	after_create :issue_notification
 	before_destroy :destroy_notification
   
-  
+	include Rails.application.routes.url_helpers
 	def issue_notification
 		
 		if self.likeable_type == "Post"
 			post_summary = self.likeable.content.truncate(30)
 			notification = Notification.new(user_id: self.likeable.user_id,
 											target_user_id: self.user_id,
-											path: "/posts/#{self.likeable.id}",
+											path: post_path(id: self.likeable.id, country: self.user.country.name),
 											message: "<span> #{self.user.name} </span> liked your post.<span> \"#{post_summary}\" </span> ",
 											post_id: self.likeable.id,
 											notification_type: "Like-Post")
@@ -19,7 +20,7 @@ class Like < ApplicationRecord
 			comment_summary = self.likeable.content.truncate(30)
 			notification = Notification.new(user_id: self.likeable.user_id,
 											target_user_id: self.user_id,
-											path: "/posts/#{self.likeable.post_id}",
+											path: post_path(id: self.likeable.id, country: self.user.country.name),
 											message: "<span> #{self.user.name} </span> liked your comment.<span> \"#{comment_summary}\" </span>",
 											post_id: self.likeable.post_id,
 											comment_id: self.likeable.id,
@@ -28,7 +29,7 @@ class Like < ApplicationRecord
 			reply_summary = self.likeable.content.truncate(30)
 			notification = Notification.new(user_id: self.likeable.user_id,
 											target_user_id: self.user_id,
-											path: "/posts/#{self.likeable.comment.post_id}",
+											path: post_path(id: self.likeable.id, country: self.user.country.name),
 											message: "<span> #{self.user.name} </span> liked your comment.<span> \"#{reply_summary}\" </span>",
 											post_id: self.likeable.comment.post_id,
 											comment_id: self.likeable.comment_id,

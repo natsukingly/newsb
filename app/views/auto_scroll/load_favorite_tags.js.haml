@@ -1,0 +1,8 @@
+$('.scroll_btn').before('#{ escape_javascript(render @loaded_tags)}');
+$('.scroll_btn').html('LOAD MORE');
+$('.scroll_btn').removeClass('loading');
+-if @loaded_tags.empty?
+    $('.scroll_btn').html('NO MORE TAGS');
+    $('.scroll_btn').addClass('stop_loading');
+    
+loading = false;

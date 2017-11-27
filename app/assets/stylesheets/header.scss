@@ -120,17 +120,19 @@ header{
 		.right{
     		justify-content: flex-end;
     		position: relative;
-    		#create_post_btn{
-    			width: 80px;
+    		#create_post_btn_circle{
 			    color: white;
 			    display: flex;
 			    align-items: center;
 			    justify-content: center;
 			    margin-right: 20px;
 			    height: 30px;
+			    width: 30px;
 			    background-color: #001E42;
-			    border-radius: 3px;
+			    border-radius: 50%;
 			    cursor: pointer;
+			    padding: 12px;
+   				 font-size: 20px;
 			    &:hover{
 			    	opacity: .9;
 			    }
@@ -180,9 +182,9 @@ header{
 	    .login_signup_link{
 			color: #696969;
 		    border: 1px solid #696969;
-		    border-radius: 3px;
+		    border-radius: 30px;
 		    height: 30px;
-		    line-height: 30px;
+		    line-height: 27px;
 		    padding: 0 12px;
 		    cursor: pointer;
 		    &:hover{
@@ -395,7 +397,8 @@ header{
 		display: flex;
 	}
 	#header_nav{
-		background-color: #f9f9f9;
+		background-color: white;
+		border-bottom: 1px solid #eee;
 	}
 	
 	#mobile_footer{

@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.user_profile_container{
+
+}
+
 .user_shoulder_name{
 	font-size: 12px;
 	color: grey;
@@ -219,25 +223,14 @@
 
 
 .user_lists{
-	.user_list_item{
+	.user{
 		display: flex;
 		background-color: white;
-		padding: 12px;
+		padding: 12px 20px;
 		&:hover{
 			background-color: #f9f9f9;
 		}
-		&:first-child{
-			border-radius: 5px 5px 0 0;
-		}
-		&:last-child{
-			border-radius: 0 0 5px 5px;
-		}
-		&:only-child{
-			border-radius: 3px;
-		}
-		&:not(:last-child){
-			border-bottom: 1px solid #e2e2e2;
-		}
+
 		p{
 			color: grey;
 			font-size: 12px;
@@ -299,7 +292,15 @@
 }
 
 
+
+
+
 @media (max-width: 768px) {
+	.user_lists{
+		.user_list_item{
+			padding: 12px;
+		}
+	}
 	.profile_contents{
 		margin-top: 12px;
 		.about, .user_lists{

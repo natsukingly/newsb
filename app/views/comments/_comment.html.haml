@@ -21,21 +21,7 @@
 			.status.clearfix
 				.comment_like_link.grey.link_btn
 					=render '/likes/like_comment', comment: comment
-				=link_to "REPLY", "/replies/#{comment.id}/new", remote: true, class: "reply_link link_btn"
-				.reply_count.grey.link_btn
-					・
-					%span.replies_count.link_btn
-						=comment.replies_count
-				-unless comment.replies.count == 0
-					.reply_view_link
-						=link_to "/replies/#{comment.id}/view_more", remote: true do
-							%i.fa.fa-comment-o
-							VIEW ALL #{comment.replies.count} REPLIES
-							%i.fa.fa-angle-down
-			
-			.reply_form.clearfix
-			
-			.replies
+
 			
 :javascript 
 	$(".comment_read_more_#{comment.id}").click(function(){
@@ -43,7 +29,6 @@
 	});
 
 	$('.comment_option_link').click(function () {
-			console.log("aoueo");
 			var height = $(this).parents(".comment").find('.opinion').css("height");
 			$(this).parents(".comment").find('.content').attr("data-height", height);
 			// ボタンが押されたら、モーダルウィンドウを表示

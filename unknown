@@ -20,4 +20,22 @@
 			I18n.locale = params[:locale] || I18n.default_locale
 		end
 	end		
+	
+	reply related
+	
+				=link_to "REPLY", "/replies/#{comment.id}/new", remote: true, class: "reply_link link_btn"
+				.reply_count.grey.link_btn
+					・
+					%span.replies_count.link_btn
+						=comment.replies_count
+				-unless comment.replies.count == 0
+					.reply_view_link
+						=link_to "/replies/#{comment.id}/view_more", remote: true do
+							%i.fa.fa-comment-o
+							VIEW ALL #{comment.replies.count} REPLIES
+							%i.fa.fa-angle-down
+			
+			.reply_form.clearfix
+			
+			.replies
 		

@@ -10,13 +10,29 @@
 			%h2.profile_title
 			
 			.posts			
-				-if @user.posts.empty?
+				-if @posts.empty?
 					.not_found
 						NO POST YET
 				-else
-					= render @user.posts	
-
+					= render @posts
+					.scroll_btn.user_posts
+						LOAD MORE
 
 :javascript
 	$(".profile_btn").removeClass("active");
 	$(".profile_btn.middle_left").addClass("active");
+
+	$('.scroll_btn.user_posts').click(function(){
+		var stop_loading = $(this).hasClass('stop_loading');
+		if(!(stop_loading)){
+			$.ajax({
+				url: "#{load_user_posts_path}",
+				type: "GET",
+				data: {existing_posts: $('#main_contents').find('.post').length,
+				user_id: "#{@user.id}"},
+				dataType: 'script',
+			})
+			$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+			$(this).addClass("loading");
+		}
+	})

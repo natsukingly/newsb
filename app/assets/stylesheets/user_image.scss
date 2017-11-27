@@ -3,6 +3,10 @@
   justify-content: center;
 }
 
+.align_items_center{
+	align-items: center;
+}
+
 .user_image{
 	@include flex_center;
 	img, svg{

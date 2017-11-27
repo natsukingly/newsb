@@ -1,5 +1,5 @@
 
-.post#post_form
+#post_form
 	.body
 		.form_main.clearfix
 			= form_tag posts_path do
@@ -7,13 +7,13 @@
 					.title
 						.user_image_xs
 							=user_image_helper(current_user)
-						MAKE POST
+						=t ('form.post.title')
 					.check
 						=check_box_tag "post[fake_news_report]", true, false
-						POST AS FAKE NEWS REPORT
+						=t ('form.post.fake_news_checkbox')
 				.field.form-group#post_textarea
 					.textarea
-						= text_area_tag 'post[content]', '', placeholder: "COMMENT *optional", class: "post_textarea"
+						= text_area_tag 'post[content]', '', placeholder: "#{t ('form.post.placeholder')}", class: "post_textarea"
 					
 					= hidden_field_tag 'post[category_id]', @article.category_id
 					= hidden_field_tag 'article[image]', @article.image
@@ -28,8 +28,8 @@
 						=render 'snss/sns_post_form_menu', user: current_user
 
 					.submit_btn_group
-						= submit_tag "POST", class: "form_btn .post_submit_btn"					
-						= submit_tag "SAVE", class: "draft_btn .post_submit_btn"	
+						= submit_tag "#{t ('form.post.submit')}", class: "form_btn post_submit_btn"	
+						= submit_tag "#{t ('form.post.save')}", class: "form_btn post_save_btn"
 
 						
 				

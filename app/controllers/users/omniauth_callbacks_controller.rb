@@ -64,7 +64,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           if @profile.user.sign_in_count <= 30
             redirect_url = complete_profile_form_users_path
           else
-            redirect_url = session[:previous_url] || root_path
+            redirect_url = cookies[:previous_url] || root_path
           end
           redirect_to redirect_url
           set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?

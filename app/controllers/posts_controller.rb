@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 	before_action :yes_found
 	before_action :set_category, only: [:load_url]
 	before_action :set_new_users, only: [:show]
+	before_action :set_side_articles, only: [:show]
 	after_action :decide_category, only: [:create, :update]
 	after_action :not_found, only: [:index, :load_more]
 
@@ -64,8 +65,8 @@ class PostsController < ApplicationController
 	def after_save_draft
 		# flash.now[:notice] = "Your post has been saved. You can access to the draft page from user menu."
 		respond_to do |format|
-	      format.js {  flash.now[:notice] = "hello?" }
-	    end
+		  format.js {  flash.now[:notice] = "hello?" }
+		end
 	end
 	
 	def create
@@ -272,5 +273,9 @@ class PostsController < ApplicationController
 			@post_draft.save
 			
 			decide_category
+		end
+		
+		def set_side_articles
+			@side_articles = Article.where(category_id: @post.article.category_id, country_id: @post.country_id).where.not(id: @post.article.id).order(likes_count: :desc).limit(5)
 		end
 end

@@ -1,0 +1,11 @@
+ja:
+  search:
+    nav:
+      item: 
+        articles: "記事"
+        posts: "投稿"
+        users: "ユーザー"
+        tags: "タグ"
+    no_result: "検索結果：０件"
+
+        

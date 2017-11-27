@@ -1,0 +1,44 @@
+:javascript
+    $('.scroll_btn.articles').click(function(){
+    	var stop_loading = $(this).hasClass('stop_loading');
+    	if(!(stop_loading)){
+    		$.ajax({
+    			url: "#{load_articles_path}",
+    			type: "GET",
+    			data: {existing_articles : $('#main_contents').find('.article').length },
+    			dataType: 'script',
+    		})
+    		$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+    		$(this).addClass("loading");
+    	}
+    })
+    
+    $('.scroll_btn.categorized_articles').click(function(){
+    	var stop_loading = $(this).hasClass('stop_loading');
+    	if(!(stop_loading)){
+    		$.ajax({
+    			url: "#{load_categorized_articles_path}",
+    			type: "GET",
+    			data: {existing_articles : $('#main_contents').find('.article').length,
+    			        category_id : "#{@category.id}"},
+    			dataType: 'script',
+    		})
+    		$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+    		$(this).addClass("loading");
+    	}
+    })
+    
+    $('.scroll_btn.searched_articles').click(function(){
+    	var stop_loading = $(this).hasClass('stop_loading');
+    	if(!(stop_loading)){
+    		$.ajax({
+    			url: "#{load_categorized_articles_path}",
+    			type: "GET",
+    			data: {existing_articles : $('#main_contents').find('.article').length,
+    			        keyword : "#{@keyword}"},
+    			dataType: 'script',
+    		})
+    		$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+    		$(this).addClass("loading");
+    	}
+    })

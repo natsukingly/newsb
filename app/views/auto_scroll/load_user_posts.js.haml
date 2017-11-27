@@ -1,0 +1,8 @@
+$('.scroll_btn').before('#{ escape_javascript(render @loaded_posts)}');
+$('.scroll_btn').html('LOAD MORE');
+$('.scroll_btn').removeClass('loading');
+-if @loaded_posts.empty?
+    $('.scroll_btn').html('NO MORE POSTS');
+    $('.scroll_btn').addClass('stop_loading');
+    
+loading = false;
