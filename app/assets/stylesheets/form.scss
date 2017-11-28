@@ -79,6 +79,7 @@ form{
             form{
                 .form_check_group{
                     display: flex;
+                    flex-wrap: wrap;
                     align-items: center;
                     color: #696969;
                     .title, .select{
@@ -147,6 +148,7 @@ form{
                     border-radius: 3px;
                     border: 1px solid #bbb;
                     width: 90px;
+                    margin-left: 5px;
                     padding: 5px 12px;
                     transition: .2s;
                     &:hover{

@@ -1,0 +1,67 @@
+// Place all the styles related to the admins controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+// profile_option
+.admin_option_block a{
+    background-color: rgba(cornflowerblue, .2);
+}
+
+.articles_count_section{
+    position: fixed;
+    width: 400px;
+    
+    .articles_count_block{
+        padding: 20px 0;
+        .result .item{
+            margin-right: 20px;
+            &.enough{
+                color: green;
+            }
+            &.not_enough{
+                color: red;
+            }
+        }
+    }
+}
+
+.admin_draft{
+    .published_time{
+        margin-bottom: 12px;
+    }
+}
+
+.admin_draft_form{
+    .category_radio_btn{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        input[type="radio"], input[type="checkbox"]{
+            margin: 0 12px 0;
+        }
+    }
+}
+
+#post_form.admin_draft_form .body{
+    padding: 0;
+}
+
+.fetched_urls{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .fetched_url{
+        display: inline-block;
+        flex: 1;
+    }
+}
+
+#schneider_btn{
+    display: block;
+    flex: 1;
+    padding: 5px;
+    border: 1px solid grey;
+    font-size: 16px;
+    text-align: center;
+}

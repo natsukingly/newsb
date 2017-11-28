@@ -35,10 +35,10 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = current_user.comments.build(content: params[:comment][:content], post_id: params[:comment][:post_id] )
+    @post = Post.find(params[:comment][:post_id])
+    @comment = current_user.comments.build(content: params[:comment][:content], post_id: @post.id, article_id: @post.article_id )
     @comment.save
-    @post = @comment.post
-    @comments = @post.comments.order(created_at: :desc)
+    @comments = @post.comments.includes(:user).order(created_at: :desc)
   end
 
   # PATCH/PUT /comments/1

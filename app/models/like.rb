@@ -2,8 +2,13 @@ class Like < ApplicationRecord
 	belongs_to :likeable, polymorphic: true
 	counter_culture :likeable
 	belongs_to :user
+	
 	after_create :issue_notification
 	before_destroy :destroy_notification
+	
+	after_create :add_e_indecator
+	after_destroy :reduce_e_indecator
+	
   
 	include Rails.application.routes.url_helpers
 	def issue_notification
@@ -60,6 +65,22 @@ class Like < ApplicationRecord
 			if notification
 				notification.destroy
 			end
+		end
+	end
+	
+	def add_e_indecator
+		if Like.where(likeable_id: self.likeable_id, user_id: self.user_id).count <= 5 
+			article = Article.find(self.likeable.article_id)
+			article.e_indecator += 1
+			article.save
+		end
+	end
+	
+	def reduce_e_indecator
+		if Like.where(likeable_id: self.likeable_id, user_id: self.user_id).count <= 4
+			article = Article.find(self.likeable.article_id)
+			article.e_indecator -= 1
+			article.save
 		end
 	end
 end

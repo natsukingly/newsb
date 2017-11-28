@@ -6,5 +6,7 @@ class Article < ApplicationRecord
     
     belongs_to :country
     belongs_to :category
+    
+    scope :published_today, -> { where("published_time >= ?", Time.zone.now.beginning_of_day) }
 
 end

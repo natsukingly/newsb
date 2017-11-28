@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123171236) do
+ActiveRecord::Schema.define(version: 20171127162726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20171123171236) do
     t.integer "posts_count", default: 0, null: false
     t.integer "likes_count", default: 0, null: false
     t.integer "country_id"
+    t.integer "e_indecator", default: 0
   end
 
   create_table "categories", force: :cascade do |t|
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 20171123171236) do
     t.datetime "updated_at", null: false
     t.integer "likes_count", default: 0, null: false
     t.integer "replies_count", default: 0, null: false
+    t.integer "article_id"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -210,6 +212,7 @@ ActiveRecord::Schema.define(version: 20171123171236) do
     t.boolean "linkedin_post", default: false
     t.boolean "twitter_post", default: false
     t.integer "twitter_follower", default: 0
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

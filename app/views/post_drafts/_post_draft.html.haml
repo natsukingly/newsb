@@ -33,33 +33,36 @@
 								= post.article.source
 							
 		.draft_menu
-			=link_to "EDIT", edit_post_draft_path(post.id), remote: true, class: "edit_draft_btn"
-			.delete_btn
+			.edit_draft_btn
+				EDIT
+			.delete_draft_btn
 				DELETE
+				
+				
+			.option_modal
+				.delete
+					%h2
+						Are you sure you want to delete your post?
+					.delete_option
+						=link_to "YES", post_draft_path(post), method: :delete
+						.cancel_delete_btn.ddm_btn
+							NO
 
 :javascript
 	// post side menu open close
 
-	$('.option_link').click(function () {
-			var height = $(this).parents(".post").find('.opinion').css("height");
-			$(this).parents(".post").find('.opinion').attr("data-height", height);
-			// ボタンが押されたら、モーダルウィンドウを表示
-			$(".ddm").hide();
-			$(this).parents(".post").find('.post_ddm').css("display", "flex");
-			
-			return false;
-	});
-	
-	$('body').click(function (event) {
-	  if(!$(event.target).closest('.post_ddm').length && !$(event.target).is('.post_ddm')) {
-		 $(".post_ddm").hide();
-	  }     
+	$(".draft_menu .delete_draft_btn").click(function(){
+	   $(this).parents(".post").find(".option_modal").fadeIn();
+	   $(this).parents(".post").find(".delete").show();
 	});
 
-	$(".draft_menu .delete_draft_btn").click(function(){
-	   $(this).parents(".post_ddm").find(".option_modal").fadeIn();
-	   $(this).parents(".post_ddm").find(".delete").show();
+	$(".draft_menu .cancel_delete_btn").click(function(){
+	   $(this).parents(".post").find(".option_modal").hide();
+	   $(this).parents(".post").find(".delete").hide();
 	});
+	
+	
+	
 	$(".draft_menu .edit_draft_btn").click(function(){
 	   $(this).parents(".post").find(".edit_draft_form").fadeIn();
 	   $(this).parents(".post").find(".opinion").hide();

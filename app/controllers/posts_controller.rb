@@ -78,15 +78,21 @@ class PostsController < ApplicationController
 		elsif params[:commit] == "SAVE"
 			save_draft
 			flash[:notice] = "You have successfully saved your draft."
-			render :after_save_draft
+			redirect_to root_path
 		end
 	end
 	
 	def create_from_modal
-
-		create_article_and_post
-		flash[:notice] = "Your have successfully published your post."
-		redirect_to all_posts_categories_path
+		if params[:commit] == "POST"
+			create_article_and_post
+			flash[:notice] = "You have successfully published your post."
+			redirect_to article_path(@post.article.id)
+			
+		elsif params[:commit] == "SAVE"
+			save_draft
+			flash[:notice] = "You have successfully saved your draft."
+			redirect_to root_path
+		end
 	end
 	
 	

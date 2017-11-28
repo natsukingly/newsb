@@ -5,13 +5,13 @@ class AutoScrollController < ApplicationController
   def load_articles
     #featured_article = 1
     @existing_articles = params[:existing_articles].to_i + 1
-    @loaded_articles = Article.where(country_id: @country.id).order(likes_count: :desc).offset(@existing_articles).limit(1)
+    @loaded_articles = Article.where(country_id: @country.id).order(e_indecator: :desc).offset(@existing_articles).limit(1)
   end
   
   def load_categorized_articles
     #featured_article = 1
     @existing_articles = params[:existing_articles].to_i + 1
-    @loaded_articles = Article.where(country_id: @country.id, category_id: params[:category_id]).order(likes_count: :desc).offset(@existing_articles).limit(1)
+    @loaded_articles = Article.where(country_id: @country.id, category_id: params[:category_id]).order(e_indecator: :desc).offset(@existing_articles).limit(1)
   end
   
   def load_searched_articles

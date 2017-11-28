@@ -5,7 +5,9 @@
 .post_draft{
     .draft_menu{
         margin: 12px 0;
-        a, .delete_btn{
+        display: flex;
+        align-items: center;
+        .edit_draft_btn, .delete_draft_btn{
             text-align: center;
             display: inline-block;
             padding: 5px 12px;
@@ -23,4 +25,8 @@
             }
         }
     }
+}
+
+.post.admin_draft .edit_draft_form{
+    display: flex;
 }

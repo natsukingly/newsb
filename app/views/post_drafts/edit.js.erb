@@ -1,1 +1,1 @@
-$(".post_<%=@post.id%>").find("p.opinion").html('<%= escape_javascript(render("posts/edit", post: @post))%>');
+$(".post_<%=@post_draft.id%>").find("p.opinion").html('<%= escape_javascript(render("posts/edit", post: @post))%>');

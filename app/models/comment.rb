@@ -7,7 +7,12 @@ class Comment < ApplicationRecord
 	has_many :replies
 	
 	after_create :issue_notification
+	after_create :add_e_indecator
+	
 	before_destroy :destroy_related_notifications
+	after_destroy :reduce_e_indecator
+	
+	
 	
 	def issue_notification
 		unless self.user_id == self.post.user_id
@@ -26,5 +31,22 @@ class Comment < ApplicationRecord
 	def destroy_related_notifications
 		notifications = Notification.where(comment_id: self.id)
 		notifications.delete_all
+	end
+	
+	
+	def add_e_indecator
+		if Comment.where(article_id: self.post.article_id, user_id: self.user_id).count <= 2 
+			article = Article.find(self.post.article_id)
+			article.e_indecator += 5
+			article.save
+		end
+	end
+	
+	def reduce_e_indecator
+		if Comment.where(article_id: self.post.article_id, user_id: self.user_id).count <= 1 
+			article = Article.find(self.post.article_id)
+			article.e_indecator -= 5
+			article.save
+		end
 	end
 end

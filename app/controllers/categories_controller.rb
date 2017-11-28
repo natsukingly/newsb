@@ -20,14 +20,13 @@ class CategoriesController < ApplicationController
 	end
 	
 	def top
-		@articles = Article.where(country_id: @country.id).order(likes_count: :desc).limit(2)
+		@articles = Article.where(country_id: @country.id).order(e_indecator: :desc).limit(20)
 		@recent_articles = Article.where(country_id: @country.id).order(published_time: :desc).limit(5)
 	end
 	
 	def articles
-		@recent_post = Post.where(country_id: @country.id, category_id: @category.id).last
-		@articles = @category.articles.where(country_id: @country.id).order(likes_count: :desc).limit(1)
-		@recent_articles = Article.where(country_id: @country.id, category_id: @category.id).order(published_time: :desc).limit(5)
+		@articles = @category.articles.where(country_id: @country.id).order(likes_count: :desc).limit(20)
+		@recent_articles = Article.where(country_id: @country.id, category_id: @category.id).order(e_indecator: :desc).limit(2)
 	end
 	
 	def posts

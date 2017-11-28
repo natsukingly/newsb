@@ -1,0 +1,2 @@
+module SchneiderHelper
+end

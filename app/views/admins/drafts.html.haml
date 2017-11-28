@@ -1,0 +1,63 @@
+-content_for(:sidebar) do
+	"Don't show"
+
+.sub_function_wrapper.post_drafts
+	.sub_function_main_section
+		.sub_function_nav
+			%h2
+				Draft
+			
+		#main_contents
+			#post_drafts_index
+				= render partial: "post_drafts/admin_draft", collection: @post_drafts.includes(:article, :category), as: :post
+	
+	.sub_function_sidebar
+
+		.articles_count_section
+	
+			.user_block
+				.user_image
+					=user_image_helper(current_user)
+				.user_info
+					=link_to current_user  do
+						.give_me_short_ellipsis.light_navy.bold
+							=current_user.name
+					%p.user_shoulder_name.sm.grey
+						=current_user.shoulder_name
+			.articles_count_block
+				%h3
+					Japan
+				.today
+					.result
+						-Category.all.each do |category|
+							- article_count = Article.where(category_id: category.id, country_id: 3).published_today.count
+							-if article_count < 10
+								%span.item.not_enough
+									=category.name
+									\:
+									=article_count
+							-else
+								%span.item.enough
+									=category.name
+									\:
+									=article.count
+			.articles_count_block
+				%h3
+					USA
+				.today
+					.result
+						-Category.all.each do |category|
+							- article_count = Article.where(category_id: category.id, country_id: 2).published_today.count
+							-if article_count < 10
+								%span.item.not_enough
+									=category.name
+									\:
+									=article_count
+							-else
+								%span.item.enough
+									=category.name
+									\:
+									=article.count
+			
+			=link_to "CALL SCHNEIDER", prepare_admin_posts_path, id: "schneider_btn", method: :post
+		

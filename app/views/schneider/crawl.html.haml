@@ -1,0 +1,9 @@
+-content_for(:sidebar) do
+	"Don't show"
+
+.fetched_urls
+	-@urls.each.with_index do |url, index|
+		.url
+			#{index}
+			\:
+			=link_to url, url, target: "_blank", class: "fetched_url"

@@ -12,6 +12,9 @@ class Post < ApplicationRecord
 	
 	after_create :issue_feed_notifications
 	after_create :post_on_sns
+	after_create :add_e_indecator
+	
+	after_destroy :reduce_e_indecator
 
 	after_create do
 		post = Post.find_by(id: self.id)
@@ -47,6 +50,24 @@ class Post < ApplicationRecord
 			end
 		end
 	end
+	
+	def add_e_indecator
+		if Post.where(article_id: self.article_id, user_id: self.user_id).count <= 1 
+			article = Article.find(self.article_id)
+			article.e_indecator += 10
+			article.save
+		end
+	end
+	
+	def reduce_e_indecator
+		if Post.where(article_id: self.article_id, user_id: self.user_id).count == 0 
+			article = Article.find(self.article_id)
+			article.e_indecator -= 10
+			article.save
+		end
+	end
+	
+			
 	
 	def post_on_sns
 		if self.user.facebook_post == true

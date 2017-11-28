@@ -1,16 +1,26 @@
 Rails.application.routes.draw do
-  get 'auto_scroll/article'
-
-  get 'auto_scroll/post'
-
-  get 'auto_scroll/user'
 
 	get '/:locale' => 'categories#top'
 	root 'categories#top'
-	devise_for :users, :controllers => {registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions'} 
+	
+	resources :admins, only: [] do
+		member do
+			post 'hide_draft'
+			post 'publish_draft'
+		end
+		collection do
+			get 'drafts'
+			post 'publish'
+		end
+	end
+	
+	get '/schneider/crawl' => 'schneider#crawl', as: :crawl
+	post '/schneider/prepare_admin_posts', as: :prepare_admin_posts
 
+	
+	
+	devise_for :users, :controllers => {registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions'} 
 	scope ":country" do
-		
 		resources :users, except: [:create, :new] do
 			member do
 				get 'posts'
