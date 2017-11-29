@@ -147,12 +147,14 @@
 @media (max-width: 768px) {
     .post{
         border-radius: 0;
+        .body{
+             padding: 12px;
+        }
     }
 }
 @media (max-width: 500px) {
     .post{
         .body{
-            padding: 12px;
             .main{
                 .post_article{
                     margin-bottom: 12px;

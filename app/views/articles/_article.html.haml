@@ -19,10 +19,6 @@
 					
 				.sub_info
 					.posts_count	
-						-popular_users = User.where(id: article.posts.order(likes_count: :desc).limit(5).uniq.pluck(:user_id))
-						.popular_user_faces.user_faces
-							-popular_users.each do |user|
-								=user_image_helper(user) 
 						%span
 							-if article.posts_count != 0
 								#{article.posts_count} posts
@@ -43,7 +39,7 @@
 			- if post != nil
 				.body.clearfix
 					.user_block
-						.user_image
+						.user_image_sm
 							=user_image_helper(post.user)
 						.user_details
 							%p

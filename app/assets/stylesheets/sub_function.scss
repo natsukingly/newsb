@@ -15,7 +15,6 @@
 			padding: 12px 20px;
 			border-bottom: 1px solid #eee;
 			h2{
-				font-size: 16px;
 				font-weight: 900;
 			}
 			.nav_options{
@@ -50,9 +49,9 @@
 
 @media(max-width: 970px){
 	.sub_function_wrapper{
-		width: auto;
+		// width: auto;
 		.sub_function_main_section{
-			width: auto;
+			// width: auto;
 		}
 		.sub_function_sidebar{
 			display: none;
@@ -62,8 +61,10 @@
 
 @media(max-width: 768px){
   .sub_function_wrapper{
+  	width: auto;
   		.sub_function_main_section{
   			min-width: auto;
+  			width: auto;
   			flex: 1;
 			.sub_function_nav{
 				padding: 20px;

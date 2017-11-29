@@ -245,6 +245,7 @@ form{
 
 .form_show.on_mobile{
 	@extend .mobile_btn;
+	height: auto;
 }
 
 @media (max-width: 768px) {

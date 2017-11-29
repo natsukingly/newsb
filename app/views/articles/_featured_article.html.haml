@@ -1,82 +1,75 @@
--if article
-	- best_posts = article.posts.order(likes_count: :desc).limit(2)
-	=link_to article_path(article.id), class: "article_#{article.id}", id: "featured_article" do
-		.article_wrapper.image{style: "background-image: url(#{article_image_helper article.image.url});"}
-			.overlay
-				.article_container	
-					.featured_article_content
-						%h2.featured_article_title
-							= universal_truncate(article.title, 100)
-							%br
-							%span.featured_article_source
-								= article.source
-								- if article.published_time
-									%i.fa.fa-clock-o
-									#{time_ago_in_words_short(article.published_time)}	
-					
-						-report_count = article.posts.where(fake_news_report: true).count
-						-if report_count != 0
-							%span.fake_news_report_count
-								[ #{report_count} fake news reports ]	
-								
+
+%div{ class: "article_#{article.id}", id: "featured_article"}
+	.article_wrapper.image{style: "background-image: url(#{article_image_helper article.image.url});"}
+		.overlay
+			.article_container	
+				.featured_article_content
+					%h2.featured_article_title
+						=link_to universal_truncate(article.title, 100), article_path(article)
+						%br
+						%span.featured_article_source
+							= article.source
+							- if article.published_time
+								%i.fa.fa-clock-o
+								#{time_ago_in_words_short(article.published_time)}	
+				
+					-report_count = article.posts.where(fake_news_report: true).count
+					-if report_count != 0
+						%span.fake_news_report_count
+							[ #{report_count} fake news reports ]	
+							
+					.featured_article_bottom
 						-if article.posts_count != 0
-							.featured_article_bottom
-								.stats
-									%p.counts
-										#{article.posts_count}
-										%span.unit
-											posts
-												
-									.mobile_posts_count.for_featured_article
-										-popular_users = User.where(id: article.posts.order(likes_count: :desc).limit(5).uniq.pluck(:user_id))
-										.popular_user_faces.featured_faces
-											-popular_users.each do |user|
-												=user_image_helper(user) 
-												
-					.best_posts				
-						-unless best_posts.empty?						
-							- unless best_posts.first.nil?
-								.body
-									.user_block
-										.user_image_sm
-											=user_image_helper(best_posts.first.user)
-										.user_details
-											%p
-												%span
-													= best_posts.first.user.name
-												%br
-												%span.user_shoulder_name
-													= best_posts.first.user.shoulder_name
-									%p.best_post_content
-										-if best_posts.first.content.empty?
-											%span.shared_message
-												> Shared this article
-										-else
-											%span.comment_large
-												= best_posts.first.content
-												
-							- unless best_posts.second.nil?
-								.body
-									.user_block
-										.user_image_sm
-											=user_image_helper(best_posts.second.user)
-										.user_details
-											%p
-												%span
-													= best_posts.second.user.name
-												%br
-												%span.user_shoulder_name
-													= best_posts.second.user.shoulder_name
-									%p.best_post_content
-										-if best_posts.second.content.empty?
-											%span.shared_message
-												> Shared this article
-										-else
-											%span.comment_large
-												= best_posts.second.content
-
-												
-
+							.stats
+								%p.counts
+									#{article.posts_count}
+									%span.unit
+										posts
+							.featured_article_options
+								=link_to "READ COMMENTS | CREATE POST"
+									
+											
+				.best_posts				
+					-unless best_posts.empty?
+						%h2.best_post_title
+							TOP COMMENTS
+						- best_posts.each do |post|
+							.body
+								.user_block
+									.user_image_sm
+										=user_image_helper(post.user)
+									.user_details
+										%p
+											%span
+												= post.user.name
+											%br
+											%span.user_shoulder_name
+												= post.user.shoulder_name
+								%p.best_post_content
+									-if post.content.empty?
+										%span.shared_message
+											> Shared this article
+									-else
+										%span.comment_large
+											= post.content
+											
+					-unless related_articles.empty?
+						.related_articles
+							%h2.best_post_title
+								RELATED ARTICLES
+							%ul.related_article_section 
+								- related_articles.each do |article|
+									%li
+										%h4
+											=link_to article.title, article_path(article)
+										%p
+											=article.source
 										
-	
+							
 						
+
+											
+
+									
+
+					

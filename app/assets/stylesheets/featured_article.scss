@@ -1,6 +1,9 @@
 #featured_article{
 	width: 100%;
 	flex-direction: row;
+	a{
+		color: #eee;
+	}
 	.article_wrapper{
 		min-height: 270px;
 		max-height: 300px;
@@ -26,16 +29,15 @@
 					.featured_article_bottom{
 						flex: 1;
 						display: flex;
-						align-items: flex-end;
+						flex-direction: column;
+						justify-content: space-between;
 						.stats{
 							display: flex;
 							align-items: center;
 							color: white;
-							font-size: 24px;
+							font-size: 16px;
 							p{
 								margin-right: 20px;
-								border: 4px double white;
-    							padding: 0 12px;
 								.counts{
 								}
 								span{
@@ -44,10 +46,21 @@
 								}
 							}
 						}
+						.featured_article_options{
+							display: flex;
+							a{
+								display: inline-block;
+								padding: 10px 20px;
+    							background-color: rgba(255,255,255,.3);
+    							&:hover{
+    								background-color: rgba(255,255,255,.2);
+    							}
+							}
+						}
 					}
 					h2.featured_article_title{
 						margin-right: 20px;
-						font-size: 40px;
+						font-size: 36px;
 						color: white;
 						font-weight: 900;
 						span.featured_article_source{
@@ -68,8 +81,13 @@
 					display: flex;
 					flex-direction: column;
 					overflow: scroll;
+					.best_post_title{
+						margin-bottom: 12px;
+						padding-bottom: 5px;
+						border-bottom: 1px solid #ccc;
+					}
 					.body{
-						margin-bottom: 40px;
+						margin-bottom: 30px;
 					}
 					.user_block{
 						margin-bottom: 12px;
@@ -83,6 +101,15 @@
 						line-height: 30px;
 						.comment_large{
 							
+						}
+					}
+					.related_articles{
+						ul li{
+							margin-bottom: 20px;
+							p{
+								font-size: 12px;
+								color: #ccc;
+							}
 						}
 					}
 				}
@@ -165,15 +192,17 @@
 			max-height: none;
 		    min-height: auto;
 			.overlay{
+				padding: 40px 12px;
 				.article_container{
 					.featured_article_content{
 						.featured_article_bottom{
 							.stats{
-								
+								justify-content: center;
 								p{
 									border: none;
 									padding: 0;
 									.counts{
+										font-size: 16px;
 									}
 									span{
 									}
@@ -182,9 +211,16 @@
 									
 								}
 							}
+							.featured_article_options{
+								a{
+									margin: 30px auto 0;
+								}
+							}
 						}
 						h2.featured_article_title{
 							font-size: 24px;
+							margin-right: 0;
+							text-align: center;
 							span.featured_article_source{
 							}
 						}
@@ -199,7 +235,7 @@
 	#featured_article._compact{
 		.article_wrapper{
 			.overlay{
-				padding: 40px 12px;
+				
 				.article_container{
 					.featured_article_content{
 						h2.featured_article_title{

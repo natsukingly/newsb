@@ -26,8 +26,8 @@ class SchneiderController < ApplicationController
 			@count = @doc.css('.stream-article .article-image').count
 			@urls = @doc.css('.stream-article .article-image').map{ |url| url.attribute("href").to_s}	
 			
-			category_id = Category.find_by(name: "Business")
-			county_id = Country.find_by(name: "Japan")
+			category_id = Category.find_by(name: "Business").id
+			country_id = Country.find_by(name: "Japan").id
 			
 			@urls.each do |url|
 				parseURL(url)
@@ -41,8 +41,8 @@ class SchneiderController < ApplicationController
 			@count = @doc.css('.stream-article .article-image').count
 			@urls = @doc.css('.stream-article .article-image').map{ |url| url.attribute("href").to_s}	
 			
-			category_id = Category.find_by(name: "Startup")
-			county_id = Country.find_by(name: "Japan")
+			category_id = Category.find_by(name: "Startup").id
+			country_id = Country.find_by(name: "Japan").id
 			
 			@urls.each do |url|
 				parseURL(url)

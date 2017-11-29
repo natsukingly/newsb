@@ -70,12 +70,12 @@ class PostsController < ApplicationController
 	end
 	
 	def create
-		if params[:commit] == "POST"
+		if params[:commit] == t('form.post.submit')
 			create_article_and_post
 			flash[:notice] = "You have successfully published your post."
-			redirect_to article_path(@post.article.id)
+			redirect_to article_path(@article)
 			
-		elsif params[:commit] == "SAVE"
+		elsif params[:commit] == t('form.post.save')
 			save_draft
 			flash[:notice] = "You have successfully saved your draft."
 			redirect_to root_path

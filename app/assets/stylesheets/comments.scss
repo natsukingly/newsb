@@ -71,6 +71,7 @@
         color: #696969;
         cursor: pointer;
         padding: 3px 0;
+        margin-left: -42px;
         &:hover{
             color: #001E42;
         }
@@ -79,7 +80,10 @@
 
 @media(max-width: 768px){
     .comment_index{
-        padding: 0 12px;
+        padding: 5px 12px;
+        .invite_comment{
+            margin-left: 0;
+        }
     }
 }
 

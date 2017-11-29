@@ -13,7 +13,7 @@
 
 			-if  yield(:featured_article).empty? == false
 				#featured_article_wrapper
-					=render "/articles/featured_article", article: @articles.first
+					=render "/articles/featured_article", article: @featured_article, best_posts: @best_posts, related_articles: @related_articles
 				.flex_wrapper.clearfix  
 					#sidebar_left
 						=render "/sidebars/left_profile", user: current_user
