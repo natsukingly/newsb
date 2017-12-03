@@ -8,8 +8,8 @@
 					=link_to comment.user do
 						%span.user_name.light_navy.bold
 							=comment.user.name
-					%span.user_shoulder_name.sm.grey
-						=comment.user.shoulder_name
+					%span.user_credential.sm.grey
+						=comment.user.credential
 				.option
 					%i.fa.fa-ellipsis-h.comment_option_link
 					=render 'dropdown/comment_option', comment: comment

@@ -49,6 +49,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           @profile.user = current_user
         else
           @profile.user = User.create_from_omniauth(@omniauth)
+
         end
         @profile.save!
       end
@@ -56,7 +57,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       #userがサインインしている場合、javascriptを実行。
       #userがサインインしてなかった場合、リダイレクト
       if current_user
-        flash[:notice] = "you success fully connected with #{@omniauth['provider']}"
+        flash[:notice] = "you successfully connected with #{@omniauth['provider']}"
         redirect_to sns_setting_user_path(current_user.id)
       else
         if @profile.user.persisted?

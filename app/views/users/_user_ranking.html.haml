@@ -13,7 +13,7 @@
           %span.name
             =user.name
           %br
-          %span.give_me_ellipsis= user.shoulder_name
+          %span.give_me_ellipsis= user.credential
           %i.fa.fa-thumbs-o-up
           \:
           =Like.where(target_user_id: user.id).count

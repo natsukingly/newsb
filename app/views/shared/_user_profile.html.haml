@@ -7,7 +7,7 @@
 				%h2
 					=user.name
 				%p
-					=user.shoulder_name
+					=user.credential
 			.user_profile_option{class: "user_#{user.id}"}
 				-if current_user && current_user.id == user.id
 					=link_to "EDIT SETTING", edit_setting_user_path(current_user.id), class: "edit_link"

@@ -10,10 +10,10 @@
 					Welcome. #{current_user.name}
 			
 			=form_tag complete_profile_users_path do
-				.setting_block.shoulder_name
+				.setting_block.credential
 					.title
 						CREDENTIAL
-					=text_field_tag 'user[shoulder_name]', current_user.shoulder_name, placeholder: "ex) company, job title, school", class: "content form-control"
+					=text_field_tag 'user[credential]', current_user.credential, placeholder: "ex) company, job title, school", class: "content form-control"
 				
 				.setting_block.about
 					.title
@@ -54,7 +54,7 @@
 	})
 	$('#reset_setting_btn').click(function(){
 		$(".setting_block.name .new.content input").val("#{current_user.name}");
-		$(".setting_block.shoulder_name .content").val("#{current_user.shoulder_name}");
+		$(".setting_block.credential .content").val("#{current_user.credential}");
 		$(".setting_block.about .content").val("#{current_user.about}");
 		$(".setting_block.language .new.content select").val("#{current_user.language.id}");
 		$(".setting_block.location .new.content select").val("#{current_user.country.id}");

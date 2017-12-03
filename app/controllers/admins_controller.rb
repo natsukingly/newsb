@@ -27,6 +27,24 @@ class AdminsController < ApplicationController
 		@post_draft.save
 	end
 	
+	def reports
+		@reports = Report.all.includes(:user, :country, :reportable).order(created_at: :desc).limit(20)
+		@reports_count = @reports.count
+		@non_checked_reports_count = @reports.where(check: false).count
+	end
+
+	def check_report
+		@report = Report.find(params[:id])
+		@report.check = true
+		@report.save
+	end
+	
+	def uncheck_report
+		@report = Report.find(params[:id])
+		@report.check = false
+		@report.save
+	end
+	
 	
 	private
 		def authenticate_admin

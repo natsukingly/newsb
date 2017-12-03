@@ -7,9 +7,13 @@ Rails.application.routes.draw do
 		member do
 			post 'hide_draft'
 			post 'publish_draft'
+			post 'check_report'
+			post 'uncheck_report'
 		end
 		collection do
 			get 'drafts'
+			get 'reports'
+			get 'all_reports'
 			post 'publish'
 		end
 	end
@@ -67,6 +71,7 @@ Rails.application.routes.draw do
 				get 'edit_article_post', as: :edit_article
 				post 'update_article_post', as: :update_article
 				get 'cancel_edit_article_post', as: :cancel_edit_article
+				post 'create_report'
 			end
 			collection do
 				post 'create_from_modal'
@@ -83,6 +88,9 @@ Rails.application.routes.draw do
 				get 'view_more'
 				get 'view_less'
 			end
+			collection do
+				post 'create_report'
+			end
 		end	
 		
 		resources :replies, except: [:new] do
@@ -93,6 +101,8 @@ Rails.application.routes.draw do
 			end
 		end
 		get '/replies/:comment_id/new' => 'replies#new'
+		
+		resources :report
 		
 		resources :post_drafts do
 			member do
@@ -187,6 +197,6 @@ Rails.application.routes.draw do
 		get "/auto_scroll/load_following" => "auto_scroll#load_following", as: :load_following
 		get "/auto_scroll/load_followers" => "auto_scroll#load_followers", as: :load_followers
 	
-	
+		get "/auto_scroll/load_reports" => "auto_scroll#load_reports", as: :load_reports
 	end	
 end

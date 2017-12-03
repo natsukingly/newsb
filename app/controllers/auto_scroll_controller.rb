@@ -95,4 +95,14 @@ class AutoScrollController < ApplicationController
   end
   
   
+  #report
+  def load_reports
+    @existing_reports = params[:existing_reports].to_i
+    @loaded_reports = Report.order(created_at: :desc).offset(@existing_reports)
+  end
+  
+  
+  #THINGS I NEED TO SCROLL 
+  # DRAFT & POST DRAFT
+  
 end

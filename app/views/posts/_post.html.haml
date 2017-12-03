@@ -9,8 +9,8 @@
 						=link_to post.user  do
 							.give_me_short_ellipsis.light_navy.bold
 								=post.user.name
-						%p.user_shoulder_name.sm.grey
-							=post.user.shoulder_name
+						%p.user_credential.sm.grey
+							=post.user.credential
 							%i.fa.fa-clock-o
 							#{time_ago_in_words_short(post.created_at)}
 					.user_option.follow_switch.pull-right

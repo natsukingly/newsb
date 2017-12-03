@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-	before_action :set_post, only: [:show, :edit, :update, :destroy, :edit_article_post, :update_article_post, :cancel_edit_article_post]
+	before_action :set_post, only: [:show, :edit, :update, :destroy, :edit_article_post, :update_article_post, :cancel_edit_article_post, :create_report]
 	before_action :yes_found
 	before_action :set_category, only: [:load_url]
 	before_action :set_new_users, only: [:show]
@@ -83,19 +83,17 @@ class PostsController < ApplicationController
 	end
 	
 	def create_from_modal
-		if params[:commit] == "POST"
+		if params[:commit] == t('form.post.submit')
 			create_article_and_post
 			flash[:notice] = "You have successfully published your post."
 			redirect_to article_path(@post.article.id)
 			
-		elsif params[:commit] == "SAVE"
+		elsif params[:commit] == t('form.post.save')
 			save_draft
 			flash[:notice] = "You have successfully saved your draft."
 			redirect_to root_path
 		end
 	end
-	
-	
 	
 	def create_article_post
 		@article = Article.find(params[:id])
@@ -107,7 +105,6 @@ class PostsController < ApplicationController
 		flash[:notice] = "Your have successfully published your post."
 		redirect_to @article
 	end
-
 
 	def update
 		@post.fake_news_report = params[:post][:fake_news_report] || false
@@ -129,6 +126,14 @@ class PostsController < ApplicationController
 		flash[:notice] = "Your post has been successfully deleted."
 		redirect_to root_path
 	end
+
+	def create_report
+		@report = @post.reports.build(	user_id: current_user.id, 
+										content: params[:report][:content],
+										country_id: params[:report][:country_id])
+		@report.save
+	end
+
 
 
 	private

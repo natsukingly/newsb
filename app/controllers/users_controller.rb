@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
     @user.country_id = params[:user][:country_id].to_i
     @user.language_id = params[:user][:language_id].to_i
-    @user.shoulder_name = params[:user][:shoulder_name]
+    @user.credential = params[:user][:credential]
     @user.about = params[:user][:about]
     @user.save
     
@@ -178,6 +178,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :image, :provider, :about, :shoulder_name, :country_id, :language_id)
+      params.require(:user).permit(:name, :image, :provider, :about, :credential, :country_id, :language_id)
     end
 end

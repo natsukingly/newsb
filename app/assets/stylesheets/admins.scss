@@ -65,3 +65,38 @@
     font-size: 16px;
     text-align: center;
 }
+
+
+#report_index{
+    background-color: white;
+    .report{
+        padding: 20px;
+        border-bottom: 1px solid #aaa;
+        a:hover{
+            color: blue;
+            font-weight: 900;
+        }
+        p{
+            padding-bottom: 8px;
+            span{
+                margin-right: 8px;
+            }
+        }
+        .report_btn{
+            display: inline-block;
+            padding: 12px;
+            background-color: darkred;
+            color: #eee;
+            margin-top: 12px;
+            cursor: pointer;
+            &:hover{
+                opacity: .8;
+                color: #eee;
+            }
+            &.uncheck_report_btn{
+                background-color: #eee;
+                color: black;
+            }
+        }
+    }
+}

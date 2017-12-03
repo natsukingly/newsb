@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127162726) do
+ActiveRecord::Schema.define(version: 20171203145352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20171127162726) do
     t.boolean "fake_news_report", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "hide", default: false
   end
 
   create_table "posts", force: :cascade do |t|
@@ -148,6 +149,18 @@ ActiveRecord::Schema.define(version: 20171127162726) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "likes_count", default: 0, null: false
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "reportable_id"
+    t.string "reportable_type"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "check", default: false
+    t.integer "country_id"
+    t.index ["reportable_id", "reportable_type"], name: "index_reports_on_reportable_id_and_reportable_type"
   end
 
   create_table "social_profiles", force: :cascade do |t|
@@ -199,7 +212,6 @@ ActiveRecord::Schema.define(version: 20171127162726) do
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.string "gender"
-    t.string "shoulder_name", default: "Newspartyの村人X"
     t.text "about", default: ""
     t.string "cover"
     t.integer "followers_count", default: 0, null: false
@@ -213,6 +225,7 @@ ActiveRecord::Schema.define(version: 20171127162726) do
     t.boolean "twitter_post", default: false
     t.integer "twitter_follower", default: 0
     t.boolean "admin", default: false
+    t.string "credential"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

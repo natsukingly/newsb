@@ -11,8 +11,8 @@
             =reply.user.name
             %span.grey
               #{time_ago_in_words(reply.created_at)} ago
-            %p.user_shoulder_name
-              =reply.user.shoulder_name
+            %p.user_credential
+              =reply.user.credential
           .follow_switch.pull-right
             =render "/shared/follow_form_icon.html.haml", user: reply.user
         %p.give_me_ellipsis 

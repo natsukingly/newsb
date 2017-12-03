@@ -92,7 +92,7 @@ class StartAllOver < ActiveRecord::Migration[5.1]
       t.inet "current_sign_in_ip"
       t.inet "last_sign_in_ip"
       t.string "gender"
-      t.string "shoulder_name", default: "Newspartyの村人X"
+      t.string "credential", default: "Newspartyの村人X"
       t.text "about", default: ""
       t.string "cover"
       t.index ["email"], name: "index_users_on_email", unique: true

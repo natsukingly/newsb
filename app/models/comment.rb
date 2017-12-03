@@ -5,6 +5,7 @@ class Comment < ApplicationRecord
 	belongs_to :user
 	has_many :likes, as: :likeable
 	has_many :replies
+	has_many :reports, as: :reportable, dependent: :delete_all
 	
 	after_create :issue_notification
 	after_create :add_e_indecator

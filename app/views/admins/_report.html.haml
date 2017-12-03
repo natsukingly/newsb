@@ -1,0 +1,30 @@
+.report{class: "report_#{report.id}"}
+    %p
+        %span.status
+            STATUS: 
+            -if report.check == true
+                CHECKED
+            -else
+                NOT YET
+        %span
+            TIME: 
+            = report.created_at
+        %span
+            COUNTRY: 
+            = report.country.name
+    %p
+        USER:
+        =link_to "#{report.user.name}", user_path(report.user.id)
+    %p
+        ABOUT: 
+        =link_to report.reportable.content, post_path(report.reportable)
+            
+    %p  
+        COMPLAIN:
+        = report.content
+    
+    .report_menu
+        -if report.check == true
+            =link_to "UNCHECK", uncheck_report_admin_path(report.id), remote: true, class: "uncheck_report_btn report_btn", method: :post
+        -else
+            =link_to "CHECK", check_report_admin_path(report.id), remote: true, class: "check_report_btn report_btn", method: :post

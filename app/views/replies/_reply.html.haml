@@ -7,8 +7,8 @@
 					=link_to reply.user do
 						%span.user_name.light_navy.bold
 							=reply.user.name
-					%span.user_shoulder_name.sm.grey
-						=reply.user.shoulder_name
+					%span.user_credential.sm.grey
+						=reply.user.credential
 				.option
 					%i.fa.fa-ellipsis-h.reply_option_link
 					=render '/dropdown/reply_option', reply: reply

@@ -22,10 +22,10 @@
 				Upload
 			%input{id: "file-upload", type: "file", name: "image"}
 			
-	.setting_block.shoulder_name
+	.setting_block.credential
 		.title
 			CREDENTIAL
-		=text_field_tag 'user[shoulder_name]', current_user.shoulder_name, placeholder: "ex) company, job title, school", class: "content form-control"
+		=text_field_tag 'user[credential]', current_user.credential, placeholder: "ex) company, job title, school", class: "content form-control"
 	
 	.setting_block.about
 		.title

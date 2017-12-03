@@ -5,10 +5,11 @@ class Post < ApplicationRecord
 	belongs_to :article
 	
 	counter_culture :article
-	has_many :likes, as: :likeable, dependent: :destroy
+	has_many :likes, as: :likeable, dependent: :delete_all
 	has_many :comments
 	has_many :tagged_posts, dependent: :destroy
 	has_many :tags, through: :tagged_posts
+	has_many :reports, as: :reportable, dependent: :delete_all
 	
 	after_create :issue_feed_notifications
 	after_create :post_on_sns
@@ -52,7 +53,7 @@ class Post < ApplicationRecord
 	end
 	
 	def add_e_indecator
-		if Post.where(article_id: self.article_id, user_id: self.user_id).count <= 1 
+		if self.article != nil && Post.where(article_id: self.article_id, user_id: self.user_id).count <= 1 
 			article = Article.find(self.article_id)
 			article.e_indecator += 10
 			article.save
@@ -60,7 +61,7 @@ class Post < ApplicationRecord
 	end
 	
 	def reduce_e_indecator
-		if Post.where(article_id: self.article_id, user_id: self.user_id).count == 0 
+		if self.article != nil && Post.where(article_id: self.article_id, user_id: self.user_id).count == 0 
 			article = Article.find(self.article_id)
 			article.e_indecator -= 10
 			article.save

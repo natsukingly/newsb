@@ -7,8 +7,8 @@
       =image_tag user.image.profile_sm.url, class: "pull-left user_index_image"
       .user_info.pull-left
         =link_to user.name, user
-        %p.user_shoulder_name
-          =user.shoulder_name
+        %p.user_credential
+          =user.credential
         %p.grey
           #{Like.where(user_id: user.id).count} total likes
           %span.hidden-xs

@@ -48,8 +48,8 @@
 							%span
 								=post.user.name
 							%br
-							%span.user_shoulder_name
-								=post.user.shoulder_name
+							%span.user_credential
+								=post.user.credential
 				%p.best_post_content
 					-if post.content.empty?
 						%span.shared_message
@@ -67,8 +67,8 @@
 							%span
 								=post.user.name
 							%br
-							%span.user_shoulder_name
-								=post.user.shoulder_name
+							%span.user_credential
+								=post.user.credential
 				%p.best_post_content
 					-if post.content.empty?
 						%span.shared_message
@@ -111,8 +111,8 @@
 							%span
 								=post.user.name
 								\/
-							%span.user_shoulder_name
-								=post.user.shoulder_name
+							%span.user_credential
+								=post.user.credential
 						%p.content
 							-if post.content.empty?
 								%span.shared_message
