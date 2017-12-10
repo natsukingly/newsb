@@ -19,25 +19,29 @@ $(document).on('turbolinks:load', function() {
 	$("#post_form .textarea").click(function(){
 	   $(this).find("#post_content").focus(); 
 	});
-	
 
 	$('.best_post_btn').click(function(event){
 		event.stopPropagation();
-		console.log(this);
 		if($(this).hasClass('open')){
 			$(this).removeClass('open');
-			$(this).text("Best post");
-			$(this).parents('.article').find('.best_post').slideUp();
+			$(this).html('<i class="fa fa-angle-down fa-fw open_icon"></i><span>Best post</span>');
+			$(this).parents('.article').find('.best_post').hide();
 			return false;
 		} else {
 			$(this).addClass('open');
-			$(this).text("close");
-			$(this).parents('.article').find('.best_post').slideDown();
+			$(this).html('<i class="fa fa-times fa-fw">');
+			$(this).parents('.article').find('.best_post').fadeIn();
 			return false;
 		}
 		return false;
 	});
 	
+	$('body').click(function (event) {
+		if(!$(event.target).closest('.ddm_wrapper').length && !$(event.target).is('.ddm_wrapper')) {
+			$(".ddm").hide();
+			$('body').removeClass('fixed');
+		}     
+	});	
 	
 	$(".notice_bar").click(function(){
 		$(this).hide();	

@@ -42,7 +42,6 @@
 	$("#post_textarea textarea").css("lineHeight","20px");//init
 	
 	$("#post_textarea textarea").on("input",function(evt){
-		console.log("post_content");
 	    if(evt.target.scrollHeight > evt.target.offsetHeight){
 	        $(evt.target).height(evt.target.scrollHeight);
 	    }else{

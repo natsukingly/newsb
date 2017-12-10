@@ -25,8 +25,8 @@ gem 'omniauth-twitter'
 
 
 gem 'koala'
-# gem 'linkedin'
 gem 'linkedin'
+gem 'twitter'
 
 gem 'carrierwave'
 gem 'rmagick'

@@ -1,0 +1,8 @@
+if("<%= @success %>" == "true"){
+	$("form").hide();
+	$("p").hide();
+	$("h2").html("The instruction has been sent to your email address. <br> It may take a couple of minutes to process.").css("margin-top", "50px"); 
+	
+} else {
+	$('.error_message').text("This email has not been registered.");
+}

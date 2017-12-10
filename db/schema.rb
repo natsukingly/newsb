@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171203145352) do
+ActiveRecord::Schema.define(version: 20171210124120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20171203145352) do
     t.integer "post_id"
     t.integer "comment_id"
     t.integer "reply_id"
+    t.boolean "everyone", default: false
   end
 
   create_table "post_drafts", force: :cascade do |t|
@@ -226,6 +227,8 @@ ActiveRecord::Schema.define(version: 20171203145352) do
     t.integer "twitter_follower", default: 0
     t.boolean "admin", default: false
     t.string "credential"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

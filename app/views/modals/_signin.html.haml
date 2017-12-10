@@ -5,7 +5,6 @@
 	#continue_with_social_account_block.modal_section
 		.modal_title
 			.logo
-				=render 'svg/logo_glasses'
 				NEWSB
 			.description
 				Check news. Share knowledge.
@@ -14,11 +13,11 @@
 			= link_to user_facebook_omniauth_authorize_path do
 				.facebook_signin_btn.social_signin_btn
 					%i.fa.fa-facebook
-					Continue with facebook
+					facebook
 			= link_to user_google_omniauth_authorize_path do
 				.google_signin_btn.social_signin_btn
 					%i.fa.fa-google
-					Continue with Google
+					Google
 		
 		.non_social_link
 			%p or
@@ -28,21 +27,18 @@
 						=f.email_field :email, placeholder: :Email
 						%i.fa.fa-exclamation-circle.error_icon
 						%ul.error_block
-							-unless resource.errors[:email].empty?
-								-resource.errors[:email].each do |message|
-									%li.error_message
-										Email #{message}
-				
 					.password_form
 						= f.password_field :password, autocomplete: "off", placeholder: :Password
 						%i.fa.fa-exclamation-circle.error_icon
-						%ul.error_block#login_error_message
+						=link_to "forgot password?", new_user_password_path, target: "_blank", id: "reset_password_link"
+
+					.actions.non_social_submit_btn
+						= f.submit "LOG IN"
+						%ul#login_error_message
 							-unless resource.errors[:password].empty?
 								-resource.errors[:password].each do |message|
 									%li.error_message
 										Password #{message}
-					.actions.non_social_submit_btn
-						= f.submit "LOG IN"
 
 			%h2.term_confirmation
 				%span.email_signup_link 
@@ -81,7 +77,6 @@
 								-resource.errors[:password].each do |message|
 									%li.error_message
 										Password #{message}
-					
 					
 					.actions.non_social_submit_btn
 						= f.submit "SIGN UP"	

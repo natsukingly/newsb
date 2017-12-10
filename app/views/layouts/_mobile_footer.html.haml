@@ -1,11 +1,19 @@
 
 =link_to root_path, class: "icon" do
 	=render "svg/mobile_home_icon"
-=link_to ranking_weekly_user_path, class: "icon" do
-	=render "svg/mobile_ranking_icon"	
+	
+.icon#mobile_locale_link
+	%span
+		=render "svg/globe_icon"
+		
+.icon#mobile_post_link
+	%span.create_post_btn
+		+
+		
 =link_to tags_path, class: "icon" do
 	=render "svg/mobile_tag_icon"
-=link_to notification_index_users_path, id: "notification_icon", class: "icon" do
-	=render "shared/mobile_notification_icon"
 	
-=render 'dropdown/notifications'
+.icon#mobile_notification_link
+	%span
+		=render "svg/mobile_notification_icon"
+	

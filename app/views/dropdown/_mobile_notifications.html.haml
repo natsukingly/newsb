@@ -1,0 +1,38 @@
+-if current_user
+	#mobile_notification_ddm.ddm
+		.mobile_notification_ddm_wrapper.ddm_wrapper
+			.title_block
+				%h2
+					Notifications
+				.close_ddm_btn
+					=render 'svg/close_icon'
+			
+			.notifications.notification_list_for_ddm
+				-if current_user.notifications.empty?
+					.notification_empty
+						You haven't received any notifications yet.
+				-else        
+					- current_user.notifications.includes(:target_user).order(created_at: :desc).each do |notification|
+						=link_to notification.path, class: "notification" do
+							.user_image
+								=user_image_helper(notification.target_user)
+							.content
+								%p
+									=notification.message.html_safe
+								%p
+									#{time_ago_in_words(notification.created_at)} ago
+
+
+:javascript
+	$('#mobile_notification_link').click(function () {
+		$(".ddm").hide();
+		$('#mobile_notification_ddm').show();
+		$('body').addClass('fixed');
+		return false;
+	});
+
+
+	$('.close_ddm_btn').click(function (event) {
+		$('#mobile_notification_ddm').hide();
+		$('body').removeClass('fixed');
+	});

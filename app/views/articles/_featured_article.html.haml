@@ -15,19 +15,19 @@
 				
 					-report_count = article.posts.where(fake_news_report: true).count
 					-if report_count != 0
-						%span.fake_news_report_count
-							[ #{report_count} fake news reports ]	
+						%span.posts_count
+							#{article.posts_count} posts [ #{report_count} fake news reports ]	
 							
 					.featured_article_bottom
-						-if article.posts_count != 0
-							.stats
-								%p.counts
-									#{article.posts_count}
-									%span.unit
-										posts
-							.featured_article_options
-								=link_to "READ COMMENTS | CREATE POST"
-									
+						=link_to article_path(article), class: "featured_article_image" do
+							.image{style: "background-image: url(#{article_image_helper article.image.url});"}
+								.frame
+									%i.fa.fa-mouse-pointer
+										
+						.featured_article_options
+							=link_to article_path(article) do 
+								%span
+									POSTS & COMMENTS
 											
 				.best_posts				
 					-unless best_posts.empty?
@@ -42,8 +42,7 @@
 										%p
 											%span
 												= post.user.name
-											%br
-											%span.user_credential
+											%p.user_credential.give_me_short_ellipsis
 												= post.user.credential
 								%p.best_post_content
 									-if post.content.empty?

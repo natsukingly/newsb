@@ -2,7 +2,10 @@
 	width: 100%;
 	flex-direction: row;
 	a{
-		color: #eee;
+		color: #e9e9e9;
+		&:hover{
+			color: white;
+		}
 	}
 	.article_wrapper{
 		min-height: 270px;
@@ -11,7 +14,7 @@
 		background-position: center;
 		display: flex;
 		.overlay{
-			background-color: rgba(0, 30, 60, .8);
+			background-color: rgba(0, 5, 10, .8);
 			padding: 20px;
 			flex: 1;
 			.article_container{
@@ -29,39 +32,67 @@
 					.featured_article_bottom{
 						flex: 1;
 						display: flex;
-						flex-direction: column;
-						justify-content: space-between;
-						.stats{
-							display: flex;
-							align-items: center;
-							color: white;
-							font-size: 16px;
-							p{
-								margin-right: 20px;
-								.counts{
-								}
-								span{
-									font-size: 14px;
-						
-								}
-							}
+						align-items: flex-end;
+						.image{
+							width: 200px;
+							height: 100px;
+							background-size: cover;
+							background-position: center;
+							margin-right: 20px;
+						    display: flex;
+						    .frame{
+						    	flex: 1;
+							    display: flex;
+							    justify-content: flex-end;
+							    align-items: flex-end;
+						    	border: 1px solid #eee;
+						    	transition: .2s;
+						    	&:hover{
+						    		background-color: rgba(255,255,255,.1);
+						    		i{
+						    			font-size: 15px;
+						    		}
+						    	}
+						    	i{
+						    		display: inline-block;
+						    		border-top: 1px solid #eee;
+						    		border-left: 1px solid #eee;
+						    	 	background-color: white;
+								    color: darkred;
+								    width: 30px;
+								    text-align: center;
+								    line-height: 30px;
+								    height: 30px;
+    								
+						    	}
+						    }
 						}
 						.featured_article_options{
 							display: flex;
+							flex-direction: column;
+							justify-content: flex-end;
+							height: 100px;
+							display: none;
 							a{
-								display: inline-block;
-								padding: 10px 20px;
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								padding: 8px 20px;
+								margin-top: 10px;
     							background-color: rgba(255,255,255,.3);
     							&:hover{
     								background-color: rgba(255,255,255,.2);
     							}
+    							i{
+									margin-left: 12px;
+								}
 							}
 						}
 					}
 					h2.featured_article_title{
 						margin-right: 20px;
 						font-size: 36px;
-						color: white;
+						color: #eee;
 						font-weight: 900;
 						span.featured_article_source{
 							font-size: 14px;
@@ -69,7 +100,7 @@
 						}
 					}
 				}
-				span.fake_news_report_count{
+				span.posts_count{
 					color: #eee;
 					margin-bottom: 20px;
 				}
@@ -81,6 +112,7 @@
 					display: flex;
 					flex-direction: column;
 					overflow: scroll;
+					overflow-x: hidden;
 					.best_post_title{
 						margin-bottom: 12px;
 						padding-bottom: 5px;
@@ -93,6 +125,7 @@
 						margin-bottom: 12px;
 						.user_credential{
 							color: #eee;
+							width: 270px;
 						}
 					}
 					.best_post_content{
@@ -135,8 +168,8 @@
 						color: #ccc;
 					    border: 1px solid #ccc;
 					    padding: 8px 12px;
-					    margin-right: 12px;
 					    border-radius: 3px;
+					    
 					    &:hover{
 					    	color: white;
 					    	border: 1px solid white;
@@ -159,16 +192,9 @@
 				.article_container{
 					.featured_article_content{
 						.featured_article_bottom{
-							.stats{
-								p{
-									.counts{
-									}
-									span{
-									}
-								}
-								.genre{
-									
-								}
+							.image{
+								width: 100px;
+								height: 100px;
 							}
 						}
 						h2.featured_article_title{
@@ -196,24 +222,18 @@
 				.article_container{
 					.featured_article_content{
 						.featured_article_bottom{
-							.stats{
-								justify-content: center;
-								p{
-									border: none;
-									padding: 0;
-									.counts{
-										font-size: 16px;
-									}
-									span{
-									}
-								}
-								.genre{
-									
-								}
+							justify-content: center;
+							.image{
+								display: none;
 							}
 							.featured_article_options{
+								display: flex;
+								justify-content: center;
 								a{
 									margin: 30px auto 0;
+									&.category_article_link{
+										display: none;
+									}
 								}
 							}
 						}
@@ -229,6 +249,9 @@
 						display: none;
 					}
 				}
+				span.posts_count{
+					justify-content: center;
+				}
 			}
 		}
 	}
@@ -243,10 +266,9 @@
 						}
 					}
 					.featured_article_menu{
-						display: none;
 						text-align: center;
 						a{
-							width: 100%;
+							margin-top: 40px;
 						    &:hover{
 
 						    }

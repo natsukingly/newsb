@@ -117,11 +117,8 @@
 }
 
 @media(max-width: 768px){
-	.modal_section{
-		margin: 0 auto;
-		max-width: 500px;
-	}
 	.modal{
+		background-color: white;
 		.modal_block{
 			height: 100%;
 			width: auto;
@@ -134,6 +131,10 @@
 			}
 		}
 	}
+	.modal_section{
+		margin: 0 auto;
+		max-width: 500px;
+	}
 }
 
 
@@ -145,6 +146,13 @@
 #signin_modal{
 	.signin_modal_block{
 		.social_signin_links{
+			display: flex;
+			a{
+				flex: 1;
+				&:first-child{
+					margin-right: 5px;
+				}
+			}
 			.social_signin_btn{
 				border-radius: 3px;
 				color: white;
@@ -185,19 +193,17 @@
 	}
 }
 
-
-@media(max-width: 768px){
-
-}
-
-
-
-
-
-
 .non_social_form{
 	display: flex;
 	flex-direction: column;
+	.email_form{
+
+	}
+	#reset_password_link{
+		margin: 12px 0;
+	    display: inline-block;
+	    border-bottom: 1px solid #aaa;
+	}
 }
 
 
@@ -224,14 +230,3 @@
 	}
 }
 
-
-
-
-
-
-
-#post_modal{
-	.post_modal_block.modal_block{
-		width: 600px;
-	}
-}

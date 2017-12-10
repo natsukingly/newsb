@@ -1,0 +1,32 @@
+-if current_user
+	#mobile_post_ddm.ddm
+		.mobile_post_ddm_wrapper.ddm_wrapper
+			.title_block
+				%h2
+					Create post
+				.close_ddm_btn
+					=render 'svg/close_icon'
+			
+			.post_ddm_block
+				.post_form_title
+					%h2
+						=t 'form.url.caption'
+				.post_url_form.for_mobile
+					=render "shared/url_form_modal"
+				#post_form_block_for_mobile
+				
+	
+:javascript
+	$('#mobile_post_link').click(function () {
+		console.log('aiueofda');
+		$(".ddm").hide();
+		$('#mobile_post_ddm').show();
+		$('body').addClass('fixed');
+		return false;
+	});
+
+	
+	$('.close_ddm_btn').click(function (event) {
+		$('#mobile_post_ddm').hide();
+		$('body').removeClass('fixed');
+	});

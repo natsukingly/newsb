@@ -51,6 +51,12 @@ class PostsController < ApplicationController
 		@post = Post.new
 		@article = Article.new
 	end
+	
+	def load_url_mobile
+		parseURL
+		@post = Post.new
+		@article = Article.new
+	end
  
 	
 	def edit

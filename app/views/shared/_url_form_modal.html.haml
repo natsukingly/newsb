@@ -22,3 +22,13 @@
 		$('.post_modal_block').animate({marginTop: "50px"}, 500);
 		return false;
 	});
+	
+	$('.post_url_form.for_mobile input').keyup(function(e) {
+		$.ajax({
+			url: "#{load_url_mobile_posts_path}",
+			type: "GET",
+			data: {placeholder_url: $(this).val()},
+			dataType: 'script',
+		});
+		return false;
+	});

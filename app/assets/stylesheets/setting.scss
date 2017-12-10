@@ -11,13 +11,34 @@ input[type="file"] {
 
 #user_profile_setting_wrapper, #sns_setting_wrapper{
     background-color: white;
-    padding: 50px;
+    padding: 30px 50px;
+    min-height: 400px;
 }
 
+.error_message{
+    color: red;
+}
+
+.forgot_password_block{
+    display: flex;
+
+    #reset_password_link_on_profile{
+        display: inline-block;
+        margin-bottom: 40px;
+        border-bottom: 1px solid grey;
+        color: grey;
+    }
+}
 
 .setting_block{
     display: flex;
     margin-bottom: 40px;
+    &.about, &.credential{
+        flex-direction: column;
+    }
+    &.current_password{
+        margin-bottom: 12px;
+    }
     &.image{
         align-items: center;
         .current.content{
@@ -43,12 +64,17 @@ input[type="file"] {
         }
     }
     .title{
-        width: 120px;
+        width: 150px;
         font-size: 14px;
         color: #696969;
+        padding: 8px 0;
+        margin-right: 30px;
     }
     .content{
         flex: 2;
+        > div{
+            padding: 8px 0;
+        }
         .edit_content_btn{
             display: inline-block;
             color: cornflowerblue;

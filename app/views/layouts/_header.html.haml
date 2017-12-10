@@ -62,11 +62,8 @@
 			#mobile_profile_option_link.user_image_sm
 				=user_image_helper(current_user)
 		-else
-			= link_to user_facebook_omniauth_authorize_path, class: "login_icon" do
+			.login_icon.login_signup_link
 				=render 'svg/profile_icon_bold'
-	
-		=render 'dropdown/mobile_locale'
-		=render 'dropdown/mobile_profile_option'
 		
 	#close_search_bar
 		=render 'svg/close_icon'

@@ -1,44 +1,12 @@
 =form_tag save_setting_user_path(current_user.id), multipart: true, id: "user_setting_form" do
-	.setting_block.name
-		.title
-			NAME
-		.current.content 
-			=current_user.name
-			.edit_content_btn
-				edit
-		.new.content
-			=text_field_tag 'user[name]', current_user.name, class: "edit_name_form form-control"
-			%h3
-				*On NEWSB, using your actual name is recommended.
-	
-	.setting_block.image
-		.title
-			IMAGE
-		.current.content 
-			#preview{style: "background-image: url(#{current_user.image_url});", class: "img-circle"}
-
-			%label{for: "file-upload", class: "custom-file-upload"}
-				%i.fa.fa-cloud-upload 
-				Upload
-			%input{id: "file-upload", type: "file", name: "image"}
-			
-	.setting_block.credential
-		.title
-			CREDENTIAL
-		=text_field_tag 'user[credential]', current_user.credential, placeholder: "ex) company, job title, school", class: "content form-control"
-	
-	.setting_block.about
-		.title
-			ABOUT
-		=text_area_tag 'user[about]', current_user.about, class: "content form-control", style: "min-height: 120px;"
-	
 	.setting_block.language
 		.title
 			LANGUAGE
 		.current.content 
-			=current_user.language.name
-			.edit_content_btn
-				edit
+			%div
+				=current_user.language.name
+				.edit_content_btn
+					edit
 		.new.content
 			=select_tag "user[language_id]", options_from_collection_for_select(Language.all, "id", "name", @language.id.to_i), prompt: "please select", class: "content form-control country_selection"   
 	
@@ -46,9 +14,10 @@
 		.title
 			LOCATION
 		.current.content 
-			=current_user.country.name
-			.edit_content_btn
-				edit
+			%div
+				=current_user.country.name
+				.edit_content_btn
+					edit
 		.new.content
 			=select_tag "user[country_id]", options_from_collection_for_select(Country.all, "id", "name", @country.id.to_i), class: "content form-control country_selection"  
 			%h3

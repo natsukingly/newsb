@@ -6,7 +6,7 @@
 			.profile_option_block
 				=link_to "Profile", user_path(current_user), class: "profile_option ddm_btn" 
 				=link_to "Setting", edit_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
-				=link_to "SNS", sns_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
+				=link_to "SNS", edit_sns_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
 				=link_to "Drafts", drafts_users_path, class: "profile_option ddm_btn" 
 				=link_to "Support", root_path, class: "profile_option ddm_btn" 
 			-if current_user.admin == true

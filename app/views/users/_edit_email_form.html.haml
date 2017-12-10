@@ -1,0 +1,28 @@
+=form_tag save_email_setting_user_path(@user), multipart: true, id: "user_setting_form" do
+	.setting_block.current_email
+		.title
+			Current email
+		.current.content 
+			%div
+				=current_user.email
+
+	.setting_block.new_email
+		.title
+			New email
+		.content
+			=email_field_tag 'user[email]', @email, autofocus: true, autocomplete: "off"
+			-if @taken_email_error != nil
+				.error_message
+					=@taken_email_error
+	.setting_block.new_email
+		.title
+			Confirm new email
+		.content
+			=email_field_tag 'user[email_confirmation]', @confirmation_email, autocomplete: "off"
+			-if @matching_error != nil
+				.error_message
+					=@matching_error
+	.submit_btn_group
+		= submit_tag "SAVE", class: "form_btn btn", id: "setting_submit_btn"
+
+	

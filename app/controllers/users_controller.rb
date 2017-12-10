@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :followers, :following, :posts, :save_setting, :edit_setting, :sns_setting]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :followers, :following, :posts, :save_setting, :save_email_setting, :save_password_setting, :edit_setting, :edit_locale_setting, :edit_password_setting, :edit_email_setting, :edit_sns_setting]
   before_action :set_new_users, only: [:notification_index, :show]
   # GET /users
   # GET /users.json
@@ -60,12 +60,25 @@ class UsersController < ApplicationController
   # end
   
   def show
-    @best_posts = @user.posts.order(likes_count: :desc).limit(3)
+    @posts = @user.posts.order(created_at: :desc).limit(20)
     
   end
   
   def edit_setting
-    @current_topic = "Profile Setting"
+    @current_topic = "Setting"
+  end
+  
+  def edit_locale_setting
+    @current_topic = "Setting"
+  end
+  
+  def edit_email_setting
+    @current_topic = "Setting"
+  end
+  
+  def edit_password_setting
+    @current_topic = "Setting"
+    @minimum_password_length = 6
   end
   
   def save_setting
@@ -75,9 +88,48 @@ class UsersController < ApplicationController
     end
   end
   
-  def sns_setting
-    @current_topic = "SNS Setting"
+  def save_locale_setting
+    @user.update(user_param)
+    if @user.save 
+      redirect_to current_user
+    end
   end
+  
+  def save_email_setting
+    @email = params[:user][:email]
+    @confirmation_email = params[:user][:email_confirmation]
+    if @email == @confirmation_email
+      if !(User.where(email: @email).any?)
+        @user.update(email: @email)
+        if @user.save 
+          flash[:notice] = "Your email has been successfully updated"
+          redirect_to current_user
+        end
+      else
+        @taken_email_error = "this address is already registered by another user"
+        render :edit_email_setting
+      end
+    else
+      @matching_error = "Adresses did not match"
+      render :edit_email_setting
+    end
+  end
+  
+  def save_password_setting
+    @password = params[:user][:password]
+    @password_confirmation = params[:user][:password_confirmation]
+    @current_password = params[:user][:current_password]
+    respond_to do |format|
+      if current_user.update_with_password(password: @password, password_confirmation: @password_confirmation, current_password: @current_password)
+        # パスワードを変更するとログアウトしてしまうので、再ログインが必要
+        sign_in(current_user, bypass: true)
+        format.html { redirect_to edit_setting_user_path(current_user) }
+      else
+        format.html { render :edit_setting_password }
+      end
+    end
+  end
+    
   
   
   def posts
@@ -179,5 +231,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :image, :provider, :about, :credential, :country_id, :language_id)
+    end
+    
+    def password_params
+      params.require(:user).permit(:current_password, :new_password, :password_confirmation)
     end
 end

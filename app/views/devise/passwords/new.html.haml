@@ -1,0 +1,31 @@
+-content_for(:sidebar) do
+	"Don't show"
+-content_for(:header) do
+	"Don't show"
+
+
+
+.forgot_password_wrapper
+	.forgot_password_section
+		%h1.logo
+			NEWSB
+		%h2
+			Forgot password?
+		%p
+			Type the email address you registered for NEWSB.
+			%br
+			We will email you the instruction to reset (or create) password.
+			
+		=form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, remote: true, class: "email_form") do |f|
+			.email
+				= f.email_field :email, placeholder: "type your email address",autofocus: true
+				= f.submit "SEND"
+		%p.error_message
+			
+
+:css
+	body{
+		background-image: linear-gradient(90deg,rgba(0,30,60,.9), rgba(0,30,60,.9)), url('#{ asset_path "bkg_image.jpeg"}');
+		background-size: cover;
+		background-position: center;
+	}

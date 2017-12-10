@@ -58,7 +58,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       #userがサインインしてなかった場合、リダイレクト
       if current_user
         flash[:notice] = "you successfully connected with #{@omniauth['provider']}"
-        redirect_to sns_setting_user_path(current_user.id)
+        redirect_to edit_sns_setting_user_path(current_user.id)
       else
         if @profile.user.persisted?
           sign_in @profile.user

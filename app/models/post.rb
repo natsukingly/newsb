@@ -78,10 +78,10 @@ class Post < ApplicationRecord
 			@api.put_wall_post(self.content, {
 				"type": "article",
 				"name" => "NEWSB",
-				"link" => "https://news-party-natsukingly.c9users.io/articles/#{self.article.id}",
+				"link" => "https://news-party-natsukingly.c9users.io/#{self.country.name}/articles/#{self.article.id}",
 				"caption" => self.article.title,
 				"description" => "NEWSB: The most social news platform in the world",
-				"picture" => "https://news-party-natsukingly.c9users.io#{asset_path_in_model(self.article.image.url)}"
+				"picture" => "https://dev-newsb.s3.amazonaws.com#{asset_path_in_model(self.article.image.url)}"
 			})
 		end
 		# linkedin api との協調がとれないので保留中。
@@ -99,6 +99,20 @@ class Post < ApplicationRecord
 		# 		}
 		# 	})
 		# end
+		if self.user.twitter_post == true
+			require "twitter"
+		    client = Twitter::REST::Client.new do |config|
+				# applicationの設定
+				config.consumer_key         = ENV['TWITTER_KEY']
+				config.consumer_secret      = ENV['TWITTER_SECRET']
+				# ユーザー情報の設定
+				access_token = self.user.social_profile(:twitter).access_token
+				access_secret = self.user.social_profile(:twitter).access_secret
+			    config.access_token         = access_token
+			    config.access_token_secret  = access_secret
+		    end
+		    client.update(self.content.truncate(70) + " " + "https://news-party-natsukingly.c9users.io/#{self.country.name}/articles/#{self.article.id}" + " " + "#NEWSB")
+		end
 	end
 	
 	

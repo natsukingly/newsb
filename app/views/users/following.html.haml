@@ -4,6 +4,16 @@
 	"Don't show"
 
 .sub_function_wrapper.user_profile
+	.sub_function_user_sidebar.profile_menu
+		%h2.profile_title
+			PROFILE
+		=link_to user_path(@user), class: "profile_menu_btn" do
+			#{@user.posts.count} posts
+		=link_to followers_user_path(@user.id), class: "profile_menu_btn" do
+			#{@user.followers.count} follower
+		=link_to following_user_path(@user.id), class: "profile_menu_btn active" do
+			#{@user.following.count} following
+			
 	.sub_function_main_section
 		#main_contents.profile_contents
 			%h2.profile_title

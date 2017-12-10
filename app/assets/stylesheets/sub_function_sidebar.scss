@@ -12,6 +12,17 @@
 	}
 }
 
+.sub_function_user_sidebar{
+	width: 160px;
+	margin-right: 20px;
+}
+@media(max-width: 768px){
+	.sub_function_user_sidebar{
+		display: none;
+	}	
+}
+
+
 .recent_article_section, .side_article_section, .new_users_section{
 	background-color: white;
 	padding: 12px 0;

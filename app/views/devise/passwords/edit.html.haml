@@ -1,0 +1,53 @@
+-content_for(:sidebar) do
+	"Don't show"
+-content_for(:header) do
+	"Don't show"
+
+
+
+.forgot_password_wrapper
+	.forgot_password_section
+		%h1.logo
+			NEWSB
+		%h2
+			SET NEW PASSWORD
+		%p
+			Type the email address you registered for NEWSB.
+			%br
+			We will email you the instruction to reset (or create) password.
+			
+
+		= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+			= f.hidden_field :reset_password_token
+
+			.field
+				New password
+				%br
+				- if @minimum_password_length
+					%em
+						(#{ @minimum_password_length} characters minimum)
+					%br
+				= f.password_field :password, autofocus: true, autocomplete: "off"
+
+			.field
+				Confirm new password
+				%br
+				= f.password_field :password_confirmation, autocomplete: "off"
+			
+			-unless resource.errors.empty?
+				%ul.error_block
+					-resource.errors.full_messages.each do |msg|
+						%li
+							%i.fa.fa-exclamation-circle.error_icon
+							= msg
+			.actions
+				= f.submit "Change my password", id: "change_password_btn"
+
+
+
+:css
+	body{
+		background-image: linear-gradient(90deg,rgba(0,30,60,.9), rgba(0,30,60,.9)), url('#{ asset_path "bkg_image.jpeg"}');
+		background-size: cover;
+		background-position: center;
+	}

@@ -3,12 +3,6 @@
 .sub_function_wrapper.article_show
 	.sub_function_main_section
 		=render "/articles/featured_article_sm", article: @article
-		=link_to @article.url, target: :_blank do
-			.read_article.on_mobile
-				%span.content
-					= t 'article.read_btn' 
-				%span.mobile_btn_icon.svg_icon
-					=render "svg/window_icon"
 		.form_show.on_mobile
 			%span.content
 				=t 'form.post.title'
@@ -30,13 +24,14 @@
 					.show_fake_news_link
 						=t ('fake_news.show.desktop')
 						>>
-		.show_fake_news_btn.on_mobile
-			%span.content
-				=t ('fake_news.show.mobile')
-				\:
-				= report_count
-			%span.mobile_btn_icon
-				+
+		-unless report_count == 0
+			.show_fake_news_btn.on_mobile
+				%span.content
+					=t ('fake_news.show.mobile')
+					\:
+					= report_count
+				%span.mobile_btn_icon
+					+
 					
 		#main_contents.article_posts
 			=render '/articles/post_index'

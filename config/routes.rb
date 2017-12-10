@@ -21,9 +21,8 @@ Rails.application.routes.draw do
 	get '/schneider/crawl' => 'schneider#crawl', as: :crawl
 	post '/schneider/prepare_admin_posts', as: :prepare_admin_posts
 
+	devise_for :users, :controllers => {registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions', passwords: 'users/passwords'}
 	
-	
-	devise_for :users, :controllers => {registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions'} 
 	scope ":country" do
 		resources :users, except: [:create, :new] do
 			member do
@@ -32,7 +31,13 @@ Rails.application.routes.draw do
 				get 'followers'
 				get 'edit_setting'
 				post 'save_setting'
-				get 'sns_setting'
+				post 'save_locale_setting'
+				post 'save_email_setting'
+				post 'save_password_setting'
+				get 'edit_sns_setting'
+				get 'edit_password_setting'
+				get 'edit_email_setting'
+				get 'edit_locale_setting'
 			end
 			collection do 
 				get 'auto_complete'
@@ -78,6 +83,7 @@ Rails.application.routes.draw do
 				get 'load_more'
 				get 'autocomplete_tags'
 				get 'load_url_modal'
+				get 'load_url_mobile'
 				get 'load_url_feed'
 			end
 		end

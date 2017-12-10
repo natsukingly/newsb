@@ -8,6 +8,14 @@
 					=user.name
 				%p
 					=user.credential
+					
+				%p.liked_count
+					%span
+						Weekly : #{@user.weekly_liked_count} likes   
+					%span
+						Total : #{@user.liked_count} likes
+				%p
+					=user.about
 			.user_profile_option{class: "user_#{user.id}"}
 				-if current_user && current_user.id == user.id
 					=link_to "EDIT SETTING", edit_setting_user_path(current_user.id), class: "edit_link"

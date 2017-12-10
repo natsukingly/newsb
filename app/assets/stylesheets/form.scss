@@ -12,8 +12,8 @@
 }
 
 #login_error_message{
-    color: grey;
-    padding: 12px;
+    color: red;
+    margin: 12px 0 0;
 }
 
 form{
@@ -24,14 +24,14 @@ form{
     	    border-radius: 3px;
     	    outline: 0px;
     	    border: 1px solid #bbb;
-    	    padding: 12px;
+    	    padding: 8px;
     	    background-color: white;
     	    &:hover{
     	    	opacity: .95;
     	    }
     	}
     	input[type="submit"]{
-            padding: 5px 12px;
+            padding: 8px 12px;
     	}
     	.error_icon{
     	    position: absolute;
@@ -55,7 +55,7 @@ form{
 
 #post_form{
     margin-bottom: 0;
-    border-bottom: 1px solid #eee;
+    // border-bottom: 1px solid #eee;
     background-color: white;
     .post_article{
         flex-direction: column;
@@ -149,8 +149,9 @@ form{
                     border: 1px solid #bbb;
                     width: 90px;
                     margin-left: 5px;
-                    padding: 5px 12px;
+                    padding: 0;
                     transition: .2s;
+                    line-height: 35px;
                     &:hover{
                         background-color: #001E42;
                         color: white;
@@ -195,6 +196,7 @@ form{
                             font-size: 20px;
                             border: 1px solid #aaa;
                             display: flex;
+                            padding: 0;
                             align-items: center;
                             justify-content: center;
                             &.connect, &.share{
@@ -252,6 +254,9 @@ form{
 	#post_form .body{
 	    padding: 12px;
 	}
+    .article_show #post_form{ 
+        display: none;
+    }	
 }
 
 #post_form.on_modal{
@@ -259,6 +264,7 @@ form{
         flex-direction: row;
     }
 }
+
 
 
 
@@ -367,7 +373,7 @@ form{
             outline: none;
             box-shadow: none;
             height: 50px;
-            padding: 25px 12px 25px 0;
+            padding: 25px 12px 25px 0; 
             font-size: 20px;
             border-bottom: 1px solid #eee;
         }
@@ -381,7 +387,14 @@ form{
 @media (max-width: 768px) {
 	.post_url_form{
 	    display: none;
+	    &.on_modal, &.for_mobile{
+	        display: block;
+	    }
+	    form input[type=url]{
+	        font-size: 16px;
+	    }
 	}
+	
 }
 
 #extra_info_wrapper{
@@ -456,4 +469,72 @@ form{
         margin: 0;
         padding: 20px 12px 200px;
 	}
+}
+
+.forgot_password_wrapper{
+    margin: 0 auto;
+    .forgot_password_section{
+        padding: 0 12px;
+        margin-top: 80px;
+        text-align: center;
+        h1.logo{
+            font-family: 'Nova Flat', cursive;
+            font-size: 45px;
+            margin-bottom: 20px;
+            justify-content: center;
+            color: #eee;
+        }
+        h2{
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #eee;
+        }
+        p{
+            text-align: left;
+            margin-bottom: 40px;
+            font-size: 16px;
+            color: #eee;
+        }
+        form{
+            color: #ccc;
+            text-align: left;
+            input{
+                margin-bottom: 12px;
+                color: grey;
+            }
+            input[type=submit]{
+                background-color: cornflowerblue;
+                border: none;
+                color: #eee; 
+            }
+            #change_password_btn{
+                padding: 12px;     
+                margin-top: 12px;
+            }
+            .email{
+                display: flex;
+                margin-bottom: 20px;
+                input[type=submit]{
+                    width: 100px;
+                    margin-left: 5px;
+                    padding: 8px 12px;
+                }
+            }
+            ul{
+                padding: 12px;
+                font-size: 16px;
+                i{
+                    color: pink;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 768px){
+    .forgot_password_wrapper{
+        .forgot_password_section{
+            margin-top: 60px;
+        }
+    }
 }

@@ -82,15 +82,23 @@ module ApplicationHelper
         {
             title: article.title,
             description: "NEWSB: The most social news platform in the world",
-            image_src: "https://news-party-natsukingly.c9users.io#{url_for(asset_path article.image.url || "no_image.jpeg")}",
+            image_src: "#{url_for(asset_path article.image.url || "no_image.jpeg")}",
             keywords: "",
             og: {
               title: :title,
               type: "article",
-              url: "https://news-party-natsukingly.c9users.io/articles/#{article.id}",
-              image: "https://news-party-natsukingly.c9users.io#{url_for(asset_path article.image.url || "no_image.jpeg")}",
+              url: "https://news-party-natsukingly.c9users.io/#{article.country.name}/articles/#{article.id}",
+              image: "#{url_for(asset_path article.image.url || "no_image.jpeg")}",
               site_name: "NEWSB",
               description: :description,
+            },
+            twitter: {
+                card: "summary_large_image",
+                site: "NEWSB",
+                creater: "NEWSB",
+                title: :title,
+                description: :description,
+                image: "#{url_for(asset_path article.image.url || "no_image.jpeg")}",
             }
         }
     end

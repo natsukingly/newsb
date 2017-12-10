@@ -31,7 +31,12 @@ class CategoriesController < ApplicationController
 	
 	def articles
 		@articles = @category.articles.where(country_id: @country.id).order(e_indecator: :desc).limit(20)
-		@recent_articles = Article.where(country_id: @country.id, category_id: @category.id).order(published_time: :desc).limit(2)
+		@featured_article = @articles.first
+		unless @featured_article.nil?
+			@best_posts = @articles.first.posts.order(likes_count: :desc).includes(:user).limit(3)
+			@related_articles = Article.where(country_id: @country.id, category_id: @featured_article.category_id).where.not(id: @featured_article.id).limit(5)
+		end
+		@recent_articles = Article.where(country_id: @country.id).order(published_time: :desc).limit(5)
 	end
 	
 	def posts

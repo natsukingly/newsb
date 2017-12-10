@@ -1,14 +1,19 @@
-#mobile_profile_option_ddm.ddm
-	.mobile_profile_option_ddm_wrapper
-		=link_to "Profile", current_user, class: "profile_option" 
-		=link_to "Setting", root_path, class: "profile_option" 
-		=link_to "Support", root_path, class: "profile_option" 
-		=link_to "About", root_path, class: "profile_option" 
-		=link_to "Terms", root_path, class: "profile_option" 
-		=link_to "Logout", destroy_user_session_path, class: "profile_option" 
-		&copy; 2017 NEWSB
-		.close_ddm_btn
-			=render 'svg/close_icon'
+-if current_user
+	#mobile_profile_option_ddm.ddm
+		.mobile_profile_option_ddm_wrapper.ddm_wrapper
+			.title_block
+				%h2
+					=current_user.name
+				.close_ddm_btn
+					=render 'svg/close_icon'
+			=link_to "Profile", current_user, class: "profile_option" 
+			=link_to "Setting", root_path, class: "profile_option" 
+			=link_to "Support", root_path, class: "profile_option" 
+			=link_to "About", root_path, class: "profile_option" 
+			=link_to "Terms", root_path, class: "profile_option" 
+			=link_to "Logout", destroy_user_session_path, class: "profile_option" 
+			.profile_option
+				&copy; 2017 NEWSB
 			
 :javascript
 	
@@ -19,12 +24,6 @@
 		return false;
 	});
 
-	$('body').click(function (event) {
-		if(!$(event.target).closest('.mobile_profile_option_ddm_wrapper').length && !$(event.target).is('.mobile_profile_option_ddm_wrapper')) {
-			$("#mobile_profile_option_ddm").hide();
-			$('body').removeClass('fixed');
-		}     
-	});
 	
 	$('.close_ddm_btn').click(function (event) {
 		$('#mobile_profile_option_ddm').hide();

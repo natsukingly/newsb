@@ -100,50 +100,47 @@ class ApplicationController < ActionController::Base
 		# 		@language = Language.find_by(code: cookies[:language])
 		# 	end
 		# end
-				
+		def detect_locale
+			@ip = request.remote_ip
+			if @ip
+				@country_name = Geocoder.search(@ip).first.country
+				@country = Country.find_by(name: @country_name)
+				if @country 
+					cookies[:country] = @country.name
+				else 
+					cookies[:country] = "United States"
+				end
+				@country = Country.find_by(name: cookies[:country])
+			else
+				@country = Country.find_by(name: "United States")
+			end
+		end
+		
+		def set_locale
+			if current_user
+				preferred_language_code = current_user.language.code
+			elsif params[:locale]
+				preferred_language_code = params[:locale]
+			else
+				detected_locale_code = @country.language.code
+			end
+			I18n.locale = preferred_language_code || detected_locale_code || I18n.default_locale
+			@language = Language.find_by(code: I18n.locale)
+		end
+
+		def set_country
+			if params[:country]
+				@country = Country.find_by(name: params[:country])
+			elsif current_user
+				@country = Country.find(current_user.country_id)
+			else
+				detect_locale
+			end
+		end				
 		
 		
 		
 		protected
-				def detect_locale
-					ip = request.remote_ip
-					if ip
-						country_name = Geocoder.search(ip).first.country
-						country = Country.find_by(name: country_name)
-						if country 
-							cookies[:country] = country.name
-						else 
-							cookies[:country] = "United States"
-						end
-						@country = Country.find_by(name: cookies[:country])
-					else
-						@country = Country.find_by(name: "United States")
-					end
-				end
-				
-				def set_locale
-					if current_user
-						preferred_language_code = current_user.language.code
-						@country = current_user.country
-					elsif params[:locale]
-						preferred_language_code = params[:locale]
-					else
-						detect_locale
-						detected_locale_code = @country.language.code
-					end
-					I18n.locale = preferred_language_code || detected_locale_code || I18n.default_locale
-					@language = Language.find_by(code: I18n.locale)
-				end
-		
-				def set_country
-					if params[:country]
-						@country = Country.find_by(name: params[:country])
-					elsif current_user
-						@county = Country.find(current_user.country_id)
-					else
-						detect_locale
-					end
-				end
 				
 				def authenticate_user!
 						if user_signed_in?

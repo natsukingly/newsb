@@ -4,48 +4,23 @@
 	"Don't show"
 		
 .sub_function_wrapper.user_profile
+	.sub_function_user_sidebar.profile_menu
+		%h2.profile_title
+			PROFILE
+		=link_to user_path(@user), class: "profile_menu_btn active" do
+			#{@user.posts.count} posts
+		=link_to followers_user_path(@user.id), class: "profile_menu_btn" do
+			#{@user.followers.count} follower
+		=link_to following_user_path(@user.id), class: "profile_menu_btn" do
+			#{@user.following.count} following
+
+			
 	.sub_function_main_section
 		#main_contents.profile_contents
-			%h2.profile_title.for_mobile
-				ABOUT
-			.about.for_mobile
-				%p
-					-if !(@user.about.empty?)
-						=@user.about
-					-else
-						Not available
-						
-			%h2.profile_title.for_mobile
-				LIKES
-			.likes.for_mobile
-				%p
-					WEEK: #{@user.weekly_liked_count}
-					%br
-					All-TIME: #{@user.liked_count}
-					
-						
-			-unless @best_posts.empty?
+			-unless @posts.empty?
 				.best_posts
-					%h2.profile_title
-						BEST POSTS
-					= render @best_posts.includes(:article)
-	.sub_function_sidebar.profile_contents
-		%h2.profile_title
-			ABOUT
-		.about
-			%p
-				-if !(@user.about.empty?)
-					=@user.about
-				-else
-					Not available
-		%h2.profile_title
-			LIKES
-		.likes
-			%p
-				WEEK: #{@user.weekly_liked_count}
-				%span
-					All-TIME: #{@user.liked_count}
-			
+					= render @posts.includes(:article)
+
 
 		
 

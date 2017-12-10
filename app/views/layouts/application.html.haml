@@ -9,7 +9,8 @@
 		= javascript_include_tag 'application'
 	%body
 		.flex_container
-			=render 'layouts/header'
+			-if  yield(:header).empty?
+				=render 'layouts/header'
 
 			-if  yield(:featured_article).empty? == false && @featured_article.nil? == false
 				#featured_article_wrapper
@@ -31,8 +32,6 @@
 				.user_profile_container
 					=render 'shared/user_profile', user: @user
 				.flex_wrapper.on_user_profile.clearfix 
-					#sidebar_left
-						=render "/sidebars/left_profile", user: current_user
 					#main_container
 						=yield
 			
@@ -50,5 +49,18 @@
 			
 		#post_modal.modal
 			=render 'modals/post'
+		
+		#mobile_locale
+			=render 'dropdown/mobile_locale'
+			
+		#mobile_notification
+			=render 'dropdown/mobile_notifications'
+			
+		#mobile_post
+			=render 'dropdown/mobile_post'
+	
+		#mobile_profile_option
+			=render 'dropdown/mobile_profile_option'
+
 			
 								
