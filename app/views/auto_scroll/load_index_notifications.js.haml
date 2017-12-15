@@ -1,0 +1,8 @@
+$('.scroll_btn.index_notifications').before("#{ escape_javascript(render @loaded_index_notifications)}");
+$('.scroll_btn.index_notifications').html('LOAD MORE');
+$('.scroll_btn.index_notifications').removeClass('loading');
+-if @loaded_index_notifications.empty? || @loaded_index_notifications.count < 30
+    $('.scroll_btn.index_notifications').html('NO MORE NOTIFICATIONS');
+    $('.scroll_btn.index_notifications').addClass('stop_loading');
+    
+loading = false;

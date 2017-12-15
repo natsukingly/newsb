@@ -5,16 +5,25 @@
 		= csrf_meta_tags
 		= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
 		= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Nova+Flat"
-		= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Lobster+Two"
 		= javascript_include_tag 'application'
 	%body
+
 		.flex_container
 			-if  yield(:header).empty?
 				=render 'layouts/header'
 
 			-if  yield(:featured_article).empty? == false && @featured_article.nil? == false
 				#featured_article_wrapper
-					=render "/articles/featured_article", article: @featured_article, best_posts: @best_posts, related_articles: @related_articles
+					=render "/articles/featured_article", article: @featured_article, best_post: @best_post, related_articles: @related_articles
+				.flex_wrapper.clearfix  
+					#sidebar_left
+						=render "/sidebars/left_profile", user: current_user
+					#main_container
+						=yield
+			
+			-elsif  yield(:selected_article).empty? == false && @article.nil? == false
+				#selected_article_wrapper
+					=render "/articles/selected_article", article: @article
 				.flex_wrapper.clearfix  
 					#sidebar_left
 						=render "/sidebars/left_profile", user: current_user
@@ -62,5 +71,4 @@
 		#mobile_profile_option
 			=render 'dropdown/mobile_profile_option'
 
-			
-								
+

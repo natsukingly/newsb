@@ -1,5 +1,5 @@
 
-.post#post_form
+.post.post_form{data: {form: "feed", country: "#{@country.id}"}}
 	.body
 		.post_article
 			.post_image{ style: "background-image: url(#{article_image_helper @article_image});"}
@@ -18,8 +18,8 @@
 						=check_box_tag "post[fake_news_report]", true, false
 						=t ('form.post.fake_news_checkbox')
 
-				.field.form-group#post_textarea
-					.textarea
+				.field.form-group.post_textarea_wrapper
+					.post_textarea_block.feed
 						= text_area_tag 'post[content]', '', placeholder: "#{t ('form.post.placeholder')}", class: "post_textarea"
 					
 					= hidden_field_tag 'article[image]', @article_image
@@ -29,6 +29,7 @@
 					= hidden_field_tag 'article[published_time]', value: @article_published_time
 					
 					#autocomplete_tags
+						.autocomplete_tags_block
 				.post_submit_menu
 					#sns_post_form_menu
 						=render 'snss/sns_post_form_menu', user: current_user
@@ -37,18 +38,18 @@
 						= submit_tag "#{t ('form.post.submit')}", class: "form_btn post_submit_btn"	
 						= submit_tag "#{t ('form.post.save')}", class: "form_btn post_save_btn"	
 
-						
-				
+=render 'js/autocomplete'						
+=render 'js/autosize'					
 
-=render 'js/autocomplete'
+
 
 
 :javascript
-	$("#post_textarea textarea").height(30);//init
-	$("#post_textarea textarea").css("lineHeight","20px");//init
+	$(".post_textarea textarea").height(30);//init
+	$(".post_textarea textarea").css("lineHeight","20px");//init
 	
-	$("#post_textarea textarea").on("input",function(evt){
-		console.log("post_content");
+	$(".post_textarea textarea").on("input",function(evt){
+		 
 	    if(evt.target.scrollHeight > evt.target.offsetHeight){
 	        $(evt.target).height(evt.target.scrollHeight);
 	    }else{

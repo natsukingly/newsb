@@ -5,19 +5,23 @@ var scrollVolume = $(window).scrollTop();
 var windowWidth = $(window).width();
 var noticeHeight = parseInt($('.notice_bar').css("height"), 10);
 var articleHeight = parseInt($('#featured_article_wrapper').css("height"), 10);
-var offsetAmount = 58;
+var selectedArticleHeight = parseInt($('#selected_article').css("height"));
+var offsetAmount = 52;
 
 setTimeout(function(){
     var position = $('#sidebar_left').offset();
 	$('.sidebar_wrapper').css("left", position.left);
 },2000);
 
-if(noticeHeight){
-	offsetAmount += noticeHeight;
-}
+// if(noticeHeight){
+// 	offsetAmount += noticeHeight;
+// }
 
 if(articleHeight){
 	offsetAmount += articleHeight;
+}
+if(selectedArticleHeight){
+	offsetAmount += selectedArticleHeight;
 }
 
 if( $object.length && scrollVolume > offsetAmount){
@@ -37,7 +41,7 @@ if( $object.length && scrollVolume > offsetAmount){
 }
 
 $(window).scroll(function() {
-	
+	var selectedArticleHeight = parseInt($('#selected_article').css("height"));
     var $object = $('.sidebar_wrapper');
 	var scrollVolume = $(window).scrollTop();
 	var windowWidth = $(window).width();
@@ -46,11 +50,14 @@ $(window).scroll(function() {
 	var offsetAmount = 58;
 	
 	
-	if(noticeHeight){
-		offsetAmount += noticeHeight;
-	}
+	// if(noticeHeight){
+	// 	offsetAmount += noticeHeight;
+	// }
 	if(articleHeight){
 		offsetAmount += articleHeight;
+	}
+	if(selectedArticleHeight){
+		offsetAmount += selectedArticleHeight;
 	}
 	
 	if( $object.length && scrollVolume > offsetAmount){

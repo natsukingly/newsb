@@ -1,8 +1,11 @@
 - set_meta_tags article_meta_tags(@article)
 
+-content_for(:selected_article) do
+	"show the selected article"
+	
 .sub_function_wrapper.article_show
 	.sub_function_main_section
-		=render "/articles/featured_article_sm", article: @article
+		=render "/articles/selected_article_mobile", article: @article
 		.form_show.on_mobile
 			%span.content
 				=t 'form.post.title'
@@ -22,8 +25,7 @@
 						%i.fa.fa-exclamation-circle
 						=t 'fake_news.count_description', count: report_count
 					.show_fake_news_link
-						=t ('fake_news.show.desktop')
-						>>
+						%i.fa.fa-angle-down
 		-unless report_count == 0
 			.show_fake_news_btn.on_mobile
 				%span.content
@@ -36,6 +38,8 @@
 		#main_contents.article_posts
 			=render '/articles/post_index'
 
+
+
 	.sub_function_sidebar
 		%h2 
 			=t ('sidebar.title.recommended_articles')
@@ -46,14 +50,14 @@
 	- @best_posts.ids.each do |best_id|		
 		:javascript
 			$("#main_contents").find(".post_#{best_id}").find(".user_block .star").css("display","block");
-					
+
 :javascript
 	$('.show_fake_news_link').click(function(){
 		if($(this).hasClass("open")){
-			$(this).removeClass("open").text("#{t ('fake_news.show.desktop')}" + ">>");
+			$(this).removeClass("open").html("<i class='fa fa-angle-down'></i>");
 			$('.fake_news_reports').fadeOut();
 		} else{
-			$(this).addClass("open").text("#{t ('fake_news.hide')}");
+			$(this).addClass("open").html("×");
 			$('.fake_news_reports').fadeIn();
 		}
 	})
@@ -72,10 +76,32 @@
 		if($(this).hasClass("open")){
 			$(this).removeClass("open").find('span.content').text("#{t ('form.post.title')}");
 			$(this).find('span.mobile_btn_icon').text("+");
-			$('#post_form').slideUp();
+			$('.post_form').slideUp();
 		} else{
 			$(this).addClass("open").find('span.content').text("#{t ('form.cancel')}");
 			$(this).find('span.mobile_btn_icon').text("ー");
-			$('#post_form').slideDown();
+			$('.post_form').slideDown();
 		}
 	})
+	
+
+	$('.scroll_btn.article_posts').click(function(){
+		var stop_loading = $(this).hasClass('stop_loading');
+		if(!(stop_loading)){
+			$.ajax({
+				url: "#{load_article_posts_path}",
+				type: "GET",
+				data: {existing_posts: $('.new_posts').find('.post').length,
+						article_id: #{@article.id}},
+				dataType: 'script',
+			})
+			$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+			$(this).addClass("loading");
+		}
+	})
+
+	
+	$(".post_form .cancel_btn").click(function(){
+		$(this).parents(".post_form").hide();
+		$(this).parents(".post").find("p.opinion").fadeIn();
+	});

@@ -1,7 +1,17 @@
-#post_show_menu
-	=link_to "READ MORE", @article.url, target: "_blank", class: "read_article_btn" 
-	.post_form_block
-		.title
-			
-		=render "posts/form_no_category", article: @article
+%div{ class: "article_#{article.id}", id: "selected_article"}
+	.article_wrapper.image{style: "background-image: url(#{article_image_helper article.image.url});"}
+		.overlay
+			.article_container
+				.article_title
+					-if article.title.empty? 
+						This article has been deleted.
+					-else
+						=article.title
+						%br
+						%span.selected_article_info
+							= article.source
+							- if article.published_time
+								%i.fa.fa-clock-o
+								#{time_ago_in_words_short(article.published_time)}
+				=link_to "READ MORE", article.url, class: "read_article_btn", target: "_blank"
 

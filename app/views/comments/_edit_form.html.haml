@@ -17,7 +17,6 @@
 		$(".form_content").css("lineHeight","20px");//init
 		
 		$(".form_content").on("input",function(evt){
-						console.log("comment");
 				if(evt.target.scrollHeight > evt.target.offsetHeight){
 						$(evt.target).height(evt.target.scrollHeight);
 				}else{

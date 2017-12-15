@@ -17,9 +17,21 @@
 			
 	.sub_function_main_section
 		#main_contents.profile_contents
-			-unless @posts.empty?
+			-if @posts.empty?
+				.result_not_found
+					%h4.not_found_content
+						=t('not_found.user_posts')
+					#create_post_btn.show_post_modal_btn
+						=t ('form.post.title')
+			-else
 				.best_posts
 					= render @posts.includes(:article)
+					-if @posts.count < 30
+						.scroll_btn.stop_loading
+							NO MORE POSTS	
+					-else
+						.scroll_btn.user_posts
+							LOAD MORE	
 
 
 		
@@ -29,3 +41,18 @@
 :javascript
 	$(".profile_btn").removeClass("active");
 	$(".profile_btn.left").addClass("active");
+	
+	$('.scroll_btn.user_posts').click(function(){
+		var stop_loading = $(this).hasClass('stop_loading');
+		if(!(stop_loading)){
+			$.ajax({
+				url: "#{load_user_posts_path}",
+				type: "GET",
+				data: {existing_posts: $('#main_contents').find('.post').length,
+				user_id: "#{@user.id}"},
+				dataType: 'script',
+			})
+			$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+			$(this).addClass("loading");
+		}
+	})

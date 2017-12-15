@@ -30,9 +30,13 @@ input[type="file"] {
     }
 }
 
+.setting_block.compact{
+    margin-bottom: 12px;
+}
+
 .setting_block{
     display: flex;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     &.about, &.credential{
         flex-direction: column;
     }
@@ -51,6 +55,7 @@ input[type="file"] {
                 width: 60px;
                 height: 60px;
                 border-radius: 50%;
+                background-color: #eee;
             }
         }
         .upload_image_btn{
@@ -91,6 +96,9 @@ input[type="file"] {
             margin-top: 5px;
             color: grey;
         }
+    }
+    .new.content.to_show{
+        display: block;
     }
 }
 

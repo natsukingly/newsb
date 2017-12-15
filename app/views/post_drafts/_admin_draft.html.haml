@@ -1,23 +1,23 @@
-.post{class: "post post_#{post.id} post_draft admin_draft"}
+.post{class: "post post_#{post_draft.id} post_draft admin_draft"}
 	.body
 		.main
 			.content.clearfix
-				-if post.article == nil
+				-if post_draft.article == nil
 					%p.deleted_article	
 						This article has been deleted.
 				-else
 					%h2.published_time
-						PUBLISHED TIME:  #{post.article.published_time}
-					=link_to article_path(post.article_id), class: "post_article" do
-						-if post.article.image
-							.image{ style: "background-image: url(#{article_image_helper post.article.image.url });"}
+						PUBLISHED TIME:  #{post_draft.article.published_time}
+					=link_to article_path(post_draft.article_id), class: "post_article" do
+						-if post_draft.article.image
+							.image{ style: "background-image: url(#{article_image_helper post_draft.article.image.url });"}
 						.article_info
 							%h2.bold
-								= post.article.title
+								= post_draft.article.title
 								
 							%p.xs.grey
-								= post.article.source
-				=render "post_drafts/admin_edit", post: post
+								= post_draft.article.source
+				=render "post_drafts/admin_edit", post_draft: post_draft
 
 :javascript
 	// post side menu open close

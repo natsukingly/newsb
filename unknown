@@ -39,3 +39,50 @@
 			
 			.replies
 		
+-unless @shared_posts.empty?
+	.shared_posts
+		%h3
+			%i.fa.fa-share-alt.fa-fw
+			SHARING
+		= render partial: "posts/post_wo_article", collection: @shared_posts.includes(:user), as: :post
+		
+    def render_with_hashtags(body)
+        hashtag_regex = /[#|＃]\w*[一-龠_ぁ-ん_ァ-ヴーａ-ｚＡ-Ｚa-zA-Z0-9]+|[a-zA-Z0-9_]+|[a-zA-Z0-9_]w*/
+        body.gsub(hashtag_regex){|word| link_to word, "#{tag_path(word.downcase.delete('#').delete('＃'))}", class: "tag_link"}.html_safe
+    end
+    
+    		.test_space
+			-example = "#yoyo　#yoyoyo ＃あいうえお　＃かきくdaiuさんっ文字 kakikukeko"
+			-hashtag_regex = /[#|＃]\w*[一-龠_ぁ-ん_ァ-ヴーａ-ｚＡ-Ｚa-zA-Z0-9]+|[#|＃]\[a-zA-Z0-9_]+|[#|＃]\[a-zA-Z0-9_]/
+			-hashtags = example.scan(hashtag_regex)
+			-hashtags.each do |hashtag|
+				=hashtag
+				
+
+old feed 
+=form_tag "/posts/load_url_feed", method: :get, autocomplete: :off, remote: true, class: "show_post_modal_btn" do
+	%span
+		%i.fa.fa-newspaper-o
+		=t 'form.url.caption'
+	.form_row
+		.user_image
+			=user_image_helper(current_user)
+		= url_field_tag :placeholder_url, "", placeholder: "[https://] #{t 'form.url.placeholder'}", class: "url_form", disable: "disabled"
+
+:css 
+	.post_url_form form input:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0 30px white inset;
+	}
+	
+:javascript
+	$('.post_url_form.on_feed input').keyup(function(e) {
+		$.ajax({
+			url: "#{load_url_feed_posts_path}",
+			type: "GET",
+			data: {placeholder_url: $(this).val()},
+			dataType: 'script',
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+				$('.post_form_block.feed').html("<p class='parse_failure_message'>I'm sorry. This article cannot be uploaded.</p>");
+			})
+		return false;
+	});

@@ -65,7 +65,7 @@ module ApplicationHelper
       {
         site: "NEWSB",
         reverse: true,
-        title: "NEWSB: The most social news platform in the world",
+        title: "NEWSB",
         description: "Share knowledge, ask questions, and report fake news.",
         keywords: "",
         og: {

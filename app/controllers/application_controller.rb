@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
 		before_action :trending_tags
 		before_action :set_country
 		before_action :set_locale
-	
+		before_action :set_notifications
+		
 		def configure_permitted_parameters
 				devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
 				devise_parameter_sanitizer.permit(:sign_up, keys: [:gender])
@@ -136,7 +137,13 @@ class ApplicationController < ActionController::Base
 			else
 				detect_locale
 			end
-		end				
+		end		
+		
+		def set_notifications
+			if current_user
+				@notifications = current_user.notifications.includes(:target_user).order(created_at: :desc).limit(30)
+			end
+		end
 		
 		
 		
@@ -166,7 +173,7 @@ class ApplicationController < ActionController::Base
 				
 				def set_new_users
 					if current_user
-						@new_users = User.where(country_id: @country.id).where.not(id: current_user.id).order(created_at: :desc).limit(3)
+						@new_users = User.where(country_id: @country.id).where.not(id: current_user.id).order(created_at: :desc).limit(30)
 					else
 						@new_users = User.where(country_id: @country.id).order(created_at: :desc).limit(3)
 					end

@@ -55,7 +55,7 @@
 	bottom: 0;
 	background-color: rgba(#001E42, 0.8);
 	.modal_block{
-		margin: 100px auto;
+		margin: 70px auto;
 		width: 500px;
 		position: relative;
 		background-color: white;
@@ -196,6 +196,12 @@
 .non_social_form{
 	display: flex;
 	flex-direction: column;
+	.non_social_submit_btn input[type="submit"]{
+		padding: 10px 12px;
+		&:hover{
+			font-weight: 900;
+		}
+	}
 	.email_form{
 
 	}

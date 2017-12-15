@@ -110,6 +110,21 @@
     }
 }
 
+.post.share{
+     .body{
+        padding: 12px 20px; 
+        .user_info_for_share{
+            display: flex;
+            align-items: center;
+            flex: 1;
+            a{
+                color: $lightNavy;
+            }
+        }
+     }
+}
+
+
 .post_article{
     margin-bottom: 12px;
     display: flex;
@@ -133,6 +148,10 @@
     }
 }
 
+.shared_post_space{
+    height: 20px;
+}
+
 .post.show_post{
 }
 
@@ -148,7 +167,7 @@
     #main_contents.posts{
         margin-top: 12px;
     }
-    .post{
+    .post, .post.share{
         border-radius: 0;
         .body{
              padding: 12px;
@@ -182,20 +201,7 @@
 
 
 
-#autocomplete_tags{
-    ul{
-        border: 1px solid #eee;
-        padding: 5px;
-    }
-    li{
-        padding: 5px 20px;
-        
-    }
-    li.selected{
-        color: white;
-        background-color: #001E42;
-    }
-}
+
 
 
 .same_article_posts_link{

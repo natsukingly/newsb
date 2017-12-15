@@ -1,7 +1,6 @@
 
 
-.notifications{
-	margin-top: 50px;
+.index_notifications, .notifications{
 	border-radius: 3px;
 	.notification_empty{
 		font-size: 18px;
@@ -44,7 +43,7 @@
 }
 
 @media (max-width: 768px){
-	.notifications{
+	.index_notifications{
 		margin-top: 0;
 	}
 }

@@ -12,9 +12,13 @@
 
 		#main_contents.user_lists
 			= render @users
-			.scroll_btn.all_time_users
-				LOAD MORE
-	
+			-if @users.count < 30
+				.scroll_btn.stop_loading
+					NO MORE NOTIFICATIONS	
+			-else
+				.scroll_btn.all_time_users
+					LOAD MORE	
+					
 	.sub_function_sidebar
 		%h2
 			=t('sidebar.title.new_users')

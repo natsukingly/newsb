@@ -8,9 +8,20 @@
 				Draft
 			
 		#main_contents
-			#post_drafts_index
-				= render partial: "post_drafts/admin_draft", collection: @post_drafts.includes(:article, :category), as: :post
-	
+			-if @post_drafts.empty?
+				.result_not_found
+					%h4.not_found_content
+						=t('not_found.user_drafts')
+			-else
+				#post_drafts_index
+					= render partial: "post_drafts/admin_draft", collection: @post_drafts.includes(:article, :category), as: :post_draft
+					-if @post_drafts.count < 30
+						.scroll_btn.stop_loading
+							NO MORE DRAFTS	
+					-else
+						.scroll_btn.load_admin_drafts
+							LOAD MORE	
+						
 	.sub_function_sidebar
 
 		.articles_count_section
@@ -60,4 +71,18 @@
 									=article.count
 			
 			=link_to "CALL SCHNEIDER", prepare_admin_posts_path, id: "schneider_btn", method: :post
-		
+			
+:javascript
+	$('.scroll_btn.load_admin_drafts').click(function(){
+		var stop_loading = $(this).hasClass('stop_loading');
+		if(!(stop_loading)){
+			$.ajax({
+				url: "#{load_admin_drafts_path}",
+				type: "GET",
+				data: {existing_admin_drafts: $('#main_contents').find('.admin_draft').length },
+				dataType: 'script',
+			})
+			$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+			$(this).addClass("loading");
+		}
+	})

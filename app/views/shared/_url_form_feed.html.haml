@@ -1,25 +1,15 @@
 
-=form_tag "/posts/load_url_feed", method: :get, autocomplete: :off, remote: true do
-	%span
+=form_tag "/posts/load_url_feed", method: :get, autocomplete: :off, remote: true, class: "show_post_modal_btn on_feed" do
+	%span.url_form_title_on_feed
 		%i.fa.fa-newspaper-o
 		=t 'form.url.caption'
 	.form_row
 		.user_image
 			=user_image_helper(current_user)
-		= url_field_tag :placeholder_url, "", placeholder: "[https://] #{t 'form.url.placeholder'}", class: "url_form"
+		.dummy_url_form
+			\[https://] #{t 'form.url.placeholder'}
 
 :css 
 	.post_url_form form input:-webkit-autofill {
 		-webkit-box-shadow: 0 0 0 30px white inset;
 	}
-	
-:javascript
-	$('.post_url_form.on_feed input').keyup(function(e) {
-		$.ajax({
-			url: "#{load_url_feed_posts_path}",
-			type: "GET",
-			data: {placeholder_url: $(this).val()},
-			dataType: 'script',
-		});
-		return false;
-	});

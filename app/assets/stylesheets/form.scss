@@ -1,5 +1,9 @@
 
 
+.btn_lg{
+    padding: 10px 12px;
+}
+
 .error_block{
     min-height: 12px;
     .error_message{
@@ -16,6 +20,7 @@
     margin: 12px 0 0;
 }
 
+
 form{
     div{
         position: relative;
@@ -31,7 +36,7 @@ form{
     	    }
     	}
     	input[type="submit"]{
-            padding: 8px 12px;
+            padding: 5px 12px;
     	}
     	.error_icon{
     	    position: absolute;
@@ -51,12 +56,20 @@ form{
     	}
     }
 }
-
-
-#post_form{
+.dummy_url_form{
+    color: grey;
+    flex: 1;
+    cursor: text;
+    height: 30px;
+    border-bottom: 1px solid #eee;
+}
+.post_form{
     margin-bottom: 0;
     // border-bottom: 1px solid #eee;
     background-color: white;
+    &[data-form="feed"]{
+        margin-bottom: 12px;
+    }
     .post_article{
         flex-direction: column;
         .post_image{
@@ -96,13 +109,15 @@ form{
                         }
                     }
                 }
-                #post_textarea{
-                    .textarea{
+                .post_textarea_wrapper{
+                    position: relative;
+                    .post_textarea_block{
                         display: flex;
                         border: 1px solid #aaa;
                         padding: 5px 12px;
                         border-radius: 3px;
-                        min-height: 60px;
+                        min-height: 80px;
+                        cursor: text;
                         textarea{
                             border: none;
                             box-shadow: none;
@@ -189,7 +204,7 @@ form{
                         display: flex;
                         align-items: center;
                         .sns_connect_btn{
-                            border-radius: 50%;
+                            border-radius: 3px;
                             width: 35px;
                             height: 35px;
                             margin-right: 8px;
@@ -245,21 +260,68 @@ form{
     }
 }
 
+.post_form_requirement{
+    height: 335px;
+    border: 1px solid #eee;
+    padding: 12px;
+    line-height: 20px;
+    color: #696969;
+    h2{
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+    ul{
+        list-style: disc;
+        li{
+            list-style-type: disc;
+            list-style-position: inside;
+        }
+    }
+    .post_form_icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 160px;
+        background-color: #f9f9f9;
+        margin: 20px 0;
+        svg{
+            height: 100px;
+            
+        }
+    }
+}
+
+
+
 .form_show.on_mobile{
 	@extend .mobile_btn;
 	height: auto;
 }
 
 @media (max-width: 768px) {
-	#post_form .body{
+	.post_form .body{
 	    padding: 12px;
 	}
-    .article_show #post_form{ 
+    .article_show .post_form{ 
         display: none;
     }	
 }
 
-#post_form.on_modal{
+.post_form_block{
+    &.loading{
+        text-align: center;
+        font-size: 50px;
+        color: grey;
+        margin: 100px 0;
+    }
+    .parse_failure_message{
+        text-align: center;
+        color: darkred;
+        font-size: 20px;
+    }
+}
+
+.post_form.on_modal{
     .post_article{
         flex-direction: row;
     }
@@ -268,14 +330,13 @@ form{
 
 
 
-#post_form.edit_form{
+.post_form.edit_form{
     .body{
         padding: 0;
         margin-bottom: 20px;
         .form_main form{
             padding: 0;
             .textarea{
-                margin-bottom: 12px;
             }
         }
     }
@@ -357,6 +418,9 @@ form{
         color: #4b4f56;
         letter-spacing: 1px;
     }
+    .url_form_title_on_feed{
+        margin-bottom: 12px;
+    }
     form{
         display: flex;
         flex-direction: column;
@@ -365,7 +429,7 @@ form{
         }
         .form_row{
             display: flex;
-            align-items: center;
+            align-items: flex-end;
         }
         input[type=url]{
             flex: 1;
@@ -403,14 +467,13 @@ form{
     left: 0;
     right: 0;
     bottom: 0;
-    padding-top: 100px;
     background-size: cover;
     background-position: center;
     overflow: scroll;
 }
 
 #extra_info{
-    width: 600px;
+    max-width: 600px;
     padding: 50px;
     margin: 50px auto;
     background-color: white;
@@ -432,7 +495,7 @@ form{
             }
             h2{
                 flex: 1;
-                font-size: 30px;
+                font-size: 50px;
                 font-weight: 900;
                 color: #001E42;
                 margin-bottom: 40px;

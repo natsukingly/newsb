@@ -14,9 +14,11 @@
 								#{time_ago_in_words_short(article.published_time)}	
 				
 					-report_count = article.posts.where(fake_news_report: true).count
+					%span.posts_count
+						#{article.posts_count} posts
 					-if report_count != 0
-						%span.posts_count
-							#{article.posts_count} posts [ #{report_count} fake news reports ]	
+						%sapn
+							[ #{report_count} fake news reports ]	
 							
 					.featured_article_bottom
 						=link_to article_path(article), class: "featured_article_image" do
@@ -28,34 +30,25 @@
 							=link_to article_path(article) do 
 								%span
 									POSTS & COMMENTS
-											
-				.best_posts				
-					-unless best_posts.empty?
-						%h2.best_post_title
-							TOP COMMENTS
-						- best_posts.each do |post|
-							.body
-								.user_block
-									.user_image_sm
-										=user_image_helper(post.user)
-									.user_details
-										%p
-											%span
-												= post.user.name
-											%p.user_credential.give_me_short_ellipsis
-												= post.user.credential
-								%p.best_post_content
-									-if post.content.empty?
-										%span.shared_message
-											> Shared this article
-									-else
-										%span.comment_large
-											= post.content
-											
+						-unless best_post.nil?
+							.best_post
+								.user_image_sm
+									=user_image_helper(best_post.user)
+								.best_post_body
+									%p.user_info.give_me_short_ellipsis
+										#{best_post.user.name} / #{best_post.user.credential}
+									%p.best_post_content.give_me_ellipsis
+										-if best_post.content.empty?
+											%span.shared_message
+												> Shared this article
+										-else
+											%span.comment_large
+												= best_post.content
+												
+												
+				.featured_article_sidebar			
 					-unless related_articles.empty?
 						.related_articles
-							%h2.best_post_title
-								RELATED ARTICLES
 							%ul.related_article_section 
 								- related_articles.each do |article|
 									%li

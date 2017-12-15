@@ -1,5 +1,5 @@
 
-.post#post_form
+.post.post_form
 	.body
 		.post_article
 			.post_image{ style: "background-image: url(#{@article_image});"}
@@ -15,7 +15,7 @@
 					.select
 						= select_tag "post[category_id]", options_from_collection_for_select(@categories, "id", "name", { :selected => @category.id.to_i }), class: "form-control selectpicker tag_selection"
 
-				.field.form-group#post_textarea
+				.field.form-group.post_textarea
 					.textarea
 						= text_area_tag 'post[content]', '', placeholder: "your awesome comment *optional", class: "post_textarea form-control"
 					
@@ -36,11 +36,11 @@
 =render 'js/autocomplete'
 
 :javascript
-	$("#post_textarea textarea").height(30);//init
-	$("#post_textarea textarea").css("lineHeight","20px");//init
+	$(".post_textarea textarea").height(30);//init
+	$(".post_textarea textarea").css("lineHeight","20px");//init
 	
-	$("#post_textarea textarea").on("input",function(evt){
-		console.log("post_content");
+	$(".post_textarea textarea").on("input",function(evt){
+		 
 		if(evt.target.scrollHeight > evt.target.offsetHeight){
 			$(evt.target).height(evt.target.scrollHeight);
 		}else{
@@ -56,8 +56,8 @@
 	});
 	
 	
-	$("#post_form .cancel_btn").click(function(){
-		$("#post_form").hide(); 
+	$(".post_form .cancel_btn").click(function(){
+		$(".post_form").hide(); 
 	});
 
 	

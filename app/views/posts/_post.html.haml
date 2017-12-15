@@ -1,74 +1,114 @@
-.post{class: "post post_#{post.id} clearfix"}
-	.body
-		.main
-			.content.clearfix
-				.user_block.clearfix{class: "user_#{post.user.id}"}
-					.user_image
-						=user_image_helper(post.user)
-					.user_info
-						=link_to post.user  do
-							.give_me_short_ellipsis.light_navy.bold
-								=post.user.name
-						%p.user_credential.sm.grey
-							=post.user.credential
-							%i.fa.fa-clock-o
-							#{time_ago_in_words_short(post.created_at)}
-					.user_option.follow_switch.pull-right
-						=render "/shared/follow_form_icon.html.haml", user: post.user
-				%p.opinion
-					=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
-				=render "posts/edit", post: post
-				-if post.article == nil
-					%p.deleted_article	
-						This article has been deleted.
-				-else
-					=link_to article_path(post.article_id), class: "post_article" do
-						-if post.article.image
-							.image{ style: "background-image: url(#{article_image_helper post.article.image.url });"}
-						.article_info
-							%h2.bold
-								= universal_truncate(post.article.title, 120) do
-									%span ...
-							%p.xs.grey
-								= post.article.source
-							
-		.status.md
-			.post_like_link.link_btn
-				=render '/likes/like_post', post: post
-			-if current_user
-				.comment_link.link_btn
-					COMMENT
-					・
-					.comment_count	
-						= post.comments_count
-			-else
-				.comment_dummy_link.link_btn.login_signup_link
-					COMMENT
-					・
-					.comment_count	
-						= post.comments_count	
+-if post.content.nil? || post.content.empty?
+	.post{class: "post post_#{post.id} share"}
+		.body
+			.main
+				.content.clearfix
+					.user_block.clearfix{class: "user_#{post.user.id}"}
+						.user_image
+							=user_image_helper(post.user)
+						.user_info_for_share
+							.give_me_short_ellipsis
+								=link_to post.user.name, post.user, class: "user_name bold"
+								shared this article.
+								%i.fa.fa-clock-o
+								#{time_ago_in_words_short(post.created_at)}
+						.user_option.follow_switch
+							=render "/shared/follow_form_icon.html.haml", user: post.user
+					-if post.article == nil
+						.shared_post_space
+						%p.deleted_article
+							This article has been deleted.
+					-else
+						.shared_post_space
+						=link_to article_path(post.article_id), class: "post_article" do
+							-if post.article.image
+								.image{ style: "background-image: url(#{article_image_helper post.article.image.url });"}
+							.article_info
+								%h2.bold
+									= universal_truncate(post.article.title, 120) do
+										%span ...
+								%p.xs.grey
+									= post.article.source
 						
-			.option.pull-right
-				%i.fa.fa-ellipsis-h.lg.option_link
-				=render 'dropdown/post_option', post: post
-	
-	.comment_index		
-		.comment_form.clearfix
-			=render '/comments/form', post: post 
-		- if post.comments_count > 1
-			.view_link
-				=render 'comments/view_more_link', post: post
-		- if post.comments_count == 0 
-			-if current_user
-				.invite_comment.comment_link
-					Be the first one to comment >>
+-else
+	.post{class: "post post_#{post.id} clearfix"}
+		.body
+			.main
+				.content.clearfix
+					.user_block.clearfix{class: "user_#{post.user.id}"}
+						.user_image
+							=user_image_helper(post.user)
+						.user_info
+							=link_to post.user  do
+								.give_me_short_ellipsis.light_navy.bold
+									=post.user.name
+							%p.user_credential.sm.grey
+								=post.user.credential
+								%i.fa.fa-clock-o
+								#{time_ago_in_words_short(post.created_at)}
+						.user_option.follow_switch
+							=render "/shared/follow_form_icon.html.haml", user: post.user
+					%p.opinion
+						=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
+					=render "posts/edit", post: post
+					-if post.article == nil
+						%p.deleted_article	
+							This article has been deleted.
+					-else
+						=link_to article_path(post.article_id), class: "post_article" do
+							-if post.article.image
+								.image{ style: "background-image: url(#{article_image_helper post.article.image.url });"}
+							.article_info
+								%h2.bold
+									= universal_truncate(post.article.title, 120) do
+										%span ...
+								%p.xs.grey
+									= post.article.source
+								
+			.status.md
+				.post_like_link.link_btn
+					=render '/likes/like_post', post: post
+				-if current_user
+					.comment_link.link_btn
+						COMMENT
+						・
+						.comment_count	
+							= post.comments_count
+				-else
+					.comment_dummy_link.link_btn.login_signup_link
+						COMMENT
+						・
+						.comment_count	
+							= post.comments_count	
+							
+				.option.pull-right
+					%i.fa.fa-ellipsis-h.lg.option_link
+					=render 'dropdown/post_option', post: post
+		
+		.comment_index		
+			.comment_form.clearfix
+				=render '/comments/form', post: post 
+			- if post.comments_count > 1
+				.view_link
+					=render 'comments/view_more_link', post: post
+			- if post.comments_count == 0 
+				-if current_user
+					.invite_comment.comment_link
+						Be the first one to comment >>
+				-else
+					.invite_comment.comment_link.login_signup_link
+						Be the first one to comment >>
+				.comments
 			-else
-				.invite_comment.comment_link.login_signup_link
-					Be the first one to comment >>
-			.comments
-		-else
-			.comments
-				=render 'comments/comment', comment: post.best_comment unless post.best_comment.nil?
+				.comments
+					=render 'comments/comment', comment: post.best_comment unless post.best_comment.nil?
+	
+
+
+
+
+
+
 
 :javascript
 	// post side menu open close

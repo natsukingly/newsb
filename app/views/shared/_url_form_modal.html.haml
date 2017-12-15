@@ -17,18 +17,26 @@
 			type: "GET",
 			data: {placeholder_url: $(this).val()},
 			dataType: 'script',
-		});
-		$('.post_modal_block .modal_title').fadeOut();
-		$('.post_modal_block').animate({marginTop: "50px"}, 500);
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+				$('.post_form_block.on_modal').html("<p class='parse_failure_message'>I'm sorry. This article cannot be uploaded.</p>");
+			})
+		$('.post_form_requirement').hide();
+		$('.post_form_block.on_modal').show().html("<i class='fa fa-spinner fa-pulse'></i>");
+		$('.post_form_block.on_modal').addClass("loading");
 		return false;
 	});
-	
 	$('.post_url_form.for_mobile input').keyup(function(e) {
 		$.ajax({
 			url: "#{load_url_mobile_posts_path}",
 			type: "GET",
 			data: {placeholder_url: $(this).val()},
 			dataType: 'script',
-		});
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+				$('.post_form_block.for_mobile').html("<p class='parse_failure_message'>I'm sorry. This article cannot be uploaded.</p>");
+			})
+		$('.post_form_requirement').hide();
+		$('.post_form_block.for_mobile').show().html("<i class='fa fa-spinner fa-pulse'></i>");
+		$('.post_form_block.for_mobile').addClass("loading");
 		return false;
 	});
+	

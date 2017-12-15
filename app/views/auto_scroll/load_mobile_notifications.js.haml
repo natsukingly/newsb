@@ -1,0 +1,6 @@
+$('.scroll_btn.mobile_notifications').before('#{ escape_javascript(render @loaded_mobile_notifications)}');
+$('.scroll_btn.mobile_notifications').html('LOAD MORE');
+$('.scroll_btn.mobile_notifications').removeClass('loading');
+-if @loaded_mobile_notifications.empty? || @loaded_mobile_notifications.count < 30
+    $('.scroll_btn.mobile_notifications').html('NO MORE NOTIFICATIONS');
+    $('.scroll_btn.mobile_notifications').addClass('stop_loading');

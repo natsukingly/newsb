@@ -27,17 +27,17 @@
 								%span.fake_news_report_count
 									[#{report_count} reports]
 					-if article.posts_count != 0 || report_count != 0
-						.best_post_btn
-							%i.fa.fa-angle-down.open_icon
-							%span
-								Best post
+						-post = article.posts.order(likes_count: :desc).first
+						-unless post.content.empty?
+							.best_post_btn
+								%i.fa.fa-angle-down.open_icon
+								%span
+									Best post
 						
 						
 		
 			
 		.best_post
-			-post = article.posts.order(likes_count: :desc).first
-			
 			- if post != nil
 				.body.clearfix
 					.user_block

@@ -4,7 +4,10 @@
     width: 750px;
 }
 
-
+a.tag_link{
+    color: #001E42;
+    font-weight: 900;
+}
 .tags{
     .tag{
         background-color: white;
@@ -93,6 +96,35 @@
     span{
         color: #696969;
         font-size: 14px;
+    }
+}
+
+#autocomplete_tags{
+    position: relative;
+    .autocomplete_tags_block{
+        position: absolute;
+        top: 0;
+        background-color: white;
+        z-index: 10;
+    }
+}
+
+#autocomplete_tags{
+    ul{
+        border: 1px solid #eee;
+        padding: 5px;
+    }
+    li{
+        padding: 5px 20px;
+        cursor: pointer;
+        &:hover{
+            background-color: rgba(0,0,0,.2);
+        }
+        
+    }
+    li.selected{
+        color: white;
+        background-color: cornflowerblue;
     }
 }
 

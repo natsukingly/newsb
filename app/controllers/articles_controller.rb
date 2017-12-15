@@ -15,32 +15,19 @@ class ArticlesController < ApplicationController
   def show
     @fake_news_reports = @article.posts.where(fake_news_report: true).order(likes_count: :desc)
     if current_user
-      @shared_posts = @article.posts.where(fake_news_report: false).where(content: "")
-      #よく使われるので変数を使う。
-      shared_posts_ids = @shared_posts.ids
-      @your_posts = @article.posts.where(fake_news_report: false).where(user_id: current_user.id).where.not(id: shared_posts_ids)
-      @best_posts = @article.posts.where(fake_news_report: false).where.not(id: shared_posts_ids).order(likes_count: :desc).limit(3)
-      @follower_posts = @article.posts.where(fake_news_report: false).where(user_id: current_user.followers.ids).where.not(id: shared_posts_ids).where.not(id: @best_posts.ids)
-      inapplicable_ids = @your_posts.ids + @best_posts.ids + @follower_posts.ids + shared_posts_ids
-      @new_posts = @article.posts.where(fake_news_report: false).where.not(id: inapplicable_ids).order(created_at: :desc)
+      @your_posts = @article.posts.where(fake_news_report: false).where(user_id: current_user.id)
+      @best_posts = @article.posts.where(fake_news_report: false).order(likes_count: :desc).limit(3)
+      @follower_posts = @article.posts.where(fake_news_report: false).where(user_id: current_user.followers.ids).where.not(id: @best_posts.ids)
+      inapplicable_ids = @your_posts.ids + @best_posts.ids + @follower_posts.ids
+      @new_posts = @article.posts.where(fake_news_report: false).where.not(id: inapplicable_ids).order(created_at: :desc).limit(30)
     else
-      @shared_posts = @article.posts.where(fake_news_report: false).where(content: "")
-      shared_posts_ids = @shared_posts.ids
       @your_posts = []
-      @best_posts = @article.posts.where(fake_news_report: false).where.not(id: shared_posts_ids).order(likes_count: :desc).limit(3)
+      @best_posts = @article.posts.where(fake_news_report: false).order(likes_count: :desc).limit(3)
       @follower_posts = []
-      inapplicable_ids = @best_posts.ids + @shared_posts.ids
-      @new_posts = @article.posts.where(fake_news_report: false).where.not(id: inapplicable_ids).order(created_at: :desc)
+      inapplicable_ids = @best_posts.ids
+      @new_posts = @article.posts.where(fake_news_report: false).where.not(id: inapplicable_ids).order(created_at: :desc).limit(30)
     end
   end
-  
-  def load_more_posts
-    existing_article_posts = params[:existing_article_posts]
-    @posts = Post.includes([:user]).sortByLikes(Like.recent.offset(existing_article_posts).limit(5).popularPosts(@article.posts.ids))
-  end
-  
-  
-  
   
   private 
     def not_found

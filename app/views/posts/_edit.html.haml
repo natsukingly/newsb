@@ -1,4 +1,4 @@
-#post_form.edit_form
+.post_form.edit_form{data: {form: "#{post.id}", country: "#{@country.id}"}}
 	.body
 		.form_main.clearfix
 			=form_tag update_article_post_path(post), method: :post do
@@ -7,10 +7,12 @@
 						=check_box_tag "post[fake_news_report]", true, post.fake_news_report
 						=label_tag "post[fake_news_report]", 'post as a fake news report'
 				
-				.field.form-group#post_textarea
-					.textarea
-						= text_area_tag 'post[content]', post.content, placeholder: "your awesome comment *optional", class: "post_textarea"
-			
+				.field.form-group.post_textarea_wrapper
+					.post_textarea_block.still
+						= text_area_tag 'post[content]', post.content, placeholder: "your awesome comment *optional", class: "post_textarea edit_textarea"
+					#autocomplete_tags
+						.autocomplete_tags_block
+	
 				.post_submit_menu
 					#sns_post_form_menu
 						=render 'snss/sns_post_form_menu', user: current_user
@@ -20,36 +22,9 @@
 						.cancel_btn
 							CANCEL
 							
-			
 
-=render 'js/autocomplete'
 
-:javascript
-	
-	$("#post_textarea textarea").height(30);//init
-	$("#post_textarea textarea").css("lineHeight","20px");//init
-	
-	$("#post_textarea textarea").on("input",function(evt){
-		console.log("post_content");
-		if(evt.target.scrollHeight > evt.target.offsetHeight){
-			$(evt.target).height(evt.target.scrollHeight);
-		}else{
-			var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
-			while (true){
-				$(evt.target).height($(evt.target).height() - lineHeight);
-				if(evt.target.scrollHeight > evt.target.offsetHeight){
-					$(evt.target).height(evt.target.scrollHeight);
-				}
-				break;
-			}
-		}
-	});
-	
-	
-	$("#post_form .cancel_btn").click(function(){
-		$(this).parents("#post_form").hide();
-		$(this).parents(".post").find("p.opinion").fadeIn();
-	});
+
 
 	
 

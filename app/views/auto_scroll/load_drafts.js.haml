@@ -1,0 +1,7 @@
+$('.scroll_btn.load_drafts').before('#{ escape_javascript(render @loaded_drafts)}');
+$('.scroll_btn.load_drafts').html('LOAD MORE');
+$('.scroll_btn.load_drafts').removeClass('loading');
+-if @loaded_drafts.empty? || @loaded_drafts.count < 30
+    $('.scroll_btn.load_drafts').html('NO MORE DRAFTS');
+    $('.scroll_btn.load_drafts').addClass('stop_loading');
+    

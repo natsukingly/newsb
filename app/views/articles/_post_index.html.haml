@@ -1,3 +1,5 @@
+
+
 -unless @fake_news_reports.empty?
 	.fake_news_reports
 		.title
@@ -18,35 +20,31 @@
 	-unless @best_posts.where.not(id: @your_posts.ids).empty?
 		.best_posts
 			%h3
-				%i.fa.fa-line-chart.fa-fw
 				BEST POSTS
 			= render partial: "posts/post_wo_article", collection: @best_posts.where.not(id: @your_posts.ids).includes(:user), as: :post
 -else
 	-unless @best_posts.empty?
 		.best_posts
 			%h3
-				%i.fa.fa-line-chart.fa-fw
 				BEST POSTS
 			= render partial: "posts/post_wo_article", collection: @best_posts.includes(:user), as: :post
 		
 -unless @follower_posts.empty?
 	.follower_posts
 		%h3
-			%i.fa.fa-star-o .fa-fw
 			FOLLOWERS POSTS
 		= render partial: "posts/post_wo_article", collection: @follower_posts.includes(:user), as: :post
 		
 -unless @new_posts.empty?
 	.new_posts
 		%h3
-			%i.fa.fa-comment-o.fa-fw
 			NEW POSTS
 		= render partial: "posts/post_wo_article", collection: @new_posts.includes(:user), as: :post
-		
--unless @shared_posts.empty?
-	.shared_posts
-		%h3
-			%i.fa.fa-share-alt.fa-fw
-			SHARING
-		= render partial: "posts/post_wo_article", collection: @shared_posts.includes(:user), as: :post
+		-if @new_posts.count < 30
+			.scroll_btn.stop_loading
+				NO MORE POSTS	
+		-else
+			.scroll_btn.article_posts
+				LOAD MORE		
+
 

@@ -26,10 +26,12 @@ class PostsController < ApplicationController
 	
 	def autocomplete_tags
 		# to deal with consecutive words and new lines without spacing
-		input = params[:input].scan(/#\w+/)
+        hashtag_regex = /[#|＃]\w*[一-龠_ぁ-ん_ァ-ヴーａ-ｚＡ-Ｚa-zA-Z0-9]+|[#|＃]\[a-zA-Z0-9_]+|[#|＃]\[a-zA-Z0-9_]/
+		input = params[:input].scan(hashtag_regex)
 		@last_word = input[0]
-		
-		@autocomplete_tag_lists = Tag.where('LOWER(name) LIKE(?)', "%#{@last_word.downcase.delete('#')}%").limit(5)
+		@form = params[:form]
+		@country_id = params[:country_id]
+		@autocomplete_tag_lists = Tag.where(country_id: @country_id).where('LOWER(name) LIKE(?)', "#{@last_word.downcase.delete('#').delete('＃')}%").limit(5)
 	end
 
 
@@ -57,6 +59,7 @@ class PostsController < ApplicationController
 		@post = Post.new
 		@article = Article.new
 	end
+ 
  
 	
 	def edit
@@ -179,8 +182,9 @@ class PostsController < ApplicationController
 				f.read # htmlを読み込んで変数htmlに渡す
 			end
 			# ノコギリを使ってhtmlを解析
-			doc = Nokogiri::HTML.parse(html, charset)
 			
+			doc = Nokogiri::HTML.parse(html, charset)
+
 			#TITLE
 			if doc.css('//meta[property="og:title"]/@content').empty?
 				@article_title = doc.title.to_s
@@ -208,6 +212,8 @@ class PostsController < ApplicationController
 				@article_published_time = doc.css('//meta[property="article:published_time"]/@content').to_s
 			end
 		end
+		
+		
 		
 		#method to determine which category the article should belong.
 		#use it after creat and update

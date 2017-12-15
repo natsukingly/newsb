@@ -188,14 +188,21 @@ Rails.application.routes.draw do
 		get "/auto_scroll/load_searched_articles" => "auto_scroll#load_searched_articles", as: :load_searched_articles
 		
 		get "/auto_scroll/load_posts" => "auto_scroll#load_posts", as: :load_posts
+		get "/auto_scroll/load_article_posts" => "auto_scroll#load_article_posts", as: :load_article_posts
 		get "/auto_scroll/load_user_posts" => "auto_scroll#load_user_posts", as: :load_user_posts
 		get "/auto_scroll/load_searched_posts" => "auto_scroll#load_searched_posts", as: :load_searched_posts
 	
+		get "/auto_scroll/load_drafts" => "auto_scroll#load_drafts", as: :load_drafts
+		get "/auto_scroll/load_admin_drafts" => "auto_scroll#load_admin_drafts", as: :load_admin_drafts
+		
 		get "/auto_scroll/load_trending_tags" => "auto_scroll#load_trending_tags", as: :load_trending_tags
 		get "/auto_scroll/load_favorite_tags" => "auto_scroll#load_favorite_tags", as: :load_favorite_tags
 		get "/auto_scroll/load_searched_tags" => "auto_scroll#load_searched_tags", as: :load_searched_tags	
 		
 		get "/auto_scroll/load_notifications" => "auto_scroll#load_notifications", as: :load_notifications
+		get "/auto_scroll/load_index_notifications" => "auto_scroll#load_index_notifications", as: :load_index_notifications
+		get "/auto_scroll/load_mobile_notifications" => "auto_scroll#load_mobile_notifications", as: :load_mobile_notifications
+
 
 		get "/auto_scroll/load_weekly_users" => "auto_scroll#load_weekly_users", as: :load_weekly_users
 		get "/auto_scroll/load_all_time_users" => "auto_scroll#load_all_time_users", as: :load_all_time_users

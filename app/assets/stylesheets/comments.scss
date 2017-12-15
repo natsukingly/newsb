@@ -62,7 +62,7 @@
 
 .comment_index{
     background-color: #f9f9f9;
-    padding: 5px 20px 5px 60px;
+    padding: 5px 20px 5px 40px;
     border-radius: 0 0 5px 5px;
     .view_link{
         padding: 5px 0;
@@ -71,7 +71,7 @@
         color: #696969;
         cursor: pointer;
         padding: 3px 0;
-        margin-left: -42px;
+        margin-left: -22px;
         &:hover{
             color: #001E42;
         }
@@ -80,7 +80,7 @@
 
 @media(max-width: 768px){
     .comment_index{
-        padding: 5px 12px;
+        padding: 5px 12px 5px 30px;
         .invite_comment{
             margin-left: 0;
         }

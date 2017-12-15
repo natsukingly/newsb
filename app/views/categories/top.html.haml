@@ -13,9 +13,14 @@
 					\|
 				%span
 					TOP
-			=render @articles
-			.scroll_btn.articles
-				LOAD MORE
+			=render @articles.offset(1)
+			-if @articles.count < 30
+				.scroll_btn.stop_loading
+					NO MORE ARTICLES	
+			-else
+				.scroll_btn.articles
+					LOAD MORE
+
 			
 			
 	.sub_function_sidebar

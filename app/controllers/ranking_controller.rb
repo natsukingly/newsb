@@ -3,12 +3,12 @@ class RankingController < ApplicationController
     
     def user_ranking
         @current_topic = "Ranking"
-        @users = User.where(country_id: @country.id).order(liked_count: :desc).limit(1)
+        @users = User.where(country_id: @country.id).order(liked_count: :desc).limit(30)
     end
     
     def user_weekly_ranking
         @current_topic = "Ranking"
-        @users = User.where(country_id: @country.id).order(weekly_liked_count: :desc).limit(1)
+        @users = User.where(country_id: @country.id).order(weekly_liked_count: :desc).limit(30)
     end
     
 end

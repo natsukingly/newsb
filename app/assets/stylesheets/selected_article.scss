@@ -1,100 +1,100 @@
 
-#selected_article{
-    background-color: white;
-    border: 1px solid #ddd;
-	.article_wrapper{
-	    .article_block{
-	        flex-direction: column;
-    		.image{
-    		    background-size: cover;
-    		    background-position: center;
-    			height: 150px;
-    			display: flex;
-    			.overlay{
-    			    flex: 1;
-    			    background-color: rgba(#001E42, .2);
-    			}
-    			.stats{
-        			margin: 20px;
-        			p{
-        			    font-size: 24px;
-        			    color: white;
-                        text-shadow: 0 0 8px black;
-        				span{
-        				    font-size: 14px;
-        				}
-        			}
-        		}
-    		}
-    		.info{
-    			display: flex;
-    			flex-direction: column;
-    			padding: 20px;
-    			padding-bottom: 0;
-    			&:hover{
-    				color: rgb(54, 88, 155);
-    			}
-    			.title{
-    			    h2{
-    			        font-size: 24px;
-    			        font-weight: 900;
-    			        padding: 0;
-    			        margin-bottom: 5px;
-    			    }
-    			}
+// #selected_article{
+//     background-color: white;
+//     border: 1px solid #ddd;
+// 	.article_wrapper{
+// 	    .article_block{
+// 	        flex-direction: column;
+//     		.image{
+//     		    background-size: cover;
+//     		    background-position: center;
+//     			height: 150px;
+//     			display: flex;
+//     			.overlay{
+//     			    flex: 1;
+//     			    background-color: rgba(#001E42, .2);
+//     			}
+//     			.stats{
+//         			margin: 20px;
+//         			p{
+//         			    font-size: 24px;
+//         			    color: white;
+//                         text-shadow: 0 0 8px black;
+//         				span{
+//         				    font-size: 14px;
+//         				}
+//         			}
+//         		}
+//     		}
+//     		.info{
+//     			display: flex;
+//     			flex-direction: column;
+//     			padding: 20px;
+//     			padding-bottom: 0;
+//     			&:hover{
+//     				color: rgb(54, 88, 155);
+//     			}
+//     			.title{
+//     			    h2{
+//     			        font-size: 24px;
+//     			        font-weight: 900;
+//     			        padding: 0;
+//     			        margin-bottom: 5px;
+//     			    }
+//     			}
     	
-    		}
-    		.read_article_btn{
-    			font-size: 14px;
-    			display: inline-block;
-    			text-align: center;
-    			line-height: 30px;
-    			padding: 5px;
-    			margin-top: 12px;
-    			border: 1px solid steelblue;
-    			color: steelblue;
-    			&:hover{
-    				background-color: #001E42;
-    				color: white;
-    			}
-    		}
-	    }
-		#post_form{
-			padding: 20px;
+//     		}
+//     		.read_article_btn{
+//     			font-size: 14px;
+//     			display: inline-block;
+//     			text-align: center;
+//     			line-height: 30px;
+//     			padding: 5px;
+//     			margin-top: 12px;
+//     			border: 1px solid steelblue;
+//     			color: steelblue;
+//     			&:hover{
+//     				background-color: #001E42;
+//     				color: white;
+//     			}
+//     		}
+// 	    }
+// 		.post_form{
+// 			padding: 20px;
 	        
-		}
-	}
+// 		}
+// 	}
 	
-	.article_posts{
-		h2{
-			padding: 12px;
-			font-weight: bold;
-			font-size: 16px;
-			color: #696969;
-		}
-	}
-}
+// 	.article_posts{
+// 		h2{
+// 			padding: 12px;
+// 			font-weight: bold;
+// 			font-size: 16px;
+// 			color: #696969;
+// 		}
+// 	}
+// }
 
-@media(max-width: 768px){
-	#selected_article{
-		.article_wrapper{
-		    .article_block{
-    		    .info{
-    		        padding: 12px;
-    		        padding-bottom: 0;
-    		        .title{
-    		            h2{
-    		                font-size: 20px;
-    		            }
-    		        }
-    		    }
-		    }
-			.image{
-				height: 150px;
-			}
-			#post_form{
-				padding: 12px;
-			}
-		}
-	}
-}
+// @media(max-width: 768px){
+// 	#selected_article{
+// 		.article_wrapper{
+// 		    .article_block{
+//     		    .info{
+//     		        padding: 12px;
+//     		        padding-bottom: 0;
+//     		        .title{
+//     		            h2{
+//     		                font-size: 20px;
+//     		            }
+//     		        }
+//     		    }
+// 		    }
+// 			.image{
+// 				height: 150px;
+// 			}
+// 			.post_form{
+// 				padding: 12px;
+// 			}
+// 		}
+// 	}
+// }

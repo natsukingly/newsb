@@ -321,7 +321,6 @@
 	right: 30px;
 	width: 400px;
 	div{
-		padding: 0;
 		a{
 		}
 	}
@@ -355,13 +354,14 @@
 		border-top: 1px solid #eee;
 		text-align: center;
 	}
+	
 }
 
 #notification_ddm:before{
 	content: "";
 	position: absolute;
 	top: -16px;
-	right: 24px;
+	right: 80px;
 	margin-left: -15px;
 	border: 8px solid transparent;
 	border-bottom: 8px solid #FFF;
@@ -372,7 +372,7 @@
 	content: "";
 	position: absolute;
 	top: -20px;
-	right: 22px;
+	right: 78px;
 	margin-left: -17px;
 	border: 10px solid transparent;
 	border-bottom: 10px solid #bbb;

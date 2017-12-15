@@ -16,7 +16,7 @@ $(document).on('turbolinks:load', function() {
 	
 	
 	// articles/show post_form form_no_category
-	$("#post_form .textarea").click(function(){
+	$(".post_form .post_textarea_block").click(function(){
 	   $(this).find("#post_content").focus(); 
 	});
 
@@ -46,7 +46,6 @@ $(document).on('turbolinks:load', function() {
 	$(".notice_bar").click(function(){
 		$(this).hide();	
 	});
-	
 });
 
 

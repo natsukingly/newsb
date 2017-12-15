@@ -13,12 +13,23 @@
 						=t 'form.url.caption'
 				.post_url_form.for_mobile
 					=render "shared/url_form_modal"
-				#post_form_block_for_mobile
+				.post_form_requirement
+					%h2
+						Note:
+					%ul
+						%li
+							NEWSB's algorism favors the articles published within a week.
+						%li
+							Some articles cannot be updated due to the company policy or website setup. 
+					.post_form_icon
+						=render 'svg/news_bubble_icon'					
+							
+					
+				.post_form_block.for_mobile
 				
 	
 :javascript
 	$('#mobile_post_link').click(function () {
-		console.log('aiueofda');
 		$(".ddm").hide();
 		$('#mobile_post_ddm').show();
 		$('body').addClass('fixed');

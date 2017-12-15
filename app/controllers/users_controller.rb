@@ -60,7 +60,7 @@ class UsersController < ApplicationController
   # end
   
   def show
-    @posts = @user.posts.order(created_at: :desc).limit(20)
+    @posts = @user.posts.order(created_at: :desc).limit(30)
     
   end
   
@@ -137,15 +137,15 @@ class UsersController < ApplicationController
   end
   
   def drafts
-    @post_drafts = PostDraft.where(user_id: current_user.id)
+    @post_drafts = current_user.post_drafts.order(created_at: :desc).includes(:article).limit(30)
   end
   
   def following
-    @users = @user.following.order(liked_count: :desc).limit(1)
+    @users = @user.following.order(liked_count: :desc).limit(30)
   end
 
   def followers
-    @users = @user.followers.order(liked_count: :desc).limit(1)
+    @users = @user.followers.order(liked_count: :desc).limit(30)
   end
 
   # GET /users/new
@@ -209,8 +209,6 @@ class UsersController < ApplicationController
       
   def notification_index
     @current_topic = "Notifications"
-		@notifications = current_user.notifications.includes(:target_user).order(created_at: :desc).limit(1)
-
   end
 
   def check_notifications

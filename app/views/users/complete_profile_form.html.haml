@@ -4,45 +4,39 @@
 	"Do not show"
 
 
-#extra_info_wrapper{style: "background-image: linear-gradient(90deg,rgba(0,30,60,.6), rgba(0,30,60,.6)), url('#{ asset_path "bkg_image.jpeg"}')"}
+#extra_info_wrapper{style: "background-image: linear-gradient(90deg,rgba(0,30,60,.6), rgba(0,30,60,.6)), url('#{ asset_path "bkg_img.jpeg"}')"}
 	#extra_info
 		.profile_form_content
 			.form_title
-				%h2
-					Welcome. #{current_user.name}
+				%h2.logo
+					NEWSB 
+					%br
+					%span
+						Welcome. #{current_user.name}
 			
 			=form_tag complete_profile_users_path do
-				.setting_block.credential
+				.setting_block.compact.language
+					.title
+						LANGUAGE
+					.new.content.to_show
+						=select_tag "user[language_id]", options_from_collection_for_select(Language.all, "id", "name", @language.id.to_i), prompt: "please select", class: "content form-control country_selection"   
+				
+				.setting_block.compact.location
+					.title
+						LOCATION
+					.new.content.to_show
+						=select_tag "user[country_id]", options_from_collection_for_select(Country.all, "id", "name", @country.id.to_i), class: "content form-control country_selection"  
+				
+
+				.setting_block.compact.credential
 					.title
 						CREDENTIAL
 					=text_field_tag 'user[credential]', current_user.credential, placeholder: "ex) company, job title, school", class: "content form-control"
 				
-				.setting_block.about
+				.setting_block.compact.about
 					.title
 						ABOUT
 					=text_area_tag 'user[about]', current_user.about, class: "content form-control", style: "min-height: 120px;"
-				
-				.setting_block.language
-					.title
-						LANGUAGE
-					.current.content 
-						=current_user.language.name
-						.edit_content_btn
-							edit
-					.new.content
-						=select_tag "user[language_id]", options_from_collection_for_select(Language.all, "id", "name", @language.id.to_i), prompt: "please select", class: "content form-control country_selection"   
-				
-				.setting_block.location
-					.title
-						LOCATION
-					.current.content 
-						=current_user.country.name
-						.edit_content_btn
-							edit
-					.new.content
-						=select_tag "user[country_id]", options_from_collection_for_select(Country.all, "id", "name", @country.id.to_i), class: "content form-control country_selection"  
-						%h3
-							*This will affect the index of articles and posts you will see on NEWSB.
 				
 				.submit_btn_group
 					= submit_tag "SAVE", class: "form_btn btn", id: "setting_submit_btn"

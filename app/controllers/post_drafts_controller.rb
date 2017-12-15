@@ -11,11 +11,12 @@ class PostDraftsController < ApplicationController
 	end
 	
 	def publish
+		@fake_news_report = params[:post_draft][:fake_news_report].nil? ? false : true
 		@new_post = current_user.posts.build(	article_id: @post_draft.article.id, 
 												content: params[:post][:content],
 												category_id: @post_draft.category_id,
 												country_id: @post_draft.country_id,
-												fake_news_report: params[:post][:fake_news_report]
+												fake_news_report: @fake_news_report
 												)
 		if @new_post.save
 			@post_draft.destroy

@@ -12,8 +12,12 @@
 					=link_to t('ranking.nav.item.all_time'), ranking_user_path
 			#main_contents
 				= render @users
-				.scroll_btn.weekly_users
-					LOAD MORE
+				-if @users.count < 30
+					.scroll_btn.stop_loading
+						NO MORE NOTIFICATIONS	
+				-else
+					.scroll_btn.weekly_users
+						LOAD MORE	
 	
 	.sub_function_sidebar
 		%h2

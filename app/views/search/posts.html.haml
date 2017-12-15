@@ -21,9 +21,13 @@
 						"
 			-else
 				= render partial: "posts/post", collection: @posts_search_results.includes(:article, :user), as: :post
-				.scroll_btn.searched_posts
-					LOAD MORE
-					
+				-if @posts_search_results.count < 30
+					.scroll_btn.stop_loading
+						NO MORE POSTS	
+				-else
+					.scroll_btn.searched_posts
+						LOAD MORE		
+						
 	.sub_function_sidebar
 		%h2
 			=t('sidebar.title.new_users')

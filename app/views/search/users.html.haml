@@ -21,8 +21,12 @@
 						"
 			-else
 				=render @users_search_results
-				.scroll_btn.searched_users
-					LOAD MORE
+				-if @users_search_results.count < 30
+					.scroll_btn.stop_loading
+						NO MORE NOTIFICATIONS	
+				-else
+					.scroll_btn.searched_users
+						LOAD MORE	
 				
 	.sub_function_sidebar
 		%h2

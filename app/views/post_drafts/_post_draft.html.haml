@@ -1,36 +1,37 @@
-.post{class: "post post_#{post.id} post_draft"}
+.post{class: "post post_#{post_draft.id} post_draft"}
 	.body
 		.main
 			.content.clearfix
-				.user_block.clearfix{class: "user_#{post.user.id}"}
+				.user_block.clearfix{class: "user_#{post_draft.user.id}"}
 					.user_image
-						=user_image_helper(post.user)
+						=user_image_helper(post_draft.user)
 					.user_info
-						=link_to post.user  do
+						=link_to post_draft.user  do
 							.give_me_short_ellipsis.light_navy.bold
-								=post.user.name
+								=post_draft.user.name
 						%p.user_credential.sm.grey
-							=post.user.credential
+							=post_draft.user.credential
 							%i.fa.fa-clock-o
-							#{time_ago_in_words_short(post.created_at)}
+							#{time_ago_in_words_short(post_draft.created_at)}
 					.user_option.follow_switch.pull-right
-						=render "/shared/follow_form_icon.html.haml", user: post.user
+						=render "/shared/follow_form_icon.html.haml", user: post_draft.user
 				%p.opinion
-					=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
-				=render "post_drafts/edit", post: post
-				-if post.article == nil
+					-unless post_draft.content.nil?
+						=render_with_hashtags(post_draft.content.gsub(/\n/, '<br />'))
+				=render "post_drafts/edit", post: post_draft
+				-if post_draft.article == nil
 					%p.deleted_article	
 						This article has been deleted.
 				-else
-					=link_to article_path(post.article_id), class: "post_article" do
-						-if post.article.image
-							.image{ style: "background-image: url(#{article_image_helper post.article.image.url });"}
+					=link_to article_path(post_draft.article_id), class: "post_article" do
+						-if post_draft.article.image
+							.image{ style: "background-image: url(#{article_image_helper post_draft.article.image.url });"}
 						.article_info
 							%h2.bold
-								= universal_truncate(post.article.title, 120) do
+								= universal_truncate(post_draft.article.title, 120) do
 									%span ...
 							%p.xs.grey
-								= post.article.source
+								= post_draft.article.source
 							
 		.draft_menu
 			.edit_draft_btn
@@ -44,7 +45,7 @@
 					%h2
 						Are you sure you want to delete your post?
 					.delete_option
-						=link_to "YES", post_draft_path(post), method: :delete
+						=link_to "YES", post_draft_path(post_draft), method: :delete
 						.cancel_delete_btn.ddm_btn
 							NO
 

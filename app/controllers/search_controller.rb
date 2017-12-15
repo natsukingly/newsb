@@ -8,19 +8,19 @@ class SearchController < ApplicationController
     end
     
     def posts
-        @posts_search_results = Post.where(country_id: @country.id).where('LOWER(content) LIKE(?)', "%#{@keyword.downcase}%").order(likes_count: :desc).limit(1)
+        @posts_search_results = Post.where(country_id: @country.id).where('LOWER(content) LIKE(?)', "%#{@keyword.downcase}%").order(likes_count: :desc).limit(30)
     end
     
     def articles
-        @articles_search_results = Article.where(country_id: @country.id).where('LOWER(title) LIKE(?)', "%#{@keyword.downcase}%").order(likes_count: :desc).limit(1)
+        @articles_search_results = Article.where(country_id: @country.id).where('LOWER(title) LIKE(?)', "%#{@keyword.downcase}%").order(e_indecator: :desc).limit(30)
     end
     
     def users
-        @users_search_results = User.where(country_id: @country.id).where('LOWER(name) LIKE(?)', "%#{@keyword.downcase}%").limit(1)
+        @users_search_results = User.where(country_id: @country.id).where('LOWER(name) LIKE(?)', "%#{@keyword.downcase}%").limit(30)
     end
     
     def tags
-        @tags_search_results = Tag.where(country_id: @country.id).where('LOWER(name) LIKE(?)', "%#{@keyword.downcase}%").order(liked_count: :desc).limit(1)
+        @tags_search_results = Tag.where(country_id: @country.id).where('LOWER(name) LIKE(?)', "%#{@keyword.downcase}%").order(posts_count: :desc).limit(30)
     end
     
     private

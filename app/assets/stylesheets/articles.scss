@@ -167,13 +167,18 @@
 			}
 		}
 		.best_post{
-			font-size: 12px;
-			width: auto;
-			margin-top: 20px;
-		    padding: 0 20px;
-		    display: none;
+				font-size: 12px;
+			    width: auto;
+			    padding: 0 20px;
+			    display: none;
+			    margin-left: 30px;
+			    border-left: 2px solid cornflowerblue;
+			    .body{
+			    	padding: 20px 0;
+			    }
 			.user_block{
 				padding: 0;
+
 			}
 			.content{
 				margin-top: 5px;
@@ -192,6 +197,7 @@
 	align-items: center;
 	.posts_count{
 		flex: 1;
+		height: 30px;
 	}
 	.best_post_btn{
 		padding: 0 12px;
@@ -265,9 +271,7 @@
 .mobile_posts_count, .posts_count{
 	display: flex;
 	position: relative;
-	margin-top: 5px;
     align-items: flex-end;
-    height: 25px;
 	span{
 		display: inline-block;
 		height: 25px;
@@ -489,6 +493,14 @@ span.overlay{
 				.mobile_posts_count{
 					display: flex;
 				}
+			}
+			.best_post{
+			    padding: 0 12px;
+			    margin-top: 8px;
+			    margin-left: 0;
+			    .body{
+			    	padding: 8px 0;
+			    }
 			}
 		}
 	}

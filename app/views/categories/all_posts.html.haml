@@ -6,13 +6,17 @@
 			.post_url_form.on_feed
 				=render 'shared/url_form_feed'
 							
-		#post_form_block
+		.post_form_block.feed
 		
 		
 		#main_contents.posts
 			=render @posts
-			.scroll_btn.posts
-				LOAD MORE
+			-if @posts.count < 30
+				.scroll_btn.stop_loading
+					NO MORE POSTS	
+			-else
+				.scroll_btn.posts
+					LOAD MORE	
 	
 	.sub_function_sidebar
 		%h2

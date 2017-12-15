@@ -3,16 +3,17 @@ class AdminsController < ApplicationController
 	before_action :set_admin, only: []
 	
 	def drafts
-		@post_drafts = current_user.post_drafts.where(hide: false)
+		@post_drafts = current_user.post_drafts.where(hide: false).includes(:article).limit(30)
 	end
 	
 	def publish_draft
 		@post_draft = PostDraft.find(params[:id])
+		@fake_news_report = params[:post_draft][:fake_news_report].nil? ? false : true
 		@new_post = current_user.posts.build(	article_id: @post_draft.article.id, 
-												content: params[:post][:content],
-												category_id: params[:post][:category_id].to_i,
+												content: params[:post_draft][:content],
+												category_id: params[:post_draft][:category_id].to_i,
 												country_id: @post_draft.country_id,
-												fake_news_report: params[:post][:fake_news_report],
+												fake_news_report: @fake_news_report,
 												)
 		if @new_post.save
 			@post_draft.destroy

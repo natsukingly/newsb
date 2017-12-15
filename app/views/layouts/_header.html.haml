@@ -31,12 +31,15 @@
 					=render "shared/notification_icon"
 				#profile_option_link.user_image_sm.align_items_center
 					=user_image_helper(current_user)
+				#create_post_btn_circle.show_post_modal_btn
+					%span
+						+
 			-else
 				.login_signup_link.header_btn 
 					Login/Signup
-			#create_post_btn_circle.show_post_modal_btn
-				%span
-					+
+				#create_post_btn_circle.login_signup_link
+					%span
+						+
 
 			=render 'dropdown/notifications'
 			=render 'dropdown/profile_option'
@@ -50,7 +53,7 @@
 		%span.fa-stack.fa-lg.form_icon
 			%i.fa.fa-circle.fa-stack-2x
 			%i.fa.fa-search.fa-stack-1x
-		=form_tag "/search", method: "get", id: "search" do
+		=form_tag search_path(country: @country.name), method: "get", id: "search" do
 			=text_field_tag :keyword, params[:keyword], placeholder: "search"
 			=submit_tag "", style: "display: none;"
 			

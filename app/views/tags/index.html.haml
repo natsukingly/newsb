@@ -20,8 +20,12 @@
 
 		#main_contents
 			=render @tags
-			.scroll_btn.trending_tags
-				LOAD MORE
+			-if @tags.count < 30
+				.scroll_btn.stop_loading
+					NO MORE TAGS	
+			-else
+				.scroll_btn.trending_tags
+					LOAD MORE
 	
 	.sub_function_sidebar
 		%h2

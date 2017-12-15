@@ -24,9 +24,13 @@
 						
 			-else
 				=render @articles.offset(1)
-				.scroll_btn.categorized_articles
-					LOAD MORE
-			
+				-if @articles.count < 30
+					.scroll_btn.stop_loading
+						NO MORE ARTICLES	
+				-else
+					.scroll_btn.categorized_articles
+						LOAD MORE	
+						
 	.sub_function_sidebar
 		%h2
 			=t ('sidebar.title.recent_articles')

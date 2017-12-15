@@ -19,13 +19,19 @@
 			%h2.profile_title
 
 			-if @user.following.empty?
-				.not_found
-					NO USERS YET
+				.result_not_found
+					%h4.not_found_content
+						=t('not_found.user_following')
+					=link_to "RANKING", ranking_weekly_user_path, class: "btn_md in_navy"
 			-else
 				.user_lists
 					= render @users
-					.scroll_btn.load_following
-						LOAD MORE
+					-if @users.count < 30
+						.scroll_btn.stop_loading
+							NO MORE NOTIFICATIONS	
+					-else
+						.scroll_btn.load_following
+							LOAD MORE
 
 :javascript
 	$(".profile_btn").removeClass("active");

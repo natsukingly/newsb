@@ -1,4 +1,3 @@
-
 .sub_function_wrapper
 	.sub_function_main_section
 		.sub_function_nav
@@ -22,8 +21,12 @@
 						"
 			-else
 				=render partial: "articles/article", collection: @articles_search_results, as: :article
-				.scroll_btn.searched_articles
-					LOAD MORE
+				-if @articles_search_results.count < 30
+					.scroll_btn.stop_loading
+						NO MORE ARTICLES	
+				-else
+					.scroll_btn.searched_articles
+						LOAD MORE	
 	
 	.sub_function_sidebar
 		%h2

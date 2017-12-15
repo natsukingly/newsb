@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
 	before_action :set_current_topic_for_all_posts, only: [:all_posts]
 
 	def all_posts
-		@posts = Post.where(country_id: @country.id).order(created_at: :desc).includes(:user, :article).limit(3)
+		@posts = Post.where(country_id: @country.id).order(created_at: :desc).includes(:user, :article).limit(30)
 
 		if current_user && current_user.feed_notifications.any?
 			current_user.feed_notifications.each do |notification|
@@ -20,20 +20,20 @@ class CategoriesController < ApplicationController
 	end
 	
 	def top
-		@articles = Article.all.where(country_id: @country.id).order(e_indecator: :desc).limit(20)
+		@articles = Article.all.where(country_id: @country.id).order(e_indecator: :desc).limit(30)
 		@featured_article = @articles.first
 		unless @featured_article.nil?
-			@best_posts = @articles.first.posts.order(likes_count: :desc).includes(:user).limit(3)
+			@best_post = @articles.first.posts.order(likes_count: :desc).includes(:user).limit(1).first
 			@related_articles = Article.where(country_id: @country.id, category_id: @featured_article.category_id).where.not(id: @featured_article.id).limit(5)
 		end
 		@recent_articles = Article.where(country_id: @country.id).order(published_time: :desc).limit(5)
 	end
 	
 	def articles
-		@articles = @category.articles.where(country_id: @country.id).order(e_indecator: :desc).limit(20)
+		@articles = @category.articles.where(country_id: @country.id).order(e_indecator: :desc).limit(30)
 		@featured_article = @articles.first
 		unless @featured_article.nil?
-			@best_posts = @articles.first.posts.order(likes_count: :desc).includes(:user).limit(3)
+			@best_post = @articles.first.posts.order(likes_count: :desc).includes(:user).limit(1).first
 			@related_articles = Article.where(country_id: @country.id, category_id: @featured_article.category_id).where.not(id: @featured_article.id).limit(5)
 		end
 		@recent_articles = Article.where(country_id: @country.id).order(published_time: :desc).limit(5)

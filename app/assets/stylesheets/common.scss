@@ -24,7 +24,7 @@
 .logo{
 	font-size: 32px;
 	font-family: 'Nova Flat', cursive;
-	// font-family: 'Lobster Two', cursive;
+	font-family: 'Bungee', cursive;
 }
 body{
 	background-color: #eee;
@@ -137,6 +137,21 @@ input[type="text"]:focus {
 	}
 }
 
+
+.btn_md{
+	padding: 5px 12px;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 3px;
+}
+
+.btn_md.in_navy{
+	background-color: #001E42;
+	color: #eee;
+	&:hover{
+		opacity: .8;
+	}
+}
 
 .not_found{
 	border-radius: 3px;
