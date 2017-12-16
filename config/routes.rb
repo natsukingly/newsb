@@ -24,6 +24,17 @@ Rails.application.routes.draw do
 	devise_for :users, :controllers => {registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions', passwords: 'users/passwords'}
 	
 	scope ":country" do
+		
+		#home
+		get '/about' => 'home#about', as: :about
+		get '/terms' => 'home#terms', as: :terms
+		get '/cookie_policy' => 'home#cookie_policy', as: :cookie_policy
+		get '/privacy' => 'home#privacy', as: :privacy
+		get '/contact' => 'home#contact', as: :contact
+		post '/contact/post' => 'home#contact', as: :post_contact
+		
+		
+		
 		resources :users, except: [:create, :new] do
 			member do
 				get 'posts'

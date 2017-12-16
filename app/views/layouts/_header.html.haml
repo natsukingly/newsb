@@ -187,7 +187,8 @@
 		$(".ddm").hide();
 		$('#locale_ddm').css("display", "flex");
 		current_url = location.href 
-		document.cookie = 'previous_url=' + current_url;
+		Cookies.set('previous_url', current_url);
+		// document.cookie = 'previous_url=' + current_url;
 		return false;
 	});
 

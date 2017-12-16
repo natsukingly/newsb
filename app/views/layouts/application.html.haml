@@ -9,7 +9,7 @@
 	%body
 
 		.flex_container
-			-if  yield(:header).empty?
+			-if  yield(:header).empty? == true
 				=render 'layouts/header'
 
 			-if  yield(:featured_article).empty? == false && @featured_article.nil? == false
@@ -29,6 +29,7 @@
 						=render "/sidebars/left_profile", user: current_user
 					#main_container
 						=yield
+			
 
 			-elsif yield(:sidebar).empty? == true
 				.flex_wrapper.clearfix  
@@ -36,13 +37,19 @@
 						=render "/sidebars/left_profile", user: current_user
 					#main_container
 						=yield
-				
+			
+			
 			-elsif yield(:profile).empty? == false
 				.user_profile_container
 					=render 'shared/user_profile', user: @user
 				.flex_wrapper.on_user_profile.clearfix 
 					#main_container
 						=yield
+			
+			
+			-elsif yield(:general).empty? == false
+				=render 'layouts/header_sub'
+				=yield
 			
 			-else
 				.flex_wrapper.clearfix 

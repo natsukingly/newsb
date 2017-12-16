@@ -1,3 +1,23 @@
+
+
+.social_mode_switch_block{
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	.social_mode_switch{
+		i{
+			margin-right: 5px;
+			&.active{
+				color: cornflowerblue;
+			}
+		}
+	}
+	.social_mode_title{
+		
+	}
+}
+
+
 #main_contents.articles{
 	display: flex;
 	align-content: flex-start;
@@ -9,6 +29,7 @@
 	    border-bottom: 1px solid #eee;
 	    display: flex;
 	    justify-content: space-between;
+	    align-items: center;
 	    .divider{
 	    	display: none;
 	    }
@@ -167,22 +188,31 @@
 			}
 		}
 		.best_post{
-				font-size: 12px;
+				font-size: 13px;
 			    width: auto;
-			    padding: 0 20px;
 			    display: none;
 			    margin-left: 30px;
-			    border-left: 2px solid cornflowerblue;
+			    border-left: 2px solid rgba(cornflowerblue, .5);
 			    .body{
-			    	padding: 20px 0;
+			    	padding: 20px;
 			    }
 			.user_block{
 				padding: 0;
+				display: flex;
+				flex-direction: column;
+				.user_details{
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					margin-bottom: 8px;
+					.user_name{
+						font-weight: 900;
+					}
+				}
 
 			}
 			.content{
-				margin-top: 5px;
-				color: grey;
+				color: #696969;
 				.shared_message{
 					color: grey;
 				}
@@ -470,36 +500,23 @@ span.overlay{
 
 @media(max-width: 768px){
 	.article{
-		padding: 5px;
-		border-bottom: none;
-		&:first-child{
-			padding-top: 8px;
-		}
+		padding: 12px;
 		.article_wrapper{
 			.article_block{
 				.image{
-					border-radius: 0;
-					width: 20%;
-					max-width: 100px;
-					height: 100px;
+
 				}
 				.info{
-					margin-left: 12px;
-					justify-content: flex-start;
+
 					.title h2{
-						font-size: 14px;
 					}
 				}
 				.mobile_posts_count{
-					display: flex;
 				}
 			}
 			.best_post{
-			    padding: 0 12px;
-			    margin-top: 8px;
-			    margin-left: 0;
 			    .body{
-			    	padding: 8px 0;
+			    	padding: 12px 0 20px 12px;
 			    }
 			}
 		}

@@ -10,8 +10,8 @@
 							= universal_truncate(article.title, 100)
 							-if article.title.empty? 
 								This article has been deleted.
-							%br
-							%span.featured_article_source
+						.selected_article_info
+							.selected_article_source
 								= article.source
 								- if article.published_time
 									%i.fa.fa-clock-o

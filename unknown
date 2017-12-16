@@ -1,3 +1,4 @@
+%i.fa.fa-toggle-on.fa-2x.fa-rotate-180
 
 	def set_locale
 		if user_signed_in?
@@ -85,4 +86,96 @@ old feed
 				$('.post_form_block.feed').html("<p class='parse_failure_message'>I'm sorry. This article cannot be uploaded.</p>");
 			})
 		return false;
-	});
+	});												
+												
+			.featured_article_sidebar			
+				-unless related_articles.empty?
+					.related_articles
+						%ul.related_article_section 
+							- related_articles.each do |article|
+								%li
+									%h4
+										=link_to article.title, article_path(article)
+									%p
+										=article.source
+										
+						=link_to article_path(article), class: "featured_article_image" do
+							.image{style: "background-image: url(#{article_image_helper article.image.url});"}
+								.frame
+									%i.fa.fa-mouse-pointer
+									
+				.featured_article_sidebar{
+					flex: 1;
+					max-width: 300px;
+					padding: 0;
+					color: white;
+					display: flex;
+					flex-direction: column;
+					overflow: scroll;
+					overflow-x: hidden;
+					.featured_article_sidebar_title{
+						margin-bottom: 12px;
+						padding-bottom: 5px;
+						border-bottom: 1px solid #ccc;
+					}
+					.related_articles{
+						ul{
+							padding: 12px;
+							background-color: rgba(255,255,255,.1);
+
+							li{
+								margin-bottom: 20px;
+								p{
+									font-size: 12px;
+									color: #ccc;
+								}
+							}
+						}
+					}
+				}
+					// -if article.posts_count != 0 || report_count != 0
+					// 	-post = article.posts.order(likes_count: :desc).first
+					// 	-unless post.content.empty?
+					// 		.best_post_btn
+					// 			%i.fa.fa-angle-down.open_icon
+					// 			%span
+					// 				Best post
+					
+
+@media(max-width: 768px){
+	.article{
+		padding: 5px;
+		border-bottom: none;
+		&:first-child{
+			padding-top: 8px;
+		}
+		.article_wrapper{
+			.article_block{
+				.image{
+					border-radius: 0;
+					width: 20%;
+					max-width: 100px;
+					height: 100px;
+				}
+				.info{
+					margin-left: 12px;
+					justify-content: flex-start;
+					.title h2{
+						font-size: 14px;
+					}
+				}
+				.mobile_posts_count{
+					display: flex;
+				}
+			}
+			.best_post{
+			    padding: 0 12px;
+			    margin-top: 8px;
+			    margin-left: 0;
+			    .body{
+			    	padding: 8px 0;
+			    }
+			}
+		}
+	}
+}

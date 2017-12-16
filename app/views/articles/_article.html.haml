@@ -26,35 +26,32 @@
 							-if report_count != 0
 								%span.fake_news_report_count
 									[#{report_count} reports]
-					-if article.posts_count != 0 || report_count != 0
-						-post = article.posts.order(likes_count: :desc).first
-						-unless post.content.empty?
-							.best_post_btn
-								%i.fa.fa-angle-down.open_icon
-								%span
-									Best post
-						
-						
-		
-			
-		.best_post
-			- if post != nil
-				.body.clearfix
-					.user_block
-						.user_image_sm
-							=user_image_helper(post.user)
-						.user_details
-							%p
-								%span
-									=post.user.name
-								%span.user_credential
-									=post.user.credential
+							-if current_user && current_user.admin == true
+								%span{style: "color: red; padding: 0 5px;"}
+									e: #{article.e_indecator}
+
+	
+
+		-if article.posts_count != 0 || report_count != 0
+			-post = article.posts.order(likes_count: :desc).first	
+			- if post != nil && post.content.empty? != true
+				.best_post
+					.body.clearfix
+						.user_block
+							.user_details
+								.user_image_sm
+									=user_image_helper(post.user)
+								%p
+									%span.user_name
+										=post.user.name
+									%span.user_credential
+										=post.user.credential
 							%p.content
 								-if post.content.empty?
 									%span.shared_message
 										> Shared this article
 								-else
-									= universal_truncate(post.content, 400) do
+									= universal_truncate(post.content, 200) do
 										%span ...
-		
-							
+			
+								

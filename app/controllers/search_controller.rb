@@ -12,7 +12,7 @@ class SearchController < ApplicationController
     end
     
     def articles
-        @articles_search_results = Article.where(country_id: @country.id).where('LOWER(title) LIKE(?)', "%#{@keyword.downcase}%").order(e_indecator: :desc).limit(30)
+        @articles_search_results = Article.where(country_id: @country.id).where('LOWER(title) LIKE(?)', "%#{@keyword.downcase}%").order(e_indecator: :desc, published_time: :desc).limit(30)
     end
     
     def users
