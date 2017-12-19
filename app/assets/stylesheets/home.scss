@@ -1,3 +1,218 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.general_container{
+    padding: 0 100px;
+}
+
+@media(max-width: 768px){
+    .general_container{
+        padding: 0 12px;
+    }
+}
+
+.general_wrapper{
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+        &.in_white{
+            color: #eee;
+        }
+        &.bkg_navy{
+            background-color: #001E42;
+        }
+        &.bkg_grey{
+            background-color: #f9f9f9;
+        }
+    .general_title{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        &.large{
+            padding: 200px 0 100px;
+        }
+        &.top{
+            padding-top: 100px;
+        }
+        h2{
+            font-size: 70px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+
+        }
+        h3{
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        h4{
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+        p{
+            font-size: 16px;
+            margin-bottom: 80px;
+        }
+        span.hrz_dvd{
+            display: inline-block;
+            width: 40px;
+            border-bottom: 5px solid pink;
+            margin-bottom: 20px;
+        }
+        // .value_block{
+        //     margin-bottom: 50px;
+        // }
+        .member{
+            margin-top: 30px;
+            img{
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            
+            }
+        }
+    }
+    .contact_form{
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        margin: 0 auto;
+        .contact_form_field{
+            display: flex;
+            flex: 1;
+            margin-top: 20px;
+            input, textarea{
+                flex: 1;
+            }
+            &.error_field{
+                margin-top: 5px;
+            }
+            input[type="submit"]{
+                padding: 8px 12px;
+                margin-bottom: 100px;
+                &:hover{
+                    border: 1px solid cornflowerblue;
+                    color: cornflowerblue;
+                }
+            }
+            textarea{
+                min-height: 150px;
+            }
+            input[type="file"]{
+                display: block;
+            }
+            i{
+                font-size: 20px;
+                margin-right: 8px;
+            }
+        }
+    }
+    p.contact_description{
+        // margin-bottom: 20px;
+    }
+}
+
+
+@media(max-width: 768px){
+    .general_wrapper{
+        .general_title{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            &.large{
+                padding: 200px 0 150px;
+            }
+            h2{
+                font-size: 40px;
+                letter-spacing: 0;
+            }
+            h3{
+                font-size: 26px;
+                font-weight: 900;
+                margin-bottom: 20px;
+            }
+            h4{
+                font-size: 20px;
+                font-weight: 900;
+                margin-bottom: 12px;
+            }
+            p{
+                font-size: 16px;
+                margin-bottom: 80px;
+            }
+            span.hrz_dvd{
+                display: inline-block;
+                width: 40px;
+                border-bottom: 5px solid pink;
+                margin-bottom: 20px;
+            }
+            // .value_block{
+            //     margin-bottom: 50px;
+            // }
+        }
+        .contact_form{
+            width: 100%;
+        }
+    }
+}
+
+
+
+.general_footer{
+    background-color: #001E42;
+    color: #eee;
+    text-align: center;
+    flex: 1;
+    .footer_container{
+        padding: 50px 0;
+        .footer_menu{
+            display: flex;
+            justify-content: space-around;
+            .footer_menu_block{
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 20px;
+                .footer_menu_block_title.footer_logo{
+                    font-weight: 900;
+                    margin-top: 20px;
+                    text-align: center;
+                    font-family: 'Bungee', cursive;
+                    font-size: 30px;
+                }
+                a.footer_menu_item{
+                    display: block;
+                    color: #eee;
+                    margin-bottom: 5px;                        
+                    &:hover{
+                        font-weight: 900;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 768px){
+    .general_footer{
+        .footer_container{
+            .footer_menu{
+                flex-direction: column;
+                .footer_menu_block{
+                    .footer_menu_title{
+                        font-weight: 900;
+                        margin-bottom: 8px;
+                    }
+                    a.footer_menu_item{
+                        display: block;
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+        }
+    }    
+}

@@ -1,4 +1,5 @@
-class ImageUploader < CarrierWave::Uploader::Base
+class ContactImageUploader < CarrierWave::Uploader::Base
+
 
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
@@ -22,7 +23,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
   # 画像の上限を700pxにする
-  process :resize_to_fill => [500, 500, gravity = ::Magick::CenterGravity]
+  # process :resize_to_fill => [500, 500, gravity = ::Magick::CenterGravity]
   
   
   process :convert => 'jpg'
@@ -38,10 +39,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process resize_to_fill: [300, 300, gravity = ::Magick::CenterGravity]
   # endふぉrm
-  
-  version :profile_sm do
-    process resize_to_fill: [50, 50, gravity = ::Magick::CenterGravity]
-  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

@@ -23,11 +23,6 @@
 									%i.fa.fa-clock-o
 									#{time_ago_in_words_short(article.published_time)}	
 						
-
-					
-					=link_to "SEE MORE", article, class: "show_article_link"
-						
-
 					-unless best_post.nil?
 						=link_to article do
 							.best_post
@@ -40,6 +35,8 @@
 										> Shared this article
 									-else
 										= universal_truncate(best_post.content, 200)
+										
+					=link_to "SEE MORE", article, class: "show_article_link"
 											
 											
 						

@@ -1,0 +1,16 @@
+:css
+	body{ 
+		background-color: white;
+	}
+
+.header_general
+	.header_general_container
+		.header_general_logo
+			=link_to "NEWSB", root_path, class: "logo"
+		
+		.header_general_menu
+			=link_to "About", about_page_path, class: "header_general_option" 
+			=link_to "Contact", contact_page_path, class: "header_general_option" 
+			=link_to "Terms", terms_page_path, class: "header_general_option" 
+			=link_to "Privacy", privacy_page_path, class: "header_general_option" 
+			=link_to "Cookies", cookie_policy_page_path, class: "header_general_option" 

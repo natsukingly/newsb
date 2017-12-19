@@ -7,7 +7,7 @@
 .error_block{
     min-height: 12px;
     .error_message{
-        padding: 0 12px;
+        // padding: 0 12px;
         color: #8b0000;
         &:last-child{
             margin-bottom: 12px;
@@ -24,7 +24,7 @@
 form{
     div{
         position: relative;
-    	input[type="text"], input[type="password"], input[type="submit"], input[type="email"]{
+    	input[type="text"], input[type="password"], input[type="submit"], input[type="email"], textarea{
     		width: 100%;
     	    border-radius: 3px;
     	    outline: 0px;

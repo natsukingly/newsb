@@ -22,18 +22,20 @@
 			=link_to "NEWSB", root_path, class: "logo"
 		
 		.header_general_menu_right
-			=link_to "ABOUT US", about_page_path, class: "header_general_option" 
+			=link_to "CONTACT", contact_page_path, class: "header_general_option"
 		.header_general_menu_right_mobile
 			.open_general_mobile_menu.in_white
 				=render 'svg/menu_icon'
 
-.general_wrapper#contact
+.general_wrapper
 	.general_container
-		.general_title.top
+		.general_title.large
 			%h3
-				Contact
-			%span.hrz_dvd
-		%p.contact_description
-			NEWSBを使った感想やバグの報告、
-			取材の申し込み等の内容をご自由に投稿ください。
-		=render 'home/contact_form', contact: @contact
+				ご連絡ありがとうございます！
+			%p
+				NEWSBのスタッフが３営業日内で返信致します。
+				%br
+				記入していただいたアドレス宛に確認のメールを送信しました。
+				%br
+				メールが届いていない場合は誤入力の可能性があります。
+				

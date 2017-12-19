@@ -179,3 +179,9 @@ old feed
 		}
 	}
 }
+
+
+
+			=link_to "Terms", terms_page_path, class: "header_general_option in_white" 
+			=link_to "Privacy", privacy_page_path, class: "header_general_option in_white" 
+			=link_to "Cookies", cookie_policy_page_path, class: "header_general_option in_white" 

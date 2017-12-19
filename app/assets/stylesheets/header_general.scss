@@ -1,0 +1,87 @@
+
+
+.header_general{
+    position: fixed;
+    display: flex;
+    width: 100%;
+    z-index: 100;
+    .header_general_container{
+        flex: 1;
+        padding: 8px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .header_general_menu_left{
+            a.logo.in_white{
+                color: #eee;
+            }
+        }
+        .header_general_menu_right{
+            display: flex;
+            flex: 1;
+            justify-content: flex-end;
+            a.header_general_option{
+                display: inline-block;
+                line-height: 40px;
+                padding: 0 10px;
+                margin: 0 10px;
+                border-bottom: 2px solid rgba(0,0,0,0);
+                &.in_white{
+                    color: #eee;
+                    &:hover{
+                        border-bottom: 2px solid #eee;
+                    }
+                }
+            }
+        }
+        .header_general_menu_right_mobile{
+            display: none;
+            flex: 1;
+            justify-content: flex-end;
+            .open_general_mobile_menu{
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                svg{
+                    width: 20px;
+                    height: 20px;
+                }
+                &.in_white{
+                    svg{
+                        fill: white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media(max-width: 768px){
+    .header_general{
+        .header_general_container{
+            .header_general_menu_left{
+                a.logo.in_white{
+                }
+            }
+            .header_general_menu_right{
+                display: none;
+                a.header_general_option{
+                    &.in_white{
+                        &:hover{
+                        }
+                    }
+                }
+            }
+            .header_general_menu_right_mobile{
+                display: flex;
+                .open_general_mobile_menu{
+                    svg{
+
+                    }
+                }
+            }
+        }
+    }    
+}

@@ -15,11 +15,15 @@
 					=link_to "Schneider", crawl_path
 					=link_to "Reports", reports_admins_path
 			.footer
-				=link_to "About", root_path, class: "sub_profile_option" 
-				・
-				=link_to "Terms", root_path, class: "sub_profile_option" 
-				・
-				=link_to "Logout", destroy_user_session_path, class: "sub_profile_option" 
+				=link_to "About", about_page_path, class: "sub_profile_option", target: "_blank"
+				·
+				=link_to "Contact", contact_page_path, class: "sub_profile_option", target: "_blank" 
+				·
+				=link_to "Terms", terms_page_path, class: "sub_profile_option", target: "_blank"
+				·
+				=link_to "Privacy", privacy_page_path, class: "sub_profile_option", target: "_blank" 
+				·
+				=link_to "Cookies", cookie_policy_page_path, class: "sub_profile_option", target: "_blank" 
 				%br
 				&copy; 2017 NEWSB
 

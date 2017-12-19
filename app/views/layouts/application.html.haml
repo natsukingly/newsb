@@ -7,7 +7,6 @@
 		= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Nova+Flat"
 		= javascript_include_tag 'application'
 	%body
-
 		.flex_container
 			-if  yield(:header).empty? == true
 				=render 'layouts/header'
@@ -48,9 +47,8 @@
 			
 			
 			-elsif yield(:general).empty? == false
-				=render 'layouts/header_sub'
 				=yield
-			
+				=render 'layouts/footer' 
 			-else
 				.flex_wrapper.clearfix 
 					#main_container

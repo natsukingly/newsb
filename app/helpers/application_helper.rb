@@ -43,7 +43,7 @@ module ApplicationHelper
     
     def user_image_helper(user)
         if user && user.image.url.nil? == false
-            image_tag user.image.url, class: "img-circle"
+            image_tag user.image.profile_sm.url, class: "img-circle"
         elsif user
             render 'svg/user_icon_sub'
         end

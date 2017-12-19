@@ -1,0 +1,37 @@
+=form_tag post_contact_page_path, multipart: true, class: "contact_form" do
+	.contact_form_field
+		-if current_user
+			=text_field_tag "contact[name]", current_user.name, placeholder: "Name"
+		-else
+			=text_field_tag "contact[name]", '', placeholder: "Name"
+	-unless contact.errors[:name].empty?
+		.contact_form_field.error_field
+			%ul.error_block
+				-contact.errors[:name].each do |message|
+					%li.error_message
+						Name #{message}
+	.contact_form_field
+		-if current_user
+			=email_field_tag "contact[email]", current_user.email, placeholder: "Email address"
+		-else
+			=email_field_tag "contact[email]", '', placeholder: "Email address"
+	-unless contact.errors[:email].empty?
+		.contact_form_field.error_field
+			%ul.error_block
+				-contact.errors[:email].each do |message|
+					%li.error_message
+						Email #{message}
+						
+	.contact_form_field
+		=text_area_tag 'contact[message]', '', placeholder: "Message"
+	-unless contact.errors[:message].empty?
+		.contact_form_field.error_field
+			%ul.error_block
+				-contact.errors[:message].each do |message|
+					%li.error_message
+						Message #{message}
+	.contact_form_field
+		%i.fa.fa-picture-o
+		%input{id: "file-upload", type: "file", name: "contact[image]", accept: "image/*"}
+	.contact_form_field
+		=submit_tag "SEND"

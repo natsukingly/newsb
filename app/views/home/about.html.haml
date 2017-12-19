@@ -1,5 +1,134 @@
 -content_for(:sidebar) do
-    "Don't show"
+	"Don't show"
 
-%h1 Home#about
-%p Find me in app/views/home/about.html.haml
+-content_for(:header) do
+	"Don't show"
+
+-content_for(:general) do
+	"Do show"
+
+:css
+	body{ 
+		background-color: white;
+	}
+	#mobile_footer{
+		display: none;
+	}
+
+
+.header_general
+	.header_general_container
+		.header_general_menu_left
+			=link_to "NEWSB", root_path, class: "logo in_white"
+		
+		.header_general_menu_right
+			=link_to "MISSION", '#mission', class: "header_general_option in_white" 
+			=link_to "MEMBER", '#member', class: "header_general_option in_white" 
+			=link_to "CONTACT", '#contact', class: "header_general_option in_white"
+		.header_general_menu_right_mobile
+			.open_general_mobile_menu.in_white
+				=render 'svg/menu_icon'
+
+.general_wrapper#intro{class: "in_white bkg_navy", style: "background-image: linear-gradient(90deg,rgba(0,30,60,.8), rgba(0,30,60,.8)), url('#{ asset_path "bkg_img.jpeg"}')"}
+	.general_container
+		.general_title.large
+			%h2
+				Think together.
+			%p
+				みんなで考えるからわかる。
+				%br
+				みんなで考えるから面白い。
+
+.general_wrapper#mission
+	.general_container
+		.general_title.top
+			%h3
+				OUR MISSION
+			%span.hrz_dvd
+			%h4
+				ニュースをもっと面白く、わかりやすくすること。
+			%p
+				１人で読む記事よりも１００人の仲間が発信したコメント。
+				%br
+				それぞれがお互いのジャーナリストになる場所。そんな場所をNEWSBは提供していきます。
+
+		.general_title
+			%h3
+				Values
+			%span.hrz_dvd
+			
+			.value_block
+				%h4
+					Be curious　-好奇心を実現しよう
+				%p
+					好奇心・探究心こそがイノベーションの種です。
+					%br
+					メンバーがそれぞれの好奇心から目をそらさず、
+					%br
+					プロダクトに反映させていくことで破壊的創造を達成していきます。
+	
+			.value_block		
+				%h4
+					Empower　- お互いを高め合おう
+				%p
+					お互いの成果にコミットし合うことで、
+					%br
+					メンバーが自身の限界に日常的に挑戦できるような環境をチーム全体でつくります。
+		
+			.value_block	
+				%h4
+					Try and fail　- 何回も失敗しよう
+				%p
+					挑戦して、失敗して、学んでのサイクルを継続し、
+					%br
+					最高のプロダクトを開発します。
+
+.general_wrapper.bkg_grey#member
+	.general_container
+		.general_title.top
+			%h3
+				MEMBER
+			%span.hrz_dvd
+			.member
+				=image_tag asset_path "natsuki.png"
+				
+				%h4
+					山口　夏生
+				%p
+					創業者兼エンジニア
+					
+.general_wrapper#contact
+	.general_container
+		.general_title.top
+			%h3
+				Contact
+			%span.hrz_dvd
+		=render 'home/contact_form', contact: @contact
+
+:javascript
+	$('.header_general_option').click(function(){
+		var id = $(this).attr('href');
+		var position = $(id).offset().top;
+		$('html, body').animate({
+			'scrollTop':position
+		}, 'slow');
+		console.log("yo");
+		return false;
+	});
+	
+	$(window).scroll(function(){
+		var change_point = $('#mission').offset().top - $('.header_general').height();
+		var scrollVolume = $(window).scrollTop();
+		if( scrollVolume > change_point){
+			$('.header_general').css("background-color", "white").css("border-bottom", "1px solid #eee");
+			$('.header_general a').removeClass('in_white');
+			$('.header_general_container').css("padding", "0px 20px");
+			$('.open_general_mobile_menu').removeClass('in_white');
+		} else{
+			$('.header_general').css("background-color", "rgba(0,0,0,0)").css("border-bottom", "none");	
+			$('.header_general a').addClass('in_white');
+			$('.header_general_container').css("padding", "8px 20px");
+			$('.open_general_mobile_menu').addClass('in_white');
+		}
+		return false;
+	});

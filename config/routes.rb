@@ -1,7 +1,25 @@
 Rails.application.routes.draw do
 
+	#home
+	get '/about' => 'home#about'
+	get '/terms' => 'home#terms', as: :terms
+	get '/cookie_policy' => 'home#cookie_policy', as: :cookie_policy
+	get '/privacy' => 'home#privacy', as: :privacy
+	get '/contact' => 'home#contact', as: :contact
+	post '/contact/post' => 'home#contact', as: :post_contact
+
 	get '/:locale' => 'categories#top'
 	root 'categories#top'
+	
+	scope ':locale' do
+		get '/about' => 'home#about', as: :about_page
+		get '/terms' => 'home#terms', as: :terms_page
+		get '/cookie_policy' => 'home#cookie_policy', as: :cookie_policy_page
+		get '/privacy' => 'home#privacy', as: :privacy_page
+		get '/contact' => 'home#contact', as: :contact_page
+		post '/contact/post' => 'home#post_contact', as: :post_contact_page
+		get '/contact/message_received' => 'home#contact_message_received', as: :contact_message_received_page
+	end
 	
 	resources :admins, only: [] do
 		member do
@@ -25,13 +43,6 @@ Rails.application.routes.draw do
 	
 	scope ":country" do
 		
-		#home
-		get '/about' => 'home#about', as: :about
-		get '/terms' => 'home#terms', as: :terms
-		get '/cookie_policy' => 'home#cookie_policy', as: :cookie_policy
-		get '/privacy' => 'home#privacy', as: :privacy
-		get '/contact' => 'home#contact', as: :contact
-		post '/contact/post' => 'home#contact', as: :post_contact
 		
 		
 		

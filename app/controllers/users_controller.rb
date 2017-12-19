@@ -85,6 +85,9 @@ class UsersController < ApplicationController
     @user.update(user_params)
     if @user.save 
       redirect_to current_user
+    else
+      flash[:notice] = "Error. Please check the format of your contents."
+      redirect_to edit_setting_user_path(current_user)
     end
   end
   
