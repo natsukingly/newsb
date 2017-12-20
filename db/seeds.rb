@@ -11,7 +11,10 @@
 @default_categories = ["Business", "Tech", "Politics", "Economics", "Market", "Startup", "Sports", "Education", "Lifestyle"]
 
 @default_categories.each do |category|
-    Category.create(name: category)
+    category = Category.find_by(name: category)
+    unless category
+        Category.create(name: category)
+    end
 end
 
 @available_languages = { en: "English", ja: "Japanese"}
@@ -34,7 +37,6 @@ japan_language_id = Language.find_by(code: "ja").id
         Country.create(name: country, language_id: language_id)
     end
 end
-
 
 
 # 5.times do
