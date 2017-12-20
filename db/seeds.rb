@@ -14,16 +14,19 @@
     Category.create(name: category)
 end
 
-@available_countries = { "United States" => 1, "Japan" => 2}
+@available_languages = { en: "English", ja: "Japanese"}
+
+@available_languages.each do |code, name|
+    Language.create(code: code, name: name)
+end
+
+united_states_language_id = Language.find_by(code: "en").id
+japan_language_id = Language.find_by(code: "ja").id
+
+@available_countries = { "United States" => united_states_language_id, "Japan" => japan_language_id}
 
 @available_countries.each do |country, language_id|
     Country.create(name: country, language_id: language_id)
-end
-
-@available_languages = { en: "English", ja: "Japanese"}
-
-@available_languages.each do |language_code, name|
-    Language.create(language_code: language_code, name: name)
 end
 
 
