@@ -8,20 +8,34 @@
 
 
 
-@default_categories = ["Business", "Tech", "Politics", "Economics", "Market", "Startup", "Sports", "Education", "Lifestyle"]
+# @default_categories = { 1 => "Business", 2 => "Tech", 3 => "Politics", 4 => "Economics", 5 => "Market", 6 => "Startup", 7 => "Sports", 8 => "Education", 9 => "Lifestyle"}
 
-@default_categories.each do |category|
-    category = Category.find_by(name: category)
-    unless category
-        Category.create(name: category)
-    end
-end
+# @default_categories.each do |id, category|
+#     category = Category.find(id)
+#     if category.nil?
+#         category_item = Category.new(name: category[1])
+#         category_item.save
+#     else
+#         category.update(name: category)
+#     end
+# end
+
+Category.find_or_create_by(name: "Business")
+Category.find_or_create_by(name: "Tech")
+Category.find_or_create_by(name: "Politics")
+Category.find_or_create_by(name: "Economy")
+Category.find_or_create_by(name: "Market")
+Category.find_or_create_by(name: "Startup")
+Category.find_or_create_by(name: "Sports")
+Category.find_or_create_by(name: "Education")
+Category.find_or_create_by(name: "Lifestyle")
+
 
 @available_languages = { en: "English", ja: "Japanese"}
 
 @available_languages.each do |code, name|
     language = Language.find_by(code: code)
-    unless language
+    if language.nil?
         Language.create(code: code, name: name)
     end
 end
@@ -33,7 +47,7 @@ japan_language_id = Language.find_by(code: "ja").id
 
 @available_countries.each do |country, language_id|
     country = Country.find_by(name: country)
-    unless country
+    if country.nil?
         Country.create(name: country, language_id: language_id)
     end
 end
