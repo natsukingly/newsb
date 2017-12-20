@@ -16,3 +16,6 @@ production:
   database: newsb_production
   username: natsuking
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+  host: <%= ENV['MYAPP_DATABASE_ENDPOINT'] %>
+  port: 5432
+  
