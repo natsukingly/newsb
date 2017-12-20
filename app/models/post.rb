@@ -19,7 +19,7 @@ class Post < ApplicationRecord
 
 	after_create do
 		post = Post.find_by(id: self.id)
-        hashtag_regex = /[#|＃]\w*[一-龠_ぁ-ん_ァ-ヴーａ-ｚＡ-Ｚa-zA-Z0-9]+|[#|＃]\[a-zA-Z0-9_]+|[#|＃]\[a-zA-Z0-9_]/
+        hashtag_regex = /[#＃][Ａ-Ｚａ-ｚA-Za-z一-鿆0-9０-９ぁ-ヶｦ-ﾟー]+/
 		hashtags = self.content.scan(hashtag_regex)
 		hashtags.uniq.map do |hashtag|
 		  tag = Tag.find_or_create_by(name: hashtag.downcase.delete('#').delete('＃'), country_id: post.country.id)
@@ -32,7 +32,7 @@ class Post < ApplicationRecord
 	before_update do
 		post = Post.find_by(id: self.id)
 		post.tags.clear
-        hashtag_regex = /[#|＃]\w*[一-龠_ぁ-ん_ァ-ヴーａ-ｚＡ-Ｚa-zA-Z0-9]+|[#|＃]\[a-zA-Z0-9_]+|[#|＃]\[a-zA-Z0-9_]/
+        hashtag_regex = /[#＃][Ａ-Ｚａ-ｚA-Za-z一-鿆0-9０-９ぁ-ヶｦ-ﾟー]+/
 		hashtags = self.content.scan(hashtag_regex)
 		hashtags.uniq.map do |hashtag|
 		  tag = Tag.find_or_create_by(name: hashtag.downcase.delete('#').delete('＃'), country_id: post.country.id)

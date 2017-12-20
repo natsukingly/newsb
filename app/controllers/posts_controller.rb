@@ -26,7 +26,7 @@ class PostsController < ApplicationController
 	
 	def autocomplete_tags
 		# to deal with consecutive words and new lines without spacing
-        hashtag_regex = /[#|＃]\w*[一-龠_ぁ-ん_ァ-ヴーａ-ｚＡ-Ｚa-zA-Z0-9]+|[#|＃]\[a-zA-Z0-9_]+|[#|＃]\[a-zA-Z0-9_]/
+    	hashtag_regex = /[#＃][Ａ-Ｚａ-ｚA-Za-z一-鿆0-9０-９ぁ-ヶｦ-ﾟー]+/
 		input = params[:input].scan(hashtag_regex)
 		@last_word = input[0]
 		@form = params[:form]

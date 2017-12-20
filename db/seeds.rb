@@ -17,7 +17,10 @@ end
 @available_languages = { en: "English", ja: "Japanese"}
 
 @available_languages.each do |code, name|
-    Language.create(code: code, name: name)
+    language = Language.find_by(code: code)
+    unless language
+        Language.create(code: code, name: name)
+    end
 end
 
 united_states_language_id = Language.find_by(code: "en").id
@@ -26,7 +29,10 @@ japan_language_id = Language.find_by(code: "ja").id
 @available_countries = { "United States" => united_states_language_id, "Japan" => japan_language_id}
 
 @available_countries.each do |country, language_id|
-    Country.create(name: country, language_id: language_id)
+    country = Country.find_by(name: country)
+    unless country
+        Country.create(name: country, language_id: language_id)
+    end
 end
 
 
