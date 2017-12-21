@@ -29,7 +29,7 @@ form{
     	    border-radius: 3px;
     	    outline: 0px;
     	    border: 1px solid #bbb;
-    	    padding: 8px;
+    	    padding: 8px 5px;
     	    background-color: white;
     	    &:hover{
     	    	opacity: .95;
@@ -53,6 +53,9 @@ form{
     	    & + .error_icon{
     	        display: inline-block;
     	    }
+    	}
+    	textarea.form-control{
+    	    padding: 8px;
     	}
     }
 }
@@ -82,7 +85,8 @@ form{
         }
     }
     .body{
-        font-size: 14px;
+        font-size: 16px;
+        width: 100%;
         display: flex;
         flex-direction: column;
         border: none;
@@ -114,7 +118,7 @@ form{
                     .post_textarea_block{
                         display: flex;
                         border: 1px solid #aaa;
-                        padding: 5px 12px;
+                        padding: 5px;
                         border-radius: 3px;
                         min-height: 80px;
                         cursor: text;
@@ -123,6 +127,7 @@ form{
                             box-shadow: none;
                             flex: 1;
                             resize: none; 
+                            font-size: 16px;
                             &:focus{
                                 border: none;
                                 box-shadow: none;
@@ -296,6 +301,7 @@ form{
 .form_show.on_mobile{
 	@extend .mobile_btn;
 	height: auto;
+	display: none;
 }
 
 @media (max-width: 768px) {
@@ -303,7 +309,7 @@ form{
 	    padding: 12px;
 	}
     .article_show .post_form{ 
-        display: none;
+        // display: none;
     }	
 }
 
@@ -337,6 +343,7 @@ form{
         .form_main form{
             padding: 0;
             .textarea{
+                font-size: 16px;
             }
         }
     }
@@ -371,6 +378,7 @@ form{
             flex: 1;
             border: 1px solid #ddd;
             min-height: 46px;
+            font-size: 16px;
         }
     }
     .form_textarea.edit{
@@ -479,7 +487,7 @@ form{
     background-color: white;
     border-radius: 3px;
     color: #696969;
-    font-size: 14px;
+    font-size: 16px;
     display: flex;
     
     .profile_form_content{

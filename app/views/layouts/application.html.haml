@@ -77,3 +77,10 @@
 			=render 'dropdown/mobile_profile_option'
 
 
+:javascript
+	$("textarea").bind('paste', function(e) {
+	 var self = this;
+		  setTimeout(function(e) {
+			alert($(self).val());
+		  }, 0);
+	});

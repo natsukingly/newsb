@@ -4,24 +4,26 @@
 		.overlay
 			.article_container	
 				.featured_article_content
+					=link_to article, class: "featured_article_image_for_mobile" do
+						.article_image{style: "background-image: url(#{article_image_helper article.image.url});"}
 					%h2.featured_article_title
 						=link_to universal_truncate(article.title, 100), article_path(article)
-					=link_to article do
-						.featured_article_info
-							-report_count = article.posts.where(fake_news_report: true).count
-							%p.featured_post_posts_count
-								=render 'svg/speech_bubble_icon'
-								%span.post_number
-									#{article.posts_count} posts
-								-if report_count != 0
-									%sapn.report_number
-										#{report_count} fake news reports 
-										
-							%p.featured_article_source
-								= article.source
-								- if article.published_time
+					=link_to article, class: "featured_article_info" do
+						-report_count = article.posts.where(fake_news_report: true).count
+						%p.featured_post_posts_count
+							=render 'svg/speech_bubble_icon'
+							%span.post_number
+								#{article.posts_count} posts
+							-if report_count != 0
+								%sapn.report_number
+									#{report_count} fake news reports 
+							-if article.published_time
+								%sapn.published_time
 									%i.fa.fa-clock-o
 									#{time_ago_in_words_short(article.published_time)}	
+									
+						%p.featured_article_source
+							= article.source
 						
 					-unless best_post.nil?
 						=link_to article do
@@ -29,7 +31,9 @@
 								.user_info
 									.user_image_sm
 										=user_image_helper(best_post.user)
-									#{best_post.user.name} / #{best_post.user.credential}
+									#{best_post.user.name}
+									-unless best_post.user.credential.nil? || best_post.user.credential.empty?
+										\/ #{best_post.user.credential}
 								%p.best_post_content
 									-if best_post.content.empty?
 										> Shared this article

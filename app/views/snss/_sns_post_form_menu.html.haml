@@ -1,6 +1,4 @@
 -if user
-	%span
-		SHARE
 	.sns_block_small
 		-if user.facebook_post == true
 			=link_to unshare_facebook_snss_path(user.id), class: "sns_connect_btn facebook unshare", method: :post, remote: true do

@@ -5,8 +5,6 @@
 				
 				NEWSB
 			#locale_link
-				// .setting_icon
-				// 	=render "svg/location_icon"
 				.setting
 					=country_name_helper(@country.name)
 					%br
@@ -113,7 +111,8 @@
 		var windowWidth = $(window).width();
 		
 		if(windowWidth - 100 < position.left){
-			$('.nav_container').animate({scrollLeft: position.left - 50}, 500, "swing");
+			// $('.nav_container').animate({scrollLeft: position.left - 50}, 500, "swing");
+			$('.nav_container').scrollLeft(position.left - 50);
 		}
 		// $('#header_nav .selected_topic').text("#{@category.name}").show();
 	

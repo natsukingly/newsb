@@ -37,11 +37,6 @@
 						=t 'sidebar.likes.title'
 					
 				%p 
-					=t 'sidebar.likes.week'
-					\: #{user.weekly_liked_count}
-					// %span= Like.where(target_user_id: current_user.id).where(created_at: 48.hours.ago..Time.now).count
-		
-				%p 
 					=t 'sidebar.likes.all_time'
 					\: #{user.liked_count}
 					
@@ -84,8 +79,6 @@
 					%span
 						Likes
 					
-				%p 
-					Week: -
 				%p 
 					ALL-TIME: -
 			
