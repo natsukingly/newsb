@@ -68,6 +68,7 @@ module ApplicationHelper
         title: "NEWSB",
         description: "Share knowledge, ask questions, and report fake news.",
         keywords: "",
+        viewport: "width=device-width, initial-scale=1.0" ,
         og: {
           title: :title,
           type: "website",
