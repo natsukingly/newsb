@@ -1,94 +1,95 @@
 .sidebar_wrapper
-	-if current_user
-		.profile
-			.user_info
-				.name
-					%h2
-						=link_to user.name, user_path(user.id)
-					%h3.credential.grey= user.credential
-		
-			.stats
-				%h2.section_title.stats
-					=render 'svg/stats_icon'
-					%span
-						=t 'sidebar.stats.title'
-				.stats_item
-					%p 
-						=t 'sidebar.stats.posts'
-						\:
-						%span 
-							= user.posts.count
-				.stats_item
-					%p	
-						=t 'sidebar.stats.follower'
-						\:
-						%span 
-							= user.followers_count
-				.stats_item
-					%p
-						=t 'sidebar.stats.following'
-						\:
-						%span 
-							= user.following_count
-			.like_stats
-				%h2.section_title.like
-					=render 'svg/like_icon'
-					%span
-						=t 'sidebar.likes.title'
-					
-				%p 
-					=t 'sidebar.likes.all_time'
-					\: #{user.liked_count}
-					
-			#favorite_tags
-				%h2.section_title.tag
-					=render 'svg/tag_icon_circle'
-					%span
-						=t 'sidebar.favorite_tags.title'
-				.favorite_tags_block
-					-unless user.favorites.empty?
-						-user.favorites.includes(:tag).each do |favorite|
-							%p.tag
-								=link_to "\##{favorite.tag.name}",tag_path(favorite.tag.name)
-					=link_to "#{t('sidebar.favorite_tags.link')} >>", tags_path, class: "tags_link"
-				
-	-else
-		.profile.not_signed_in
-			.user_info
-				.name
-					%h2
-						No account
-					= link_to "signup・login", user_facebook_omniauth_authorize_path, class: "login_link"
-		
-			.stats
-				%h2.section_title.stats
-					=render 'svg/stats_icon'
-					Stats
-				.stats_item
-					%p 
-						Posts: -
-				.stats_item
-					%p	
-						Follower: -
-				.stats_item
-					%p
-						Following: -
-			.like_stats
-				%h2.section_title
-					=render 'svg/like_icon'
-					%span
-						Likes
-					
-				%p 
-					ALL-TIME: -
+	.sidebar_inner_wrapper
+		-if current_user
+			.profile
+				.user_info
+					.name
+						%h2
+							=link_to user.name, user_path(user.id)
+						%h3.credential.grey= user.credential
 			
+				.stats
+					%h2.section_title.stats
+						=render 'svg/stats_icon'
+						%span
+							=t 'sidebar.stats.title'
+					.stats_item
+						%p 
+							=t 'sidebar.stats.posts'
+							\:
+							%span 
+								= user.posts.count
+					.stats_item
+						%p	
+							=t 'sidebar.stats.follower'
+							\:
+							%span 
+								= user.followers_count
+					.stats_item
+						%p
+							=t 'sidebar.stats.following'
+							\:
+							%span 
+								= user.following_count
+				.like_stats
+					%h2.section_title.like
+						=render 'svg/like_icon'
+						%span
+							=t 'sidebar.likes.title'
+						
+					%p 
+						=t 'sidebar.likes.all_time'
+						\: #{user.liked_count}
+						
+				#favorite_tags
+					%h2.section_title.tag
+						=render 'svg/tag_icon_circle'
+						%span
+							=t 'sidebar.favorite_tags.title'
+					.favorite_tags_block
+						-unless user.favorites.empty?
+							-user.favorites.includes(:tag).each do |favorite|
+								%p.tag
+									=link_to "\##{favorite.tag.name}",tag_path(favorite.tag.name)
+						=link_to "#{t('sidebar.favorite_tags.link')} >>", tags_path, class: "tags_link"
+					
+		-else
+			.profile.not_signed_in
+				.user_info
+					.name
+						%h2
+							No account
+						= link_to "signup・login", user_facebook_omniauth_authorize_path, class: "login_link"
+			
+				.stats
+					%h2.section_title.stats
+						=render 'svg/stats_icon'
+						Stats
+					.stats_item
+						%p 
+							Posts: -
+					.stats_item
+						%p	
+							Follower: -
+					.stats_item
+						%p
+							Following: -
+				.like_stats
+					%h2.section_title
+						=render 'svg/like_icon'
+						%span
+							Likes
+						
+					%p 
+						ALL-TIME: -
+				
+						
+		
+		
 					
 	
-	
-				
-
-				
-		
+					
+			
 			
 			
 		

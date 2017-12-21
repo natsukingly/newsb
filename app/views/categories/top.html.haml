@@ -14,17 +14,16 @@
 		#main_contents.articles
 			.title
 				.social_mode_switch_block
-					-if @sns_mode == "on"
-						.social_mode_switch
-							%i.fa.fa-toggle-on.fa-2x.fa-rotate-180.active
-						.social_model_title
-							SNS MODE ON
-					-else
+					-if @sns_mode == "off"
 						.social_mode_switch
 							%i.fa.fa-toggle-on.fa-2x
 						.social_model_title
 							SNS MODE OFF
-
+					-else
+						.social_mode_switch
+							%i.fa.fa-toggle-on.fa-2x.fa-rotate-180.active
+						.social_model_title
+							SNS MODE ON
 				
 				%span.divider
 					\|

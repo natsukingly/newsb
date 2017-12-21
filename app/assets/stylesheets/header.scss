@@ -308,18 +308,18 @@ header{
 		overflow-y: hidden;
 		-webkit-overflow-scrolling: touch;
 		-ms-overflow-style: -ms-autohiding-scrollbar;
-		padding-bottom: 50px;
+		padding-bottom: 60px;
 		a {
 			flex: 1;
-			line-height: 40px;
-			padding: 0 12px;
-			letter-spacing: 1px;
-			height: 40px;
-			color: #696969;
-			display: inline-block;
-			text-align: center;
-			font-size: 12px;
-			text-decoration: none;
+		    line-height: 25px;
+		    padding: 0 12px;
+		    margin: 8px;
+		    letter-spacing: 1px;
+		    height: 25px;
+		    border-radius: 98px;
+		    display: inline-block;
+		    text-align: center;
+		    font-size: 12px;
 			&:hover{
 				color: #001E42;
 				background-color: #f1f1f1;
@@ -329,10 +329,10 @@ header{
 			color: red;
 		}
 		a.active{
-			color: black;
-			font-weight: 900;
-    		pointer-events: none;
-    		border-bottom: 2px solid #6495ED;
+		    color: white;
+		    font-weight: 900;
+		    pointer-events: none;
+		    background-color: cadetblue;
 		}
 		a.active.top_btn{
 			pointer-events: auto;
