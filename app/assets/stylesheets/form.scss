@@ -458,7 +458,7 @@ form{
 
 @media (max-width: 768px) {
 	.post_url_form{
-	    display: none;
+	   // display: none;
 	    &.on_modal, &.for_mobile{
 	        display: block;
 	    }
