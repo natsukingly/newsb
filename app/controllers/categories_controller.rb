@@ -20,7 +20,7 @@ class CategoriesController < ApplicationController
 	end
 	
 	def top
-		@sns_mode = cookies[:sns_mode] || "off"
+		@sns_mode = cookies[:sns_mode] || "on"
 		@articles = Article.all.where(country_id: @country.id).order(e_indecator: :desc, published_time: :desc).limit(30)
 		@featured_article = @articles.first
 		unless @featured_article.nil?
@@ -32,7 +32,7 @@ class CategoriesController < ApplicationController
 	end
 	
 	def articles
-		@sns_mode = cookies[:sns_mode] || "off"
+		@sns_mode = cookies[:sns_mode] || "on"
 		@articles = @category.articles.where(country_id: @country.id).order(e_indecator: :desc, published_time: :desc).limit(30)
 		@featured_article = @articles.first
 		unless @featured_article.nil?
