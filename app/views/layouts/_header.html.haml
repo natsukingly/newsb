@@ -2,23 +2,22 @@
 	.header_container
 		.left
 			= link_to root_path, class: "logo" do
-				
 				NEWSB
 			#locale_link
 				.setting
 					=country_name_helper(@country.name)
 					%br
 					=language_name_helper(@language.name)
-				
 			=render "dropdown/locale" 
 		.middle
 			.search_bar
 				=form_tag search_path(country: @country.name), method: "get" do
 					=text_field_tag :keyword, params[:keyword], placeholder: "search"
-					=submit_tag "", style: "display: none;"
-					%i.fa.fa-search.form_icon
+					=button_tag type: "submit" do
+						%i.fa.fa-search.form_icon
 	
 		.right
+
 			=link_to ranking_weekly_user_path, class: "icon" do
 				=render "svg/ranking_icon"	
 			=link_to tags_path, class: "icon" do
@@ -29,6 +28,9 @@
 					=render "shared/notification_icon"
 				#profile_option_link.user_image_sm.align_items_center
 					=user_image_helper(current_user)
+					%span.header_user_name
+						=current_user.name
+					%i.fa.fa-angle-down
 				#create_post_btn_circle.show_post_modal_btn
 					%span
 						+
@@ -132,6 +134,12 @@
 
 
 :javascript	
+	$('.search_bar form').submit(function(){
+		if($(this).find('input[type="text"]').val() == ''){
+			$(this).find('input[type="text"]').css("border", "1px solid red");
+			return false;
+		}	
+	});
 	$('#notification_icon').click(function () {
 		// ボタンが押されたら、モーダルウィンドウを表示
 		$(".ddm").hide();

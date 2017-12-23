@@ -1,19 +1,19 @@
 
-=link_to root_path, class: "icon" do
+=link_to root_path, class: "icon mobile_icon" do
 	=render "svg/mobile_home_icon"
 	
-.icon#mobile_locale_link
+.icon#mobile_locale_link.mobile_icon
 	%span
 		=render "svg/globe_icon"
 		
-.icon#mobile_post_link
+.icon#mobile_post_link.mobile_icon
 	%span.create_post_btn
 		+
 		
-=link_to tags_path, class: "icon" do
+=link_to tags_path, class: "icon mobile_icon" do
 	=render "svg/mobile_tag_icon"
 	
-.icon#mobile_notification_link
+.icon#mobile_notification_link.mobile_icon
 	%span
 		=render "svg/mobile_notification_icon"
 	

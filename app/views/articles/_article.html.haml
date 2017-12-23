@@ -1,48 +1,52 @@
 
-=link_to article_path(article.id), class: "article article_#{article.id} clearfix" do
-	.article_wrapper
-		.article_block
-			.image{style: "background-image: url(#{article_image_helper article.image.url});"}
-				%span.posts_count
-					#{article.posts_count}
-
-				-if current_user && current_user.admin == true
-					%span.e_counter
-						#{article.e_indecator}
-
+.article{class: "article_#{article.id}"}
+	=link_to article.url, class: "direct_article_link", target: "_blank" do
+		=render 'svg/window_icon'
 		
-			.info
-				.title
-					%h2.give_me_ellipsis
-						= article.title
-						- if article.title.empty?
-							[ This article has been deleted ]
-					%p.sm.grey
-						= universal_truncate_with_omission(article.source, 30, "")
-						- if article.published_time
-							%i.fa.fa-clock-o
-							#{time_ago_in_words_short(article.published_time)}
+	=link_to article do
+		.article_wrapper
+			.article_block
+				.image{style: "background-image: url(#{article_image_helper article.image.url});"}
+					%span.posts_count
+						#{article.posts_count}
+	
+					-if current_user && current_user.admin == true
+						%span.e_counter
+							#{article.e_indecator}
+	
 			
-		-if article.posts_count != 0
-			-post = article.posts.order(likes_count: :desc).first	
-			- if post != nil && post.content.empty? != true
-				.best_post
-					.body
-						.user_block
-							.user_details
-								.user_image_sm
-									=user_image_helper(post.user)
-								%p
-									%span.user_name
-										=post.user.name
-									%span.user_credential
-										=post.user.credential
-							%p.content
-								-if post.content.empty?
-									%span.shared_message
-										> Shared this article
-								-else
-									= universal_truncate(post.content, 200) do
-										%span ...
-			
-								
+				.info
+					.title
+						%h2.give_me_ellipsis
+							= article.title
+							- if article.title.empty?
+								[ This article has been deleted ]
+						%p.sm.grey
+							= universal_truncate_with_omission(article.source, 30, "")
+							- if article.published_time
+								%i.fa.fa-clock-o
+								#{time_ago_in_words_short(article.published_time)}
+				
+			-if article.posts_count != 0
+				-post = article.posts.order(likes_count: :desc).first	
+				- if post != nil && post.content.empty? != true
+					.best_post
+						.body
+							.user_block
+								.user_details
+									.user_image_sm
+										=user_image_helper(post.user)
+									%p
+										%span.user_name
+											=post.user.name
+										%span.user_credential
+											=post.user.credential
+								%p.content
+									-if post.content.empty?
+										%span.shared_message
+											> Shared this article
+									-else
+										= universal_truncate(post.content, 200) do
+											%span ...
+				
+									

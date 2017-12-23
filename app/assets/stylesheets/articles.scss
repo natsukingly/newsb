@@ -103,8 +103,32 @@
 
 
 .article{
+	position: relative;
 	&:first-child{
 		padding-top: 20px;
+	}
+	.direct_article_link{
+		z-index: 10;
+	    position: absolute;
+	    display: flex;
+	    align-items: center;
+	    top: 48px;
+	    right: 30px;
+	    font-size: 12px;
+	    color: grey;
+	    padding: 12px 0 12px 12px;
+	    svg{
+	    	margin-left: 5px;
+	    	width: 14px;
+	    	height: 14px;
+	    	fill: grey;
+	    }
+	    &:hover{
+	    	color: #001E42;
+	    	svg{
+	    		fill: #001E42;
+	    	}
+	    }
 	}
 	.article_wrapper{
 		padding-bottom: 0;
@@ -140,8 +164,8 @@
 					left: -3px;
 					&.posts_count{
 						background-color: white;
-						border: 1px solid lightblue;
-						color: cadetblue;
+						border: 1px solid cornflowerblue;
+						color: cornflowerblue;
 						top: -3px;
 					}
 					&.e_counter{

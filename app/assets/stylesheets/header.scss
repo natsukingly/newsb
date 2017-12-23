@@ -1,18 +1,33 @@
 .icon{
 	display: flex;
 	align-items: center;
-	margin-right: 20px;
+	margin-right: 12px;
 	cursor: pointer;
 	svg{
-		fill: #696969;
-		width: 18px;
-		height: 18px;
-		&:hover{
-			fill: #001E42;
-		}
+		fill: white;
+	    width: 30px;
+	    height: 30px;
+	    padding: 7px;
+	    background-color: #001E42;
+	    border-radius: 50%;
+	    transition: .1s;
 	}
-	
+	&:hover svg{
+		padding: 6px;
+	}
 }
+
+.mobile_icon{
+	margin: 0;
+	svg{
+		background-color: rgba(0,0,0,0);
+		fill: #001E42;
+		padding: 0;
+	}
+}
+
+
+
 .logo{
 	display: flex;
 	align-items: center;
@@ -39,38 +54,23 @@ header{
 		// header left start 
 		.left{
 			position: relative;
-			margin-right: 20px;
 			display: flex;
 	    	align-items: center;
-			#locale_link{
-			    display: flex;
-			    align-items: center;
-			    margin-left: 5px;
-			    cursor: pointer;
-				.setting{
-					color: #696969;
-				    margin-left: 5px;
-				    line-height: 12px;
-				    text-align: left;
-				    font-size: 10px;
-				}
-				.setting_icon{
-					display: flex;
-   					align-items: center;
-					svg{
-						fill: #696969;
-						width: 20px;
-					}	
-				}
-			    &:hover .setting, &:hover svg{
-			    	color: #001E42;
-			    	fill: #001E42;
-			    }
-			}
+	    	span{
+	    		display: inline-block;
+	    		height: 16px;
+	    		position: absolute;
+	    		top: 0;
+	    		left: 150px;
+	    		background-color: cornflowerblue;
+	    		color: white;
+	    		border-radius: 30px;
+	    	}
 		}
 		.middle, .right{
 			display: flex;
 			align-items: center;
+
 		}
 		
 		
@@ -86,26 +86,50 @@ header{
 				display: inline-block;
 				form{
 					display: flex;
+					align-items: center;
+					margin-right: 20px;
+					&:hover{
+						button[type="submit"]{
+
+						}
+						input{
+							border: 1px solid #001E42;
+						}
+					}
+				}
+				button[type="submit"]{
+					position: absolute;
+					right: 20px;
+					z-index: 10;
+					background-color: rgba(0,0,0,0);
+					border-radius: 0 3px 3px 0;
+					border: 1px solid rgba(0,0,0,0);
+					height: 30px;
+					line-height: 25px;
+					width: 40px;
+					border-left: none;
+					&:hover{
+						.form_icon{
+							color: #001E42;
+							
+						}
+					}
 				}
 				.form_icon{
-					position: absolute;
-					z-index: 22;
-					top: 7px;
-					left: 10px;
 					font-size: 16px;
 					color: grey;
-					float: left;
 				}
 				input {
 					z-index: 1;
-					width: 95%;
+					width: 100%;
 					height: 30px;
 					line-height: 25px;
 					border-radius: 3px;
 					background-color: rgba(0,0,0,0);
-					border: 1px solid #bbb;
-					padding: 0 0 0 35px;
 					font-size: 14px;
+					border: 1px solid #bbb;
+					padding: 0 30px 0 12px;
+
 				}
 				input:hover, input:focus {
 	                border: 1px solid #001E42;
@@ -197,12 +221,41 @@ header{
 		}
 	}
 }
+#locale_link{
+    display: flex;
+    align-items: center;
+    margin-right: 12px;
+    cursor: pointer;
+	.setting{
+		color: #696969;
+	    margin-left: 5px;
+	    line-height: 12px;
+	    text-align: left;
+	    font-size: 10px;
+	}
+	.setting_icon{
+		display: flex;
+   		align-items: center;
+		svg{
+			fill: #696969;
+			width: 20px;
+		}	
+	}
+    &:hover .setting, &:hover svg{
+    	color: #001E42;
+    	fill: #001E42;
+    }
+}
+
+
+
+
 #mobile_logo{
 	flex: 1;
 	text-align: center;
 	line-height: 50px;
 	font-size: 30px;
-	font-family: 'Bungee', cursive;
+	font-family: 'Raleway', sans-serif;
 }
 
 #mobile_header{
@@ -516,10 +569,32 @@ header{
 
 
 #profile_option_link{
-	margin-right: 0;
-	height: 35px;
-	cursor: pointer;
+	margin-right: 12px;
+	color: grey;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    border-radius: 50px;
+    padding-right: 12px;
+	&:hover{
+		color: #001E42;
+	}
+	.header_user_name{
+		margin-right: 8px;	
+	}
 }
+
+@media(max-width: 768px){
+	#profile_option_link{
+		.header_user_name{
+			display: none;
+		}
+		i{
+			display: none;
+		}
+	}	
+}
+
 
 
 #notification_icon{
