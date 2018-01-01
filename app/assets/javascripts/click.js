@@ -17,7 +17,9 @@ $(document).on('turbolinks:load', function() {
 	
 	// articles/show post_form form_no_category
 	$(".post_form .post_textarea_block").click(function(){
-	   $(this).find("#post_content").focus(); 
+		if(!($(this).hasClass('not_logged_in'))){
+			$(this).find("#post_content").focus(); 
+		}
 	});
 
 	$('.best_post_btn').click(function(event){

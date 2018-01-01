@@ -8,7 +8,7 @@
 				-else
 					%h2.published_time
 						PUBLISHED TIME:  #{post_draft.article.published_time}
-					=link_to article_path(post_draft.article_id), class: "post_article" do
+					=link_to article_path(post_draft.article_id), class: "post_article", target: "_blank" do
 						-if post_draft.article.image
 							.image{ style: "background-image: url(#{article_image_helper post_draft.article.image.url });"}
 						.article_info

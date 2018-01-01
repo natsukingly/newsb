@@ -1,0 +1,20 @@
+-if @existing_users
+	-index = user_counter + @existing_users.to_i
+-else
+	-index = user_counter + 1
+.user{class: "user_#{user.id}"}
+	.user_image
+		=user_image_helper(user)
+		%span.user_ranking
+			#{index}
+	=link_to user, class: "info" do
+		%p.name
+			%span
+				=user.name
+			= user.credential
+		%p.follower_stats 
+			FOLLOWER: #{user.followers.count} 
+			%span 
+				FOLLOWING: #{user.following.count}
+	.follow_switch
+		=render "/shared/follow_form_icon", user: user

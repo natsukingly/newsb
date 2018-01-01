@@ -5,7 +5,7 @@
 
 	.language
 		-Language.all.each do |language|
-			=link_to language_name_helper(language.name), change_language_path(language.id), class: "language_link_#{language.id}", method: :post
+			=link_to language_name_helper(language.name), change_language_path(locale: language.code, language_id: language.id), class: "language_link_#{language.id}", method: :post
 	
 			
 :javascript

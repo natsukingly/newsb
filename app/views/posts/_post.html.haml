@@ -7,13 +7,14 @@
 						.user_image
 							=user_image_helper(post.user)
 						.user_info_for_share
-							.give_me_short_ellipsis
-								=link_to post.user.name, post.user, class: "user_name bold"
+							=link_to post.user.name, post.user, class: "user_name bold"
+							%span
 								shared this article.
 								%i.fa.fa-clock-o
 								#{time_ago_in_words_short(post.created_at)}
-						.user_option.follow_switch
-							=render "/shared/follow_form_icon.html.haml", user: post.user
+						-if post.user != current_user
+							.user_option.follow_switch
+								=render "/shared/follow_form_icon.html.haml", user: post.user
 					-if post.article == nil
 						.shared_post_space
 						%p.deleted_article

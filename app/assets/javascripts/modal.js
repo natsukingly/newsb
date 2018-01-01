@@ -3,7 +3,11 @@ $(document).on('turbolinks:load', function() {
 	$('.show_post_modal_btn.on_feed').click(function () {
         var position = $('.post_url_form.on_feed').offset();
         var width = $('.post_section').width();
-    	$('#post_modal .post_modal_block').css("position", "absolute").css("left", position.left).css("top", 50).css("width", width + "px");
+        if(windowWidth >= 768){
+    		$('#post_modal .post_modal_block').css("position", "absolute").css("left", position.left).css("top", 50).css("width", width + "px");
+    	} else{
+    		$('#post_modal .post_modal_block').css("position", "absolute").css("left", position.left).css("top", 0).css("width", width + "px");
+    	}
 		$("#post_modal").fadeIn();
 		$('body').addClass('fixed');
 		$('#placeholder_url').focus();
@@ -24,7 +28,7 @@ $(document).on('turbolinks:load', function() {
 		}  
 	});
 	
-	$('.close_modal_btn').click(function (event) {
+	$('.close_modal_btn, .mobile_modal_back_btn').click(function (event) {
 		$("#post_modal").hide();
 		$('body').removeClass('fixed');
 	});	

@@ -1,7 +1,7 @@
 #user_profile_wrapper
 	.user_profile_container
 		.user_image_xl
-			=user_image_helper(user)
+			=user_image_lg_helper(user)
 		.user_info
 			.user_names
 				%h2
@@ -28,14 +28,10 @@
 						Follow
 #profile_nav
 	.nav_wrapper
-		=link_to @user, class: "profile_btn left active" do
-			%h3.fa.fa-globe 
-			%br
-			top
-		=link_to posts_user_path(@user.id), class: "profile_btn middle_left" do
+		=link_to @user, class: "profile_btn left" do
 			%h3= @user.posts.count
 			posts
-		=link_to followers_user_path(@user.id), class: "profile_btn middle_right" do
+		=link_to followers_user_path(@user.id), class: "profile_btn middle" do
 			%h3= @user.followers.count
 			follower
 		=link_to following_user_path(@user.id), class: "profile_btn right" do

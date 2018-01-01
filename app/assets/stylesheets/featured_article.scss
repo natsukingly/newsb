@@ -13,12 +13,14 @@
 		background-size: cover;
 		background-position: center;
 		display: flex;
+		flex-direction: column;
+
 		.overlay{
 			background-color: rgba(0, 5, 10, .85);
 			padding: 40px 20px;
 			flex: 1;
 			.article_container{
-				max-width: 1170px;
+				max-width: 900px;
 				margin: 0 auto;
 				height: 100%;
 				display: flex;
@@ -67,17 +69,6 @@
 									margin-left: 12px;
 								}
 							}
-						}
-					}
-					.featured_article_image_for_mobile{
-						display: none;
-						width: 100%;
-						.article_image{
-							height: 200px;
-							width: 100%;
-							background-size: cover;
-							background-position: center;
-							margin-bottom: 12px;
 						}
 					}
 					h2.featured_article_title{
@@ -185,6 +176,7 @@
 	#featured_article, #selected_article_mobile{
 		.article_wrapper{
 			.overlay{
+				
 				.article_container{
 					.featured_article_content{
 						margin-right: 0;
@@ -211,7 +203,9 @@
 			max-height: none;
 		    min-height: auto;
 			.overlay{
-				padding: 20px 12px;
+				padding: 12px;
+				padding-top: 120px;
+				background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.8));
 				.article_container{
 					.featured_article_content{
 						margin-bottom: 0;
@@ -219,21 +213,24 @@
 						.best_post{
 							display: none;
 						}
-						.featured_article_image_for_mobile{
-							display: block;
-						}
 						h2.featured_article_title{
 							width: 100%;
-							font-size: 20px;
+							font-size: 18px;
 							margin-right: 0;
 							text-align: left;
 							margin-bottom: 5px;
+							a{
+								color: white;
+								text-shadow: 0 0 12px rgba(0,0,0,.8);
+							}
 						}
 						.featured_article_info, .selected_article_info{
 							flex-direction: column-reverse;
 							align-items: flex-start;
 							margin-bottom: 0;
 							width: 100%;
+							color: white;
+							text-shadow: 0 0 12px rgba(0,0,0,.8);
 							.featured_post_posts_count{
 								margin-bottom: 5px;
 								margin-right: 0;
@@ -292,10 +289,21 @@
 
 
 #selected_article{
+	display: flex;
+	flex-direction: column-reverse;
+	.article_image_for_mobile{
+		height: 250px;
+		background-size: cover;
+		background-position: center;
+		display: none;
+		
+	}
 	.article_wrapper{
 		background-size: cover;
 		background-position: center;
 		display: flex;
+		padding-bottom: 250px;
+		box-shadow: 0 0 12px #aaa, 0 0 10px #aaa;
 		.overlay{
 			background-color: rgba(0, 5, 10, .85);
 			padding: 20px;
@@ -311,22 +319,23 @@
 				.article_title{
 					flex: 1;	
 					color: #eee;
-					font-size: 20px;
-					line-height: 16px;
+					font-weight: 900;
+					font-size: 18px;
+					line-height: 20px;
 					.selected_article_info{
 						font-size: 12px;
 						
 					}
 				}
 				.read_article_btn{
-					border-radius: 3px;
-					background-color: rgba(255,255,255,.8);
-					color: #001E42;
-					font-weight: 900;
-					padding: 8px 30px;
-					transition: .2s;
+				    border-radius: 3px;
+				    background-color: rgba(255, 255, 255, 0.1);
+				    color: #eee;
+				    padding: 8px 30px;
+				    transition: .2s;
 					&:hover{
-						background-color: white;
+						background-color: rgba(255, 255, 255, 0.2);
+						color: white;
 					}
 				}
 			}
@@ -335,6 +344,46 @@
 }
 @media(max-width: 768px){
 	#selected_article{
-		display: none;
+		flex-direction: column;
+		.article_image_for_mobile{
+			height: 200px;
+			display: block;
+		}
+		.article_wrapper{
+			padding: 0;
+			box-shadow: none;
+			.overlay{
+				background-color: white;
+				padding: 12px 5px;
+				.article_container{
+					flex-direction: column;
+					// justify-content: space-between;
+					// align-items: center;
+					.article_title{
+						flex: 1;	
+						color: black;
+						font-weight: 900;
+						font-size: 18px;
+						line-height: 24px;
+						margin-bottom: 12px;
+						.selected_article_info{
+							font-size: 12px;
+						}
+					}
+					.read_article_btn{
+						border: 1px solid grey;
+					    border-radius: 3px;
+					    background-color: rgba(0,0,0,0);
+					    color: black;
+					    width: 100%;
+					    text-align: center;
+						&:hover{
+							background-color: #001E42;
+							color: white;
+						}
+					}
+				}
+			}
+		}
 	}
 }

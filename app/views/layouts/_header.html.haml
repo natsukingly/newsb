@@ -1,4 +1,5 @@
 %header
+
 	.header_container
 		.left
 			= link_to root_path, class: "logo" do
@@ -12,13 +13,13 @@
 		.middle
 			.search_bar
 				=form_tag search_path(country: @country.name), method: "get" do
-					=text_field_tag :keyword, params[:keyword], placeholder: "search"
+					=text_field_tag :keyword, params[:keyword], placeholder: "Search"
 					=button_tag type: "submit" do
 						%i.fa.fa-search.form_icon
 	
 		.right
 
-			=link_to ranking_weekly_user_path, class: "icon" do
+			=link_to ranking_user_path, class: "icon" do
 				=render "svg/ranking_icon"	
 			=link_to tags_path, class: "icon" do
 				=render "svg/tag_icon"	
@@ -54,7 +55,7 @@
 			%i.fa.fa-circle.fa-stack-2x
 			%i.fa.fa-search.fa-stack-1x
 		=form_tag search_path(country: @country.name), method: "get", id: "search" do
-			=text_field_tag :keyword, params[:keyword], placeholder: "search"
+			=text_field_tag :keyword, params[:keyword], placeholder: "Search"
 			=submit_tag "", style: "display: none;"
 			
 	= link_to "NEWSB", root_path, id: "mobile_logo" 
@@ -155,12 +156,18 @@
 		return false;
 	});
 
-	$('body').click(function (event) {
-		if(!$(event.target).closest('#notification_ddm').length && !$(event.target).is('#notification_ddm')) {
-			$("#notification_ddm").hide();
-			// $('body').removeClass("fixed");
-		}
-	});
+	// $('body').click(function (event) {
+	// 	if(!$(event.target).closest('#notification_ddm').length && !$(event.target).is('#notification_ddm')) {
+	// 		$("#notification_ddm").hide();
+	// 		// $('body').removeClass("fixed");
+	// 	}
+	// });
+	// $('body').click(function (event) {
+	// 	if(!$(event.target).closest('.ddm').length && !$(event.target).is('.ddm')) {
+	// 		$(".ddm").hide();
+	// 		// $('body').removeClass("fixed");
+	// 	}
+	// });
 		
 	$('#profile_option_link').click(function () {
 		$(".ddm").hide();

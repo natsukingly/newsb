@@ -1,21 +1,24 @@
--if current_user
-	.post_modal_block.modal_block
-		.modal_title
-			%h2
-				=t 'form.url.caption'
-		.post_url_form.on_modal
-			=render "shared/url_form_modal"
-		.post_form_requirement
-			%h2
-				Note:
-			%ul
-				%li
-					NEWSB's algorism favors the articles published within a week.
-				%li
-					Some articles cannot be updated due to the company policy or website setup. 
-			.post_form_icon
-				=render 'svg/news_bubble_icon'
-		.post_form_block.on_modal
-		.close_modal_btn
-			=render 'svg/close_icon'
+
+.post_modal_block.modal_block
+	.mobile_modal_back_btn
+		%span
+			< BACK
+	.modal_title
+		%h2
+			=t 'form.url.caption'
+	.post_url_form.on_modal
+		=render "shared/url_form_modal"
+	.post_form_requirement
+		%h2
+			Note:
+		%ul
+			%li
+				NEWSB's algorism favors the articles published within a week.
+			%li
+				Some articles cannot be updated due to the company policy or website setup. 
+		.post_form_icon
+			=render 'svg/news_bubble_icon'
+	.post_form_block.on_modal
+	.close_modal_btn
+		=render 'svg/close_icon'
 	

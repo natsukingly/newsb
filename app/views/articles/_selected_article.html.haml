@@ -1,4 +1,5 @@
 %div{ class: "article_#{article.id}", id: "selected_article"}
+	.article_image_for_mobile{style: "background-image: url(#{article_image_helper article.image.url});"}
 	.article_wrapper.image{style: "background-image: url(#{article_image_helper article.image.url});"}
 		.overlay
 			.article_container

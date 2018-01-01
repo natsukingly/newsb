@@ -15,6 +15,15 @@ input[type="file"] {
     min-height: 400px;
 }
 
+@media(max-width: 768px){
+    #user_profile_setting_wrapper, #sns_setting_wrapper{
+        padding: 0;
+        form{
+            padding: 12px;
+        }
+    }
+}
+
 .error_message{
     color: red;
 }
@@ -102,11 +111,23 @@ input[type="file"] {
     }
 }
 
+@media(max-width: 768px){
+    .setting_block{
+
+        .title{
+            width: 80px;
+        }
+    }
+}
+
+
+
+
 .submit_btn_group{
     display: flex;
 }
 #setting_submit_btn{
-    width: 200px;
+    width: 100px;
     background-color: white;
     color: #001E42;
     border: 1px solid #001E42;

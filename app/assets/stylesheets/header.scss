@@ -24,6 +24,9 @@
 		fill: #001E42;
 		padding: 0;
 	}
+	&:hover svg{
+		padding: 0;
+	}
 }
 
 
@@ -254,7 +257,8 @@ header{
 	flex: 1;
 	text-align: center;
 	line-height: 50px;
-	font-size: 30px;
+	font-size: 28px;
+
 	font-family: 'Raleway', sans-serif;
 }
 
@@ -401,6 +405,7 @@ header{
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			text-align: center;
 			span.feed_notifications_count{
 				display: inline-block;
 				width: 17px;
@@ -409,8 +414,14 @@ header{
 				background-color: #6495ED;
 				color: white;
 				font-size: 10px;
-				line-height: 16px;
+				line-height: 17px;
 				margin-left: 5px;
+			}
+			&.active{
+				span.feed_notifications_count{
+					background-color: white;
+					color: cadetblue;
+				}
 			}
 		}
 	}

@@ -58,6 +58,7 @@
 				= render partial: "articles/side_recent_article", collection: @recent_articles, as: :article
 
 :javascript
+
 	$('.scroll_btn.categorized_articles').click(function(){
 		var stop_loading = $(this).hasClass('stop_loading');
 		if(!(stop_loading)){
@@ -72,6 +73,10 @@
 			$(this).addClass("loading");
 		}
 	})
+
+	if(#{@sns_mode != "on"}){
+		$('.article .best_post').hide();
+	}
 
 	$('.social_mode_switch_block').click(function(){
 		var $switch = $(this).find('i');

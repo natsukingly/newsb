@@ -22,7 +22,6 @@
 				.result_not_found
 					%h4.not_found_content
 						=t('not_found.user_following')
-					=link_to "RANKING", ranking_weekly_user_path, class: "btn_md in_navy"
 			-else
 				.user_lists
 					= render @users

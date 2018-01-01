@@ -8,7 +8,6 @@
 			= user.credential
 		%p.follower_stats 
 			FOLLOWER: #{user.followers.count} 
-			%span 
-				FOLLOWING: #{user.following.count}
-	.follow_link
-		=render "/shared/follow_form", user: user
+
+	.follow_switch
+		=render "/shared/follow_form_icon", user: user

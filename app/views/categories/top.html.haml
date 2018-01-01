@@ -62,7 +62,9 @@
 			$(this).addClass("loading");
 		}
 	})
-	
+	if(#{@sns_mode != "on"}){
+		$('.article .best_post').hide();
+	}	
 	$('.social_mode_switch_block').click(function(){
 		var $switch = $(this).find('i');
 		var $state = $(this).find('.social_model_title');

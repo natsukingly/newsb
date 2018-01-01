@@ -110,9 +110,12 @@ class PostsController < ApplicationController
 																category_id: @article.category_id,
 																user_id: current_user.id,
 																country_id: @country.id)
-		@post.save
-		flash[:notice] = "Your have successfully published your post."
-		redirect_to @article
+		if @post.save
+			flash[:notice] = "Your have successfully published your post."
+			redirect_to @article
+		else 
+			render :top
+		end
 	end
 
 	def update
@@ -208,7 +211,7 @@ class PostsController < ApplicationController
 			end
 			
 			#PUBLISHED_TIME
-			unless doc.css('//meta[property="article:published_time"]/@content').empty?
+			unless doc.css('//meta[property="article:published_time"]/@content') != "{:value=>nil}" || doc.css('//meta[property="article:published_time"]/@content').empty?
 				@article_published_time = doc.css('//meta[property="article:published_time"]/@content').to_s
 			end
 		end
@@ -254,7 +257,7 @@ class PostsController < ApplicationController
 				if params[:article][:image].to_s == "no_image"
 					@article.image = "no_image.jpeg"
 				else
-					@article.remote_image_url = params[:article][:image].gsub('http:','https:')
+					@article.remote_image_url = params[:article][:image]
 				end
 				@article.category_id = params[:post][:category_id].to_i
 				@article.country_id = @country.id

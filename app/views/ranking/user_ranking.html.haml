@@ -6,12 +6,10 @@
 				=t 'ranking.title'
 			
 			.nav_options	
-				=link_to t('ranking.nav.item.weekly'), ranking_weekly_user_path 
-				|
 				=link_to t('ranking.nav.item.all_time'), ranking_user_path, class: "active"
 
 		#main_contents.user_lists
-			= render @users
+			= render partial: 'users/user_with_rank', collection: @users, as: :user
 			-if @users.count < 30
 				.scroll_btn.stop_loading
 					NO MORE USERS	

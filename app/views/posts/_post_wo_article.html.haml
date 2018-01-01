@@ -3,25 +3,25 @@
 	.post{class: "post post_#{post.id} share"}
 		.body
 			.main
-				.content.clearfix
+				.content
 					.user_block.clearfix{class: "user_#{post.user.id}"}
 						.user_image
 							=user_image_helper(post.user)
 						.user_info_for_share
-							.give_me_short_ellipsis
-								=link_to post.user.name, post.user, class: "user_name bold"
-								shared this article.
-								%i.fa.fa-clock-o
-								#{time_ago_in_words_short(post.created_at)}
-						.user_option.follow_switch
-							=render "/shared/follow_form_icon.html.haml", user: post.user
+							=link_to post.user.name, post.user, class: "user_name bold"
+							shared this article.
+							%i.fa.fa-clock-o
+							#{time_ago_in_words_short(post.created_at)}
+						-if post.user != current_user
+							.user_option.follow_switch
+								=render "/shared/follow_form_icon.html.haml", user: post.user
 								
 
 -else				
 	.post{class: "post post_#{post.id} clearfix"}
 		.body
 			.main
-				.content.clearfix
+				.content
 					.user_block.clearfix{class: "user_#{post.user.id}"}
 						.user_image
 							=user_image_helper(post.user)

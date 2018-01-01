@@ -52,6 +52,7 @@
                 padding-right: 0;
                 .opinion{
                     padding: 12px 0;
+                    font-size: 14px;
                 }
                 .edit_form{
                     display: none;
@@ -114,14 +115,18 @@
 }
 
 .post.share{
+    display: none;
      .body{
         padding: 12px 20px; 
         .user_info_for_share{
-            display: flex;
-            align-items: center;
+            margin-top: 10px;
             flex: 1;
+            font-size: 14px;
+            margin-left: 5px;
+            color: grey;
             a{
                 color: $lightNavy;
+                font-size: 16px;
             }
         }
      }
@@ -171,6 +176,7 @@
         margin-top: 12px;
     }
     .post, .post.share{
+        // display: none;
         border-radius: 0;
         .body{
              padding: 12px;

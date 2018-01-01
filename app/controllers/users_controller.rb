@@ -193,6 +193,7 @@ class UsersController < ApplicationController
       @user.country_id = @country.id
       @user.save
     end
+    cookies[:country] = @country.name
     redirect_to root_path(country: @country.name)
   end
   
@@ -203,9 +204,10 @@ class UsersController < ApplicationController
       @user.language_id = language.id
       @user.save
     end
+    cookies[:language] = @language.name
     redirect_url = cookies[:previous_url]
     cookies.delete :previous_url
-    redirect_to redirect_url || root_path
+    redirect_to root_path(locale: @language.code)
   end
       
       

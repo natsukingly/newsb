@@ -40,14 +40,13 @@
 		display: flex;
 		padding: 50px 20px;
 		img{
-			height: 80px;
 			margin: 12px;
 		}
 		.user_info{
 			flex: 1;
 			display: flex;
 			padding: 12px 20px;
-			line-height: 12px;
+			line-height: 20px;
 			.user_names{
 				flex: 1;
 				display: flex;
@@ -162,7 +161,7 @@
 		.user_profile_container{
 			flex-direction: column;
 			text-align: center;
-			padding: 50px 12px;
+			padding: 30px 12px;
 			img{
 			}
 			.user_info{
@@ -209,7 +208,6 @@
 	}
 	h2.profile_title{
 		padding: 8px 12px;
-		padding-left: 0;
 		font-weight: bold;
 		font-size: 16px;
  	    border-bottom: 1px solid #aaa;
@@ -255,9 +253,22 @@
 			color: grey;
 			font-size: 12px;
 		}
-		.image{
-			height: 50px;
-			width: 50px;
+		.user_image{
+			position: relative;
+			span.user_ranking{
+				display: inline-block;
+				border-radius: 50px;
+				min-width: 20px;
+				height: 20px;
+				line-height: 12px;
+				padding: 3px;
+				text-align: center;
+				position: absolute;
+				left: -16px;
+			    top: -8px;
+			    background-color: white;
+			    border: 1px solid #001E42;			
+			}
 		}
 		.follow_link{
 			width: 80px;

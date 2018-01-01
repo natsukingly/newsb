@@ -1,299 +1,357 @@
 
 
 .btn_lg{
-    padding: 10px 12px;
+	padding: 10px 12px;
 }
 
 .error_block{
-    min-height: 12px;
-    .error_message{
-        // padding: 0 12px;
-        color: #8b0000;
-        &:last-child{
-            margin-bottom: 12px;
-        }
-    }
+	min-height: 12px;
+	.error_message{
+		// padding: 0 12px;
+		color: #8b0000;
+		&:last-child{
+			margin-bottom: 12px;
+		}
+	}
 }
 
+.dummy_layer{
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 10;
+}
+
+
 #login_error_message{
-    color: red;
-    margin: 12px 0 0;
+	color: red;
+	margin: 12px 0 0;
 }
 
 
 form{
-    div{
-        position: relative;
-    	input[type="text"], input[type="password"], input[type="submit"], input[type="email"], textarea{
-    		width: 100%;
-    	    border-radius: 3px;
-    	    outline: 0px;
-    	    border: 1px solid #bbb;
-    	    padding: 8px 5px;
-    	    background-color: white;
-    	    &:hover{
-    	    	opacity: .95;
-    	    }
-    	}
-    	input[type="submit"]{
-            padding: 5px 12px;
-    	}
-    	.error_icon{
-    	    position: absolute;
-            top: 12px;
-            right: 12px;
-            font-size: 20px;
-            color: darkred;
-            display: none;
-    	}
-    	&.field_with_errors{
-    	    input[type="text"], input[type="password"], input[type="submit"], input[type="email"]{
-        	    border: 1px solid red;
-    	    }
-    	    & + .error_icon{
-    	        display: inline-block;
-    	    }
-    	}
-    	textarea.form-control{
-    	    padding: 8px;
-    	}
-    }
+	div{
+		position: relative;
+		input[type="text"], input[type="password"], input[type="submit"], input[type="email"], textarea{
+			width: 100%;
+			border-radius: 3px;
+			outline: 0px;
+			border: 1px solid #bbb;
+			padding: 8px 5px;
+			background-color: white;
+			&:hover{
+				opacity: .95;
+			}
+		}
+		input[type="submit"]{
+			padding: 5px 12px;
+		}
+		.error_icon{
+			position: absolute;
+			top: 12px;
+			right: 12px;
+			font-size: 20px;
+			color: darkred;
+			display: none;
+		}
+		&.field_with_errors{
+			input[type="text"], input[type="password"], input[type="submit"], input[type="email"]{
+				border: 1px solid red;
+			}
+			& + .error_icon{
+				display: inline-block;
+			}
+		}
+		textarea.form-control{
+			padding: 8px;
+		}
+	}
 }
 .dummy_url_form{
-    color: grey;
-    flex: 1;
-    cursor: text;
-    height: 30px;
-    border-bottom: 1px solid #eee;
+	color: grey;
+	flex: 1;
+	cursor: text;
+	height: 30px;
+	border-bottom: 1px solid #eee;
 }
 .post_form{
-    margin-bottom: 0;
-    // border-bottom: 1px solid #eee;
-    background-color: white;
-    &[data-form="feed"]{
-        margin-bottom: 12px;
-    }
-    .post_article{
-        flex-direction: column;
-        .post_image{
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-        }
-        .article_info{
-            padding: 12px;
-        }
-    }
-    .body{
-        font-size: 16px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        border: none;
-        padding: 20px;
-        .form_main{
-            flex: 1;
-            form{
-                .form_check_group{
-                    display: flex;
-                    flex-wrap: wrap;
-                    align-items: center;
-                    color: #696969;
-                    .title, .select{
-                        display: flex;
-                        align-items: center;
-                        font-size: 16px;
-                        margin-right: 20px;
-                        color: #001E42;
-                        font-weight: 900;
-                    }
-                    .check{
-                        input{
-                            margin-right: 5px;
-                        }
-                    }
-                }
-                .post_textarea_wrapper{
-                    position: relative;
-                    .post_textarea_block{
-                        display: flex;
-                        border: 1px solid #aaa;
-                        padding: 5px;
-                        border-radius: 3px;
-                        min-height: 80px;
-                        cursor: text;
-                        textarea{
-                            border: none;
-                            box-shadow: none;
-                            flex: 1;
-                            resize: none; 
-                            font-size: 16px;
-                            &:focus{
-                                border: none;
-                                box-shadow: none;
-                                outline: none;
-                            }
-                        }
-                    }
-                }
-                .form_label{
-                    color: #696969;
-                    margin-bottom: 10px;
-                }
-                .textarea_label{
-                    border-bottom: 1px solid #f9f9f9;
-                }
-            }
-            .select{
-                select{
-                    width: 180px;
-                    border: 1px solid #bbb;
-                }
-                select::-webkit-input-placeholder{
-                    color: red;
-                }
-                .tag_selection{
-                    box-shadow: none;
-                    text-align: center;
-                }  
-                   
-            }
-            .post_submit_menu{
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                .form_btn{
-                    background-color: white;
-                    color: #001E42;
-                    border-radius: 3px;
-                    border: 1px solid #bbb;
-                    width: 90px;
-                    margin-left: 5px;
-                    padding: 0;
-                    transition: .2s;
-                    line-height: 35px;
-                    &:hover{
-                        background-color: #001E42;
-                        color: white;
-                    }
-                    &.post_save_btn{
-                        border: none;
-                        color: grey;
-                        &:hover{
-                            background-color: white;
-                            font-weight: 900;
-                            color: #001E42;
-                        }
-                    }
-                }
-                .draft_btn{
-                    background-color: white;
-                    color: #696969;
-                    width: 90px;
-                    padding: 5px 12px;
-                    transition: .2s;
-                    border: none;
-                    &:hover{
-                        color: #001E42;
-                    }
-                }
-                #sns_post_form_menu{
-                    display: flex;
-                    justify-content: flex-end;
-                    align-items: center;
-                    color: grey;
-                    span{
-                        margin-right: 12px;
-                    }
-                    .sns_block_small{
-                        display: flex;
-                        align-items: center;
-                        .sns_connect_btn{
-                            border-radius: 3px;
-                            width: 35px;
-                            height: 35px;
-                            margin-right: 8px;
-                            font-size: 20px;
-                            border: 1px solid #aaa;
-                            display: flex;
-                            padding: 0;
-                            align-items: center;
-                            justify-content: center;
-                            &.connect, &.share{
-                                color: grey; 
- 
-                            }
-                            &.unshare{
-                                color: white;
-                                &:hover{
-                                    opacity: .8;
-                                }
-                            }
-                            &.facebook.connect:hover, &.facebook.share:hover, &.facebook.unshare{
-                                background-color: $facebook;
-                                color: white;
-                                border: none;
-                            }
-                            &.twitter.connect:hover, &.twitter.share:hover, &.twitter.unshare{
-                                background-color: $twitter;
-                                color: white;
-                                border: none;
-                            }                            
-                            &.linkedin.connect:hover, &.linkedin.share:hover,&.linkedin.unshare{
-                                background-color: $linkedin;
-                                color: white;
-                                border: none;
-                            }
-        
-                        }
-                    }
-                }
-                .cancel_btn, .clear_btn{
-                    line-height: 25px;
-                    width: 90px;
-                    text-align: center;
-                    padding: 5px;
-                    cursor: pointer;
-                    transition: .2s;
-                    &:hover{
-                        opacity: .8;
-                    }
-                    
-                }
-            }
-        }
-    }
+	margin-bottom: 0;
+	// border-bottom: 1px solid #eee;
+	background-color: white;
+	&[data-form="feed"]{
+		margin-bottom: 12px;
+	}
+	.post_article{
+		flex-direction: column;
+		.post_image{
+			height: 200px;
+			background-size: cover;
+			background-position: center;
+		}
+		.article_info{
+			padding: 12px;
+		}
+	}
+	.body{
+		font-size: 16px;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		border: none;
+		padding: 20px;
+		.form_main{
+			flex: 1;
+			form{
+				.form_check_group{
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					color: #696969;
+					.title, .select{
+						display: flex;
+						align-items: center;
+						font-size: 16px;
+						margin-right: 20px;
+						color: #001E42;
+						font-weight: 900;
+					}
+					.check{
+						input{
+							margin-right: 5px;
+						}
+					}
+				}
+				.post_textarea_wrapper{
+					position: relative;
+					
+					margin: 12px 0;
+					padding: 0;
+					.post_textarea_block{
+							display: flex;
+							border: 1px solid grey;
+							padding: 5px;
+							min-height: 80px;
+							cursor: text;
+						textarea{
+							border: none;
+							box-shadow: none;
+							flex: 1;
+							resize: none; 
+							font-size: 16px;
+							&:focus{
+								border: none;
+								box-shadow: none;
+								outline: none;
+							}
+						}
+					}
+				}
+				.form_label{
+					color: #696969;
+					margin-bottom: 10px;
+				}
+				.textarea_label{
+					border-bottom: 1px solid #f9f9f9;
+				}
+			}
+			.select{
+				select{
+					width: 180px;
+					border: 1px solid #bbb;
+				}
+				select::-webkit-input-placeholder{
+					color: red;
+				}
+				.tag_selection{
+					box-shadow: none;
+					text-align: center;
+				}  
+				   
+			}
+			.post_submit_menu{
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				.form_btn{
+					background-color: white;
+					color: #001E42;
+					border-radius: 3px;
+					border: 1px solid #bbb;
+					width: 90px;
+					// margin-left: 5px;
+					padding: 0;
+					transition: .2s;
+					line-height: 35px;
+					&:hover{
+						background-color: #001E42;
+						color: white;
+					}
+					&.post_save_btn{
+						border: none;
+						color: grey;
+						&:hover{
+							background-color: white;
+							font-weight: 900;
+							color: #001E42;
+						}
+					}
+				}
+				.draft_btn{
+					background-color: white;
+					color: #696969;
+					width: 90px;
+					padding: 5px 12px;
+					transition: .2s;
+					border: none;
+					&:hover{
+						color: #001E42;
+					}
+				}
+				.cancel_btn, .clear_btn{
+					line-height: 25px;
+					width: 90px;
+					text-align: center;
+					padding: 5px;
+					cursor: pointer;
+					transition: .2s;
+					&:hover{
+						opacity: .8;
+					}
+					
+				}
+			}
+		}
+	}
+}
+#sns_post_form_menu{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	color: grey;
+	>span{
+		margin-right: 12px;
+	}
+	.sns_block_small{
+		display: flex;
+		align-items: center;
+		.sns_connect_btn{
+			border-radius: 3px;
+			width: 35px;
+			height: 35px;
+			margin-right: 8px;
+			font-size: 20px;
+			border: 1px solid #aaa;
+			display: flex;
+			padding: 0;
+			position: relative;
+			align-items: center;
+			justify-content: center;
+			&.locked, &.share{
+				color: grey; 
+
+			}
+			&.unshare{
+				color: white;
+				&:hover{
+					opacity: .8;
+				}
+			}
+			&.facebook.unshare{
+				background-color: $facebook;
+			}
+			&.twitter.unshare{
+				background-color: $twitter;
+			}
+			span{
+				display: flex;
+			    align-items: center;
+			    justify-content: center;
+			    position: absolute;
+				width: 20px;
+			    height: 20px;
+			    top: -8px;
+			    right: -8px;
+			    border-radius: 50%;
+			    text-align: center;
+			    font-size: 14px;
+			    background-color: rgba(0,0,0,.3);
+			    color: white;
+			}
+		}
+	}
+}
+@media(min-width: 768px){
+	#sns_post_form_menu{
+		.sns_block_small{
+			.sns_connect_btn{
+				&.locked, &.share{
+				}
+				&.unshare{
+					&:hover{
+					}
+				}
+				span{
+				}
+				&.facebook.connect:hover, &.facebook.share:hover{
+					background-color: $facebook;
+					color: white;
+					border: none;
+				}
+				&.twitter.connect:hover, &.twitter.share:hover{
+					background-color: $twitter;
+					color: white;
+					border: none;
+				}                            
+				&.facebook.locked:hover{
+					border: 1px solid $facebook;
+					span{
+						background-color: $facebook;
+					}
+				}
+				&.twitter.locked:hover{
+					border: 1px solid $twitter;
+					span{
+						background-color: $twitter;
+					}
+				}                         
+			}
+		}
+	}	
 }
 
 .post_form_requirement{
-    height: 335px;
-    border: 1px solid #eee;
-    padding: 12px;
-    line-height: 20px;
-    color: #696969;
-    h2{
-        font-size: 20px;
-        margin-bottom: 12px;
-    }
-    ul{
-        list-style: disc;
-        li{
-            list-style-type: disc;
-            list-style-position: inside;
-        }
-    }
-    .post_form_icon{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 160px;
-        background-color: #f9f9f9;
-        margin: 20px 0;
-        svg{
-            height: 100px;
-            
-        }
-    }
+	height: 335px;
+	border: 1px solid #eee;
+	padding: 12px;
+	line-height: 20px;
+	color: #696969;
+	h2{
+		font-size: 20px;
+		margin-bottom: 12px;
+	}
+	ul{
+		list-style: disc;
+		li{
+			list-style-type: disc;
+			list-style-position: outside;
+   			margin-left: 20px;
+   			margin-bottom: 8px;
+		}
+	}
+	.post_form_icon{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 160px;
+		background-color: #f9f9f9;
+		margin: 20px 0;
+		svg{
+			height: 100px;
+			
+		}
+	}
 }
 
 
@@ -306,306 +364,330 @@ form{
 
 @media (max-width: 768px) {
 	.post_form .body{
-	    padding: 12px;
+		padding: 12px 5px;
+		.form_main{ 
+			form .form_check_group{
+				display: block;
+				.title{
+					background-color: #eee;
+				    padding: 12px;
+				    margin: 0 0px;
+				}
+				.check{
+					padding-top: 12px;
+				}
+			}
+			form{
+				.post_textarea_wrapper{
+					margin: 12px 0;
+					.post_textarea_block{
+						// border-right: none;
+						// border-left: none;
+					}
+				}
+			}
+		}
 	}
-    .article_show .post_form{ 
-        // display: none;
-    }	
+	.article_show .post_form{ 
+		// display: none;
+	}	
 }
 
 .post_form_block{
-    &.loading{
-        text-align: center;
-        font-size: 50px;
-        color: grey;
-        margin: 100px 0;
-    }
-    .parse_failure_message{
-        text-align: center;
-        color: darkred;
-        font-size: 20px;
-    }
+	&.loading{
+		text-align: center;
+		font-size: 50px;
+		color: grey;
+		margin: 100px 0;
+	}
+	.parse_failure_message{
+		text-align: center;
+		color: darkred;
+		font-size: 20px;
+	}
 }
 
 .post_form.on_modal{
-    .post_article{
-        flex-direction: row;
-    }
+	.post_article{
+		flex-direction: row;
+	}
 }
 
 
 
 
 .post_form.edit_form{
-    .body{
-        padding: 0;
-        margin-bottom: 20px;
-        .form_main form{
-            padding: 0;
-            .textarea{
-                font-size: 16px;
-            }
-        }
-    }
+	.body{
+		padding: 0;
+		margin-bottom: 20px;
+		.form_main form{
+			padding: 0;
+			.textarea{
+				font-size: 16px;
+			}
+		}
+	}
 }
 
 
 .comment_form.edit_form{
-    .comment_submit{
-        display: flex;
-        margin: 5px 0;
-        input[type="submit"]{
-            border-radius: 3px;
-        }
-    }
+	.comment_submit{
+		display: flex;
+		margin: 5px 0;
+		input[type="submit"]{
+			border-radius: 3px;
+		}
+	}
 }
 
 
 .comment_form, .reply_form{
-    display: none;
-    padding: 12px 0 5px;
-    .form-group{
-        margin-bottom: 8px;
-    }
-    .form_textarea{
-        display: flex;
-        img{
-            margin-right: 10px;
-            width: 30px;
-            height: 30px;
-        }
-        textarea{
-            flex: 1;
-            border: 1px solid #ddd;
-            min-height: 46px;
-            font-size: 16px;
-        }
-    }
-    .form_textarea.edit{
-        margin: 0;
-    }
-    .comment_submit{
-        margin-left: 40px;
-        color: grey;
-        display: flex;
-        align-items: center;
-        input[type="submit"]{
-            background-color: rgba(0,0,0,0);
-            border: 1px solid #bbb;
-            width: 100px;
-            &:hover{
-                color: rgb(54, 88, 155);
-                border: 1px solid rgb(54, 88, 155);
-            }
-        }
-        .cancel_btn{
-            display: inline-block;
-            padding: 8px 12px;
-            cursor: pointer;
-            &:hover{
-                color: rgb(54, 88, 155);
-            }
-        }
-    }
+	display: none;
+	padding: 12px 0 5px;
+	.form-group{
+		margin-bottom: 8px;
+	}
+	.form_textarea{
+		display: flex;
+		img{
+			margin-right: 10px;
+			width: 30px;
+			height: 30px;
+		}
+		textarea{
+			flex: 1;
+			border: 1px solid #ddd;
+			min-height: 46px;
+			font-size: 16px;
+		}
+	}
+	.form_textarea.edit{
+		margin: 0;
+	}
+	.comment_submit{
+		margin-left: 40px;
+		color: grey;
+		display: flex;
+		align-items: center;
+		input[type="submit"]{
+			background-color: rgba(0,0,0,0);
+			border: 1px solid #bbb;
+			width: 100px;
+			&:hover{
+				color: rgb(54, 88, 155);
+				border: 1px solid rgb(54, 88, 155);
+			}
+		}
+		.cancel_btn{
+			display: inline-block;
+			padding: 8px 12px;
+			cursor: pointer;
+			&:hover{
+				color: rgb(54, 88, 155);
+			}
+		}
+	}
 }
 
 .post_url_form{
-    margin: 0 0 12px;
-    overflow: hidden;
-    padding: 12px 20px;
-    background-color: white;
-    box-shadow: 0 0 1px rgba(0,0,0,0.3);
-    input:focus, button:focus{
-        box-shadow: none;
-        border-color: rgb(204, 204, 204);
-    }
-    .url_form_title{
-        padding: 12px;
-        background-color: #f6f7f9;
-        font-size: 14px;
-        color: #4b4f56;
-        letter-spacing: 1px;
-    }
-    .url_form_title_on_feed{
-        margin-bottom: 12px;
-    }
-    form{
-        display: flex;
-        flex-direction: column;
-        i{
-            margin-right: 5px;
-        }
-        .form_row{
-            display: flex;
-            align-items: flex-end;
-        }
-        input[type=url]{
-            flex: 1;
-            border: none;
-            outline: none;
-            box-shadow: none;
-            height: 50px;
-            padding: 25px 12px 25px 0; 
-            font-size: 20px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        button[type=submit]{
-            width: 20px;
-        }
-    }
+	margin: 0 0 12px;
+	overflow: hidden;
+	padding: 12px 20px;
+	background-color: white;
+	box-shadow: 0 0 1px rgba(0,0,0,0.3);
+	input:focus, button:focus{
+		box-shadow: none;
+		border-color: rgb(204, 204, 204);
+	}
+	.url_form_title{
+		padding: 12px;
+		background-color: #f6f7f9;
+		font-size: 14px;
+		color: #4b4f56;
+		letter-spacing: 1px;
+	}
+	.url_form_title_on_feed{
+		margin-bottom: 12px;
+	}
+	form{
+		display: flex;
+		flex-direction: column;
+		i{
+			margin-right: 5px;
+		}
+		.form_row{
+			display: flex;
+			align-items: flex-end;
+		}
+		input[type=url]{
+			flex: 1;
+			border: none;
+			outline: none;
+			box-shadow: none;
+			height: 50px;
+			padding: 25px 12px 25px 0; 
+			font-size: 20px;
+			border-bottom: 1px solid #eee;
+		}
+		
+		button[type=submit]{
+			width: 20px;
+		}
+	}
 }
 
 @media (max-width: 768px) {
 	.post_url_form{
 	   // display: none;
-	    &.on_modal, &.for_mobile{
-	        display: block;
-	    }
-	    form input[type=url]{
-	        font-size: 16px;
-	    }
+	   margin-top: 20px;
+		&.on_modal, &.for_mobile{
+			display: block;
+		}
+		form input[type=url]{
+			font-size: 16px;
+		}
 	}
 	
 }
 
 #extra_info_wrapper{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-size: cover;
-    background-position: center;
-    overflow: scroll;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-size: cover;
+	background-position: center;
+	overflow: scroll;
 }
 
 #extra_info{
-    max-width: 600px;
-    padding: 50px;
-    margin: 50px auto;
-    background-color: white;
-    border-radius: 3px;
-    color: #696969;
-    font-size: 16px;
-    display: flex;
-    
-    .profile_form_content{
-        width: 100%;
-        .form_title{
-            display: flex;
-            .community_icon{
-                width: 30px;
-                svg{
-                    height: 30px;
-                    width: 30px;
-                }
-            }
-            h2{
-                flex: 1;
-                font-size: 50px;
-                font-weight: 900;
-                color: #001E42;
-                margin-bottom: 40px;
-                span{
-                    font-size: 14px;
-                    color: #696969;
-                }
-            }
-        }
-        p {
-            margin-bottom: 12px;
-        }
-        .form_label{
-            margin-bottom: 5px;
-        }
-        select, input, textarea{
-            margin-bottom: 12px;
-        }
-    }
-    
+	max-width: 600px;
+	padding: 50px;
+	margin: 50px auto;
+	background-color: white;
+	border-radius: 3px;
+	color: #696969;
+	font-size: 16px;
+	display: flex;
+	
+	.profile_form_content{
+		width: 100%;
+		.form_title{
+			display: flex;
+			.community_icon{
+				width: 30px;
+				svg{
+					height: 30px;
+					width: 30px;
+				}
+			}
+			h2{
+				flex: 1;
+				font-size: 50px;
+				font-weight: 900;
+				color: #001E42;
+				margin-bottom: 40px;
+				flex-direction: column;
+				span{
+					font-size: 14px;
+					color: #696969;
+				}
+			}
+		}
+		p {
+			margin-bottom: 12px;
+		}
+		.form_label{
+			margin-bottom: 5px;
+		}
+		select, input, textarea{
+			margin-bottom: 12px;
+		}
+	}
+	
 }
 
 @media (max-width: 768px) {
 	#extra_info{
-        width: auto;
-        padding: 20px 12px;
+		width: auto;
+		padding: 20px 12px;
 	}
 }
 
 
 @media (max-width: 600px) {
 	#extra_info{
-        width: auto;
-        margin: 0;
-        padding: 20px 12px 200px;
+		width: auto;
+		margin: 0;
+		padding: 20px 12px 200px;
 	}
 }
 
 .forgot_password_wrapper{
-    margin: 0 auto;
-    .forgot_password_section{
-        padding: 0 12px;
-        margin-top: 80px;
-        text-align: center;
-        h1.logo{
-            font-family: 'Nova Flat', cursive;
-            font-size: 45px;
-            margin-bottom: 20px;
-            justify-content: center;
-            color: #eee;
-        }
-        h2{
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: #eee;
-        }
-        p{
-            text-align: left;
-            margin-bottom: 40px;
-            font-size: 16px;
-            color: #eee;
-        }
-        form{
-            color: #ccc;
-            text-align: left;
-            input{
-                margin-bottom: 12px;
-                color: grey;
-            }
-            input[type=submit]{
-                background-color: cornflowerblue;
-                border: none;
-                color: #eee; 
-            }
-            #change_password_btn{
-                padding: 12px;     
-                margin-top: 12px;
-            }
-            .email{
-                display: flex;
-                margin-bottom: 20px;
-                input[type=submit]{
-                    width: 100px;
-                    margin-left: 5px;
-                    padding: 8px 12px;
-                }
-            }
-            ul{
-                padding: 12px;
-                font-size: 16px;
-                i{
-                    color: pink;
-                }
-            }
-        }
-    }
+	margin: 0 auto;
+	.forgot_password_section{
+		padding: 0 12px;
+		margin-top: 80px;
+		text-align: center;
+		h1.logo{
+			font-family: 'Nova Flat', cursive;
+			font-size: 45px;
+			margin-bottom: 20px;
+			justify-content: center;
+			color: #eee;
+		}
+		h2{
+			font-size: 20px;
+			margin-bottom: 20px;
+			color: #eee;
+		}
+		p{
+			text-align: left;
+			margin-bottom: 40px;
+			font-size: 16px;
+			color: #eee;
+		}
+		form{
+			color: #ccc;
+			text-align: left;
+			input{
+				margin-bottom: 12px;
+				color: grey;
+			}
+			input[type=submit]{
+				background-color: cornflowerblue;
+				border: none;
+				color: #eee; 
+			}
+			#change_password_btn{
+				padding: 12px;     
+				margin-top: 12px;
+			}
+			.email{
+				display: flex;
+				margin-bottom: 20px;
+				input[type=submit]{
+					width: 100px;
+					margin-left: 5px;
+					padding: 8px 12px;
+				}
+			}
+			ul{
+				padding: 12px;
+				font-size: 16px;
+				i{
+					color: pink;
+				}
+			}
+		}
+	}
 }
 
 @media(max-width: 768px){
-    .forgot_password_wrapper{
-        .forgot_password_section{
-            margin-top: 60px;
-        }
-    }
+	.forgot_password_wrapper{
+		.forgot_password_section{
+			margin-top: 60px;
+		}
+	}
 }

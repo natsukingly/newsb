@@ -38,7 +38,7 @@
             display: none;
             flex: 1;
             justify-content: flex-end;
-            .open_general_mobile_menu{
+            .open_general_mobile_menu, .close_general_mobile_menu{
                 cursor: pointer;
                 display: flex;
                 justify-content: center;
@@ -48,10 +48,14 @@
                     height: 20px;
                 }
                 &.in_white{
+                    color: white;
                     svg{
                         fill: white;
                     }
                 }
+            }
+            .close_general_mobile_menu{
+                display: none;
             }
         }
     }
@@ -61,15 +65,25 @@
 @media(max-width: 768px){
     .header_general{
         .header_general_container{
+            padding: 8px 12px;
+            position: relative;
             .header_general_menu_left{
                 a.logo.in_white{
                 }
             }
             .header_general_menu_right{
                 display: none;
+                background-color: rgba(0,0,0,.5);
+                position: absolute;
+                right: 0;
+                top: 50px;
+                flex-direction: column;
                 a.header_general_option{
+                    text-align: right;
+                    color: #eee;
                     &.in_white{
                         &:hover{
+                            border-bottom: 2px solid rgba(0,0,0,0);
                         }
                     }
                 }

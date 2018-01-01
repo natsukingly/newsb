@@ -1,9 +1,9 @@
 
 .post_form{data: {form: "article", country: "#{@country.id}"}}
-	.body
-		.form_main.clearfix
+	.body 
+		.form_main 
 			= form_tag posts_path do
-				.form_check_group.form-group
+				.form_check_group.form-group 
 					.title
 						.user_image_xs
 							=user_image_helper(current_user)
@@ -11,25 +11,38 @@
 					.check
 						=check_box_tag "post[fake_news_report]", true, false
 						=t ('form.post.fake_news_checkbox')
-				.field.form-group.post_textarea_wrapper
-					.textarea_block.post_textarea_block.still
-						= text_area_tag 'post[content]', '', placeholder: "#{t ('form.post.placeholder')}", class: "article_post_content"
-					
-					= hidden_field_tag 'post[category_id]', @article.category_id
-					= hidden_field_tag 'article[image]', @article.image
-					= hidden_field_tag 'article[url]', @article.url
-					= hidden_field_tag 'article[source]', @article.source
-					= hidden_field_tag 'article[title]', @article.title
-					= hidden_field_tag 'article[published_time]', value: @article.published_time
-					
-					#autocomplete_tags
-						.autocomplete_tags_block
-				.post_submit_menu
-					#sns_post_form_menu
-						=render 'snss/sns_post_form_menu', user: current_user
-
-					.submit_btn_group
-						= submit_tag "#{t ('form.post.submit')}", class: "form_btn post_submit_btn"	
-						= submit_tag "#{t ('form.post.save')}", class: "form_btn post_save_btn"
+						
+				-if current_user
+					.field.form-group.post_textarea_wrapper 
+						.textarea_block.post_textarea_block.still
+							= text_area_tag 'post[content]', '', placeholder: "#{t ('form.post.placeholder')}", class: "article_post_content"
+						
+						= hidden_field_tag 'post[category_id]', @article.category_id
+						= hidden_field_tag 'article[image]', @article.image
+						= hidden_field_tag 'article[url]', @article.url
+						= hidden_field_tag 'article[source]', @article.source
+						= hidden_field_tag 'article[title]', @article.title
+						= hidden_field_tag 'article[published_time]', value: @article.published_time
+						
+						#autocomplete_tags
+							.autocomplete_tags_block
+				-else
+					.field.form-group.post_textarea_wrapper
+						.dummy_layer.login_signup_link
+						.textarea_block.post_textarea_block.still
+							= text_area_tag 'post[content]', '', placeholder: "#{t ('form.post.placeholder')}", class: "article_post_content"
+				
+				.post_submit_menu 
+					-if current_user
+						#sns_post_form_menu
+							=render 'snss/sns_post_form_menu', user: current_user
+	
+						.submit_btn_group
+							= submit_tag "#{t ('form.post.submit')}", class: "form_btn post_submit_btn"	
+							= submit_tag "#{t ('form.post.save')}", class: "form_btn post_save_btn"
+					-else
+						.submit_btn_group.login_signup_link
+							= submit_tag "#{t ('form.post.submit')}", class: "form_btn post_submit_btn"	
+							= submit_tag "#{t ('form.post.save')}", class: "form_btn post_save_btn"
 
 

@@ -1,7 +1,7 @@
 .signin_modal_block.modal_block
 	.mobile_modal_back_btn
 		%span
-			<- BACK
+			< BACK
 	#continue_with_social_account_block.modal_section
 		.modal_title
 			.logo
@@ -50,6 +50,7 @@
 			%h2
 				Signup via email
 		.non_social_link
+			= devise_error_messages! 
 			= form_for(resource, as: resource_name, url: registration_path(resource_name), id: "signup_with_email", remote: true) do |f|
 				.non_social_form
 					.name_form_section
@@ -87,7 +88,7 @@
 				By signing up, you indicate that you have read and agree to the Terms of Service and Privacy Policy.		
 				
 	
-	.close_modal_btn
+	.close_modal_btn.hidden-xs
 		=render 'svg/close_icon'
 
 :javascript
@@ -99,6 +100,7 @@
 		if("#{current_user}" == false){
 			$(".ddm").hide();
 			$('#signin_modal').fadeIn();
+			$("html,body,#signin_modal").scrollTop();
 			$('body').addClass('fixed');
 			current_url = location.href 
 			document.cookie = 'previous_url=' + current_url;

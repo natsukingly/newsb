@@ -5,8 +5,11 @@
 				%i.fa.fa-facebook
 		-else
 			-if !(user.social_profile(:facebook))
-				=link_to root_path, class: "sns_connect_btn facebook connect" do
+				.sns_connect_btn.facebook.locked
 					%i.fa.fa-facebook
+					%span
+						%i.fa.fa-lock
+					=render 'dropdown/unlock_sns'
 			-else
 				=link_to share_facebook_snss_path(user.id), class: "sns_connect_btn facebook share", method: :post, remote: true do
 					%i.fa.fa-facebook
@@ -17,20 +20,14 @@
 				%i.fa.fa-twitter
 		-else
 			-if !(user.social_profile(:twitter))
-				=link_to root_path, class: "sns_connect_btn twitter connect" do
+				.sns_connect_btn.twitter.locked
 					%i.fa.fa-twitter
+					%span
+						%i.fa.fa-lock
+					=render 'dropdown/unlock_sns'
 			-else
 				=link_to share_twitter_snss_path(user.id), class: "sns_connect_btn twitter share", method: :post, remote: true do
 					%i.fa.fa-twitter
+		
+		
 
-	// .sns_block
-	// 	-if user.linkedin_post == true
-	// 		=link_to unshare_linkedin_snss_path(user.id), class: "sns_connect_btn linkedin unshare", method: :post, remote: true do
-	// 			%i.fa.fa-linkedin
-	// 	-else
-	// 		-if !(user.social_profile(:linkedin))
-	// 			=link_to root_path, class: "sns_connect_btn linkedin connect" do
-	// 				%i.fa.fa-linkedin
-	// 		-else
-	// 			=link_to share_linkedin_snss_path(user.id), class: "sns_connect_btn linkedin share", method: :post, remote: true do
-	// 				%i.fa.fa-linkedin

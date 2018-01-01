@@ -1,0 +1,31 @@
+-if current_user
+	#mobile_menu_ddm.ddm
+		.mobile_menu_ddm_wrapper.ddm_wrapper
+			.title_block
+				%h2
+					menu
+				.close_ddm_btn
+					=render 'svg/close_icon'
+			=link_to "User ranking", user_ranking_path, class: "menu_option" 
+			=link_to "Trending Tags", tags_path, class: "menu_option" 
+			=link_to "Favorite Tags", favorite_index_tags_path, class: "menu_option" 
+			=link_to "About", root_path, class: "menu_option" 
+			=link_to "Terms", root_path, class: "menu_option" 
+			=link_to "Logout", destroy_user_session_path, class: "menu_option" 
+			.profile_option
+				&copy; 2017 NEWSB
+			
+:javascript
+	
+	$('#mobile_profile_option_link').click(function () {
+		$(".ddm").hide();
+		$('#mobile_profile_option_ddm').css("display", "block");
+		$('body').addClass('fixed');
+		return false;
+	});
+
+	
+	$('.close_ddm_btn').click(function (event) {
+		$('#mobile_profile_option_ddm').hide();
+		$('body').removeClass('fixed');
+	});
