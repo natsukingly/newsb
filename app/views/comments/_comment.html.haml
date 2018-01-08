@@ -6,21 +6,22 @@
 			.user_info
 				.user_name
 					=link_to comment.user do
-						%span.user_name.light_navy.bold
+						%span.user_name.bold
 							=comment.user.name
 					%span.user_credential.sm.grey
 						=comment.user.credential
-				.option
-					%i.fa.fa-ellipsis-h.comment_option_link
-					=render 'dropdown/comment_option', comment: comment
+
 					
 			.content
 				=truncate( simple_format(comment.content), escape: false, length: 200) do
 					%span.light_navy.read_more{class: "comment_read_more_#{comment.id}"}
 						Raed more
-			.status.clearfix
-				.comment_like_link.grey.link_btn
+			.status
+				.comment_like_block
 					=render '/likes/like_comment', comment: comment
+				.option
+					%i.fa.fa-ellipsis-h.comment_option_link
+					=render 'dropdown/comment_option', comment: comment
 
 			
 :javascript 

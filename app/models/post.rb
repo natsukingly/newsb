@@ -86,21 +86,6 @@ class Post < ApplicationRecord
 				"picture" => "https://dev-newsb.s3.amazonaws.com#{asset_path_in_model(self.article.image.url)}"
 			})
 		end
-		# linkedin api との協調がとれないので保留中。
-		# if self.user.linkedin_post == true
-		# 	require 'linkedin'
-		# 	require 'json'
-		# 	access_token = self.user.social_profile(:linkedin).access_token
-		# 	access_secret = self.user.social_profile(:linkedin).access_secret
-		# 	client = LinkedIn::Client.new(ENV['LINKEDIN_KEY'], ENV['LINKEDIN_SECRET'])
-		# 	client.add_share({:comment => self.content, :content => {
-		# 			"title"=> self.article.title,
-		# 			"description" => "NEWSB: The most social news platform in the world",
-		# 			"submitted-url" => "https://news-party-natsukingly.c9users.io/articles/#{self.article.id}",
-		# 			"submitted-image-url" => "https://news-party-natsukingly.c9users.io#{asset_path_in_model(self.article.image.url)}",
-		# 		}
-		# 	})
-		# end
 		if self.user.twitter_post == true
 			require "twitter"
 		    client = Twitter::REST::Client.new do |config|
@@ -120,10 +105,11 @@ class Post < ApplicationRecord
 	
 	def best_comment
 		#This sentence below returns an array.
-		if self.comments.nil?
+		best_comment = self.comments.order(likes_count: :asc).first
+		if best_comment.nil?
 			return self.comments.last
 		end	
-		return self.comments.order(likes_count: :asc).first
+		return best_comment
 	end
 	
 	private

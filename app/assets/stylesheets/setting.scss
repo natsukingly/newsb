@@ -4,14 +4,14 @@ input[type="file"] {
 .custom-file-upload {
     display: inline-block;
     padding: 6px 12px;
-    color: cornflowerblue;
+    color: $newsb_light;
     cursor: pointer;
     font-weight: normal;
 }
 
 #user_profile_setting_wrapper, #sns_setting_wrapper{
     background-color: white;
-    padding: 30px 50px;
+    padding: 30px;
     min-height: 400px;
 }
 
@@ -19,7 +19,7 @@ input[type="file"] {
     #user_profile_setting_wrapper, #sns_setting_wrapper{
         padding: 0;
         form{
-            padding: 12px;
+            padding: 12px 5px;
         }
     }
 }
@@ -91,7 +91,7 @@ input[type="file"] {
         }
         .edit_content_btn{
             display: inline-block;
-            color: cornflowerblue;
+            color: $newsb_light;
             margin-left: 12px;
             cursor: pointer;
         }
@@ -129,12 +129,12 @@ input[type="file"] {
 #setting_submit_btn{
     width: 100px;
     background-color: white;
-    color: #001E42;
-    border: 1px solid #001E42;
+    color: $newsb;
+    border: 1px solid $newsb;
     padding: 8px;
     border-radius: 0;
         &:hover{
-            background-color: #001E42;
+            background-color: $newsb;
             color: #eee;
         }
 }
@@ -146,7 +146,7 @@ input[type="file"] {
     padding: 8px;
     text-align: center;
     &:hover{
-        color: #001E42;
+        color: $newsb;
     }
 }
 
@@ -202,15 +202,15 @@ input[type="file"] {
                 color: grey;
                 border: 1px solid grey;
                 &:hover{
-                    background-color: #001E42;
+                    background-color: $newsb;
                     color: #eee;
                 }
             }
             &.share{
-                border: 1px solid cornflowerblue;
-                color: cornflowerblue;
+                border: 1px solid $newsb_light;
+                color: $newsb_light;
                 &:hover{
-                    background-color: cornflowerblue;
+                    background-color: $newsb_light;
                     color: #eee;
                 }
             }

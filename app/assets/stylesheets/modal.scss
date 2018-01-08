@@ -1,3 +1,39 @@
+
+
+
+
+.show_post_modal_btn{
+    background-color: $newsb;
+    padding: 8px 12px;
+    border-radius: 3px;
+    color: #eee;
+    cursor: pointer;
+    opacity: .9;
+    &:hover{
+    	opacity: 1;
+    }
+	&.on_header{
+		display: inline-block;
+	}
+	&.for_mobile{
+		display: none;
+	}
+}
+
+@media(max-width: 768px){
+	.show_post_modal_btn{
+
+		&.on_header{
+			display: none;
+		}
+		&.for_mobile{
+			display: inline-block;
+		}
+	}	
+}
+
+
+
 .lines-on-sides {
 	display: table;
 	text-align: center;
@@ -25,8 +61,8 @@
 	cursor: pointer;
 }
 .email_signup_link{
-	color: #001E42;
-	border-bottom: 1px solid #001E42;
+	color: $newsb;
+	border-bottom: 1px solid $newsb;
 	cursor: pointer;
 }
 #cancel_email_signup_link{
@@ -44,7 +80,7 @@
 	cursor: text;
 }
 
-.modal{
+.modal_wrapper{
 	display: none;
 	z-index: 1000;
 	position: fixed;
@@ -53,18 +89,19 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(#001E42, 0.8);
-	.modal_block{
+	background-color: rgba($newsb, 0.8);
+	.modal{
+		display: block;
 		margin: 70px auto;
-		width: 500px;
+		width: 600px;
 		position: relative;
 		background-color: white;
 		border-radius: 3px;
-		padding: 40px;
+		padding: 20px;
 		.modal_title{
 			display: flex;
 			flex-direction: column;
-			align-items: center;
+			// align-items: center;
 			margin-bottom: 20px;
 			h2{
 				font-size: 18px;
@@ -103,7 +140,7 @@
 }
 .mobile_modal_back_btn{
 	display: none;
-	justify-content: center;
+	// justify-content: center;
 	align-items: center;
 	padding: 0 12px 12px;
 	border-bottom: 1px solid #eee;
@@ -229,7 +266,7 @@
 				}
 			}
 			input[type="submit"]{
-				background-color: #001E42;
+				background-color: $newsb;
 				margin-top: 20px;
 				padding: 8px 30px;
 				width: auto;

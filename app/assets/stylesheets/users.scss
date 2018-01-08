@@ -33,7 +33,7 @@
 }
 
 #user_profile_wrapper{
-	background-color: #001E42;
+	background-color: $newsb;
 	.user_profile_container{
 		max-width: 920px;
 		margin: 0 auto;
@@ -83,7 +83,7 @@
 				&:hover{
 					border: 1px solid white;
 					color: white;
-					background-color: #001E42;
+					background-color: $newsb;
 				}
 			}
 			.follow_link.on_user_profile{
@@ -119,13 +119,14 @@
 		}
 		
 		.profile_btn.active{
-			box-shadow: 0 2px 0 #001E42;
+			box-shadow: 0 2px 0 $newsb;
 		}
 	}
 }
 
 @media (max-width: 970px) {
 	#user_profile_wrapper{
+		
 		.user_profile_container{
 			max-width: 600px;
 			img{
@@ -134,6 +135,7 @@
 				flex-direction: column;
 				.user_names{
 					margin-bottom: 20px;
+
 				}
 			}
 		}
@@ -158,6 +160,7 @@
 
 @media (max-width: 768px) {
 	#user_profile_wrapper{
+		background-color: white;
 		.user_profile_container{
 			flex-direction: column;
 			text-align: center;
@@ -168,7 +171,14 @@
 				flex-direction: column;
 				padding: 12px 0px;
 				.user_names{
-					
+					h2, p{
+						color: #000;
+					}	
+				}
+			}
+			.user_profile_option{
+				.edit_link{
+					color: #000;
 				}
 			}
 		}
@@ -244,7 +254,7 @@
 	.user{
 		display: flex;
 		background-color: white;
-		padding: 12px 20px;
+		padding: 20px;
 		&:hover{
 			background-color: #f9f9f9;
 		}
@@ -266,8 +276,7 @@
 				position: absolute;
 				left: -16px;
 			    top: -8px;
-			    background-color: white;
-			    border: 1px solid #001E42;			
+
 			}
 		}
 		.follow_link{
@@ -290,8 +299,8 @@
 			}
 			.unfollow{
 				font-weight: bold;
-				color: #001E42;
-				border: 2px solid #001E42;
+				color: $newsb;
+				border: 2px solid $newsb;
 			}
 		}
 		.info{
@@ -302,7 +311,7 @@
 				span{
 					font-size: 14px;
 					font-weight: bold;
-					color: #001E42;
+					color: $newsb;
 				}
 			}
 			.follower_stats{

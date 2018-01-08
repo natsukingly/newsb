@@ -4,9 +4,9 @@
 
 
 .comment, .reply{
-    padding: 5px 0;
+    padding: 12px 0;
     .main{
-        background-color: #f9f9f9;
+        // background-color: #f9f9f9;
         display: flex;
         .body{
             padding: 0;
@@ -29,7 +29,7 @@
                 }
             }
             .content{
-                padding: 5px 0;
+                padding: 20px 0;
                 font-size: 14px;
             }
             .status{
@@ -62,9 +62,9 @@
 
 
 .comment_index{
-    background-color: #f9f9f9;
-    padding: 5px 20px 5px 40px;
-    border-radius: 0 0 5px 5px;
+    // background-color: #f9f9f9;
+    padding: 5px 20px;
+    border-left: 2px solid $newsb_light;
     .view_link{
         padding: 5px 0;
     }
@@ -74,17 +74,18 @@
         padding: 3px 0;
         margin-left: -22px;
         &:hover{
-            color: #001E42;
+            color: $newsb;
         }
     }
 }
 
 @media(max-width: 768px){
+    .comment{
+        padding: 12px 0;
+    }
     .comment_index{
-        padding: 5px 12px 5px 30px;
-        .invite_comment{
-            margin-left: 0;
-        }
+        padding: 12px 8px;
+        border-left: 3px solid $newsb_light;
     }
 }
 

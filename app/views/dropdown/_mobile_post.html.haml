@@ -8,14 +8,9 @@
 					=render 'svg/close_icon'
 			
 			.post_ddm_block
-				.post_form_title
-					%h2
-						=t 'form.url.caption'
 				.post_url_form.for_mobile
 					=render "shared/url_form_modal"
 				.post_form_requirement
-					%h2
-						Note:
 					%ul
 						%li
 							NEWSB's algorism favors the articles published within a week.
@@ -29,7 +24,7 @@
 				
 	
 :javascript
-	$('#mobile_post_link').click(function () {
+	$('#mobile_post_link, .show_post_modal_btn.for_mobile').click(function () {
 		$(".ddm").hide();
 		$('#mobile_post_ddm').show();
 		$('body').addClass('fixed');

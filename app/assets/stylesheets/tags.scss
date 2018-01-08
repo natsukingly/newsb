@@ -5,7 +5,7 @@
 }
 
 a.tag_link{
-    color: #001E42;
+    color: $newsb;
     font-weight: 900;
 }
 .tags{
@@ -55,8 +55,8 @@ a.tag_link{
             }
             .unfavorite{
                 font-weight: bold;
-                color: #001E42;
-                border: 2px solid #001E42;
+                color: $newsb;
+                border: 2px solid $newsb;
             }
         }
     }
@@ -91,7 +91,7 @@ a.tag_link{
 
 .hashtag_title{
     padding: 20px 0;
-    color: #001E42;
+    color: $newsb;
     font-size: 20px;
     span{
         color: #696969;
@@ -124,7 +124,7 @@ a.tag_link{
     }
     li.selected{
         color: white;
-        background-color: cornflowerblue;
+        background-color: $newsb_light;
     }
 }
 

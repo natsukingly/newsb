@@ -1,18 +1,23 @@
-%ul
-	-if user_signed_in?
-		%li
-			-if comment.likes.find_by(user_id: current_user.id)
-				= link_to comment_unlike_path(comment.id), method: :delete, remote: true do 
-					UNLIKE
-			-else
-				= link_to comment_like_path(comment.id), method: :post, remote: true do
-					LIKE
-			・
-			%span.comment_likes_count
-				= comment.likes.count
+
+
+-if user_signed_in?
+	-if comment.likes.find_by(user_id: current_user.id)
+		.comment_like_link.link_btn.liked
+			= link_to comment_unlike_path(comment.id), method: :delete, remote: true do 
+				%i.fa.fa-thumbs-up 
+				・
+				%span.likes_count
+					= comment.likes.count
 	-else
-		%li.login_signup_link
-			LIKE
-			・
-			%span.comment_likes_count
-				= comment.likes.count
+		.comment_like_link.link_btn
+			= link_to comment_like_path(comment.id), method: :post, remote: true do
+				%i.fa.fa-thumbs-o-up 
+				・
+				%span.likes_count
+					=comment.likes.count
+-else
+	.login_signup_link.link_btn
+		%i.fa.fa-thumbs-o-up 
+		・
+		%span.likes_count
+			= comment.likes.count

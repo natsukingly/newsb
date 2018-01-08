@@ -1,10 +1,10 @@
 .comment_form.edit_form
 	.body
 		.form_main.clearfix
-			=form_tag "/comments/#{comment.id}", remote: true, method: :patch do
+			=form_tag comment_path, remote: true, method: :patch do
 				.field.form-group.comment_textarea
 					.textarea
-						=text_area_tag 'comment[content]', comment.content, placeholder: "your awesome comment *optional", class: "form_content comment_textarea form-control", style: "border: none; box-shadow: none; resize: none;"
+						=text_area_tag 'comment[content]', comment.content, placeholder: "Comment", class: "form_content comment_textarea", style: "box-shadow: none; resize: none;"
 		
 					.comment_submit
 						= submit_tag "Submit", class: "form_btn .comment_submit"

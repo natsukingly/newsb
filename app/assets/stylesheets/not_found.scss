@@ -14,7 +14,7 @@ h4.not_found_content{
 // search
 .result_not_found{
     @include not_found_setting;
-	padding: 80px 12px;
+	padding: 80px 12px 100px;
 }
 
 
@@ -28,7 +28,7 @@ h4.not_found_content{
     display: inline-block;
     padding: 5px 12px;
     margin: 20px auto;
-    background-color: #001E42;
+    background-color: $newsb;
     border-radius: 3px;
     color: #eee;
     font-size: 16px;

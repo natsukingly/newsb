@@ -41,6 +41,7 @@ form{
 			border: 1px solid #bbb;
 			padding: 8px 5px;
 			background-color: white;
+
 			&:hover{
 				opacity: .95;
 			}
@@ -69,6 +70,20 @@ form{
 		}
 	}
 }
+
+@media(max-width: 768px){
+	form{
+		padding: 0;
+		div{
+			input[type="text"], input[type="password"], input[type="submit"], input[type="email"], textarea{
+				padding: 5px;
+				font-size: 16px;
+			}
+		}
+	}
+}
+
+
 .dummy_url_form{
 	color: grey;
 	flex: 1;
@@ -103,7 +118,20 @@ form{
 		padding: 20px;
 		.form_main{
 			flex: 1;
+			
 			form{
+				.article_title{
+					overflow: hidden;
+  					width: 100%;	
+  					p{
+  						overflow: hidden;
+					    text-overflow: ellipsis;
+					    white-space: nowrap;
+					    margin-bottom: 20px;
+						color: $newsb;
+						font-weight: 900;
+  					}
+				}
 				.form_check_group{
 					display: flex;
 					flex-wrap: wrap;
@@ -114,8 +142,7 @@ form{
 						align-items: center;
 						font-size: 16px;
 						margin-right: 20px;
-						color: #001E42;
-						font-weight: 900;
+
 					}
 					.check{
 						input{
@@ -126,7 +153,7 @@ form{
 				.post_textarea_wrapper{
 					position: relative;
 					
-					margin: 12px 0;
+					margin: 8px 0;
 					padding: 0;
 					.post_textarea_block{
 							display: flex;
@@ -134,12 +161,19 @@ form{
 							padding: 5px;
 							min-height: 80px;
 							cursor: text;
+							border-radius: 3px;
+							&.large{
+								height: 250px;
+							}
 						textarea{
 							border: none;
 							box-shadow: none;
 							flex: 1;
 							resize: none; 
 							font-size: 16px;
+							&.large{
+								max-height: 230px;
+							}
 							&:focus{
 								border: none;
 								box-shadow: none;
@@ -176,16 +210,16 @@ form{
 				justify-content: space-between;
 				.form_btn{
 					background-color: white;
-					color: #001E42;
+					color: $newsb;
 					border-radius: 3px;
 					border: 1px solid #bbb;
 					width: 90px;
 					// margin-left: 5px;
 					padding: 0;
 					transition: .2s;
-					line-height: 35px;
+					line-height: 30px;
 					&:hover{
-						background-color: #001E42;
+						background-color: $newsb;
 						color: white;
 					}
 					&.post_save_btn{
@@ -194,7 +228,7 @@ form{
 						&:hover{
 							background-color: white;
 							font-weight: 900;
-							color: #001E42;
+							color: $newsb;
 						}
 					}
 				}
@@ -206,7 +240,7 @@ form{
 					transition: .2s;
 					border: none;
 					&:hover{
-						color: #001E42;
+						color: $newsb;
 					}
 				}
 				.cancel_btn, .clear_btn{
@@ -225,6 +259,11 @@ form{
 		}
 	}
 }
+
+
+
+
+
 #sns_post_form_menu{
 	display: flex;
 	justify-content: flex-end;
@@ -238,10 +277,10 @@ form{
 		align-items: center;
 		.sns_connect_btn{
 			border-radius: 3px;
-			width: 35px;
-			height: 35px;
+			width: 30px;
+			height: 30px;
 			margin-right: 8px;
-			font-size: 20px;
+			font-size: 16px;
 			border: 1px solid #aaa;
 			display: flex;
 			padding: 0;
@@ -322,9 +361,9 @@ form{
 }
 
 .post_form_requirement{
-	height: 335px;
 	border: 1px solid #eee;
-	padding: 12px;
+	padding: 20px;
+    margin-bottom: 20px;
 	line-height: 20px;
 	color: #696969;
 	h2{
@@ -337,11 +376,12 @@ form{
 			list-style-type: disc;
 			list-style-position: outside;
    			margin-left: 20px;
-   			margin-bottom: 8px;
+   			margin-bottom: 12px;
 		}
 	}
+	// we may never use the following 
 	.post_form_icon{
-		display: flex;
+		display: none;
 		align-items: center;
 		justify-content: center;
 		height: 160px;
@@ -363,34 +403,31 @@ form{
 }
 
 @media (max-width: 768px) {
-	.post_form .body{
-		padding: 12px 5px;
-		.form_main{ 
-			form .form_check_group{
-				display: block;
-				.title{
-					background-color: #eee;
-				    padding: 12px;
-				    margin: 0 0px;
+	.post_form {
+		border-top: 1px solid #eee;
+		.body{
+			padding: 20px 5px;
+			.form_main{ 
+				form .form_check_group{
+					display: block;
+					.title{
+						display: none;
+					}
+					.check{
+						
+					}
 				}
-				.check{
-					padding-top: 12px;
-				}
-			}
-			form{
-				.post_textarea_wrapper{
-					margin: 12px 0;
-					.post_textarea_block{
-						// border-right: none;
-						// border-left: none;
+				form{
+					.post_textarea_wrapper{
+						margin: 8px 0;
+						.post_textarea_block{
+							padding: 5px 0;
+						}
 					}
 				}
 			}
 		}
 	}
-	.article_show .post_form{ 
-		// display: none;
-	}	
 }
 
 .post_form_block{
@@ -424,6 +461,7 @@ form{
 			padding: 0;
 			.textarea{
 				font-size: 16px;
+				height: 54px;
 			}
 		}
 	}
@@ -431,6 +469,7 @@ form{
 
 
 .comment_form.edit_form{
+	padding: 5px 0;
 	.comment_submit{
 		display: flex;
 		margin: 5px 0;
@@ -443,7 +482,7 @@ form{
 
 .comment_form, .reply_form{
 	display: none;
-	padding: 12px 0 5px;
+	padding: 0 20px 20px;
 	.form-group{
 		margin-bottom: 8px;
 	}
@@ -465,7 +504,7 @@ form{
 		margin: 0;
 	}
 	.comment_submit{
-		margin-left: 40px;
+
 		color: grey;
 		display: flex;
 		align-items: center;
@@ -488,6 +527,12 @@ form{
 		}
 	}
 }
+@media(max-width: 768px){
+    .comment_form{
+        padding: 12px;
+    }
+}
+
 
 .post_url_form{
 	margin: 0 0 12px;
@@ -495,6 +540,19 @@ form{
 	padding: 12px 20px;
 	background-color: white;
 	box-shadow: 0 0 1px rgba(0,0,0,0.3);
+	position: relative;
+	span.show_post_modal_btn{
+		position: absolute;
+		display: block;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		cursor: pointer;
+		&.for_mobile{
+			display: none;
+		}
+	}
 	input:focus, button:focus{
 		box-shadow: none;
 		border-color: rgb(204, 204, 204);
@@ -539,9 +597,19 @@ form{
 @media (max-width: 768px) {
 	.post_url_form{
 	   // display: none;
-	   margin-top: 20px;
+	   margin: 12px 0 0;
 		&.on_modal, &.for_mobile{
 			display: block;
+			margin: 0 0 12px;
+		}
+		
+		span.show_post_modal_btn{
+			&.on_feed{
+				display: none;
+			}
+			&.for_mobile{
+				display: block;
+			}
 		}
 		form input[type=url]{
 			font-size: 16px;
@@ -586,7 +654,7 @@ form{
 				flex: 1;
 				font-size: 50px;
 				font-weight: 900;
-				color: #001E42;
+				color: $newsb;
 				margin-bottom: 40px;
 				flex-direction: column;
 				span{
@@ -656,7 +724,7 @@ form{
 				color: grey;
 			}
 			input[type=submit]{
-				background-color: cornflowerblue;
+				background-color: $newsb_light;
 				border: none;
 				color: #eee; 
 			}

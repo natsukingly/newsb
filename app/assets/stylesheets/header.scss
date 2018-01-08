@@ -8,7 +8,7 @@
 	    width: 30px;
 	    height: 30px;
 	    padding: 7px;
-	    background-color: #001E42;
+	    background-color: $newsb;
 	    border-radius: 50%;
 	    transition: .1s;
 	}
@@ -21,7 +21,7 @@
 	margin: 0;
 	svg{
 		background-color: rgba(0,0,0,0);
-		fill: #001E42;
+		fill: $newsb;
 		padding: 0;
 	}
 	&:hover svg{
@@ -31,13 +31,14 @@
 
 
 
-.logo{
+a.logo{
 	display: flex;
 	align-items: center;
+	color: $newsb;
 	svg{
 		width: 35px;
 		height: 35px;
-		fill: #001E42;
+		fill: $newsb;
 		margin-right: 5px;
 	}
 }
@@ -53,7 +54,7 @@ header{
 	.header_container{
 		display: flex;
 		margin: 0 auto;
-		
+		max-width: 1080px;
 		// header left start 
 		.left{
 			position: relative;
@@ -65,7 +66,7 @@ header{
 	    		position: absolute;
 	    		top: 0;
 	    		left: 150px;
-	    		background-color: cornflowerblue;
+	    		background-color: $newsb_light;
 	    		color: white;
 	    		border-radius: 30px;
 	    	}
@@ -87,7 +88,9 @@ header{
 				flex: 1;
 				position: relative;
 				display: inline-block;
+				max-width: 400px;
 				form{
+					
 					display: flex;
 					align-items: center;
 					margin-right: 20px;
@@ -96,7 +99,7 @@ header{
 
 						}
 						input{
-							border: 1px solid #001E42;
+							border: 1px solid $newsb;
 						}
 					}
 				}
@@ -113,7 +116,7 @@ header{
 					border-left: none;
 					&:hover{
 						.form_icon{
-							color: #001E42;
+							color: $newsb;
 							
 						}
 					}
@@ -135,10 +138,10 @@ header{
 
 				}
 				input:hover, input:focus {
-	                border: 1px solid #001E42;
+	                border: 1px solid $newsb;
 				}
 				input:hover + i, input:focus + i {
-	                color: #001E42;
+	                color: $newsb;
 				}
 			}
 		}
@@ -155,7 +158,7 @@ header{
 			    margin-right: 20px;
 			    height: 30px;
 			    width: 30px;
-			    background-color: #001E42;
+			    background-color: $newsb;
 			    border-radius: 50%;
 			    cursor: pointer;
 			    padding: 12px;
@@ -215,8 +218,8 @@ header{
 		    padding: 0 12px;
 		    cursor: pointer;
 		    &:hover{
-		    	border: 1px solid #001E42;
-		    	color: #001E42;
+		    	border: 1px solid $newsb;
+		    	color: $newsb;
 		    }
 		    &.header_btn{
 		    	margin-right: 12px;
@@ -245,8 +248,8 @@ header{
 		}	
 	}
     &:hover .setting, &:hover svg{
-    	color: #001E42;
-    	fill: #001E42;
+    	color: $newsb;
+    	fill: $newsb;
     }
 }
 
@@ -256,18 +259,21 @@ header{
 #mobile_logo{
 	flex: 1;
 	text-align: center;
+	padding-left: 8px;
 	line-height: 50px;
-	font-size: 28px;
+	font-size: 26px;
+	
 
 	font-family: 'Raleway', sans-serif;
 }
 
 #mobile_header{
 	padding: 0 5px;
+	// padding-top: 8px;
     position: relative;
 	height: 50px;
-	background-color: white;
-	color: #001E42;
+	background-color: $mobile_header_bkg_color;
+	color: $newsb;
 	display: flex;
 	align-items: center;
 	#menu_icon, #profile_icon{
@@ -276,13 +282,13 @@ header{
         width: 30px;
         height: 30px;
         line-height: 30px;
-        color: #001E42;
+        color: $newsb;
         cursor: pointer;
         justify-content: center;
         align-items: center;
 		i{
 		    flex: 1;
-		    color: #001E42;
+		    color: $newsb;
 		    text-align: center;
 		}
 		img{
@@ -305,7 +311,8 @@ header{
 			top: 0;
 			left: 0;
 			font-size: 16px;
-			color: #001E42;
+			color: $newsb;
+			background-color: rgba(0,0,0,0);
 			float: left;
 			.fa-search{ 
 				color: white;
@@ -313,33 +320,37 @@ header{
 		}
 		#search{
 			input {
+				color: white;
 			    z-index: 1;
 			    width: 80%;
 			    height: 30px;
 			    border-radius: 3px;
 			    padding: 0 0 0 50px;
 			    border: none;
-			    font-size: 24px;
-			    color: #001E42;
+			    font-size: 20px;
+			    background-color: $mobile_header_bkg_color;
 			}
 		}
 	}
 	#account{
 		width: 35px;
+		svg{
+			fill: white;
+		}
 	}
 	#close_search_bar{
 		display: none;
 		cursor: pointer;
 		svg{
-			width: 20px;
-			height: 20px;
+			width: 16px;
+			height: 16px;
 			margin-right: 12px;
-			fill: #696969;
+			fill: white;
 		}
 	}
 	.login_icon{
 		svg{
-		    fill: #001E42;
+		    fill: $newsb;
 		    width: 25px;
 		    padding-top: 5px;
 		}
@@ -354,7 +365,7 @@ header{
 	z-index: 100;
 	
 	.nav_container{
-		max-width: 1200px;
+		max-width: 1080px;
 		margin: 0 auto;
 		position: relative;
 		display: flex;
@@ -370,7 +381,7 @@ header{
 			flex: 1;
 		    line-height: 25px;
 		    padding: 0 12px;
-		    margin: 8px;
+		    margin: 8px 5px;
 		    letter-spacing: 1px;
 		    height: 25px;
 		    border-radius: 98px;
@@ -378,7 +389,7 @@ header{
 		    text-align: center;
 		    font-size: 12px;
 			&:hover{
-				color: #001E42;
+				color: $newsb;
 				background-color: #f1f1f1;
 			}
 		}
@@ -433,6 +444,8 @@ header{
 }
 
 #mobile_logo{
+	color: white;
+	
 	svg{
 		width: 30px;
 		height: 30px;
@@ -462,8 +475,25 @@ header{
 		display: flex;
 	}
 	#header_nav{
-		background-color: white;
-		border-bottom: 1px solid #eee;
+		background-color: rgba($mobile_header_bkg_color, .85);
+		// height: 35px;
+		padding: 0 5px;
+		.nav_container{
+			a{
+				margin: 7px 3px 8px;
+				color: white;
+				&.active{
+					background-color: white;
+					color: $newsb;
+					font-weight: 900;
+				}
+				&:hover{
+					background-color: rgba(0,0,0,0);
+					color: white;
+					font-weight: 900;
+				}
+			}
+		}
 	}
 	
 	#mobile_footer{
@@ -474,11 +504,11 @@ header{
 	.icon{
 		margin-right: 0;
 		svg{
-			fill: #001E42;
+			fill: $newsb;
 			height: 25px;
 			width: 25px;
 			&:hover{
-				fill: #001E42;	
+				fill: $newsb;	
 			}
 		}
 		span{
@@ -501,7 +531,7 @@ header{
     min-width: 500px;
     line-height: 40px;
     padding: 0px 30px;
-    background-color: cornflowerblue;
+    background-color: $newsb_light;
     color: white;
     font-size: 14px;
     z-index: 1000;
@@ -526,7 +556,7 @@ header{
 @media(max-width: 768px){
 	.notice_bar{
 	    position: fixed;
-	   	bottom: 50px;
+	   	top: 60px;
 	    right: 0;
 	    border-radius: 3px;
 	    min-width: auto;
@@ -534,7 +564,7 @@ header{
 	    margin: 0 2%;
 	    line-height: 40px;
 	    padding: 0px 12px;
-	    background-color: cornflowerblue;
+	    background-color: $newsb_light;
 	    color: white;
 	    font-size: 14px;
 	    z-index: 1000;
@@ -567,7 +597,7 @@ header{
 }
 
 #mobile_locale_link svg{
-	fill: #001E42;
+	fill: $newsb;
 	width: 22px;
 }
 
@@ -588,7 +618,7 @@ header{
     border-radius: 50px;
     padding-right: 12px;
 	&:hover{
-		color: #001E42;
+		color: $newsb;
 	}
 	.header_user_name{
 		margin-right: 8px;	

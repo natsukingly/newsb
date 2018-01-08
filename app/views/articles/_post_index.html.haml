@@ -1,16 +1,7 @@
 
 
--unless @fake_news_reports.empty?
-	.fake_news_reports
-		.title
-			%h3
-				FAKE NEWS REPORTS
-		= render partial: "posts/post_wo_article", collection: @fake_news_reports.includes(:user), as: :post
 
--if @your_posts.empty?
-	.your_posts
-		%h3
--else
+-unless @your_posts.empty?
 	.your_posts
 		%h3
 			YOUR POSTS
@@ -28,6 +19,39 @@
 			%h3
 				BEST POSTS
 			= render partial: "posts/post_wo_article", collection: @best_posts.includes(:user), as: :post
+
+-unless report_count == 0 || @shared_posts.empty?
+
+	.title
+		%h3
+			OTHERS
+	.article_other_section.show_fake_news_link
+		.article_other_container
+			%p
+				%i.fa.fa-exclamation
+				=t ('fake_news.show.mobile')
+				\:
+				= report_count
+				
+			.article_other_section_icon
+				%i.fa.fa-angle-down
+				
+	.fake_news_reports
+		= render partial: "posts/post_wo_article", collection: @fake_news_reports.includes(:user), as: :post
+
+-unless @shared_posts.empty?
+	.article_other_section.show_shared_posts_link
+		.article_other_container
+			%p
+				%i.fa.fa-share-alt
+				Shared
+				\:
+				= @shared_posts.count
+			.article_other_section_icon
+				%i.fa.fa-angle-down
+	.shared_posts
+		= render partial: "posts/post_wo_article", collection: @shared_posts.includes(:user), as: :post
+	
 		
 -unless @follower_posts.empty?
 	.follower_posts

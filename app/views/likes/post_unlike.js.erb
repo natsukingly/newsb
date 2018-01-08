@@ -1,2 +1,1 @@
-$(".post_<%=@post.id%>").find(".post_like_link").html('<%= escape_javascript(render("likes/like_post", post: @post))%>');
-$(".post_<%=@post.id%>").find(".likes_count").html('<%= @post.likes.count %>');
+$(".post_<%=@post.id%>").find(".post_like_block").html('<%= escape_javascript(render("likes/like_post", post: @post))%>');

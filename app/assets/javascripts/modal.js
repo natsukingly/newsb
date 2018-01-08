@@ -14,7 +14,7 @@ $(document).on('turbolinks:load', function() {
 		return false;
 	});
 	
-	$('.show_post_modal_btn').click(function () {
+	$('.show_post_modal_btn.on_header').click(function () {
 		$("#post_modal").fadeIn();
 		$('body').addClass('fixed');
 		$('#placeholder_url').focus();
@@ -33,5 +33,18 @@ $(document).on('turbolinks:load', function() {
 		$('body').removeClass('fixed');
 	});	
 	
-  
+  	$('.show_article_post_form_link').click(function () {
+		$(".article_post_form").fadeIn();
+		$('body').addClass('fixed');
+		$('#placeholder_url').focus();
+		return false;
+	});
+	
+	$('.modal_wrapper').click(function (event) {
+		if(!$(event.target).closest('.modal').length && !$(event.target).is('.modal')) {
+			$(".modal_wrapper").hide();
+			$('body').removeClass('fixed');
+		}  
+	});
+	
 });

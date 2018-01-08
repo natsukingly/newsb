@@ -51,6 +51,17 @@
 	}
 }
 
+
+@media(max-width: 768px){
+	.user_image, .user_image_md, .user_image_sm, .user_image_xs, .user_image_xl{
+		img, svg{
+			margin-right: 5px;
+		}
+	}
+}
+
+
+
 .user_faces{
     img, svg{
 	    width: 25px;
@@ -97,7 +108,7 @@
 // 	line-height: 35px;
 // 	text-align: center;
 // 	border-radius: 50%;
-// 	background-color: #001E42;
+// 	background-color: $newsb;
 // 	font-size: 30px;
 // 	font-family: 'Nova Flat', cursive;
 // 	color: white;

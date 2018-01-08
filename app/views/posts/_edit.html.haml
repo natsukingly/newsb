@@ -3,7 +3,7 @@
 		.form_main.clearfix
 			=form_tag update_article_post_path(post), method: :post do
 				.field.form-group.form_check_group
-					.check
+					.check.on_edit_form
 						=check_box_tag "post[fake_news_report]", true, post.fake_news_report
 						=label_tag "post[fake_news_report]", 'post as a fake news report'
 				

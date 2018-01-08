@@ -3,7 +3,7 @@
 	.header_container
 		.left
 			= link_to root_path, class: "logo" do
-				NEWSB
+				NEWSB!
 			#locale_link
 				.setting
 					=country_name_helper(@country.name)
@@ -32,7 +32,7 @@
 					%span.header_user_name
 						=current_user.name
 					%i.fa.fa-angle-down
-				#create_post_btn_circle.show_post_modal_btn
+				#create_post_btn_circle.show_post_modal_btn.on_header
 					%span
 						+
 			-else
@@ -58,7 +58,7 @@
 			=text_field_tag :keyword, params[:keyword], placeholder: "Search"
 			=submit_tag "", style: "display: none;"
 			
-	= link_to "NEWSB", root_path, id: "mobile_logo" 
+	= link_to "NEWSB!", root_path, id: "mobile_logo" 
 	
 	/ HEADER RIGHT     
 	#account.menu_icon
@@ -75,12 +75,17 @@
 #header_nav
 	.nav_container
 		=link_to " ", root_path, class: "selected_topic active", style: "pointer-events: none; display: none;"
-		=link_to "TOP", root_path, class: "top_btn"
-		=link_to all_posts_categories_path, class: "feed_btn" do
-			FEED
-			-if current_user
+		=link_to "Top", root_path, class: "top_btn"
+		-if current_user
+			=link_to all_posts_categories_path, class: "feed_btn" do
+				Feed
 				%span.feed_notifications_count
 					=current_user.feed_notifications.where(check: false).count
+		-else
+			=link_to all_posts_categories_path, class: "feed_btn login_signup_link" do
+				Feed
+					
+					
 		-@categories.each do |category|
 			=link_to category.name, articles_category_path(category.id), class: "#{category.name}_nav_btn"
 		%span.padding

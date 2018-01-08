@@ -13,15 +13,15 @@ class SchneiderController < ApplicationController
 	
 	def prepare_admin_posts
 		
-		# forbes_business
-		# forbes_startup
-		# bridge_startup
-		# techcrunch_startup
-		# itmedia_tech
-		# techcrunch_tech1
-		# techcrunch_tech2
-		# asahi_politics
-		yomiuri_politics
+		forbes_business
+		forbes_startup
+		bridge_startup
+		techcrunch_startup
+		itmedia_tech
+		techcrunch_tech1
+		techcrunch_tech2
+		asahi_politics
+		# yomiuri_politics
 		redirect_to drafts_admins_path
 		
 	end
@@ -264,7 +264,7 @@ class SchneiderController < ApplicationController
 			
 			# PUBLISHED_TIME
 			unless doc.css('//meta[property="article:published_time"]/@content').empty?
-				@article_published_time = doc.css('//meta[property="article:modified_time"]/@content').to_s || doc.css('//meta[property="article:published_time"]/@content').to_s
+				@article_published_time = doc.css('//meta[property="article:published_time"]/@content').to_s
 			end
 		end
 		

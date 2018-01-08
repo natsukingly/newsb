@@ -136,7 +136,7 @@ class UsersController < ApplicationController
   
   
   def posts
-    @posts = @user.posts.includes(:article).order(created_at: :desc).limit(1)
+    @posts = @user.posts.includes(:article).order(created_at: :desc).limit(30)
   end
   
   def drafts

@@ -16,7 +16,7 @@
 		flex-direction: column;
 
 		.overlay{
-			background-color: rgba(0, 5, 10, .85);
+			background-color: rgba(0, 5, 10, .8);
 			padding: 40px 20px;
 			flex: 1;
 			.article_container{
@@ -197,7 +197,7 @@
 
 @media(max-width: 768px){
 	#featured_article, #selected_article_mobile{
-		display: block;
+		// display: none;
 		flex-direction: row;
 		.article_wrapper{
 			max-height: none;
@@ -292,7 +292,7 @@
 	display: flex;
 	flex-direction: column-reverse;
 	.article_image_for_mobile{
-		height: 250px;
+		height: 180px;
 		background-size: cover;
 		background-position: center;
 		display: none;
@@ -302,20 +302,27 @@
 		background-size: cover;
 		background-position: center;
 		display: flex;
-		padding-bottom: 250px;
 		box-shadow: 0 0 12px #aaa, 0 0 10px #aaa;
 		.overlay{
-			background-color: rgba(0, 5, 10, .85);
+			background-color: rgba(0, 5, 10, .8);
 			padding: 20px;
 			flex: 1;
 			.article_container{
-				max-width: 1170px;
+				max-width: 1080px;
 				margin: 0 auto;
 				height: 100%;
 				display: flex;
 				flex-direction: row;
 				justify-content: space-between;
-				align-items: center;
+				// align-items: center;
+				.image{
+					height: 80px;
+				    width: 80px;
+				    background-size: cover;
+				    background-position: center;
+				    margin-right: 20px;
+				    border-radius: 50%;
+				}
 				.article_title{
 					flex: 1;	
 					color: #eee;
@@ -327,12 +334,25 @@
 						
 					}
 				}
-				.read_article_btn{
+				.article_menu{
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					padding: 0 70px;
+				}
+				
+				.article_item{
+					display: inline-block;
 				    border-radius: 3px;
 				    background-color: rgba(255, 255, 255, 0.1);
 				    color: #eee;
 				    padding: 8px 30px;
 				    transition: .2s;
+				    cursor: pointer;
+				    text-align: center;
+				    &:first-child{
+				    	margin-bottom: 12px;
+				    }
 					&:hover{
 						background-color: rgba(255, 255, 255, 0.2);
 						color: white;
@@ -346,7 +366,6 @@
 	#selected_article{
 		flex-direction: column;
 		.article_image_for_mobile{
-			height: 200px;
 			display: block;
 		}
 		.article_wrapper{
@@ -359,11 +378,14 @@
 					flex-direction: column;
 					// justify-content: space-between;
 					// align-items: center;
+					.image{
+						display: none;
+					}
 					.article_title{
 						flex: 1;	
 						color: black;
 						font-weight: 900;
-						font-size: 18px;
+						font-size: 16px;
 						line-height: 24px;
 						margin-bottom: 12px;
 						.selected_article_info{
@@ -378,7 +400,7 @@
 					    width: 100%;
 					    text-align: center;
 						&:hover{
-							background-color: #001E42;
+							background-color: $newsb;
 							color: white;
 						}
 					}

@@ -6,37 +6,17 @@
 .sub_function_wrapper.article_show
 	.sub_function_main_section
 		// =render "/articles/selected_article_mobile", article: @article
+
 		.form_show.on_mobile
 			%span.content
 				=t 'form.post.title'
 			%span.mobile_btn_icon
 				+
-		=render "/posts/form_no_category", article: @article
-		#fake_news_block
-			.fake_news_container
-				- report_count = @article.posts.where(fake_news_report: true).count
-					
-				-if report_count == 0
-					%p.no_fake_news_report
-						%i.fa.fa-check
-						=t ('fake_news.no_fake_news')
-				-else
-					%p.yes_fake_news_report
-						%i.fa.fa-exclamation-circle
-						=t 'fake_news.count_description', count: report_count
-					.show_fake_news_link
-						%i.fa.fa-angle-down
-		-unless report_count == 0
-			.show_fake_news_btn.on_mobile
-				%span.content
-					=t ('fake_news.show.mobile')
-					\:
-					= report_count
-				%span.mobile_btn_icon
-					+
-					
+		
+		- report_count = @article.posts.where(fake_news_report: true).count
+
 		#main_contents.article_posts
-			=render '/articles/post_index'
+			=render '/articles/post_index', report_count: report_count
 
 
 
@@ -51,25 +31,27 @@
 		:javascript
 			$("#main_contents").find(".post_#{best_id}").find(".user_block .star").css("display","block");
 
+
+	
+	
+
 :javascript
 	$('.show_fake_news_link').click(function(){
 		if($(this).hasClass("open")){
-			$(this).removeClass("open").html("<i class='fa fa-angle-down'></i>");
+			$(this).removeClass("open").find('.article_other_section_icon').html("<i class='fa fa-angle-down'></i>");
 			$('.fake_news_reports').fadeOut();
 		} else{
-			$(this).addClass("open").html("×");
+			$(this).addClass("open").find('.article_other_section_icon').html("×");
 			$('.fake_news_reports').fadeIn();
 		}
 	})
-	$('.show_fake_news_btn').click(function(){
+	$('.show_shared_posts_link').click(function(){
 		if($(this).hasClass("open")){
-			$(this).removeClass("open").find('span.content').text("#{t ('fake_news.show.mobile')}" + ":" + "#{report_count}");
-			$(this).find('span.mobile_btn_icon').text("+");
-			$('.fake_news_reports').slideUp();
+			$(this).removeClass("open").find('.article_other_section_icon').html("<i class='fa fa-angle-down'></i>");
+			$('.shared_posts').fadeOut();
 		} else{
-			$(this).addClass("open").find('span.content').text("#{t ('fake_news.hide')}");
-			$(this).find('span.mobile_btn_icon').text("ー");
-			$('.fake_news_reports').slideDown();
+			$(this).addClass("open").find('.article_other_section_icon').html("×");
+			$('.shared_posts').fadeIn();
 		}
 	})
 	$('.form_show.on_mobile').click(function(){

@@ -1,5 +1,5 @@
 
-=form_tag "/posts/load_url_feed", method: :get, autocomplete: :off, remote: true, class: "show_post_modal_btn on_feed" do
+=form_tag "/posts/load_url_feed", method: :get, autocomplete: :off, remote: true do
 	%span.url_form_title_on_feed
 		%i.fa.fa-newspaper-o
 		=t 'form.url.caption'
@@ -7,7 +7,10 @@
 		.user_image
 			=user_image_helper(current_user)
 		.dummy_url_form
-			\[https://] #{t 'form.url.placeholder'}
+			https://example.com
+	
+	%span.show_post_modal_btn.on_feed
+	%span.show_post_modal_btn.for_mobile
 
 :css 
 	.post_url_form form input:-webkit-autofill {

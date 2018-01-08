@@ -17,13 +17,13 @@ a.follow_btn{
     color: #6495ED;
     font-size: 14px;
     &:hover{
-        border: 1px solid #001E42;
-        color: #001E42;
+        border: 1px solid $newsb;
+        color: $newsb;
     }
 }
 
 a.unfollow_btn{
-    background-color: #001E42;
+    background-color: $newsb;
     border: rgba(0,0,0,0);
     color: white;
     font-size: 14px;

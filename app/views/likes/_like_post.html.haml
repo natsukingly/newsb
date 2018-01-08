@@ -1,18 +1,22 @@
-%ul
-	-if user_signed_in?
-		%li
-			-if post.likes.find_by(user_id: current_user.id)
-				= link_to post_unlike_path(post.id), method: :delete, remote: true do 
-					UNLIKE
-			-else
-				= link_to post_like_path(post.id), method: :post, remote: true do
-					LIKE
-			・
-			%span.likes_count
-				= post.likes.count
+
+-if user_signed_in?
+	-if post.likes.find_by(user_id: current_user.id)
+		.post_like_link.link_btn.liked
+			= link_to post_unlike_path(post.id), method: :delete, remote: true do 
+				%i.fa.fa-thumbs-up 
+				・
+				%span.likes_count
+					= post.likes.count
 	-else
-		%li.login_signup_link
-			LIKE
-			・
-			%span.likes_count
-				= post.likes.count
+		.post_like_link.link_btn
+			= link_to post_like_path(post.id), method: :post, remote: true do
+				%i.fa.fa-thumbs-o-up 
+				・
+				%span.likes_count
+					=post.likes.count
+-else
+	.login_signup_link.link_btn
+		%i.fa.fa-thumbs-o-up 
+		・
+		%span.likes_count
+			= post.likes.count

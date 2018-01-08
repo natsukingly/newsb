@@ -13,18 +13,25 @@ class ArticlesController < ApplicationController
   end
   
   def show
+    @current_topic = "Comments"
     @fake_news_reports = @article.posts.where(fake_news_report: true).order(likes_count: :desc)
+    
     if current_user
       @your_posts = @article.posts.where(fake_news_report: false).where(user_id: current_user.id)
       @best_posts = @article.posts.where(fake_news_report: false).order(likes_count: :desc).limit(3)
-      @follower_posts = @article.posts.where(fake_news_report: false).where(user_id: current_user.followers.ids).where.not(id: @best_posts.ids)
-      inapplicable_ids = @your_posts.ids + @best_posts.ids + @follower_posts.ids
+      @shared_posts = @article.posts.where(content: "").where.not(user_id: current_user.id).order(created_at: :asc)
+      @follower_posts = @article.posts.where(fake_news_report: false).where(user_id: current_user.followers.ids).where.not(id: @best_posts.ids).where.not(id: @shared_posts.ids)
+      
+      
+      inapplicable_ids = @your_posts.ids + @best_posts.ids + @follower_posts.ids + @shared_posts.ids
       @new_posts = @article.posts.where(fake_news_report: false).where.not(id: inapplicable_ids).order(created_at: :desc).limit(30)
     else
       @your_posts = []
       @best_posts = @article.posts.where(fake_news_report: false).order(likes_count: :desc).limit(3)
       @follower_posts = []
-      inapplicable_ids = @best_posts.ids
+      @shared_posts = @article.posts.where(content: "")
+      inapplicable_ids = @best_posts.ids + @shared_posts.ids
+      
       @new_posts = @article.posts.where(fake_news_report: false).where.not(id: inapplicable_ids).order(created_at: :desc).limit(30)
     end
   end

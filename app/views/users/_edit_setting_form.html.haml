@@ -25,12 +25,12 @@
 	.setting_block.credential
 		.title
 			CREDENTIAL
-		=text_field_tag 'user[credential]', current_user.credential, placeholder: "ex) company, job title, school", class: "content form-control"
+		=text_field_tag 'user[credential]', current_user.credential, placeholder: "ex) company, job title, school", class: "content"
 	
 	.setting_block.about
 		.title
 			ABOUT
-		=text_area_tag 'user[about]', current_user.about, class: "content form-control", style: "min-height: 120px;"
+		=text_area_tag 'user[about]', current_user.about, class: "content", style: "min-height: 120px;"
 	
 	.submit_btn_group
 		= submit_tag "SAVE", class: "form_btn btn", id: "setting_submit_btn"

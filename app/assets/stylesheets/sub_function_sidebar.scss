@@ -1,10 +1,10 @@
 .sub_function_sidebar{
 	width: 320px;
-	margin: 10px 20px;
+	margin: 20px;
 	h2{
-		font-size: 14px;
+		font-size: 16px;
 	    color: #696969;
-	    margin-bottom: 12px;
+	    margin-bottom: 20px;
 	}
 	h3{
 		font-size: 20px;
@@ -53,7 +53,7 @@
 .recent_article_section{
 	.side_article{
 		.title h2{
-			color: #001E42;
+			color: $newsb;
 			font-weight: normal;
 		}
 	}

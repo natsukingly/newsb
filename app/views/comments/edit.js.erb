@@ -1,7 +1,7 @@
 $(".comment_<%=@comment.id%>").find(".content").html("<%= escape_javascript(simple_format(h(@comment.content.gsub(/\n/, '<br />')))) %>");
-var height = $(".comment_<%=@comment.id%>").find(".content").css("height");
-console.log(height);
+var height = parseInt($(".comment_<%=@comment.id%>").find(".content").css("height"), 10);
 $(".comment_<%=@comment.id%>").find(".content").html('<%= escape_javascript(render("comments/edit_form", comment: @comment))%>');
 $(".comment_<%=@comment.id%>").find(".comment_ddm").hide();
 $(".comment_<%=@comment.id%>").find('.comment_form.edit_form').css("display", "block");
-$(".comment_<%=@comment.id%>").find("form textarea").css("height", height);
+
+$(".comment_<%=@comment.id%>").find("form textarea").css("height", height + 24 + "px");

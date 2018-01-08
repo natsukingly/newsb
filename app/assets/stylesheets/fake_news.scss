@@ -1,34 +1,9 @@
 .show_fake_news_btn.on_mobile{
 	@extend .mobile_btn;
+	border-top: 1px solid #eee;
 }
 
-#fake_news_block{
-	background-color: white;
-	border-top: 1px solid #eee;
-	padding: 0 20px;
-	display: flex;
-	.fake_news_container{
-	    flex: 1;
-	    display: flex;
-	    align-items: center;
-	    p{
-	        flex: 1;
-	        padding: 12px 0;
-	        i{
-	            color: grey;
-	            margin-right: 5px;
-	        }
-	    }
-	    .show_fake_news_link{
-	        display: inline-block;
-	        cursor: pointer;
-	        font-size: 20px;
-	        &:hover{
-	            color: #001E42;
-	        }
-	    }
-	}
-}
+
 
 @media (max-width: 768px) {
 

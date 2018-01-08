@@ -4,7 +4,6 @@ class PostsController < ApplicationController
 	before_action :set_category, only: [:load_url]
 	before_action :set_new_users, only: [:show]
 	before_action :set_side_articles, only: [:show]
-	after_action :decide_category, only: [:create, :update]
 	after_action :not_found, only: [:index, :load_more]
 
 
@@ -81,8 +80,8 @@ class PostsController < ApplicationController
 	def create
 		if params[:commit] == t('form.post.submit')
 			create_article_and_post
-			flash[:notice] = "You have successfully published your post."
-			redirect_to article_path(@article)
+			
+			redirect_to @article
 			
 		elsif params[:commit] == t('form.post.save')
 			save_draft
@@ -104,19 +103,25 @@ class PostsController < ApplicationController
 		end
 	end
 	
-	def create_article_post
-		@article = Article.find(params[:id])
-		@post = @article.posts.build(content: params[:post][:content], 
-																category_id: @article.category_id,
-																user_id: current_user.id,
-																country_id: @country.id)
-		if @post.save
-			flash[:notice] = "Your have successfully published your post."
-			redirect_to @article
-		else 
-			render :top
-		end
-	end
+	# def create_article_post
+	# 	@article = Article.find(params[:id])
+		
+	# 	if current_user.posts.where(article_id: @article.id, content: "").any?
+	# 		@post = @article.posts.build(content: params[:post][:content], 
+	# 																category_id: @article.category_id,
+	# 																user_id: current_user.id,
+	# 																country_id: @country.id)
+	# 		if @post.save
+	# 			flash[:notice] = "Your have successfully published your post."
+	# 			redirect_to @article
+	# 		else 
+	# 			render :top
+	# 		end
+	# 	else
+	# 		flash[:notice] = "Your have already shared this article."
+	# 		redirect_to @article
+	# 	end
+	# end
 
 	def update
 		@post.fake_news_report = params[:post][:fake_news_report] || false
@@ -211,7 +216,7 @@ class PostsController < ApplicationController
 			end
 			
 			#PUBLISHED_TIME
-			unless doc.css('//meta[property="article:published_time"]/@content') != "{:value=>nil}" || doc.css('//meta[property="article:published_time"]/@content').empty?
+			unless doc.css('//meta[property="article:published_time"]/@content').empty?
 				@article_published_time = doc.css('//meta[property="article:published_time"]/@content').to_s
 			end
 		end
@@ -264,17 +269,32 @@ class PostsController < ApplicationController
 				@article.save
 			end
 			
-			#save post
-			@post = current_user.posts.build(article_id: @article.id)
-			@post.category_id = params[:post][:category_id].to_i
-			@post.country_id = @country.id
-			@post.content = params[:post][:content]
-			@post.fake_news_report = params[:post][:fake_news_report] || false
-			@post.save
+			#save post.
+			#if user has shared the same article, dont save
+			# @post = current_user.posts.build(article_id: @article.id)
+			# @post.category_id = params[:post][:category_id].to_i
+			# @post.country_id = @country.id
+			# @post.content = params[:post][:content]
+			# @post.fake_news_report = params[:post][:fake_news_report] || false
+			# @post.save
+			# decide_category
+			# flash[:notice] = "You have successfully published your post."
 			
-			decide_category
+			shared_article = current_user.posts.where(article_id: @article.id, content: "").first
+			if shared_article
+				flash[:notice] = "Your have already shared this article."
+			else
+				@post = current_user.posts.build(article_id: @article.id)
+				@post.category_id = params[:post][:category_id].to_i
+				@post.country_id = @country.id
+				@post.content = params[:post][:content]
+				@post.fake_news_report = params[:post][:fake_news_report] || false
+				@post.save
+				decide_category
+				flash[:notice] = "You have successfully published your post."
+			end
 		end
-		
+
 		def save_draft
 			@article = Article.where(country_id: @country.id).find_by(title: params[:article][:title]) || Article.where(country_id: @country.id).find_by(url: params[:article][:url])
 			

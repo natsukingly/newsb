@@ -1,7 +1,7 @@
 ja:
   form:
     url:
-      caption: "気になる記事をNEWSBの仲間と共有しよう。"
+      caption: "気になる記事を共有"
       placeholder: "URLを入力して開始"
     post:
       title: "投稿を作成"

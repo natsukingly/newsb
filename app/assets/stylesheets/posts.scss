@@ -39,19 +39,19 @@
 }
 
 .post{
-    margin-bottom: 10px;
     background: white;
     box-shadow: 0 0 1px #bbb;
     font-size: 16px;
     .body{
-        padding: 20px 20px 8px;
+        border-left: 2px solid white;
+        padding: 20px;
         flex: 1;
 
         .main{
             .content{
                 padding-right: 0;
                 .opinion{
-                    padding: 12px 0;
+                    padding: 30px 0;
                     font-size: 14px;
                 }
                 .edit_form{
@@ -80,18 +80,61 @@
         .status{
             color: grey;
             font-size: 14px;
-            .link_btn, .link_btn div{
-                display: inline-block;
+            display: flex;
+            align-items: center;
+            .link_btn, .link_btn{
                 margin-right: 12px;
-                &:hover, &:hover a{
-                    color: #001E42;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                border: 1px solid #aaa;
+                padding: 5px 12px;
+                border-radius: 5px;
+                &.liked{
+                    background-color: $newsb;
+                    border: 1px solid $newsb;
+                    &:hover{
+                        opacity: .9;
+                        
+                        a{
+                            color: white;
+                        }
+                    }
+                    a{
+                        color: white;
+                    }
+                }
+                &:hover{
+                    color: $newsb;
+                    border: 1px solid $newsb;
+                    a{
+                        color: $newsb;
+                    }
+                    svg{
+                        fill: $newsb;
+                    }
+                }
+                i{
+                    font-size: 16px;
+                }
+                svg{
+                    height: 16px;
+                    width: 16px;
                 }
             }
             .option{
                 cursor: pointer;
                 position: relative;
+                flex: 1;
+                display: flex;
+                flex-direction: row-reverse;
                 i{
-                    font-size: 20px;                    
+                    font-size: 20px;
+                    text-align: center;
+                    line-height: 40px;
+                    width: 40px;
+                    height: 40px;
+                    display: inline-block;                  
                 }
             }
             
@@ -115,20 +158,24 @@
 }
 
 .post.share{
-    display: none;
+
      .body{
         padding: 12px 20px; 
         .user_info_for_share{
-            margin-top: 10px;
             flex: 1;
             font-size: 14px;
-            margin-left: 5px;
             color: grey;
             a{
-                color: $lightNavy;
+
                 font-size: 16px;
             }
         }
+     }
+     &.wo_article{
+         .body .user_info_for_share{
+             display: flex;
+             align-items: center;
+         }
      }
 }
 
@@ -178,14 +225,30 @@
     .post, .post.share{
         // display: none;
         border-radius: 0;
+        box-shadow: 0 0 1px grey;
         .body{
-             padding: 12px;
+             padding: 12px 8px;
              font-size: 16px;
+            .main{
+                .content{
+                    .opinion{
+                        padding: 30px 0;
+                    }
+                }
+            }
+            .status{
+                .link_btn{
+                    border: 1px solid #aaa;
+                    padding: 5px 12px;
+                    border-radius: 5px;
+                }
+            }
         }
     }
 }
 @media (max-width: 500px) {
     .post{
+        
         .body{
             .main{
                 .post_article{
@@ -296,7 +359,7 @@
             padding: 20px;
 
             p{
-                color: #001E42;
+                color: $newsb;
             }
         }
     }
@@ -314,7 +377,7 @@
         flex: 1;
         padding: 5px 0;
         margin: 0 5px 20px;
-        border: 1px solid #001E42;
+        border: 1px solid $newsb;
         border-radius: 3px;
         
         &:hover{
@@ -340,8 +403,8 @@
                 font-size: 16px;
                 color: grey;
                 &:hover{
-                    color: #001E42;
-                    border: 1px solid #001E42;
+                    color: $newsb;
+                    border: 1px solid $newsb;
                 }
             }
         }

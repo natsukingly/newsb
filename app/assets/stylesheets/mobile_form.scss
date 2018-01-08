@@ -2,7 +2,7 @@
 .form_step{
     font-size: 30px;
     font-weight: bold;
-    color: #001E42;
+    color: $newsb;
     padding-bottom: 50px;
     text-align: center;
 }
@@ -10,7 +10,7 @@
 #mobile_loaded_article{
     height: 800px;
     margin: 0 auto;
-    background-color: #001E42;
+    background-color: $newsb;
     color: white;
     padding: 50px 10px;
     text-align: center;
@@ -38,7 +38,7 @@
             background-color: white;
             padding: 10px;
             border-radius: 3px;
-            color: #001E42;
+            color: $newsb;
             cursor: pointer;
         }
     }
@@ -50,7 +50,7 @@
 #mobile_main_form{
     padding-bottom: 200px;
     background-color: #f3f3f3;
-    color: #001E42;
+    color: $newsb;
     form{ 
         select{
             width: 90%;
@@ -59,7 +59,7 @@
         }
         p{
             font-size: 20px;
-            color: #001E42;
+            color: $newsb;
         }
         textarea{
             width: 90%;

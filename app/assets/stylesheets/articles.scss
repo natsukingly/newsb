@@ -8,7 +8,7 @@
 		i{
 			margin-right: 5px;
 			&.active{
-				color: cornflowerblue;
+				color: $newsb_light;
 			}
 		}
 	}
@@ -24,6 +24,7 @@
 	flex-direction: column;
 	>.title{
 	    padding: 8px 20px;
+	    margin-top: 10px;
 	    background-color: white;
 	    color: #696969;
 	    border-bottom: 1px solid #eee;
@@ -40,7 +41,7 @@
 		>.title{
 
 		    align-items: center;
-		    padding: 12px;
+		    padding: 5px 12px;
 		    .divider{
 		    	// padding: 0 12px;
 		    	// display: block;
@@ -52,8 +53,26 @@
     h2{
     }
     h3{
-    	margin: 20px;
+    	margin: 20px 8px;
     	font-size: 16px;
+		display: flex;
+   		align-items: center;
+   		color: #696969;
+    	&:after, &:before{
+		    border-top: 1px solid #aaa;
+		    content: "";
+		    display: inline;
+		    flex-grow: 1;
+		    
+    	}
+    	&:before{
+    		display: none;
+    		margin-right: 12px;
+    	}
+    	&:after{
+    		margin-left: 12px;
+    	}
+    	
     	&.fake_news_hide_btn{
     		cursor: pointer;
     	}
@@ -64,14 +83,56 @@
     .fake_news_reports{
     	display: none;
     	.post{
-    		border: 2px solid rgba(#8b0000, .5);
+    		border-left: 2px solid rgba(#8b0000, .5);
     	}
     }
+    .shared_posts{
+    	display: none;
+    }
 }
+
+
+.article_other_section{
+	background-color: white;
+	border-top: 1px solid #eee;
+	padding: 0 20px;
+	display: flex;
+	cursor: pointer;
+	.article_other_container{
+	    flex: 1;
+	    display: flex;
+	    align-items: center;
+	    p{
+	        flex: 1;
+	        padding: 12px 0;
+	        i{
+	            color: grey;
+	            display: inline-block;
+	            text-align: center;
+	            width: 20px;
+	            margin-right: 12px;
+	        }
+	    }
+	    
+	    .article_other_section_icon{
+            font-size: 20px;
+            text-align: center;
+            line-height: 40px;
+            width: 40px;
+            height: 40px;
+            display: inline-block; 
+	        &:hover{
+	            color: $newsb;
+	        }
+	    }
+	}
+}
+
+
 @media(max-width: 768px){
 	.sub_function_wrapper.article_show{
 	    h3{
-	    	margin: 12px;
+	    	margin: 50px 5px 12px;
 	    	font-size: 16px;
 	    	color: #696969;
 	    }
@@ -129,6 +190,7 @@
 			    border-radius: 50%;
 				background-size: cover;
 				background-position: center;
+				box-shadow: 0 0 2px #bbb;
 				span.posts_count, span.e_counter{
 					display: inline-block;
 					border-radius: 50px;
@@ -141,8 +203,8 @@
 					left: -3px;
 					&.posts_count{
 						background-color: white;
-						border: 1px solid cornflowerblue;
-						color: cornflowerblue;
+						border: 1px solid $newsb;
+						color: $newsb;
 						top: -3px;
 					}
 					&.e_counter{
@@ -153,7 +215,7 @@
 					}
 				}
 				.overlay{
-					background-color: rgba(#001E42, .05);
+					background-color: rgba($newsb, .05);
 					padding: 5px;
 					height: 100%;
 				}
@@ -189,11 +251,11 @@
 						line-height: 20px;
 						font-size: 16px;
 						font-weight: 900;
-						color: #001E42;
+						color: $newsb;
 					}
 				}
 				.stats{
-					color: #001E42;
+					color: $newsb;
 	
 				}
 				.mini_image{
@@ -210,7 +272,7 @@
 			font-size: 13px;
 		    width: auto;
 		    margin-left: 30px;
-		    border-left: 2px solid rgba(cornflowerblue, .5);
+		    border-left: 2px solid rgba($newsb, .5);
 		    margin-top: 5px;
 		    .body{
 		    	padding: 12px 0 20px 12px;
@@ -267,13 +329,13 @@
 // 			height: 12px;
 // 		}
 // 		&:hover{
-// 			color: #001E42;
-// 			border: 1px solid #001E42;
+// 			color: $newsb;
+// 			border: 1px solid $newsb;
 // 		}
 // 	}
 // 	.best_post_btn.open{
 // 		display: block;
-// 		color: #001E42;
+// 		color: $newsb;
 // 		border: none;
 // 	}
 // }
@@ -391,7 +453,7 @@
 			min-height: 300px;
 			width: auto;
 			.overlay{
-				background-color: rgba(#001E42, 0.6);
+				background-color: rgba($newsb, 0.6);
 				padding: 20px;
 				display: flex;
 				flex-direction: row;
@@ -560,6 +622,7 @@ span.overlay{
 				.info{
 					margin-left: 12px;
 					.title h2{
+						font-size: 14px;
 					}
 				}
 				.mobile_posts_count{
@@ -584,7 +647,7 @@ span.overlay{
 				display: block;
 				height: 300px;
 				.overlay{
-					background-color: rgba(#001E42, 0.3);
+					background-color: rgba($newsb, 0.3);
 					.best_post{
 						display: none;
 					}

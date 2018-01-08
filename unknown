@@ -185,3 +185,21 @@ old feed
 			=link_to "Terms", terms_page_path, class: "header_general_option in_white" 
 			=link_to "Privacy", privacy_page_path, class: "header_general_option in_white" 
 			=link_to "Cookies", cookie_policy_page_path, class: "header_general_option in_white" 
+			
+		.comment_index		
+			.comment_form.clearfix
+				=render '/comments/form', post: post 
+			- if post.comments_count > 1
+				.view_link
+					=render 'comments/view_more_link', post: post
+			- if post.comments_count == 0 
+				-if current_user
+					.invite_comment.comment_link
+						Be the first one to comment >>
+				-else
+					.invite_comment.comment_link.login_signup_link
+						Be the first one to comment >>
+				.comments
+			-else
+				.comments
+					=render 'comments/comment', comment: post.best_comment unless post.best_comment.nil?

@@ -28,7 +28,7 @@
 								#{time_ago_in_words_short(article.published_time)}
 				
 			-if article.posts_count != 0
-				-post = article.posts.order(likes_count: :desc).first	
+				-post = article.posts.order(likes_count: :desc).first
 				- if post != nil && post.content.empty? != true
 					.best_post
 						.body

@@ -20,7 +20,7 @@
             color: #eee;
         }
         &.bkg_navy{
-            background-color: #001E42;
+            background-color: $newsb;
         }
         &.bkg_grey{
             background-color: #f9f9f9;
@@ -95,8 +95,8 @@
                 padding: 8px 12px;
                 margin-bottom: 100px;
                 &:hover{
-                    border: 1px solid cornflowerblue;
-                    color: cornflowerblue;
+                    border: 1px solid $newsb_light;
+                    color: $newsb_light;
                 }
             }
             textarea{
@@ -164,7 +164,7 @@
 
 
 .general_footer{
-    background-color: #001E42;
+    background-color: $newsb;
     color: #eee;
     text-align: center;
     flex: 1;

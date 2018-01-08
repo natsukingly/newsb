@@ -24,7 +24,7 @@
 .logo{
 	font-size: 32px;
 	font-family: 'Raleway', sans-serif;
-	color: #001E42;
+	color: $newsb;
 }
 body{
 	background-color: #eee;
@@ -78,7 +78,7 @@ body{
 }
 
 .navy_bk{
-	background-color: #001E42;
+	background-color: $newsb;
 	color: #fff;
 }
 
@@ -89,7 +89,7 @@ body{
 }
 
 .navy{
-	color: #001E42;
+	color: $newsb;
 }
 
 .light_navy{
@@ -146,7 +146,7 @@ input[type="text"]:focus {
 }
 
 .btn_md.in_navy{
-	background-color: #001E42;
+	background-color: $newsb;
 	color: #eee;
 	&:hover{
 		opacity: .8;
@@ -197,7 +197,7 @@ input[type="text"]:focus {
 		font-size: 16px;
 		padding: 10px;
 		margin: 10px;
-		border: 1px solid #001E42;
+		border: 1px solid $newsb;
 		
 	}
 }
@@ -209,7 +209,7 @@ input[type="text"]:focus {
 		flex: 1;
 		#mobile_side_nav_link{
 			display: inline-block;
-			background-color: #001E42;
+			background-color: $newsb;
 			color: white;
 			border-radius: 60px;
 			height: 60px;
@@ -359,7 +359,7 @@ a  {
 		border-bottom: 2px solid rgba(0, 30, 66, 0.2);
 
 		&:hover{
-			border-bottom: 2px solid rgba(#001E42, 0.5);
+			border-bottom: 2px solid rgba($newsb, 0.5);
 		}
 		svg{
 			height: 20px;
@@ -374,9 +374,9 @@ a  {
 		}
 	}
 	div.active{
-		color: #001E42;
+		color: $newsb;
 		font-weight: bold;
-		border-bottom: 2px solid #001E42;
+		border-bottom: 2px solid $newsb;
 		pointer-events: none;
 	}
 	
@@ -414,7 +414,7 @@ a  {
 	.menu_icon{
 		margin-left: 20px;
 		background-color: white;
-		color: #001E42;
+		color: $newsb;
 	}
 	#article_index_link{
 		color: #CC0000;
@@ -561,14 +561,14 @@ span.input-group-btn{
 	height: 40px;
 	line-height: 45px;
 	svg{
-		height: 25px;
+		height: 22px;
 		width: 100%;
 	}
 	.follow svg{
 		fill: grey;
 	}
 	.unfollow svg{
-		fill: #001E42;
+		fill: $newsb;
 	}
 }
 

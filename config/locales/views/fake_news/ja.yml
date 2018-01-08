@@ -2,8 +2,8 @@ ja:
   fake_news:
     title: "フェイクニュースの報告"
     count_description:
-      one: "%{count} 人のユーザーがフェイクニュースとして報告しています。"
-      other: "%{count} 人のユーザーがフェイクニュースとして報告しています。"
+      one: "%{count} 件のレポートが届いています。"
+      other: "%{count} 件のレポートが届いています。"
     no_fake_news: "フェイクニュースの報告はまだ受けていません。"
     show:
       desktop: "報告を読む"

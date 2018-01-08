@@ -2,28 +2,35 @@
     text-align: center;
     font-size: 16px;
     color: grey;
-    padding: 20px;
-    margin: 0 auto;
+    padding: 12px 20px;
+    width: 95%;
+    border: 1px solid grey;
+    border-radius: 3px;
+    margin: 12px auto;
     cursor: pointer;
     line-height: 20px;
     &:hover{
-        color: #001E42;
-        font-weight: 900;
+        color: $newsb;
+        border: 1px solid $newsb;
     }
 }
 .scroll_btn.loading{
     cursor: auto;
+    border: none;
     &:hover{
         color: grey;
         font-weight: normal;
+        border: none;
     }
 }
 
 
 .scroll_btn.stop_loading{
     cursor: auto;
+    border: none;
     &:hover{
         color: grey;
         font-weight: normal;
+        border: none;
     }
 }
