@@ -8,9 +8,7 @@
 						.user_image_xs
 							=user_image_helper(current_user)
 						=t ('form.post.title')
-					.check
-						=check_box_tag "post[fake_news_report]", true, false
-						=t ('form.post.fake_news_checkbox')
+
 						
 				-if current_user
 					.field.form-group.post_textarea_wrapper 

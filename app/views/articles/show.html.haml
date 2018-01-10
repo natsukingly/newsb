@@ -29,7 +29,7 @@
 			
 	- @best_posts.ids.each do |best_id|		
 		:javascript
-			$("#main_contents").find(".post_#{best_id}").find(".user_block .star").css("display","block");
+			$("#main_contents").find(".post_#{best_id}").find(".user_block .star").css("display","inline-block");
 
 
 	
@@ -45,6 +45,7 @@
 			$('.fake_news_reports').fadeIn();
 		}
 	})
+	
 	$('.show_shared_posts_link').click(function(){
 		if($(this).hasClass("open")){
 			$(this).removeClass("open").find('.article_other_section_icon').html("<i class='fa fa-angle-down'></i>");
@@ -54,6 +55,7 @@
 			$('.shared_posts').fadeIn();
 		}
 	})
+	
 	$('.form_show.on_mobile').click(function(){
 		if($(this).hasClass("open")){
 			$(this).removeClass("open").find('span.content').text("#{t ('form.post.title')}");

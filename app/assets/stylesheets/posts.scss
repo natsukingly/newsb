@@ -38,12 +38,20 @@
 	}
 }
 
+
+
 .post{
     background: white;
     box-shadow: 0 0 1px #bbb;
     font-size: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    &.wo_article{
+        margin-bottom: 0;
+    }
+
     .body{
-        border-left: 2px solid white;
+        // border-left: 2px solid white;
         padding: 20px;
         flex: 1;
 
@@ -51,7 +59,7 @@
             .content{
                 padding-right: 0;
                 .opinion{
-                    padding: 30px 0;
+                    padding: 20px 0;
                     font-size: 14px;
                 }
                 .edit_form{
@@ -120,6 +128,7 @@
                 svg{
                     height: 16px;
                     width: 16px;
+                    fill: grey;
                 }
             }
             .option{
@@ -147,7 +156,11 @@
         }
     }
     .comment_index{
+        padding: 0 20px;
+        border-left: 2px solid $newsb_light;
+        // background-color: #f9f9f9;
         .view_link, .reply_view_link{
+            padding: 5px 0;
             a {
                 font-size: 14px;
                 font-weight: 900;
@@ -157,14 +170,17 @@
     }
 }
 
-.post.share{
 
+.post.share{
      .body{
         padding: 12px 20px; 
         .user_info_for_share{
             flex: 1;
             font-size: 14px;
             color: grey;
+            i{
+                margin-left: 5px;
+            }
             a{
 
                 font-size: 16px;
@@ -172,12 +188,25 @@
         }
      }
      &.wo_article{
+         
          .body .user_info_for_share{
              display: flex;
              align-items: center;
          }
      }
 }
+
+.post .comment{
+    .body{
+        padding: 12px 0;
+
+        span.opinion.comment_opinion{
+            display: inline-block;
+            padding: 12px 0;
+        }
+    }
+}
+
 
 
 .post_article{
@@ -199,6 +228,16 @@
         transition: .1s;
         h2{
             padding-bottom: 5px;
+        }
+    }
+    .post .comment{
+        .body{
+            padding: 12px 0;
+    
+            span.opinion.comment_opinion{
+                display: inline-block;
+                padding: 12px 0;
+            }
         }
     }
 }
@@ -226,25 +265,38 @@
         // display: none;
         border-radius: 0;
         box-shadow: 0 0 1px grey;
+        &.wo_article{
+            margin-bottom: 0;
+        }
         .body{
              padding: 12px 8px;
              font-size: 16px;
             .main{
                 .content{
                     .opinion{
-                        padding: 30px 0;
+                        // padding: 30px 0;
                     }
                 }
             }
             .status{
                 .link_btn{
                     border: 1px solid #aaa;
-                    padding: 5px 12px;
+                    margin-right: 8px;
+                    padding: 5px 8px;
                     border-radius: 5px;
                 }
             }
         }
+        .comment_index{
+            padding: 0 8px;
+            // margin: 8px 0;
+            // margin-left: 8px;
+            // padding-left: 20px;
+            border-left: 2px solid cornflowerblue;
+        }
+
     }
+
 }
 @media (max-width: 500px) {
     .post{
@@ -255,16 +307,21 @@
                     margin-bottom: 12px;
                     display: flex;
                     flex-direction: column;
-                    border: 1px solid rgba(0,0,0,0.2);
+                    border: none;
                     &:hover{
-                        border: 1px solid rgba(54, 88, 155, 0.4);
+                        border: none;
                     }
                     .image{
                         background-position: center;
                         background-size: cover;
                         height: 130px;
+                        margin: 0 -20px;
                         width: auto;
                         flex: 1;
+                    }
+                    .article_info{
+                        padding: 12px 0;
+                        color: #001E42;
                     }
                 }
             }

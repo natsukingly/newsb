@@ -39,7 +39,7 @@ form{
 			border-radius: 3px;
 			outline: 0px;
 			border: 1px solid #bbb;
-			padding: 8px 5px;
+			padding: 8px;
 			background-color: white;
 
 			&:hover{
@@ -47,7 +47,8 @@ form{
 			}
 		}
 		input[type="submit"]{
-			padding: 5px 12px;
+			padding: 5px 20px;
+			width: auto;
 		}
 		.error_icon{
 			position: absolute;
@@ -75,7 +76,10 @@ form{
 	form{
 		padding: 0;
 		div{
-			input[type="text"], input[type="password"], input[type="submit"], input[type="email"], textarea{
+			input[type="submit"]{
+				padding: 5px 12px;
+			}
+			input[type="text"], input[type="password"], input[type="email"], textarea{
 				padding: 5px;
 				font-size: 16px;
 			}
@@ -115,11 +119,14 @@ form{
 		display: flex;
 		flex-direction: column;
 		border: none;
-		padding: 20px;
+
 		.form_main{
 			flex: 1;
 			
 			form{
+				hr{
+					display: none;
+				}
 				.article_title{
 					overflow: hidden;
   					width: 100%;	
@@ -127,7 +134,7 @@ form{
   						overflow: hidden;
 					    text-overflow: ellipsis;
 					    white-space: nowrap;
-					    margin-bottom: 20px;
+					   
 						color: $newsb;
 						font-weight: 900;
   					}
@@ -208,6 +215,7 @@ form{
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
+				margin-top: 8px;
 				.form_btn{
 					background-color: white;
 					color: $newsb;
@@ -217,7 +225,7 @@ form{
 					// margin-left: 5px;
 					padding: 0;
 					transition: .2s;
-					line-height: 30px;
+					line-height: 35px;
 					&:hover{
 						background-color: $newsb;
 						color: white;
@@ -277,8 +285,8 @@ form{
 		align-items: center;
 		.sns_connect_btn{
 			border-radius: 3px;
-			width: 30px;
-			height: 30px;
+			width: 35px;
+			height: 35px;
 			margin-right: 8px;
 			font-size: 16px;
 			border: 1px solid #aaa;
@@ -373,9 +381,6 @@ form{
 	ul{
 		list-style: disc;
 		li{
-			list-style-type: disc;
-			list-style-position: outside;
-   			margin-left: 20px;
    			margin-bottom: 12px;
 		}
 	}
@@ -404,15 +409,31 @@ form{
 
 @media (max-width: 768px) {
 	.post_form {
-		border-top: 1px solid #eee;
 		.body{
-			padding: 20px 5px;
+			padding: 10px 5px;
 			.form_main{ 
-				form .form_check_group{
-					display: block;
-					.title{
-						display: none;
+				form{
+					.form_check_group{
+						display: block;
+						.title{
+							display: none;
+						}
 					}
+					hr{
+						display: block;
+						border-width: 1px 0 0 0; /* 太さ */
+						border-style: solid; /* 種類 */
+						border-color: #eee; /* 色 */
+						padding: 0;
+						margin: 0;
+					}
+					.article_title{
+						width: 80%;
+						p{
+							margin: 5px 0 12px;
+						}
+					}
+
 					.check{
 						
 					}
@@ -420,8 +441,10 @@ form{
 				form{
 					.post_textarea_wrapper{
 						margin: 8px 0;
+						
 						.post_textarea_block{
 							padding: 5px 0;
+							border: none;
 						}
 					}
 				}
@@ -511,7 +534,6 @@ form{
 		input[type="submit"]{
 			background-color: rgba(0,0,0,0);
 			border: 1px solid #bbb;
-			width: 100px;
 			&:hover{
 				color: rgb(54, 88, 155);
 				border: 1px solid rgb(54, 88, 155);

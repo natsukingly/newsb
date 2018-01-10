@@ -11,10 +11,15 @@
 						=article.title
 						%br
 						%span.selected_article_info
+							%span.selected_post_posts_count
+								=render 'svg/speech_bubble_icon'
+								%span.post_number
+									#{article.posts_count}
 							= article.source
 							- if article.published_time
-								%i.fa.fa-clock-o
-								#{time_ago_in_words_short(article.published_time)}
+								%span.time
+									#{time_ago_in_words_short(article.published_time)}
+
 				.article_menu
 					=link_to "READ MORE", article.url, class: "read_article_btn article_item", target: "_blank"
 					-if current_user
@@ -26,6 +31,8 @@
 						
 .article_post_form.modal_wrapper
 	=render 'modals/article_post_form'
-
+	
+.article_post_edit_form.modal_wrapper
+	=render 'modals/article_post_edit_form'
 
 

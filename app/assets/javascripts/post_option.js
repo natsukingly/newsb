@@ -9,14 +9,8 @@ $(document).on('turbolinks:load', function() {
 	});
 	
 	
-	$(".post_ddm .edit_btn").click(function(){
-	   var opinion_height = $(this).parents(".post").find(".opinion").css("height");
-	   var opinion_form_height = parseInt(opinion_height) - 20
-	   $(this).parents(".post").find(".edit_form .edit_textarea").css("height", opinion_form_height + "px");
-	   $(this).parents(".post").find(".edit_form").fadeIn();
-	   $(this).parents(".post").find(".opinion").hide();
-	   $(".post_ddm").hide();
-	});	
+
+	
 	$('.post_ddm .option_modal').click(function (event) {
 		if(!$(event.target).closest('.delete').length && !$(event.target).is('.delete')) {
 			if(!$(event.target).closest('.report').length && !$(event.target).is('.report')) {

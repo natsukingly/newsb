@@ -22,13 +22,23 @@
 		}
 	}
 	.star{
-		position: absolute;
-		display: none;
-		top: -5px;
-		left: -5px;
-		svg{
-			width: 16px;
-		}
+	    padding: 0 8px;
+	    line-height: 22px;
+	    vertical-align: top;
+	    background-color: indianred;
+	    font-size: 12px;
+	    border-radius: 3px;
+	    color: white;
+	    text-align: center;
+	    display: none;
+		// margin-right: 5px;
+		// position: absolute;
+		// display: none;
+		// top: -5px;
+		// left: -5px;
+		// svg{
+		// 	width: 16px;
+		// }
 	}
 }
 
@@ -164,7 +174,7 @@
 		.user_profile_container{
 			flex-direction: column;
 			text-align: center;
-			padding: 30px 12px;
+			padding: 12px;
 			img{
 			}
 			.user_info{
@@ -337,6 +347,9 @@
 
 @media (max-width: 768px) {
 	.user_lists{
+		.user{
+			padding: 12px 8px;
+		}
 		.user_list_item{
 			padding: 12px;
 		}

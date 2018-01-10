@@ -29,20 +29,42 @@ $(document).on('turbolinks:load', function() {
 	});
 	
 	$('.close_modal_btn, .mobile_modal_back_btn').click(function (event) {
-		$("#post_modal").hide();
+		$(".modal_wrapper").hide();
+		$('.sub_function_wrapper').show();
 		$('body').removeClass('fixed');
 	});	
 	
   	$('.show_article_post_form_link').click(function () {
 		$(".article_post_form").fadeIn();
 		$('body').addClass('fixed');
-		$('#placeholder_url').focus();
+		if(windowWidth < 768){
+			$('.sub_function_wrapper').hide();
+		}
 		return false;
 	});
+	
+	$(".post_ddm .edit_btn").click(function(){
+	   var opinion_height = $(this).parents(".post").find(".opinion").css("height");
+	   var opinion_form_height = parseInt(opinion_height) - 20
+	   $(".article_post_edit_form").find("textarea").css("height", opinion_form_height + "px");
+	   
+	   var post_id = $(this).parents(".post").attr("data-post-id");
+	   var content = $(this).parents(".post").find(".opinion").text();
+	   $(".article_post_edit_form").find('#edit_target_post_id').val(post_id);
+	   $(".article_post_edit_form").find('textarea').val($.trim(content));
+	   if(windowWidth < 768){
+			$('.sub_function_wrapper').hide();
+		}
+	   $(".article_post_edit_form").fadeIn();
+	  
+	   
+	   $(".post_ddm").hide();
+	});	
 	
 	$('.modal_wrapper').click(function (event) {
 		if(!$(event.target).closest('.modal').length && !$(event.target).is('.modal')) {
 			$(".modal_wrapper").hide();
+			$('.sub_function_wrapper').show();
 			$('body').removeClass('fixed');
 		}  
 	});

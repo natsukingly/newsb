@@ -308,12 +308,18 @@ header{
 		.form_icon{
 			position: absolute;
 			z-index: 22;
-			top: 0;
-			left: 0;
+			top: 5px;
+			left: 5px;
 			font-size: 16px;
 			color: $newsb;
 			background-color: rgba(0,0,0,0);
-			float: left;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			svg{
+				width: 20px;
+				fill: white;
+			}
 			.fa-search{ 
 				color: white;
 			}
@@ -328,7 +334,7 @@ header{
 			    padding: 0 0 0 50px;
 			    border: none;
 			    font-size: 20px;
-			    background-color: $mobile_header_bkg_color;
+			    background-color: rgba(0,0,0,0);
 			}
 		}
 	}
@@ -525,7 +531,7 @@ header{
 
 .notice_bar{
     position: fixed;
-   	bottom: 20px;
+   	top: 55px;
     right: 20px;
     border-radius: 3px;
     min-width: 500px;

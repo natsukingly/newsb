@@ -14,9 +14,6 @@
 				.field.form-group.form_check_group
 					.select
 						= select_tag "post[category_id]", options_from_collection_for_select(@categories, "id", "name"), prompt: "select a category", class: "form-control selectpicker tag_selection"
-					.check
-						=check_box_tag "post[fake_news_report]", true, false
-						=t ('form.post.fake_news_checkbox')
 
 				.field.form-group.post_textarea_wrapper
 					.post_textarea_block.feed

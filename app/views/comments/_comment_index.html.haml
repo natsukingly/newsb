@@ -1,0 +1,8 @@
+.comment_index
+	.view_link
+		=link_to view_less_comment_path(post.id), remote: true do
+			HIDE COMMENTS
+			%i.fa.fa-angle-up
+	.comments
+		=render comments
+  

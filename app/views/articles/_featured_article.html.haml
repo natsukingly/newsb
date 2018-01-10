@@ -5,23 +5,19 @@
 			.article_container	
 				.featured_article_content
 					%h2.featured_article_title
-						=link_to universal_truncate(article.title, 100), article_path(article)
+						=link_to universal_truncate(article.title, 150), article_path(article)
 					=link_to article, class: "featured_article_info" do
-						-report_count = article.posts.where(fake_news_report: true).count
 						%p.featured_post_posts_count
 							=render 'svg/speech_bubble_icon'
 							%span.post_number
-								#{article.posts_count} posts
-							-if report_count != 0
-								%sapn.report_number
-									#{report_count} fake news reports 
-							-if article.published_time
-								%sapn.published_time
-									%i.fa.fa-clock-o
-									#{time_ago_in_words_short(article.published_time)}	
+								#{article.posts_count}
 									
 						%p.featured_article_source
 							= article.source
+							-if article.published_time
+								%span.time
+									#{time_ago_in_words_short(article.published_time)}
+
 						
 					-unless best_post.nil?
 						=link_to article do

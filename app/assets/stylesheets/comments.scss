@@ -3,91 +3,90 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.comment, .reply{
-    padding: 12px 0;
-    .main{
-        // background-color: #f9f9f9;
-        display: flex;
-        .body{
-            padding: 0;
-            flex: 1;
-            .user_info{
-                display: flex;
-                border-bottom: 1px solid #eee;
-                .user_name{
-                    flex: 1;
-                }
-                .option{
-                    position: relative;
-                    text-align: center;
-                    width: 30px;
-                    height: 16px;
-                    line-height: 16px;
-                    font-size: 16px;
-                    cursor: pointer;
-                    color: grey;
-                }
-            }
-            .content{
-                padding: 20px 0;
-                font-size: 14px;
-            }
-            .status{
-                .reply_link.link_btn{
-                    margin: 0;
-                }
-            }
-            .reply_view_link{
-                margin-right: 5px;
-                display: inline-block;
-            }
-        }
-        img{
-            margin-right: 10px;
-            width: 30px;
-            height: 30px;
-        }
-    }
-}
+// .comment, .reply{
+//     padding: 12px 0;
+//     .main{
+//         // background-color: #f9f9f9;
+//         display: flex;
+//         .body{
+//             padding: 0;
+//             flex: 1;
+//             .user_info{
+//                 display: flex;
+//                 border-bottom: 1px solid #eee;
+//                 .user_name{
+//                     flex: 1;
+//                 }
+//                 .option{
+//                     position: relative;
+//                     text-align: center;
+//                     width: 30px;
+//                     height: 16px;
+//                     line-height: 16px;
+//                     font-size: 16px;
+//                     cursor: pointer;
+//                     color: grey;
+//                 }
+//             }
+//             .content{
+//                 padding: 20px 0;
+//                 font-size: 14px;
+//             }
+//             .status{
+//                 .reply_link.link_btn{
+//                     margin: 0;
+//                 }
+//             }
+//             .reply_view_link{
+//                 margin-right: 5px;
+//                 display: inline-block;
+//             }
+//         }
+//         img{
+//             margin-right: 10px;
+//             width: 30px;
+//             height: 30px;
+//         }
+//     }
+// }
 
 
-.reply{
-    .main{
-        img{
-            width: 20px;
-            height: 20px;
-        }
-    }
-}
+// .reply{
+//     .main{
+//         img{
+//             width: 20px;
+//             height: 20px;
+//         }
+//     }
+// }
 
 
-.comment_index{
-    // background-color: #f9f9f9;
-    padding: 5px 20px;
-    border-left: 2px solid $newsb_light;
-    .view_link{
-        padding: 5px 0;
-    }
-    .invite_comment{
-        color: #696969;
-        cursor: pointer;
-        padding: 3px 0;
-        margin-left: -22px;
-        &:hover{
-            color: $newsb;
-        }
-    }
-}
+// .comment_index{
+//     // background-color: #f9f9f9;
+//     padding: 0 20px;
+//     border-left: 2px solid $newsb_light;
+//     .view_link{
+//         padding: 5px 0;
+//     }
+//     .invite_comment{
+//         color: #696969;
+//         cursor: pointer;
+//         padding: 3px 0;
+//         margin-left: -22px;
+//         &:hover{
+//             color: $newsb;
+//         }
+//     }
+// }
 
-@media(max-width: 768px){
-    .comment{
-        padding: 12px 0;
-    }
-    .comment_index{
-        padding: 12px 8px;
-        border-left: 3px solid $newsb_light;
-    }
-}
+// @media(max-width: 768px){
+//     .comment{
+//         padding: 12px 0;
+//     }
+//     .comment_index{
+//         border-left: 3px solid $newsb_light;
+//     }
+// }
 
 
 

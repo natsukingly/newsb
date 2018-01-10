@@ -92,7 +92,7 @@ Rails.application.routes.draw do
 			end
 		end
 		
-		resources :posts, except: [:new] do
+		resources :posts, except: [:new, :update] do
 			member do
 				post 'create_article_post', as: :create_article	
 				get 'edit_article_post', as: :edit_article
@@ -101,6 +101,7 @@ Rails.application.routes.draw do
 				post 'create_report'
 			end
 			collection do
+				post 'update', as: :update
 				post 'create_from_modal'
 				get 'load_more'
 				get 'autocomplete_tags'

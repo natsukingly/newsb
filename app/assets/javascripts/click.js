@@ -7,7 +7,7 @@ $(document).on('turbolinks:load', function() {
 	});
 	
 	$('.comment_link').click(function(){
-		console.log("clicked");
+
 		$(this).parents('.post').find('.comment_form').show();
 		$(this).parents('.post').find('.comment_form textarea').focus();
 		$(this).parents('.post').find('.invite_comment').hide();

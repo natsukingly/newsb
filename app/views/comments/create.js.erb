@@ -1,5 +1,4 @@
 $(".post_<%=@post.id%>").find(".comment_count").text("<%= @post.comments.count %>");
-$(".post_<%=@post.id%>").find(".comments").html('<%= escape_javascript(render @comments)%>');
+$(".post_<%=@post.id%>").find(".comment_index_wrapper").html('<%= escape_javascript(render 'comments/comment_index', comments: @comments, post: @post)%>');
 $(".post_<%=@post.id%>").find(".comment_form textarea").val(" ");
 $(".post_<%=@post.id%>").find(".comment_form").hide();
-$(".post_<%=@post.id%>").find(".invite_comment").html("");

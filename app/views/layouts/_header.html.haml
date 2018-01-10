@@ -51,9 +51,8 @@
 		-#=render 'svg/globe_icon'
 	/ header left
 	.search_bar
-		%span.fa-stack.fa-lg.form_icon
-			%i.fa.fa-circle.fa-stack-2x
-			%i.fa.fa-search.fa-stack-1x
+		.form_icon
+			=render 'svg/search_icon'
 		=form_tag search_path(country: @country.name), method: "get", id: "search" do
 			=text_field_tag :keyword, params[:keyword], placeholder: "Search"
 			=submit_tag "", style: "display: none;"

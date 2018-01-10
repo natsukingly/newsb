@@ -11,6 +11,7 @@ en:
       submit: "POST"
       save: "SAVE"
       cancel: "CANCEL"
+      update: "UPDATE"
     comment:
       placeholder: "What do you think?"
       submit: "COMMENT"

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-	before_action :set_post, only: [:show, :edit, :update, :destroy, :edit_article_post, :update_article_post, :cancel_edit_article_post, :create_report]
+	before_action :set_post, only: [:show, :edit, :destroy, :edit_article_post, :update_article_post, :cancel_edit_article_post, :create_report]
 	before_action :yes_found
 	before_action :set_category, only: [:load_url]
 	before_action :set_new_users, only: [:show]
@@ -124,9 +124,14 @@ class PostsController < ApplicationController
 	# end
 
 	def update
-		@post.fake_news_report = params[:post][:fake_news_report] || false
+		post_id = params[:post][:id].to_i
+		@post = Post.find(post_id)
 		@post.content = params[:post][:content] 
-		@post.save
+		if @post.save
+			flash[:notice] = "Your post has been successfully updated"
+			redirect_to article_path(@post.article_id)
+		end
+		
 	end
 	
 	def update_article_post
@@ -280,8 +285,8 @@ class PostsController < ApplicationController
 			# decide_category
 			# flash[:notice] = "You have successfully published your post."
 			
-			shared_article = current_user.posts.where(article_id: @article.id, content: "").first
-			if shared_article
+			shared_article = current_user.posts.where(article_id: @article.id, content: "").any?
+			if shared_article == true && params[:post][:content] == ""
 				flash[:notice] = "Your have already shared this article."
 			else
 				@post = current_user.posts.build(article_id: @article.id)

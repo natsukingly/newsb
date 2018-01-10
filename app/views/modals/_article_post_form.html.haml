@@ -1,19 +1,14 @@
 .post_form_modal.modal
+	.close_modal_btn
+		=render 'svg/close_icon'
+			
 	.post_form{data: {form: "article", country: "#{@country.id}"}}
 		.body 
 			.form_main 
 				= form_tag posts_path do
 					.article_title
 						%p=@article.title
-							
-					.form_check_group
-						.title
-							.user_image_xs
-								=user_image_helper(current_user)
-							=t ('form.post.title')
-						.check
-							=check_box_tag "post[fake_news_report]", true, false
-							=t ('form.post.fake_news_checkbox')
+					%hr
 							
 					-if current_user
 						.field.form-group.post_textarea_wrapper 
@@ -29,12 +24,7 @@
 							
 							#autocomplete_tags
 								.autocomplete_tags_block
-					-else
-						.field.form-group.post_textarea_wrapper
-							.dummy_layer.login_signup_link
-							.textarea_block.post_textarea_block.still
-								= text_area_tag 'post[content]', '', placeholder: "#{t ('form.post.placeholder')}", class: "article_post_content"
-					
+					%hr
 					.post_submit_menu 
 						-if current_user
 							#sns_post_form_menu

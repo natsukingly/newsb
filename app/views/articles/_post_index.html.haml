@@ -20,37 +20,7 @@
 				BEST POSTS
 			= render partial: "posts/post_wo_article", collection: @best_posts.includes(:user), as: :post
 
--unless report_count == 0 || @shared_posts.empty?
 
-	.title
-		%h3
-			OTHERS
-	.article_other_section.show_fake_news_link
-		.article_other_container
-			%p
-				%i.fa.fa-exclamation
-				=t ('fake_news.show.mobile')
-				\:
-				= report_count
-				
-			.article_other_section_icon
-				%i.fa.fa-angle-down
-				
-	.fake_news_reports
-		= render partial: "posts/post_wo_article", collection: @fake_news_reports.includes(:user), as: :post
-
--unless @shared_posts.empty?
-	.article_other_section.show_shared_posts_link
-		.article_other_container
-			%p
-				%i.fa.fa-share-alt
-				Shared
-				\:
-				= @shared_posts.count
-			.article_other_section_icon
-				%i.fa.fa-angle-down
-	.shared_posts
-		= render partial: "posts/post_wo_article", collection: @shared_posts.includes(:user), as: :post
 	
 		
 -unless @follower_posts.empty?
@@ -59,10 +29,22 @@
 			FOLLOWERS POSTS
 		= render partial: "posts/post_wo_article", collection: @follower_posts.includes(:user), as: :post
 		
--unless @new_posts.empty?
+-unless @new_posts.empty? && @shared_posts.empty?
 	.new_posts
 		%h3
 			NEW POSTS
+		-unless @shared_posts.empty?
+			.article_other_section.show_shared_posts_link
+				.article_other_container
+					%p
+						%i.fa.fa-share-alt
+						Shared
+						\:
+						= @shared_posts.count
+					.article_other_section_icon
+						%i.fa.fa-angle-down
+			.shared_posts
+				= render partial: "posts/post_wo_article", collection: @shared_posts.includes(:user), as: :post
 		= render partial: "posts/post_wo_article", collection: @new_posts.includes(:user), as: :post
 		-if @new_posts.count < 30
 			.scroll_btn.stop_loading
