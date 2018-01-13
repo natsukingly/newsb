@@ -49,8 +49,9 @@
 						LOAD MORE	
 						
 	.sub_function_sidebar
-		%h2
-			=t ('sidebar.title.recent_articles')
+		.title_block
+			%h2
+				=t ('sidebar.title.recent_articles')
 		.recent_article_section
 			-if @recent_articles.empty?
 				.new_users_not_found

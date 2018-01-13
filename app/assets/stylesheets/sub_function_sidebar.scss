@@ -1,23 +1,41 @@
 .sub_function_sidebar{
 	width: 320px;
-	margin: 20px;
+	margin: 0 20px;
 	h2{
-		font-size: 16px;
+		font-size: 14px;
 	    color: #696969;
-	    margin-bottom: 20px;
+	    margin: 20px 0;
 	}
 	.side_article h2{
 		font-size: 14px;
+		
+	}
+	.title_block{
+		margin-top: 20px;
+		h2{
+			padding: 16px 0;
+			margin: 0;
+		}
 	}
 	h3{
 		font-size: 20px;
 		font-weight: 900;
 	}
+	h4{
+		font-size: 14px;
+		font-weight: 900;
+	}
+	p{
+		font-size: 12px;
+	}
+	span{
+		font-size: 12px;
+	}
 }
 
 .sub_function_user_sidebar{
 	width: 160px;
-	margin-right: 20px;
+	margin-right: 0 20px;
 }
 @media(max-width: 768px){
 	.sub_function_user_sidebar{
@@ -29,6 +47,7 @@
 .recent_article_section, .side_article_section, .new_users_section{
 	background-color: white;
 	padding: 12px 0;
+	box-shadow: 0 0 1px #bbb;
 }
 
 

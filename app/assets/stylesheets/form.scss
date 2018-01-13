@@ -124,26 +124,13 @@ form{
 			flex: 1;
 			
 			form{
-				hr{
-					display: none;
-				}
-				.article_title{
-					overflow: hidden;
-  					width: 100%;	
-  					p{
-  						overflow: hidden;
-					    text-overflow: ellipsis;
-					    white-space: nowrap;
-					   
-						color: $newsb;
-						font-weight: 900;
-  					}
-				}
+
 				.form_check_group{
 					display: flex;
 					flex-wrap: wrap;
 					align-items: center;
 					color: #696969;
+					margin-bottom: 8px;
 					.title, .select{
 						display: flex;
 						align-items: center;
@@ -160,12 +147,12 @@ form{
 				.post_textarea_wrapper{
 					position: relative;
 					
-					margin: 8px 0;
+					margin: 0;
 					padding: 0;
 					.post_textarea_block{
 							display: flex;
 							border: 1px solid grey;
-							padding: 5px;
+							padding: 0;
 							min-height: 80px;
 							cursor: text;
 							border-radius: 3px;
@@ -215,7 +202,8 @@ form{
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
-				margin-top: 8px;
+				margin: 8px 0;
+				font-size: 14px;
 				.form_btn{
 					background-color: white;
 					color: $newsb;
@@ -369,8 +357,7 @@ form{
 }
 
 .post_form_requirement{
-	border: 1px solid #eee;
-	padding: 20px;
+
     margin-bottom: 20px;
 	line-height: 20px;
 	color: #696969;
@@ -381,7 +368,7 @@ form{
 	ul{
 		list-style: disc;
 		li{
-   			margin-bottom: 12px;
+   			font-size: 12px;
 		}
 	}
 	// we may never use the following 
@@ -399,6 +386,11 @@ form{
 	}
 }
 
+@media(max-width: 768px){
+	.post_form_requirement{
+		padding: 0 8px;
+	}
+}
 
 
 .form_show.on_mobile{
@@ -410,7 +402,7 @@ form{
 @media (max-width: 768px) {
 	.post_form {
 		.body{
-			padding: 10px 5px;
+			padding: 0;
 			.form_main{ 
 				form{
 					.form_check_group{
@@ -440,13 +432,17 @@ form{
 				}
 				form{
 					.post_textarea_wrapper{
-						margin: 8px 0;
+						margin: 0;
 						
 						.post_textarea_block{
 							padding: 5px 0;
 							border: none;
 						}
 					}
+				}
+				.post_submit_menu{
+					margin: 8px;
+					
 				}
 			}
 		}
@@ -456,9 +452,7 @@ form{
 .post_form_block{
 	&.loading{
 		text-align: center;
-		font-size: 50px;
-		color: grey;
-		margin: 100px 0;
+		margin-top: 50px;
 	}
 	.parse_failure_message{
 		text-align: center;
@@ -600,14 +594,12 @@ form{
 			align-items: flex-end;
 		}
 		input[type=url]{
-			flex: 1;
-			border: none;
-			outline: none;
-			box-shadow: none;
-			height: 50px;
-			padding: 25px 12px 25px 0; 
-			font-size: 20px;
-			border-bottom: 1px solid #eee;
+		    flex: 1;
+		    border: none;
+		    outline: none;
+		    box-shadow: none;
+		    height: 40px;
+		    font-size: 20px;
 		}
 		
 		button[type=submit]{
@@ -620,6 +612,7 @@ form{
 	.post_url_form{
 	   // display: none;
 	   margin: 12px 0 0;
+	   padding: 12px 8px;
 		&.on_modal, &.for_mobile{
 			display: block;
 			margin: 0 0 12px;

@@ -40,8 +40,9 @@
 			
 			
 	.sub_function_sidebar
-		%h2
-			=t ('sidebar.title.recent_articles')
+		.title_block
+			%h2
+				=t ('sidebar.title.recent_articles')
 		.recent_article_section
 			-if @recent_articles
 				= render partial: "articles/side_recent_article", collection: @recent_articles, as: :article

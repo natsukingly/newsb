@@ -30,7 +30,7 @@
 						.user_info
 							=link_to post.user  do
 								%span.star
-									VIP
+									BEST
 								%span
 									=post.user.name
 							%p.user_credential.sm.grey
@@ -74,22 +74,5 @@
 					.comments
 						=render 'comments/comment', comment: post.best_comment unless post.best_comment.nil?
 
-:javascript
-	// post side menu open close
-	$('.option_link').click(function () {
-			var height = $(this).parents(".post").find('.opinion').css("height");
-			$(this).parents(".post").find('.opinion').attr("data-height", height);
-			// ボタンが押されたら、モーダルウィンドウを表示
-			$(".ddm").hide();
-			$(this).parents(".post").find('.post_ddm').css("display", "flex");
-			
-			return false;
-	});
-	
-	$('body').click(function (event) {
-	  if(!$(event.target).closest('.post_ddm').length && !$(event.target).is('.post_ddm')) {
-		 $(".post_ddm").hide();
-	  }     
-	});
 
 

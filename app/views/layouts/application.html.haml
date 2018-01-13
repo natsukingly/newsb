@@ -59,11 +59,29 @@
 		#mobile_footer
 			=render 'layouts/mobile_footer'
 			
-		#signin_modal.modal_wrapper
-			=render 'modals/signin'
+		.signin_modal_wrapper.modal_wrapper
+			.modal_container
+				=render 'modals/signin'
 			
-		#post_modal.modal_wrapper
-			=render 'modals/post'
+		.post_modal_wrapper.modal_wrapper
+			.modal_container
+				=render 'modals/post'
+				
+		.delete_post_modal_wrapper.modal_wrapper
+			.modal_container
+				=render 'modals/delete_post'
+				
+		.report_post_modal_wrapper.modal_wrapper
+			.modal_container
+				=render 'modals/report_post'
+			
+			
+
+		.delete_comment_modal.modal_wrapper	
+			.modal_container
+				
+		.report_comment_modal.modal_wrapper
+			.modal_container
 		
 		#mobile_locale
 			=render 'dropdown/mobile_locale'
@@ -76,6 +94,8 @@
 	
 		#mobile_profile_option
 			=render 'dropdown/mobile_profile_option'
+			
+		
 
 
 :javascript

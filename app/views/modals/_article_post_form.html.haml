@@ -1,15 +1,14 @@
-.post_form_modal.modal
+.post_form_modal.modal.post_form_modal_via_article
 	.close_modal_btn
 		=render 'svg/close_icon'
-			
+	%h2.modal_content_title
+		%p.give_me_short_ellipsis
+			=@article.title
+	%hr.modal_content_divider		
 	.post_form{data: {form: "article", country: "#{@country.id}"}}
 		.body 
 			.form_main 
 				= form_tag posts_path do
-					.article_title
-						%p=@article.title
-					%hr
-							
 					-if current_user
 						.field.form-group.post_textarea_wrapper 
 							.textarea_block.post_textarea_block.still.large
@@ -24,7 +23,7 @@
 							
 							#autocomplete_tags
 								.autocomplete_tags_block
-					%hr
+					%hr.modal_content_divider
 					.post_submit_menu 
 						-if current_user
 							#sns_post_form_menu

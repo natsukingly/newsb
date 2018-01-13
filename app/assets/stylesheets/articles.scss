@@ -24,7 +24,7 @@
 	flex-direction: column;
 	>.title{
 	    padding: 8px 20px;
-	    margin-top: 10px;
+	    margin-top: 20px;
 	    background-color: white;
 	    color: #696969;
 	    border-bottom: 1px solid #eee;
@@ -53,8 +53,8 @@
     h2{
     }
     h3{
-    	margin: 20px 8px;
-    	font-size: 16px;
+    	margin: 20px 0;
+    	font-size: 14px;
 		display: flex;
    		align-items: center;
    		color: #696969;
@@ -98,19 +98,25 @@
 	padding: 0 20px;
 	display: flex;
 	cursor: pointer;
+	
+	box-shadow: 0 0 1px #bbb;
 	.article_other_container{
-	    flex: 1;
+        flex: 1;
 	    display: flex;
+	    align-items: center;
+	    font-size: 16px;
+	    color: #001E42;
 	    align-items: center;
 	    p{
 	        flex: 1;
 	        padding: 12px 0;
+	        font-weight: 900;
 	        i{
-	            color: grey;
 	            display: inline-block;
 	            text-align: center;
-	            width: 20px;
-	            margin-right: 12px;
+	            width: 40px;
+    			margin-right: 5px;
+    			
 	        }
 	    }
 	    
@@ -132,6 +138,13 @@
 @media(max-width: 768px){
 	.article_other_section{
 		padding: 0 8px;
+		.article_other_container{
+			p{
+				i{
+					margin: 0;
+				}
+			}
+		}
 	}
 	.sub_function_wrapper.article_show{
 	    h3{
@@ -247,7 +260,7 @@
 			}
 			.info{
 				position: relative;
-				margin-left: 20px;
+				margin-left: 12px;
 				flex: 1;
 				display: flex;
 				flex-direction: column;
@@ -281,7 +294,7 @@
 		    border-left: 2px solid rgba($newsb, .5);
 		    margin-top: 5px;
 		    .body{
-		    	padding: 12px 0 20px 12px;
+		    	padding: 0 0 20px 12px;
 		    }
 			.user_block{
 				padding: 0;
@@ -384,6 +397,7 @@
 
 @media(max-width: 768px){
 	.article{
+
 		.sub_info{
 			.best_post_btn{
 			    padding: 12px;
@@ -636,7 +650,7 @@ span.overlay{
 			}
 			.best_post{
 			    .body{
-			    	padding: 5px 0 20px 12px;
+			    	padding: 0 0 12px 12px;
 			    }
 			}
 		}

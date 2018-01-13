@@ -23,16 +23,18 @@
 				.article_menu
 					=link_to "READ MORE", article.url, class: "read_article_btn article_item", target: "_blank"
 					-if current_user
-						.article_item.show_article_post_form_link
+						.article_item.show_article_post_modal_btn
 							COMMENT
 					-else
 						.article_item.login_signup_link
 							COMMENT
 						
-.article_post_form.modal_wrapper
-	=render 'modals/article_post_form'
+.article_post_modal_wrapper.modal_wrapper
+	.modal_container
+		=render 'modals/article_post_form'
 	
 .article_post_edit_form.modal_wrapper
-	=render 'modals/article_post_edit_form'
+	.modal_container
+		=render 'modals/article_post_edit_form'
 
 

@@ -99,8 +99,8 @@
 	$('.login_signup_link').click(function () {
 		if("#{current_user}" == false){
 			$(".ddm").hide();
-			$('#signin_modal').fadeIn();
-			$("html,body,#signin_modal").scrollTop();
+			$('.signin_modal_wrapper').fadeIn();
+			// $("html,body,#signin_modal").scrollTop();
 			$('body').addClass('fixed');
 			current_url = location.href 
 			document.cookie = 'previous_url=' + current_url;
@@ -108,13 +108,13 @@
 		}
 	});
 
-	$('#signin_modal').click(function (event) {
-		if(!$(event.target).closest('.signin_modal_block').length && !$(event.target).is('.signin_modal_block')) {
-			$("#signin_modal").hide();
-			$('body').removeClass('fixed');
-			return false;
-		}     
-	});
+	// $('.signin_modal_wrapper').click(function (event) {
+	// 	if(!$(event.target).closest('.signin_modal_block').length && !$(event.target).is('.signin_modal_block')) {
+	// 		$("#signin_modal").hide();
+	// 		$('body').removeClass('fixed');
+	// 		return false;
+	// 	}     
+	// });
 	
 	$('.close_modal_btn, .mobile_modal_back_btn').click(function (event) {
 		$("#signin_modal").hide();

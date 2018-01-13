@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-	before_action :set_post, only: [:show, :edit, :destroy, :edit_article_post, :update_article_post, :cancel_edit_article_post, :create_report]
+	before_action :set_post, only: [:show, :edit, :edit_article_post, :update_article_post, :cancel_edit_article_post, :create_report]
 	before_action :yes_found
 	before_action :set_category, only: [:load_url]
 	before_action :set_new_users, only: [:show]
@@ -144,9 +144,13 @@ class PostsController < ApplicationController
 
 
 	def destroy
+		
+		post_id = params[:post][:id].to_i
+		@post = Post.find(post_id)
+		article_id = @post.article_id
 		@post.destroy
 		flash[:notice] = "Your post has been successfully deleted."
-		redirect_to root_path
+		redirect_to article_path(article_id)
 	end
 
 	def create_report

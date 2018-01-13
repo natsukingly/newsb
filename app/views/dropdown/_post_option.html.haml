@@ -11,27 +11,7 @@
 			.report_btn.ddm_btn
 				REPORT
 		
-		.option_modal
-			.delete
-				%h2
-					Are you sure you want to delete your post?
-				.delete_option
-					=link_to "YES", post_path(post), method: :delete
-					.cancel_btn.ddm_btn
-						NO
-				
-			.report
-				%h2
-					Report inappropriate comments
-				.report_form
-					= form_tag create_report_post_path(post.id), remote: true do
-						.field.form-group#report_textarea
-							= text_area_tag 'report[content]', '', placeholder: "#{t ('form.post.placeholder')}", class: "report_textarea"
-							= hidden_field_tag 'report[country_id]', value: @country.id
-							.submit_btn_group
-								= submit_tag "#{t ('form.post.submit')}", class: "form_btn form_submit_btn"	
-								.cancel_btn.ddm_btn
-									NO
+
 				
 
 	

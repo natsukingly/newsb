@@ -18,25 +18,27 @@
 			data: {placeholder_url: $(this).val()},
 			dataType: 'script',
 		}).fail(function(jqXHR, textStatus, errorThrown) {
-				$('.post_form_block.on_modal').html("<p class='parse_failure_message'>I'm sorry. This article cannot be uploaded.</p>");
+				$('.post_form_block').html("#{escape_javascript render 'shared/loading_error'}");
+				$('i.loading_mobile').hide();
 			})
 		$('.post_form_requirement').hide();
-		$('.post_form_block.on_modal').show().html("<i class='fa fa-spinner fa-pulse'></i>");
-		$('.post_form_block.on_modal').addClass("loading");
+		$('i.loading_mobile').show();
+		$('.post_form_block').show().html("#{escape_javascript render 'shared/loading'}");
+		$('.post_form_block').addClass("loading");
 		return false;
 	});
-	$('.post_url_form.for_mobile input').keyup(function(e) {
-		$.ajax({
-			url: "#{load_url_mobile_posts_path}",
-			type: "GET",
-			data: {placeholder_url: $(this).val()},
-			dataType: 'script',
-		}).fail(function(jqXHR, textStatus, errorThrown) {
-				$('.post_form_block.for_mobile').html("<p class='parse_failure_message'>I'm sorry. This article cannot be uploaded.</p>");
-			})
-		$('.post_form_requirement').hide();
-		$('.post_form_block.for_mobile').show().html("<i class='fa fa-spinner fa-pulse'></i>");
-		$('.post_form_block.for_mobile').addClass("loading");
-		return false;
-	});
+	// $('.post_url_form.for_mobile input').keyup(function(e) {
+	// 	$.ajax({
+	// 		url: "#{load_url_mobile_posts_path}",
+	// 		type: "GET",
+	// 		data: {placeholder_url: $(this).val()},
+	// 		dataType: 'script',
+	// 	}).fail(function(jqXHR, textStatus, errorThrown) {
+	// 			$('.post_form_block.for_mobile').html("<p class='parse_failure_message'>I'm sorry. This article cannot be uploaded.</p>");
+	// 		})
+	// 	$('.post_form_requirement').hide();
+	// 	$('.post_form_block.for_mobile').show().html("<i class='fa fa-spinner fa-pulse'></i>");
+	// 	$('.post_form_block.for_mobile').addClass("loading");
+	// 	return false;
+	// });
 	

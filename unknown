@@ -203,3 +203,7 @@ old feed
 			-else
 				.comments
 					=render 'comments/comment', comment: post.best_comment unless post.best_comment.nil?
+
+
+$('.post_form_block.on_modal').html('<%= escape_javascript(render('posts/form_modal',
+article_title: @article_title, article_url: @article_url, article_site: @article_site, article_published_time: @article_published_time, article_locale: @article_locale, post: @post, default_tags: @default_tags))%>');

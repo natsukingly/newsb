@@ -69,26 +69,27 @@
 	>div{
 		flex: 1;
 		flex-direction: column;
-		h2{
-			color: $newsb;
+	}
+	h2{
+		color: $newsb;
+	}
+	a, .ddm_btn{
+		line-height: 40px;
+		padding: 0 20px;
+		display: block;
+		flex: 1;
+		color: #696969;
+		font-size: 14px;
+		&:hover{
+			background-color: #eee;
 		}
-		a, .ddm_btn{
-			line-height: 40px;
-			padding: 0 20px;
-			display: block;
-			flex: 1;
-			color: #696969;
-			font-size: 14px;
-			&:hover{
-				background-color: #eee;
-			}
-			&.selected:after{
-				font-family: FontAwesome;
-				content: "\f00c";
-				margin-left: 12px;
-				color: navy;
-			}
+		&.selected:after{
+			font-family: FontAwesome;
+			content: "\f00c";
+			margin-left: 12px;
+			color: navy;
 		}
+	
 	}
 	.country, .post_user_menu{
 		border-bottom: 1px solid #eee;

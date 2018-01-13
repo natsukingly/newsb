@@ -1,19 +1,63 @@
 
-.post_modal_block.modal
-	.modal_title
-		%h2
-			=t 'form.url.caption'
-	.post_url_form.on_modal
-		=render "shared/url_form_modal"
-	.post_form_requirement
-		%ul
-			%li
-				NEWSB's algorism favors the articles published within a week.
-			%li
-				Some articles cannot be updated due to the company policy or website setup. 
-		.post_form_icon
-			=render 'svg/news_bubble_icon'
-	.post_form_block.on_modal
+.post_url_form_modal.modal
 	.close_modal_btn
 		=render 'svg/close_icon'
-	
+	%h2.modal_content_title
+		=t 'form.url.caption'
+		%i.fa.fa-spinner.fa-pulse.loading_mobile
+			
+	.post_url_form.on_modal
+		=render "shared/url_form_modal"
+	=render 'shared/post_form_requirement'
+
+
+	.post_form_block
+
+		
+
+.post_form_modal.modal.post_form_modal_via_url
+	.back_modal_btn
+		=render 'svg/close_icon'
+		%br
+		%span
+			BACK
+	%h2.modal_content_title
+		%p.give_me_short_ellipsis
+			
+	%hr.modal_content_divider		
+	.post_form{data: {form: "article", country: "#{@country.id}"}}
+		.body 
+			.form_main 
+				= form_tag posts_path do
+					.field.form_check_group
+						.select
+							= select_tag "post[category_id]", options_from_collection_for_select(Category.all, "id", "name"), prompt: "select a category", class: "form-control selectpicker tag_selection"
+
+					-if current_user
+						.field.form-group.post_textarea_wrapper 
+							.textarea_block.post_textarea_block.still.large
+								= text_area_tag 'post[content]', '', placeholder: "#{t ('form.post.placeholder')}", class: "article_post_content large"
+							
+							= hidden_field_tag 'article[image]', ''
+							= hidden_field_tag 'article[url]', ''
+							= hidden_field_tag 'article[source]', ''
+							= hidden_field_tag 'article[title]', ''
+							= hidden_field_tag 'article[published_time]', ''
+							
+							
+							#autocomplete_tags
+								.autocomplete_tags_block
+					%hr.modal_content_divider
+					.post_submit_menu 
+						-if current_user
+							#sns_post_form_menu
+								=render 'snss/sns_post_form_menu', user: current_user
+		
+							.submit_btn_group
+								= submit_tag "#{t ('form.post.submit')}", class: "form_btn post_submit_btn"	
+								= submit_tag "#{t ('form.post.save')}", class: "form_btn post_save_btn"
+						-else
+							.submit_btn_group.login_signup_link
+								= submit_tag "#{t ('form.post.submit')}", class: "form_btn post_submit_btn"	
+								= submit_tag "#{t ('form.post.save')}", class: "form_btn post_save_btn"
+
