@@ -5,18 +5,19 @@
 		
 	.icon#mobile_locale_link.mobile_icon
 		%span
-			=render "svg/globe_icon"
+			=render "svg/locale_icon"
 			
 	.icon#mobile_post_link.mobile_icon
 		%span.show_post_modal_btn
-			+
+			=render 'svg/create_post_icon'
 			
-	=link_to tags_path, class: "icon mobile_icon" do
-		=render "svg/mobile_tag_icon"
-		
 	.icon#mobile_notification_link.mobile_icon
 		%span
 			=render "svg/mobile_notification_icon"
+			
+	.icon.mobile_icon
+		%span
+			=render "svg/menu_icon"
 	
 -else
 	=link_to root_path, class: "icon mobile_icon" do
@@ -24,15 +25,15 @@
 		
 	.icon#mobile_locale_link.mobile_icon
 		%span
-			=render "svg/globe_icon"
+			=render "svg/locale_icon"
 			
 	.icon#mobile_post_link.mobile_icon.login_signup_link
-		%span.create_post_btn
-			+
+		%span
+			=render 'svg/create_post_icon'
 			
-	=link_to tags_path, class: "icon mobile_icon" do
-		=render "svg/mobile_tag_icon"
-		
 	.icon#mobile_notification_link.mobile_icon.login_signup_link
 		%span
 			=render "svg/mobile_notification_icon"
+	.icon.mobile_icon
+		%span
+			=render "svg/menu_icon"

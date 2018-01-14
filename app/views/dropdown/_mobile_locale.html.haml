@@ -1,17 +1,45 @@
 #mobile_locale_ddm.ddm
 	.mobile_locale_ddm_wrapper.ddm_wrapper
-		.title_block
-			%h2
-				Location & Language
-			.close_ddm_btn
-				=render 'svg/close_icon'
+		.title_section
+			.title_block
+				%h2
+					Locale
+				.close_ddm_btn
+					=render 'svg/close_icon'
 		.country 
-			-Country.all.each do |country|
-				=link_to country.name, change_country_path(country.id), class: "country_link_#{country.id}", method: :post
-	
+			.menu_title
+				%span
+					Country
+				%i.fa.fa-angle-down
+			.menu_items
+				-usa = Country.find_by(name: "United States")
+				-japan = Country.find_by(name: "Japan")
+				=link_to change_country_path(usa.id), class: "country_link_#{usa.id} menu_item", method: :post do
+					.menu_item_left
+						=render "flags/usa"
+						%span
+							United States
+					%span.coming_soon
+						coming soon
+						
+				=link_to change_country_path(japan.id), class: "country_link_#{japan.id} menu_item", method: :post do
+					.menu_item_left
+						=render "flags/japan"
+						%span
+							Japan
+						
+						
 		.language
-			-Language.all.each do |language|
-				=link_to language.name, change_language_path(language.id), class: "language_link_#{language.id}", method: :post
+			.menu_title
+				%span
+					Language
+				%i.fa.fa-angle-down
+			.menu_items
+				-Language.all.each do |language|
+					=link_to change_language_path(language.id), class: "language_link_#{language.id} menu_item", method: :post do
+						.menu_item_left.for_language
+							%span
+								=language.name	
 		
 			
 :javascript

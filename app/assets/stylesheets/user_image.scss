@@ -6,22 +6,13 @@
 .align_items_center{
 	align-items: center;
 }
-
-.user_image{
+.user_image_xs{
 	@include flex_center;
 	img, svg{
 		margin-right: 10px;
-		width: 40px;
-		height: 40px;
+		width: 25px;
+		height: 25px;
 	}
-}
-.user_image_md{
-	@include flex_center;
-	img, svg{
-		margin-right: 10px;
-		width: 35px;
-		height: 35px;
-	}	
 }
 
 .user_image_sm{
@@ -33,14 +24,34 @@
 	}
 }
 
-.user_image_xs{
+.user_image_md{
 	@include flex_center;
 	img, svg{
 		margin-right: 10px;
-		width: 25px;
-		height: 25px;
+		width: 35px;
+		height: 35px;
+	}	
+}
+
+.user_image{
+	@include flex_center;
+	img, svg{
+		margin-right: 10px;
+		width: 40px;
+		height: 40px;
 	}
 }
+
+
+.user_image_lg{
+	@include flex_center;
+	img, svg{
+		margin-right: 10px;
+		width: 60px;
+		height: 60px;
+	}	
+}
+
 
 .user_image_xl{
 	@include flex_center;

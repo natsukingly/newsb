@@ -41,7 +41,7 @@ form{
 			border: 1px solid #bbb;
 			padding: 8px;
 			background-color: white;
-
+			-webkit-appearance: none;
 			&:hover{
 				opacity: .95;
 			}
@@ -80,7 +80,7 @@ form{
 				padding: 5px 12px;
 			}
 			input[type="text"], input[type="password"], input[type="email"], textarea{
-				padding: 5px;
+				padding: 8px;
 				font-size: 16px;
 			}
 		}
@@ -361,6 +361,7 @@ form{
     margin-bottom: 20px;
 	line-height: 20px;
 	color: #696969;
+	text-align: left;
 	h2{
 		font-size: 20px;
 		margin-bottom: 12px;
@@ -545,7 +546,7 @@ form{
 }
 @media(max-width: 768px){
     .comment_form{
-        padding: 12px;
+        padding: 12px 8px;
     }
 }
 

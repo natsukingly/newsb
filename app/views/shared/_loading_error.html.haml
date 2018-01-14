@@ -1,8 +1,11 @@
-.modal_content.error
+.modal_content.error.hidden-xs
 	.modal_icon.mini
 		=render 'svg/sad_face_icon'
 	%h2.modal_content_title
 		ERROR
 	%p.modal_description
 		This article cannot be uploaded
+		
+%p.modal_description_for_mobile.visible-xs
+	This article cannot be uploaded
 

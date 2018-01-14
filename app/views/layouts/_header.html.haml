@@ -79,7 +79,7 @@
 			=link_to all_posts_categories_path, class: "feed_btn" do
 				Feed
 				%span.feed_notifications_count
-					=current_user.feed_notifications.where(check: false).count
+					(#{current_user.feed_notifications.where(check: false).count})
 		-else
 			=link_to all_posts_categories_path, class: "feed_btn login_signup_link" do
 				Feed

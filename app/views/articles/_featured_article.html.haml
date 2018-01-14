@@ -7,16 +7,22 @@
 					%h2.featured_article_title
 						=link_to universal_truncate(article.title, 150), article_path(article)
 					=link_to article, class: "featured_article_info" do
-						%p.featured_post_posts_count
+				
+						%span.featured_post_posts_count
 							=render 'svg/speech_bubble_icon'
 							%span.post_number
 								#{article.posts_count}
-									
-						%p.featured_article_source
-							= article.source
-							-if article.published_time
-								%span.time
-									#{time_ago_in_words_short(article.published_time)}
+								
+						-if article.published_time
+							%span.time
+								#{time_ago_in_words_short(article.published_time)}	
+								
+						%span.featured_article_source
+							=article.source
+							
+						%span.featured_article_source.for_mobile
+							=universal_truncate(article.source, 40)
+
 
 						
 					-unless best_post.nil?

@@ -1,14 +1,9 @@
-.signin_modal_block.modal
-	.mobile_modal_back_btn
-		%span
-			< BACK
+.signin_modal_block.modal.modal_width_400
+	.close_modal_btn
+		=render 'svg/close_icon'
 	#continue_with_social_account_block.modal_section
-		.modal_title
-			.logo
-				NEWSB!
-			.description
-				Check news. Share knowledge.
-				Ask questions.
+		%h2.modal_content_title
+			Continue with ...
 		.social_signin_links
 			= link_to user_facebook_omniauth_authorize_path do
 				.facebook_signin_btn.social_signin_btn
@@ -30,7 +25,7 @@
 					.password_form
 						= f.password_field :password, autocomplete: "off", placeholder: :Password
 						%i.fa.fa-exclamation-circle.error_icon
-						=link_to "forgot password?", new_user_password_path, target: "_blank", id: "reset_password_link"
+						=link_to "Forgot password?", new_user_password_path, target: "_blank", id: "reset_password_link"
 
 					.actions.non_social_submit_btn
 						= f.submit "LOG IN"
@@ -88,8 +83,7 @@
 				By signing up, you indicate that you have read and agree to the Terms of Service and Privacy Policy.		
 				
 	
-	.close_modal_btn.hidden-xs
-		=render 'svg/close_icon'
+
 
 :javascript
 	$('.actions.non_social_submit_btn').click(function(){

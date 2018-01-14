@@ -1,11 +1,12 @@
 -if current_user
 	#mobile_notification_ddm.ddm
 		.mobile_notification_ddm_wrapper.ddm_wrapper
-			.title_block
-				%h2
-					Notifications
-				.close_ddm_btn
-					=render 'svg/close_icon'
+			.title_section
+				.title_block
+					%h2
+						Notifications
+					.close_ddm_btn
+						=render 'svg/close_icon'
 			
 			.notifications.notification_list_for_ddm.mobile_notifications
 				-if current_user.notifications.empty?

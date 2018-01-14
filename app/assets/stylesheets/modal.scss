@@ -3,22 +3,22 @@
 
 
 
-.show_post_modal_btn{
-    background-color: $newsb;
-    padding: 8px 12px;
-    border-radius: 3px;
-    color: #eee;
-    cursor: pointer;
-    &:hover{
-    	opacity: 1;
-    }
-	&.on_header{
-		display: inline-block;
-	}
-	&.for_mobile{
-		display: none;
-	}
-}
+// .show_post_modal_btn{
+//     background-color: $newsb;
+//     padding: 8px 12px;
+//     border-radius: 3px;
+//     color: #eee;
+//     cursor: pointer;
+//     &:hover{
+//     	opacity: 1;
+//     }
+// 	&.on_header{
+// 		display: inline-block;
+// 	}
+// 	&.for_mobile{
+// 		display: none;
+// 	}
+// }
 
 @media(max-width: 768px){
 	.show_post_modal_btn{
@@ -90,6 +90,7 @@
 	right: 0;
 	bottom: 0;
 	background-color: rgba($newsb, 0.8);
+	-webkit-overflow-scrolling: touch;
     .modal_container{
     	display: flex;
     	width: 100%;
@@ -105,8 +106,12 @@
 		background-color: white;
 		border-radius: 3px;
 		padding: 40px;
+		
 		&.post_form_modal_via_url{
 			display: none;
+		}
+		&.modal_width_400{
+			width: 400px;
 		}
 		&.modal_width_auto{
 			width: auto;
@@ -210,7 +215,8 @@ hr.modal_content_divider{
 
 @media(max-width: 768px){
 	h2.modal_content_title{
-		margin: 20px 8px;
+		padding: 8px;
+		margin-bottom: 12px;
 		p{
 			margin-right: 40px;
 			font-size: 14px;
@@ -275,20 +281,24 @@ hr.modal_content_divider{
 @media(max-width: 768px){
 	.modal_wrapper{
 		position: absolute;
-		padding: 5px;
+		// padding: 5px;
 		.modal_container{
 			display: block;
-			margin-top: 50px;
+			margin-top: 20px;
 		}
 		.modal{
 			
-			padding: 0;
-   			margin: 50px 0;
+			padding: 12px 0;
+   			margin: 0;
 			width: 100%;
 			// height: 100%;
 
 			// border-radius: 0;
 			overflow: scroll;
+			-webkit-overflow-scrolling: touch;
+			&.modal_width_400{
+				width: auto;
+			}
 			.close_modal_btn, .back_modal_btn{
 				top: 6px;
 				width: 40px;
@@ -297,12 +307,12 @@ hr.modal_content_divider{
 					top: 30px;
     				right: 5px;
 				}
+
 			}
 		}
 	}
 	.modal_section{
-		margin: 0 auto;
-		max-width: 500px;
+		margin: 0 8px;
 	}
 	.mobile_modal_back_btn{
 		display: flex;
@@ -319,6 +329,7 @@ hr.modal_content_divider{
 	.signin_modal_block{
 		.social_signin_links{
 			display: flex;
+			
 			a{
 				flex: 1;
 				&:first-child{
@@ -351,6 +362,9 @@ hr.modal_content_divider{
 				font-size: 14px;
     			color: grey;
     			text-align: center;
+    			&.logo_style{
+    				font-family: 'Raleway', sans-serif;
+    			}
 			}
 			p{
 				font-size: 16px;
@@ -359,11 +373,28 @@ hr.modal_content_divider{
 				@extend .lines-on-sides
 			}
 		}
+		.non_social_submit_btn{
+			input[type="submit"]{
+				width: 100%;
+			}
+		}
 		.term_confirmation{
-			margin-top: 12px;
+			margin-bottom: 12px;
 		}
 	}
 }
+
+@media(max-width: 768px){
+	.signin_modal_wrapper{
+		.signin_modal_block{
+			.social_signin_links{
+
+			}
+		}
+	}
+}
+
+
 
 .non_social_form{
 	display: flex;
@@ -381,6 +412,7 @@ hr.modal_content_divider{
 		margin: 12px 0;
 	    display: inline-block;
 	    border-bottom: 1px solid #aaa;
+	    font-size: 14px;
 	}
 }
 
