@@ -207,3 +207,30 @@ old feed
 
 $('.post_form_block.on_modal').html('<%= escape_javascript(render('posts/form_modal',
 article_title: @article_title, article_url: @article_url, article_site: @article_site, article_published_time: @article_published_time, article_locale: @article_locale, post: @post, default_tags: @default_tags))%>');
+
+
+#mobile_header
+	.mobile_header_left
+		.search_bar
+			.form_icon
+				=render 'svg/search_icon'
+			=form_tag search_path(country: @country.name), method: "get", class: "search" do
+				=text_field_tag :keyword, params[:keyword], placeholder: "Search"
+				=submit_tag "", style: "display: none;"
+	
+	.mobile_header_middle		
+		= link_to "NEWSB!", root_path, class: "mobile_logo" 
+		%h2.mobile_ddm_title
+	
+	/ HEADER RIGHT     
+	.mobile_header_right
+		.account.menu_icon
+			-if user_signed_in?
+				#mobile_profile_option_link.user_image_sm
+					=user_image_helper(current_user)
+			-else
+				.login_icon.login_signup_link
+					=render 'svg/profile_icon_bold'
+		
+		.close_search_bar
+			=render 'svg/close_icon'

@@ -4,7 +4,7 @@
 
 
 // .show_post_modal_btn{
-//     background-color: $newsb;
+//     background-color: $newsb_grey;
 //     padding: 8px 12px;
 //     border-radius: 3px;
 //     color: #eee;
@@ -19,17 +19,51 @@
 // 		display: none;
 // 	}
 // }
+.post_url_form.on_feed{
+	padding: 20px;
+	cursor: pointer;
+	line-height: 24px;
+	svg{
+		width: 20px;
+	    height: 20px;
+	}
+}
 
+
+
+
+.show_post_modal_btn{
+
+	.create_post_icon{
+	}
+	.title{
+		display: inline-block;
+		flex: 1;
+	}
+	&.on_feed{
+		display: flex;
+		align-items: center
+	}
+}	
 @media(max-width: 768px){
-	.show_post_modal_btn{
+	.post_url_form.on_feed{
+		padding: 16px 8px;
+		margin: 0;
+		cursor: pointer;
 
-		&.on_header{
-			display: none;
-		}
-		&.for_mobile{
-			display: inline-block;
-		}
-	}	
+	}
+	// .show_post_modal_btn{
+
+	// 	&.on_header{
+	// 		display: none;
+	// 	}
+	// 	&.on_feed{
+	// 		display: none;
+	// 	}		
+	// 	&.for_mobile{
+	// 		display: flex;
+	// 	}
+	// }	
 }
 
 
@@ -61,8 +95,8 @@
 	cursor: pointer;
 }
 .email_signup_link{
-	color: $newsb;
-	border-bottom: 1px solid $newsb;
+	color: $newsb_grey;
+	border-bottom: 1px solid $newsb_grey;
 	cursor: pointer;
 }
 #cancel_email_signup_link{
@@ -82,14 +116,14 @@
 
 .modal_wrapper{
 	display: none;
-	z-index: 10000;
+	z-index: 1000;
 	position: fixed;
 	overflow: scroll;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba($newsb, 0.8);
+	background-color: rgba($newsb_grey, 0.8);
 	-webkit-overflow-scrolling: touch;
     .modal_container{
     	display: flex;
@@ -106,7 +140,14 @@
 		background-color: white;
 		border-radius: 3px;
 		padding: 40px;
-		
+		.post_form_block{
+			min-height: 60px;
+			.error_message{
+				display: none;
+				padding: 0 8px;
+				margin-bottom: 12px;
+			}
+		}
 		&.post_form_modal_via_url{
 			display: none;
 		}
@@ -149,10 +190,10 @@
 			svg{
 				height: 16px;
 				width: 16px;
-				fill: $newsb;
+				fill: $newsb_grey;
 				transition: 0.3;
 				&:hover{
-					fill: $newsb_light;
+					fill: $newsb_grey;
 				}
 			}
 			span{
@@ -165,12 +206,14 @@
 	}
 }
 
+
+
 .modal_content{
 	margin-bottom: 30px;
 	min-height: 200px;
 	text-align: center;
 	.modal_icon{
-		margin-bottom: 30px;
+		margin: 20px 0;
 		svg{
 			height: 150px;
 			width: 150px;
@@ -214,12 +257,19 @@ hr.modal_content_divider{
 }
 
 @media(max-width: 768px){
+
+	
 	h2.modal_content_title{
-		padding: 8px;
-		margin-bottom: 12px;
+		padding: 16px 8px;
+	    background-color: $newsb;
+	    color: white;
+	    text-align: center;
+		margin-bottom: 0;
+		
 		p{
 			margin-right: 40px;
 			font-size: 14px;
+			text-align: left;
 		}
 	}
 	
@@ -255,7 +305,7 @@ hr.modal_content_divider{
 		&.with_border{
 			border: 1px solid grey;
 			&:hover{
-				background-color: $newsb;
+				background-color: $newsb_grey;
 				color: white;
 			}
 		}
@@ -281,23 +331,28 @@ hr.modal_content_divider{
 @media(max-width: 768px){
 	.modal_wrapper{
 		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
 		// padding: 5px;
 		.modal_container{
 			display: block;
-			margin-top: 20px;
+			// margin-top: ;
 		}
 		.modal{
 			
-			padding: 12px 0;
+			padding: 0;
    			margin: 0;
 			width: 100%;
-			// height: 100%;
-
-			// border-radius: 0;
+			border-radius: 0;
 			overflow: scroll;
 			-webkit-overflow-scrolling: touch;
 			&.modal_width_400{
 				width: auto;
+				
+			}
+			&.modal_width_auto{
+				padding: 0 0 20px;
 			}
 			.close_modal_btn, .back_modal_btn{
 				top: 6px;
@@ -307,12 +362,20 @@ hr.modal_content_divider{
 					top: 30px;
     				right: 5px;
 				}
+				svg{
+					fill: white;
+				}
+				&:hover{
+					svg{
+						fill: white;
+					}
+				}
 
 			}
 		}
 	}
 	.modal_section{
-		margin: 0 8px;
+		margin: 20px 8px;
 	}
 	.mobile_modal_back_btn{
 		display: flex;
@@ -329,25 +392,26 @@ hr.modal_content_divider{
 	.signin_modal_block{
 		.social_signin_links{
 			display: flex;
-			
+			flex-direction: column;
 			a{
 				flex: 1;
-				&:first-child{
-					margin-right: 5px;
-				}
+
 			}
 			.social_signin_btn{
 				border-radius: 3px;
 				color: white;
 				padding: 12px 16px;
 				font-size: 16px;
-				margin-bottom: 12px;
+				margin-bottom: 8px;
 				&.facebook_signin_btn{
-					background-color: #3C5B97;
+					background-color: $facebook;
 				}
 
 				&.google_signin_btn{
-					background-color: #df4930;
+					background-color: $google;
+				}
+				&.twitter_signin_btn{
+					background-color: $twitter;
 				}
 	    		&:hover{
 			    	opacity: .95;
@@ -374,12 +438,14 @@ hr.modal_content_divider{
 			}
 		}
 		.non_social_submit_btn{
+			margin-bottom: 12px;
 			input[type="submit"]{
 				width: 100%;
 			}
 		}
 		.term_confirmation{
-			margin-bottom: 12px;
+			margin: 20px 0 12px;
+			font-size: 14px;
 		}
 	}
 }
@@ -430,8 +496,7 @@ hr.modal_content_divider{
 				}
 			}
 			input[type="submit"]{
-				background-color: $newsb;
-				margin-top: 20px;
+				background-color: $newsb_grey;
 				padding: 8px 30px;
 				width: auto;
 				color: white;

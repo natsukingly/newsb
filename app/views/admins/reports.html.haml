@@ -7,7 +7,7 @@
 			%h2
 				Reports
 			
-			
+			=link_to "only show unchecked reports", unchecked_reports_admins_path
 		#main_contents.reports
 			#report_index
 				= render partial: "admins/report", collection: @reports, as: :report

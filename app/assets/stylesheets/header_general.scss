@@ -7,11 +7,15 @@
     z-index: 100;
     .header_general_container{
         flex: 1;
-        padding: 8px 20px;
+        padding: 8px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         .header_general_menu_left{
+            a.logo{
+                padding: 0;
+                font-size: 30px;
+            }
             a.logo.in_white{
                 color: #eee;
             }
@@ -37,12 +41,14 @@
         .header_general_menu_right_mobile{
             display: none;
             flex: 1;
+            padding: 0;
             justify-content: flex-end;
             .open_general_mobile_menu, .close_general_mobile_menu{
                 cursor: pointer;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                padding: 8px;
                 svg{
                     width: 20px;
                     height: 20px;
@@ -65,7 +71,7 @@
 @media(max-width: 768px){
     .header_general{
         .header_general_container{
-            padding: 8px 12px;
+            padding: 0 8px;
             position: relative;
             .header_general_menu_left{
                 a.logo.in_white{

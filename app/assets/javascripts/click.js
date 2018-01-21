@@ -38,7 +38,7 @@ $(document).on('turbolinks:load', function() {
 		return false;
 	});
 	
-	$('body').click(function (event) {
+	$('.flex_container').click(function (event) {
 		if(!$(event.target).closest('.ddm_wrapper').length && !$(event.target).is('.ddm_wrapper')) {
 			$(".ddm").hide();
 			$('body').removeClass('fixed');
@@ -48,6 +48,39 @@ $(document).on('turbolinks:load', function() {
 	$(".notice_bar").click(function(){
 		$(this).hide();	
 	});
+	
+	$('.setting_menu_btn').click(function(){
+		console.log('aiueo');
+		if($(this).hasClass("open")){
+			$(this).removeClass("open");
+			$(this).find("i").removeClass("fa-angle-up").addClass("fa-angle-down");
+			$(this).parents(".profile_option_block").find(".setting_menu").slideUp().css("display", "block");
+			return false;
+		} else {
+			$(this).addClass("open");
+			$(this).find("i").removeClass("fa-angle-down").addClass("fa-angle-up");
+			$(this).parents(".profile_option_block").find(".setting_menu").slideDown();
+			return false;
+		}
+	});
+	
+	
+	// edit setting js
+	$('#reset_setting_btn').click(function(){
+		original_name = $('.setting_block.name').attr("data-original-name");
+		original_credential = $('.setting_block.credential').attr("data-original-credential");
+		original_about = $('.setting_block.about').attr("data-original-about");
+		$('.setting_block.name input[name="user[name]"]').val(original_name);
+		$('.setting_block.credential input[name="user[credential]"]').val(original_credential);
+		$('.setting_block.about textarea[name="user[about]"]').val(original_about);
+	});	
+	
+	$('.edit_content_btn').click(function(){
+		$(this).parents('.setting_block').find('.current.content').hide();
+		$(this).parents('.setting_block').find('.new.content').show();
+	})
+	
+	
 });
 
 

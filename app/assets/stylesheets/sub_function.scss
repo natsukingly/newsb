@@ -8,12 +8,13 @@
 		display: flex;
 		flex-direction: column;
 		width: 600px;
+		margin-top: 20px;
 		.sub_function_nav{
 			background-color: white;
 			display: flex;
+			justify-content: space-between;
 			align-items: center;
 			padding: 12px 20px;
-			margin-top: 20px;
 			border-bottom: 1px solid #eee;
 			h2{
 				font-weight: 900;
@@ -31,16 +32,16 @@
 					margin-left: 5px;
 					color: grey;
 					&:hover{
-						color: $newsb_light;
+						color: $newsb_grey;
 					}
 				}
 				a.active{
 					border: none;
 					font-weight: 900;
 					pointer-events: none; 
-					color: $newsb;
+					color: $newsb_grey;
 					&:hover{
-						color: $newsb;
+						color: $newsb_grey;
 					}
 				}
 			}
@@ -68,8 +69,9 @@
   			min-width: auto;
   			width: auto;
   			flex: 1;
+  			margin: 0;
 			.sub_function_nav{
-				// display: none;
+				margin: 0;
 				padding: 12px;
 				h2{
 					

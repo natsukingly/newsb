@@ -1,7 +1,7 @@
 .post{class: "post post_#{post_draft.id} post_draft admin_draft"}
 	.body
 		.main
-			.content.clearfix
+			.content
 				-if post_draft.article == nil
 					%p.deleted_article	
 						This article has been deleted.

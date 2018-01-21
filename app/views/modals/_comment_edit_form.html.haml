@@ -1,0 +1,20 @@
+.comment_modal.comment_edit_modal.modal
+	.close_modal_btn
+		=render 'svg/close_icon'
+	%h2.modal_content_title
+		%p.give_me_short_ellipsis
+			EDIT COMMENT
+	.textarea_form.comment_new_form
+		.body 
+			.form_main 
+				= form_tag update_comments_path do
+					-if current_user
+						.field.textarea_block.comment_textarea
+							= text_area_tag 'comment[content]', "", placeholder: "#{t ('form.comment.placeholder')}"
+							= hidden_field_tag 'comment[id]', '', class: "target_comment_id"
+
+					%hr.modal_content_divider
+						.textarea_submit_menu
+							= submit_tag "#{t ('form.comment.submit')}", class: "submit_btn"
+							.cancel_modal_btn.submit_btn
+								=t ('form.comment.cancel')

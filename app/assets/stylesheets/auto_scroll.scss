@@ -10,14 +10,20 @@
     cursor: pointer;
     line-height: 20px;
     &:hover{
-        color: $newsb;
-        border: 1px solid $newsb;
+        color: $newsb_grey;
+        border: 1px solid $newsb_grey;
     }
+}
+
+.ddm .scroll_btn{
+    width: 95%;
 }
 
 @media(max-width: 768px){
     .scroll_btn{
         width: 95%;
+        color: $newsb_grey;
+        border: 1px solid $newsb_grey;
     }
 }
 

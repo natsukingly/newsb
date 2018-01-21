@@ -16,6 +16,7 @@
 //= require jquery.turbolinks
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require exif
 //= require_tree .
 
 

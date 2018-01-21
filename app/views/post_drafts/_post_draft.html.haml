@@ -35,19 +35,11 @@
 							
 		.draft_menu
 			.edit_draft_btn
-				EDIT
-			.delete_draft_btn
-				DELETE
+				Edit
+			=link_to "Delete", post_draft_path(post_draft), method: :delete, class: "delete_draft_btn"
 				
 				
-			.option_modal
-				.delete
-					%h2
-						Are you sure you want to delete your post?
-					.delete_option
-						=link_to "YES", post_draft_path(post_draft), method: :delete
-						.cancel_delete_btn.ddm_btn
-							NO
+
 
 :javascript
 	// post side menu open close

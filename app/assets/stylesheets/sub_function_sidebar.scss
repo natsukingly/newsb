@@ -35,7 +35,7 @@
 
 .sub_function_user_sidebar{
 	width: 160px;
-	margin-right: 0 20px;
+	margin: 20px;
 }
 @media(max-width: 768px){
 	.sub_function_user_sidebar{
@@ -47,7 +47,6 @@
 .recent_article_section, .side_article_section, .new_users_section{
 	background-color: white;
 	padding: 12px 0;
-	box-shadow: 0 0 1px #bbb;
 }
 
 
@@ -75,7 +74,7 @@
 .recent_article_section{
 	.side_article{
 		.title h2{
-			color: $newsb;
+			color: $newsb_grey;
 			font-weight: normal;
 		}
 	}

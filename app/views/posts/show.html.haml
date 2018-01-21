@@ -1,64 +1,71 @@
 .sub_function_wrapper.search
 	.sub_function_main_section
 		#main_contents
-			.post{class: "post post_#{@post.id} clearfix show_post"}
+			.post{class: "post post_#{@post.id}", data: {post_id: "#{@post.id}"}}
 				.body
-					.main
-						.content.clearfix
-							.user_block.clearfix{class: "user_#{@post.user.id}"}
-								.user_image
-									=user_image_helper(@post.user)
-								.star
-									=render 'svg/star_icon'
-								.user_info
-									=link_to @post.user  do
-										.give_me_short_ellipsis.light_navy.bold
-											=@post.user.name
-									%p.user_credential.sm.grey
-										=@post.user.credential
-										%i.fa.fa-clock-o
-										#{time_ago_in_words_short(@post.created_at)}
-								.user_option.follow_switch.pull-right
-									=render "/shared/follow_form_icon.html.haml", user: @post.user
-							%p.opinion
-								=render_with_hashtags(@post.content.gsub(/\n/, '<br />'))
-			
-							
-							// link to the article
+		
+					.user_block{class: "user_#{@post.user.id}"}
+						.user_image
+							=user_image_helper(@post.user)
+						.user_info
+							=link_to @post.user, class: "user_name" do
+								.give_me_short_ellipsis.bold
+									=@post.user.name
+							%p.user_credential.sm.grey
+								=@post.user.credential
+								%span.time
+									#{time_ago_in_words_short(@post.created_at)}
+						.user_option.follow_switch
+						
+							=render "/shared/follow_form_icon.html.haml", user: @post.user
+					
+					.content_block	
+						%p.opinion.post_opinion
+							=render_with_hashtags(@post.content.gsub(/\n/, '<br />'))
+						=render "posts/edit", post: @post
+						-if @post.article == nil
+							%p.deleted_article	
+								This article has been deleted.
+						-else
 							=link_to article_path(@post.article_id), class: "post_article" do
-								.image{ style: "background-image: url(#{@post.article.image.url});"}
+								-if @post.article.image
+									.image{ style: "background-image: url(#{article_image_helper @post.article.image.url });"}
 								.article_info
 									%h2.bold
-										= truncate(@post.article.title, length: 40) do
+										= universal_truncate(@post.article.title, 120) do
 											%span ...
 									%p.xs.grey
 										= @post.article.source
-											
+									
 					.status.md
-						.post_like_link.link_btn
+						.post_like_block
 							=render '/likes/like_post', post: @post
-						.comment_link.link_btn
-							COMMENT
-							・
-							.comment_count.link_btn
-								= @post.comments_count
-						.option.pull-right
+						-if current_user
+							.comment_link.link_btn.show_comment_modal_btn
+								=render 'svg/chat_icon_circle'
+								・
+								%span.comment_count	
+									= @post.comments_count
+						-else
+							.comment_dummy_link.link_btn.login_signup_link
+								=render 'svg/chat_icon_circle'
+								・
+								%span.comment_count	
+									= @post.comments_count	
+									
+						.option
 							%i.fa.fa-ellipsis-h.lg.option_link
 							=render 'dropdown/post_option', post: @post
-					
-				.comment_index		
-					.comment_form.clearfix
-						=render '/comments/form', post: @post 
-					- if @post.comments_count > 1
-						.view_link
-							=render 'comments/view_more_link', post: @post
-					- if @post.comments_count == 0
-						.invite_comment.comment_link
-							Be the first one to comment!!
+				
+		
+				.comment_index_wrapper
+					.comment_index
 						.comments
-					-else
-						.comments
-							=render partial: 'comments/comment_wo_replies', collection: @post.comments, as: :comment
+							=render @post.comments
+						
+
+	
+
 
 	.sub_function_sidebar
 		%h2 

@@ -2,20 +2,20 @@
 
 
 -unless @your_posts.empty?
-	.your_posts
+	.your_posts.posts_section
 		%h3
 			YOUR POSTS
 		= render partial: "posts/post_wo_article", collection: @your_posts.includes(:user), as: :post
 		
 -if current_user
 	-unless @best_posts.where.not(id: @your_posts.ids).empty?
-		.best_posts
+		.best_posts.posts_section
 			%h3
 				BEST POSTS
 			= render partial: "posts/post_wo_article", collection: @best_posts.where.not(id: @your_posts.ids).includes(:user), as: :post
 -else
 	-unless @best_posts.empty?
-		.best_posts
+		.best_posts.posts_section
 			%h3
 				BEST POSTS
 			= render partial: "posts/post_wo_article", collection: @best_posts.includes(:user), as: :post
@@ -24,27 +24,26 @@
 	
 		
 -unless @follower_posts.empty?
-	.follower_posts
+	.follower_posts.posts_section
 		%h3
 			FOLLOWERS POSTS
 		= render partial: "posts/post_wo_article", collection: @follower_posts.includes(:user), as: :post
 		
 -unless @new_posts.empty? && @shared_posts.empty?
-	.new_posts
+	.new_posts.posts_section
 		%h3
 			NEW POSTS
 		-unless @shared_posts.empty?
-			.article_other_section.show_shared_posts_link
-				.article_other_container
+			.shared_posts_section
+				.show_shared_posts_link
+					%i.fa.fa-share-alt
 					%p
-						%i.fa.fa-share-alt
 						Shared
 						\:
 						= @shared_posts.count
-					.article_other_section_icon
-						%i.fa.fa-angle-down
-			.shared_posts
-				= render partial: "posts/post_wo_article", collection: @shared_posts.includes(:user), as: :post
+					%i.fa.fa-angle-down
+				.shared_posts
+					= render partial: "posts/post_wo_article", collection: @shared_posts.includes(:user), as: :post
 		= render partial: "posts/post_wo_article", collection: @new_posts.includes(:user), as: :post
 		-if @new_posts.count < 30
 			.scroll_btn.stop_loading

@@ -1,5 +1,8 @@
 class CommentsController < ApplicationController
-	before_action :set_comment, only: [:show, :edit, :update, :destroy, :cancel_edit_comment]
+	before_action :set_comment, only: [:show, :edit, :cancel_edit_comment]
+	before_action :set_comment_from_form, only: [:update, :destroy]
+	before_action -> { authenticate_user(@comment, post_path(@comment.post_id)) }, only: [:update, :destroy]
+	before_action :authenticate, only: [:create, :create_report]
 	# GET /comments
 	# GET /comments.json
 	def index
@@ -36,15 +39,17 @@ class CommentsController < ApplicationController
 	# POST /comments.json
 	def create
 		@post = Post.find(params[:comment][:post_id])
+		
 		@comment = current_user.comments.build(content: params[:comment][:content], post_id: @post.id, article_id: @post.article_id )
 		@comment.save
-		@comments = @post.comments.includes(:user).order(created_at: :asc)
+		redirect_to post_path(@comment.post_id)
 	end
 
 	# PATCH/PUT /comments/1
 	# PATCH/PUT /comments/1.json
 	def update
-		@comment.update(comment_params)
+		@comment.update(content: params[:comment][:content])
+		redirect_to post_path(@comment.post_id)
 	end
 
 	# DELETE /comments/1
@@ -69,6 +74,10 @@ class CommentsController < ApplicationController
 		# Use callbacks to share common setup or constraints between actions.
 		def set_comment
 			@comment = Comment.find(params[:id])
+		end
+		
+		def set_comment_from_form
+			@comment = Comment.find(params[:comment][:id])
 		end
 
 		# Never trust parameters from the scary internet, only allow the white list through.

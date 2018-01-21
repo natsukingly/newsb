@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :followers, :following, :posts, :save_setting, :save_email_setting, :save_password_setting, :edit_setting, :edit_locale_setting, :edit_password_setting, :edit_email_setting, :edit_sns_setting]
   before_action :set_new_users, only: [:notification_index, :show]
+  before_action :authenticate_user_for_setting, only: [:complete_profile_form, :complete_profile, :edit_setting, :edit_locale_setting, :edit_email_setting, :edit_password_setting,
+  :save_setting, :save_locale_setting, :save_email_setting, :save_password_setting]
+  
   # GET /users
   # GET /users.json
   def index
@@ -238,5 +241,12 @@ class UsersController < ApplicationController
     
     def password_params
       params.require(:user).permit(:current_password, :new_password, :password_confirmation)
+    end
+    
+    def authenticate_user_for_setting
+      unless current_user && current_user.id == params[:id].to_i
+        flash[:notice] = "You are not allowed to access this page."
+        redirect_to root_path
+      end
     end
 end

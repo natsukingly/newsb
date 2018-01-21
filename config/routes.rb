@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'reports/create'
+
 	#home
 	get '/about' => 'home#about'
 	get '/terms' => 'home#terms', as: :terms
@@ -31,6 +33,7 @@ Rails.application.routes.draw do
 		collection do
 			get 'drafts'
 			get 'reports'
+			get 'unchecked_reports'
 			get 'all_reports'
 			post 'publish'
 		end
@@ -42,9 +45,6 @@ Rails.application.routes.draw do
 	devise_for :users, :controllers => {registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions', passwords: 'users/passwords'}
 	
 	scope ":country" do
-		
-		
-		
 		
 		resources :users, except: [:create, :new] do
 			member do
@@ -98,41 +98,37 @@ Rails.application.routes.draw do
 				get 'edit_article_post', as: :edit_article
 				post 'update_article_post', as: :update_article
 				get 'cancel_edit_article_post', as: :cancel_edit_article
-				post 'create_report'
 			end
 			collection do
 				post 'update', as: :update
 				post 'destroy', as: :destroy
 				post 'create_from_modal'
+				post 'create_from_article'
 				get 'load_more'
 				get 'autocomplete_tags'
 				get 'load_url_modal'
 				get 'load_url_mobile'
 				get 'load_url_feed'
+				post 'create_report'
+			
 			end
 		end
 		
-		resources :comments, except: [:new] do
+		resources :comments, except: [:new, :update, :destroy] do
 			member do 
 				get 'cancel_edit_comment', as: :cancel_edit
 				get 'view_more'
 				get 'view_less'
 			end
 			collection do
+				
 				post 'create_report'
+				post 'destroy', as: :destroy
+				post 'update', as: :update
 			end
 		end	
 		
-		resources :replies, except: [:new] do
-			member do 
-				get 'cancel_edit_reply', as: :cancel_edit
-				get 'view_more'
-				get 'view_less'
-			end
-		end
-		get '/replies/:comment_id/new' => 'replies#new'
-		
-		resources :report
+		resources :reports
 		
 		resources :post_drafts do
 			member do

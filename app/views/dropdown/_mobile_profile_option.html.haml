@@ -1,32 +1,38 @@
 -if current_user
-	#mobile_profile_option_ddm.ddm
+	.mobile_ddm_header.mobile_profile_option_ddm
+		.mobile_ddm_header_wrapper
+			%h2.mobile_ddm_title
+				Profile Menu
+			.close_mobile_ddm_btn
+				=render 'svg/close_icon'
+	.mobile_profile_option_ddm.ddm.mobile_ddm
 		.mobile_profile_option_ddm_wrapper.ddm_wrapper
-			.title_section
-				.title_block
-					%h2
+			.profile_user_block
+				.user_info
+					.user_image_xl.profile_image
+						=user_image_lg_helper(current_user)
+					%h2.user_name
 						=current_user.name
-					.close_ddm_btn
-						=render 'svg/close_icon'
-			=link_to "Profile", current_user, class: "profile_option" 
-			=link_to "Setting", edit_setting_user_path(current_user.id), class: "profile_option"
-			=link_to "About", about_page_path, class: "profile_option", target: "_blank"
-			=link_to "Contact", contact_page_path, class: "profile_option", target: "_blank"
-			=link_to "Terms", terms_page_path, class: "profile_option", target: "_blank"
-			=link_to "Logout", destroy_user_session_path, class: "profile_option" 
-			.profile_option
+					%p.credential
+						=current_user.credential
+					%p.stats
+						%span
+							#{current_user.liked_count} likes
+						%span
+							#{current_user.followers.count} followers
+						%span
+							#{current_user.following.count} following
+
+				
+				
+			.profile_option_block
+				=link_to "Profile / My Posts", current_user, class: "profile_option" 
+				=link_to "Setting", edit_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
+				=link_to "SNS", edit_sns_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
+				=link_to "About Us", about_page_path, class: "profile_option", target: "_blank"
+				=link_to "Contact", contact_page_path, class: "profile_option", target: "_blank"
+				=link_to "Terms", terms_page_path, class: "profile_option", target: "_blank"
+				=link_to "Logout", destroy_user_session_path, class: "profile_option" 
+			.copy_right_statement
 				&copy; 2017 NEWSB
 			
-:javascript
-	
-	$('#mobile_profile_option_link').click(function () {
-		$(".ddm").hide();
-		$('#mobile_profile_option_ddm').css("display", "block");
-		$('body').addClass('fixed');
-		return false;
-	});
-
-	
-	$('.close_ddm_btn').click(function (event) {
-		$('#mobile_profile_option_ddm').hide();
-		$('body').removeClass('fixed');
-	});

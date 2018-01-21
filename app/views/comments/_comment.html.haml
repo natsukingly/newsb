@@ -1,28 +1,29 @@
-.comment{class: "comment_#{comment.id}"}
+.comment{class: "comment_#{comment.id}", data: {comment_id: "#{comment.id}"}}
 	.body
-		.main
-			.content
-				.user_block
-					.user_image_sm
-						=user_image_helper(comment.user)
-					.user_info
-						.user_name
-							=link_to comment.user do
-								%span.user_name.bold
-									=comment.user.name
-							%p.user_credential.sm.grey
-								=comment.user.credential
-				%span.opinion.comment_opinion
-					=truncate( simple_format(comment.content), escape: false, length: 200) do
-						%span.light_navy.read_more{class: "comment_read_more_#{comment.id}"}
-							Raed more
-		.status
-			.comment_like_block
-				=render '/likes/like_comment', comment: comment
-			.option
-				%i.fa.fa-ellipsis-h.comment_option_link
-				=render 'dropdown/comment_option', comment: comment
-
+		.user_block
+			.user_image_sm
+				=user_image_helper(comment.user)
+			.user_info
+				.user_name
+					=link_to comment.user do
+						%span.user_name.bold
+							=comment.user.name
+					%p.user_credential.sm.grey
+						=comment.user.credential
+		.content_block
+			%span.opinion.comment_opinion
+				=truncate( simple_format(comment.content), escape: false, length: 200) do
+					%span.light_navy.read_more{class: "comment_read_more_#{comment.id}"}
+						Raed more
+			.status
+				.comment_like_block
+					=render '/likes/like_comment', comment: comment
+				.option
+					-if current_user
+						%i.fa.fa-ellipsis-h.comment_option_link
+						=render 'dropdown/comment_option', comment: comment
+					-else
+						%i.fa.fa-ellipsis-h.comment_option_link.login_signup_link
 			
 :javascript 
 	$(".comment_read_more_#{comment.id}").click(function(){

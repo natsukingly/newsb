@@ -1,9 +1,12 @@
 class PostsController < ApplicationController
-	before_action :set_post, only: [:show, :edit, :edit_article_post, :update_article_post, :cancel_edit_article_post, :create_report]
+	before_action :set_post, only: [:show, :edit,:create_report]
+	before_action :set_post_from_form, only: [:update, :destroy]
 	before_action :yes_found
 	before_action :set_category, only: [:load_url]
 	before_action :set_new_users, only: [:show]
 	before_action :set_side_articles, only: [:show]
+	before_action :authenticate, only: [:create, :create_from_modal, :create_report]
+	before_action -> { authenticate_user(@post, article_path(@post.article_id)) }, only: [:update, :destroy]
 	after_action :not_found, only: [:index, :load_more]
 
 
@@ -63,69 +66,49 @@ class PostsController < ApplicationController
 	
 	def edit
 	end
-	
-	def edit_article_post
-	end
-	
-	def cancel_edit_article_post
-	end
 
-	def after_save_draft
-		# flash.now[:notice] = "Your post has been saved. You can access to the draft page from user menu."
-		respond_to do |format|
-		  format.js {  flash.now[:notice] = "hello?" }
-		end
-	end
+
+	# def after_save_draft
+	# 	# flash.now[:notice] = "Your post has been saved. You can access to the draft page from user menu."
+	# 	respond_to do |format|
+	# 	  format.js {  flash.now[:notice] = "hello?" }
+	# 	end
+	# end
 	
 	def create
-		if params[:commit] == t('form.post.submit')
-			create_article_and_post
-			
-			redirect_to @article
-			
-		elsif params[:commit] == t('form.post.save')
-			save_draft
-			flash[:notice] = "You have successfully saved your draft."
-			redirect_to root_path
-		end
+		create_article_and_post
+		redirect_to @article
+	end
+	
+	def create_from_article
+		@article = Article.find(params[:post][:article_id].to_i)
+		shared_article = current_user.posts.where(article_id: @article.id, content: "").any?
+		if shared_article == true && params[:post][:content] == ""
+			flash[:notice] = "Your have already shared this article."
+			redirect_to article_path(@article.id)
+		else
+			@post = @article.posts.build(user_id: current_user.id,
+							country_id: @country.id,
+							content: params[:post][:content],
+							category_id: @article.category_id)	
+			if @post.save
+				flash[:notice] = "You have successfully published your post."
+				redirect_to article_path(@article.id)
+			else 
+				flash[:notice] = "Error. We couldn't process your post."
+				redirect_to article_path(@article.id)
+			end
+		end		
 	end
 	
 	def create_from_modal
-		if params[:commit] == t('form.post.submit')
-			create_article_and_post
-			flash[:notice] = "You have successfully published your post."
-			redirect_to article_path(@post.article.id)
-			
-		elsif params[:commit] == t('form.post.save')
-			save_draft
-			flash[:notice] = "You have successfully saved your draft."
-			redirect_to root_path
-		end
-	end
-	
-	# def create_article_post
-	# 	@article = Article.find(params[:id])
+		create_article_and_post
+		flash[:notice] = "You have successfully published your post."
+		redirect_to article_path(@post.article.id)
 		
-	# 	if current_user.posts.where(article_id: @article.id, content: "").any?
-	# 		@post = @article.posts.build(content: params[:post][:content], 
-	# 																category_id: @article.category_id,
-	# 																user_id: current_user.id,
-	# 																country_id: @country.id)
-	# 		if @post.save
-	# 			flash[:notice] = "Your have successfully published your post."
-	# 			redirect_to @article
-	# 		else 
-	# 			render :top
-	# 		end
-	# 	else
-	# 		flash[:notice] = "Your have already shared this article."
-	# 		redirect_to @article
-	# 	end
-	# end
+	end
 
 	def update
-		post_id = params[:post][:id].to_i
-		@post = Post.find(post_id)
 		@post.content = params[:post][:content] 
 		if @post.save
 			flash[:notice] = "Your post has been successfully updated"
@@ -134,19 +117,15 @@ class PostsController < ApplicationController
 		
 	end
 	
-	def update_article_post
-		@post.fake_news_report = params[:post][:fake_news_report] || false
-		@post.content = params[:post][:content] 
-		@post.save
-		flash[:notice] = "Your post has been updated."
-		redirect_to article_path(@post.article.id)
-	end
+	# def update_article_post
+	# 	@post.content = params[:post][:content] 
+	# 	@post.save
+	# 	flash[:notice] = "Your post has been updated."
+	# 	redirect_to article_path(@post.article.id)
+	# end
 
 
 	def destroy
-		
-		post_id = params[:post][:id].to_i
-		@post = Post.find(post_id)
 		article_id = @post.article_id
 		@post.destroy
 		flash[:notice] = "Your post has been successfully deleted."
@@ -163,8 +142,14 @@ class PostsController < ApplicationController
 
 
 	private
+
+		
 		def set_post
 			@post = Post.find(params[:id])
+		end
+		
+		def set_post_from_form
+			@post = Post.find(params[:post][:id])
 		end
 		
 		def set_category
@@ -262,6 +247,8 @@ class PostsController < ApplicationController
 			end
 		end
 		
+		
+		
 		def create_article_and_post
 			@article = Article.where(country_id: @country.id).find_by(title: params[:article][:title]) || Article.where(country_id: @country.id).find_by(url: params[:article][:url])
 			
@@ -277,18 +264,7 @@ class PostsController < ApplicationController
 				@article.country_id = @country.id
 				@article.save
 			end
-			
-			#save post.
-			#if user has shared the same article, dont save
-			# @post = current_user.posts.build(article_id: @article.id)
-			# @post.category_id = params[:post][:category_id].to_i
-			# @post.country_id = @country.id
-			# @post.content = params[:post][:content]
-			# @post.fake_news_report = params[:post][:fake_news_report] || false
-			# @post.save
-			# decide_category
-			# flash[:notice] = "You have successfully published your post."
-			
+	
 			shared_article = current_user.posts.where(article_id: @article.id, content: "").any?
 			if shared_article == true && params[:post][:content] == ""
 				flash[:notice] = "Your have already shared this article."
@@ -297,7 +273,6 @@ class PostsController < ApplicationController
 				@post.category_id = params[:post][:category_id].to_i
 				@post.country_id = @country.id
 				@post.content = params[:post][:content]
-				@post.fake_news_report = params[:post][:fake_news_report] || false
 				@post.save
 				decide_category
 				flash[:notice] = "You have successfully published your post."

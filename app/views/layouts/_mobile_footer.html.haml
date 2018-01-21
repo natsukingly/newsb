@@ -1,8 +1,11 @@
 
 -if current_user 
-	=link_to root_path, class: "icon mobile_icon" do
-		=render "svg/mobile_home_icon"
-		
+	.icon.mobile_icon#mobile_profile_option_link.user_image_xs
+		%span
+			=user_image_helper(current_user)
+
+
+			
 	.icon#mobile_locale_link.mobile_icon
 		%span
 			=render "svg/locale_icon"
@@ -11,17 +14,20 @@
 		%span.show_post_modal_btn
 			=render 'svg/create_post_icon'
 			
-	.icon#mobile_notification_link.mobile_icon
+	.icon#mobile_notification_link.mobile_icon.mobile_notification_icon
 		%span
-			=render "svg/mobile_notification_icon"
-			
-	.icon.mobile_icon
+			=render "shared/mobile_notification_icon"
+
+	.icon.mobile_icon#mobile_menu_link
 		%span
-			=render "svg/menu_icon"
+			=render "svg/menu_icon"			
+	
 	
 -else
-	=link_to root_path, class: "icon mobile_icon" do
-		=render "svg/mobile_home_icon"
+
+	.icon.mobile_icon.login_icon.login_signup_link
+		%span
+			=render 'svg/profile_icon_bold'
 		
 	.icon#mobile_locale_link.mobile_icon
 		%span
@@ -31,9 +37,22 @@
 		%span
 			=render 'svg/create_post_icon'
 			
-	.icon#mobile_notification_link.mobile_icon.login_signup_link
+	.icon.mobile_icon.login_signup_link
 		%span
 			=render "svg/mobile_notification_icon"
-	.icon.mobile_icon
+			
+	.icon.mobile_icon.login_signup_link
 		%span
 			=render "svg/menu_icon"
+
+:javascript
+	$('.mobile_notification_icon').click(function () {
+		// ボタンが押されたら、モーダルウィンドウを表示
+		$.ajax({
+			url: "#{check_notifications_users_path}",
+			type: "POST",
+			dataType: 'script',
+		})
+		$('.mobile_notification_icon .notifications_count').hide();
+		return false;
+	});

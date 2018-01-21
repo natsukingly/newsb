@@ -1,27 +1,25 @@
 .comment_ddm.ddm
 	.comment_ddm_wrapper
-		.regular_user_menu
-			.report_btn.ddm_btn
-				REPORT
-				
+
 		-if current_user && comment.user.id == current_user.id
 			.comment_user_menu
-				=link_to "EDIT", edit_comment_path(comment.id), remote: true, class: "comment_edit_link"
-				.delete_btn.ddm_btn
+				.comment_edit_btn.ddm_btn.show_comment_edit_modal_btn
+					EDIT
+				.comment_delete_btn.ddm_btn
 					DELETE
+					
+		.regular_user_menu
+			.report_btn.ddm_btn.show_report_modal_btn{data: {type: "comment"}}
+				REPORT
 		
-		.option_modal
-			.delete
-				%h2
-					Are you sure you want to delete your comment?
-				.delete_option
-					=link_to "YES", comment_path(comment), method: :delete
-					.cancel_btn.ddm_btn
-						NO
-			.report
 		
 :javascript
-	$(".comment_ddm .delete_btn").click(function(){
+	$(".comment_edit_btn").click(function(){
+		$(this).parents(".comment").find(".comment_edit_form").show();
+		$(this).parents(".comment_ddm").hide();
+	});
+	
+	$(".comment_delete_btn").click(function(){
 		$(this).parents(".comment_ddm").find(".delete").show();
 		$(this).parents(".comment_ddm").find(".option_modal").fadeIn();
 	});

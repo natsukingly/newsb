@@ -12,7 +12,9 @@
 @media (max-width: 1200px) {
 }
 
-
+.stretch{
+	// height: 100%;
+}
 
 // #6699cc nice blue color
 // #20b2aa clean green
@@ -21,16 +23,18 @@
 
 // facebook testuser
 // otzadcbmoq_1503621559@tfbnw.net
-.logo{
-	font-size: 32px;
-	font-family: 'Raleway', sans-serif;
-	color: $newsb;
+
+html{
+	height: 100%;
 }
+
 body{
+
+	
 	background-color: #eee;
  	font-family: Lato, "Noto Sans JP", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 	font-size: 16px;
-	color: #222222;
+	color: #222;
 	position: relative;
 	margin: 0;
 	padding: 0;
@@ -46,7 +50,8 @@ a.disabled{
 
 @media (max-width: 768px) {
 	body{
-		// background-color: #ccc;
+		background-color: #ddd;
+		padding-top: 50px;
 	}
 }
 
@@ -84,7 +89,7 @@ a.disabled{
 }
 
 .navy_bk{
-	background-color: $newsb;
+	background-color: $newsb_grey;
 	color: #fff;
 }
 
@@ -95,7 +100,7 @@ a.disabled{
 }
 
 .navy{
-	color: $newsb;
+	color: $newsb_grey;
 }
 
 .light_navy{
@@ -109,8 +114,7 @@ input[type="text"]:focus {
 
 
 .flex_container{
-	min-height: 100vh;
-	height: 100%; /* for IE11 */
+
 	display: flex;
 	flex-direction: column;
 }
@@ -152,7 +156,7 @@ input[type="text"]:focus {
 }
 
 .btn_md.in_navy{
-	background-color: $newsb;
+	background-color: $newsb_grey;
 	color: #eee;
 	&:hover{
 		opacity: .8;
@@ -203,7 +207,7 @@ input[type="text"]:focus {
 		font-size: 16px;
 		padding: 10px;
 		margin: 10px;
-		border: 1px solid $newsb;
+		border: 1px solid $newsb_grey;
 		
 	}
 }
@@ -215,7 +219,7 @@ input[type="text"]:focus {
 		flex: 1;
 		#mobile_side_nav_link{
 			display: inline-block;
-			background-color: $newsb;
+			background-color: $newsb_grey;
 			color: white;
 			border-radius: 60px;
 			height: 60px;
@@ -365,7 +369,7 @@ a  {
 		border-bottom: 2px solid rgba(0, 30, 66, 0.2);
 
 		&:hover{
-			border-bottom: 2px solid rgba($newsb, 0.5);
+			border-bottom: 2px solid rgba($newsb_grey, 0.5);
 		}
 		svg{
 			height: 20px;
@@ -380,9 +384,9 @@ a  {
 		}
 	}
 	div.active{
-		color: $newsb;
+		color: $newsb_grey;
 		font-weight: bold;
-		border-bottom: 2px solid $newsb;
+		border-bottom: 2px solid $newsb_grey;
 		pointer-events: none;
 	}
 	
@@ -420,7 +424,7 @@ a  {
 	.menu_icon{
 		margin-left: 20px;
 		background-color: white;
-		color: $newsb;
+		color: $newsb_grey;
 	}
 	#article_index_link{
 		color: #CC0000;
@@ -574,7 +578,7 @@ span.input-group-btn{
 		fill: grey;
 	}
 	.unfollow svg{
-		fill: $newsb;
+		fill: $newsb_grey;
 	}
 }
 

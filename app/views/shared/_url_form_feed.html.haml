@@ -1,18 +1,6 @@
 
-=form_tag "/posts/load_url_feed", method: :get, autocomplete: :off, remote: true do
-	%span.url_form_title_on_feed
-		%i.fa.fa-newspaper-o
-		=t 'form.url.caption'
-	.form_row
-		.user_image
-			=user_image_helper(current_user)
-		.dummy_url_form
-			https://example.com
-	
-	%span.show_post_modal_btn.on_feed
-	%span.show_post_modal_btn.for_mobile
+// .show_post_modal_btn.on_feed
+// 	%span.title
+// 		=t 'form.url.caption'
+// 	=render 'svg/plus_icon_circle'
 
-:css 
-	.post_url_form form input:-webkit-autofill {
-		-webkit-box-shadow: 0 0 0 30px white inset;
-	}

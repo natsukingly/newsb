@@ -5,7 +5,7 @@
 }
 
 a.tag_link{
-    color: $newsb;
+    color: $newsb_grey;
     font-weight: 900;
 }
 .tags{
@@ -14,9 +14,7 @@ a.tag_link{
         display: flex;
         align-items: center;
         padding: 20px;
-        &:hover{
-            background-color: #f9f9f9;
-        }
+        border-bottom: 1px solid #eee;
         .tag_link{
             display: flex;
             flex: 1;
@@ -39,24 +37,22 @@ a.tag_link{
         }
 
         .favorite_link{
-            width: 80px;
-            margin-left: 20px;
-            line-height: 27px;
             &:hover{
                 opacity: 0.6;
             }
             a{
-                display: inline-block;
-                width: 100%;
-                border-radius: 3px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             .favorite{
-                border: 1px solid #bbb;
             }
             .unfavorite{
-                font-weight: bold;
-                color: $newsb;
-                border: 2px solid $newsb;
+    
+            }
+            svg{
+                width: 20px;
+                height: 20px;
             }
         }
     }
@@ -91,7 +87,7 @@ a.tag_link{
 
 .hashtag_title{
     padding: 20px 0;
-    color: $newsb;
+    color: $newsb_grey;
     font-size: 20px;
     span{
         color: #696969;
@@ -124,14 +120,7 @@ a.tag_link{
     }
     li.selected{
         color: white;
-        background-color: $newsb_light;
+        background-color: $newsb_grey;
     }
 }
 
-
-// index_nav from common.scss on the tag index page
-// span.tag_counts{
-//     color: grey;
-//     font-size: 12px;
-//     margin-left: 0;
-// }

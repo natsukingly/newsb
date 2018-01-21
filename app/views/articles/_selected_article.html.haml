@@ -1,4 +1,4 @@
-%div{ class: "article_#{article.id}", id: "selected_article"}
+%div{ class: "article_#{article.id}", id: "selected_article", data: {article_id: "#{article.id}"}}
 	.article_image_for_mobile{style: "background-image: url(#{article_image_helper article.image.url});"}
 	.article_wrapper.image{style: "background-image: url(#{article_image_helper article.image.url});"}
 		.overlay
@@ -29,12 +29,8 @@
 						.article_item.login_signup_link
 							COMMENT
 						
-.article_post_modal_wrapper.modal_wrapper
-	.modal_container
-		=render 'modals/article_post_form'
+
 	
-.article_post_edit_form.modal_wrapper
-	.modal_container
-		=render 'modals/article_post_edit_form'
+
 
 

@@ -59,49 +59,60 @@
 		#mobile_footer
 			=render 'layouts/mobile_footer'
 			
-		.signin_modal_wrapper.modal_wrapper
+		.signin_modal_wrapper.modal_wrapper{data:{position: '0'}}
 			.modal_container
 				=render 'modals/signin'
 			
-		.post_modal_wrapper.modal_wrapper
+		.post_modal_wrapper.modal_wrapper{data:{position: '0'}}
 			.modal_container
 				=render 'modals/post'
 				
-		.delete_post_modal_wrapper.modal_wrapper
+		.delete_post_modal_wrapper.modal_wrapper{data:{position: '0'}}
 			.modal_container
 				=render 'modals/delete_post'
 				
-		.report_post_modal_wrapper.modal_wrapper
-			.modal_container
-				=render 'modals/report_post'
-			
-			
 
-		.delete_comment_modal.modal_wrapper	
+		.delete_comment_modal_wrapper.modal_wrapper{data:{position: '0'}}
 			.modal_container
+				=render 'modals/delete_comment'
 				
-		.report_comment_modal.modal_wrapper
+		.report_modal_wrapper.modal_wrapper{data:{position: '0'}}
+			.modal_container
+				=render 'modals/report'
+				
+		.article_post_modal_wrapper.modal_wrapper{data:{position: '0'}}
+			.modal_container
+				=render 'modals/article_post_form'
+					
+		.article_post_edit_form.modal_wrapper{data:{position: '0'}}
+			.modal_container
+				=render 'modals/article_post_edit_form'	
+				
+		.comment_modal_wrapper.modal_wrapper{data:{position: '0'}}
+			.modal_container
+				=render 'modals/comment_form'
+	
+		.comment_edit_modal_wrapper.modal_wrapper{data:{position: '0'}}
+			.modal_container
+				=render 'modals/comment_edit_form'
+
+		.delete_comment_modal.modal_wrapper{data:{position: '0'}}
 			.modal_container
 		
-		#mobile_locale
+		
+		.mobile_menu_ddm_wrapper.mobile_ddm_wrapper{data:{position: '0'}}
+			=render 'dropdown/mobile_menu'
+		
+		#mobile_locale.mobile_ddm_wrapper{data:{position: '0'}}
 			=render 'dropdown/mobile_locale'
 			
-		#mobile_notification
+		#mobile_notification.mobile_ddm_wrapper{data:{position: '0'}}
 			=render 'dropdown/mobile_notifications'
 			
-		#mobile_post
-			=render 'dropdown/mobile_post'
+
 	
-		#mobile_profile_option
+		#mobile_profile_option.mobile_ddm_wrapper{data:{position: '0'}}
 			=render 'dropdown/mobile_profile_option'
 			
+
 		
-
-
-:javascript
-	$("textarea").bind('paste', function(e) {
-	 var self = this;
-		  setTimeout(function(e) {
-			alert($(self).val());
-		  }, 0);
-	});

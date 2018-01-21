@@ -1,21 +1,12 @@
 -if current_user
-	#profile_option_ddm.ddm
+	.profile_option_ddm.ddm
 		.profile_option_wrapper
 			.user_info_block
 				=current_user.name
 			.profile_option_block
-				=link_to "Profile", user_path(current_user), class: "profile_option ddm_btn" 
-				.setting_menu_btn.profile_option.ddm_btn
-					%span
-						Setting
-					%i.fa.fa-angle-down
-				.setting_menu
-					=link_to "General", edit_setting_user_path(current_user.id), class: "profile_option ddm_btn setting_option" 
-					=link_to "SNS", edit_sns_setting_user_path(current_user.id), class: "profile_option ddm_btn setting_option" 
-					=link_to "Email", edit_sns_setting_user_path(current_user.id), class: "profile_option ddm_btn setting_option" 
-					=link_to "Password", edit_sns_setting_user_path(current_user.id), class: "profile_option ddm_btn setting_option" 
-				=link_to "Drafts", drafts_users_path, class: "profile_option ddm_btn" 
-				=link_to "Support", root_path, class: "profile_option ddm_btn" 
+				=link_to "Profile / My Posts", user_path(current_user), class: "profile_option ddm_btn" 
+				=link_to "Setting", edit_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
+				=link_to "SNS", edit_sns_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
 			-if current_user.admin == true
 				.admin_option_block
 					=link_to "Admin drafts", drafts_admins_path
@@ -32,23 +23,9 @@
 				=link_to "Logout", destroy_user_session_path, class: "sub_profile_option" 
 
 				%br
-				&copy; 2017 NEWSB
+				%span.copy_right_statement
+					&copy; 2017 NEWSB
 
-
-:javascript
-	$('.setting_menu_btn').click(function(){
-		if($(this).hasClass("open")){
-			$(this).removeClass("open");
-			$(this).find("i").removeClass("fa-angle-up").addClass("fa-angle-down");
-			$(this).parents(".profile_option_block").find(".setting_menu").slideUp().css("display", "block");
-			return false;
-		} else {
-			$(this).addClass("open");
-			$(this).find("i").removeClass("fa-angle-down").addClass("fa-angle-up");
-			$(this).parents(".profile_option_block").find(".setting_menu").slideDown();
-			return false;
-		}
-	});
 
 				
  

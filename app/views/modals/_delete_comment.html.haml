@@ -1,0 +1,18 @@
+.delete_modal.modal.modal_width_auto
+	.close_modal_btn
+		=render 'svg/close_icon'
+	%h2.modal_content_title
+		DELETE COMMENT
+	.modal_content
+		
+		.modal_icon
+			=render 'svg/delete_icon'
+
+		%p
+			Are you sure you want to delete your comment?
+	.delete_menu.modal_menu.modal_menu_center
+		.cancel_btn.modal_menu_item.cancel_modal_btn
+			NO
+		=form_tag(destroy_comments_path) do
+			=hidden_field_tag 'comment[id]', '', class: "delete_target_comment_id"
+			=submit_tag "YES", class: "modal_menu_item with_border"

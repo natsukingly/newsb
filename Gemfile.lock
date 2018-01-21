@@ -105,6 +105,7 @@ GEM
     erubis (2.7.0)
     excon (0.59.0)
     execjs (2.7.0)
+    exifjs-rails (1.0.0.beta1)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
@@ -531,6 +532,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   erb2haml
+  exifjs-rails
   fog
   font-awesome-sass
   geocoder

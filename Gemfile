@@ -40,6 +40,7 @@ gem 'geocoder'
 gem 'dotenv-rails'
 gem 'meta-tags'
 gem 'fog'
+gem 'exifjs-rails'
 # ここまで追加したGEM
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

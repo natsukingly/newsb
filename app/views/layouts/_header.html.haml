@@ -1,5 +1,4 @@
 %header
-
 	.header_container
 		.left
 			= link_to root_path, class: "logo" do
@@ -25,7 +24,7 @@
 				=render "svg/tag_icon"	
 				
 			-if user_signed_in?
-				#notification_icon.icon
+				.notification_icon.icon
 					=render "shared/notification_icon"
 				#profile_option_link.user_image_sm.align_items_center
 					=user_image_helper(current_user)
@@ -45,44 +44,26 @@
 			=render 'dropdown/notifications'
 			=render 'dropdown/profile_option'
 
-#mobile_header
 
-	-#=link_to tags_path, id: "mobile_locale_link" do
-		-#=render 'svg/globe_icon'
-	/ header left
-	.search_bar
-		.form_icon
-			=render 'svg/search_icon'
-		=form_tag search_path(country: @country.name), method: "get", id: "search" do
-			=text_field_tag :keyword, params[:keyword], placeholder: "Search"
-			=submit_tag "", style: "display: none;"
-			
-	= link_to "NEWSB!", root_path, id: "mobile_logo" 
 	
-	/ HEADER RIGHT     
-	#account.menu_icon
-		-if user_signed_in?
-			#mobile_profile_option_link.user_image_sm
-				=user_image_helper(current_user)
-		-else
-			.login_icon.login_signup_link
-				=render 'svg/profile_icon_bold'
-		
-	#close_search_bar
-		=render 'svg/close_icon'
+
+
 
 #header_nav
+	
+	.mobile_top_btn_block
+		=link_to root_path, class: "top_btn_mobile" do
+			%span
+				N!
 	.nav_container
 		=link_to " ", root_path, class: "selected_topic active", style: "pointer-events: none; display: none;"
-		=link_to "Top", root_path, class: "top_btn"
+		=link_to "Top", root_path, class: "top_btn top_btn"
 		-if current_user
 			=link_to all_posts_categories_path, class: "feed_btn" do
 				Feed
 				%span.feed_notifications_count
 					(#{current_user.feed_notifications.where(check: false).count})
-		-else
-			=link_to all_posts_categories_path, class: "feed_btn login_signup_link" do
-				Feed
+
 					
 					
 		-@categories.each do |category|
@@ -135,7 +116,7 @@
 
 -elsif @all_topic
 	:javascript
-		$('#header_nav').find(".top_btn").addClass("active");
+		$('#header_nav').find(".top_btn, .top_btn_mobile").addClass("active");
 
 
 :javascript	
@@ -145,7 +126,8 @@
 			return false;
 		}	
 	});
-	$('#notification_icon').click(function () {
+	
+	$('.notification_icon').click(function () {
 		// ボタンが押されたら、モーダルウィンドウを表示
 		$(".ddm").hide();
 		$('#notification_ddm').css("display", "block");
@@ -155,27 +137,13 @@
 			type: "POST",
 			dataType: 'script',
 		})
-		$('#notification_icon .notifications_count').hide();
-		$('#notification_icon .notification_fire').hide();
+		$('.notification_icon .notifications_count').hide();
 		return false;
 	});
-
-	// $('body').click(function (event) {
-	// 	if(!$(event.target).closest('#notification_ddm').length && !$(event.target).is('#notification_ddm')) {
-	// 		$("#notification_ddm").hide();
-	// 		// $('body').removeClass("fixed");
-	// 	}
-	// });
-	// $('body').click(function (event) {
-	// 	if(!$(event.target).closest('.ddm').length && !$(event.target).is('.ddm')) {
-	// 		$(".ddm").hide();
-	// 		// $('body').removeClass("fixed");
-	// 	}
-	// });
 		
 	$('#profile_option_link').click(function () {
 		$(".ddm").hide();
-		$('#profile_option_ddm').css("display", "flex");
+		$('.profile_option_ddm').css("display", "flex");
 		return false;
 	});
 
@@ -186,18 +154,20 @@
 	});
 
 	$("#mobile_header .search_bar").click(function(){
-		$("#mobile_logo").hide();
-		$(this).css("flex", "1");
-		$(this).find("#search input").focus();
-		$("#account").hide();
-		$("#close_search_bar").show();
+		$(".mobile_header_middle").hide();
+		$('.mobile_header_left').css("flex", "1");
+		$('.mobile_header_left .search_bar').css("width", "auto");
+		$(this).find(".search input").focus();
+		$(".account").hide();
+		$(".close_search_bar").show();
 	});
 	
-	$("#close_search_bar").click(function(){
-		$("#mobile_logo").show();
-		$("#mobile_header .search_bar").css("flex", "none");
-		$("#account").show();
-		$("#close_search_bar").hide();
+	$(".close_search_bar").click(function(){
+		$(".mobile_header_middle").show();
+		$(".mobile_header_left").css("flex", "none");
+		$('.mobile_header_left .search_bar').css("width", "30px");
+		$(".account").show();
+		$(".close_search_bar").hide();
 	});
 	
 	$('#locale_link').click(function () {

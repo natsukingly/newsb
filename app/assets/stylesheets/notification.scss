@@ -2,7 +2,7 @@
 
 .index_notifications, .notifications{
 	border-radius: 3px;
-	margin-top: 54px;
+
 	.notification_empty{
 		font-size: 18px;
 		margin: 30px;
@@ -10,43 +10,74 @@
 		color: grey;
 		padding: 50px;
 	}
-	.notification{
-		color: grey;
-		display: flex;
-		padding: 12px;
-		background-color: white;
-		&:first-child{
-			border-radius: 5px 5px 0 0;
-		}
-		&:last-child{
-			border-radius: 0 0 5px 5px;
-		}
-		&:only-child{
-			border-radius: 3px;
-		}
-		// end
-		&:not(:last-child){
-			border-bottom: 1px solid #eee;
-		}
-		&:hover{
-			background-color: #f9f9f9;
-		}
+}
 
-		.content{
-			flex: 1;
-			font-size: 12px; 
-
+.notification{
+	color: grey;
+	display: flex;
+	padding: 12px;
+	background-color: white;
+	.image_wrapper{
+		border-radius: 50%;
+	    border: 1px solid orange;
+	    padding: 2px;
+	    margin-right: 8px;
+		img{
+			margin: 0;
+			width: 65px;
+			height: 65px;
 		}
-		span{
-			color: $newsb;
-			font-weight: 900;
-		}
-	
 	}
+	&:first-child{
+		border-radius: 5px 5px 0 0;
+	}
+	&:last-child{
+		border-radius: 0 0 5px 5px;
+	}
+	&:only-child{
+		border-radius: 3px;
+	}
+	// end
+	&:not(:last-child){
+		border-bottom: 1px solid #eee;
+	}
+	&:hover{
+		background-color: #f9f9f9;
+	}
+	a{
+		padding: 0;
+		line-height: 0;
+		display: inline;
+		&:hover{
+			background-color: rgba(0,0,0,0);
+		}
+	}
+	a.notification_target_user_link{
+		
+		flex: none;
+	}
+	.content{
+		flex: 1;
+		font-size: 12px; 
+
+	}
+	span{
+		color: $newsb_grey;
+		font-weight: 900;
+	}
+
 }
 
 @media (max-width: 768px){
 	.index_notifications{
 		margin-top: 0;
+	}
+	.ddm{
+		.notification a{
+			padding: 0;
+		}
+	}
+	.notification{
+		padding: 8px 5px;
 	}
 }

@@ -3,7 +3,9 @@ class CategoriesController < ApplicationController
 	before_action :set_new_users, only: [:all_posts, :articles]
 	before_action :set_current_topic_for_all, only: [:top]
 	before_action :set_current_topic_for_all_posts, only: [:all_posts]
-
+	before_action :authenticate, only: [:all_posts]
+	
+	
 	def all_posts
 		@posts = Post.where(country_id: @country.id).order(created_at: :desc).includes(:user, :article).limit(30)
 
@@ -21,14 +23,13 @@ class CategoriesController < ApplicationController
 	
 	def top
 		@sns_mode = cookies[:sns_mode] || "on"
-		@articles = Article.all.where(country_id: @country.id).where("published_time >= ?", Time.now.ago(5.days)).where.not(posts_count: 0).order(e_indecator: :desc, published_time: :desc).limit(30)
+		@articles = Article.all.where(country_id: @country.id).where("published_time >= ?", Time.now.ago(20.days)).where.not(posts_count: 0).order(e_indecator: :desc, published_time: :desc).limit(30)
 		@featured_article = @articles.first
 		unless @featured_article.nil?
 			@best_post = @articles.first.posts.order(likes_count: :desc).includes(:user).limit(1).first
 			@related_articles = Article.where(country_id: @country.id, category_id: @featured_article.category_id).where.not(id: @featured_article.id).limit(5)
 		end
 		@recent_articles = Article.where(country_id: @country.id).order(published_time: :desc).limit(5)
-
 	end
 	
 	def articles

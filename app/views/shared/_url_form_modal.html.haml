@@ -1,9 +1,10 @@
 
 =form_tag "/posts/load_url_feed", method: :get, autocomplete: :off, remote: true do
 	.form_row
-		.user_image
-			=user_image_helper(current_user)
+		.load_url_btn
+			=render 'svg/load_icon'
 		= url_field_tag :placeholder_url, "", placeholder: "https://example.com", class: "url_form"
+
 
 :css 
 	.post_url_form form input:-webkit-autofill {
@@ -12,20 +13,38 @@
 	
 :javascript
 	$('.post_url_form.on_modal input').keyup(function(e) {
+		$('.post_form_block .error_message').hide();
 		$.ajax({
 			url: "#{load_url_modal_posts_path}",
 			type: "GET",
 			data: {placeholder_url: $(this).val()},
 			dataType: 'script',
 		}).fail(function(jqXHR, textStatus, errorThrown) {
-				$('.post_form_block').html("#{escape_javascript render 'shared/loading_error'}");
+				$('.post_form_block .error_message').show();
 				$('i.loading_mobile').hide();
 			})
 		$('.post_form_requirement').hide();
 		$('i.loading_mobile').show();
-		$('.post_form_block').show().html("#{escape_javascript render 'shared/loading'}");
+		// $('.post_form_block').show().html("#{escape_javascript render 'shared/loading'}");
 		$('.post_form_block').addClass("loading");
 		return false;
+	});
+	
+	$('.load_url_btn').click(function(){
+		$('.post_form_block .error_message').hide();
+		$.ajax({
+			url: "#{load_url_modal_posts_path}",
+			type: "GET",
+			data: {placeholder_url: $(this).val()},
+			dataType: 'script',
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+				$('.post_form_block .error_message').show();
+				$('i.loading_mobile').hide();
+			})
+		$('.post_form_requirement').hide();
+		$('i.loading_mobile').show();
+		$('.post_form_block').addClass("loading");
+		return false;	
 	});
 	// $('.post_url_form.for_mobile input').keyup(function(e) {
 	// 	$.ajax({

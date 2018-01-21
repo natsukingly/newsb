@@ -1,7 +1,4 @@
 =render "svg/mobile_notification_icon"
--if current_user && current_user.notifications.where(check: false).count > 0 && current_user.notifications.where(check: false).count < 10
+-if current_user && current_user.notifications.where(check: false).count > 0
 	.notifications_count
 		=current_user.notifications.where(check: false).count
--elsif current_user && current_user.notifications.where(check: false).count >= 10 
-	.notification_fire
-		=render 'svg/fire_icon'

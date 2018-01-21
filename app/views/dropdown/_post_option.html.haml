@@ -1,14 +1,14 @@
 .post_ddm.ddm
 	.post_ddm_wrapper
-		-if current_user && post.user.id == current_user.id
+		-if post.user.id == current_user.id
 			.post_user_menu
-				.edit_btn.ddm_btn
+				.edit_btn.ddm_btn.show_article_post_edit_modal_btn
 					EDIT
 				.delete_btn.ddm_btn
 					DELETE
 					
 		.regular_user_menu
-			.report_btn.ddm_btn
+			.report_btn.ddm_btn.show_report_modal_btn{data: {type: "post"}}
 				REPORT
 		
 

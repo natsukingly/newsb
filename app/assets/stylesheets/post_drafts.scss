@@ -10,18 +10,17 @@
         .edit_draft_btn, .delete_draft_btn{
             text-align: center;
             display: inline-block;
-            padding: 5px 12px;
+            padding: 5px 20px;
             margin-right: 12px;
             border-radius: 3px;
-            border: 1px solid #bbb;
             transition: .3s;
             cursor: pointer;
             &:hover{
-                background-color: $newsb;
+                background-color: $newsb_grey;
                 color: white;
             }
             &.edit_draft_btn{
-                width: 150px;
+                border: 1px solid #bbb;
             }
         }
     }

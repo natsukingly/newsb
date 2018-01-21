@@ -25,7 +25,7 @@
 	    padding: 0 8px;
 	    line-height: 22px;
 	    vertical-align: top;
-	    background-color: indianred;
+	    background-color: $newsb_grey;
 	    font-size: 12px;
 	    border-radius: 3px;
 	    color: white;
@@ -43,24 +43,26 @@
 }
 
 #user_profile_wrapper{
-	background-color: $newsb;
+	background-color: $newsb_grey;
+	color: white;
+	font-size: 14px;
 	.user_profile_container{
 		max-width: 920px;
 		margin: 0 auto;
 		display: flex;
+		flex-direction: column;
 		padding: 50px 20px;
-		img{
+		img, svg{
 			margin: 12px;
 		}
 		.user_info{
 			flex: 1;
 			display: flex;
-			padding: 12px 20px;
 			line-height: 20px;
 			a{
 				font-weight: 900;
 			}
-			.user_names{
+			.user_name{
 				flex: 1;
 				display: flex;
 			    flex-direction: column;
@@ -72,13 +74,21 @@
 				}
 				p{
 					color: #ddd;
-					margin-top: 12px;
+					&.liked_count{
+						margin-top: 20px;
+					}
 					span{
-						margin-right: 20px;
 					}
 
 				}
 				
+			}
+		}
+		.user_description{
+			padding: 0 12px;
+			margin-bottom: 12px;
+			p{
+				margin-bottom: 12px;
 			}
 		}
 		.user_profile_option{
@@ -96,7 +106,7 @@
 				&:hover{
 					border: 1px solid white;
 					color: white;
-					background-color: $newsb;
+					background-color: $newsb_grey;
 				}
 			}
 			.follow_link.on_user_profile{
@@ -132,61 +142,65 @@
 		}
 		
 		.profile_btn.active{
-			box-shadow: 0 2px 0 $newsb;
+			box-shadow: 0 2px 0 $newsb_grey;
 		}
 	}
 }
 
-@media (max-width: 970px) {
-	#user_profile_wrapper{
+// @media (max-width: 970px) {
+// 	#user_profile_wrapper{
 		
-		.user_profile_container{
-			max-width: 600px;
-			img{
-			}
-			.user_info{
-				flex-direction: column;
-				.user_names{
-					margin-bottom: 20px;
+// 		.user_profile_container{
+// 			max-width: 600px;
+// 			img{
+// 			}
+// 			.user_info{
+// 				flex-direction: column;
+// 				.user_names{
+// 					margin-bottom: 20px;
 
-				}
-			}
-		}
-	}
-	#profile_nav{
-		.nav_wrapper{
-			max-width: 600px;
-			.profile_btn{
-				flex: 1;
-				h3{
-				}
-			}
-			.profile_btn:hover{
-			}
+// 				}
+// 			}
+// 		}
+// 	}
+// 	#profile_nav{
+// 		.nav_wrapper{
+// 			max-width: 600px;
+// 			.profile_btn{
+// 				flex: 1;
+// 				h3{
+// 				}
+// 			}
+// 			.profile_btn:hover{
+// 			}
 			
-			.profile_btn.active{
-			}
-		}
-	}
-}
+// 			.profile_btn.active{
+// 			}
+// 		}
+// 	}
+// }
 
 
 @media (max-width: 768px) {
 	#user_profile_wrapper{
 		background-color: white;
+		color: #696969;
 		.user_profile_container{
-			flex-direction: column;
-			text-align: center;
-			padding: 12px;
+			// flex-direction: column;
+			text-align: left;
+			padding: 0;
 			img{
 			}
 			.user_info{
-				flex-direction: column;
-				padding: 12px 0px;
-				.user_names{
-					h2, p{
+				// flex-direction: column;
+				.user_name{
+					h2{
 						color: #000;
-					}	
+					}
+					p{
+						font-size: 14px;
+						color: #696969;
+					}
 				}
 			}
 			.user_profile_option{
@@ -202,6 +216,7 @@
 			max-width: none;
 			.profile_btn{
 				flex: 1;
+				font-size: 12px;
 				h3{
 				}
 			}
@@ -240,6 +255,7 @@
 		padding: 5px 12px;
 		margin: 5px 0;
 		border-radius: 3px;
+		font-size: 14px;
 		color: #696969;
 		&:hover{
 			color: #2b6dad;
@@ -268,6 +284,7 @@
 		display: flex;
 		background-color: white;
 		padding: 20px;
+		border-bottom: 1px solid #eee;
 		&:hover{
 			background-color: #f9f9f9;
 		}
@@ -312,19 +329,18 @@
 			}
 			.unfollow{
 				font-weight: bold;
-				color: $newsb;
-				border: 2px solid $newsb;
+				color: $newsb_grey;
+				border: 2px solid $newsb_grey;
 			}
 		}
 		.info{
-			padding: 0 12px;
+			margin-right: 12px;
 			flex: 1;
 			.name {
-				margin-bottom: 5px;
 				span{
 					font-size: 14px;
 					font-weight: bold;
-					color: $newsb;
+					color: $newsb_grey;
 				}
 			}
 			.follower_stats{
@@ -352,9 +368,17 @@
 	.user_lists{
 		.user{
 			padding: 12px 8px;
+			.user_image{
+				span.user_ranking{
+					left: -6px;
+				    top: -10px;
+				    background-color: white;
+				}
+			}
 		}
 		.user_list_item{
 			padding: 12px;
+			
 		}
 	}
 	.profile_contents{

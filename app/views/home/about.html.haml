@@ -10,6 +10,7 @@
 :css
 	body{ 
 		background-color: white;
+		padding: 0;
 	}
 	#mobile_footer{
 		display: none;
@@ -19,7 +20,7 @@
 .header_general
 	.header_general_container
 		.header_general_menu_left
-			=link_to "NEWSB", root_path, class: "logo in_white"
+			=link_to "NEWSB!", root_path, class: "logo in_white"
 		
 		.header_general_menu_right
 			=link_to "MISSION", '#mission', class: "header_general_option in_white" 
@@ -99,7 +100,6 @@
 				%p
 					創業者兼エンジニア
 					
-.general_wrapper#contact
 	.general_container
 		.general_title.top
 			%h3
@@ -138,12 +138,10 @@
 		if( scrollVolume > change_point){
 			$('.header_general').css("background-color", "white").css("border-bottom", "1px solid #eee");
 			$('.header_general a').removeClass('in_white');
-			$('.header_general_container').css("padding", "0px 20px");
-			$('.open_general_mobile_menu, close_general_mobile_menu').removeClass('in_white');
+			$('.open_general_mobile_menu, .close_general_mobile_menu').removeClass('in_white');
 		} else{
 			$('.header_general').css("background-color", "rgba(0,0,0,0)").css("border-bottom", "none");	
 			$('.header_general a').addClass('in_white');
-			$('.header_general_container').css("padding", "8px 20px");
 			$('.open_general_mobile_menu, .close_general_mobile_menu').addClass('in_white');
 		}
 		return false;

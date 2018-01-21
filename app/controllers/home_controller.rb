@@ -24,12 +24,15 @@ class HomeController < ApplicationController
 			@contact = Contact.new(contact_params)
 		end
 		@contact.image = params[:contact][:image]
+		
+		@name = params[:contact][:name]
+		@email = params[:contact][:email]
+		@content = params[:contact][:message]
 		if @contact.save
+			ContactMailer.auto_reply(@name, @email, @content).deliver
 			redirect_to contact_message_received_page_path
 		else
-			@name = params[:contact][:name]
-			@email = params[:contact][:email]
-			@content = params[:contact][:message]
+			flash[:notice] = "Error. We couldn't process your message."
 			render :contact
 		end
 	end

@@ -1,8 +1,10 @@
-=link_to notification.path, class: "notification" do
-	.user_image_lg
-		=user_image_helper(notification.target_user)
-	.content
-		%p
-			=notification.message.html_safe
-		%p
-			#{time_ago_in_words(notification.created_at)} ago
+.notification
+	=link_to notification.target_user, class: "notification_target_user_link user_image_lg" do
+		.image_wrapper
+			=user_image_helper(notification.target_user)
+	=link_to notification.path do
+		.content
+			%p
+				=notification.message.html_safe
+			%p
+				#{time_ago_in_words(notification.created_at)} ago

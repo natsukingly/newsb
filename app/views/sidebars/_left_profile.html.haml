@@ -6,7 +6,7 @@
 					.name
 						%h2
 							=link_to user.name, user_path(user.id)
-						%h3.credential.grey= user.credential
+						%p.credential.grey= user.credential
 			
 				.stats
 					%h2.section_title.stats
@@ -82,9 +82,14 @@
 					%p 
 						ALL-TIME: -
 				
-						
-		
-		
+				#favorite_tags
+					%h2.section_title.tag
+						=render 'svg/tag_icon_circle'
+						%span
+							=t 'sidebar.favorite_tags.title'
+					.favorite_tags_block
+						%p
+							\-
 					
 	
 					

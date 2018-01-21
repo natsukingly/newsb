@@ -7,30 +7,11 @@
 			Setting
 		=link_to "Biography", edit_setting_user_path(@user), class: "profile_menu_btn active" 
 		=link_to "Location & Language", edit_locale_setting_user_path(@user), class: "profile_menu_btn"
-		=link_to "Email", edit_email_setting_user_path(@user), class: "profile_menu_btn"
-		=link_to "Password", edit_password_setting_user_path(@user), class: "profile_menu_btn"
 		=link_to "SNS connection", edit_sns_setting_user_path(@user), class: "profile_menu_btn"
 	.sub_function_main_section
-		.sub_function_nav
-			%h2
-				Profile Setting
-			
+
 		#main_contents
 			#user_profile_setting_wrapper
 				=render "users/edit_setting_form"
 	
-	
-:javascript
-	$('.edit_content_btn').click(function(){
-		$(this).parents('.setting_block').find('.current.content').hide();
-		$(this).parents('.setting_block').find('.new.content').show();
-	})
-	$('#reset_setting_btn').click(function(){
-		$(".setting_block.name .new.content input").val("#{current_user.name}");
-		$(".setting_block.credential .content").val("#{current_user.credential}");
-		$(".setting_block.about .content").val("#{current_user.about}");
-		$(".setting_block.language .new.content select").val("#{current_user.language.id}");
-		$(".setting_block.location .new.content select").val("#{current_user.country.id}");
-		$('.setting_block').find('.current.content').show();
-		$('.setting_block').find('.new.content').hide();
-	})
+

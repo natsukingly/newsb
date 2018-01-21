@@ -42,125 +42,122 @@
 
 .post{
     background: white;
-    box-shadow: 0 0 1px #bbb;
+    // box-shadow: 0 0 1px #bbb;
     font-size: 16px;
     margin-bottom: 20px;
-    overflow: hidden;
     &.wo_article{
-        margin-bottom: 0;
+        // margin-bottom: 0;
     }
 
     .body{
         // border-left: 2px solid white;
         padding: 20px;
         flex: 1;
-
-        .main{
-            .content{
-                padding-right: 0;
-                .opinion{
-                    padding: 20px 0;
-                    font-size: 14px;
-                }
-                .edit_form{
-                    display: none;
-                    margin: 20px 0;
-                }
-                .deleted_article{
-                    color: grey;
-                    border: 1px solid #eee;
-                    margin-bottom: 20px;
-                    padding : 12px;
-                }
-                .post_time{
-                    padding-bottom: 12px;
-                }
-                
-            }
-            .follow_switch{
-                font-size: 20px;
-            }
-            .post_menu{
-                font-size: 20px;
-                cursor: pointer;
+        .user_info, .user_info_for_share{
+            .user_name{
+                font-weight: 900;
             }
         }
-        .status{
-            color: grey;
+        .opinion{
+            padding: 20px 0;
             font-size: 14px;
+        }
+        .edit_form{
+            display: none;
+            margin: 20px 0;
+        }
+        .deleted_article{
+            color: grey;
+            border: 1px solid #eee;
+            margin-bottom: 20px;
+            padding : 12px;
+        }
+        .post_time{
+            padding-bottom: 12px;
+        }
+        
+        .follow_switch{
+            font-size: 20px;
+        }
+        .post_menu{
+            font-size: 20px;
+            cursor: pointer;
+        }
+    }
+    .status{
+        color: grey;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        .link_btn, .link_btn{
+            margin-right: 12px;
             display: flex;
             align-items: center;
-            .link_btn, .link_btn{
-                margin-right: 12px;
-                display: flex;
-                align-items: center;
-                cursor: pointer;
-                border: 1px solid #aaa;
-                padding: 5px 12px;
-                border-radius: 5px;
-                &.liked{
-                    background-color: $newsb;
-                    border: 1px solid $newsb;
-                    &:hover{
-                        opacity: .9;
-                        
-                        a{
-                            color: white;
-                        }
-                    }
-                    a{
-                        color: white;
-                    }
-                }
+            cursor: pointer;
+            border: 1px solid #aaa;
+            padding: 3px 8px;
+            border-radius: 5px;
+            &.liked{
+                border: 1px solid $newsb_grey;
+                
                 &:hover{
-                    color: $newsb;
-                    border: 1px solid $newsb;
-                    a{
-                        color: $newsb;
-                    }
-                    svg{
-                        fill: $newsb;
-                    }
+                    opacity: .9;
+                    
+                    // a{
+                    //     color: $newsb_grey;
+                    // }
                 }
-                i{
-                    font-size: 16px;
+                a{
+                    color: $newsb_grey;
+                }
+            }
+            &:hover{
+                color: $newsb_grey;
+                border: 1px solid $newsb_grey;
+                a{
+                    color: $newsb_grey;
                 }
                 svg{
-                    height: 16px;
-                    width: 16px;
-                    fill: grey;
+                    fill: $newsb_grey;
                 }
             }
-            .option{
+            i{
+                font-size: 16px;
+            }
+            svg{
+                height: 16px;
+                width: 16px;
+                fill: grey;
+            }
+        }
+        .option{
+            position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: row-reverse;
+            i{
                 cursor: pointer;
-                position: relative;
-                flex: 1;
-                display: flex;
-                flex-direction: row-reverse;
-                i{
-                    font-size: 20px;
-                    text-align: center;
-                    line-height: 40px;
-                    width: 40px;
-                    height: 40px;
-                    display: inline-block;                  
-                }
+                font-size: 20px;
+                text-align: center;
+                line-height: 40px;
+                width: 40px;
+                height: 40px;
+                display: inline-block;                  
             }
-            
-            .comment_link{
-                cursor: pointer;
-            }
-            a{
-                color: grey;
-            }
+        }
+        
+        .comment_link{
+            cursor: pointer;
+        }
+        a{
+            color: grey;
         }
     }
     .comment_index{
         padding: 0 20px;
-        border-left: 2px solid $newsb_light;
+        border-left: 2px solid $newsb_grey;
         // background-color: #f9f9f9;
         .view_link, .reply_view_link{
-            padding: 5px 0;
             a {
                 font-size: 14px;
                 font-weight: 900;
@@ -169,6 +166,7 @@
         }
     }
 }
+
 
 
 .post.share{
@@ -180,6 +178,7 @@
             color: grey;
             i{
                 margin-left: 5px;
+                font-size: 10px;
             }
             a{
 
@@ -207,7 +206,16 @@
     }
 }
 
-
+@media(max-width: 768px){
+    .comment{
+        
+        .content_block{
+            margin-left: 15px;
+            padding-left: 20px;
+            border-left: 2px solid $newsb_grey;
+        }
+    }
+}
 
 .post_article{
     margin-bottom: 12px;
@@ -255,6 +263,16 @@
     }
 }
 
+.comment{
+    .comment_edit_form{
+        display: none;
+        padding: 0;
+        textarea{
+            padding: 8px 5px;
+        }
+    }
+}
+
 
 
 @media (max-width: 768px) {
@@ -264,23 +282,18 @@
     .post, .post.share{
         // display: none;
         border-radius: 0;
-        box-shadow: 0 0 1px grey;
+        margin-bottom: 8px;
+        // box-shadow: 0 0 1px grey;
         &.wo_article{
-            margin-bottom: 0;
+            // margin-bottom: 0;
         }
         .body{
              padding: 12px 8px;
              font-size: 16px;
-            .main{
-                .content{
-                    .opinion{
-                        // padding: 30px 0;
-                    }
-                }
-            }
             .status{
                 .link_btn{
-                    border: 1px solid #aaa;
+                    border: none;
+                    background-color: #f6f6f6;
                     margin-right: 8px;
                     padding: 5px 8px;
                     border-radius: 5px;
@@ -289,10 +302,8 @@
         }
         .comment_index{
             padding: 0 8px;
-            // margin: 8px 0;
-            // margin-left: 8px;
-            // padding-left: 20px;
-            border-left: 2px solid cornflowerblue;
+            // background-color: #f9f9f9;
+            border-left: none;
         }
 
     }
@@ -302,27 +313,25 @@
     .post{
         
         .body{
-            .main{
-                .post_article{
-                    margin-bottom: 12px;
-                    display: flex;
-                    flex-direction: column;
-                    border: none;
-                    &:hover{
-                        border: none;
-                    }
-                    .image{
-                        background-position: center;
-                        background-size: cover;
-                        height: 130px;
-                        margin: 0 -20px;
-                        width: auto;
-                        flex: 1;
-                    }
-                    .article_info{
-                        padding: 12px 0;
-                        color: #001E42;
-                    }
+  
+            .post_article{
+                margin-bottom: 12px;
+                display: flex;
+                flex-direction: column;
+                // border: none;
+                &:hover{
+                    // border: none;
+                }
+                .image{
+                    background-position: center;
+                    background-size: cover;
+                    height: 130px;
+                    width: auto;
+                    flex: 1;
+                }
+                .article_info{
+                    padding: 12px 5px;
+                    color: #001E42;
                 }
             }
         }
@@ -416,7 +425,7 @@
             padding: 20px;
 
             p{
-                color: $newsb;
+                color: $newsb_grey;
             }
         }
     }
@@ -434,7 +443,7 @@
         flex: 1;
         padding: 5px 0;
         margin: 0 5px 20px;
-        border: 1px solid $newsb;
+        border: 1px solid $newsb_grey;
         border-radius: 3px;
         
         &:hover{
@@ -460,8 +469,8 @@
                 font-size: 16px;
                 color: grey;
                 &:hover{
-                    color: $newsb;
-                    border: 1px solid $newsb;
+                    color: $newsb_grey;
+                    border: 1px solid $newsb_grey;
                 }
             }
         }

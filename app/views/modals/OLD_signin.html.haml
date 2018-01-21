@@ -1,0 +1,136 @@
+.signin_modal_block.modal.modal_width_400
+	.close_modal_btn
+		=render 'svg/close_icon'
+	#continue_with_social_account_block
+		%h2.modal_content_title
+			Continue with ...
+		.modal_section
+		
+			.social_signin_links
+				= link_to user_facebook_omniauth_authorize_path do
+					.facebook_signin_btn.social_signin_btn
+						%i.fa.fa-facebook
+						facebook
+				= link_to user_google_omniauth_authorize_path do
+					.google_signin_btn.social_signin_btn
+						%i.fa.fa-google
+						Google
+			
+			.non_social_link
+				%p or
+				= form_for(resource, as: resource_name, url: session_path(resource_name), id: "signin_with_email", remote: true) do |f|
+					.non_social_form
+						.email_form
+							=f.email_field :email, placeholder: :Email
+							%i.fa.fa-exclamation-circle.error_icon
+							%ul.error_block
+						.password_form
+							= f.password_field :password, autocomplete: "off", placeholder: :Password
+							%i.fa.fa-exclamation-circle.error_icon
+							=link_to "Forgot password?", new_user_password_path, target: "_blank", id: "reset_password_link"
+	
+						.actions.non_social_submit_btn
+							= f.submit "LOG IN"
+							%ul#login_error_message
+								-unless resource.errors[:password].empty?
+									-resource.errors[:password].each do |message|
+										%li.error_message
+											Password #{message}
+	
+				%h2.term_confirmation
+					%span.email_signup_link 
+						Continue with Email
+					By signing up, you indicate that you have read and agree to the Terms of Service and Privacy Policy.
+					
+	#signup_with_email_block
+		.modal_title
+			%h2
+				Signup via email
+		.modal_section
+			.non_social_link
+				= devise_error_messages! 
+				= form_for(resource, as: resource_name, url: registration_path(resource_name), id: "signup_with_email", remote: true) do |f|
+					.non_social_form
+						.name_form_section
+							=f.text_field :name, placeholder: "Your full name", class: "name_form", autofocus: true
+							%i.fa.fa-exclamation-circle.error_icon
+							%ul.error_block
+								-unless resource.errors[:name].empty?
+									-resource.errors[:name].each do |message|
+										%li.error_message
+											Name #{message}
+						.email_form
+							=f.email_field :email, placeholder: :Email
+							%i.fa.fa-exclamation-circle.error_icon
+							%ul.error_block
+								-unless resource.errors[:email].empty?
+									-resource.errors[:email].each do |message|
+										%li.error_message
+											Email #{message}
+					
+						.password_form
+							=f.password_field :password, autocomplete: "off", placeholder: :Password
+							%i.fa.fa-exclamation-circle.error_icon
+							%ul.error_block
+								-unless resource.errors[:password].empty?
+									-resource.errors[:password].each do |message|
+										%li.error_message
+											Password #{message}
+						
+						.actions.non_social_submit_btn
+							= f.submit "SIGN UP"	
+							#cancel_email_signup_link
+								BACK
+	
+				%h2.term_confirmation
+					By signing up, you indicate that you have read and agree to the Terms of Service and Privacy Policy.		
+				
+	
+
+
+:javascript
+	$('.actions.non_social_submit_btn').click(function(){
+		$('#login_error_message').text('');	
+	});
+	
+	$('.login_signup_link').click(function () {
+		if("#{current_user}" == false){
+			$(".ddm").hide();
+			$('.signin_modal_wrapper').fadeIn();
+			// $("html,body,#signin_modal").scrollTop();
+			$('body').addClass('fixed');
+			current_url = location.href 
+			document.cookie = 'previous_url=' + current_url;
+			return false;
+		}
+	});
+
+	// $('.signin_modal_wrapper').click(function (event) {
+	// 	if(!$(event.target).closest('.signin_modal_block').length && !$(event.target).is('.signin_modal_block')) {
+	// 		$("#signin_modal").hide();
+	// 		$('body').removeClass('fixed');
+	// 		return false;
+	// 	}     
+	// });
+	
+	$('.close_modal_btn, .mobile_modal_back_btn').click(function (event) {
+		$("#signin_modal").hide();
+		$('body').removeClass('fixed');
+	});
+
+	$('.email_signup_link').click(function(e){
+		e.stopPropagation();
+		$('#continue_with_social_account_block').hide();
+		$('#signup_with_email_block').show();
+		$('#signin_modal .error_message').text('');
+		$('#signin_modal .field_with_errors').removeClass("field_with_errors");
+	});
+	
+	$('#cancel_email_signup_link').click(function(){
+		$('#continue_with_social_account_block').show();
+		$('#signup_with_email_block').hide();
+		$('#signin_modal .error_message').text('');
+		$('#signin_modal .field_with_errors').removeClass("field_with_errors");
+	});
+	
+	

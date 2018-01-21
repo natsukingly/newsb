@@ -4,7 +4,12 @@
 	.sub_function_main_section.post_section
 		-if current_user
 			.post_url_form.on_feed
-				=render 'shared/url_form_feed'
+				.show_post_modal_btn.on_feed
+					%span.title
+						=t 'form.url.caption'
+					=render 'svg/plus_icon_circle'
+
+
 							
 		.post_form_block.feed
 		

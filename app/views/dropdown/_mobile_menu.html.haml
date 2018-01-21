@@ -1,31 +1,32 @@
 -if current_user
-	#mobile_menu_ddm.ddm
+	.mobile_ddm_header.mobile_menu_ddm
+		.mobile_ddm_header_wrapper
+			%h2.mobile_ddm_title
+				Menu
+			.close_mobile_ddm_btn
+				=render 'svg/close_icon'
+	.mobile_menu_ddm.ddm.mobile_ddm
 		.mobile_menu_ddm_wrapper.ddm_wrapper
-			.title_block
-				%h2
-					menu
-				.close_ddm_btn
-					=render 'svg/close_icon'
-			=link_to "User ranking", user_ranking_path, class: "menu_option" 
-			=link_to "Trending Tags", tags_path, class: "menu_option" 
-			=link_to "Favorite Tags", favorite_index_tags_path, class: "menu_option" 
-			=link_to "About", root_path, class: "menu_option" 
-			=link_to "Terms", root_path, class: "menu_option" 
-			=link_to "Logout", destroy_user_session_path, class: "menu_option" 
-			.profile_option
-				&copy; 2017 NEWSB
-			
-:javascript
-	
-	$('#mobile_profile_option_link').click(function () {
-		$(".ddm").hide();
-		$('#mobile_profile_option_ddm').css("display", "block");
-		$('body').addClass('fixed');
-		return false;
-	});
-
-	
-	$('.close_ddm_btn').click(function (event) {
-		$('#mobile_profile_option_ddm').hide();
-		$('body').removeClass('fixed');
-	});
+			.menu_block
+				.menu_option.search_bar
+					=form_tag search_path(country: @country.name), method: "get" do
+						=text_field_tag :keyword, params[:keyword], placeholder: "Search"
+						=button_tag type: "submit" do
+							%i.fa.fa-search.form_icon
+				=link_to all_posts_categories_path, class: "menu_option" do
+					=render 'svg/mobile_news_icon'
+					%span
+						Feed・#{current_user.feed_notifications.where(check: false).count}
+				=link_to ranking_user_path, class: "menu_option" do
+					=render 'svg/mobile_trophy_icon'
+					%span
+						Ranking
+				=link_to tags_path, class: "menu_option ddm_btn" do
+					=render 'svg/mobile_tag_icon'
+					%span
+						Trending tags
+				
+				=link_to favorite_index_tags_path, class: "menu_option ddm_btn" do
+					=render 'svg/mobile_favorite_tag_icon'
+					%span
+						Favorite tags

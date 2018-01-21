@@ -27,7 +27,8 @@
 
 #login_error_message{
 	color: red;
-	margin: 12px 0 0;
+	margin: 12px 0;
+	font-size: 14px;
 }
 
 
@@ -144,38 +145,6 @@ form{
 						}
 					}
 				}
-				.post_textarea_wrapper{
-					position: relative;
-					
-					margin: 0;
-					padding: 0;
-					.post_textarea_block{
-							display: flex;
-							border: 1px solid grey;
-							padding: 0;
-							min-height: 80px;
-							cursor: text;
-							border-radius: 3px;
-							&.large{
-								height: 250px;
-							}
-						textarea{
-							border: none;
-							box-shadow: none;
-							flex: 1;
-							resize: none; 
-							font-size: 16px;
-							&.large{
-								max-height: 230px;
-							}
-							&:focus{
-								border: none;
-								box-shadow: none;
-								outline: none;
-							}
-						}
-					}
-				}
 				.form_label{
 					color: #696969;
 					margin-bottom: 10px;
@@ -206,7 +175,7 @@ form{
 				font-size: 14px;
 				.form_btn{
 					background-color: white;
-					color: $newsb;
+					color: $newsb_grey;
 					border-radius: 3px;
 					border: 1px solid #bbb;
 					width: 90px;
@@ -215,7 +184,7 @@ form{
 					transition: .2s;
 					line-height: 35px;
 					&:hover{
-						background-color: $newsb;
+						background-color: $newsb_grey;
 						color: white;
 					}
 					&.post_save_btn{
@@ -224,7 +193,7 @@ form{
 						&:hover{
 							background-color: white;
 							font-weight: 900;
-							color: $newsb;
+							color: $newsb_grey;
 						}
 					}
 				}
@@ -236,7 +205,7 @@ form{
 					transition: .2s;
 					border: none;
 					&:hover{
-						color: $newsb;
+						color: $newsb_grey;
 					}
 				}
 				.cancel_btn, .clear_btn{
@@ -255,7 +224,38 @@ form{
 		}
 	}
 }
-
+.textarea_wrapper{
+	position: relative;
+	
+	margin: 0;
+	padding: 0;
+	.textarea_block{
+			display: flex;
+			border: 1px solid grey;
+			padding: 0;
+			min-height: 80px;
+			cursor: text;
+			border-radius: 3px;
+			&.large{
+				height: 250px;
+			}
+		textarea{
+			border: none;
+			box-shadow: none;
+			flex: 1;
+			resize: none; 
+			font-size: 16px;
+			&.large{
+				max-height: 230px;
+			}
+			&:focus{
+				border: none;
+				box-shadow: none;
+				outline: none;
+			}
+		}
+	}
+}
 
 
 
@@ -358,7 +358,7 @@ form{
 
 .post_form_requirement{
 
-    margin-bottom: 20px;
+    margin-bottom: 8px;
 	line-height: 20px;
 	color: #696969;
 	text-align: left;
@@ -408,8 +408,18 @@ form{
 				form{
 					.form_check_group{
 						display: block;
+						margin-bottom: 0;
 						.title{
 							display: none;
+						}
+						.select{
+							margin-bottom: 0;
+							margin: 8px 5px 0;
+							
+							select{
+								width: 100%;
+								font-size: 16px;
+							}
 						}
 					}
 					hr{
@@ -432,14 +442,6 @@ form{
 					}
 				}
 				form{
-					.post_textarea_wrapper{
-						margin: 0;
-						
-						.post_textarea_block{
-							padding: 5px 0;
-							border: none;
-						}
-					}
 				}
 				.post_submit_menu{
 					margin: 8px;
@@ -448,15 +450,26 @@ form{
 			}
 		}
 	}
+	.textarea_wrapper{
+		margin: 0;
+		
+		.textarea_block{
+			padding: 0;
+			border: none;
+			textarea{
+				padding: 20px 8px 5px;  
+			}
+		}
+	}
 }
-
+				
 .post_form_block{
 	&.loading{
-		text-align: center;
-		margin-top: 50px;
+
+
 	}
 	.parse_failure_message{
-		text-align: center;
+
 		color: darkred;
 		font-size: 20px;
 	}
@@ -471,41 +484,42 @@ form{
 
 
 
-.post_form.edit_form{
-	.body{
-		padding: 0;
-		margin-bottom: 20px;
-		.form_main form{
-			padding: 0;
-			.textarea{
-				font-size: 16px;
-				height: 54px;
-			}
-		}
-	}
-}
+// .post_form.edit_form{
+// 	.body{
+// 		padding: 0;
+// 		margin-bottom: 20px;
+// 		.form_main form{
+// 			padding: 0;
+// 			.textarea{
+// 				font-size: 16px;
+// 				height: 54px;
+// 			}
+// 		}
+// 	}
+// }
 
 
-.comment_form.edit_form{
-	padding: 5px 0;
-	.comment_submit{
+// .comment_form.edit_form{
+// 	padding: 5px 0;
+// 	.comment_submit{
+// 		display: flex;
+// 		margin: 5px 0;
+// 		input[type="submit"]{
+// 			border-radius: 3px;
+// 		}
+// 	}
+// }
+
+
+.textarea_form{
+	padding: 0;
+	.textarea_block{
 		display: flex;
-		margin: 5px 0;
-		input[type="submit"]{
-			border-radius: 3px;
-		}
-	}
-}
-
-
-.comment_form, .reply_form{
-	display: none;
-	padding: 0 20px 20px;
-	.form-group{
-		margin-bottom: 8px;
-	}
-	.form_textarea{
-		display: flex;
+		border: 1px solid #bbb;
+    	border-radius: 3px;
+    	height: 200px;
+    	max-height: 200px;
+    	margin-bottom: 12px;
 		img{
 			margin-right: 10px;
 			width: 30px;
@@ -513,15 +527,18 @@ form{
 		}
 		textarea{
 			flex: 1;
-			border: 1px solid #ddd;
-			min-height: 46px;
+			border: none;
+    		resize: none;
+    		overflow: scroll;
+    		height: 190px;
+    		max-height: 190px;
 			font-size: 16px;
 		}
 	}
-	.form_textarea.edit{
+	.textarea_block.edit{
 		margin: 0;
 	}
-	.comment_submit{
+	.textarea_submit_menu{
 
 		color: grey;
 		display: flex;
@@ -534,30 +551,54 @@ form{
 				border: 1px solid rgb(54, 88, 155);
 			}
 		}
-		.cancel_btn{
-			display: inline-block;
-			padding: 8px 12px;
+		.submit_btn{
+			margin-right: 8px;
 			cursor: pointer;
-			&:hover{
-				color: rgb(54, 88, 155);
-			}
 		}
 	}
 }
 @media(max-width: 768px){
-    .comment_form{
-        padding: 12px 8px;
+    .textarea_form{
+        padding: 0;
+        .textarea_block{
+        	border: none;
+        	padding: 5px 0;
+        }
+    }
+    .textarea_submit_menu{
+    	padding: 12px 8px;
+    	
     }
 }
 
 
 .post_url_form{
-	margin: 0 0 12px;
-	overflow: hidden;
-	padding: 12px 20px;
+	margin-bottom: 20px;
+	padding: 12px;
+	border: 1px solid #ddd;
+    border-radius: 3px;
 	background-color: white;
-	box-shadow: 0 0 1px rgba(0,0,0,0.3);
 	position: relative;
+	.load_url_btn{
+		width: 40px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	    border-radius: 50%;
+	    background-color: #eee;
+	    margin-right: 12px;
+		svg{
+			width: 20px;
+			height: 20px;
+		}
+		
+	}
+	&.on_feed{
+		border: 0;
+  		border-radius: 0;
+  		font-weight: 900;
+	}
 	span.show_post_modal_btn{
 		position: absolute;
 		display: block;
@@ -614,6 +655,12 @@ form{
 	   // display: none;
 	   margin: 12px 0 0;
 	   padding: 12px 8px;
+	   border: none;
+	   border-radius: 0;
+	   border-bottom: 1px solid #eee;
+	   .load_url_btn{
+	   	margin-right: 0;
+	   }
 		&.on_modal, &.for_mobile{
 			display: block;
 			margin: 0 0 12px;
@@ -670,7 +717,7 @@ form{
 				flex: 1;
 				font-size: 50px;
 				font-weight: 900;
-				color: $newsb;
+				color: $newsb_grey;
 				margin-bottom: 40px;
 				flex-direction: column;
 				span{
@@ -740,7 +787,7 @@ form{
 				color: grey;
 			}
 			input[type=submit]{
-				background-color: $newsb_light;
+				background-color: $newsb_grey;
 				border: none;
 				color: #eee; 
 			}

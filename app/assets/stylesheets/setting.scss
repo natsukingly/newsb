@@ -4,7 +4,7 @@ input[type="file"] {
 .custom-file-upload {
     display: inline-block;
     padding: 6px 12px;
-    color: $newsb_light;
+    color: $newsb_grey;
     cursor: pointer;
     font-weight: normal;
 }
@@ -16,11 +16,14 @@ input[type="file"] {
 }
 
 @media(max-width: 768px){
-    #user_profile_setting_wrapper, #sns_setting_wrapper{
+    #user_profile_setting_wrapper{
         padding: 0;
         form{
             padding: 12px 5px;
         }
+    }
+    #sns_setting_wrapper{
+        padding: 12px;
     }
 }
 
@@ -61,8 +64,8 @@ input[type="file"] {
                 display: inline-block;
                 background-size: cover;
                 background-position: center;
-                width: 60px;
-                height: 60px;
+                width: 100px;
+                height: 100px;
                 border-radius: 50%;
                 background-color: #eee;
             }
@@ -77,8 +80,11 @@ input[type="file"] {
             display: none;
         }
     }
+    .user_name_large{
+        font-size: 20px;
+    }
     .title{
-        width: 150px;
+        width: 125px;
         font-size: 14px;
         color: #696969;
         padding: 8px 0;
@@ -91,7 +97,7 @@ input[type="file"] {
         }
         .edit_content_btn{
             display: inline-block;
-            color: $newsb_light;
+            color: $newsb_grey;
             margin-left: 12px;
             cursor: pointer;
         }
@@ -113,7 +119,7 @@ input[type="file"] {
 
 @media(max-width: 768px){
     .setting_block{
-
+        margin-bottom: 12px;
         .title{
             width: 80px;
         }
@@ -129,12 +135,12 @@ input[type="file"] {
 #setting_submit_btn{
     width: 100px;
     background-color: white;
-    color: $newsb;
-    border: 1px solid $newsb;
+    color: $newsb_grey;
+    border: 1px solid $newsb_grey;
     padding: 8px;
     border-radius: 0;
         &:hover{
-            background-color: $newsb;
+            background-color: $newsb_grey;
             color: #eee;
         }
 }
@@ -146,7 +152,7 @@ input[type="file"] {
     padding: 8px;
     text-align: center;
     &:hover{
-        color: $newsb;
+        color: $newsb_grey;
     }
 }
 
@@ -202,15 +208,15 @@ input[type="file"] {
                 color: grey;
                 border: 1px solid grey;
                 &:hover{
-                    background-color: $newsb;
+                    background-color: $newsb_grey;
                     color: #eee;
                 }
             }
             &.share{
-                border: 1px solid $newsb_light;
-                color: $newsb_light;
+                border: 1px solid $newsb_grey;
+                color: $newsb_grey;
                 &:hover{
-                    background-color: $newsb_light;
+                    background-color: $newsb_grey;
                     color: #eee;
                 }
             }

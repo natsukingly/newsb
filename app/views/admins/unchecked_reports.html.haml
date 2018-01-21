@@ -1,0 +1,41 @@
+-content_for(:sidebar) do
+	"Don't show"
+
+.sub_function_wrapper.post_drafts
+	.sub_function_main_section
+		.sub_function_nav
+			%h2
+				Unchecked reports
+			
+			=link_to "show all reports", reports_admins_path
+		#main_contents.reports
+			#report_index
+				= render partial: "admins/report", collection: @reports, as: :report
+			.scroll_btn.reports
+				LOAD MORE
+				
+	.sub_function_sidebar
+		.reports_count_section
+			%h2
+				REPORTS COUNT
+			%p
+				ALL:
+				= @reports_count
+			%p
+				NOT YET:
+				= @non_checked_reports_count
+				
+:javascript
+	$('.scroll_btn.reports').click(function(){
+		var stop_loading = $(this).hasClass('stop_loading');
+		if(!(stop_loading)){
+			$.ajax({
+				url: "#{load_reports_path}",
+				type: "GET",
+				data: {existing_reports : $('#main_contents').find('.report').length },
+				dataType: 'script',
+			})
+			$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+			$(this).addClass("loading");
+		}
+	})

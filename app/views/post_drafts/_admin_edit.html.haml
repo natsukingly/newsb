@@ -12,11 +12,6 @@
 							.category_radio_btn{class: "category_#{category.id}"}
 								=radio_button_tag 'post_draft[category_id]', category.id
 								=label :'post_draft[category_id]', category.name, value: category.id
-			
-				.field.form-group.form_check_group
-					.check
-						=check_box_tag "post_draft[fake_news_report]", true, post_draft.fake_news_report
-						=label_tag "post_draft[fake_news_report]", 'post as a fake news report'
 				
 				.field.form-group.post_textarea_wrapper
 					.post_textarea_block

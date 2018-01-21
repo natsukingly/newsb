@@ -1,0 +1,21 @@
+.report_post_modal.report_modal.modal
+	.close_modal_btn
+		=render 'svg/close_icon'
+	%h2.modal_content_title
+		%p.give_me_short_ellipsis
+		
+	.report_form.textarea_form
+		.body 
+			.form_main 
+				= form_tag reports_path do
+					-if current_user
+						.field.textarea_block.report_textarea
+							= text_area_tag 'report[content]', "", placeholder: "Report*****"
+							= hidden_field_tag 'report[target_id]', '', class: "target_id"
+							= hidden_field_tag 'report[target_type]', '', class: "target_type"
+
+					%hr.modal_content_divider
+						.textarea_submit_menu
+							= submit_tag "#{t ('form.comment.submit')}", class: "submit_btn"
+							.cancel_modal_btn.submit_btn
+								=t ('form.comment.cancel')

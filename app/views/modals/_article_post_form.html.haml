@@ -1,39 +1,26 @@
-.post_form_modal.modal.post_form_modal_via_article
-	.close_modal_btn
-		=render 'svg/close_icon'
-	%h2.modal_content_title
-		%p.give_me_short_ellipsis
-			=@article.title
-	%hr.modal_content_divider		
-	.post_form{data: {form: "article", country: "#{@country.id}"}}
-		.body 
-			.form_main 
-				= form_tag posts_path do
-					-if current_user
-						.field.form-group.post_textarea_wrapper 
-							.textarea_block.post_textarea_block.still.large
+-if current_user
+	.post_form_modal.modal.post_form_modal_via_article
+		.close_modal_btn
+			=render 'svg/close_icon'
+		%h2.modal_content_title
+			%p.give_me_short_ellipsis
+			
+		.post_form{data: {form: "article", country: "#{@country.id}"}}
+			.body 
+				.form_main 
+					= form_tag create_from_article_posts_path do
+						.field.form-group.textarea_wrapper 
+							.textarea_block.textarea_block.still.large
 								= text_area_tag 'post[content]', '', placeholder: "#{t ('form.post.placeholder')}", class: "article_post_content large"
 							
-							= hidden_field_tag 'post[category_id]', @article.category_id
-							= hidden_field_tag 'article[image]', @article.image
-							= hidden_field_tag 'article[url]', @article.url
-							= hidden_field_tag 'article[source]', @article.source
-							= hidden_field_tag 'article[title]', @article.title
-							= hidden_field_tag 'article[published_time]', value: @article.published_time
+							= hidden_field_tag 'post[article_id]', '', class: "target_article_id"
 							
-							#autocomplete_tags
-								.autocomplete_tags_block
-					%hr.modal_content_divider
-					.post_submit_menu 
-						-if current_user
+						%hr.modal_content_divider
+						.post_submit_menu 
 							#sns_post_form_menu
 								=render 'snss/sns_post_form_menu', user: current_user
 		
 							.submit_btn_group
 								= submit_tag "#{t ('form.post.submit')}", class: "form_btn post_submit_btn"	
-								= submit_tag "#{t ('form.post.save')}", class: "form_btn post_save_btn"
-						-else
-							.submit_btn_group.login_signup_link
-								= submit_tag "#{t ('form.post.submit')}", class: "form_btn post_submit_btn"	
-								= submit_tag "#{t ('form.post.save')}", class: "form_btn post_save_btn"
-
+				
+	

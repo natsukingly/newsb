@@ -1,25 +1,24 @@
 .post_form_modal.modal
 	.close_modal_btn
 		=render 'svg/close_icon'
-			
+	%h2.modal_content_title
+		%p.give_me_short_ellipsis
+			EDIT
 	.post_form{data: {form: "article", country: "#{@country.id}"}}
 		.body 
 			.form_main 
 				= form_tag update_posts_path do
-					.article_title
-						%p=@article.title
-					%hr
 							
 					-if current_user
-						.field.form-group.post_textarea_wrapper 
-							.textarea_block.post_textarea_block.still.large
+						.field.form-group.textarea_wrapper 
+							.textarea_block.textarea_block.still.large
 								= text_area_tag 'post[content]', '', placeholder: "#{t ('form.post.placeholder')}", class: "article_post_content large"
 							
 							= hidden_field_tag 'post[id]', '', id: "edit_target_post_id"
 							
 							#autocomplete_tags
 								.autocomplete_tags_block
-					%hr
+					%hr.modal_content_divider
 					.post_submit_menu 
 						#sns_post_form_menu
 							=render 'snss/sns_post_form_menu', user: current_user

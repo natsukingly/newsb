@@ -1,13 +1,14 @@
+
+.mobile_ddm_header.mobile_notification_ddm
+	.mobile_ddm_header_wrapper
+		%h2.mobile_ddm_title
+			Notifications
+		.close_mobile_ddm_btn
+			=render 'svg/close_icon'
+
 -if current_user
-	#mobile_notification_ddm.ddm
+	.mobile_notification_ddm.ddm.mobile_ddm
 		.mobile_notification_ddm_wrapper.ddm_wrapper
-			.title_section
-				.title_block
-					%h2
-						Notifications
-					.close_ddm_btn
-						=render 'svg/close_icon'
-			
 			.notifications.notification_list_for_ddm.mobile_notifications
 				-if current_user.notifications.empty?
 					.notification_empty
@@ -24,19 +25,6 @@
 
 
 :javascript
-	$('#mobile_notification_link').click(function () {
-		$(".ddm").hide();
-		$('#mobile_notification_ddm').show();
-		$('body').addClass('fixed');
-		return false;
-	});
-
-
-	$('.close_ddm_btn').click(function (event) {
-		$('#mobile_notification_ddm').hide();
-		$('body').removeClass('fixed');
-	});
-	
 	$('.scroll_btn.mobile_notifications').click(function(e){
 		e.stopPropagation();
 		var stop_loading = $(this).hasClass('stop_loading');
@@ -49,7 +37,7 @@
 				},
 				dataType: 'script',
 			})
-			$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
+			$(this).html("<i class='fa fa-spinner fa-pulse'></i>");
 			$(this).addClass("loading");
 		}
-	})
+	});

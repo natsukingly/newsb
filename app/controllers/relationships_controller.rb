@@ -1,4 +1,6 @@
 class RelationshipsController < ApplicationController
+    before_action :authenticate
+    
     
     def follow_icon
         @user = User.find(params[:id])
@@ -23,4 +25,5 @@ class RelationshipsController < ApplicationController
         relationship =  Relationship.find_by(follower_id: current_user.id, following_id: @user.id)
         relationship.destroy
     end
+    
 end

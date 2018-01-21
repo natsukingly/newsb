@@ -12,7 +12,7 @@
 //     			display: flex;
 //     			.overlay{
 //     			    flex: 1;
-//     			    background-color: rgba($newsb, .2);
+//     			    background-color: rgba($newsb_grey, .2);
 //     			}
 //     			.stats{
 //         			margin: 20px;
@@ -54,7 +54,7 @@
 //     			border: 1px solid steelblue;
 //     			color: steelblue;
 //     			&:hover{
-//     				background-color: $newsb;
+//     				background-color: $newsb_grey;
 //     				color: white;
 //     			}
 //     		}

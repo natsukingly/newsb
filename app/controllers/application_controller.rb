@@ -11,21 +11,7 @@ class ApplicationController < ActionController::Base
 				devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
 				devise_parameter_sanitizer.permit(:sign_up, keys: [:gender])
 		end
-		
-		# def after_sign_up_path_for(resource)
-		#   bio_form_users_path(resource)
-		# end
-	
-		# # # The path used after sign up for inactive accounts.
-		# def after_inactive_sign_up_path_for(resource)
-		#   bio_form_users_path(resource)
-		# end
-		# def after_sign_in_path_for(resource)
-		#   bio_form_users_path(resource)
-		# end
 
-		#保留中　今はログインモーダルが開くタイミングで保存するようになっている。
-		#_signin.html.hamlのjavascriptを参照
 		def default_url_options(options = {})
 		  { country: @country.name, locale: I18n.locale}.merge options
 		end
@@ -53,54 +39,6 @@ class ApplicationController < ActionController::Base
 			# ３　IPから国を割り出して使う。（国と言語は一致）を適用
 			# ４　デフォルトセッティング　アメリカ・英語を適用
 		
-		
-		# def set_locale
-		# 	if current_user
-		# 		preferred_language_code = current_user.language.code
-		# 		@country = current_user.country
-		# 	#未登録だが言語と国の設定をしたことがある。	
-		# 	elsif cookies[:preferred_language_code] && cookies[:preferred_country_id]
-		# 		preferred_language_code = cookies[:preferred_language_code]
-		# 		@county = Country.find(cookies[:preferred_country_id])
-		# 	# 未登録だが言語の設定はしたことがある。	
-		# 	elsif cookies[:preferred_language_code]
-		# 		preferred_language_code = cookies[:preferred_language_code]
-		# 		#ログインしたばかり
-		# 		if cookies[:previous_county_id]
-		# 			@country = Country.find(cookie[:previous_county_id])
-		# 		end
-		# 		detect_locale
-		# 	elsif cookies[:preferred_country_id]
-		# 	# 1
-		# 		@country = Country.find(cookies[:preferred_country_id])
-		# 		preferred_language_code = @country.language.code
-
-		# 	else
-		# 	# 2
-		# 		detect_locale
-		# 		detected_locale_code = @country.language.code
-		# 	end
-			
-		# 	recorded_country = Country.find_by(name: params[:country])
-			
-		# 	I18n.locale = preferred_language_code || recorded_country.language.code || detected_locale_code || I18n.default_locale
-		# 	@language = Language.find_by(code: I18n.locale)
-		# end
-		
-		# def set_country
-		# 	if user_signed_in?
-		# 		@country = current_user.country
-		# 		@language = current_user.language
-		# 	elsif cookies[:country]
-		# 		@country = Country.find_by(name: cookies[:country])
-
-		# 	else
-		# 		#this method detect locale and save it to cookies
-		# 		detect_locale
-		# 		cookies[:language] = @country.language.code
-		# 		@language = Language.find_by(code: cookies[:language])
-		# 	end
-		# end
 		def detect_locale
 			@ip = request.remote_ip
 			if @ip
@@ -148,15 +86,18 @@ class ApplicationController < ActionController::Base
 		
 		
 		protected
+				def authenticate_user(object, redirect_url)
+					if current_user.id =! object.user_id
+						flash[:notice] = "Permission denied"
+						redirect_to redirect_url
+					end
+				end
 				
-				def authenticate_user!
-						if user_signed_in?
-								super
-						else
-								redirect_to about_path, :notice => 'please sign-up'
-								## if you want render 404 page
-								## render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
-						end
+				def authenticate
+					unless user_signed_in?
+						flash[:notice] = "You need to login first."
+						redirect_to root_path
+					end
 				end
 				
 				def default_categories

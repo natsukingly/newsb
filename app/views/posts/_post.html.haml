@@ -7,7 +7,7 @@
 						.user_image
 							=user_image_helper(post.user)
 						.user_info_for_share
-							=link_to post.user.name, post.user, class: "user_name bold"
+							=link_to post.user.name, post.user, class: "user_name"
 							%span
 								%i.fa.fa-share
 								shared
@@ -35,43 +35,45 @@
 -else
 	.post{class: "post post_#{post.id}", data: {post_id: "#{post.id}"}}
 		.body
-			.main
-				.content.clearfix
-					.user_block.clearfix{class: "user_#{post.user.id}"}
-						.user_image
-							=user_image_helper(post.user)
-						.user_info
-							=link_to post.user  do
-								.give_me_short_ellipsis.bold
-									=post.user.name
-							%p.user_credential.sm.grey
-								=post.user.credential
-								%span.time
-									#{time_ago_in_words_short(post.created_at)}
-						.user_option.follow_switch
-							=render "/shared/follow_form_icon.html.haml", user: post.user
-					%p.opinion
-						=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
-					=render "posts/edit", post: post
-					-if post.article == nil
-						%p.deleted_article	
-							This article has been deleted.
-					-else
-						=link_to article_path(post.article_id), class: "post_article" do
-							-if post.article.image
-								.image{ style: "background-image: url(#{article_image_helper post.article.image.url });"}
-							.article_info
-								%h2.bold
-									= universal_truncate(post.article.title, 120) do
-										%span ...
-								%p.xs.grey
-									= post.article.source
-								
+
+			.user_block{class: "user_#{post.user.id}"}
+				.user_image
+					=user_image_helper(post.user)
+				.user_info
+					=link_to post.user, class: "user_name" do
+						.give_me_short_ellipsis.bold
+							=post.user.name
+					%p.user_credential.sm.grey
+						=post.user.credential
+						%span.time
+							#{time_ago_in_words_short(post.created_at)}
+				.user_option.follow_switch
+				
+					=render "/shared/follow_form_icon.html.haml", user: post.user
+			
+			.content_block	
+				%p.opinion.post_opinion
+					=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
+				=render "posts/edit", post: post
+				-if post.article == nil
+					%p.deleted_article	
+						This article has been deleted.
+				-else
+					=link_to article_path(post.article_id), class: "post_article" do
+						-if post.article.image
+							.image{ style: "background-image: url(#{article_image_helper post.article.image.url });"}
+						.article_info
+							%h2.bold
+								= universal_truncate(post.article.title, 120) do
+									%span ...
+							%p.xs.grey
+								= post.article.source
+							
 			.status.md
 				.post_like_block
 					=render '/likes/like_post', post: post
 				-if current_user
-					.comment_link.link_btn
+					.comment_link.link_btn.show_comment_modal_btn
 						=render 'svg/chat_icon_circle'
 						・
 						%span.comment_count	
@@ -84,12 +86,13 @@
 							= post.comments_count	
 							
 				.option
-					%i.fa.fa-ellipsis-h.lg.option_link
-					=render 'dropdown/post_option', post: post
+					-if current_user
+						%i.fa.fa-ellipsis-h.lg.option_link
+						=render 'dropdown/post_option', post: post
+					-else
+						%i.fa.fa-ellipsis-h.lg.option_link.login_signup_link
 		
-		.comment_form
-			=render '/comments/form', post: post 		
-		
+
 		.comment_index_wrapper
 			-unless post.comments_count == 0
 				.comment_index		

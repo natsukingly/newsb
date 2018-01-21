@@ -1,31 +1,19 @@
 .delete_modal.modal.modal_width_auto
 	.close_modal_btn
 		=render 'svg/close_icon'
-
+	%h2.modal_content_title
+		DELETE	POST
 	.modal_content
 		
 		.modal_icon
 			=render 'svg/delete_icon'
-		%h2.modal_content_title
-			DELETE	
-		%p.modal_content_description
+
+		%p
 			Are you sure you want to delete your post?
 	.delete_menu.modal_menu.modal_menu_center
-		.cancel_btn.modal_menu_item
+		.cancel_btn.modal_menu_item.cancel_modal_btn
 			NO
 		=form_tag(destroy_posts_path) do
 			=hidden_field_tag 'post[id]', '', class: "delete_target_post_id"
 			=submit_tag "YES", class: "modal_menu_item with_border"
 
-	
-
-:javascript	
-	$(".post_ddm .delete_btn").click(function(){
-		$('.delete_post_modal_wrapper').fadeIn();
-		var post_id = $(this).parents(".post").attr("data-post-id");
-		$(".delete_modal").find('.delete_target_post_id').val(post_id);
-		if(windowWidth < 768){
-			$('.sub_function_wrapper').hide();
-		}
-		$(".post_ddm").hide();
-	});	

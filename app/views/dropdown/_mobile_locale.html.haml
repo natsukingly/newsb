@@ -1,11 +1,13 @@
-#mobile_locale_ddm.ddm
+
+.mobile_ddm_header.mobile_locale_ddm
+	.mobile_ddm_header_wrapper
+		%h2.mobile_ddm_title
+			Locale
+		.close_mobile_ddm_btn
+			=render 'svg/close_icon'	
+
+.mobile_locale_ddm.ddm.mobile_ddm
 	.mobile_locale_ddm_wrapper.ddm_wrapper
-		.title_section
-			.title_block
-				%h2
-					Locale
-				.close_ddm_btn
-					=render 'svg/close_icon'
 		.country 
 			.menu_title
 				%span
@@ -27,33 +29,20 @@
 						=render "flags/japan"
 						%span
 							Japan
-						
-						
-		.language
-			.menu_title
-				%span
-					Language
-				%i.fa.fa-angle-down
-			.menu_items
-				-Language.all.each do |language|
-					=link_to change_language_path(language.id), class: "language_link_#{language.id} menu_item", method: :post do
-						.menu_item_left.for_language
-							%span
-								=language.name	
+							
+							
+			.language
+				.menu_title
+					%span
+						Language
+					%i.fa.fa-angle-down
+				.menu_items
+					-Language.all.each do |language|
+						=link_to change_language_path(language.id), class: "language_link_#{language.id} menu_item", method: :post do
+							.menu_item_left.for_language
+								%span
+									=language.name	
 		
-			
-:javascript
+:javascript			
 	$('.country').find(".country_link_" + #{@country.id}).addClass("selected");
 	$('.language').find(".language_link_" + #{@language.id}).addClass("selected");
-	
-	$('#mobile_locale_link').click(function () {
-		$(".ddm").hide();
-		$('#mobile_locale_ddm').show();
-		$('body').addClass('fixed');
-		return false;
-	});
-	
-	$('.close_ddm_btn').click(function (event) {
-		$('#mobile_locale_ddm').hide();
-		$('body').removeClass('fixed');
-	});

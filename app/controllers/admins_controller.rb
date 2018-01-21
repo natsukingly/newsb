@@ -33,6 +33,12 @@ class AdminsController < ApplicationController
 		@reports_count = @reports.count
 		@non_checked_reports_count = @reports.where(check: false).count
 	end
+	
+	def unchecked_reports
+		@reports = Report.all.where(check: false).includes(:user, :country, :reportable).order(created_at: :desc).limit(20)
+		@reports_count = @reports.count
+		@non_checked_reports_count = @reports.where(check: false).count
+	end
 
 	def check_report
 		@report = Report.find(params[:id])

@@ -20,7 +20,7 @@
             color: #eee;
         }
         &.bkg_navy{
-            background-color: $newsb;
+            background-color: $newsb_grey;
         }
         &.bkg_grey{
             background-color: #f9f9f9;
@@ -95,15 +95,16 @@
                 padding: 8px 12px;
                 margin-bottom: 100px;
                 &:hover{
-                    border: 1px solid $newsb_light;
-                    color: $newsb_light;
+                    border: 1px solid $newsb_grey;
+                    color: $newsb_grey;
                 }
             }
             textarea{
                 min-height: 150px;
             }
             input[type="file"]{
-                display: block;
+                display: inline-block;
+                width: 100px;
             }
             i{
                 font-size: 20px;
@@ -156,7 +157,7 @@
             // }
         }
         .contact_form{
-            width: 100%;
+            width: auto;
         }
     }
 }
@@ -164,7 +165,7 @@
 
 
 .general_footer{
-    background-color: $newsb;
+    background-color: $newsb_grey;
     color: #eee;
     text-align: center;
     flex: 1;

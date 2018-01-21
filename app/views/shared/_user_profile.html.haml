@@ -1,9 +1,9 @@
 #user_profile_wrapper
 	.user_profile_container
-		.user_image_xl
-			=user_image_lg_helper(user)
 		.user_info
-			.user_names
+			.user_image_xl
+				=user_image_lg_helper(user)
+			.user_name
 				%h2
 					=user.name
 				%p
@@ -11,11 +11,10 @@
 					
 				%p.liked_count
 					%span
-						Weekly : #{@user.weekly_liked_count} likes   
-					%span
 						Total : #{@user.liked_count} likes
-				%p
-					=user.about
+		.user_description
+			%p
+				=user.about
 			.user_profile_option{class: "user_#{user.id}"}
 				-if current_user && current_user.id == user.id
 					=link_to "EDIT SETTING", edit_setting_user_path(current_user.id), class: "edit_link"

@@ -1,38 +1,38 @@
--if current_user
-	#mobile_post_ddm.ddm
-		.mobile_post_ddm_wrapper.ddm_wrapper
-			.title_block
-				%h2
-					Create post
-				.close_ddm_btn
-					=render 'svg/close_icon'
+// -if current_user
+// 	#mobile_post_ddm.ddm
+// 		.mobile_post_ddm_wrapper.ddm_wrapper
+// 			.title_block
+// 				%h2
+// 					Create post
+// 				.close_ddm_btn
+// 					=render 'svg/close_icon'
 			
-			.post_ddm_block
-				.post_url_form.for_mobile
-					=render "shared/url_form_modal"
-				.post_form_requirement
-					%ul
-						%li
-							NEWSB's algorism favors the articles published within a week.
-						%li
-							Some articles cannot be updated due to the company policy or website setup. 
-					.post_form_icon
-						=render 'svg/news_bubble_icon'					
+// 			.post_ddm_block
+// 				.post_url_form.for_mobile
+// 					=render "shared/url_form_modal"
+// 				.post_form_requirement
+// 					%ul
+// 						%li
+// 							NEWSB's algorism favors the articles published within a week.
+// 						%li
+// 							Some articles cannot be updated due to the company policy or website setup. 
+// 					.post_form_icon
+// 						=render 'svg/news_bubble_icon'					
 							
 					
-				.post_form_block.for_mobile
+// 				.post_form_block.for_mobile
 				
 	
-:javascript
-	$('#mobile_post_link, .show_post_modal_btn.for_mobile').click(function () {
-		$(".ddm").hide();
-		$('#mobile_post_ddm').show();
-		$('body').addClass('fixed');
-		return false;
-	});
+// :javascript
+// 	$('#mobile_post_link, .show_post_modal_btn.for_mobile').click(function () {
+// 		$(".ddm").hide();
+// 		$('#mobile_post_ddm').show();
+// 		$('body').addClass('fixed');
+// 		return false;
+// 	});
 
 	
-	$('.close_ddm_btn').click(function (event) {
-		$('#mobile_post_ddm').hide();
-		$('body').removeClass('fixed');
-	});
+// 	$('.close_ddm_btn').click(function (event) {
+// 		$('#mobile_post_ddm').hide();
+// 		$('body').removeClass('fixed');
+// 	});

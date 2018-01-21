@@ -4,6 +4,5 @@ class Contact < ApplicationRecord
     validates :message, presence: true
     mount_uploader :image, ContactImageUploader
     
-    belongs_to :user
     
 end
