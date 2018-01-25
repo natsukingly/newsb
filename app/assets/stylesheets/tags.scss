@@ -58,6 +58,22 @@ a.tag_link{
     }
 }
 
+#sidebar_left{
+    
+    a.tag{
+        color: grey;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        svg{
+            height: 12px;
+            width: 12px;
+            margin-right: 5px;
+        }
+    }
+}
+
 
 @media (max-width: 768px) {
     #explore_container{

@@ -1,7 +1,7 @@
 #user_profile_wrapper
 	.user_profile_container
 		.user_info
-			.user_image_xl
+			.user_image_xl_circle
 				=user_image_lg_helper(user)
 			.user_name
 				%h2
@@ -11,20 +11,20 @@
 					
 				%p.liked_count
 					%span
-						Total : #{@user.liked_count} likes
+						=t('like', count: @user.liked_count)
 		.user_description
 			%p
 				=user.about
 			.user_profile_option{class: "user_#{user.id}"}
 				-if current_user && current_user.id == user.id
-					=link_to "EDIT SETTING", edit_setting_user_path(current_user.id), class: "edit_link"
+					=link_to t('action.edit_profile'), edit_setting_user_path(current_user.id), class: "edit_link"
 					
 				-elsif current_user
 					.follow_link.on_user_profile
 						=render "/shared/follow_form", user: user
 				-else
 					.follow_link.on_user_profile.login_signup_link 
-						Follow
+						=t('action.follow')
 #profile_nav
 	.nav_wrapper
 		=link_to @user, class: "profile_btn left" do

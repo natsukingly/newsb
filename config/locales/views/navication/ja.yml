@@ -1,0 +1,15 @@
+ja:
+  nav:
+    title:
+      tags: "タグ"
+      trending_tags: "人気上昇中"
+      favorite_tags: "お気に入り"
+    login_signup: "ログイン・登録"
+    topic:
+     tags: "タグ"
+     favorite: "お気に入り"
+     profile: "プロフィール"
+     setting: "設定"
+     social_media: "SNS接続"
+     ranking: "ランキング"
+     search_result: "検索: "

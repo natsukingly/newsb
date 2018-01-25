@@ -219,7 +219,7 @@ article_title: @article_title, article_url: @article_url, article_site: @article
 				=submit_tag "", style: "display: none;"
 	
 	.mobile_header_middle		
-		= link_to "NEWSB!", root_path, class: "mobile_logo" 
+		= link_to "newsb!", root_path, class: "mobile_logo" 
 		%h2.mobile_ddm_title
 	
 	/ HEADER RIGHT     

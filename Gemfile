@@ -41,6 +41,7 @@ gem 'dotenv-rails'
 gem 'meta-tags'
 gem 'fog'
 gem 'exifjs-rails'
+gem 'devise-i18n'
 # ここまで追加したGEM
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

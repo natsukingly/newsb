@@ -59,5 +59,4 @@ $(document).on('turbolinks:load', function() {
 		$('.flex_container').hide();
 		$('html').addClass('stretch');
 	}	
-	
 });

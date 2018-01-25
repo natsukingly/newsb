@@ -1,8 +1,10 @@
 en:
   search:
+    placeholder: "Search"
     nav:
       item: 
         articles: "ARTICLES"
         posts: "POSTS"
         users: "USERS"
         tags: "TAGS"
+    result: "Search Results:"

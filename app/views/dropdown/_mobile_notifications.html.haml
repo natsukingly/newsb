@@ -2,7 +2,7 @@
 .mobile_ddm_header.mobile_notification_ddm
 	.mobile_ddm_header_wrapper
 		%h2.mobile_ddm_title
-			Notifications
+			=t ('dropdown.notifications')
 		.close_mobile_ddm_btn
 			=render 'svg/close_icon'
 
@@ -17,10 +17,10 @@
 					=render @notifications
 					-if @notifications.count < 30
 						.scroll_btn.stop_loading
-							NO MORE NOTIFICATIONS	
+							=t ('scroll.no_more')	
 					-else
 						.scroll_btn.mobile_notifications
-							LOAD MORE	
+							=t ('scroll.load')	
 						
 
 
@@ -36,7 +36,7 @@
 				data: {existing_notifications: $('.mobile_notifications').find('.notification').length,
 				},
 				dataType: 'script',
-			})
+			});
 			$(this).html("<i class='fa fa-spinner fa-pulse'></i>");
 			$(this).addClass("loading");
 		}

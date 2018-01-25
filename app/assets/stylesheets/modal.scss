@@ -20,7 +20,7 @@
 // 	}
 // }
 .post_url_form.on_feed{
-	padding: 20px;
+	padding: 12px 20px;
 	cursor: pointer;
 	line-height: 24px;
 	svg{
@@ -146,6 +146,7 @@
 				display: none;
 				padding: 0 8px;
 				margin-bottom: 12px;
+				font-size: 14px;
 			}
 		}
 		&.post_form_modal_via_url{
@@ -444,7 +445,7 @@ hr.modal_content_divider{
 			}
 		}
 		.term_confirmation{
-			margin: 20px 0 12px;
+			margin: 5px 0 12px;
 			font-size: 14px;
 		}
 	}

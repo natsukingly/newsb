@@ -7,7 +7,8 @@
 	.sub_function_main_section{
 		display: flex;
 		flex-direction: column;
-		width: 600px;
+		min-width: 550px;
+		max-width: 600px;
 		margin-top: 20px;
 		.sub_function_nav{
 			background-color: white;
@@ -54,7 +55,9 @@
 		width: auto;
 		margin: 0;
 		.sub_function_main_section{
-			// width: auto;
+			width: auto;
+			min-width: 550px;
+			max-width: 600px;
 		}
 		.sub_function_sidebar{
 			display: none;
@@ -67,7 +70,7 @@
   	width: auto;
   		.sub_function_main_section{
   			min-width: auto;
-  			width: auto;
+  			max-width: none;
   			flex: 1;
   			margin: 0;
 			.sub_function_nav{

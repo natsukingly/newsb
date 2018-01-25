@@ -74,7 +74,6 @@ Rails.application.routes.draw do
 		
 		resources :categories, only: [:show] do
 			member do
-				get 'articles'
 				get 'posts'
 				get 'load_more'
 			end
@@ -82,6 +81,8 @@ Rails.application.routes.draw do
 				get 'all_posts'
 			end
 		end	
+		get "/categories/:name/articles" => "categories#articles" , as: :categorized_articles
+		
 		
 		resources :articles, only: [:index, :show] do
 			member do
@@ -136,8 +137,8 @@ Rails.application.routes.draw do
 			end
 		end
 	
-		post '/users/:country_id/change_country' => 'users#change_country', as: :change_country
-		post '/users/:language_id/change_language' => 'users#change_language', as: :change_language
+		post '/users/:country_name/change_country' => 'users#change_country', as: :change_country
+		post '/users/:code/change_language' => 'users#change_language', as: :change_language
 		
 		resources :snss, only: [] do
 			member do 

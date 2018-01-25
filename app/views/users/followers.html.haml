@@ -6,13 +6,13 @@
 .sub_function_wrapper.user_profile
 	.sub_function_user_sidebar.profile_menu
 		%h2.profile_title
-			PROFILE
+			=t('sidebar.title.profile')
 		=link_to user_path(@user), class: "profile_menu_btn" do
-			#{@user.posts.count} posts
+			=t('sidebar.stats.posts', count: @user.posts.count)
 		=link_to followers_user_path(@user.id), class: "profile_menu_btn active" do
-			#{@user.followers.count} follower
+			=t('sidebar.stats.follower', count: @user.followers.count)
 		=link_to following_user_path(@user.id), class: "profile_menu_btn" do
-			#{@user.following.count} following
+			=t('sidebar.stats.following', count: @user.following.count)
 			
 	.sub_function_main_section
 		#main_contents.profile_contents

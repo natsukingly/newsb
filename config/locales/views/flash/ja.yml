@@ -1,0 +1,21 @@
+ja:
+  flash:
+    general_error: "エラー：リクエストを処理できませんでした。"
+    post:
+     create_success: "投稿を作成しました。"
+     create_fail: "エラー：投稿を作成できませんでした。"
+     update_success: "投稿の変更を保存しました。"
+     update_fail: "エラー：投稿の変更を保存できませんでした。"
+     delete_success: "投稿を削除しました。"
+     delete_alert: "エラー：投稿を削除できませんでした。"
+     already_shared: "既に共有済みの記事です。"
+    comment:
+     create_success: "コメントを作成しました。"
+     update_success: "コメントの変更を保存しました。"
+     delete_success: "コメントを削除しました。"
+    user:
+     country_change_success: "国の設定を変更しました。"
+     language_change_success: "言語の設定を変更しました。"
+     update_setting_success: "プロフィールの変更を保存しました。"
+    report:
+     success: "投稿を報告しました。"

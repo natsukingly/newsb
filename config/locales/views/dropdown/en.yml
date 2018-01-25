@@ -1,0 +1,21 @@
+en:
+  dropdown:
+    profile_option:
+      profile: "Profile / My Posts"
+      setting: "Setting"
+      social_media: "Social Media"
+      about: "About"
+      contact: "Contact"
+      terms: "Terms"
+      privacy: "Privacy"
+      logout: "Logout"
+    notifications: "Notifications"
+    profile_menu: "Profile Menu"
+    mobile_menu:
+      title: "Menu"
+    　feed: "Feed"
+    　ranking: "User Ranking"
+    　trending_tags: "Trending Tags"
+    　favorite_tags: "Favorite Tags"
+    　search: "Search"
+    location: "Location・Language"

@@ -2,7 +2,7 @@
 .mobile_ddm_header.mobile_locale_ddm
 	.mobile_ddm_header_wrapper
 		%h2.mobile_ddm_title
-			Locale
+			=t ('dropdown.location')
 		.close_mobile_ddm_btn
 			=render 'svg/close_icon'	
 
@@ -11,38 +11,40 @@
 		.country 
 			.menu_title
 				%span
-					Country
+					=t('location.title')
 				%i.fa.fa-angle-down
 			.menu_items
 				-usa = Country.find_by(name: "United States")
 				-japan = Country.find_by(name: "Japan")
-				=link_to change_country_path(usa.id), class: "country_link_#{usa.id} menu_item", method: :post do
-					.menu_item_left
-						=render "flags/usa"
-						%span
-							United States
-					%span.coming_soon
-						coming soon
-						
-				=link_to change_country_path(japan.id), class: "country_link_#{japan.id} menu_item", method: :post do
+				=link_to change_country_path(country_name: "Japan"), class: "country_link_#{japan.id} menu_item", method: :post do
 					.menu_item_left
 						=render "flags/japan"
 						%span
-							Japan
+							=t('location.japan')
+				=link_to change_country_path(country_name: "United States"), class: "disabled country_link_#{usa.id} menu_item", method: :post do
+					.menu_item_left
+						=render "flags/usa"
+						%span
+							=t('location.united_states')
+					%span.coming_soon
+						coming soon
 							
 							
 			.language
 				.menu_title
 					%span
-						Language
+						=t('language.title')
 					%i.fa.fa-angle-down
 				.menu_items
-					-Language.all.each do |language|
-						=link_to change_language_path(language.id), class: "language_link_#{language.id} menu_item", method: :post do
-							.menu_item_left.for_language
-								%span
-									=language.name	
-		
+					=link_to change_language_path(code: 'en'), class: "language_link menu_item", method: :post do
+						.menu_item_left.for_language
+							%span
+								English	
+					=link_to change_language_path(code: 'ja'), class: "language_link menu_item", method: :post do
+						.menu_item_left.for_language
+							%span
+								日本語	
+	
 :javascript			
-	$('.country').find(".country_link_" + #{@country.id}).addClass("selected");
-	$('.language').find(".language_link_" + #{@language.id}).addClass("selected");
+	$('.country').find(".country_link_" + #{@country.name}).addClass("selected");
+	$('.language').find(".language_link_" + #{@language.name}).addClass("selected");

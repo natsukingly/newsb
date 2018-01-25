@@ -1,0 +1,13 @@
+ja:
+  devise:
+    sessions:
+      user:
+        signed_out: "ログアウトしました。"
+    signin:
+      success: "ログインに成功しました。"
+      sns_already_connected: "エラー：このSNSアカウントは接続されています。"
+      sns_account_already_used: "エラー：このSNSアカウントはすでに他のnewsb!のアカウントと接続されています。"
+      sns_connection_success: "接続に成功しました。"
+      sns_communication_failure: "エラー：このSNSアカウントの情報へのアクセスが断られました。"
+      same_email_error: "エラー：このSNSで設定されたEmailは既に他のnewsb!のアカウントで使用されています。既存のアカウントでログインしてから接続を行なってください。"
+      communication_error: "エラー：情報をプロセスできませんでした。"

@@ -4,7 +4,7 @@
 			=form_tag publish_draft_admin_path(post_draft.id), method: :post, remote: true do
 				.field.form-group.form_check_group
 					- Category.all.each do |category|
-						-if post_draft.category.id == category.id 
+						-if post_draft.category_id == category.id 
 							.category_radio_btn{class: "category_#{category.id}"}
 								=radio_button_tag 'post_draft[category_id]', category.id, {:checked => true}
 								=label :'post_draft[category_id]', category.name, value: category.id
@@ -18,8 +18,8 @@
 						= text_area_tag 'post_draft[content]', post_draft.content, placeholder: "your awesome comment *optional", class: "post_textarea"
 			
 				.post_submit_menu
-					#sns_post_form_menu
-						=render 'snss/sns_post_form_menu', user: current_user
+					.sns_post_form_menu
+						=render 'snss/sns_post_form_menu', user: current_user, facebook_post: current_user.facebook_post, twitter_post: current_user.twitter_post
 			
 					.submit_btn_group
 						= submit_tag "PUBLISH", class: "form_btn #post_submit_btn"					

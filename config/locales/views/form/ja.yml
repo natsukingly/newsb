@@ -3,17 +3,42 @@ ja:
     url:
       caption: "気になる記事を共有"
       placeholder: "URLを入力して開始"
+      note: "newsb!の一覧ページでは3日以内に作成された記事のみ表示されます。"
+      error: "エラー：この記事はアップロードできません。"
     post:
       title: "投稿を作成"
       fake_news_checkbox: "フェイクニュースとして報告する"
       placeholder: "コメントする　※任意"
       selectbox_placeholder: "カテゴリーを選ぶ"
-      submit: "共有"
+
+      submit: "投稿"
       save: "保存"
       cancel: "キャンセル"
-      update: "更新"
+      update: "変更"
     comment:
       placeholder: "コメント"
-      submit: "共有"
+      submit: "投稿"
       cancel: "キャンセル"
+    sns:
+      setting_popup: "選択したSNSアカウントは未登録です。"
+      later: "後でやる"
+      setting_page: "SNS設定ページ"
+    post_errors:
+      category_undecided: "カテゴリーを選んでください。"
+      too_long: "1000文字までしか投稿できません。現在の文字数："
+    comment_errors:  
+      too_long: "500文字までしか投稿できません。現在の文字数："
+      blank: "空白のコメントは投稿はできません。"
     cancel: "キャンセル"
+    report: 
+      placeholder: "この投稿にどの様な問題があるか教えてください。報告の後にウェブサイトからの返信はありません。"
+    setting:
+      name: "名前"
+      name_rule: "※newsb!では本名を使うことを推奨しています。"
+      credential: "役職・肩書き"
+      about: "自己紹介（最大1000文字）"
+      language: "言語"
+      location: "国・地域"
+      credential_error: "100文字までしか投稿できません。現在の文字数："
+      about_error: "1000文字までしか投稿できません。現在の文字数："
+      name_error: "名前が空白です。"

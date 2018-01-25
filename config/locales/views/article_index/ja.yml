@@ -1,4 +1,11 @@
 ja:
   article_index:
     title:
+      comment: "コメントON"
+      comment_off: "コメントOFF"
       week: "注目の記事 - 週間"
+      your_posts: "あなたの投稿"
+      followers_posts: "フォロワーの投稿"
+      best_posts: "人気の投稿"
+      new_posts: "新着の投稿"
+      shared_posts: "共有のみ"

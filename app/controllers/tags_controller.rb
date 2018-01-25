@@ -6,6 +6,7 @@ class TagsController < ApplicationController
     before_action :set_new_users
     
     def show
+        
     end
     
     def index

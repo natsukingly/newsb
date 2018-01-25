@@ -4,23 +4,23 @@
 			.user_info_block
 				=current_user.name
 			.profile_option_block
-				=link_to "Profile / My Posts", user_path(current_user), class: "profile_option ddm_btn" 
-				=link_to "Setting", edit_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
-				=link_to "SNS", edit_sns_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
+				=link_to t('dropdown.profile_option.profile'), user_path(current_user), class: "profile_option ddm_btn" 
+				=link_to t('dropdown.profile_option.setting'), edit_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
+				=link_to t('dropdown.profile_option.social_media'), edit_sns_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
 			-if current_user.admin == true
 				.admin_option_block
-					=link_to "Admin drafts", drafts_admins_path
+					=link_to "Admin_drafts", drafts_admins_path
 					=link_to "Reports", reports_admins_path
 			.footer
-				=link_to "About", about_page_path, class: "sub_profile_option", target: "_blank"
+				=link_to t('dropdown.profile_option.about'), about_page_path, class: "sub_profile_option", target: "_blank"
 				·
-				=link_to "Contact", contact_page_path, class: "sub_profile_option", target: "_blank" 
+				=link_to t('dropdown.profile_option.contact'), contact_page_path, class: "sub_profile_option", target: "_blank" 
 				·
-				=link_to "Terms", terms_page_path, class: "sub_profile_option", target: "_blank"
+				=link_to t('dropdown.profile_option.terms'), terms_page_path, class: "sub_profile_option", target: "_blank"
 				·
-				=link_to "Privacy", privacy_page_path, class: "sub_profile_option", target: "_blank" 
+				=link_to t('dropdown.profile_option.privacy'), privacy_page_path, class: "sub_profile_option", target: "_blank" 
 				·
-				=link_to "Logout", destroy_user_session_path, class: "sub_profile_option" 
+				=link_to t('dropdown.profile_option.logout'), destroy_user_session_path, class: "sub_profile_option" 
 
 				%br
 				%span.copy_right_statement

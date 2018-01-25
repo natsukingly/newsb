@@ -256,11 +256,26 @@ form{
 		}
 	}
 }
+.textarea_error_message{
+	display: none;
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 12px;
+    background-color: rgba(indianred, .8);
+    color: white;
+}
+
+@media(max-width: 768px){
+	.textarea_error_message{
+		font-size: 14px;
+	}
+}
 
 
 
-
-#sns_post_form_menu{
+.sns_post_form_menu{
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
@@ -587,7 +602,7 @@ form{
 		justify-content: center;
 	    border-radius: 50%;
 	    background-color: #eee;
-	    margin-right: 12px;
+	    margin-right: 8px;
 		svg{
 			width: 20px;
 			height: 20px;
@@ -659,7 +674,7 @@ form{
 	   border-radius: 0;
 	   border-bottom: 1px solid #eee;
 	   .load_url_btn{
-	   	margin-right: 0;
+	   	margin-right: 8px;
 	   }
 		&.on_modal, &.for_mobile{
 			display: block;

@@ -7,13 +7,13 @@
 	-if user.social_profile(:facebook)
 		-if user.facebook_post == true
 			.sns_link
-				=link_to "SHARING", unshare_facebook_snss_path(user.id), class: "sns_btn unshare", method: :post, remote: true
+				=link_to t('action_cap.unshare'), unshare_facebook_snss_path(user.id), class: "sns_btn unshare", method: :post, remote: true
 		-else
 			.sns_link
-				=link_to "SHARE", share_facebook_snss_path(user.id), class: "sns_btn share", method: :post, remote: true
+				=link_to t('action_cap.share'), share_facebook_snss_path(user.id), class: "sns_btn share", method: :post, remote: true
 	-else
 		.sns_link
-			=link_to "CONNECT", user_facebook_omniauth_authorize_path, class: "sns_btn connect"
+			=link_to t('action_cap.connect'), user_facebook_omniauth_authorize_path, class: "sns_btn connect"
 
 			
 		
@@ -27,13 +27,13 @@
 	-if user.social_profile(:twitter)
 		-if user.twitter_post == true
 			.sns_link
-				=link_to "SHARING", unshare_twitter_snss_path(user.id), class: "sns_btn unshare", method: :post, remote: true
+				=link_to t('action_cap.unshare'), unshare_twitter_snss_path(user.id), class: "sns_btn unshare", method: :post, remote: true
 		-else
 			.sns_link
-				=link_to "SHARE", share_twitter_snss_path(user.id), class: "sns_btn share", method: :post, remote: true
+				=link_to t('action_cap.share'), share_twitter_snss_path(user.id), class: "sns_btn share", method: :post, remote: true
 	-else
 		.sns_link
-			=link_to "CONNECT", user_twitter_omniauth_authorize_path, class: "sns_btn connect"
+			=link_to t('action_cap.connect'), user_twitter_omniauth_authorize_path, class: "sns_btn connect"
 		
 // .sns_block.linkedin
 // 	.sns_title

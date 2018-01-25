@@ -11,9 +11,14 @@
 	Your Message:
 	%br
 	=@message
+	%br
+	-unless @image_url.nil?
+		Image URL: 
+		%br
+		=@image_url
 
 %p.email_block{style: "margin-bottom: 20px;"}
-	\-NEWSB![Support Team]
+	\-newsb![Support Team]
 	
 
 

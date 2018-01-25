@@ -5,37 +5,46 @@
 
 			%label{for: "file-upload", class: "custom-file-upload"}
 				%i.fa.fa-cloud-upload 
-				Upload
+				=t('action_cap.upload')
 			%input{id: "file-upload", type: "file", name: "user[image]", accept: "image/*"}
 	
 	.setting_block.name{data: {original_name: "#{current_user.name}"}}
-
 		.current.content 
-			.title
-				NAME
+			.title.for_name
+				=t('form.setting.name')
 			%span.user_name_large
 				=current_user.name
 			.edit_content_btn
-				Edit
+				=t('action_cap.edit')
 		.new.content
 			=text_field_tag 'user[name]', current_user.name, class: "edit_name_form form-control"
 			%h3
-				*On NEWSB, using your actual name is recommended.
+				=t('form.setting.name_rule')
+			.error_message		
+				=t('form.setting.name_error')
 
 	.setting_block.credential{data: {original_credential: "#{current_user.credential}"}}
-		.title
-			CREDENTIAL
-		=text_field_tag 'user[credential]', current_user.credential, placeholder: "ex) company, job title, school", class: "content"
+		.title_block
+			.title
+				=t('form.setting.credential')
+			.error_message
+				=t('form.setting.credential_error') 
+				%span.letter_count
+		=text_field_tag 'user[credential]', current_user.credential, placeholder: "ex) company, job title, school", class: "content credential_form"
 	
 	.setting_block.about{data: {original_about: "#{current_user.about}"}}
-		.title
-			ABOUT
-		=text_area_tag 'user[about]', current_user.about, class: "content", style: "min-height: 120px;"
+		.title_block
+			.title
+				=t('form.setting.about')
+			.error_message
+				=t('form.setting.about_error') 
+				%span.letter_count	
+		=text_area_tag 'user[about]', current_user.about, class: "content about_form", style: "resize: none"
 	
 	.submit_btn_group
-		= submit_tag "SAVE", class: "form_btn btn", id: "setting_submit_btn"
+		= submit_tag t('action_cap.save'), class: "form_btn btn setting_submit_btn"
 		#reset_setting_btn
-			RESET
+			=t('action_cap.reset')
 	
 :javascript
 	$(function() {

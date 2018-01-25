@@ -3,7 +3,7 @@
 		=render 'svg/close_icon'
 	%h2.modal_content_title
 		%p.give_me_short_ellipsis
-			COMMENT
+			=t('modal.title.comment')
 	.comment_form.comment_new_form.textarea_form
 		.body 
 			.form_main 
@@ -11,10 +11,18 @@
 					-if current_user
 						.field.textarea_block.comment_textarea
 							= text_area_tag 'comment[content]', "", placeholder: "#{t ('form.comment.placeholder')}"
+							
+							%p.textarea_error_message.too_long
+								=t('form.comment_errors.too_long') 
+								%span.letter_count
+							%p.textarea_error_message.blank
+								=t('form.comment_errors.blank')  
+		
+		
 							= hidden_field_tag 'comment[post_id]', '', class: "target_post_id"
 
 					%hr.modal_content_divider
 						.textarea_submit_menu
-							= submit_tag "#{t ('form.comment.submit')}", class: "submit_btn"
+							= submit_tag "#{t ('form.comment.submit')}", class: "submit_btn comment_submit_btn"
 							.cancel_modal_btn.submit_btn
 								=t ('form.comment.cancel')

@@ -1,7 +1,7 @@
 $('.scroll_btn.header_notifications').before('#{ escape_javascript(render @loaded_notifications)}');
-$('.scroll_btn.header_notifications').html('LOAD MORE');
+$('.scroll_btn.header_notifications').html("#{t('scroll.load')}");
 $('.scroll_btn.header_notifications').removeClass('loading');
 -if @loaded_notifications.empty? || @loaded_notifications.count < 30
-    $('.scroll_btn.header_notifications').html('NO MORE NOTIFICATIONS');
+    $('.scroll_btn.header_notifications').html("#{t('scroll.no_more')}");
     $('.scroll_btn.header_notifications').addClass('stop_loading');
     

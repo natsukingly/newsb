@@ -294,7 +294,7 @@
 			font-size: 13px;
 		    width: auto;
 		    margin-left: 30px;
-		    border-left: 2px solid rgba($newsb_grey, .5);
+		    border-left: 2px solid $newsb_grey;
 		    margin-top: 5px;
 		    .body{
 		    	padding: 0 0 20px 12px;
@@ -324,44 +324,6 @@
 	}
 }
 
-// .sub_info{
-// 	display: flex;
-// 	justify-content: space-between;
-// 	align-items: center;
-// 	.posts_count{
-// 		display: none;
-// 		flex: 1;
-// 		height: 30px;
-// 	}
-// 	.best_post_btn{
-// 		padding: 0 12px;
-// 		display: inline-block;
-// 		border: 1px solid #aaa;
-// 		color: #696969;
-// 		line-height: 25px;
-// 		display: none;
-// 		span{
-// 			display: block;
-// 		}
-// 		i.open_icon, svg{
-// 			display: none;
-// 		}
-// 		svg{
-// 			width: 12px;
-// 			height: 12px;
-// 		}
-// 		&:hover{
-// 			color: $newsb_grey;
-// 			border: 1px solid $newsb_grey;
-// 		}
-// 	}
-// 	.best_post_btn.open{
-// 		display: block;
-// 		color: $newsb_grey;
-// 		border: none;
-// 	}
-// }
-
 .article:hover{
 	.sub_info{
 		.best_post_btn{
@@ -378,7 +340,7 @@
 	justify-content: center;
 	background-color: rgba(0,0,0,0);
 	top: 21px;
-	left: 21px;
+	left: 20px;
 	border-radius: 50%;
 	font-size: 12px;
 	color: grey;
@@ -396,43 +358,6 @@
 		}
 	}
 }
-
-
-@media(max-width: 768px){
-	.article{
-
-		.sub_info{
-			.best_post_btn{
-			    padding: 12px;
-			    display: block;
-			    border-radius: 50%;
-			    border: 1px solid #eee;
-			    width: 40px;
-			    height: 40px;
-			    text-align: center;
-				span{
-					display: none;
-				}
-				i, svg{
-					display: block;
-				}
-			}
-		}
-		&:hover{
-			.sub_info{
-				.best_post_btn{
-				  padding: 12px;
-				}
-			}
-		}
-	}
-	.direct_article_link{
-		left: 13px;
-	}
-}
-
-
-
 
 .mobile_posts_count, .posts_count{
 	display: flex;
@@ -519,6 +444,7 @@
 				.best_post{
 					flex: 1;
 					padding: 0;
+					
 					color: white;
 					display: flex;
 					flex-direction: column;
@@ -606,6 +532,7 @@ span.overlay{
 			.image{
 				.overlay{
 					.best_post{
+						
 						&.best_post_second{
 							display: none;
 						}
@@ -636,14 +563,28 @@ span.overlay{
 
 @media(max-width: 768px){
 	.article{
+		&:hover{
+			.sub_info{
+				.best_post_btn{
+				  padding: 12px;
+				}
+			}
+		}
+		.direct_article_link{
+			// padding: 32px;
+			// left: 8px;
+		}
+
+
 		.article_wrapper{
-			padding: 20px 5px 20px 12px;
+			padding: 16px 5px;
 			.article_block{
 				.image{
-
+					// width: 80px;
+					// height: 80px;
 				}
 				.info{
-					margin-left: 12px;
+					margin-left: 5px;
 					.title h2{
 						font-size: 14px;
 					}
@@ -652,8 +593,9 @@ span.overlay{
 				}
 			}
 			.best_post{
+				// margin-left: 40px;
 			    .body{
-			    	padding: 0 0 12px 12px;
+			    	padding: 0 0 12px 8px;
 			    }
 			}
 		}

@@ -23,14 +23,15 @@
 				=render @users_search_results
 				-if @users_search_results.count < 30
 					.scroll_btn.stop_loading
-						NO MORE USERS
+						=t('scroll.no_more')
 				-else
 					.scroll_btn.searched_users
-						LOAD MORE	
+						=t('scroll.load')	
 				
 	.sub_function_sidebar
-		%h2
-			=t('sidebar.title.new_users')
+		.title_block
+			%h2
+				=t('sidebar.title.new_users')
 		.new_users_section
 			-if @new_users.empty?
 				.new_users_not_found

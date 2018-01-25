@@ -5,12 +5,21 @@ ja:
       recent_articles: "新着記事一覧"
       recommended_articles: "関連記事一覧"
       who_to_follow: "注目のユーザー"
-    
+      profile: "プロフィール"
     stats:
       title: "統計"
-      posts: "投稿"
-      follower: "フォロワー"
-      following: "フォロー中"
+      posts: 
+        zero: "投稿：0"
+        one: "投稿：1"
+        other: "投稿：%{count}"
+      follower:
+        zero: "フォロワー：0"
+        one: "フォロワー：1"
+        other: "フォロワー：%{count}"
+      following: 
+        zero: "フォロー中：0"
+        one: "フォロー中：1"
+        other: "フォロー中：%{count}"
     likes:
       title: "いいね！"
       week: "週間"
@@ -18,3 +27,10 @@ ja:
     favorite_tags:
       title: "お気に入り"
       link: "注目のタグ"
+    no_account: "未登録ユーザー"
+    setting:
+      title: "設定"
+      profile: "プロフィール"
+      sns: "SNSの接続"
+      locale: "地域・言語"
+      

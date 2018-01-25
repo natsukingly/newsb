@@ -1,32 +1,32 @@
 =form_tag save_setting_user_path(current_user.id), multipart: true, id: "user_setting_form" do
-	.setting_block.language
+	.setting_block.language{data: {original_language: "#{current_user.language_id}"}}
 		.title
-			LANGUAGE
+			=t('form.setting.language')
 		.current.content 
 			%div
 				=current_user.language.name
 				.edit_content_btn
-					edit
+					=t('action_cap.edit')
 		.new.content
 			=select_tag "user[language_id]", options_from_collection_for_select(Language.all, "id", "name", @language.id.to_i), prompt: "please select", class: "content form-control country_selection"   
 	
-	.setting_block.location
+	.setting_block.location{data: {original_country: "#{current_user.country_id}"}}
 		.title
-			LOCATION
+			=t('form.setting.location')
 		.current.content 
 			%div
 				=current_user.country.name
 				.edit_content_btn
-					edit
+					=t('action_cap.edit')
 		.new.content
 			=select_tag "user[country_id]", options_from_collection_for_select(Country.all, "id", "name", @country.id.to_i), class: "content form-control country_selection"  
-			%h3
-				*This will affect the index of articles and posts you will see on NEWSB.
+
+		
 		
 	.submit_btn_group
-		= submit_tag "SAVE", class: "form_btn btn", id: "setting_submit_btn"
+		= submit_tag t('action_cap.save'), class: "form_btn btn setting_submit_btn"
 		#reset_setting_btn
-			RESET
+			=t('action_cap.reset')
 	
 :javascript
 	$(function() {

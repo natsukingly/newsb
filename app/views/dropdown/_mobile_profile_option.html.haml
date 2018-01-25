@@ -17,22 +17,20 @@
 						=current_user.credential
 					%p.stats
 						%span
-							#{current_user.liked_count} likes
+							=t('like', count: current_user.liked_count)
 						%span
-							#{current_user.followers.count} followers
+							=t('follower', count: current_user.followers.count)
 						%span
-							#{current_user.following.count} following
+							=t('following', count: current_user.following.count)
 
-				
-				
 			.profile_option_block
-				=link_to "Profile / My Posts", current_user, class: "profile_option" 
-				=link_to "Setting", edit_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
-				=link_to "SNS", edit_sns_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
-				=link_to "About Us", about_page_path, class: "profile_option", target: "_blank"
-				=link_to "Contact", contact_page_path, class: "profile_option", target: "_blank"
-				=link_to "Terms", terms_page_path, class: "profile_option", target: "_blank"
-				=link_to "Logout", destroy_user_session_path, class: "profile_option" 
+				=link_to t('dropdown.profile_option.profile'), current_user, class: "profile_option" 
+				=link_to t('dropdown.profile_option.setting'), edit_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
+				=link_to t('dropdown.profile_option.social_media'), edit_sns_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
+				=link_to t('dropdown.profile_option.about'), about_page_path, class: "profile_option", target: "_blank"
+				=link_to t('dropdown.profile_option.contact'), contact_page_path, class: "profile_option", target: "_blank"
+				=link_to t('dropdown.profile_option.terms'), terms_page_path, class: "profile_option", target: "_blank"
+				=link_to t('dropdown.profile_option.logout'), destroy_user_session_path, class: "profile_option" 
 			.copy_right_statement
 				&copy; 2017 NEWSB
 			

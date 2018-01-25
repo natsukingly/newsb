@@ -1,5 +1,6 @@
 ja:
   search:
+    placeholder: "検索する"
     nav:
       item: 
         articles: "記事"
@@ -7,5 +8,6 @@ ja:
         users: "ユーザー"
         tags: "タグ"
     no_result: "検索結果：０件"
+    result: "検索結果:"
 
         

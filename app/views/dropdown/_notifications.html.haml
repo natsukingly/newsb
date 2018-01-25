@@ -3,7 +3,7 @@
 		.notification_ddm_wrapper
 			.title
 				%h2
-					Notifications
+					=t('dropdown.notifications')
 			
 			.notifications.notification_list_for_ddm.header_notifications
 				-if current_user.notifications.empty?
@@ -13,10 +13,10 @@
 					=render partial: @notifications
 					-if @notifications.count < 30
 						.scroll_btn.stop_loading
-							NO MORE NOTIFICATIONS	
+							=t('scroll.no_more')	
 					-else
 						.scroll_btn.header_notifications
-							LOAD MORE	
+							=t('scroll.load')	
 
 :javascript
 	$('.scroll_btn.header_notifications').click(function(e){

@@ -13,12 +13,12 @@
 }
 
 a.follow_btn{
-    border: 1px solid #6495ED;
-    color: #6495ED;
+    border: 1px solid grey;
+    color: grey;
     font-size: 14px;
+    opacity: .9;
     &:hover{
-        border: 1px solid $newsb_grey;
-        color: $newsb_grey;
+        opacity: 1;
     }
 }
 

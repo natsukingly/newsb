@@ -1,0 +1,26 @@
+.mobile_top_btn_block
+	=link_to root_path, class: "top_btn_mobile" do
+		%span
+			n!
+.nav_container
+	=link_to " ", root_path, class: "selected_topic active", style: "pointer-events: none; display: none;"
+	=link_to "Top", root_path, class: "top_btn top_btn"
+	-if current_user
+		=link_to all_posts_categories_path, class: "feed_btn" do
+			=t('categories.feed')
+			%span.feed_notifications_count
+				(#{current_user.feed_notifications.where(check: false).count})
+
+	
+	=link_to t('categories.business'), categorized_articles_path("Business"), class: "Business_nav_btn"
+	=link_to t('categories.politics'), categorized_articles_path("Politics"), class: "Politics_nav_btn"
+	=link_to t('categories.technology'), categorized_articles_path("Tech"), class: "Technology_nav_btn"
+	=link_to t('categories.economy'), categorized_articles_path("Economy"), class: "Economy_nav_btn"
+	=link_to t('categories.lifestyle'), categorized_articles_path("Lifestyle"), class: "Lifestyle_nav_btn"
+	=link_to t('categories.sports'), categorized_articles_path("Sports"), class: "Sports_nav_btn"
+	=link_to t('categories.startup'), categorized_articles_path("Startup"), class: "Startup_nav_btn"
+	=link_to t('categories.entertainment'), categorized_articles_path("Entertainment"), class: "Entertainment_nav_btn"
+	=link_to t('categories.food'), categorized_articles_path("Food"), class: "Food_nav_btn"
+	=link_to t('categories.health'), categorized_articles_path("Health"), class: "Health_nav_btn"
+	=link_to t('categories.movies'), categorized_articles_path("Movies・Music"), class: "Movies・Music_nav_btn"
+	=link_to t('categories.funny'), categorized_articles_path("Funny"), class: "Funny_nav_btn"

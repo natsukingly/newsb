@@ -1,5 +1,20 @@
 -content_for(:sidebar) do
-    "Don't show"
+	"Don't show"
+
+-content_for(:header) do
+	"Don't show"
+
+-content_for(:general) do
+	"Do show"
+
+:css
+	body{ 
+		background-color: white;
+		padding: 0;
+	}
+	#mobile_footer{
+		display: none;
+	}
 
 %h1 Home#about
 %p Find me in app/views/home/about.html.haml

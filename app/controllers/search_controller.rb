@@ -29,6 +29,6 @@ class SearchController < ApplicationController
         end
         
         def set_current_topic
-            @current_topic = 'Search Results:' + " " + @keyword 
+            @current_topic = I18n.t('search.result') + " " + @keyword 
         end
 end

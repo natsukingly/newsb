@@ -61,6 +61,17 @@
 		height: 100px;
 	}
 }
+.user_image_xl_circle{
+	@include flex_center;
+    background-color: darkorange;
+    border-radius: 50%;
+    margin: 20px;	
+	img, svg{
+		margin: 5px;
+		width: 100px;
+		height: 100px;
+	}
+}
 
 
 @media(max-width: 768px){

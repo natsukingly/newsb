@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-	before_action :set_category
+	before_action :set_category, only: [:articles]
 	before_action :set_new_users, only: [:all_posts, :articles]
 	before_action :set_current_topic_for_all, only: [:top]
 	before_action :set_current_topic_for_all_posts, only: [:all_posts]
@@ -70,8 +70,8 @@ class CategoriesController < ApplicationController
 		end
 		
 		def set_category
-			if params[:id]
-				@category = Category.find(params[:id])
+			if params[:name]
+				@category = Category.find_by(name: params[:name])
 			end
 		end
 		

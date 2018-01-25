@@ -20,25 +20,31 @@
 #     end
 # end
 
-Category.find_or_create_by(name: "Business")
-Category.find_or_create_by(name: "Tech")
-Category.find_or_create_by(name: "Politics")
-Category.find_or_create_by(name: "Economy")
-Category.find_or_create_by(name: "Market")
-Category.find_or_create_by(name: "Startup")
-Category.find_or_create_by(name: "Sports")
-Category.find_or_create_by(name: "Education")
-Category.find_or_create_by(name: "Lifestyle")
+Category.find_or_create_by(name: "Business", ja_name: "ビジネス")
+Category.find_or_create_by(name: "Tech", ja_name: "テクノロジー")
+Category.find_or_create_by(name: "Politics", ja_name: "政治")
+Category.find_or_create_by(name: "Economy", ja_name: "経済")
+Category.find_or_create_by(name: "Entertainment", ja_name: "エンタメ")
+Category.find_or_create_by(name: "Sports", ja_name: "スポーツ")
+Category.find_or_create_by(name: "Funny", ja_name: "おもしろ")
+Category.find_or_create_by(name: "Startup", ja_name: "スタートアップ")
+Category.find_or_create_by(name: "Lifestyle", ja_name: "暮らし")
+Category.find_or_create_by(name: "Food", ja_name: "グルメ")
+Category.find_or_create_by(name: "Movies・Music", ja_name: "映画・音楽")
+Category.find_or_create_by(name: "Health", ja_name: "健康")
 
 
-@available_languages = { en: "English", ja: "Japanese"}
+# @available_languages = { en: "English", ja: "Japanese"}
 
-@available_languages.each do |code, name|
-    language = Language.find_by(code: code)
-    if language.nil?
-        Language.create(code: code, name: name)
-    end
-end
+# @available_languages.each do |code, name|
+#     language = Language.find_by(code: code)
+#     if language.nil?
+#         Language.create(code: code, name: name)
+#     end
+# end
+
+Language.find_or_create_by(name: "English", code: "en")
+Language.find_or_create_by(name: "Japanese", code: "ja")
 
 
 Country.find_or_create_by(name: "United States", language_id: Language.find_by(code: "en").id)

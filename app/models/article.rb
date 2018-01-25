@@ -5,7 +5,7 @@ class Article < ApplicationRecord
     has_many :likes
     
     belongs_to :country
-    belongs_to :category
+    belongs_to :category, dependent: :destroy
     
     scope :published_today, -> { where("published_time >= ?", Time.zone.now.beginning_of_day) }
 

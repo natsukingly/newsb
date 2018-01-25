@@ -43,7 +43,7 @@ body{
 }
 
 
-a.disabled{
+a.disabled, a.selected{
 	pointer-events: none;
   	cursor: default;
 }
@@ -514,11 +514,11 @@ span.input-group-btn{
 
 
 
-.nav_container{
-	max-width: 800px;
-	margin: 0 auto;
-	height: 100%;
-}
+// .nav_container{
+// 	max-width: 800px;
+// 	margin: 0 auto;
+// 	height: 100%;
+// }
 
 
 

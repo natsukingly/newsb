@@ -9,7 +9,8 @@ input[type="file"] {
     font-weight: normal;
 }
 
-#user_profile_setting_wrapper, #sns_setting_wrapper{
+#user_profile_setting_wrapper, .sns_setting_wrapper{
+    min-width: 600px;
     background-color: white;
     padding: 30px;
     min-height: 400px;
@@ -18,18 +19,16 @@ input[type="file"] {
 @media(max-width: 768px){
     #user_profile_setting_wrapper{
         padding: 0;
+        min-width: auto;
         form{
             padding: 12px 5px;
         }
     }
-    #sns_setting_wrapper{
+    .sns_setting_wrapper{
         padding: 12px;
     }
 }
 
-.error_message{
-    color: red;
-}
 
 .forgot_password_block{
     display: flex;
@@ -48,7 +47,14 @@ input[type="file"] {
 
 .setting_block{
     display: flex;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    .error_message{
+        color: indianred;
+        display: none;
+    }
+    textarea.about_form{
+        height: 200px;
+    }
     &.about, &.credential{
         flex-direction: column;
     }
@@ -79,16 +85,26 @@ input[type="file"] {
         input[type="file"]{
             display: none;
         }
+
     }
     .user_name_large{
         font-size: 20px;
     }
+    .title_block{
+        display: flex;
+        align-items: center;
+    }
     .title{
-        width: 125px;
         font-size: 14px;
         color: #696969;
         padding: 8px 0;
-        margin-right: 30px;
+        margin-right: 8px;
+        &.for_name{
+            padding: 8px 0 0;
+        }
+        &.for_language, &.for_locale{
+            margin-right: 50px;
+        }
     }
     .content{
         flex: 2;
@@ -115,13 +131,17 @@ input[type="file"] {
     .new.content.to_show{
         display: block;
     }
+    
 }
 
 @media(max-width: 768px){
     .setting_block{
         margin-bottom: 12px;
+        .title_block{
+            flex-direction: column;
+            align-items: flex-start;
+        }
         .title{
-            width: 80px;
         }
     }
 }
@@ -132,7 +152,7 @@ input[type="file"] {
 .submit_btn_group{
     display: flex;
 }
-#setting_submit_btn{
+.setting_submit_btn{
     width: 100px;
     background-color: white;
     color: $newsb_grey;
@@ -146,10 +166,9 @@ input[type="file"] {
 }
 #reset_setting_btn, #skip_setting_btn a{
     display: inline-block;
-    width: 150px;
     color: grey;
     cursor: pointer;
-    padding: 8px;
+    padding: 8px 20px;
     text-align: center;
     &:hover{
         color: $newsb_grey;

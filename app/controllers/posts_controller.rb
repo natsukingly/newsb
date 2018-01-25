@@ -77,14 +77,13 @@ class PostsController < ApplicationController
 	
 	def create
 		create_article_and_post
-		redirect_to @article
 	end
 	
 	def create_from_article
 		@article = Article.find(params[:post][:article_id].to_i)
 		shared_article = current_user.posts.where(article_id: @article.id, content: "").any?
 		if shared_article == true && params[:post][:content] == ""
-			flash[:notice] = "Your have already shared this article."
+			flash[:alert] = t('flash.post.already_shared')
 			redirect_to article_path(@article.id)
 		else
 			@post = @article.posts.build(user_id: current_user.id,
@@ -92,10 +91,10 @@ class PostsController < ApplicationController
 							content: params[:post][:content],
 							category_id: @article.category_id)	
 			if @post.save
-				flash[:notice] = "You have successfully published your post."
+				flash[:notice] = t('flash.post.create_success')
 				redirect_to article_path(@article.id)
 			else 
-				flash[:notice] = "Error. We couldn't process your post."
+				flash[:alert] = t('flash.post.create_fail')
 				redirect_to article_path(@article.id)
 			end
 		end		
@@ -103,7 +102,7 @@ class PostsController < ApplicationController
 	
 	def create_from_modal
 		create_article_and_post
-		flash[:notice] = "You have successfully published your post."
+		flash[:notice] = t('flash.post.create_success')
 		redirect_to article_path(@post.article.id)
 		
 	end
@@ -111,7 +110,10 @@ class PostsController < ApplicationController
 	def update
 		@post.content = params[:post][:content] 
 		if @post.save
-			flash[:notice] = "Your post has been successfully updated"
+			flash[:notice] = t('flash.post.update_success')
+			redirect_to article_path(@post.article_id)
+		else
+			flash[:alert] = t('flash.post.update_fail')
 			redirect_to article_path(@post.article_id)
 		end
 		
@@ -127,17 +129,25 @@ class PostsController < ApplicationController
 
 	def destroy
 		article_id = @post.article_id
-		@post.destroy
-		flash[:notice] = "Your post has been successfully deleted."
-		redirect_to article_path(article_id)
+		if @post.destroy
+			flash[:notice] = t('flash.post.delete_success')
+			redirect_to article_path(article_id)
+		else 
+			flash[:alert] = t('flash.post.delete_fail')
+			redirect_to article_path(article_id)
+		end
 	end
 
-	def create_report
-		@report = @post.reports.build(	user_id: current_user.id, 
-										content: params[:report][:content],
-										country_id: params[:report][:country_id])
-		@report.save
-	end
+	# def create_report
+	# 	@report = @post.reports.build(	user_id: current_user.id, 
+	# 									content: params[:report][:content],
+	# 									country_id: params[:report][:country_id])
+	# 	if @report.save
+	# 		flash[:notice] = t('flash.post.report_success')
+	# 	else
+	# 		flash[:alert] = t('flash.post.report_fail')
+	# 	end
+	# end
 
 
 
@@ -267,43 +277,47 @@ class PostsController < ApplicationController
 	
 			shared_article = current_user.posts.where(article_id: @article.id, content: "").any?
 			if shared_article == true && params[:post][:content] == ""
-				flash[:notice] = "Your have already shared this article."
+				flash[:notice] = t('flash.post.already_shared')
 			else
 				@post = current_user.posts.build(article_id: @article.id)
 				@post.category_id = params[:post][:category_id].to_i
 				@post.country_id = @country.id
 				@post.content = params[:post][:content]
-				@post.save
-				decide_category
-				flash[:notice] = "You have successfully published your post."
+				if @post.save
+					decide_category
+					flash[:notice] = t('flash.post.create_success')
+					redirect_to article_path(@post.article_id)
+				else
+					flash[:notice] = t('flash.post.create_fail')
+				end
 			end
 		end
 
-		def save_draft
-			@article = Article.where(country_id: @country.id).find_by(title: params[:article][:title]) || Article.where(country_id: @country.id).find_by(url: params[:article][:url])
+		# def save_draft
+		# 	@article = Article.where(country_id: @country.id).find_by(title: params[:article][:title]) || Article.where(country_id: @country.id).find_by(url: params[:article][:url])
 			
-			if @article == nil
-				@article = Article.new(article_params)
-				if params[:article][:image].to_s == "no_image"
-					@article.image = "no_image.jpeg"
-				else
-					@article.remote_image_url = params[:article][:image].gsub('http:','https:')
-				end
-				@article.category_id = params[:post][:category_id].to_i
-				@article.country_id = @country.id
-				@article.save
-			end
+		# 	if @article == nil
+		# 		@article = Article.new(article_params)
+		# 		if params[:article][:image].to_s == "no_image"
+		# 			@article.image = "no_image.jpeg"
+		# 		else
+		# 			@article.remote_image_url = params[:article][:image].gsub('http:','https:')
+		# 		end
+		# 		@article.category_id = params[:post][:category_id].to_i
+		# 		@article.country_id = @country.id
+		# 		@article.save
+		# 	end
 			
-			#save post
-			@post_draft = current_user.post_drafts.build(article_id: @article.id)
-			@post_draft.category_id = params[:post][:category_id].to_i
-			@post_draft.country_id = @country.id
-			@post_draft.content = params[:post][:content]
-			@post_draft.fake_news_report = params[:post][:fake_news_report] || false
-			@post_draft.save
+		# 	#save post
+		# 	@post_draft = current_user.post_drafts.build(article_id: @article.id)
+		# 	@post_draft.category_id = params[:post][:category_id].to_i
+		# 	@post_draft.country_id = @country.id
+		# 	@post_draft.content = params[:post][:content]
+		# 	@post_draft.fake_news_report = params[:post][:fake_news_report] || false
+		# 	@post_draft.save
 			
-			decide_category
-		end
+		# 	decide_category
+		# end
 		
 		def set_side_articles
 			@side_articles = Article.where(category_id: @post.article.category_id, country_id: @post.country_id).where.not(id: @post.article.id).order(likes_count: :desc).limit(5)

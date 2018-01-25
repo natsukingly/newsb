@@ -1,0 +1,18 @@
+en:
+  nav:
+    title:
+      tags: "Tags"
+      trending_tags: "Trending"
+      favorite_tags: "Favorite"
+    login_signup: "Login/Signup"
+    topic:
+     tags: "Tags"
+     favorite: "Favorite"
+     profile: "Profile"
+     setting: "Setting"
+     social_media: "Social Media"
+     ranking: "Ranking"
+     search_result: "Search: "
+     
+     
+    

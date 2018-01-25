@@ -15,19 +15,20 @@
 								=render 'svg/speech_bubble_icon'
 								%span.post_number
 									#{article.posts_count}
-							= article.source
+							
 							- if article.published_time
 								%span.time
-									#{time_ago_in_words_short(article.published_time)}
+									#{time_ago_in_words(article.published_time)}・
+							= article.source
 
 				.article_menu
-					=link_to "READ MORE", article.url, class: "read_article_btn article_item", target: "_blank"
+					=link_to t('article.read_btn'), article.url, class: "read_article_btn article_item", target: "_blank"
 					-if current_user
 						.article_item.show_article_post_modal_btn
-							COMMENT
+							=t('article.comment')
 					-else
 						.article_item.login_signup_link
-							COMMENT
+							=t('article.comment')
 						
 
 	

@@ -18,18 +18,18 @@ class HomeController < ApplicationController
 	
 	def post_contact
 		
+		@contact = Contact.new(contact_params)
 		if current_user
-			@contact = current_user.contacts.build(contact_params)
-		else
-			@contact = Contact.new(contact_params)
+			@contact.user_id = current_user.id
 		end
 		@contact.image = params[:contact][:image]
 		
 		@name = params[:contact][:name]
 		@email = params[:contact][:email]
 		@content = params[:contact][:message]
+		
 		if @contact.save
-			ContactMailer.auto_reply(@name, @email, @content).deliver
+			ContactMailer.auto_reply(@name, @email, @content, @contact.image.url).deliver
 			redirect_to contact_message_received_page_path
 		else
 			flash[:notice] = "Error. We couldn't process your message."

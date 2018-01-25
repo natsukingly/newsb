@@ -92,6 +92,8 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.5.0)
+      devise (>= 3.4)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.2.1)
@@ -530,6 +532,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   counter_culture
   devise
+  devise-i18n
   dotenv-rails
   erb2haml
   exifjs-rails

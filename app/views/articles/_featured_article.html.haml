@@ -15,7 +15,7 @@
 								
 						-if article.published_time
 							%span.time
-								#{time_ago_in_words_short(article.published_time)}	
+								#{time_ago_in_words(article.published_time)}	
 								
 						%span.featured_article_source
 							=article.source
@@ -40,7 +40,7 @@
 									-else
 										= universal_truncate(best_post.content, 300)
 										
-					=link_to "SEE MORE", article, class: "show_article_link"
+					=link_to t('article.see_more'), article, class: "show_article_link"
 											
 											
 						

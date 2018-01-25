@@ -105,6 +105,9 @@
 			align-items: center;
 			border-bottom: 1px solid #eee;
 			padding: 0 8px;
+			line-height: 30px;
+			font-weight: 900;
+			font-size: 12px;
 			span{
 				margin-right: 12px;
 			}
@@ -152,7 +155,7 @@
 
 #locale_ddm{
 	top: 70px;
-	left: 105px;
+	left: 130px;
 	width: 200px;
 }
 #locale_ddm:before{
@@ -288,6 +291,10 @@
 		}
 	}
 }
+
+// .mobile_ddm_wrapper{
+// 	display: none;
+// }
 
 
 
@@ -654,7 +661,7 @@
 	.profile_option_wrapper{
 		padding: 0;
 		.user_info_block{
-			padding: 8px 12px;
+			padding: 8px 20px;
 			font-weight: 900;
 			border-bottom: 1px solid #eee;
 		}
@@ -687,6 +694,7 @@
 				display: inline;
 				padding: 0;
 				line-height: 20px;
+				font-size: 12px;
 				&:hover{
 					background-color: rgba(0,0,0,0);
 					border-bottom: 1px solid black;
@@ -719,14 +727,15 @@
 }
 
 .unlock_sns_ddm{
-	width: 200px;
+	width: 300px;
 	font-size: 16px;
     top: -240px;
-    right: -160px;
-    border-radius: 12px;
+    right: -260px;
 }
+
 .unlock_sns_ddm_wrapper{
 	padding: 20px;
+	color: #000;
 	.description{
 		a, .skip_btn{
 			border-radius: 3px;

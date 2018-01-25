@@ -6,14 +6,15 @@
 			= render partial: 'users/user_with_rank', collection: @users, as: :user
 			-if @users.count < 30
 				.scroll_btn.stop_loading
-					NO MORE USERS	
+					=t('scroll.no_more')	
 			-else
 				.scroll_btn.all_time_users
-					LOAD MORE	
+					=t('scroll.load')	
 					
 	.sub_function_sidebar
-		%h2
-			=t('sidebar.title.new_users')
+		.title_block
+			%h2
+				=t('sidebar.title.new_users')
 		.new_users_section
 			-if @new_users.empty?
 				.new_users_not_found

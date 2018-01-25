@@ -13,7 +13,7 @@
 								%i.fa.fa-share
 								shared
 								%span.time
-									#{time_ago_in_words_short(post.created_at)}
+									・#{time_ago_in_words(post.created_at)}
 						-if post.user != current_user
 							.user_option.follow_switch
 								=render "/shared/follow_form_icon.html.haml", user: post.user
@@ -31,10 +31,11 @@
 							BEST
 						%span.user_name 
 							=post.user.name
-					%p.user_credential.sm.grey
-						=post.user.credential
+					%p.user_credential
+						-unless post.user.credential.nil?
+							#{post.user.credential}・
 						%span.time
-							#{time_ago_in_words_short(post.created_at)}
+							#{time_ago_in_words(post.created_at)}
 				.user_option.follow_switch
 					=render "/shared/follow_form_icon.html.haml", user: post.user
 			

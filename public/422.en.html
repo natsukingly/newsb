@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>We're sorry, but something went wrong (500)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Supermercado+One" rel="stylesheet">
+
+  <style>
+  html, body{
+    height: 100%;
+  }
+  .newsb_error_page{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+  }
+  .error_page_block{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 200px;
+    max-width: 500px;
+    padding: 20px;
+  }
+  .logo{
+    font-family: 'Supermercado One', cursive;
+    font-size: 50px;
+    margin-bottom: 0;
+    color: orange;
+  }
+  .error_title{
+    margin: 0;
+    font-size: 20px;
+
+  }
+  .error_description{
+    color: #696969;
+  }
+  </style>
+</head>
+
+<body class="newsb_error_page">
+  <!-- This file lives in public/500.html -->
+  <div class="error_page_block">
+    <h1 class="logo">newsb!</h1>
+    <h2 class="error_title">Sorry, It's not you. It's us!</h2>
+    <p class="error_description">
+      We're experiencing an internal server problem. 
+      <br>
+      Please try again later.
+    </p>
+  </div>
+</body>
+</html>

@@ -1,8 +1,8 @@
 $('.scroll_btn.load_following').before('#{ escape_javascript(render @loaded_users)}');
-$('.scroll_btn.load_following').html('LOAD MORE');
+$('.scroll_btn.load_following').html("#{t('scroll.load')}");
 $('.scroll_btn.load_following').removeClass('loading');
 -if @loaded_users.empty? || @loaded_users.count < 30
-    $('.scroll_btn.load_following').html('NO MORE USERS');
+    $('.scroll_btn.load_following').html("#{t('scroll.no_more')}");
     $('.scroll_btn.load_following').addClass('stop_loading');
     
 loading = false;

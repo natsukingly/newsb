@@ -13,10 +13,10 @@ class ReportsController < ApplicationController
       post_id = @comment.post_id
     end
     if @report.save
-      flash[:notice] = "Thank you for submitting your report!"
+      flash[:notice] = t('flash.report.success')
       redirect_to post_path(post_id)
     else
-      flash[:notice] = "Error: we couldn't process your report."
+      flash[:notice] = t('flash.general_error')
       redirect_to post_path(post_id)
     end
   end

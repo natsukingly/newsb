@@ -1,0 +1,14 @@
+ja:
+  action:
+    edit_profile: "プロフィールを編集"
+    follow: "フォロー"
+    unfollow: "フォロー中"
+  action_cap:  
+    save: "保存"
+    reset: "リセット"
+    edit: "編集"
+    upload: "変更"
+    share: "シェアする"
+    connect: "接続する"
+    unshare: "シェアをやめる"
+  state:

@@ -2,7 +2,7 @@
 	.header_container
 		.left
 			= link_to root_path, class: "logo" do
-				NEWSB!
+				newsb!
 			#locale_link
 				.setting
 					=country_name_helper(@country.name)
@@ -12,7 +12,7 @@
 		.middle
 			.search_bar
 				=form_tag search_path(country: @country.name), method: "get" do
-					=text_field_tag :keyword, params[:keyword], placeholder: "Search"
+					=text_field_tag :keyword, params[:keyword], placeholder: t('search.placeholder')
 					=button_tag type: "submit" do
 						%i.fa.fa-search.form_icon
 	
@@ -36,7 +36,7 @@
 						+
 			-else
 				.login_signup_link.header_btn 
-					Login/Signup
+					=t('nav.login_signup')
 				#create_post_btn_circle.login_signup_link
 					%span
 						+
@@ -50,42 +50,38 @@
 
 
 #header_nav
-	
-	.mobile_top_btn_block
-		=link_to root_path, class: "top_btn_mobile" do
-			%span
-				N!
-	.nav_container
-		=link_to " ", root_path, class: "selected_topic active", style: "pointer-events: none; display: none;"
-		=link_to "Top", root_path, class: "top_btn top_btn"
-		-if current_user
-			=link_to all_posts_categories_path, class: "feed_btn" do
-				Feed
-				%span.feed_notifications_count
-					(#{current_user.feed_notifications.where(check: false).count})
+	.header_nav_wrapper
+		=render 'layouts/header_nav'
 
-					
-					
-		-@categories.each do |category|
-			=link_to category.name, articles_category_path(category.id), class: "#{category.name}_nav_btn"
-		%span.padding
-#flash_wrapper
-	.notice_bar.for_js
-		%span.notice_content
-		=render 'svg/close_icon'
-			
+
+		.notice_bar.for_js
+			.notification_bar_wrapper
+				%span.blank_box
+				%span.notice_content
+				=render 'svg/close_icon'
 		
-	-if flash[:notice]
-		.notice_bar
-			%span
-				= flash[:notice]
-			=render 'svg/close_icon'
-			
-	-if flash[:alert]
-		.notice_bar
-			%span
-				= flash[:alert]
-			=render 'svg/close_icon'
+		.alert_bar.for_js
+			.notification_bar_wrapper
+				%span.blank_box
+				%span.alert_content
+				=render 'svg/close_icon'
+				
+		-if flash[:notice]
+			.notice_bar
+				.notification_bar_wrapper
+					%span.blank_box
+					%span
+						= flash[:notice]
+					
+					=render 'svg/close_icon'
+				
+		-if flash[:alert]
+			.alert_bar
+				.notification_bar_wrapper
+					%span.blank_box
+					%span
+						= flash[:alert]
+					=render 'svg/close_icon'
 
 :css
 	a.Lifestyle_nav_btn{

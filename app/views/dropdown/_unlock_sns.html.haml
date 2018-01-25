@@ -1,20 +1,19 @@
 .unlock_sns_ddm.ddm
 	.unlock_sns_ddm_wrapper
 		.description
-			You haven't connected your SNS account yet. 
-			=link_to "SNS setting page", edit_sns_setting_user_path(current_user.id), class: "sns_setting_link"
+			=t('form.sns.setting_popup')
+			=link_to t('form.sns.setting_page'), edit_sns_setting_user_path(current_user.id), class: "sns_setting_link"
 			.skip_btn
-				Maybe, later
+				=t('form.sns.later')
 		
 :javascript
 	$(".sns_connect_btn.locked").click(function(e){
-		if($(event.target).is('.sns_setting_link')){
+		if($(e.target).is('.sns_setting_link')){
 			stopPropagation();
 		}
 	   $(this).find(".unlock_sns_ddm").show();
 	   return false;
 	});
-	
 	
 	
 	$('.sns_connect_btn .skip_btn').click(function (event) {

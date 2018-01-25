@@ -1,0 +1,18 @@
+en:
+  action:
+    edit_profile: "EDIT PROFILE"
+    follow: "Follow"
+    unfollow: "Following"
+  action_cap:  
+    save: "SAVE"
+    reset: "RESET"
+    edit: "EDIT"
+    upload: "UPLOAD"
+    share: "SHARE"
+    connect: "CONNECT"
+    unshare: "SHARING"
+  state_cap:
+
+    
+    
+    

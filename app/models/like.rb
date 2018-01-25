@@ -12,34 +12,34 @@ class Like < ApplicationRecord
   
 	include Rails.application.routes.url_helpers
 	def issue_notification
+		post_summary = self.likeable.content.truncate(30)
+		comment_summary = self.likeable.content.truncate(30)
+		case self.likeable.user.language.code
+		when "ja"
+			post_like_message = "<span> #{self.user.name} </span>#{ I18n.t('notification.post-like', locale: :ja)}<span> \"#{post_summary}\" </span>"
+			comment_like_message = "<span> #{self.user.name} </span>#{ I18n.t('notification.comment-like', locale: :ja)}<span> \"#{comment_summary}\" </span>"
+		when "en"
+			post_like_message = "<span> #{self.user.name} </span>#{ I18n.t('notification.post-like', locale: :en)}<span> \"#{post_summary}\" </span>"
+			comment_like_message = "<span> #{self.user.name} </span>#{ I18n.t('notification.comment-like', locale: :en)}<span> \"#{comment_summary}\" </span>"
+		end
 		
 		if self.likeable_type == "Post"
-			post_summary = self.likeable.content.truncate(30)
+			post_path = Rails.application.routes.url_helpers.post_path(country: self.likeable.country.name, id: self.likeable.id)
 			notification = Notification.new(user_id: self.likeable.user_id,
 											target_user_id: self.user_id,
-											path: post_path(id: self.likeable.id, country: self.user.country.name),
-											message: "<span> #{self.user.name} </span> liked your post.<span> \"#{post_summary}\" </span> ",
+											path: post_path,
+											message: post_like_message,
 											post_id: self.likeable.id,
 											notification_type: "Like-Post")
-		elsif self.likeable_type == "Comment"
-			comment_summary = self.likeable.content.truncate(30)
+		else
+			post_path = Rails.application.routes.url_helpers.post_path(country: self.likeable.post.country.name, id: self.likeable.post_id)
 			notification = Notification.new(user_id: self.likeable.user_id,
 											target_user_id: self.user_id,
-											path: post_path(id: self.likeable.id, country: self.user.country.name),
-											message: "<span> #{self.user.name} </span> liked your comment.<span> \"#{comment_summary}\" </span>",
+											path: post_path,
+											message: comment_like_message,
 											post_id: self.likeable.post_id,
 											comment_id: self.likeable.id,
 											notification_type: "Like-Comment")
-		else
-			reply_summary = self.likeable.content.truncate(30)
-			notification = Notification.new(user_id: self.likeable.user_id,
-											target_user_id: self.user_id,
-											path: post_path(id: self.likeable.id, country: self.user.country.name),
-											message: "<span> #{self.user.name} </span> liked your comment.<span> \"#{reply_summary}\" </span>",
-											post_id: self.likeable.comment.post_id,
-											comment_id: self.likeable.comment_id,
-											reply_id: self.likeable.id,
-											notification_type: "Like-Reply")
 		end
 		notification.save
 	end
@@ -51,16 +51,11 @@ class Like < ApplicationRecord
 												target_user_id: self.user_id,
 												post_id: self.likeable.id,
 												notification_type: "Like-Post")
-			elsif self.likeable_type == "Comment"
+			else
 				notification = Notification.find_by(user_id: self.likeable.user_id,
 												target_user_id: self.user_id,
 												comment_id: self.likeable.id,
 												notification_type: "Like-Comment")
-			elsif
-				notification = Notification.find_by(user_id: self.likeable.user_id,
-												target_user_id: self.user_id,
-												reply_id: self.likeable.id,
-												notification_type: "Like-Reply")
 			end
 			if notification
 				notification.destroy

@@ -18,14 +18,15 @@
 			=render @posts
 			-if @posts.count < 30
 				.scroll_btn.stop_loading
-					NO MORE POSTS	
+					=t('scroll.no_more')	
 			-else
 				.scroll_btn.posts
-					LOAD MORE	
+					=t('scroll.load')	
 	
 	.sub_function_sidebar
-		%h2
-			WHO TO FOLLOW
+		.title_block
+			%h2
+				=t('sidebar.title.who_to_follow')
 		.new_users_section
 			-unless @new_users.empty?
 				= render partial: "users/card", collection: @new_users, as: :user

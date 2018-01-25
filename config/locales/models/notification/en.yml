@@ -1,0 +1,9 @@
+en:
+  notification:
+    comment: "commented on your post."
+    comment-comment: "also commented on the post:"
+    follow: "is now following you."
+    post-like: "liked your post. "
+    comment-like: "liked your comment."
+    
+      

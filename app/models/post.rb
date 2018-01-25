@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
 	belongs_to :user
 	belongs_to :country
-	belongs_to :category
+	belongs_to :category, dependent: :destroy
 	belongs_to :article
 	
 	counter_culture :article

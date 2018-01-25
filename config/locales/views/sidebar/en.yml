@@ -5,12 +5,21 @@ en:
       recent_articles: "NEW ARRIVALS"
       recommended_articles: "RECOMMENDED"
       who_to_follow: "WHO TO FOLLOW"
-      
+      profile: "Profile"
     stats:
       title: "Stats"
-      posts: "Posts"
-      follower: "Follower"
-      following: "Following"
+      posts: 
+        zero: "0 posts"
+        one: "1 post"
+        other: "%{count} posts"
+      follower:
+        zero: "0 followers"
+        one: "1 follower"
+        other: "%{count} followers"
+      following: 
+        zero: "0 following"
+        one: "1 following"
+        other: "%{count} following"
     likes:
       title: "Likes"
       week: "Week"
@@ -18,3 +27,9 @@ en:
     favorite_tags:
       title: "Favorite tags"
       link: "trending tags"
+    no_account: "No account"
+    setting:
+      title: "Setting"
+      profile: "Profile"
+      sns: "Social Media"
+      locale: "Locale"

@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "NEWSB![Support Team]",
-          bcc: "natsukingly01@gmail.com"
+  default from: "newsb![Support Team]",
+          bcc: "newsb.sns@gmail.com"
   layout 'mailer'
 end

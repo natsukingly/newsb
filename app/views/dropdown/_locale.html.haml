@@ -1,11 +1,11 @@
 #locale_ddm.ddm
 	.country
-		-Country.all.each do |country|
-			=link_to country_name_helper(country.name), change_country_path(country: country.name, country_id: country.id), class: "country_link_#{country.id}", method: :post
-
+		=link_to t('country.united_states'), change_country_path(country_name: "United States"), class: "country_link", method: :post
+		=link_to t('country.japan'), change_country_path(country_name: "Japan"), class: "country_link", method: :post
+		
 	.language
-		-Language.all.each do |language|
-			=link_to language_name_helper(language.name), change_language_path(locale: language.code, language_id: language.id), class: "language_link_#{language.id}", method: :post
+		=link_to "English", change_language_path(code: 'en'), class: "language_link", method: :post
+		=link_to "日本語", change_language_path(code: 'ja'), class: "language_link", method: :post
 	
 			
 :javascript

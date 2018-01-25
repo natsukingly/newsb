@@ -1,1 +1,22 @@
 ja:
+  user: 
+    zero: "0 ユーザー"
+    one: "１ ユーザー"
+    other: "%{count} ユーザー"
+  follower:
+    zero: "フォロワー: 0"
+    one: "フォロワー：1"
+    other: "フォロワー：%{count}"
+  following:
+    zero: "フォロー中：0"
+    one: "フォロー中：1"
+    other: "フォロー中：%{count}"
+  like:
+    zero: "0 いいね"
+    one: "%{count} いいね"
+    other: "%{count} いいね"
+  total_likes:
+    zero: "合計: ０いいね"
+    one: "合計: 1いいね"
+    other: "合計: %{count}いいね"
+    

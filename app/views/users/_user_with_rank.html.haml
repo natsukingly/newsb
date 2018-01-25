@@ -14,9 +14,9 @@
 				=user.name
 			= user.credential
 		%p.follower_stats 
-			#{user.followers.count} followers
+			=t('like', count: user.liked_count)
 			%span
-				#{user.liked_count} likes
+				=t('follower', count: user.followers.count)
 
 	.follow_switch
 		=render "/shared/follow_form_icon", user: user

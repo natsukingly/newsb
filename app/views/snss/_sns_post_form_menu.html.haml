@@ -1,33 +1,33 @@
--if user
-	.sns_block_small
-		-if user.facebook_post == true
-			=link_to unshare_facebook_snss_path(user.id), class: "sns_connect_btn facebook unshare", method: :post, remote: true do
-				%i.fa.fa-facebook
-		-else
-			-if !(user.social_profile(:facebook))
-				.sns_connect_btn.facebook.locked
-					%i.fa.fa-facebook
-					%span
-						%i.fa.fa-lock
-					=render 'dropdown/unlock_sns'
-			-else
-				=link_to share_facebook_snss_path(user.id), class: "sns_connect_btn facebook share", method: :post, remote: true do
-					%i.fa.fa-facebook
 
-	.sns_block_small
-		-if user.twitter_post == true
-			=link_to unshare_twitter_snss_path(user.id), class: "sns_connect_btn twitter unshare", method: :post, remote: true do
-				%i.fa.fa-twitter
+.sns_block_small.facebook
+	-if facebook_post == true
+		=link_to unshare_facebook_snss_path(current_user.id), class: "sns_connect_btn facebook unshare", method: :post, remote: true do
+			%i.fa.fa-facebook
+	-else
+		-if !(current_user.social_profile(:facebook))
+			.sns_connect_btn.facebook.locked
+				%i.fa.fa-facebook
+				%span
+					%i.fa.fa-lock
+				=render 'dropdown/unlock_sns'
 		-else
-			-if !(user.social_profile(:twitter))
-				.sns_connect_btn.twitter.locked
-					%i.fa.fa-twitter
-					%span
-						%i.fa.fa-lock
-					=render 'dropdown/unlock_sns'
-			-else
-				=link_to share_twitter_snss_path(user.id), class: "sns_connect_btn twitter share", method: :post, remote: true do
-					%i.fa.fa-twitter
-		
+			=link_to share_facebook_snss_path(current_user.id), class: "sns_connect_btn facebook share", method: :post, remote: true do
+				%i.fa.fa-facebook
+
+.sns_block_small.twitter
+	-if twitter_post == true
+		=link_to unshare_twitter_snss_path(current_user.id), class: "sns_connect_btn twitter unshare", method: :post, remote: true do
+			%i.fa.fa-twitter
+	-else
+		-if !(current_user.social_profile(:twitter))
+			.sns_connect_btn.twitter.locked
+				%i.fa.fa-twitter
+				%span
+					%i.fa.fa-lock
+				=render 'dropdown/unlock_sns'
+		-else
+			=link_to share_twitter_snss_path(current_user.id), class: "sns_connect_btn twitter share", method: :post, remote: true do
+				%i.fa.fa-twitter
+	
 		
 

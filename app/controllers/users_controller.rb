@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :followers, :following, :posts, :save_setting, :save_email_setting, :save_password_setting, :edit_setting, :edit_locale_setting, :edit_password_setting, :edit_email_setting, :edit_sns_setting]
   before_action :set_new_users, only: [:notification_index, :show]
-  before_action :authenticate_user_for_setting, only: [:complete_profile_form, :complete_profile, :edit_setting, :edit_locale_setting, :edit_email_setting, :edit_password_setting,
+  before_action :authenticate_user_for_setting, only: [:complete_profile_form, :edit_setting, :edit_locale_setting, :edit_email_setting, :edit_password_setting,
   :save_setting, :save_locale_setting, :save_email_setting, :save_password_setting]
   
   # GET /users
@@ -22,14 +22,14 @@ class UsersController < ApplicationController
     render json: @users.to_json
   end
   
-  def create
-    @user = User.new(params[:user])
-    if @user.save
-      sign_in @user
-      flash[:notice] = "Welcome to Banking Analytics."
-      redirect_to root_path
-    end
-  end
+  # def create
+  #   @user = User.new(params[:user])
+  #   if @user.save
+  #     sign_in @user
+  #     flash[:notice] = "Welcome to Banking Analytics."
+  #     redirect_to root_path
+  #   end
+  # end
   
   def complete_profile_form
     @countries = Country.all
@@ -43,14 +43,18 @@ class UsersController < ApplicationController
     @user.language_id = params[:user][:language_id].to_i
     @user.credential = params[:user][:credential]
     @user.about = params[:user][:about]
-    @user.save
-    
-    redirect_to cookies[:previous_url] || root_path
+    if @user.save
+      flash[:notice] = t('flash.user.update_setting_success')
+      redirect_to cookies[:previous_url] || root_path
+    else
+      flash[:alert] = t('flash.general_error')
+      redirect_to cookies[:previous_url] || root_path
+    end
   end
   
-  def error_message
-    @error_message = "invalid"
-  end
+  # def error_message
+  #   @error_message = "invalid"
+  # end
   # def ranking
   #   @ranked_users = User.where(id: Like.group(:target_user_id).order('count(target_user_id) desc').limit(100).pluck(:target_user_id))
   #   @top_articles = Post.all.limit(10)
@@ -64,77 +68,80 @@ class UsersController < ApplicationController
   
   def show
     @posts = @user.posts.order(created_at: :desc).limit(30)
-    
   end
   
   def edit_setting
-    @current_topic = "Setting"
+    @current_topic = t('nav.topic.setting')
   end
   
   def edit_locale_setting
-    @current_topic = "Setting"
+    @current_topic = t('nav.topic.setting')
   end
   
   def edit_email_setting
-    @current_topic = "Setting"
+    @current_topic = t('nav.topic.setting')
   end
   
   def edit_password_setting
-    @current_topic = "Setting"
+    @current_topic = t('nav.topic.setting')
     @minimum_password_length = 6
   end
   
   def save_setting
     @user.update(user_params)
     if @user.save 
+      flash[:notice] = t('flash.user.update_setting_success')
       redirect_to current_user
     else
-      flash[:notice] = "Error. Please check the format of your contents."
+      flash[:alert] = t('flash.general_error')
       redirect_to edit_setting_user_path(current_user)
     end
   end
   
   def save_locale_setting
-    @user.update(user_param)
-    if @user.save 
+    if @user.update(user_param)
+      flash[:notice] = t('flash.user.update_setting_success')
       redirect_to current_user
-    end
-  end
-  
-  def save_email_setting
-    @email = params[:user][:email]
-    @confirmation_email = params[:user][:email_confirmation]
-    if @email == @confirmation_email
-      if !(User.where(email: @email).any?)
-        @user.update(email: @email)
-        if @user.save 
-          flash[:notice] = "Your email has been successfully updated"
-          redirect_to current_user
-        end
-      else
-        @taken_email_error = "this address is already registered by another user"
-        render :edit_email_setting
-      end
     else
-      @matching_error = "Adresses did not match"
-      render :edit_email_setting
+      flash[:alert] = t('flash.general_error')
+      redirect_to edit_locale_setting_user_path(current_user)    
     end
   end
   
-  def save_password_setting
-    @password = params[:user][:password]
-    @password_confirmation = params[:user][:password_confirmation]
-    @current_password = params[:user][:current_password]
-    respond_to do |format|
-      if current_user.update_with_password(password: @password, password_confirmation: @password_confirmation, current_password: @current_password)
-        # パスワードを変更するとログアウトしてしまうので、再ログインが必要
-        sign_in(current_user, bypass: true)
-        format.html { redirect_to edit_setting_user_path(current_user) }
-      else
-        format.html { render :edit_setting_password }
-      end
-    end
-  end
+  # def save_email_setting
+  #   @email = params[:user][:email]
+  #   @confirmation_email = params[:user][:email_confirmation]
+  #   if @email == @confirmation_email
+  #     if !(User.where(email: @email).any?)
+  #       @user.update(email: @email)
+  #       if @user.save 
+  #         flash[:notice] = "Your email has been successfully updated"
+  #         redirect_to current_user
+  #       end
+  #     else
+  #       @taken_email_error = "this address is already registered by another user"
+  #       render :edit_email_setting
+  #     end
+  #   else
+  #     @matching_error = "Adresses did not match"
+  #     render :edit_email_setting
+  #   end
+  # end
+  
+  # def save_password_setting
+  #   @password = params[:user][:password]
+  #   @password_confirmation = params[:user][:password_confirmation]
+  #   @current_password = params[:user][:current_password]
+  #   respond_to do |format|
+  #     if current_user.update_with_password(password: @password, password_confirmation: @password_confirmation, current_password: @current_password)
+  #       # パスワードを変更するとログアウトしてしまうので、再ログインが必要
+  #       sign_in(current_user, bypass: true)
+  #       format.html { redirect_to edit_setting_user_path(current_user) }
+  #     else
+  #       format.html { render :edit_setting_password }
+  #     end
+  #   end
+  # end
     
   
   
@@ -190,21 +197,28 @@ class UsersController < ApplicationController
   end
 
   def change_country
-    @country = Country.find(params[:country_id])
+    @country = Country.find_by(name: params[:country_name])
     if current_user
       @user = User.find(current_user.id)
       @user.country_id = @country.id
-      @user.save
+      if @user.save
+        flash[:notice] = "success"
+        redirect_to root_path
+      else
+        flash[:alert] = "failure"
+        redirect_to root_path
+      end
+    else
+      cookies[:country] = @country.name
+      redirect_to root_path(country: @country.name)
     end
-    cookies[:country] = @country.name
-    redirect_to root_path(country: @country.name)
   end
   
   def change_language
-    language = Language.find(params[:language_id])
+    @language = Language.find_by(code: params[:code])
     if current_user
       @user = User.find(current_user.id)
-      @user.language_id = language.id
+      @user.language_id = @language.id
       @user.save
     end
     cookies[:language] = @language.name

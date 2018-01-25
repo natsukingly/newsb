@@ -1,0 +1,21 @@
+ja:
+  dropdown:
+    profile_option:
+      profile: "プロフィール・過去の投稿"
+      setting: "設定"
+      social_media: "SNSの接続"
+      about: "ABOUT"
+      contact: "お問い合わせ"
+      terms: "利用規約"
+      privacy: "プライバシーポリシー"
+      logout: "ログアウト"
+    notifications: "お知らせ"
+    profile_menu: "プロフィールメニュー"
+    mobile_menu:
+      title: "メニュー"
+      feed: "投稿"
+      ranking: "ユーザーランキング"
+      trending_tags: "注目のタグ"
+      favorite_tags: "お気に入りのタグ"
+      search: "検索する"
+    location: "地域・言語"

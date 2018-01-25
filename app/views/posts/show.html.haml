@@ -61,15 +61,16 @@
 				.comment_index_wrapper
 					.comment_index
 						.comments
-							=render @post.comments
+							=render @post.comments.includes(:user)
 						
 
 	
 
 
 	.sub_function_sidebar
-		%h2 
-			=t ('sidebar.title.recommended_articles')
+		.title_block
+			%h2 
+				=t ('sidebar.title.recommended_articles')
 		.side_article_section
 			-unless @side_articles.empty?
 				= render partial: "articles/side_article", collection: @side_articles, as: :article

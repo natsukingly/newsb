@@ -5,9 +5,10 @@ class ContactMailer < ApplicationMailer
   #
   #   en.contact_mailer.send_when_contacted.subject
   #
-  def auto_reply(name, address, message)
+  def auto_reply(name, address, message, image_url)
     @name = name
     @message = message
+    @image_url = image_url
     mail to: address, subject: "#{name}, thanks for your message!"
   end
 end

@@ -8,8 +8,11 @@
 					=link_to comment.user do
 						%span.user_name.bold
 							=comment.user.name
-					%p.user_credential.sm.grey
-						=comment.user.credential
+					%p.user_credential
+						-unless comment.user.credential.nil?
+							#{comment.user.credential}・
+						%span.time
+							#{time_ago_in_words(comment.created_at)}
 		.content_block
 			%span.opinion.comment_opinion
 				=truncate( simple_format(comment.content), escape: false, length: 200) do

@@ -18,12 +18,12 @@
 						.social_mode_switch
 							%i.fa.fa-toggle-on.fa-2x
 						.social_model_title
-							SNS MODE OFF
+							=t('article_index.title.comment_off')
 					-else
 						.social_mode_switch
 							%i.fa.fa-toggle-on.fa-2x.fa-rotate-180.active
 						.social_model_title
-							SNS MODE ON
+							=t('article_index.title.comment')
 				
 				%span.divider
 					\|
@@ -32,10 +32,10 @@
 			=render @articles.offset(1)
 			-if @articles.count < 30
 				.scroll_btn.stop_loading
-					NO MORE ARTICLES	
+					=t('scroll.no_more')	
 			-else
 				.scroll_btn.articles
-					LOAD MORE
+					=t('scroll.load')	
 
 			
 			
@@ -71,12 +71,12 @@
 		var $state = $(this).find('.social_model_title');
 		if($switch.hasClass('active')){
 			$switch.removeClass('active').removeClass('fa-rotate-180');
-			$state.text('SNS MODE OFF');
+			$state.text("#{t('article_index.title.comment_off')}");
 			$('.article .best_post').hide();
 			Cookies.set('sns_mode', "off");
 		} else{
 			$switch.addClass('active').addClass('fa-rotate-180');
-			$state.text('SNS MODE ON');	
+			$state.text("#{t('article_index.title.comment')}");	
 			$('.article .best_post').fadeIn();
 			Cookies.set('sns_mode', "on");
 		}

@@ -1,5 +1,7 @@
-
 ja:
   country:
     united_states: "アメリカ合衆国"
     japan: "日本"
+  language:
+    english: "英語"
+    japanese: "日本語"

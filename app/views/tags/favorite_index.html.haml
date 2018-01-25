@@ -2,13 +2,13 @@
 	.sub_function_main_section
 		.sub_function_nav
 			%h2
-				Tags
+				=t('nav.title.tags')
 			
 			.nav_options	
-				=link_to "Trending", tags_path
+				=link_to t('nav.title.trending_tags'), tags_path
 				|
 				=link_to favorite_index_tags_path, class: "active" do
-					Favorite・
+					#{t('nav.title.favorite_tags')}・
 					%span.tag_counts
 						#{current_user.favorite_tags.count}
 
@@ -16,13 +16,14 @@
 			=render @tags
 			-if @tags.count < 30
 				.scroll_btn.stop_loading
-					NO MORE TAGS	
+					=t('scroll.no_more')	
 			-else
 				.scroll_btn.favorite_tags
-					LOAD MORE	
+					=t('scroll.load')	
 	.sub_function_sidebar
-		%h2
-			=t('sidebar.title.new_users')
+		.title_block
+			%h2
+				=t('sidebar.title.new_users')
 		.new_users_section
 			-if @new_users.empty?
 				.new_users_not_found

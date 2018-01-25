@@ -15,22 +15,13 @@
 							=t 'sidebar.stats.title'
 					.stats_item
 						%p 
-							=t 'sidebar.stats.posts'
-							\:
-							%span 
-								= user.posts.count
+							=t('sidebar.stats.posts', count: user.posts.count)
 					.stats_item
 						%p	
-							=t 'sidebar.stats.follower'
-							\:
-							%span 
-								= user.followers_count
+							=t('sidebar.stats.follower', count: user.followers.count)
 					.stats_item
 						%p
-							=t 'sidebar.stats.following'
-							\:
-							%span 
-								= user.following_count
+							=t('sidebar.stats.following', count: user.following.count)
 				.like_stats
 					%h2.section_title.like
 						=render 'svg/like_icon'
@@ -49,16 +40,17 @@
 					.favorite_tags_block
 						-unless user.favorites.empty?
 							-user.favorites.includes(:tag).each do |favorite|
-								%p.tag
-									=link_to "\##{favorite.tag.name}",tag_path(favorite.tag.name)
-						=link_to "#{t('sidebar.favorite_tags.link')} >>", tags_path, class: "tags_link"
+								=link_to "\##{favorite.tag.name}", tag_path(favorite.tag.name), class: "tag"
+									
+						
+					=link_to "#{t('sidebar.favorite_tags.link')} >>", tags_path, class: "tags_link"
 					
 		-else
 			.profile.not_signed_in
 				.user_info
 					.name
 						%h2
-							No account
+							=t('sidebar.no_account')
 
 				.stats
 					%h2.section_title.stats

@@ -1,7 +1,7 @@
 $('.scroll_btn.load_admin_drafts').before('#{ escape_javascript(render partial: "post_drafts/admin_draft", collection: @loaded_admin_drafts, as: :post_draft)}');
-$('.scroll_btn.load_admin_drafts').html('LOAD MORE');
+$('.scroll_btn.load_admin_drafts').html("#{t('scroll.load')}");
 $('.scroll_btn.load_admin_drafts').removeClass('loading');
 -if @loaded_admin_drafts.empty? || @loaded_admin_drafts.count < 30
-    $('.scroll_btn.load_admin_drafts').html('NO MORE DRAFTS');
+    $('.scroll_btn.load_admin_drafts').html("#{t('scroll.no_more')}");
     $('.scroll_btn.load_admin_drafts').addClass('stop_loading');
     

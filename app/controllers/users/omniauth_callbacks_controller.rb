@@ -23,12 +23,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 					# current_user.idと一緒
 					if @profile.present? && @profile.user_id == current_user.id 
 						# ＞＞連携済み
-						flash[:notice] = "This sns account has already been connected"
+						flash[:alert] = t('devise.signin.sns_already_connected')
 						redirect_to redirect_to edit_sns_setting_user_path(current_user.id)
 					# current_user.idと違う
 					elsif @profile.present? && @profile.user_id != current_user.id 
 						# ＞＞他のアカウントと結びついている
-						flash[:notice] = "This sns account is being used for another NEWSB account."
+						flash[:alert] = t('devise.signin.sns_account_already_used')
 						redirect_to edit_sns_setting_user_path(current_user.id)
 					# 取得できたuid providerと一致するsocialprofileがない
 					else
@@ -37,13 +37,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 						@profile.user = current_user
 						@profile.set_values(@omniauth)
 						@profile.save!
-						flash[:notice] = "you successfully connected with #{@omniauth['provider']}"
+						flash[:notice] = t('devise.signin.sns_connection_success')
 						redirect_to edit_sns_setting_user_path(current_user.id)
 					end
 				# SNSの情報を取得できなかった
 				else
 					#  ＞＞セッティングページにエラー
-					flash[:notice] = "We were unable to access to your sns account information."
+					flash[:alert] = t('devise.signin.sns_communication_failure')
 					redirect_to redirect_to edit_sns_setting_user_path(current_user.id)					
 				end
 			#Userがログインしていない場合
@@ -60,6 +60,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 							redirect_to complete_profile_form_users_path
 						# ＞＞２回目以降はのログインの場合はログイン前にいた場所かトップにリダイレクト
 						else
+							flash[:notice] = t('devise.signin.success')
 							redirect_to cookies[:previous_url] || root_path
 						end	
 					# 取得できたuid providerと一致するsocialprofileがない
@@ -68,7 +69,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 						# 取得できたemailと一致するuserがいる
 						if @existing_user
 							# ＞＞他のアカウントが既にある。
-							flash[:notice] = "There is already an account with this email."
+							flash[:alert] = t('devise.signin.same_email_error')
 							redirect_to cookies[:previous_url] || root_path
 						# 取得できたemailと一致するuserがない
 						else
@@ -84,7 +85,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 				# SNSの情報を取得できなかった	
 				else
 					# ＞＞サインインページにエラー
-					flash[:notice] = "We were unable to access to your sns account information."
+					flash[:alert] = t('devise.signin.communication_error')
 					redirect_to cookies[:previous_url] || root_path		
 				end
 			end

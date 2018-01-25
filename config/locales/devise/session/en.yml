@@ -1,0 +1,13 @@
+en:
+  devise:
+    sessions:
+      user:
+        signed_out: "SUCESS: LOGGED OUT"
+    signin:
+      success: "You have successfuly logged in"
+      sns_already_connected: "Error: This social media account has already been connected."
+      sns_account_already_used: "Error: This social media account is being used for another NEWSB account."
+      sns_connection_success: "Connection Success!"
+      sns_communication_failure: "Error: We were unable to access to your social media account."
+      same_email_error: "Error: There is already a newsb! account with the email. Please signin with your existing account, aned then connect with your social media."
+      communication_error: "Error: We couldn't process your infomation."

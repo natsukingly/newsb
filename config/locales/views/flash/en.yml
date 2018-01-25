@@ -1,0 +1,23 @@
+en:
+  flash:
+    general_error: "Error: We couldn't process your request."
+    post:
+     create_success: "You have successfully published your post."
+     create_fail: "Error: We couldn't process your post."
+     update_success: "You have successfully updated your post."
+     update_fail: "Error: We couldn't update your post."
+     delete_success: "You have successfully deleted your post."
+     delete_alert: "Error: We couldn't delete your post."
+     already_shared: "Your have already shared this article."
+    comment:
+     create_success: "You have successfully posted your comment."
+     update_success: "You have successfully updated your comment."
+     delete_success: "You have successfully deleted your comment."
+    user:
+     country_change_success: "You have successfully changed your country setting."
+     language_change_success: "You have successfully changed your language setting."
+     update_setting_success: "You have successfully updated your profile."
+    report: 
+     success: "Thank you for submitting your report."
+
+    

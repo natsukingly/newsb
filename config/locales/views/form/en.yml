@@ -3,6 +3,8 @@ en:
     url:
       caption: "What's happening in the world today?"
       placeholder: "paste an url to start"
+      note: "Note: newsb!'s index page only show the articles published within 3 days."
+      error: "Error: this article cannot be uploaded."
     post:
       title: "Create post"
       fake_news_checkbox: "POST AS FAKE NEWS REPORT"
@@ -12,8 +14,32 @@ en:
       save: "SAVE"
       cancel: "CANCEL"
       update: "UPDATE"
+      
     comment:
       placeholder: "What do you think?"
       submit: "COMMENT"
       cancel: "CANCEL"
+    sns:
+      setting_popup: "You haven't registered this social media account."
+      later: "Maybe, later"
+      setting_page: "Setting page"
+    post_errors:
+      category_undecided: "Please select a category."
+      too_long: "Your post exceeded maximum length(1000). Right now you have"
+    comment_errors:  
+      too_long: "Your post exceeded maximum length(500). Right now you have"
+      blank: "You can't post a blank content"
     cancel: "CANCEL"
+    report:
+      placeholder: "Help us understand the problem. What is going on with this post? You won't get any replies for this message."
+    setting:
+      name: "NAME"
+      name_rule: "*On NEWSB, using your actual name is recommended."
+      credential: "CREDENTIAL"
+      about: "ABOUT"
+      language: "LANGUAGE"
+      location: "LOCATION"
+      credential_error: "Your post exceeded maximum length(100). Right now you have"
+      about_error: "Your post exceeded maximum length(1000). Right now you have"
+      name_error: "You cannot leave your name blank."
+      

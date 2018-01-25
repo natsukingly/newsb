@@ -12,10 +12,17 @@ class Relationship < ApplicationRecord
     before_destroy :destroy_notification
     
     def issue_notification
+		case self.following.language.code
+		when "ja"
+			message = "<span> #{self.follower.name} </span>#{ I18n.t('notification.follow', locale: :ja)}"
+		when "en"
+			message = "<span> #{self.follower.name} </span>#{ I18n.t('notification.follow', locale: :en)}"
+		end
+        user_path = Rails.application.routes.url_helpers.user_path(country: self.following.country.name, id: self.follower_id)
         notification = Notification.new(user_id: self.following_id,
                                         target_user_id: self.follower_id,
-                                        path: "/users/#{self.follower_id}",
-                                        message: "<span> #{self.follower.name} </span> is now following you.",
+                                        path: user_path,
+                                        message: message,
                                         notification_type: "Follow")
         notification.save
     end

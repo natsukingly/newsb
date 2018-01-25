@@ -41,33 +41,54 @@ class CommentsController < ApplicationController
 		@post = Post.find(params[:comment][:post_id])
 		
 		@comment = current_user.comments.build(content: params[:comment][:content], post_id: @post.id, article_id: @post.article_id )
-		@comment.save
-		redirect_to post_path(@comment.post_id)
+		if @comment.save
+			flash[:notice] = t('flash.comment.create_success')
+			redirect_to post_path(@comment.post_id)
+		else
+			flash[:notice] = t('flash.general_error')
+			redirect_to post_path(@comment.post_id)
+		end
 	end
 
 	# PATCH/PUT /comments/1
 	# PATCH/PUT /comments/1.json
 	def update
-		@comment.update(content: params[:comment][:content])
-		redirect_to post_path(@comment.post_id)
+		if @comment.update(content: params[:comment][:content])
+			flash[:notice] = t('flash.comment.update_success')
+			redirect_to post_path(@comment.post_id)
+		else
+			flash[:alert] = t('flash.general_error')
+			redirect_to post_path(@comment.post_id)
+		end
 	end
 
 	# DELETE /comments/1
 	# DELETE /comments/1.json
 	def destroy
 		post_id = @comment.post_id
-		@comment.destroy
-		respond_to do |format|
-			format.html { redirect_to post_path(post_id), notice: 'Comment was successfully destroyed.' }
-			format.json { head :no_content }
+		if @comment.destroy
+			respond_to do |format|
+				flash[:notice] = t('flash.comment.delete_success')
+				format.html { redirect_to post_path(post_id)}
+				format.json { head :no_content }
+			end
+		else
+			flash[:alert] = t('flash.general_error')
+			redirect_to post_path(post_id)
 		end
 	end
 
-	def create_report
-		@report = @comment.reports.build(	user_id: current_user.id, 
-										content: params[:report][:content])
-		@report.save
-	end
+	# def create_report
+	# 	@report = @comment.reports.build(	user_id: current_user.id, 
+	# 									content: params[:report][:content])
+	# 	if @report.save
+	# 		flash[:notice] = t('flash.report.success')
+	# 		redirect_to post_path(@comment.post_id)
+	# 	else
+	# 		flash[:alert] = t('flash.general_error')
+	# 		redirect_to post_path(@comment.post_id)
+	# 	end
+	# end
 
 
 	private

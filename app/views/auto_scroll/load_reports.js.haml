@@ -1,8 +1,8 @@
 $('.scroll_btn').before('#{ escape_javascript(render partial: "admins/report", collection: @reports, as: :report)}');
-$('.scroll_btn').html('LOAD MORE');
+$('.scroll_btn').html("#{t('scroll.load')}");
 $('.scroll_btn').removeClass('loading');
 -if @loaded_reports.empty?
-    $('.scroll_btn').html('NO MORE REPORTS');
+    $('.scroll_btn').html("#{t('scroll.no_more')}");
     $('.scroll_btn').addClass('stop_loading');
     
 loading = false;

@@ -137,6 +137,10 @@ $(document).on('turbolinks:load', function() {
 	// });
 	
 	$('.modal_wrapper').click(function (event) {
+		if(!$(event.target).closest('.unlock_sns_ddm.ddm').length && !$(event.target).is('.unlock_sns_ddm.ddm')){
+			$('.unlock_sns_ddm.ddm').hide();
+		}
+		
 		if(!$(event.target).closest('.modal').length && !$(event.target).is('.modal')) {
 			$(".modal_wrapper").hide();
 			$('.flex_container').show();
@@ -145,6 +149,10 @@ $(document).on('turbolinks:load', function() {
 			$(window).scrollTop(position);
 		}  
 	});
+	
+	
+	
+	
 	
 	
 	$('.close_modal_btn, .mobile_modal_back_btn, .cancel_modal_btn').click(function (event) {

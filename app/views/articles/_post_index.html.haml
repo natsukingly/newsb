@@ -4,20 +4,20 @@
 -unless @your_posts.empty?
 	.your_posts.posts_section
 		%h3
-			YOUR POSTS
+			=t('article_index.title.your_posts')
 		= render partial: "posts/post_wo_article", collection: @your_posts.includes(:user), as: :post
 		
 -if current_user
 	-unless @best_posts.where.not(id: @your_posts.ids).empty?
 		.best_posts.posts_section
 			%h3
-				BEST POSTS
+				=t('article_index.title.best_posts')
 			= render partial: "posts/post_wo_article", collection: @best_posts.where.not(id: @your_posts.ids).includes(:user), as: :post
 -else
 	-unless @best_posts.empty?
 		.best_posts.posts_section
 			%h3
-				BEST POSTS
+				=t('article_index.title.best_posts')
 			= render partial: "posts/post_wo_article", collection: @best_posts.includes(:user), as: :post
 
 
@@ -26,19 +26,19 @@
 -unless @follower_posts.empty?
 	.follower_posts.posts_section
 		%h3
-			FOLLOWERS POSTS
+			=t('article_index.title.followers_posts')
 		= render partial: "posts/post_wo_article", collection: @follower_posts.includes(:user), as: :post
 		
 -unless @new_posts.empty? && @shared_posts.empty?
 	.new_posts.posts_section
 		%h3
-			NEW POSTS
+			=t('article_index.title.new_posts')
 		-unless @shared_posts.empty?
 			.shared_posts_section
 				.show_shared_posts_link
 					%i.fa.fa-share-alt
 					%p
-						Shared
+						=t('article_index.title.shared_posts')
 						\:
 						= @shared_posts.count
 					%i.fa.fa-angle-down
@@ -47,9 +47,9 @@
 		= render partial: "posts/post_wo_article", collection: @new_posts.includes(:user), as: :post
 		-if @new_posts.count < 30
 			.scroll_btn.stop_loading
-				NO MORE POSTS	
+				=t('scroll.no_more')
 		-else
 			.scroll_btn.article_posts
-				LOAD MORE		
+				=t('scroll.load')		
 
 
