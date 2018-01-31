@@ -27,10 +27,10 @@
 					= render @users
 					-if @users.count < 30
 						.scroll_btn.stop_loading
-							NO MORE NOTIFICATIONS	
+							=t('scroll.no_more')	
 					-else
 						.scroll_btn.load_followers
-							LOAD MORE
+							=t('scroll.load')
 
 
 :javascript

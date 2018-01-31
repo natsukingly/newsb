@@ -36,12 +36,12 @@
 		-unless @shared_posts.empty?
 			.shared_posts_section
 				.show_shared_posts_link
-					%i.fa.fa-share-alt
+					%i.fa.fa-share-alt.shared_icon
 					%p
 						=t('article_index.title.shared_posts')
 						\:
 						= @shared_posts.count
-					%i.fa.fa-angle-down
+					%i.fa.fa-angle-down.shared_icon
 				.shared_posts
 					= render partial: "posts/post_wo_article", collection: @shared_posts.includes(:user), as: :post
 		= render partial: "posts/post_wo_article", collection: @new_posts.includes(:user), as: :post

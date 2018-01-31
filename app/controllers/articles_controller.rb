@@ -13,7 +13,7 @@ class ArticlesController < ApplicationController
   end
   
   def show
-    @current_topic = "Comments"
+    @current_topic = t('nav.topic.article')
     @fake_news_reports = @article.posts.where(fake_news_report: true).order(likes_count: :desc)
     
     if current_user

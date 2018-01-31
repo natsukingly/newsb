@@ -31,11 +31,23 @@
 	font-size: 14px;
 }
 
-
+button, input[type="submit"], input[type="button"]{
+	padding: 5px 20px;
+	width: auto;
+    -webkit-box-sizing: content-box;
+    -webkit-appearance: button;
+    appearance: button;
+    border: none;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+form.button_to, button{
+	width: 100%;
+}
 form{
 	div{
 		position: relative;
-		input[type="text"], input[type="password"], input[type="submit"], input[type="email"], textarea{
+		input[type="text"], input[type="password"], input[type="email"], textarea{
 			width: 100%;
 			border-radius: 3px;
 			outline: 0px;
@@ -43,14 +55,19 @@ form{
 			padding: 8px;
 			background-color: white;
 			-webkit-appearance: none;
+		}
+		input[type="submit"]{
+			border-radius: 3px;
+			outline: 0px;
+			border: 1px solid #bbb;
+			padding: 5px 20px;
+			background-color: white;
+			-webkit-appearance: none;	
 			&:hover{
 				opacity: .95;
 			}
 		}
-		input[type="submit"]{
-			padding: 5px 20px;
-			width: auto;
-		}
+
 		.error_icon{
 			position: absolute;
 			top: 12px;
@@ -192,7 +209,7 @@ form{
 						color: grey;
 						&:hover{
 							background-color: white;
-							font-weight: 900;
+							font-weight: 600;
 							color: $newsb_grey;
 						}
 					}
@@ -612,7 +629,7 @@ form{
 	&.on_feed{
 		border: 0;
   		border-radius: 0;
-  		font-weight: 900;
+  		font-weight: 600;
 	}
 	span.show_post_modal_btn{
 		position: absolute;
@@ -705,18 +722,38 @@ form{
 	background-size: cover;
 	background-position: center;
 	overflow: scroll;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 #extra_info{
-	max-width: 600px;
+	min-width: 600px;
 	padding: 50px;
-	margin: 50px auto;
+	margin-bottom: 100px;
 	background-color: white;
 	border-radius: 3px;
 	color: #696969;
 	font-size: 16px;
 	display: flex;
-	
+	.form_menu{
+		display: flex;
+  		justify-content: space-between;
+  		align-items: flex-start;
+  		margin-bottom: 40px;
+  		h2{
+			flex: 1;
+			font-size: 50px;
+			font-weight: 600;
+			color: $newsb_grey;
+			line-height: 20px;
+			flex-direction: column;
+			span{
+				font-size: 14px;
+				color: #696969;
+			}
+		}
+	}
 	.profile_form_content{
 		width: 100%;
 		.form_title{
@@ -728,18 +765,6 @@ form{
 					width: 30px;
 				}
 			}
-			h2{
-				flex: 1;
-				font-size: 50px;
-				font-weight: 900;
-				color: $newsb_grey;
-				margin-bottom: 40px;
-				flex-direction: column;
-				span{
-					font-size: 14px;
-					color: #696969;
-				}
-			}
 		}
 		p {
 			margin-bottom: 12px;
@@ -748,27 +773,98 @@ form{
 			margin-bottom: 5px;
 		}
 		select, input, textarea{
-			margin-bottom: 12px;
+
+			font-size: 16px;
+		}
+		input[type="submit"]{
+			margin-bottom: 0;
+			margin-right: 20px;
+		}
+		select{
+			width: 150px;
 		}
 	}
-	
+	.submit_btn_group{
+		input{
+			display: inline-block;
+		    flex: none;
+		    height: 35px;
+		    background-color: orange;
+		    opacity: .8;
+		    border: none;
+		    color: white;
+		    &:hover{
+		    	opacity: 1.0;
+		    }
+		}
+		display: flex;
+		&.mobile{
+			margin-top: 20px;
+			display: none;
+			input{
+				padding: 8px 40px;
+			}
+		}
+	}
+}
+#extra_info.mobile{
+	display: none;
 }
 
 @media (max-width: 768px) {
-	#extra_info{
-		width: auto;
-		padding: 20px 12px;
+	#extra_info_wrapper{
+		display: none;
 	}
-}
-
-
-@media (max-width: 600px) {
-	#extra_info{
+	.mobile_overlay{
+		height: 180px;
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    background-position: center;
+	    background-size: cover;
+	    
+	}
+	#extra_info.mobile{
+		display: block;
+		min-width: auto;
+		flex: 1;
 		width: auto;
 		margin: 0;
-		padding: 20px 12px 200px;
+		background-color: rgba(0,0,0,0);
+		border-radius: 0;
+		padding: 20px;
+		.form_menu{
+			margin-bottom: 30px;
+		    height: 150px;
+		    align-items: center;
+			h2{
+				color: $newsb;
+				span{
+					color: $newsb;
+				}
+			}
+			
+		}
+		.setting_block{
+			justify-content: space-between;
+			margin-bottom: 0;
+			.title{
+				color: black;
+			}
+		}
+		.submit_btn_group{
+			display: none;
+			&.mobile{
+				display: flex;
+			}
+			input{
+				background-color: black;
+			}
+		}
 	}
 }
+
 
 .forgot_password_wrapper{
 	margin: 0 auto;

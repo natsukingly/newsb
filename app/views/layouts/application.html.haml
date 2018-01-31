@@ -4,7 +4,6 @@
 		= render :partial => "layouts/meta_tags"
 		= csrf_meta_tags
 		= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-		= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Nova+Flat"
 		= favicon_link_tag '/images/newsb_favicon.png'
 		= javascript_include_tag 'application'
 	%body
@@ -17,7 +16,7 @@
 					=render "/articles/featured_article", article: @featured_article, best_post: @best_post, related_articles: @related_articles
 				.flex_wrapper.clearfix  
 					#sidebar_left
-						=render "/sidebars/left_profile", user: current_user
+						=render "/sidebars/categories", user: current_user
 					#main_container
 						=yield
 			
@@ -26,7 +25,7 @@
 					=render "/articles/selected_article", article: @article
 				.flex_wrapper.clearfix  
 					#sidebar_left
-						=render "/sidebars/left_profile", user: current_user
+						=render "/sidebars/categories", user: current_user
 					#main_container
 						=yield
 			
@@ -34,7 +33,7 @@
 			-elsif yield(:sidebar).empty? == true
 				.flex_wrapper.clearfix  
 					#sidebar_left
-						=render "/sidebars/left_profile", user: current_user
+						=render "/sidebars/categories", user: current_user
 					#main_container
 						=yield
 			
@@ -55,9 +54,9 @@
 					#main_container
 						=yield
 					
-		
-		#mobile_footer
-			=render 'layouts/mobile_footer'
+		-if  yield(:footer).empty? == true
+			#mobile_footer
+				=render 'layouts/mobile_footer'
 			
 		.signin_modal_wrapper.modal_wrapper{data:{position: '0'}}
 			.modal_container
@@ -75,6 +74,12 @@
 		.delete_comment_modal_wrapper.modal_wrapper{data:{position: '0'}}
 			.modal_container
 				=render 'modals/delete_comment'
+		
+		-if current_user
+			.delete_user_modal_wrapper.modal_wrapper{data:{position: '0'}}
+				.modal_container
+					=render 'modals/delete_user'				
+				
 				
 		.report_modal_wrapper.modal_wrapper{data:{position: '0'}}
 			.modal_container

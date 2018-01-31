@@ -8,13 +8,13 @@
     border: 1px solid #bbb;
     border-radius: 3px;
     text-align: center;
-    font-weight: 900;
+    font-weight: 600;
     cursor: pointer;
 }
 
 a.follow_btn{
-    border: 1px solid grey;
-    color: grey;
+    border: rgba(0,0,0,0);
+    color: white;
     font-size: 14px;
     opacity: .9;
     &:hover{

@@ -11,6 +11,9 @@ class Relationship < ApplicationRecord
     after_create :issue_notification
     before_destroy :destroy_notification
     
+    after_create :add_follower_count
+    before_destroy :reduce_follower_count
+    
     def issue_notification
 		case self.following.language.code
 		when "ja"
@@ -35,4 +38,29 @@ class Relationship < ApplicationRecord
             notification.destroy
         end
     end
+    
+    def add_follower_count
+        #the one who pressed the follow button
+        user = self.follower
+        user.following_count = user.following_count + 1
+        user.save
+        
+        #the one that will be followed
+        user = self.following
+        user.followers_count = user.followers_count + 1
+        user.save        
+    end
+    
+    def reduce_follower_count
+        #the one who pressed the follow button
+        user = self.follower
+        user.following_count = user.following_count - 1
+        user.save
+        
+        #the one that will be followed
+        user = self.following
+        user.followers_count = user.followers_count - 1
+        user.save 
+    end
+    
 end

@@ -3,11 +3,10 @@ $('i.loading_mobile').hide();
 $('.post_form_block .error_message').hide();
 $('.post_form_requirement').show();
 $('.post_form_modal').show();
-$('.post_form_modal .modal_content_title p').text("#{@article_title}");
+$('.post_form_modal .modal_content_title p').html("#{@article_title}");
+// var article_title = $('.post_form_modal .modal_content_title p').text();
 $('.post_form_modal input[name="article[image]"]').val("#{@article_image}");
 $('.post_form_modal input[name="article[url]"]').val("#{@article_url}");
 $('.post_form_modal input[name="article[source]"]').val("#{@article_source}");
 $('.post_form_modal input[name="article[title]"]').val("#{@article_title}");
 $('.post_form_modal input[name="article[published_time]"]').val("#{@article_published_time}");
-
-

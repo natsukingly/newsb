@@ -1,0 +1,17 @@
+.delete_modal.modal.modal_width_400
+	.close_modal_btn
+		=render 'svg/close_icon'
+	%h2.modal_content_title
+		=t('modal.title.delete_account')
+	.modal_content
+		
+		.modal_icon
+			=render 'svg/alert_icon'
+
+		%p
+			=t('modal.confirmation.delete_account')
+	.delete_menu.modal_menu.modal_menu_center
+		.cancel_btn.modal_menu_item.cancel_modal_btn
+			=t('action_cap.negative')
+		=link_to t('action_cap.positive'), user_path(current_user.id), method: :delete, class: "modal_menu_item with_border"
+

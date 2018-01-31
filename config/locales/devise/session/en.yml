@@ -2,9 +2,9 @@ en:
   devise:
     sessions:
       user:
-        signed_out: "SUCESS: LOGGED OUT"
+        signed_out: "You have successfuly signed out."
     signin:
-      success: "You have successfuly logged in"
+      success: "You have successfuly signed in."
       sns_already_connected: "Error: This social media account has already been connected."
       sns_account_already_used: "Error: This social media account is being used for another NEWSB account."
       sns_connection_success: "Connection Success!"

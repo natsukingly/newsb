@@ -30,7 +30,7 @@
 			.error_message
 				=t('form.setting.credential_error') 
 				%span.letter_count
-		=text_field_tag 'user[credential]', current_user.credential, placeholder: "ex) company, job title, school", class: "content credential_form"
+		=text_field_tag 'user[credential]', current_user.credential, placeholder: t('form.setting.credential_placeholder'), class: "content credential_form"
 	
 	.setting_block.about{data: {original_about: "#{current_user.about}"}}
 		.title_block
@@ -45,6 +45,11 @@
 		= submit_tag t('action_cap.save'), class: "form_btn btn setting_submit_btn"
 		#reset_setting_btn
 			=t('action_cap.reset')
+
+
+.deactivation_block
+	%p.deactivation_link
+		Deactivate your account
 	
 :javascript
 	$(function() {

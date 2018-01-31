@@ -9,6 +9,9 @@ en:
      delete_success: "You have successfully deleted your post."
      delete_alert: "Error: We couldn't delete your post."
      already_shared: "Your have already shared this article."
+     allow_comment_permission: "Users are now able to post comments on your post."
+     deny_comment_permission: "Users cannot comment or see existing comments for this post."
+     
     comment:
      create_success: "You have successfully posted your comment."
      update_success: "You have successfully updated your comment."
@@ -17,6 +20,7 @@ en:
      country_change_success: "You have successfully changed your country setting."
      language_change_success: "You have successfully changed your language setting."
      update_setting_success: "You have successfully updated your profile."
+     delete_account_success: "'Your account was successfully deleted."
     report: 
      success: "Thank you for submitting your report."
 

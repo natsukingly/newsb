@@ -1,0 +1,37 @@
+.notification.newsb_notifications{data: {notification_id: "#{notification.id}"}}
+	%p.time
+		%span.title
+			TIME: 
+		%span.content
+			=notification.created_at
+			
+	%p.message
+		%span.title
+			MESSAGE: 
+		%span.content
+			=notification.message   
+			
+	-unless notification.link.nil?
+		%p.path
+			%span.title
+				PATH: 
+			%span.content
+				=notification.path
+				
+	%p.langauge
+		%span.title
+			LANGUAGE: 
+		%span.content
+			=Language.find(notification.language_id).name
+			
+	%p.country
+		%span.title
+			TIME: 
+		%span.content
+			=Country.find(notification.country_id).name
+			
+	.newsb_notification_delete_btn
+		= link_to "DELETE", delete_newsb_notification_admin_path(notification.id), method: :delete, data: {confirm: "ARE YOU SURE？"}
+
+	
+	

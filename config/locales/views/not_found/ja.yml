@@ -3,7 +3,7 @@ ja:
     search_result: "検索結果：０件"
     new_users: "募集中!"
     new_articles: "募集中！"
-    user_posts: "気になる記事についてのコメントを投稿しましょう。"
+    user_posts: "このユーザーの投稿はまだありません。"
     user_followers: "まだあなたをフォローしているユーザーはいません。"
     user_following: "人気のユーザーをチェックして他のユーザーをフォローしましょう。"
     user_drafts: "保存されている下書きはありません。"

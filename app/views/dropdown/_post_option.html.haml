@@ -3,13 +3,18 @@
 		-if post.user.id == current_user.id
 			.post_user_menu
 				.edit_btn.ddm_btn.show_article_post_edit_modal_btn
-					EDIT
+					=t('action_cap.edit')
 				.delete_btn.ddm_btn
-					DELETE
+					=t('action_cap.delete')
+				-if post.comment_permission == true
+					=button_to t('action_cap.block_comments'), change_comment_permission_post_path(post.id), class: "ddm_btn"
+				-else
+					=button_to t('action_cap.allow_comments'), change_comment_permission_post_path(post.id), method: "post", class: "ddm_btn", remote: true
+				
 					
 		.regular_user_menu
 			.report_btn.ddm_btn.show_report_modal_btn{data: {type: "post"}}
-				REPORT
+				=t('action_cap.report')
 		
 
 				

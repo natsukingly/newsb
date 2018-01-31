@@ -71,9 +71,9 @@ module ApplicationHelper
         
     def default_meta_tags
       {
-        site: "NEWSB",
+        # site: "newsb!",
         reverse: true,
-        title: "NEWSB",
+        title: "newsb!",
         description: "Share knowledge, ask questions, and report fake news.",
         keywords: "",
         viewport: "width=device-width, initial-scale=1.0" ,
@@ -81,7 +81,7 @@ module ApplicationHelper
           title: :title,
           type: "website",
           url: request.original_url,
-          site_name: "NEWSB",
+          site_name: "newsb!",
           description: :description,
         }
       }
@@ -90,7 +90,7 @@ module ApplicationHelper
     def article_meta_tags(article)
         {
             title: article.title,
-            description: "NEWSB: The most social news platform in the world",
+            description: "newsb!: The most social news platform in the world",
             image_src: "#{url_for(asset_path article.image.url || "no_image.jpeg")}",
             keywords: "",
             og: {
@@ -98,13 +98,13 @@ module ApplicationHelper
               type: "article",
               url: "https://news-party-natsukingly.c9users.io/#{article.country.name}/articles/#{article.id}",
               image: "#{url_for(asset_path article.image.url || "no_image.jpeg")}",
-              site_name: "NEWSB",
+              site_name: "newsb!",
               description: :description,
             },
             twitter: {
                 card: "summary_large_image",
-                site: "NEWSB",
-                creater: "NEWSB",
+                site: "newsb!",
+                creater: "newsb!",
                 title: :title,
                 description: :description,
                 image: "#{url_for(asset_path article.image.url || "no_image.jpeg")}",

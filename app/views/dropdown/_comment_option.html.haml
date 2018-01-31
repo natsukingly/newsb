@@ -4,13 +4,13 @@
 		-if current_user && comment.user.id == current_user.id
 			.comment_user_menu
 				.comment_edit_btn.ddm_btn.show_comment_edit_modal_btn
-					EDIT
+					=t('action_cap.edit')
 				.comment_delete_btn.ddm_btn
-					DELETE
+					=t('action_cap.delete')
 					
 		.regular_user_menu
 			.report_btn.ddm_btn.show_report_modal_btn{data: {type: "comment"}}
-				REPORT
+				=t('action_cap.report')
 		
 		
 :javascript

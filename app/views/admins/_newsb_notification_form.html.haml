@@ -1,0 +1,7 @@
+=form_tag create_newsb_notification_admins_path, remote: true, method: :post, class: "newsb_notifications_form" do
+	=text_field_tag 'notification[title]', '', placeholder: "title", class: "content title_form form_item"
+	=text_area_tag 'notification[message]', '', placeholder: "message", class: "form_content notification_textarea form_item", style: "box-shadow: none; resize: none;"
+	=text_field_tag 'notification[path]', '', placeholder: "URL", class: "content url_form form_item"
+	=select_tag "notification[language_code]", options_for_select([["English", "en"], ["日本語", "ja"]], @current_user.language.code), class: "content country_selection form_item"   
+	=select_tag "notification[country_name]", options_for_select([[t('country.united_states'), "United States"], [t('country.japan'), "Japan"]], @current_user.country.name), class: "content country_selection form_item"    
+	=submit_tag "Submit", class: "form_btn .notification_submit"

@@ -9,11 +9,124 @@
 
 :css
 	body{ 
-		background-color: white;
+		background-color: #eee;
 		padding: 0;
 	}
 	#mobile_footer{
 		display: none;
 	}
-%h1 Home#about
-%p Find me in app/views/home/about.html.haml
+
+.header_general.in_white
+	.header_general_container
+		.header_general_menu_left
+			=link_to "newsb!", root_path, class: "logo"
+		
+		.header_general_menu_right
+			=link_to t('dropdown.profile_option.terms'), terms_page_path, class: "header_general_option" 
+			=link_to t('dropdown.profile_option.about'), about_page_path, class: "header_general_option" 
+			=link_to t('dropdown.profile_option.contact'), contact_page_path, class: "header_general_option" 
+		.header_general_menu_right_mobile
+			.open_general_mobile_menu
+				=render 'svg/menu_icon'
+			.close_general_mobile_menu
+				=render 'svg/close_icon'
+
+.general_wrapper.title_section
+	%h2.general_title
+		プライバシーポリシー
+
+.general_wrapper.compact
+	.general_container.in_white
+		.general_section.terms
+			.term.top
+				%p
+					本プライバシーポリシー（以下「本ポリシー」）は運営グループ「paprika」（以下「当運営グループ」）が
+					運営するソーシャルニュースプラットフォーム「NEWSB!」（以下「本サービス」）における、
+					ユーザーについての個人情報を含むユーザー情報の取り扱いについて定めるものです。
+					本規約に同意した上で本サービスをご利用ください。
+
+				
+				%p
+					English version will be uploaded shortly. Please wait to use our service if you don't understand the terms.
+			.term
+				%h4 
+					１.収集するユーザー情報と収集方法
+
+				%ul
+					%li
+						氏名・プロフィール写真・自己紹介文の情報をサイトのフォーム内でユーザーから提供された範囲で収集します。
+					%li
+						誕生日や性別などの情報をFacebookやTwitter等の外部サービスの認証機能を通じて取得します。
+						詳しい情報は、認証画面での項目や該当するサービスのプライバシーポリシーを参照してください。
+						すべての情報は認証画面でユーザーの了承を得た上でのみ収集されます。
+					%li
+						位置情報や端末情報をcookieやIPアドレスを通じて取得します。
+						
+			.term
+				%h4 
+					２.ユーザーコンテンツ
+				%p
+					ユーザーがプラットフォーム内で発信する情報は、登録ユーザー以外の個人からでも限定的にアクセスできます。
+					アクセスできる情報の例が以下です。
+				%ul
+					%li
+						氏名・写真・自己紹介文等のプロフィール情報
+					%li
+						投稿した記事へのコメントや他者へのコメント
+					%li
+						フォロワー
+					%li
+						お気に入りのタグ
+						
+			.term
+				%h4 
+					３.情報の利用目的
+				%p
+					取得する全てのユーザー情報は以下の目的で利用されます。
+				%ul
+					%li
+						サイト内でのユーザー体験向上
+					%li
+						お問い合わせ対応
+					%li
+						ユーザーアカウントの認証
+					%li
+						継続的なサービス開発への参考データ
+					%li
+						パーソナライズされたコンテンツや広告へのマッチング
+					%li
+						個人を特定できなような形での統計データ販売
+						
+			.term
+				%h4 
+					４.免責
+				%p
+					以下の場合、ユーザーの個人情報に関し、当運営グループは何らの責任を負いません。
+				%ul
+					%li
+						当サービス上で、ユーザーが自ら第三者に個人情報を公開した場合
+					%li
+						当サービス上で、ユーザーが誤って第三者に個人情報を公開した場合
+					%li
+						当サービス以外のウェブサイトやサービスを利用して、第三者がユーザーの情報を特定した場合
+					%li
+						当運営グループが関与する範囲外で個人情報が漏洩した場合（ソーシャルエンジニアリング等）
+
+			.term
+				%h4 
+					５.ポリシーの変更
+				%ul
+					%li
+						本ポリシーは、ユーザー情報の管理を継続的に改善する為、ポリシーの内容を随時変更することがあります。
+						ポリシーを変更した際は、サイトの規定する方法（お知らせ機能でのアナウンス等）で公表させていただきます。
+						
+			.term
+				%h4 
+					６.お問い合わせ　
+				%ul
+					%li
+						本ポリシーやその他個人情報の取り扱いについてのお問い合わせは、問い合わせページからお願いいたします。
+			
+			.term.terms_history
+				%p
+					初版　２０１８年１月３１日　制定

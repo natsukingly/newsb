@@ -4,7 +4,7 @@
 		.info
 			.title
 				%h4
-					= universal_truncate(article.title, 60)
+					= universal_truncate(article.title.html_safe, 60)
 				%p.sm.grey
 					- if article.published_time
 						#{time_ago_in_words(article.published_time)}・

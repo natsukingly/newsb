@@ -2,9 +2,12 @@
 	.user_image
 		=link_to user_image_helper(user)
 	.info
-		=link_to user.name, user, class: "user_name"
+		=link_to user, class: "user_name" do
+			#{user.name}
+			-unless user.credential.nil?
+				\/
+				#{user.credential}
 		
-		%p.credential= user.credential
 		.follow_link
 			=render "/shared/follow_form", user: user
 			

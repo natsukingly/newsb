@@ -1,11 +1,26 @@
-.notification
-	=link_to notification.target_user, class: "notification_target_user_link user_image_lg" do
-		.image_wrapper
-			=user_image_helper(notification.target_user)
-	=link_to notification.path do
-		.content
-			%p
-				=notification.message.html_safe
-			%p
-				#{time_ago_in_words(notification.created_at)}
+
+-if !(notification.path.nil? || notification.path == "")
+	.notification{data: {notification_id: "#{notification.id}"}}
+		=link_to notification.target_user, class: "notification_target_user_link user_image_lg" do
+			.image_wrapper
+				=user_image_helper(notification.target_user)
+		=link_to notification.path do
+			.content
+				%p
+					=notification.message.html_safe
+				%p
+					#{time_ago_in_words(notification.created_at)}
+					
+-else
+	.notification.disabled{data: {notification_id: "#{notification.id}"}}
+		=link_to root_path, class: "notification_target_user_link user_image_lg disabled" do
+			.image_wrapper
+				=user_image_helper(notification.target_user)
+		=link_to root_path, class: "disabled" do
+			.content
+				%p
+					=notification.message.html_safe
+				%p
+					#{time_ago_in_words(notification.created_at)}
+
 			

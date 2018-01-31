@@ -128,7 +128,7 @@ $(document).on('turbolinks:load', function() {
 		}
 		
 		letter_count = $(this).parents('form').find('input.credential_form').val().length;
-		if(letter_count > 100){
+		if(letter_count > 50){
 			$(this).parents('form').find('.setting_block.credential .error_message').show();
 			$(this).parents('form').find('.setting_block.credential .error_message .letter_count').text(letter_count);
 			return false;
@@ -141,7 +141,19 @@ $(document).on('turbolinks:load', function() {
 			return false;
 		}
 	});	
-
+	
+	$('#welcome_setting_form, #mobile_welcom_setting_form').submit(function(){
+		letter_count = $(this).find('input.credential_form').val().length;
+		if(letter_count > 50){
+			$(this).find('.setting_block.credential .error_message').show();
+			$(this).find('.setting_block.credential .error_message .letter_count').text(letter_count);
+			return false;
+		}
+	});
+	
+	
+	
+	
 	$('.report_submit_btn').click(function(){
 		letter_count = $(this).parents('form').find('textarea').val().length;
 		if(letter_count == 0){

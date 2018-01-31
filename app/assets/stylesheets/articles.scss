@@ -105,10 +105,10 @@
     p{
         flex: 1;
         padding: 16px 8px;
-        font-weight: 900;
+        font-weight: 600;
         font-size: 16px;
     }
-    i{
+    i.shared_icon{
         font-size: 20px;
         text-align: center;
         line-height: 40px;
@@ -272,7 +272,7 @@
 					 h2{
 						line-height: 20px;
 						font-size: 16px;
-						font-weight: 900;
+						font-weight: 600;
 						color: black;
 					}
 				}
@@ -297,7 +297,7 @@
 		    border-left: 2px solid $newsb_grey;
 		    margin-top: 5px;
 		    .body{
-		    	padding: 0 0 20px 12px;
+		    	padding: 0 0 12px 12px;
 		    }
 			.user_block{
 				padding: 0;
@@ -309,7 +309,7 @@
 					align-items: center;
 					margin-bottom: 8px;
 					.user_name{
-						font-weight: 900;
+						font-weight: 600;
 					}
 				}
 
@@ -434,7 +434,7 @@
 					h2.best_article_title{
 						font-size: 30px;
 						color: white;
-						font-weight: 900;
+						font-weight: 600;
 						span.best_article_source{
 							font-size: 14px;
 							color: #eee;

@@ -52,6 +52,50 @@ class AdminsController < ApplicationController
 		@report.save
 	end
 	
+	def newsb_notifications_index
+		@newsb_notifications = Notification.where(everyone: true).order(created_at: :desc).offset(@existing_notifications).limit(30)
+	end
+	
+	def create_newsb_notification
+		
+		title = params[:notification][:title]
+		content = params[:notification][:message]
+		message = "<span class='notification_title'>#{title}</span>#{content}"
+		language_id = Language.find_by(code: params[:notification][:language_code]).id
+		country_id = Country.find_by(name: params[:notification][:country_name]).id
+		path = params[:notification][:path]
+		unless path.nil?
+			link = true
+		end
+		# notification = Notification.new(user_id: 1, message: "aaaa", notification_type: "public", everyone: true, country_id: 6, language_id: 6)  
+		@notification = Notification.new(user_id: current_user.id,
+										everyone: true,
+										path: path,
+										link: link,
+										message: message,
+										notification_type: "public",
+										country_id: country_id,
+										language_id: language_id)
+		if @notification.save
+			flash[:notice] = "successfully notified everyone!"
+			redirect_to newsb_notifications_index_admins_path
+		else
+			flash[:alert] = "ERROR: couldn't issue notification"
+			redirect_to newsb_notifications_index_admins_path			
+		end
+	end
+	
+	def delete_newsb_notification
+		newsb_notification = Notification.find(params[:id])
+		if newsb_notification.destroy
+			flash[:notice] = "deleted the newsb public notification"
+			redirect_to newsb_notifications_index_admins_path
+		else
+			flash[:alert] = "failed"
+			redirect_to newsb_notifications_index_admins_path
+		end
+		
+	end
 	
 	private
 		def authenticate_admin

@@ -3,219 +3,340 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .general_container{
-    padding: 0 100px;
+	width: 90%;
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 20px;
+	&.in_white{
+	   background-color: white; 
+	}
 }
 
 @media(max-width: 768px){
-    .general_container{
-        padding: 0 12px;
-    }
+	.general_container{
+		width: 100%;
+		padding: 12px 8px;
+	}
 }
 
 .general_wrapper{
-    background-size: cover;
-    background-position: center;
-    text-align: center;
-        &.in_white{
-            color: #eee;
-        }
-        &.bkg_navy{
-            background-color: $newsb_grey;
-        }
-        &.bkg_grey{
-            background-color: #f9f9f9;
-        }
-    .general_title{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        &.large{
-            padding: 200px 0 100px;
-        }
-        &.top{
-            padding-top: 100px;
-        }
-        h2{
-            font-size: 70px;
-            font-weight: 900;
-            letter-spacing: 5px;
-            margin-bottom: 20px;
+	background-size: cover;
+	background-position: center;
+	text-align: center;
+	padding: 100px 0;
+		&.in_white{
+			color: #eee;
+		}
+		&.bkg_navy{
+			background-color: $newsb_grey;
+		}
+		&.bkg_grey{
+			background-color: #f9f9f9;
+		}
+		&.compact{
+			padding: 20px 0;
+		}
+	
+	.general_title{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		&.large{
+			padding: 100px 0;
+		}
+		// &.top{
+		//     padding-top: 100px;
+		// }
+		h2{
+			font-size: 70px;
+			font-weight: 600;
+			letter-spacing: 5px;
+			margin-bottom: 20px;
 
-        }
-        h3{
-            font-size: 26px;
-            font-weight: 900;
-            margin-bottom: 20px;
-        }
-        h4{
-            font-size: 20px;
-            font-weight: 900;
-            margin-bottom: 12px;
-        }
-        p{
-            font-size: 16px;
-            margin-bottom: 80px;
-        }
-        span.hrz_dvd{
-            display: inline-block;
-            width: 40px;
-            border-bottom: 5px solid pink;
-            margin-bottom: 20px;
-        }
-        // .value_block{
-        //     margin-bottom: 50px;
-        // }
-        .member{
-            margin-top: 30px;
-            img{
-            width: 150px;
-            height: 150px;
-            margin-bottom: 20px;
-            
-            }
-        }
-    }
-    .contact_form{
-        display: flex;
-        flex-direction: column;
-        width: 500px;
-        margin: 0 auto;
-        .contact_form_field{
-            display: flex;
-            flex: 1;
-            margin-top: 20px;
-            input, textarea{
-                flex: 1;
-            }
-            &.error_field{
-                margin-top: 5px;
-            }
-            input[type="submit"]{
-                padding: 8px 12px;
-                margin-bottom: 100px;
-                &:hover{
-                    border: 1px solid $newsb_grey;
-                    color: $newsb_grey;
-                }
-            }
-            textarea{
-                min-height: 150px;
-            }
-            input[type="file"]{
-                display: inline-block;
-                width: 100px;
-            }
-            i{
-                font-size: 20px;
-                margin-right: 8px;
-            }
-        }
-    }
-    p.contact_description{
-        // margin-bottom: 20px;
-    }
+		}
+		h3{
+			font-size: 26px;
+			font-weight: 600;
+			margin-bottom: 20px;
+		}
+		h4{
+			font-size: 20px;
+			font-weight: 600;
+			margin-bottom: 12px;
+		}
+		p{
+			font-size: 16px;
+		}
+		span.hrz_dvd{
+			display: inline-block;
+			width: 40px;
+			border-bottom: 5px solid pink;
+			margin-bottom: 20px;
+		}
+		.value_block{
+			margin-bottom: 80px;
+		}
+		.member{
+			margin-top: 30px;
+			img{
+			width: 150px;
+			height: 150px;
+			margin-bottom: 20px;
+			
+			}
+		}
+	}
+	.function_section{
+		display: flex;
+		justify-content: space-around;
+		flex-wrap: wrap;
+		text-align: center;
+		max-width: 1000px;
+		margin: 0 auto;
+		.function_block{
+			display: flex;
+			flex-direction: column;
+			
+			align-items: center;
+			width: 40%;
+			padding: 40px 0;
+			svg{
+				width: 120px;
+				height: 120px;
+				margin-bottom: 12px;
+			}
+			.function_title{
+				font-size: 20px;
+				font-weight: 600;
+				margin-bottom: 5px;
+			}
+			.function_description{
+				font-size: 14px;
+			}
+		}
+	}
+	.contact_form{
+		display: flex;
+		flex-direction: column;
+		width: 500px;
+		margin: 0 auto;
+		.contact_form_field{
+			display: flex;
+			flex: 1;
+			margin-top: 20px;
+			input, textarea{
+				flex: 1;
+			}
+			&.error_field{
+				margin-top: 5px;
+			}
+			input[type="submit"]{
+				padding: 8px 12px;
+				margin-bottom: 100px;
+				&:hover{
+					border: 1px solid $newsb_grey;
+					color: $newsb_grey;
+				}
+			}
+			textarea{
+				min-height: 150px;
+			}
+			input[type="file"]{
+				display: inline-block;
+				width: 100px;
+			}
+			i{
+				font-size: 20px;
+				margin-right: 8px;
+			}
+		}
+	}
+	p.contact_description{
+		// margin-bottom: 20px;
+	}
+}
+
+
+
+.general_wrapper.title_section{
+	background-image: linear-gradient(90deg,rgba(0,0,0,.8), rgba(0,0,0,.8)), url('/images/bkg_img.jpeg');
+	background-size: cover;
+	background-position: center;
+	color: white;
+	padding: 150px 0 100px;
+	.general_title{
+		font-size: 30px;
+	}
+}
+
+@media(max-width: 768px){
+	.general_wrapper.title_section{
+		padding: 80px 0 40px;
+	}
+}
+
+.general_section{
+	&.terms{
+		text-align: left;
+		padding: 20px;
+	}
+	.term{
+		margin-bottom: 40px;
+		h4{
+			margin-bottom: 12px;
+			font-size: 20px;
+		}
+		p, li{
+			line-height: 24px;
+			color: rgba(0,0,0,0.8);
+			
+		}
+		p{
+			margin-bottom: 12px;
+		}
+		>ul{
+			li{
+			}
+			>li{
+				margin-bottom: 20px;
+				list-style-type: decimal;
+				list-style-position: inside;
+			}
+			>ul{
+				margin-left: 40px;
+				>li{
+					list-style-type: lower-alpha;
+				}
+				>ul{
+					margin-left: 40px;
+					>li{
+						list-style-type: lower-roman;
+					}
+				}
+			}
+		}
+	}
 }
 
 
 @media(max-width: 768px){
-    .general_wrapper{
-        .general_title{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            &.large{
-                padding: 200px 0 150px;
-            }
-            h2{
-                font-size: 40px;
-                letter-spacing: 0;
-            }
-            h3{
-                font-size: 26px;
-                font-weight: 900;
-                margin-bottom: 20px;
-            }
-            h4{
-                font-size: 16px;
-                font-weight: 900;
-                margin-bottom: 20px;
-            }
-            p{
-                font-size: 16px;
-                margin-bottom: 80px;
-            }
-            span.hrz_dvd{
-                display: inline-block;
-                width: 40px;
-                border-bottom: 5px solid pink;
-                margin-bottom: 20px;
-            }
-            // .value_block{
-            //     margin-bottom: 50px;
-            // }
-        }
-        .contact_form{
-            width: auto;
-        }
-    }
+	.general_wrapper{
+		padding: 40px 0;
+		&#intro{
+			padding: 0;
+		}
+		&.title_section{
+			.general_title{
+				font-size: 20px;
+			}
+		}
+		.general_title{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			&.large{
+				padding: 200px 0 150px;
+			}
+			h2{
+				font-size: 40px;
+				letter-spacing: 0;
+			}
+			h3{
+				font-size: 26px;
+				font-weight: 600;
+				margin-bottom: 20px;
+			}
+			h4{
+				font-size: 16px;
+				font-weight: 600;
+				margin-bottom: 20px;
+			}
+			p{
+				font-size: 16px;
+				margin-bottom: 80px;
+			}
+			span.hrz_dvd{
+				display: inline-block;
+				width: 40px;
+				border-bottom: 5px solid pink;
+				margin-bottom: 20px;
+			}
+			.value_block{
+				margin-bottom: 50px;
+			}
+		}
+		.contact_form{
+			width: auto;
+		}
+		.function_section{
+			.function_block{
+				width: 90%;
+			}
+		}
+	}
+	.general_section{
+		&.terms{
+			padding: 20px 0;
+		}
+	}
 }
 
 
 
 .general_footer{
-    background-color: $newsb_grey;
-    color: #eee;
-    text-align: center;
-    flex: 1;
-    .footer_container{
-        padding: 50px 0;
-        .footer_menu{
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            .footer_menu_block_title.logo{
-                font-weight: 900;
-                margin-top: 20px;
-                text-align: center;
-                font-family: 'Mogra', cursive;
-                font-size: 30px;
-            }
-            .footer_menu_block{
-                display: flex;
-                margin-bottom: 20px;
-                justify-content: center;
-                a.footer_menu_item{
-                    display: block;
-                    color: #eee;
-                    padding: 0 20px;
-                    margin-bottom: 5px;                        
-                    &:hover{
-                        font-weight: 900;
-                    }
-                }
-            }
-        }
-    }
+	background-color: $newsb;
+	color: #000;
+	text-align: center;
+	flex: 1;
+	.footer_container{
+		padding: 50px 0;
+		.footer_menu{
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			.footer_menu_block_title.logo{
+				font-weight: 600;
+				margin-top: 20px;
+				text-align: center;
+				font-size: 30px;
+			}
+			.footer_menu_block{
+				display: flex;
+				margin-bottom: 20px;
+				justify-content: center;
+				
+				a.footer_menu_item{
+					display: block;
+					color: #000;
+					padding: 0 20px;
+					margin-bottom: 5px;                        
+					&:hover{
+						font-weight: 600;
+					}
+				}
+			}
+		}
+	}
 }
 
 @media(max-width: 768px){
-    .general_footer{
-        .footer_container{
-            .footer_menu{
-                flex-direction: column;
-                .footer_menu_block{
-                    .footer_menu_title{
-                        font-weight: 900;
-                        margin-bottom: 8px;
-                    }
-                    a.footer_menu_item{
-                        display: block;
-                        margin-bottom: 5px;
-                    }
-                }
-            }
-        }
-    }    
+	.general_footer{
+		.footer_container{
+			.footer_menu{
+				.footer_menu_block{
+					flex-direction: column;
+					.footer_menu_title{
+						font-weight: 600;
+						margin-bottom: 8px;
+					}
+					a.footer_menu_item{
+						display: block;
+						margin-bottom: 5px;
+					}
+				}
+			}
+		}
+	}    
 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123065438) do
+ActiveRecord::Schema.define(version: 20180129105344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,9 @@ ActiveRecord::Schema.define(version: 20180123065438) do
     t.integer "comment_id"
     t.integer "reply_id"
     t.boolean "everyone", default: false
+    t.integer "language_id"
+    t.integer "country_id"
+    t.boolean "link", default: true
   end
 
   create_table "post_drafts", force: :cascade do |t|
@@ -144,6 +147,7 @@ ActiveRecord::Schema.define(version: 20180123065438) do
     t.integer "comments_count", default: 0, null: false
     t.integer "country_id"
     t.boolean "fake_news_report", default: false
+    t.boolean "comment_permission", default: true
   end
 
   create_table "relationships", force: :cascade do |t|

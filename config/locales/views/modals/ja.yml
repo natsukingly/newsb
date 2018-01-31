@@ -4,4 +4,11 @@ ja:
       edit: "編集"
       edit_comment: "コメントの編集"
       comment: "コメント"
+      delete_post: "投稿の削除"
+      delete_comment: "コメントの削除"
+      delete_account: "アカウントの削除"
+    confirmation:
+      delete_post: "本当にこの投稿を削除してもよろしいですか。"
+      delete_comment: "本当にこのコメントを削除してもよろしいですか。"
+      delete_account: "本当にこのアカウントを削除してもよろしいですか。一度削除するとアカウントに関係した全てのデータには再びアクセスできなくなります。"
       

@@ -3,7 +3,7 @@
 	.image{style: "background-image: url(#{article.image.url});"}
 	.title
 		%h4.give_me_ellipsis
-			= article.title
+			= article.title.html_safe
 		%p.sm.grey
 			= article.source
 			- if article.published_time

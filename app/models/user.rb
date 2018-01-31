@@ -57,7 +57,7 @@ class User < ApplicationRecord
 			if auth.extra.raw_info.cover
 				user.cover = auth.extra.raw_info.cover.source 
 			else 
-				user.cover = "/assets/cover.jpg"
+				user.cover = "/images/bkg_img.jpg"
 			end 
 			user.gender = auth.extra.raw_info.gender
 			# If you are using confirmable and the provider(s) you use validate emails, 

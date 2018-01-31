@@ -9,6 +9,9 @@ ja:
      delete_success: "投稿を削除しました。"
      delete_alert: "エラー：投稿を削除できませんでした。"
      already_shared: "既に共有済みの記事です。"
+     allow_comment_permission: "他のユーザーがこの投稿にコメントすることを許可しました。"
+     deny_comment_permission: "他のユーザーがこの投稿にコメントしたり、既存のコメントを見ることを禁止しました。"
+          
     comment:
      create_success: "コメントを作成しました。"
      update_success: "コメントの変更を保存しました。"
@@ -17,5 +20,6 @@ ja:
      country_change_success: "国の設定を変更しました。"
      language_change_success: "言語の設定を変更しました。"
      update_setting_success: "プロフィールの変更を保存しました。"
+     delete_account_success: "アカウントを削除しました。"
     report:
      success: "投稿を報告しました。"

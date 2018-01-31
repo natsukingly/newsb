@@ -1,3 +1,4 @@
+
 %header
 	.header_container
 		.left
@@ -5,10 +6,16 @@
 				newsb!
 			#locale_link
 				.setting
-					=country_name_helper(@country.name)
-					%br
-					=language_name_helper(@language.name)
-			=render "dropdown/locale" 
+					.setting_item
+						=render 'svg/setting/location_icon'
+						%span
+							=country_name_helper(@country.name)
+					.setting_item
+						=render 'svg/setting/language_icon'
+						%span
+							=language_name_helper(@language.name)
+			=render "dropdown/locale"
+			 
 		.middle
 			.search_bar
 				=form_tag search_path(country: @country.name), method: "get" do
@@ -26,25 +33,59 @@
 			-if user_signed_in?
 				.notification_icon.icon
 					=render "shared/notification_icon"
+					
 				#profile_option_link.user_image_sm.align_items_center
 					=user_image_helper(current_user)
 					%span.header_user_name
 						=current_user.name
 					%i.fa.fa-angle-down
+					
 				#create_post_btn_circle.show_post_modal_btn
 					%span
 						+
 			-else
+				#profile_option_link.icon.not_logged_in
+					=render "svg/menu_icon_desktop"
 				.login_signup_link.header_btn 
 					=t('nav.login_signup')
 				#create_post_btn_circle.login_signup_link
 					%span
 						+
-
 			=render 'dropdown/notifications'
 			=render 'dropdown/profile_option'
 
+			
+			
 
+
+.notice_bar.for_js
+	.notification_bar_wrapper
+		%span.blank_box
+		%span.notice_content
+		=render 'svg/close_icon'
+
+.alert_bar.for_js
+	.notification_bar_wrapper
+		%span.blank_box
+		%span.alert_content
+		=render 'svg/close_icon'
+		
+-if flash[:notice]
+	.notice_bar
+		.notification_bar_wrapper
+			%span.blank_box
+			%span
+				= flash[:notice]
+			
+			=render 'svg/close_icon'
+		
+-if flash[:alert]
+	.alert_bar
+		.notification_bar_wrapper
+			%span.blank_box
+			%span
+				= flash[:alert]
+			=render 'svg/close_icon'
 	
 
 
@@ -53,35 +94,6 @@
 	.header_nav_wrapper
 		=render 'layouts/header_nav'
 
-
-		.notice_bar.for_js
-			.notification_bar_wrapper
-				%span.blank_box
-				%span.notice_content
-				=render 'svg/close_icon'
-		
-		.alert_bar.for_js
-			.notification_bar_wrapper
-				%span.blank_box
-				%span.alert_content
-				=render 'svg/close_icon'
-				
-		-if flash[:notice]
-			.notice_bar
-				.notification_bar_wrapper
-					%span.blank_box
-					%span
-						= flash[:notice]
-					
-					=render 'svg/close_icon'
-				
-		-if flash[:alert]
-			.alert_bar
-				.notification_bar_wrapper
-					%span.blank_box
-					%span
-						= flash[:alert]
-					=render 'svg/close_icon'
 
 :css
 	a.Lifestyle_nav_btn{

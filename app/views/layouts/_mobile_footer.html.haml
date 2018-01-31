@@ -1,8 +1,7 @@
 
 -if current_user 
 	.icon.mobile_icon#mobile_profile_option_link.user_image_xs
-		%span
-			=user_image_helper(current_user)
+		=user_image_helper(current_user)
 
 
 			
@@ -41,7 +40,7 @@
 		%span
 			=render "svg/mobile_notification_icon"
 			
-	.icon.mobile_icon.login_signup_link
+	.icon.mobile_icon#mobile_menu_link
 		%span
 			=render "svg/menu_icon"
 

@@ -16,7 +16,7 @@
 		%p.follower_stats 
 			=t('like', count: user.liked_count)
 			%span
-				=t('follower', count: user.followers.count)
+				=t('follower', count: user.followers_count)
 
 	.follow_switch
 		=render "/shared/follow_form_icon", user: user

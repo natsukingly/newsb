@@ -24,6 +24,8 @@
 		
 		.header_general_menu_right
 			=link_to "MISSION", '#mission', class: "header_general_option in_white" 
+			=link_to "SERVICE", '#functions', class: "header_general_option in_white" 
+			=link_to "VALUES", '#values', class: "header_general_option in_white" 
 			=link_to "MEMBER", '#member', class: "header_general_option in_white" 
 			=link_to "CONTACT", '#contact', class: "header_general_option in_white"
 		.header_general_menu_right_mobile
@@ -32,7 +34,7 @@
 			.close_general_mobile_menu.in_white
 				=render 'svg/close_icon'
 
-.general_wrapper#intro{class: "in_white bkg_navy", style: "background-image: linear-gradient(90deg,rgba(0,30,60,.8), rgba(0,30,60,.8)), url('/images/general_bkg_img.jpeg')"}
+.general_wrapper#intro{class: "in_white bkg_navy", style: "background-image: linear-gradient(90deg,rgba(0,0,0,.8), rgba(0,0,0,.8)), url('/images/bkg_img.jpeg')"}
 	.general_container
 		.general_title.large
 			%h2
@@ -46,7 +48,7 @@
 	.general_container
 		.general_title.top
 			%h3
-				OUR MISSION
+				MISSION
 			%span.hrz_dvd
 			%h4
 				ニュースをもっと面白く、わかりやすくすること。
@@ -55,9 +57,42 @@
 				%br
 				それぞれがお互いのジャーナリストになる場所。そんな場所をNEWSBは提供していきます。
 
-		.general_title
+.general_wrapper.bkg_grey#functions
+	.general_container
+		.general_title.top
 			%h3
-				Values
+				SERVICE
+			%span.hrz_dvd
+		.function_section
+			.function_block
+				=render 'svg/about/news'
+				.function_title
+					注目のニュースをチェック
+				.function_description
+					より注目度の高いニュースを優先して表示するためにユーザー同士のコミュニケーションが盛んに行われている記事をアルゴリズムが選別します。
+			.function_block
+				=render 'svg/about/expert'
+				.function_title
+					質問や意見を共有
+				.function_description
+					記事についてわからないことがあった時や自分の意見を共有したい時、newsb!のプラットフォームではすべてユーザーに向けて投稿を発信できます。
+			.function_block
+				=render 'svg/about/tag'
+				.function_title
+					タグで興味のある記事を検索
+				.function_description
+					ハッシュタグを使って自分の興味のある投稿をフォローしましょう。また、ハッシュタグを利用することでより多くのユーザーにあなたの投稿が届きます。
+			.function_block
+				=render 'svg/about/help'
+				.function_title
+					好きなユーザーをフォロー
+				.function_description
+					newsb!はニュースに興味を持ったユーザーのコミュニティです。自分の好きなユーザーをフォローして自分だけのフィードを作りましょう。
+.general_wrapper#values
+	.general_container
+		.general_title.top
+			%h3
+				VALUES
 			%span.hrz_dvd
 			
 			.value_block
@@ -90,7 +125,7 @@
 	.general_container
 		.general_title.top
 			%h3
-				MEMBER
+				開発メンバー
 			%span.hrz_dvd
 			.member
 				=image_tag asset_path "natsuki.png"
@@ -99,11 +134,12 @@
 					山口　夏生
 				%p
 					創業者兼エンジニア
-					
+
+.general_wrapper#contact
 	.general_container
 		.general_title.top
 			%h3
-				Contact
+				CONTACT
 			%span.hrz_dvd
 		=render 'home/contact_form', contact: @contact
 
@@ -114,23 +150,11 @@
 		$('html, body').animate({
 			'scrollTop':position
 		}, 'slow');
-		console.log("yo");
 		return false;
 	});
 	
 	
-	$('.open_general_mobile_menu').click(function(){
-		$('.header_general_menu_right').css("display", "flex");
-		$('.open_general_mobile_menu').hide();
-		$('.close_general_mobile_menu').show();
-	});
-	
-	$('.close_general_mobile_menu').click(function(){
-		$('.header_general_menu_right').hide();
-		$('.open_general_mobile_menu').show();
-		$('.close_general_mobile_menu').hide();
-	});	
-	
+
 	
 	$(window).scroll(function(){
 		var change_point = $('#mission').offset().top - $('.header_general').height();

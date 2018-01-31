@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 			post 'publish_draft'
 			post 'check_report'
 			post 'uncheck_report'
+			delete 'delete_newsb_notification'
 		end
 		collection do
 			get 'drafts'
@@ -36,6 +37,8 @@ Rails.application.routes.draw do
 			get 'unchecked_reports'
 			get 'all_reports'
 			post 'publish'
+			get 'newsb_notifications_index'
+			post 'create_newsb_notification'
 		end
 	end
 	
@@ -95,6 +98,7 @@ Rails.application.routes.draw do
 		
 		resources :posts, except: [:new, :update, :destroy] do
 			member do
+				post 'change_comment_permission'
 				post 'create_article_post', as: :create_article	
 				get 'edit_article_post', as: :edit_article
 				post 'update_article_post', as: :update_article
@@ -232,5 +236,6 @@ Rails.application.routes.draw do
 		get "/auto_scroll/load_followers" => "auto_scroll#load_followers", as: :load_followers
 	
 		get "/auto_scroll/load_reports" => "auto_scroll#load_reports", as: :load_reports
+		get "/auto_scroll/load_newsb_notifications" => "auto_scroll#load_newsb_notifications", as: :load_newsb_notifications
 	end	
 end

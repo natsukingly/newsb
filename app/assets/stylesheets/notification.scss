@@ -16,7 +16,9 @@
 	color: grey;
 	display: flex;
 	padding: 12px;
+	min-height: 80px;
 	background-color: white;
+	
 	.image_wrapper{
 		border-radius: 50%;
 	    border: 1px solid orange;
@@ -50,6 +52,7 @@
 		display: inline;
 		&:hover{
 			background-color: rgba(0,0,0,0);
+			color: #696969;
 		}
 	}
 	a.notification_target_user_link{
@@ -63,7 +66,7 @@
 	}
 	span{
 		color: $newsb_grey;
-		font-weight: 900;
+		font-weight: 600;
 	}
 
 }

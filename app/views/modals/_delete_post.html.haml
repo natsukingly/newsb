@@ -1,19 +1,19 @@
-.delete_modal.modal.modal_width_auto
+.delete_modal.modal.modal_width_400
 	.close_modal_btn
 		=render 'svg/close_icon'
 	%h2.modal_content_title
-		DELETE	POST
+		=t('modal.title.delete_post')
 	.modal_content
 		
 		.modal_icon
 			=render 'svg/delete_icon'
 
 		%p
-			Are you sure you want to delete your post?
+			=t('modal.confirmation.delete_post')
 	.delete_menu.modal_menu.modal_menu_center
 		.cancel_btn.modal_menu_item.cancel_modal_btn
-			NO
+			=t('action_cap.negative')
 		=form_tag(destroy_posts_path) do
 			=hidden_field_tag 'post[id]', '', class: "delete_target_post_id"
-			=submit_tag "YES", class: "modal_menu_item with_border"
+			=submit_tag t('action_cap.positive'), class: "modal_menu_item with_border"
 

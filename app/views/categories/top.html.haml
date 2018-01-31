@@ -25,10 +25,7 @@
 						.social_model_title
 							=t('article_index.title.comment')
 				
-				%span.divider
-					\|
-				%span
-					TOP
+
 			=render @articles.offset(1)
 			-if @articles.count < 30
 				.scroll_btn.stop_loading

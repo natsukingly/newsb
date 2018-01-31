@@ -1,0 +1,33 @@
+.post_like_block
+	=render '/likes/like_post', post: post
+-if current_user
+	-if post.comment_permission == false
+		.comment_link.link_btn.comment_blocked
+			=render 'svg/chat_icon_circle'
+			=t('state.turned_off')
+	-else
+		.comment_link.link_btn.show_comment_modal_btn
+			=render 'svg/chat_icon_circle'
+			・
+			%span.comment_count	
+				= post.comments_count
+-else
+	-if post.comment_permission == false
+		.comment_link.link_btn.comment_blocked
+			=render 'svg/chat_icon_circle'	
+			・
+			%span.comment_count	
+				= post.comments_count
+	-else
+		.comment_dummy_link.link_btn.login_signup_link
+			=render 'svg/chat_icon_circle'
+			・
+			%span.comment_count	
+				= post.comments_count	
+				
+.option
+	-if current_user
+		%i.fa.fa-ellipsis-v.lg.option_link
+		=render 'dropdown/post_option', post: post
+	-else
+		%i.fa.fa-ellipsis-v.lg.option_link.login_signup_link

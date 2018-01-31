@@ -5,7 +5,7 @@
 			.article_container	
 				.featured_article_content
 					%h2.featured_article_title
-						=link_to universal_truncate(article.title, 150), article_path(article)
+						=link_to universal_truncate(article.title.html_safe, 150), article_path(article)
 					=link_to article, class: "featured_article_info" do
 				
 						%span.featured_post_posts_count
@@ -40,8 +40,13 @@
 									-else
 										= universal_truncate(best_post.content, 300)
 										
-					=link_to t('article.see_more'), article, class: "show_article_link"
-											
+					
+				.featured_article_image_block
+					=link_to article, class: "article_image_link" do
+						.article_image{style: "background-image: url(#{article_image_helper article.image.url});"}
+							%span
+								=t('action_cap.more')
+
 											
 						
 					

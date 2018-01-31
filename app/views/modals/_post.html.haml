@@ -31,7 +31,7 @@
 					= form_tag posts_path do
 						.field.form_check_group
 							.select
-								= select_tag "post[category_id]", options_from_collection_for_select(Category.all, "id", "name"), prompt: "select a category", class: "form-control selectpicker tag_selection"
+								= select_tag "post[category_id]", options_from_collection_for_select(Category.all, :id, :translated_name), prompt: t('form.post.selectbox_placeholder'), class: "form-control selectpicker tag_selection"
 	
 		
 						.field.form-group.textarea_wrapper 

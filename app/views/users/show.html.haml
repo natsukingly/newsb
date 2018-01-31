@@ -21,8 +21,6 @@
 				.result_not_found
 					%h4.not_found_content
 						=t('not_found.user_posts')
-					#create_post_btn.show_post_modal_btn
-						=t ('form.post.title')
 			-else
 				.best_posts
 					= render @posts.includes(:article)

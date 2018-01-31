@@ -1,0 +1,87 @@
+.signin_modal_block.modal.modal_width_400
+	.close_modal_btn
+		=render 'svg/close_icon'
+	#continue_with_social_account_block
+		%h2.modal_content_title
+			ログインまたは、登録
+		.modal_section
+		
+			.social_signin_links
+				= link_to user_facebook_omniauth_authorize_path do
+					.facebook_signin_btn.social_signin_btn
+						%i.fa.fa-facebook
+						facebook
+						
+				= link_to user_twitter_omniauth_authorize_path do
+					.twitter_signin_btn.social_signin_btn
+						%i.fa.fa-twitter
+						Twitter
+						
+				= link_to user_google_omniauth_authorize_path do
+					.google_signin_btn.social_signin_btn
+						%i.fa.fa-google
+						Google
+						
+
+
+					
+			%h2.term_confirmation
+				登録・利用開始することで, 
+				=link_to "利用規約", terms_page_path
+				と
+				=link_to "プライバシーポリシー", privacy_page_path
+				に同意したものとみなします。	
+			%h2.warning
+				現在各SNSアカウントAPIの利用許可を申請中です。
+				許可が完全に確認できるまで、ログインで問題が発生する可能性があります。
+		
+	
+
+
+:javascript
+	$('.actions.non_social_submit_btn').click(function(){
+		$('#login_error_message').text('');	
+	});
+	
+	$('.login_signup_link').click(function () {
+		if("#{current_user}" == false){
+			$(".ddm").hide();
+			$('.signin_modal_wrapper').fadeIn();
+			// $("html,body,#signin_modal").scrollTop();
+			$('body').addClass('fixed');
+			current_url = location.href 
+			document.cookie = 'previous_url=' + current_url;
+			return false;
+		}
+	});
+
+	// $('.signin_modal_wrapper').click(function (event) {
+	// 	if(!$(event.target).closest('.signin_modal_block').length && !$(event.target).is('.signin_modal_block')) {
+	// 		$("#signin_modal").hide();
+	// 		$('body').removeClass('fixed');
+	// 		return false;
+	// 	}     
+	// });
+	
+	$('.close_modal_btn, .mobile_modal_back_btn').click(function (event) {
+		$("#signin_modal").hide();
+		$('body').removeClass('fixed');
+	});
+
+	$('.email_signup_link').click(function(e){
+		e.stopPropagation();
+		$('#continue_with_social_account_block').hide();
+		$('#signup_with_email_block').show();
+		$('#signin_modal .error_message').text('');
+		$('#signin_modal .field_with_errors').removeClass("field_with_errors");
+		return false;
+	});
+	
+	$('#cancel_email_signup_link').click(function(){
+		$('#continue_with_social_account_block').show();
+		$('#signup_with_email_block').hide();
+		$('#signin_modal .error_message').text('');
+		$('#signin_modal .field_with_errors').removeClass("field_with_errors");
+	});
+	
+	

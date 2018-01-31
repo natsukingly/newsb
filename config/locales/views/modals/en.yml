@@ -4,4 +4,11 @@ en:
       edit: "EDIT"
       edit_comment: "EDIT COMMENT"
       comment: "COMMENT"
+      delete_post: "DELETE POST"
+      delete_comment: "DELETE COMMENT"
+      delete_account: "DELETE ACCOUNT"
+    confirmation:
+      delete_post: "Are you sure you want to delete your post?"
+      delete_comment: "Are you sure you want to delete your comment?"
+      delete_account: "Are you sure you want to delete your account? After deleting your account, all of your data will be destroyed and you won't be able to retrive them later."
       

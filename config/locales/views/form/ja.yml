@@ -35,10 +35,11 @@ ja:
     setting:
       name: "名前"
       name_rule: "※newsb!では本名を使うことを推奨しています。"
-      credential: "役職・肩書き"
+      credential: "肩書き"
+      credential_placeholder: "例) 会社、役職、学校、ニックネーム"
       about: "自己紹介（最大1000文字）"
       language: "言語"
       location: "国・地域"
-      credential_error: "100文字までしか投稿できません。現在の文字数："
+      credential_error: "50文字までしか投稿できません。現在の文字数："
       about_error: "1000文字までしか投稿できません。現在の文字数："
       name_error: "名前が空白です。"

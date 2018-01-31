@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :followers, :following, :posts, :save_setting, :save_email_setting, :save_password_setting, :edit_setting, :edit_locale_setting, :edit_password_setting, :edit_email_setting, :edit_sns_setting]
   before_action :set_new_users, only: [:notification_index, :show]
-  before_action :authenticate_user_for_setting, only: [:complete_profile_form, :edit_setting, :edit_locale_setting, :edit_email_setting, :edit_password_setting,
+  before_action :authenticate_user_for_setting, only: [:edit_setting, :edit_locale_setting, :edit_email_setting, :edit_password_setting,
   :save_setting, :save_locale_setting, :save_email_setting, :save_password_setting]
   
   # GET /users
@@ -32,18 +32,16 @@ class UsersController < ApplicationController
   # end
   
   def complete_profile_form
-    @countries = Country.all
-    @languages = Language.all
-    
+
   end
   
   def complete_profile
     @user = User.find(current_user.id)
-    @user.country_id = params[:user][:country_id].to_i
-    @user.language_id = params[:user][:language_id].to_i
+    @user.country = Country.find_by(name: params[:user][:country_name])
+    @user.language = Language.find_by(code: params[:user][:language_code])
     @user.credential = params[:user][:credential]
-    @user.about = params[:user][:about]
     if @user.save
+      I18n.locale = @user.language.code
       flash[:notice] = t('flash.user.update_setting_success')
       redirect_to cookies[:previous_url] || root_path
     else
@@ -51,6 +49,7 @@ class UsersController < ApplicationController
       redirect_to cookies[:previous_url] || root_path
     end
   end
+  
   
   # def error_message
   #   @error_message = "invalid"
@@ -67,6 +66,7 @@ class UsersController < ApplicationController
   # end
   
   def show
+    @current_topic = t('nav.topic.profile')
     @posts = @user.posts.order(created_at: :desc).limit(30)
   end
   
@@ -189,10 +189,12 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
+    if @user.destroy
+      flash[:notice] = I18n.t('flash.user.delete_account_success')
+      redirect_to root_path
+    else
+      flash[:notice] = I18n.t('flash.general_error')
+      redirect_to user_path(@user.id)
     end
   end
 
@@ -202,10 +204,10 @@ class UsersController < ApplicationController
       @user = User.find(current_user.id)
       @user.country_id = @country.id
       if @user.save
-        flash[:notice] = "success"
+        flash[:notice] = t('flash.user.country_change_success')
         redirect_to root_path
       else
-        flash[:alert] = "failure"
+        flash[:alert] = t('flash.general_error')
         redirect_to root_path
       end
     else
@@ -216,22 +218,33 @@ class UsersController < ApplicationController
   
   def change_language
     @language = Language.find_by(code: params[:code])
+    
     if current_user
       @user = User.find(current_user.id)
       @user.language_id = @language.id
-      @user.save
+      redirect_url = cookies[:previous_url] || root_path
+      cookies.delete :previous_url
+      if @user.save
+        I18n.locale = @user.language.code
+        flash[:notice] = t('flash.user.language_change_success')
+        redirect_to redirect_url
+      else
+        flash[:alert] = t('flash.general_error')
+        redirect_to redirect_url
+      end
+    else
+      I18n.locale = @language.code
+      flash[:notice] = t('flash.user.language_change_success')
+      redirect_to root_path(locale: @language.code)
     end
-    cookies[:language] = @language.name
-    redirect_url = cookies[:previous_url]
-    cookies.delete :previous_url
-    redirect_to root_path(locale: @language.code)
+
   end
       
       
       
-  def notification_index
-    @current_topic = "Notifications"
-  end
+  # def notification_index
+  #   @current_topic = "Notifications"
+  # end
 
   def check_notifications
     notifications = current_user.notifications.where(check: false)

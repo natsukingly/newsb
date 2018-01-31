@@ -23,10 +23,10 @@
 					=render '/likes/like_comment', comment: comment
 				.option
 					-if current_user
-						%i.fa.fa-ellipsis-h.comment_option_link
+						%i.fa.fa-ellipsis-v.comment_option_link
 						=render 'dropdown/comment_option', comment: comment
 					-else
-						%i.fa.fa-ellipsis-h.comment_option_link.login_signup_link
+						%i.fa.fa-ellipsis-v.comment_option_link.login_signup_link
 			
 :javascript 
 	$(".comment_read_more_#{comment.id}").click(function(){

@@ -141,6 +141,12 @@ class AutoScrollController < ApplicationController
 		@existing_reports = params[:existing_reports].to_i
 		@loaded_reports = Report.order(created_at: :desc).offset(@existing_reports).limit(30)
 	end
+
+	#public notifications
+	def load_newsb_notifications
+		@exsisting_notification = params[:existing_newsb_notifications].to_i
+		@loaded_newsb_notifications = Notification.where(everyone: true).order(created_at: :desc).offset(@existing_newsb_notifications).limit(30)
+	end
 	
 	
 	#THINGS I NEED TO SCROLL 

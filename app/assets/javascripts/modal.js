@@ -105,6 +105,19 @@ $(document).on('turbolinks:load', function() {
 		}
 	});	
 	
+	// delete post modal	
+	$(".deactivation_link").click(function(){
+		initializeModal();
+		$('.delete_user_modal_wrapper').show();
+		if(windowWidth < 768){
+			$('.flex_container').hide();
+		}
+	});	
+	
+	
+	
+	
+	
 	// delete comment modal	
 	$(".comment_ddm .comment_delete_btn").click(function(){
 		initializeModal();

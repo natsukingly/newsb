@@ -9,6 +9,8 @@ class Like < ApplicationRecord
 	after_create :add_e_indecator
 	after_destroy :reduce_e_indecator
 	
+	after_create :add_liked_count
+	after_destroy :reduce_liked_count
   
 	include Rails.application.routes.url_helpers
 	def issue_notification
@@ -61,6 +63,18 @@ class Like < ApplicationRecord
 				notification.destroy
 			end
 		end
+	end
+	
+	def add_liked_count
+		user = self.likeable.user
+		user.liked_count = user.liked_count + 1
+		user.save
+	end
+	
+	def reduce_liked_count
+		user = self.likeable.user
+		user.liked_count = user.liked_count - 1
+		user.save
 	end
 	
 	def add_e_indecator

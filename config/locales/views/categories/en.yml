@@ -3,6 +3,7 @@ en:
     feed: "Feed"
     business: "Business"
     technology: "Technology"
+    tech: "Technology"
     politics: "Politics"
     economy: "Economy"
     lifestyle: "Lifestyle"
@@ -12,5 +13,6 @@ en:
     food: "Food"
     health: "Health"
     movies: "Movies・Music"
+    movies・music: "Movies・Music"
     funny: "Funny"
  

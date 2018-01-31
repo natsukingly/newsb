@@ -13,7 +13,9 @@ $(document).on('turbolinks:load', function() {
 	// 	$('.flex_container').hide();
 	// 	return false;
 	// });
-	
+	$('.ddm').click(function(e){
+		// e.stopPropagation();
+	});
 	// mobile_drop_down
 	$('#mobile_menu_link').click(function () {
 		initializeModal();
@@ -57,6 +59,6 @@ $(document).on('turbolinks:load', function() {
 		$('.mobile_ddm_wrapper').attr('data-position', position);
 		$(".modal_wrapper, .ddm, .mobile_ddm_header").hide();
 		$('.flex_container').hide();
-		$('html').addClass('stretch');
+		// $('html').addClass('stretch');
 	}	
 });

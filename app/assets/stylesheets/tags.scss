@@ -6,7 +6,7 @@
 
 a.tag_link{
     color: $newsb_grey;
-    font-weight: 900;
+    font-weight: 600;
 }
 .tags{
     .tag{
@@ -46,13 +46,19 @@ a.tag_link{
                 justify-content: center;
             }
             .favorite{
+                svg{
+                    fill: grey;
+
+                }
             }
             .unfavorite{
-    
+                svg{
+                    // fill: $newsb;
+                }
             }
             svg{
-                width: 20px;
-                height: 20px;
+                width: 25px;
+                height: 25px;
             }
         }
     }

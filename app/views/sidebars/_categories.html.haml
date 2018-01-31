@@ -1,0 +1,94 @@
+.sidebar_wrapper
+	.sidebar_inner_wrapper
+		.category_menu
+			=link_to root_path, class: "selected_topic active category_btn", style: "pointer-events: none; display: none;" do
+				=render 'svg/categories/current_topic'
+				%span
+					
+			=link_to root_path, class: "category_btn", data: {category: 'Top'} do
+				=render 'svg/categories/top'
+				%span
+					TOP
+			-if current_user
+				=link_to all_posts_categories_path, class: "category_btn", data: {category: 'Feed'} do
+					=render 'svg/categories/feed'
+					.feed_block
+						=t('categories.feed')
+						%span.feed_notifications_count
+							(#{current_user.feed_notifications.where(check: false).count})
+		
+			
+			=link_to categorized_articles_path("Business"), class: "category_btn", data: {category: 'Business'} do
+				=render 'svg/categories/business'
+				%span
+					=t('categories.business')
+					
+			=link_to categorized_articles_path("Politics"), class: "category_btn", data: {category: 'Politics'} do
+				=render 'svg/categories/politics'
+				%span
+					=t('categories.politics')
+					
+			=link_to categorized_articles_path("Tech"), class: "category_btn", data: {category: 'Tech'} do
+				=render 'svg/categories/technology'
+				%span
+					=t('categories.technology')
+					
+			=link_to categorized_articles_path("Economy"), class: "category_btn", data: {category: 'Economy'} do
+				=render 'svg/categories/economy'
+				%span
+					=t('categories.economy')
+					
+			=link_to categorized_articles_path("Lifestyle"), class: "category_btn", data: {category: 'Lifestyle'} do
+				=render 'svg/categories/lifestyle'
+				%span
+					=t('categories.lifestyle')
+					
+			=link_to categorized_articles_path("Sports"), class: "category_btn", data: {category: 'Sports'} do
+				=render 'svg/categories/sports'
+				%span
+					=t('categories.sports')
+			=link_to categorized_articles_path("Startup"), class: "category_btn", data: {category: 'Startup'} do
+				=render 'svg/categories/startup'
+				%span
+					=t('categories.startup')
+			
+			=link_to categorized_articles_path("Entertainment"), class: "category_btn", data: {category: 'Entertainment'} do
+				=render 'svg/categories/feed'
+				%span
+					=t('categories.entertainment')
+			=link_to categorized_articles_path("Food"), class: "category_btn", data: {category: 'Food'} do
+				=render 'svg/categories/food'
+				%span
+					=t('categories.food')
+			=link_to categorized_articles_path("Health"), class: "category_btn", data: {category: 'Health'} do
+				=render 'svg/categories/health'
+				%span
+					=t('categories.health')
+			=link_to categorized_articles_path("Movies・Music"), class: "category_btn", data: {category: 'Movies・Music'} do
+				=render 'svg/categories/music'
+				%span
+					=t('categories.movies')
+			=link_to categorized_articles_path("Funny"), class: "category_btn", data: {category: 'Funny'} do 
+				=render 'svg/categories/funny'
+				%span
+					=t('categories.funny')
+-if @category
+	:javascript
+		$('.category_menu').find('.category_btn[data-category="#{@category.name}"]').addClass("active");
+		var	position = $('#header_nav').find( "." + "#{@category.name}" + "_nav_btn").offset();
+
+-elsif @current_topic
+	:javascript
+		$('.category_menu .selected_topic span').text("#{@current_topic}");
+		$('.category_menu .selected_topic').show();
+
+-elsif @all_posts
+	:javascript
+		$('.category_menu').find(".category_btn[data-category='Feed']").addClass("active");
+
+-elsif @all_topic
+	:javascript
+		$('.category_menu').find(".category_btn[data-category='Top']").addClass("active");			
+			
+			
+		

@@ -55,7 +55,7 @@
         flex: 1;
         .user_info, .user_info_for_share{
             .user_name{
-                font-weight: 900;
+                font-weight: 600;
             }
         }
         .opinion{
@@ -82,6 +82,22 @@
         .post_menu{
             font-size: 20px;
             cursor: pointer;
+        }
+    }
+    .option{
+        position: relative;
+        flex: 1;
+        display: flex;
+        flex-direction: row-reverse;
+        i{
+            cursor: pointer;
+            font-size: 20px;
+            text-align: center;
+            line-height: 40px;
+            width: 40px;
+            height: 40px;
+            color: grey;
+            display: inline-block;                  
         }
     }
     .status{
@@ -128,26 +144,27 @@
                 height: 16px;
                 width: 16px;
                 fill: grey;
+                margin-right: 2px;
             }
-        }
-        .option{
-            position: relative;
-            flex: 1;
-            display: flex;
-            flex-direction: row-reverse;
-            i{
-                cursor: pointer;
-                font-size: 20px;
-                text-align: center;
-                line-height: 40px;
-                width: 40px;
-                height: 40px;
-                display: inline-block;                  
-            }
+            .comment_count{
+                margin-left: 2px;
+            }	
         }
         
         .comment_link{
             cursor: pointer;
+            &.comment_blocked{
+                border: none;
+                color: grey;
+                // background:
+                //   linear-gradient(to top right,
+                //       rgba(0,0,0,0) 0%,
+                //       rgba(0,0,0,0) calc(50% - 0.8px),
+                //       rgba(0,0,0,.2) 50%,
+                //       rgba(0,0,0,0) calc(50% + 0.8px),
+                //       rgba(0,0,0,0) 100%);   
+                pointer-events: none;
+            }
         }
         a{
             color: grey;
@@ -160,7 +177,7 @@
         .view_link, .reply_view_link{
             a {
                 font-size: 14px;
-                font-weight: 900;
+                font-weight: 600;
                 color: black;
             }
         }
@@ -184,6 +201,9 @@
 
                 font-size: 16px;
             }
+        }
+        .option{
+            flex: none;
         }
      }
      &.wo_article{
@@ -297,6 +317,9 @@
                     margin-right: 8px;
                     padding: 5px 8px;
                     border-radius: 5px;
+                    &.comment_blocked{
+                        background-color: rgba(0,0,0,0);
+                    }
                 }
             }
         }

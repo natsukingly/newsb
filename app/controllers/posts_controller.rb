@@ -125,7 +125,20 @@ class PostsController < ApplicationController
 	# 	flash[:notice] = "Your post has been updated."
 	# 	redirect_to article_path(@post.article.id)
 	# end
-
+	def change_comment_permission
+		@post = Post.find(params[:id])
+		if @post.comment_permission == true
+			@post.comment_permission = false
+			@post.save
+			flash[:notice] = t('flash.post.deny_comment_permission')
+		else
+			@post.comment_permission = true
+			@post.save
+			flash[:notice] = t('flash.post.allow_comment_permission')
+		end
+		redirect_to @post
+	end
+	
 
 	def destroy
 		article_id = @post.article_id
@@ -183,15 +196,17 @@ class PostsController < ApplicationController
 			end
 		end
 		
+
 		
 		#get article info using nokogiri gem
 		def parseURL
 			@article_url = params[:placeholder_url]
 			url = @article_url
 			charset = nil
-			html = open(url, 'User-Agent' => 'firefox') do |f|
+			html = open(url, 'User-Agent' => 'firefox', :read_timeout => 10) do |f|
 				charset = f.charset # 文字種別を取得
 				f.read # htmlを読み込んで変数htmlに渡す
+
 			end
 			# ノコギリを使ってhtmlを解析
 			
@@ -278,6 +293,7 @@ class PostsController < ApplicationController
 			shared_article = current_user.posts.where(article_id: @article.id, content: "").any?
 			if shared_article == true && params[:post][:content] == ""
 				flash[:notice] = t('flash.post.already_shared')
+				redirect_to root_path
 			else
 				@post = current_user.posts.build(article_id: @article.id)
 				@post.category_id = params[:post][:category_id].to_i
@@ -289,6 +305,7 @@ class PostsController < ApplicationController
 					redirect_to article_path(@post.article_id)
 				else
 					flash[:notice] = t('flash.post.create_fail')
+					redirect_to root_path
 				end
 			end
 		end

@@ -8,43 +8,66 @@
 
 .mobile_locale_ddm.ddm.mobile_ddm
 	.mobile_locale_ddm_wrapper.ddm_wrapper
+		.language
+			.menu_title
+				%span
+					=t('language.title')
+				%i.fa.fa-angle-down
+			.menu_items
+				=link_to change_language_path(code: 'en'), class: "language_link menu_item", data: {language_code: "en"}, method: :post do
+					.menu_item_left.for_language
+						%i.fa.fa-circle.blue
+						%span
+							English	
+				=link_to change_language_path(code: 'ja'), class: "language_link menu_item", data: {language_code: "ja"}, method: :post do
+					.menu_item_left.for_language
+						%i.fa.fa-circle.red
+						%span
+							日本語	
 		.country 
 			.menu_title
 				%span
 					=t('location.title')
 				%i.fa.fa-angle-down
 			.menu_items
-				-usa = Country.find_by(name: "United States")
-				-japan = Country.find_by(name: "Japan")
-				=link_to change_country_path(country_name: "Japan"), class: "country_link_#{japan.id} menu_item", method: :post do
+				=link_to change_country_path(country_name: "Japan"), class: "country_link menu_item", data: {country_name: "Japan"}, method: :post do
 					.menu_item_left
-						=render "flags/japan"
-						%span
-							=t('location.japan')
-				=link_to change_country_path(country_name: "United States"), class: "disabled country_link_#{usa.id} menu_item", method: :post do
+						=render "svg/flags/japan"
+						%span.country_name
+							=t('country.japan')
+				=link_to change_country_path(country_name: "United States"), class: "disabled country_link menu_item", data: {country_name: "United States"}, method: :post do
 					.menu_item_left
-						=render "flags/usa"
-						%span
-							=t('location.united_states')
+						=render "svg/flags/usa"
+						%span.country_name
+							=t('country.united_states')
 					%span.coming_soon
-						coming soon
+						=t('state.coming_soon')
 							
-							
-			.language
-				.menu_title
-					%span
-						=t('language.title')
-					%i.fa.fa-angle-down
-				.menu_items
-					=link_to change_language_path(code: 'en'), class: "language_link menu_item", method: :post do
-						.menu_item_left.for_language
-							%span
-								English	
-					=link_to change_language_path(code: 'ja'), class: "language_link menu_item", method: :post do
-						.menu_item_left.for_language
-							%span
-								日本語	
+				=link_to change_country_path(country_name: "United States"), class: "disabled country_link menu_item", data: {country_name: "United Kingdom"}, method: :post do
+					.menu_item_left
+						=render "svg/flags/uk"
+						%span.country_name
+							=t('country.united_kingdom')
+					%span.coming_soon
+						=t('state.coming_soon')
+						
+				=link_to change_country_path(country_name: "United States"), class: "disabled country_link menu_item", data: {country_name: "Singapore"}, method: :post do
+					.menu_item_left
+						=render "svg/flags/singapore"
+						%span.country_name
+							=t('country.singapore')
+					%span.coming_soon
+						=t('state.coming_soon')
+						
+				=link_to change_country_path(country_name: "United States"), class: "disabled country_link menu_item", data: {country_name: "Australia"}, method: :post do
+					.menu_item_left
+						=render "svg/flags/australia"
+						%span.country_name
+							=t('country.australia')
+					%span.coming_soon
+						=t('state.coming_soon')
+				
 	
 :javascript			
-	$('.country').find(".country_link_" + #{@country.name}).addClass("selected");
-	$('.language').find(".language_link_" + #{@language.name}).addClass("selected");
+	$('.country').find('.country_link[data-country-name="#{@country.name}"]').addClass("selected");
+	$('.language').find('.language_link[data-language-code="#{@language.code}"]').addClass("selected");

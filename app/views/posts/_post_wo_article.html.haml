@@ -1,6 +1,6 @@
 
 -if post.content.nil? || post.content.empty? 
-	.post{class: "post post_#{post.id} share wo_article"}
+	.post{class: "post post_#{post.id} share wo_article", data: {post_id: "#{post.id}"}}
 		.body
 			.main
 				.content
@@ -17,6 +17,10 @@
 						-if post.user != current_user
 							.user_option.follow_switch
 								=render "/shared/follow_form_icon.html.haml", user: post.user
+						-else	
+							.option
+								%i.fa.fa-ellipsis-h.lg.option_link
+								=render 'dropdown/post_option_for_share', post: post
 								
 
 -else				
@@ -45,27 +49,8 @@
 	
 		
 				.status.md
-					.post_like_block
-						=render '/likes/like_post', post: post
-					-if current_user
-						.link_btn.show_comment_modal_btn
-							=render 'svg/chat_icon_circle'
-							・
-							%span.comment_count	
-								= post.comments_count
-					-else
-						.comment_dummy_link.link_btn.login_signup_link
-							=render 'svg/chat_icon_circle'
-							・
-							%span.comment_count	
-								= post.comments_count		
-					
-					.option
-						-if current_user
-							%i.fa.fa-ellipsis-h.lg.option_link
-							=render 'dropdown/post_option', post: post
-						-else
-							%i.fa.fa-ellipsis-h.lg.option_link.login_signup_link
+					=render 'posts/post_menu', post: post
+
 		.comment_index_wrapper
 			-unless post.comments_count == 0
 				.comment_index		

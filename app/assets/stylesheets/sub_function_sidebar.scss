@@ -1,6 +1,6 @@
 .sub_function_sidebar{
 	width: 320px;
-	margin: 0 20px;
+	margin-left: 20px;
 	h2{
 		font-size: 14px;
 	    color: #696969;
@@ -19,11 +19,11 @@
 	}
 	h3{
 		font-size: 20px;
-		font-weight: 900;
+		font-weight: 600;
 	}
 	h4{
 		font-size: 14px;
-		font-weight: 900;
+		font-weight: 600;
 	}
 	p{
 		font-size: 12px;
@@ -65,7 +65,7 @@
 			h2{
 				color: black;
 				margin-bottom: 0;
-				font-weight: 900;
+				font-weight: 600;
 			}
 		}
 	}
@@ -100,7 +100,9 @@
 		.about{
 			margin: 12px 0;
 		}
-		.follow_link{
+		a.follow_btn{
+			border: 1px solid #aaa;
+			color: grey;
 		}
 	}
 }

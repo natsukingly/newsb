@@ -2,6 +2,10 @@ ja:
   country:
     united_states: "アメリカ合衆国"
     japan: "日本"
+    united_kingdom: "英国"
+    australia: "オーストラリア"
+    singapore: "シンガポール"
+    canada: "カナダ"
   language:
     english: "英語"
     japanese: "日本語"

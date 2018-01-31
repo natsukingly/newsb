@@ -25,10 +25,7 @@
 							%i.fa.fa-toggle-on.fa-2x
 						.social_model_title
 							=t('article_index.title.comment_off')
-				%span.divider
-					\|
-				%span
-					#{@category.name}
+
 			-if @articles.offset(1).empty?
 				.result_not_found
 					%h4.not_found_content

@@ -1,19 +1,23 @@
 .icon{
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	margin-right: 12px;
 	cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background-color: $newsb_grey;
+    border-radius: 50%;
+    transition: .1s;
 	svg{
 		fill: white;
-	    width: 30px;
-	    height: 30px;
-	    padding: 7px;
-	    background-color: $newsb_grey;
-	    border-radius: 50%;
-	    transition: .1s;
+		width: 14px;
+		height: 14px;
+	    
+	    
 	}
-	&:hover svg{
-		padding: 6px;
+	&:hover{
+		background-color: $newsb;
 	}
 }
 
@@ -48,18 +52,20 @@ a.logo{
 	display: inline-block;
 	color: $newsb_grey;
 	// background-color: $newsb;
-	font-family: 'Knewave', cursive;
+	// font-family: 'Knewave', cursive;
 	// font-family: 'Titan One', cursive;
-	font-family: 'Mogra', cursive;
+	// font-family: 'Mogra', cursive;
 	font-family: 'Supermercado One', cursive;
+	// font-family: 'VT323', monospace;
+	// font-family: 'Press Start 2P', cursive;
 	// font-family: 'Modak', cursive;
 	// font-family: 'Chela One', cursive;
 	// font-family: 'Permanent Marker', cursive;
 	// font-family: 'Gochi Hand', cursive;
 
-    padding: 12px;
+    margin-right: 5px;
     font-size: 36px;
-    font-weight: 900;
+    font-weight: 600;
 	svg{
 		width: 35px;
 		height: 35px;
@@ -71,11 +77,12 @@ a.logo{
 
 header{
 	position: relative;
-	height: 60px;
-	line-height: 60px;
+	height: 50px;
+	line-height: 50px;
 	padding: 0 20px;
 	background-color: white;
 	z-index: 200;
+	box-shadow: 0 0 12px #ddd;
 	.header_container{
 		display: flex;
 		margin: 0 auto;
@@ -85,16 +92,16 @@ header{
 			position: relative;
 			display: flex;
 	    	align-items: center;
-	    	span{
-	    		display: inline-block;
-	    		height: 16px;
-	    		position: absolute;
-	    		top: 0;
-	    		left: 150px;
-	    		background-color: $newsb_grey;
-	    		color: white;
-	    		border-radius: 30px;
-	    	}
+	    	// span{
+	    	// 	display: inline-block;
+	    	// 	height: 16px;
+	    	// 	position: absolute;
+	    	// 	top: 0;
+	    	// 	left: 150px;
+	    	// 	background-color: $newsb_grey;
+	    	// 	color: white;
+	    	// 	border-radius: 30px;
+	    	// }
 		}
 		.middle, .right{
 			display: flex;
@@ -272,6 +279,16 @@ header{
 	    line-height: 12px;
 	    text-align: left;
 	    font-size: 10px;
+	    display: flex;
+	    flex-direction: column;
+	}
+	.setting_item{
+		display: flex;
+		align-items: center;
+		svg{
+			width: 10px;
+			height: 10px;
+		}
 	}
 	.setting_icon{
 		display: flex;
@@ -327,6 +344,7 @@ header{
 
 
 #header_nav{
+	display: none;
 	height: 40px;
 	background-color: rgba(0,0,0, 0.9);
 	// box-shadow: 0 0 2px #666, 0 0 8px #222;
@@ -364,7 +382,7 @@ header{
 		    display: inline-block;
 		    text-align: center;
 		    font-size: 12px;
-		    font-weight: 900;
+		    font-weight: 600;
 		    color: white;
 			&:hover{
 				color: $newsb;
@@ -377,7 +395,7 @@ header{
 
 		a.active{
 		    color: $newsb;
-		    font-weight: 900;
+		    font-weight: 600;
 		    pointer-events: none;
 		    // background-color: $newsb;
 		}
@@ -451,12 +469,12 @@ header{
 				&.active{
 					background-color: white;
 					color: $newsb;
-					font-weight: 900;
+					font-weight: 600;
 				}
 				&:hover{
 					background-color: rgba(0,0,0,0);
 					color: white;
-					font-weight: 900;
+					font-weight: 600;
 				}
 				&.feed_btn{
 					display: none;
@@ -471,12 +489,19 @@ header{
 
 	.icon{
 		margin-right: 0;
+		background-color: rgba(0,0,0,0);
+		height: 25px;
+		width: 25px;
+		&:hover{
+			background-color: rgba(0,0,0,0);
+		}
 		svg{
 			fill: $newsb_grey;
 			height: 25px;
 			width: 25px;
 			&:hover{
-				fill: $newsb_grey;	
+				fill: $newsb_grey;
+				background-color: rgba(0,0,0,0);
 			}
 		}
 		span{
@@ -490,15 +515,13 @@ header{
 .notice_bar, .alert_bar{
 	cursor: pointer;
     position: absolute;
-    min-height: 40px;
-   	top: 0;
+   	top: 50px;
     right: 0;
     left: 0;
     text-align: center;
     color: white;
     font-size: 14px;
     z-index: 1000;
-    transition: .3s;
     display: flex;
     align-items: center;
     .notification_bar_wrapper{
@@ -541,7 +564,12 @@ header{
 		}
 	}
 	.notice_bar{
-		background-color: cornflowerblue;
+		background-color: white;
+		color: $newsb;
+		border-bottom: 1px solid orange;
+		svg{
+			fill: $newsb;
+		}
 	}
 }
 
@@ -551,7 +579,6 @@ header{
 
 
 #mobile_locale_link{
-	width: 40px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -570,18 +597,16 @@ header{
 
 #profile_option_link{
 	margin-right: 12px;
-	color: grey;
-    height: 35px;
-    cursor: pointer;
-    display: flex;
-    border-radius: 50px;
-    padding-right: 12px;
+	cursor: pointer;
+	position: relative;
+	>img, >span{
+		margin-right: 5px;
+	}
+
 	&:hover{
 		color: $newsb_grey;
 	}
-	.header_user_name{
-		margin-right: 8px;	
-	}
+
 }
 
 @media(max-width: 768px){

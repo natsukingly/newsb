@@ -32,6 +32,7 @@ body{
 
 	
 	background-color: #eee;
+	// font-family: "Lato", "Hiragino Maru Gothic Pro", "Meiryo UI", Meiryo, "MS PGothic", sans-serif;
  	font-family: Lato, "Noto Sans JP", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 	font-size: 16px;
 	color: #222;
@@ -43,7 +44,7 @@ body{
 }
 
 
-a.disabled, a.selected{
+div.disabled, a.disabled, a.selected{
 	pointer-events: none;
   	cursor: default;
 }
@@ -66,7 +67,9 @@ a.disabled, a.selected{
 	}
 }
 
-
+.logo{
+	font-family: 'Supermercado One', cursive;
+}
 .xs{
 	font-size: 10px;
 }
@@ -85,7 +88,7 @@ a.disabled, a.selected{
 }
 
 .bold{
-	font-weight: 900;
+	font-weight: 600;
 }
 
 .navy_bk{
@@ -167,7 +170,7 @@ input[type="text"]:focus {
 	border-radius: 3px;
 	padding: 50px 20px;
 	font-size: 24px;
-	font-weight: 900;
+	font-weight: 600;
 	color: grey;
 	text-align: center;
 	p{
@@ -496,7 +499,7 @@ header > div{
 
 
 
-a { text-decoration: none !important}
+// a { text-decoration: none !important}
 
 
 .btn{

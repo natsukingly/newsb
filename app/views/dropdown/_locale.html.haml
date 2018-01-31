@@ -1,16 +1,43 @@
 #locale_ddm.ddm
 	.country
-		=link_to t('country.united_states'), change_country_path(country_name: "United States"), class: "country_link", method: :post
-		=link_to t('country.japan'), change_country_path(country_name: "Japan"), class: "country_link", method: :post
-		
+		=link_to change_country_path(country_name: "Japan"), class: "country_link menu_item", data: {country_name: "Japan"}, method: :post do
+			=render "svg/flags/japan"
+			%span
+				=t('country.japan')	
+	
+		=link_to change_country_path(country_name: "United States"), class: "country_link menu_item disabled", data: {country_name: "United States"}, method: :post do
+			=render "svg/flags/usa"
+			%span
+				=t('country.united_states')
+			%span.coming_soon
+				=t('state.coming_soon')
+				
+		=link_to change_country_path(country_name: "Japan"), class: "country_link menu_item disabled", data: {country_name: "United Kingdom"}, method: :post do
+			=render "svg/flags/uk"
+			%span
+				=t('country.united_kingdom')
+			%span.coming_soon
+				=t('state.coming_soon')
+
+		=link_to change_country_path(country_name: "Japan"), class: "country_link menu_item disabled", data: {country_name: "Singapore"}, method: :post do
+			=render "svg/flags/singapore"
+			%span
+				=t('country.singapore')
+			%span.coming_soon
+				=t('state.coming_soon')
+
+		=link_to change_country_path(country_name: "Japan"), class: "country_link menu_item disabled", data: {country_name: "Australia"}, method: :post do
+			=render "svg/flags/australia"
+			%span
+				=t('country.australia')
+			%span.coming_soon
+				=t('state.coming_soon')
+				
 	.language
-		=link_to "English", change_language_path(code: 'en'), class: "language_link", method: :post
-		=link_to "日本語", change_language_path(code: 'ja'), class: "language_link", method: :post
+		=link_to "English", change_language_path(code: 'en'), class: "language_link", data: {language_code: "en"}, method: :post
+		=link_to "日本語", change_language_path(code: 'ja'), class: "language_link", data: {language_code: "ja"}, method: :post
 	
 			
 :javascript
-	$('.country').find(".country_link_" + #{@country.id}).addClass("selected");
-	$('.language').find(".language_link_" + #{@language.id}).addClass("selected");
-	
-
-	
+	$('.country').find('.country_link[data-country-name="#{@country.name}"]').addClass("selected");
+	$('.language').find('.language_link[data-language-code="#{@language.code}"]').addClass("selected");

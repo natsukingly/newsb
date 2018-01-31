@@ -1,5 +1,5 @@
 class SocialProfile < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
   store :other
   validates_uniqueness_of :uid, scope: :provider
 
