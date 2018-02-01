@@ -59,7 +59,9 @@ class Relationship < ApplicationRecord
         
         #the one that will be followed
         user = self.following
-        user.followers_count = user.followers_count - 1
+        unless user.followers_count == 0
+            user.followers_count = user.followers_count - 1
+        end
         user.save 
     end
     

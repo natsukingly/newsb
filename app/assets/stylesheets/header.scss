@@ -521,9 +521,11 @@ header{
     text-align: center;
     color: white;
     font-size: 14px;
-    z-index: 1000;
+    z-index: 100;
     display: flex;
+    min-height: 40px;
     align-items: center;
+    justify-content: center;
     .notification_bar_wrapper{
     	display: flex;
     	flex: 1;

@@ -14,7 +14,7 @@
 						=t('not_found.user_drafts')
 			-else
 				#post_drafts_index
-					= render partial: "post_drafts/admin_draft", collection: @post_drafts.includes(:article, :category), as: :post_draft
+					= render partial: "post_drafts/admin_draft", collection: @post_drafts.includes(:article), as: :post_draft
 					-if @post_drafts.count < 30
 						.scroll_btn.stop_loading
 							NO MORE DRAFTS	
@@ -40,35 +40,13 @@
 					Japan
 				.today
 					.result
-						-Category.all.each do |category|
-							- article_count = Article.where(category_id: category.id, country_id: 3).published_today.count
-							-if article_count < 10
-								%span.item.not_enough
-									=category.name
-									\:
-									=article_count
-							-else
-								%span.item.enough
-									=category.name
-									\:
-									=article.count
+						=current_user.post_drafts.where.not(hide: true).where(country_id: Country.find_by(name: "Japan").id).count
 			.articles_count_block
 				%h3
 					USA
 				.today
 					.result
-						-Category.all.each do |category|
-							- article_count = Article.where(category_id: category.id, country_id: 2).published_today.count
-							-if article_count < 10
-								%span.item.not_enough
-									=category.name
-									\:
-									=article_count
-							-else
-								%span.item.enough
-									=category.name
-									\:
-									=article.count
+						=current_user.post_drafts.where.not(hide: true).where(country_id: Country.find_by(name: "United States").id).count
 			
 			=link_to "CALL SCHNEIDER", prepare_admin_posts_path, id: "schneider_btn", method: :post
 			

@@ -13,8 +13,8 @@ development:
 
 production:
   <<: *default
-  database: newsb_production
-  username: natsuking
+  database: newsb_production_psql_database
+  username: natsukiyamaguchi
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
   host: <%= ENV['MYAPP_DATABASE_ENDPOINT'] %>
   port: 5432

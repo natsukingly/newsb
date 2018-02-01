@@ -2,7 +2,11 @@
 =form_tag "/posts/load_url_feed", method: :get, autocomplete: :off, remote: true do
 	.form_row
 		.load_url_btn
-			=render 'svg/load_icon'
+			%span.load_icon
+				=render 'svg/load_icon'
+			%span.loading_icon
+				%i.fa.fa-spinner.fa-pulse.loading_mobile
+			
 		= url_field_tag :placeholder_url, "", placeholder: "https://example.com", class: "url_form"
 
 
@@ -21,10 +25,12 @@
 			dataType: 'script',
 		}).fail(function(jqXHR, textStatus, errorThrown) {
 				$('.post_form_block .error_message').show();
-				$('i.loading_mobile').hide();
+				$('span.load_icon').show();
+				$('span.loading_icon').hide();
 			})
 		$('.post_form_requirement').hide();
-		$('i.loading_mobile').show();
+		$('span.loading_icon').show();
+		$('span.load_icon').hide();
 		// $('.post_form_block').show().html("#{escape_javascript render 'shared/loading'}");
 		$('.post_form_block').addClass("loading");
 		return false;
@@ -39,10 +45,11 @@
 			dataType: 'script',
 		}).fail(function(jqXHR, textStatus, errorThrown) {
 				$('.post_form_block .error_message').show();
-				$('i.loading_mobile').hide();
+				$('span.loading_icon').hide();
 			})
 		$('.post_form_requirement').hide();
-		$('i.loading_mobile').show();
+		$('span.loading_icon').show();
+		$('span.load_icon').hide();
 		$('.post_form_block').addClass("loading");
 		return false;	
 	});

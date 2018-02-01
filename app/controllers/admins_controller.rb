@@ -99,8 +99,13 @@ class AdminsController < ApplicationController
 	
 	private
 		def authenticate_admin
-			if current_user.admin != true
-				flash[:notice] = "You are not authorized to access this page"
+			if current_user
+				if current_user.admin != true
+					flash[:alert] = "You are not authorized to access this page"
+					redirect_to root_path
+				end
+			else
+				flash[:alert] = "You are not authorized to access this page"
 				redirect_to root_path
 			end
 		end

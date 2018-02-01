@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :followers, :following, :posts, :save_setting, :save_email_setting, :save_password_setting, :edit_setting, :edit_locale_setting, :edit_password_setting, :edit_email_setting, :edit_sns_setting]
-  before_action :set_new_users, only: [:notification_index, :show]
   before_action :authenticate_user_for_setting, only: [:edit_setting, :edit_locale_setting, :edit_email_setting, :edit_password_setting,
   :save_setting, :save_locale_setting, :save_email_setting, :save_password_setting]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :followers, :following, :posts, :save_setting, :save_email_setting, :save_password_setting, :edit_setting, :edit_locale_setting, :edit_password_setting, :edit_email_setting, :edit_sns_setting]
+  before_action :set_new_users, only: [:notification_index, :show]
+
   
   # GET /users
   # GET /users.json

@@ -17,11 +17,14 @@ class SchneiderController < ApplicationController
 		forbes_startup
 		bridge_startup
 		techcrunch_startup
-		itmedia_tech
-		techcrunch_tech1
-		techcrunch_tech2
-		asahi_politics
+		# itmedia_tech
+		# techcrunch_tech1
+		# techcrunch_tech2
+		# asahi_politics
+		
+		# cannot be loaded==============
 		# yomiuri_politics
+		
 		redirect_to drafts_admins_path
 		
 	end
