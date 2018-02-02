@@ -70,46 +70,97 @@ module ApplicationHelper
     end            
         
     def default_meta_tags
-      {
-        # site: "newsb!",
-        reverse: true,
-        title: "Newsb!",
-        description: "Share knowledge, ask questions, and report fake news.",
-        keywords: "",
-        viewport: "width=device-width, initial-scale=1.0" ,
-        og: {
-          title: :title,
-          type: "website",
-          url: request.original_url,
-          site_name: "newsb!",
-          description: :description,
-        }
-      }
+        if Rails.env.development?
+          {
+            # site: "newsb!",
+            reverse: true,
+            title: "Newsb!",
+            description: "Newsb! the social media just for news",
+            keywords: "",
+            viewport: "width=device-width, initial-scale=1.0" ,
+            fa: {
+                app_id: ENV['FACEBOOK_KEY']
+            },
+            og: {
+              title: :title,
+              type: "website",
+              url: request.original_url,
+              image: "https://news-party-natsukingly.c9users.io/images/newsb_image.png",
+              site_name: "newsb!",
+              description: :description,
+            }
+          }
+        elsif Rails.env.production?
+          {
+            # site: "newsb!",
+            reverse: true,
+            title: "Newsb!",
+            description: "Newsb! the social media just for news",
+            keywords: "",
+            viewport: "width=device-width, initial-scale=1.0" ,
+            fa: {
+                app_id: ENV['FACEBOOK_KEY']
+            },
+            og: {
+              title: :title,
+              type: "website",
+              url: request.original_url,
+              image: "http://www.newsbeee.com/images/newsb_image.png",
+              site_name: "Newsb!",
+              description: :description,
+            }
+          }
+        end
     end
     
     def article_meta_tags(article)
-        {
-            title: article.title,
-            description: "newsb!: The most social news platform in the world",
-            image_src: "#{url_for(asset_path article.image.url || "no_image.jpeg")}",
-            keywords: "",
-            og: {
-              title: :title,
-              type: "article",
-              url: "https://news-party-natsukingly.c9users.io/#{article.country.name}/articles/#{article.id}",
-              image: "#{url_for(asset_path article.image.url || "no_image.jpeg")}",
-              site_name: "newsb!",
-              description: :description,
-            },
-            twitter: {
-                card: "summary_large_image",
-                site: "newsb!",
-                creater: "newsb!",
-                title: :title,
-                description: :description,
-                image: "#{url_for(asset_path article.image.url || "no_image.jpeg")}",
+        if Rails.env.development?
+            {
+                title: article.title,
+                description: "Newsb! the social media just for news",
+                image_src: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_image.png",
+                keywords: "",
+                og: {
+                  title: :title,
+                  type: "article",
+                  url: "https://news-party-natsukingly.c9users.io/#{article.country.name}/articles/#{article.id}",
+                  image: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_image.png",
+                  site_name: "Newsb!",
+                  description: :description,
+                },
+                twitter: {
+                    card: "summary_large_image",
+                    site: "Newsb!",
+                    creater: "Newsb!",
+                    title: :title,
+                    description: :description,
+                    image: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_image.png",
+                }
             }
-        }
+        elsif Rails.env.production?
+            {
+                title: article.title,
+                description: "Newsb! the social media just for news",
+                image_src: article.image.url || "http://www.newsbeee.com/images/newsb_image.png",
+                keywords: "",
+                og: {
+                  title: :title,
+                  type: "article",
+                  url: "http://www.newsbeee.com/#{article.country.name}/articles/#{article.id}",
+                  image: article.image.url || "http://www.newsbeee.com/images/newsb_image.png",
+                  site_name: "Newsb!",
+                  description: :description,
+                },
+                twitter: {
+                    card: "summary_large_image",
+                    site: "Newsb!",
+                    creater: "Newsb!",
+                    title: :title,
+                    description: :description,
+                    image: article.image.url || "http://www.newsbeee.com/images/newsb_image.png",
+                }
+            }
+        end
     end
     
     
