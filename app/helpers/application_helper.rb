@@ -73,7 +73,7 @@ module ApplicationHelper
       {
         # site: "newsb!",
         reverse: true,
-        title: "newsb!",
+        title: "Newsb!",
         description: "Share knowledge, ask questions, and report fake news.",
         keywords: "",
         viewport: "width=device-width, initial-scale=1.0" ,

@@ -234,3 +234,24 @@ article_title: @article_title, article_url: @article_url, article_site: @article
 		
 		.close_search_bar
 			=render 'svg/close_icon'
+
+if("#{@article_published_time.empty?}"){
+	$('.post_form_block .error_message').show();
+	$('span.load_icon').show();
+	$('span.loading_icon').hide();
+	console.log("#{@article_published_time}");
+	console.log("aoiu");
+}else{
+	$('.post_url_form_modal').hide();
+	$('span.loading_icon').hide();
+	$('span.load_icon').show();
+	$('.post_form_block .error_message').hide();
+	$('.post_form_requirement').show();
+	$('.post_form_modal').show();
+	$('.post_form_modal .modal_content_title p').html("#{@article_title}");
+	$('.post_form_modal input[name="article[image]"]').val("#{@article_image}");
+	$('.post_form_modal input[name="article[url]"]').val("#{@article_url}");
+	$('.post_form_modal input[name="article[source]"]').val("#{@article_source}");
+	$('.post_form_modal input[name="article[title]"]').val("#{@article_title}");
+	$('.post_form_modal input[name="article[published_time]"]').val("#{@article_published_time}");
+}

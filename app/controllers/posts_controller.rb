@@ -41,7 +41,7 @@ class PostsController < ApplicationController
 		parseURL
 		@post = Post.new
 		@article = Article.new
-		@category_id = @category.id
+		
 	end
 	
 	def load_url_feed
@@ -95,6 +95,7 @@ class PostsController < ApplicationController
 				redirect_to article_path(@article.id)
 			else 
 				flash[:alert] = t('flash.post.create_fail')
+				
 				redirect_to article_path(@article.id)
 			end
 		end		
@@ -235,8 +236,12 @@ class PostsController < ApplicationController
 			end
 			
 			#PUBLISHED_TIME
-			unless doc.css('//meta[property="article:published_time"]/@content').empty?
+			if !(doc.css('//meta[property="article:published_time"]/@content').empty?)
 				@article_published_time = doc.css('//meta[property="article:published_time"]/@content').to_s
+			elsif !(doc.css('//meta[property="article:published"]/@content').empty?)
+				@article_published_time = doc.css('//meta[property="article:published"]/@content').to_s
+			else
+				@article_published_time = ''
 			end
 		end
 		
@@ -287,7 +292,11 @@ class PostsController < ApplicationController
 				end
 				@article.category_id = params[:post][:category_id].to_i
 				@article.country_id = @country.id
-				@article.save
+				if @article.save
+					
+				else
+					flash[:alert] = @article.errors.full_messages
+				end
 			end
 	
 			shared_article = current_user.posts.where(article_id: @article.id, content: "").any?
@@ -304,7 +313,7 @@ class PostsController < ApplicationController
 					flash[:notice] = t('flash.post.create_success')
 					redirect_to article_path(@post.article_id)
 				else
-					flash[:notice] = t('flash.post.create_fail')
+					# flash[:alert] = @post.errors.full_messages
 					redirect_to root_path
 				end
 			end
