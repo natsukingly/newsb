@@ -36,7 +36,7 @@
 										\/ #{best_post.user.credential}
 								%p.best_post_content
 									-if best_post.content.empty?
-										> Shared this article
+										=t('article.shared')
 									-else
 										= universal_truncate(best_post.content, 300)
 										
