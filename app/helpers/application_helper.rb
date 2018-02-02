@@ -37,7 +37,7 @@ module ApplicationHelper
         if url && url != ""
             url
         else 
-            return asset_path "no_image.jpeg"
+            return "/images/no_image.jpeg"
         end
     end
     

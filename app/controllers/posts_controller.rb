@@ -295,7 +295,9 @@ class PostsController < ApplicationController
 				if @article.save
 					
 				else
-					flash[:alert] = @article.errors.full_messages
+					if Rails.env.development?
+						flash[:alert] = @article.errors.full_messages
+					end
 				end
 			end
 	
@@ -313,7 +315,7 @@ class PostsController < ApplicationController
 					flash[:notice] = t('flash.post.create_success')
 					redirect_to article_path(@post.article_id)
 				else
-					# flash[:alert] = @post.errors.full_messages
+					flash[:alert] = t('flash.post.create_fail')
 					redirect_to root_path
 				end
 			end
