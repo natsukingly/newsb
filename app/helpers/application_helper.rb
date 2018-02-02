@@ -73,6 +73,7 @@ module ApplicationHelper
         if Rails.env.development?
           {
             # site: "newsb!",
+            google-site-verification: "mKpyaltoD8JmVXTMskfu7YXb5soQsBaUGS39Zd71QfE",
             reverse: true,
             title: "Newsb!",
             description: "Newsb! みんなで考えるニュース",
@@ -93,6 +94,7 @@ module ApplicationHelper
         elsif Rails.env.production?
           {
             # site: "newsb!",
+            google-site-verification: "mKpyaltoD8JmVXTMskfu7YXb5soQsBaUGS39Zd71QfE",
             reverse: true,
             title: "Newsb!",
             description: "Newsb! みんなで考えるニュース",
