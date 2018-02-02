@@ -77,13 +77,18 @@ class Post < ApplicationRecord
 			require "koala"
 			access_token = self.user.social_profile(:facebook).access_token
 			@api = Koala::Facebook::API.new(access_token)
+			if Rails.env.development?
+				link_url = "https://news-party-natsukingly.c9users.io/#{self.country.name}/articles/#{self.article.id}"
+			elsif Rails.env.production?
+				link_url = "http://www.newsbeee.com/#{self.country.name}/articles/#{self.article.id}"
+			end
 			@api.put_wall_post(self.content, {
 				"type": "article",
-				"name" => "NEWSB",
-				"link" => "https://news-party-natsukingly.c9users.io/#{self.country.name}/articles/#{self.article.id}",
+				"name" => "Newsb!",
+				"link" => link_url,
 				"caption" => self.article.title,
-				"description" => "NEWSB: The most social news platform in the world",
-				"picture" => "https://dev-newsb.s3.amazonaws.com#{asset_path_in_model(self.article.image.url)}"
+				"description" => "Newsb!: みんなで考えるニュース",
+				"picture" => self.article.image.url
 			})
 		end
 		if self.user.twitter_post == true
@@ -98,7 +103,11 @@ class Post < ApplicationRecord
 			    config.access_token         = access_token
 			    config.access_token_secret  = access_secret
 		    end
-		    client.update(self.content.truncate(70) + " " + "https://news-party-natsukingly.c9users.io/#{self.country.name}/articles/#{self.article.id}" + " " + "#NEWSB")
+		    if Rails.env.development?
+		    	client.update(self.content.truncate(70) + " " + "https://news-party-natsukingly.c9users.io/#{self.country.name}/articles/#{self.article.id}" + " " + "#NEWSB!")
+		    elsif Rails.env.production?
+		    	client.update(self.content.truncate(70) + " " + "http://www.newsbeee.com/#{self.country.name}/articles/#{self.article.id}" + " " + "#NEWSB!")
+			end	
 		end
 	end
 	

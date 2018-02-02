@@ -75,7 +75,7 @@ module ApplicationHelper
             # site: "newsb!",
             reverse: true,
             title: "Newsb!",
-            description: "Newsb! the social media just for news",
+            description: "Newsb! みんなで考えるニュース",
             keywords: "",
             viewport: "width=device-width, initial-scale=1.0" ,
             fa: {
@@ -95,7 +95,7 @@ module ApplicationHelper
             # site: "newsb!",
             reverse: true,
             title: "Newsb!",
-            description: "Newsb! the social media just for news",
+            description: "Newsb! みんなで考えるニュース",
             keywords: "",
             viewport: "width=device-width, initial-scale=1.0" ,
             fa: {
@@ -117,9 +117,12 @@ module ApplicationHelper
         if Rails.env.development?
             {
                 title: article.title,
-                description: "Newsb! the social media just for news",
+                description: "Newsb! みんなで考えるニュース",
                 image_src: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_image.png",
                 keywords: "",
+                fa: {
+                    app_id: ENV['FACEBOOK_KEY']
+                },
                 og: {
                   title: :title,
                   type: "article",
@@ -140,9 +143,12 @@ module ApplicationHelper
         elsif Rails.env.production?
             {
                 title: article.title,
-                description: "Newsb! the social media just for news",
+                description: "Newsb! みんなで考えるニュース",
                 image_src: article.image.url || "http://www.newsbeee.com/images/newsb_image.png",
                 keywords: "",
+                fa: {
+                    app_id: ENV['FACEBOOK_KEY']
+                },
                 og: {
                   title: :title,
                   type: "article",
