@@ -29,7 +29,7 @@
 						=link_to article do
 							.best_post
 								.user_info
-									.user_image_sm
+									.user_image_xs
 										=user_image_helper(best_post.user)
 									#{best_post.user.name}
 									-unless best_post.user.credential.nil? || best_post.user.credential.empty?
