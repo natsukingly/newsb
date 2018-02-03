@@ -1,0 +1,2 @@
+class AutoPostRecord < ApplicationRecord
+end

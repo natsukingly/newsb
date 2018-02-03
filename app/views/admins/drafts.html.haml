@@ -48,8 +48,72 @@
 					.result
 						=current_user.post_drafts.where.not(hide: true).where(country_id: Country.find_by(name: "United States").id).count
 			
-			=link_to "CALL SCHNEIDER", prepare_admin_posts_path, id: "schneider_btn", method: :post
+			=link_to  prepare_admin_posts_path, class: "schneider_btn", method: :post do
+				%span
+					ALL
+				%span
+					-if AutoPostRecord.where(site_name: "all").any? != false
+						=AutoPostRecord.where(site_name: "all").last.created_at
+					
+					
+			=link_to forbes_business_path, class: "schneider_btn", method: :post do
+				%span
+					forbes_business
+				%span
+					-if AutoPostRecord.where(site_name: "forbes_business").any? != false
+						=AutoPostRecord.where(site_name: "forbes_business").last.created_at			
 			
+			=link_to forbes_startup_path, class: "schneider_btn", method: :post do
+				%span
+					forbes_startup
+				%span
+					-if AutoPostRecord.where(site_name: "forbes_startup").any? != false
+						=AutoPostRecord.where(site_name: "forbes_startup").last.created_at
+					
+			=link_to bridge_startup_path, class: "schneider_btn", method: :post do
+				%span
+					bridge_startup
+				%span
+					-if AutoPostRecord.where(site_name: "bridge_startup").any? != false
+						=AutoPostRecord.where(site_name: "bridge_startup").last.created_at			
+			
+			=link_to itmedia_tech_path, class: "schneider_btn", method: :post do
+				%span
+					itmedia_tech
+				%span
+					-if AutoPostRecord.where(site_name: "itmedia_tech").any? != false
+						=AutoPostRecord.where(site_name: "itmedia_tech").last.created_at
+					
+			=link_to techcrunch_startup_path, class: "schneider_btn", method: :post do
+				%span
+					techcrunch_startup
+				%span
+					-if AutoPostRecord.where(site_name: "techcrunch_startup").any? != false
+						=AutoPostRecord.where(site_name: "techcrunch_startup").last.created_at
+					
+			=link_to techcrunch_tech1_path, class: "schneider_btn", method: :post do
+				%span
+					techcrunch_tech1
+				%span
+					-if AutoPostRecord.where(site_name: "techcrunch_tech1").any? != false
+						=AutoPostRecord.where(site_name: "techcrunch_tech1").last.created_at
+					
+			=link_to techcrunch_tech2_path, class: "schneider_btn", method: :post do
+				%span
+					techcrunch_tech2
+				%span
+					-if AutoPostRecord.where(site_name: "techcrunch_tech2").any? != false
+						=AutoPostRecord.where(site_name: "techcrunch_tech2").last.created_at
+					
+			=link_to asahi_politics_path, class: "schneider_btn", method: :post do
+				%span
+					asahi_politics
+				%span
+					-if AutoPostRecord.where(site_name: "asahi_politics").any? != false
+						=AutoPostRecord.where(site_name: "asahi_politics").last.created_at			
+			
+			
+
 :javascript
 	$('.scroll_btn.load_admin_drafts').click(function(){
 		var stop_loading = $(this).hasClass('stop_loading');

@@ -16,6 +16,7 @@ ja:
     unshare: "シェアをやめる"
     skip: "スキップ"
     more: "詳細"
+    deactivate: "アカウントの削除"
   action_cap:  
     positive: "はい"
     negative: "いいえ"

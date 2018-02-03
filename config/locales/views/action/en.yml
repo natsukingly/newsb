@@ -16,6 +16,7 @@ en:
     unshare: "Sharing"
     skip: "Skip"
     more: "More"
+    deactivate: "Deactivate your account"
   action_cap:  
     positive: "YES"
     negative: "NO"

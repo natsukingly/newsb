@@ -1,5 +1,7 @@
 class Article < ApplicationRecord
     mount_uploader :image, ArticleImageUploader
+    # serialize :keywords
+    
     has_many :posts
     has_many :post_drafts
     has_many :likes

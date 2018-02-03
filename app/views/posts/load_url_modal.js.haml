@@ -16,4 +16,7 @@
 	$('.post_form_modal input[name="article[url]"]').val("#{@article_url}");
 	$('.post_form_modal input[name="article[source]"]').val("#{@article_source}");
 	$('.post_form_modal input[name="article[title]"]').val("#{@article_title}");
+	$('.post_form_modal input[name="article[keywords]"]').val("#{@article_keywords}");
+	var description = $.trim("#{@article_description}");
+	$('.post_form_modal input[name="article[description]"]').val(description);
 	$('.post_form_modal input[name="article[published_time]"]').val("#{@article_published_time}");

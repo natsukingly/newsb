@@ -75,7 +75,6 @@
 -if @category
 	:javascript
 		$('.category_menu').find('.category_btn[data-category="#{@category.name}"]').addClass("active");
-		var	position = $('#header_nav').find( "." + "#{@category.name}" + "_nav_btn").offset();
 
 -elsif @current_topic
 	:javascript

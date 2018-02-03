@@ -56,7 +56,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 						# ＞＞ログイン
 						sign_in @profile.user
 						# ＞＞初めてのログインの場合は設定ページにリダイレクト
-						if @profile.user.sign_in_count <= 30
+						if @profile.user.sign_in_count <= 1
 							redirect_to complete_profile_form_users_path
 						# ＞＞２回目以降はのログインの場合はログイン前にいた場所かトップにリダイレクト
 						else

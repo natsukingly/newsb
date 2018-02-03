@@ -42,8 +42,18 @@ Rails.application.routes.draw do
 		end
 	end
 	
+	#scheneider
 	get '/schneider/crawl' => 'schneider#crawl', as: :crawl
+	post '/schneider/forbes_business', as: :forbes_business
+	post '/schneider/forbes_startup', as: :forbes_startup
+	post '/schneider/bridge_startup', as: :bridge_startup
+	post '/schneider/itmedia_tech', as: :itmedia_tech
+	post '/schneider/techcrunch_startup', as: :techcrunch_startup
+	post '/schneider/techcrunch_tech1', as: :techcrunch_tech1
+	post '/schneider/techcrunch_tech2', as: :techcrunch_tech2
+	post '/schneider/asahi_politics', as: :asahi_politics
 	post '/schneider/prepare_admin_posts', as: :prepare_admin_posts
+	
 
 	devise_for :users, :controllers => {registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions', passwords: 'users/passwords'}
 	

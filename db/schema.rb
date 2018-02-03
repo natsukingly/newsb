@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129105344) do
+ActiveRecord::Schema.define(version: 20180203181456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,14 @@ ActiveRecord::Schema.define(version: 20180129105344) do
     t.integer "likes_count", default: 0, null: false
     t.integer "country_id"
     t.integer "e_indecator", default: 0
+    t.string "keywords"
+    t.text "description"
+  end
+
+  create_table "auto_post_records", force: :cascade do |t|
+    t.string "site_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "categories", force: :cascade do |t|

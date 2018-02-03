@@ -235,11 +235,23 @@ class PostsController < ApplicationController
 				@article_image = doc.css('//meta[property="og:image"]/@content').to_s
 			end
 			
+			#keywords
+			unless doc.css('//meta[name="keywords"]/@content').empty?
+				@article_keywords = doc.css('//meta[name="keywords"]/@content')
+			end
+			
+			#description
+			unless doc.css('//meta[name="description"]/@content').empty?
+				@article_description = doc.css('//meta[name="description"]/@content')
+			end			
+			
 			#PUBLISHED_TIME
 			if !(doc.css('//meta[property="article:published_time"]/@content').empty?)
 				@article_published_time = doc.css('//meta[property="article:published_time"]/@content').to_s
 			elsif !(doc.css('//meta[property="article:published"]/@content').empty?)
 				@article_published_time = doc.css('//meta[property="article:published"]/@content').to_s
+			elsif !(doc.css('//meta[name="pubdate"]/@content').empty?)
+				@article_published_time = doc.css('//meta[name="pubdate"]/@content').to_s
 			else
 				@article_published_time = ''
 			end
@@ -292,6 +304,16 @@ class PostsController < ApplicationController
 				end
 				@article.category_id = params[:post][:category_id].to_i
 				@article.country_id = @country.id
+				
+				article_keywords = params[:article][:keywords]
+				unless article_keywords.empty?
+					keywords_regex = /[Ａ-Ｚａ-ｚA-Za-z一-鿆0-9０-９ぁ-ヶｦ-ﾟー]+/
+					keywords = article_keywords.scan(keywords_regex)
+					keywords = "{#{ keywords.uniq.map {|keyword| "#{ keyword }" }.join(",") }}"
+					@article.keywords = keywords
+				end
+				@article.description = params[:article][:description].to_s
+				
 				if @article.save
 					
 				else

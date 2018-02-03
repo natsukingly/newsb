@@ -102,8 +102,9 @@
 
 -if @category
 	:javascript
-		$('#header_nav').find( "." + "#{@category.name}" + "_nav_btn").addClass("active");
-		var	position = $('#header_nav').find( "." + "#{@category.name}" + "_nav_btn").offset();
+		$('.category_nav_menu').find('.category_nav_btn[data-category="#{@category.name}"]').addClass("active");
+		var	position = $('.category_nav_menu').find('.category_nav_btn[data-category="#{@category.name}"]').offset();
+
 		var windowWidth = $(window).width();
 		
 		if(windowWidth - 100 < position.left){
