@@ -221,7 +221,6 @@ class SchneiderController < ApplicationController
 		@count = @doc.css('div.mainBox li.ListBoxwrap a').count
 		@urls = @doc.css('div.mainBox li.ListBoxwrap a').map{ |url| url.attribute("href").to_s}	
 		
-		binding.pry
 		category_id = Category.find_by(name: "Entertainment").id
 		country_id = Country.find_by(name: "Japan").id
 		
