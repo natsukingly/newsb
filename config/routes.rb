@@ -52,6 +52,11 @@ Rails.application.routes.draw do
 	post '/schneider/techcrunch_tech1', as: :techcrunch_tech1
 	post '/schneider/techcrunch_tech2', as: :techcrunch_tech2
 	post '/schneider/asahi_politics', as: :asahi_politics
+	post '/schneider/rocket_news_funny', as: :rocket_news_funny
+	post '/schneider/buzzfeed_funny', as: :buzzfeed_funny
+	post '/schneider/yahoo_entertainment', as: :yahoo_entertainment
+	# post '/schneider/yahoo_health', as: :yahoo_health
+	
 	post '/schneider/prepare_admin_posts', as: :prepare_admin_posts
 	
 

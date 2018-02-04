@@ -112,7 +112,33 @@
 					-if AutoPostRecord.where(site_name: "asahi_politics").any? != false
 						=AutoPostRecord.where(site_name: "asahi_politics").last.created_at			
 			
+			=link_to rocket_news_funny_path, class: "schneider_btn", method: :post do
+				%span
+					rocket_news_funny
+				%span
+					-if AutoPostRecord.where(site_name: "rocket_news_funny").any? != false
+						=AutoPostRecord.where(site_name: "rocket_news_funny").last.created_at
+
+			=link_to buzzfeed_funny_path, class: "schneider_btn", method: :post do
+				%span
+					buzzfeed_funny
+				%span
+					-if AutoPostRecord.where(site_name: "buzzfeed_funny").any? != false
+						=AutoPostRecord.where(site_name: "buzzfeed_funny").last.created_at
+						
+			=link_to yahoo_entertainment_path, class: "schneider_btn", method: :post do
+				%span
+					yahoo_entertainment
+				%span
+					-if AutoPostRecord.where(site_name: "yahoo_entertainment").any? != false
+						=AutoPostRecord.where(site_name: "yahoo_entertainment").last.created_at
 			
+			// =link_to yahoo_health_path, class: "schneider_btn", method: :post do
+			// 	%span
+			// 		yahoo_health
+			// 	%span
+			// 		-if AutoPostRecord.where(site_name: "yahoo_health").any? != false
+			// 			=AutoPostRecord.where(site_name: "yahoo_health").last.created_at
 
 :javascript
 	$('.scroll_btn.load_admin_drafts').click(function(){

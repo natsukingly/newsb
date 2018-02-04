@@ -176,6 +176,82 @@ class SchneiderController < ApplicationController
 		redirect_to drafts_admins_path
 	end	
 	
+	def rocket_news_funny
+		AutoPostRecord.create(site_name: "rocket_news_funny")
+		set_doc("https://rocketnews24.com/")
+		
+		@count = @doc.css('div.post.type-post .post-header .entry-title a').count
+		@urls = @doc.css('div.post.type-post .post-header .entry-title a').map{ |url| url.attribute("href").to_s}	
+		
+		category_id = Category.find_by(name: "Funny").id
+		country_id = Country.find_by(name: "Japan").id
+		
+		@urls.each do |url|
+			parseURL(url)
+			create_draft(url, category_id, country_id)
+			create_shares(@article)
+		end	
+		redirect_to drafts_admins_path
+	end		
+	
+	def buzzfeed_funny
+		AutoPostRecord.create(site_name: "buzzfeed_funny")
+		set_doc("https://www.buzzfeed.com/jp")
+		
+		@count = @doc.css('div.feed-cards .story-card >a').count
+		@urls = @doc.css('div.feed-cards .story-card >a').map{ |url| url.attribute("href").to_s}	
+		
+		category_id = Category.find_by(name: "Funny").id
+		country_id = Country.find_by(name: "Japan").id
+		
+		@urls.each do |url|
+			url = "https://www.buzzfeed.com" + url 
+			parseURL(url)
+			create_draft(url, category_id, country_id)
+			create_shares_wo_tags(@article)
+		end	
+		redirect_to drafts_admins_path
+	end		
+	
+	
+	def yahoo_entertainment
+		AutoPostRecord.create(site_name: "yahoo_entertainment")
+		set_doc("https://news.yahoo.co.jp/list/?c=entertainment")
+		
+		@count = @doc.css('div.mainBox li.ListBoxwrap a').count
+		@urls = @doc.css('div.mainBox li.ListBoxwrap a').map{ |url| url.attribute("href").to_s}	
+		
+		binding.pry
+		category_id = Category.find_by(name: "Entertainment").id
+		country_id = Country.find_by(name: "Japan").id
+		
+		@urls.each do |url|
+			parseURL(url)
+			create_draft(url, category_id, country_id)
+			create_shares(@article)
+		end	
+		redirect_to drafts_admins_path
+	end
+	
+	# def yahoo_health
+	# 	AutoPostRecord.create(site_name: "yahoo_health")
+	# 	set_doc("https://news.yahoo.co.jp/hl?c=c_life&p=1")
+		
+	# 	@count = @doc.css('ul.listBd li span.thumb a').count
+	# 	@urls = @doc.css('ul.listBd li span.thumb a').map{ |url| url.attribute("href").to_s}	
+		
+	# 	category_id = Category.find_by(name: "Health").id
+	# 	country_id = Country.find_by(name: "Japan").id
+		
+	# 	@urls.each do |url|
+	# 		parseURL(url)
+	# 		create_draft(url, category_id, country_id)
+	# 		create_shares(@article)
+	# 	end	
+	# 	redirect_to drafts_admins_path
+	# end	
+	
+
 	private 
 		# def forbes_business
 		# 	set_doc("https://forbesjapan.com/category/lists/business?cx_hamburger=business")
@@ -407,6 +483,23 @@ class SchneiderController < ApplicationController
 			end
 		end
 		
+		def create_shares_wo_tags(article)
+			user = User.find_by(email: "newsb.sns@gmail.com")
+			
+			if article
+				content = ''
+				if user 
+					post = article.posts.build(user_id: user.id,
+												country_id: article.country_id,
+												category_id: article.category_id,
+												content: content,
+												comment_permission: false)
+					post.save
+				end
+			end
+		end		
+		
+		
 		
 		def parseURL(url)
 			charset = nil
@@ -455,6 +548,8 @@ class SchneiderController < ApplicationController
 				@article_published_time = doc.css('//meta[property="article:published"]/@content').to_s
 			elsif !(doc.css('//meta[name="pubdate"]/@content').empty?)
 				@article_published_time = doc.css('//meta[name="pubdate"]/@content').to_s
+			elsif !(doc.css('header.buzz-header').empty?)
+				@article_published_time = Date.parse(doc.css('header.buzz-header time.buzz-timestamp__time').text)
 			else
 				@article_published_time = ''
 			end
