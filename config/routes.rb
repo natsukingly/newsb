@@ -42,22 +42,70 @@ Rails.application.routes.draw do
 		end
 	end
 	
-	#scheneider
+	#scheneider##########==========================================================
 	get '/schneider/crawl' => 'schneider#crawl', as: :crawl
+	
+	#business
 	post '/schneider/forbes_business', as: :forbes_business
+	
+	#startup
 	post '/schneider/forbes_startup', as: :forbes_startup
 	post '/schneider/bridge_startup', as: :bridge_startup
-	post '/schneider/itmedia_tech', as: :itmedia_tech
 	post '/schneider/techcrunch_startup', as: :techcrunch_startup
+	
+	#economy
+	post '/schneider/jcast_economy', as: :jcast_economy
+	
+	# tech
 	post '/schneider/techcrunch_tech1', as: :techcrunch_tech1
 	post '/schneider/techcrunch_tech2', as: :techcrunch_tech2
+	post '/schneider/itmedia_tech', as: :itmedia_tech
+	post '/schneider/jcast_tech', as: :jcast_tech
+	
+	# politics
 	post '/schneider/asahi_politics', as: :asahi_politics
+	# post '/schneider/nhk_politics', as: :nhk_politics
+	# post '/schneider/jiji_politics', as: :jiji_politics
+	post '/schneider/excite_news_politics', as: :excite_news_politics
+	post '/schneider/jcast_politics', as: :jcast_politics
+	
+	# funny
 	post '/schneider/rocket_news_funny', as: :rocket_news_funny
 	post '/schneider/buzzfeed_funny', as: :buzzfeed_funny
+	
+	# entertainment
 	post '/schneider/yahoo_entertainment', as: :yahoo_entertainment
+	post '/schneider/netarika_entertainment', as: :netarika_entertainment
+	post '/schneider/gunosy_entertainment', as: :gunosy_entertainment
+	
+	#Movies.music
+	post '/schneider/netarika_music', as: :netarika_music
+	post '/schneider/gunosy_music', as: :gunosy_music
+	post '/schneider/gunosy_movie', as: :gunosy_movie
+	
+	
+	#health
+	post '/schneider/netarika_health', as: :netarika_health
+	post '/schneider/jcast_health', as: :jcast_health
 	# post '/schneider/yahoo_health', as: :yahoo_health
 	
+	#food
+	post '/schneider/netarika_food', as: :netarika_food	
+	post '/schneider/gunosy_food', as: :gunosy_food
+	
+	#lifestyle
+	
+	
+	#sports
+	post '/schneider/excite_news_sports', as: :excite_news_sports
+	post '/schneider/excite_news_sports2', as: :excite_news_sports2
+	
+	#all
 	post '/schneider/prepare_admin_posts', as: :prepare_admin_posts
+	
+	# ===============================================================================
+	
+	
 	
 
 	devise_for :users, :controllers => {registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions', passwords: 'users/passwords'}

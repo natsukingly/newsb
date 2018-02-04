@@ -219,17 +219,17 @@ class PostsController < ApplicationController
 			else
 				@article_title = doc.css('//meta[property="og:title"]/@content').to_s
 			end
-			
 			#SITE_NAME
 			if !(doc.css('//meta[property="og:site_name"]/@content').empty?)
 				@article_source = doc.css('//meta[property="og:site_name"]/@content').to_s
 				
 			elsif !(doc.css('//meta[name="site_name"]/@content').empty?)
 				@article_source = doc.css('//meta[name="site_name"]/@content').to_s
+			elsif !(doc.css('//meta[name="twitter:site"]/@content').empty?)
+				@article_source = doc.css('//meta[name="twitter:site"]/@content').to_s
 			else
 				@article_source = doc.title.to_s
 			end
-			
 			#SITE_IMAGE
 			unless doc.css('//meta[property="og:image"]/@content').empty? || doc.css('//meta[property="og:image"]/@content').empty?
 				@article_image = doc.css('//meta[property="og:image"]/@content').to_s
@@ -237,12 +237,14 @@ class PostsController < ApplicationController
 			
 			#keywords
 			unless doc.css('//meta[name="keywords"]/@content').empty?
-				@article_keywords = doc.css('//meta[name="keywords"]/@content')
+				@article_keywords = doc.css('//meta[name="keywords"]/@content').to_s
 			end
 			
 			#description
-			unless doc.css('//meta[name="description"]/@content').empty?
-				@article_description = doc.css('//meta[name="description"]/@content')
+			if !(doc.css('//meta[name="description"]/@content').empty?)
+				@article_description = doc.css('//meta[name="description"]/@content').to_s
+			elsif !(doc.css('//meta[property="og:description"]/@content').empty?)
+				@article_description = doc.css('//meta[property="og:description"]/@content').to_s
 			end			
 			
 			#PUBLISHED_TIME
@@ -252,12 +254,24 @@ class PostsController < ApplicationController
 				@article_published_time = doc.css('//meta[property="article:published"]/@content').to_s
 			elsif !(doc.css('//meta[name="pubdate"]/@content').empty?)
 				@article_published_time = doc.css('//meta[name="pubdate"]/@content').to_s
+			
+			#for buzzfeed
 			elsif !(doc.css('header.buzz-header').empty?)
 				@article_published_time = Date.parse(doc.css('header.buzz-header time.buzz-timestamp__time').text)
+			#for netarika
+			elsif !(doc.css('//meta[name="epoch-publish-date-seconds"]/@content').empty?)
+				time = doc.css('//meta[name="epoch-publish-date-seconds"]/@content').to_s
+				@article_published_time = Time.at(time.to_i)
+			#for NHK
+			elsif !(doc.css('#main article.module--detail time').empty?)
+
+				@article_published_time = doc.css('#main article.module--detail time').attribute("datetime").to_s
+			#for excite news and gunosy
+			elsif !(doc.css('//meta[itemprop="datePublished"]/@content').empty?)
+				@article_published_time = doc.css('//meta[itemprop="datePublished"]/@content').to_s
 			else
 				@article_published_time = ''
 			end
-			binding.pry
 		end
 		
 		

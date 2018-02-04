@@ -63,6 +63,14 @@
 					-if AutoPostRecord.where(site_name: "forbes_business").any? != false
 						=AutoPostRecord.where(site_name: "forbes_business").last.created_at			
 			
+			=link_to jcast_economy_path, class: "schneider_btn", method: :post do
+				%span
+					jcast_economy
+				%span
+					-if AutoPostRecord.where(site_name: "jcast_economy").any? != false
+						=AutoPostRecord.where(site_name: "jcast_economy").last.created_at
+			
+			
 			=link_to forbes_startup_path, class: "schneider_btn", method: :post do
 				%span
 					forbes_startup
@@ -104,13 +112,51 @@
 				%span
 					-if AutoPostRecord.where(site_name: "techcrunch_tech2").any? != false
 						=AutoPostRecord.where(site_name: "techcrunch_tech2").last.created_at
+		
+			=link_to jcast_tech_path, class: "schneider_btn", method: :post do
+				%span
+					jcast_tech
+				%span
+					-if AutoPostRecord.where(site_name: "jcast_tech").any? != false
+						=AutoPostRecord.where(site_name: "jcast_tech").last.created_at
+
 					
 			=link_to asahi_politics_path, class: "schneider_btn", method: :post do
 				%span
 					asahi_politics
 				%span
 					-if AutoPostRecord.where(site_name: "asahi_politics").any? != false
-						=AutoPostRecord.where(site_name: "asahi_politics").last.created_at			
+						=AutoPostRecord.where(site_name: "asahi_politics").last.created_at		
+			
+			=link_to excite_news_politics_path, class: "schneider_btn", method: :post do
+				%span
+					excite_news_politics
+				%span
+					-if AutoPostRecord.where(site_name: "excite_news_politics").any? != false
+						=AutoPostRecord.where(site_name: "excite_news_politics").last.created_at	
+
+			=link_to jcast_politics_path, class: "schneider_btn", method: :post do
+				%span
+					jcast_politics
+				%span
+					-if AutoPostRecord.where(site_name: "jcast_politics").any? != false
+						=AutoPostRecord.where(site_name: "jcast_politics").last.created_at
+						
+			// =link_to nhk_politics_path, class: "schneider_btn", method: :post do
+			// 	%span
+			// 		nhk_politics
+			// 	%span
+			// 		-if AutoPostRecord.where(site_name: "nhk_politics").any? != false
+			// 			=AutoPostRecord.where(site_name: "nhk_politics").last.created_at	
+
+			// =link_to jiji_politics_path, class: "schneider_btn", method: :post do
+			// 	%span
+			// 		jiji_politics
+			// 	%span
+			// 		-if AutoPostRecord.where(site_name: "jiji_politics").any? != false
+			// 			=AutoPostRecord.where(site_name: "jiji_politics").last.created_at	
+
+
 			
 			=link_to rocket_news_funny_path, class: "schneider_btn", method: :post do
 				%span
@@ -132,6 +178,89 @@
 				%span
 					-if AutoPostRecord.where(site_name: "yahoo_entertainment").any? != false
 						=AutoPostRecord.where(site_name: "yahoo_entertainment").last.created_at
+						
+			=link_to netarika_entertainment_path, class: "schneider_btn", method: :post do
+				%span
+					netarika_entertainment
+				%span
+					-if AutoPostRecord.where(site_name: "netarika_entertainment").any? != false
+						=AutoPostRecord.where(site_name: "netarika_entertainment").last.created_at
+						
+			=link_to gunosy_entertainment_path, class: "schneider_btn", method: :post do
+				%span
+					gunosy_entertainment
+				%span
+					-if AutoPostRecord.where(site_name: "gunosy_entertainment").any? != false
+						=AutoPostRecord.where(site_name: "gunosy_entertainment").last.created_at
+						
+			=link_to netarika_music_path, class: "schneider_btn", method: :post do
+				%span
+					netarika_music
+				%span
+					-if AutoPostRecord.where(site_name: "netarika_music").any? != false
+						=AutoPostRecord.where(site_name: "netarika_music").last.created_at
+					
+					
+						
+			=link_to gunosy_music_path, class: "schneider_btn", method: :post do
+				%span
+					gunosy_music
+				%span
+					-if AutoPostRecord.where(site_name: "gunosy_music").any? != false
+						=AutoPostRecord.where(site_name: "gunosy_music").last.created_at	
+						
+			=link_to gunosy_movie_path, class: "schneider_btn", method: :post do
+				%span
+					gunosy_movie
+				%span
+					-if AutoPostRecord.where(site_name: "gunosy_movie").any? != false
+						=AutoPostRecord.where(site_name: "gunosy_movie").last.created_at							
+						
+						
+						
+			=link_to netarika_health_path, class: "schneider_btn", method: :post do
+				%span
+					netarika_health
+				%span
+					-if AutoPostRecord.where(site_name: "netarika_health").any? != false
+						=AutoPostRecord.where(site_name: "netarika_health").last.created_at
+			
+			=link_to jcast_health_path, class: "schneider_btn", method: :post do
+				%span
+					jcast_health
+				%span
+					-if AutoPostRecord.where(site_name: "jcast_health").any? != false
+						=AutoPostRecord.where(site_name: "jcast_health").last.created_at			
+			
+						
+			=link_to netarika_food_path, class: "schneider_btn", method: :post do
+				%span
+					netarika_food
+				%span
+					-if AutoPostRecord.where(site_name: "netarika_food").any? != false
+						=AutoPostRecord.where(site_name: "netarika_food").last.created_at
+						
+			=link_to gunosy_food_path, class: "schneider_btn", method: :post do
+				%span
+					gunosy_food
+				%span
+					-if AutoPostRecord.where(site_name: "gunosy_food").any? != false
+						=AutoPostRecord.where(site_name: "gunosy_food").last.created_at						
+			
+			=link_to excite_news_sports_path, class: "schneider_btn", method: :post do
+				%span
+					excite_news_sports
+				%span
+					-if AutoPostRecord.where(site_name: "excite_news_sports").any? != false
+						=AutoPostRecord.where(site_name: "excite_news_sports").last.created_at	
+						
+			=link_to excite_news_sports2_path, class: "schneider_btn", method: :post do
+				%span
+					excite_news_sports2
+				%span
+					-if AutoPostRecord.where(site_name: "excite_news_sports2").any? != false
+						=AutoPostRecord.where(site_name: "excite_news_sports2").last.created_at	
+			
 			
 			// =link_to yahoo_health_path, class: "schneider_btn", method: :post do
 			// 	%span
