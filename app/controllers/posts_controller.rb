@@ -344,13 +344,13 @@ class PostsController < ApplicationController
 				@article.description = params[:article][:description].to_s
 				
 				if @article.save
-					
+				
 				else
 					if Rails.env.development?
 						flash[:alert] = @article.errors.full_messages
 					end
 				end
-				binding.pry
+				
 			end
 	
 			shared_article = current_user.posts.where(article_id: @article.id, content: "").any?

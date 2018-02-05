@@ -8,7 +8,7 @@
 			.notifications.notification_list_for_ddm.header_notifications
 				-if current_user.notifications.empty?
 					.notification_empty
-						You haven't received any notifications yet.
+						=t('not_found.no_notifications')
 				-else        
 					=render partial: @notifications
 					-if @notifications.count < 30
