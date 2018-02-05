@@ -270,6 +270,9 @@ class PostsController < ApplicationController
 			elsif !(doc.css('//meta[name="epoch-publish-date-seconds"]/@content').empty?)
 				time = doc.css('//meta[name="epoch-publish-date-seconds"]/@content').to_s
 				@article_published_time = Time.at(time.to_i)
+			#for techcrunch
+			elsif !(doc.css('//meta[name="sailthru.date"]/@content').empty?)
+				@article_published_time = doc.css('//meta[name="sailthru.date"]/@content').to_s
 			#for NHK
 			elsif !(doc.css('#main article.module--detail time').empty?)
 
@@ -280,6 +283,7 @@ class PostsController < ApplicationController
 			else
 				@article_published_time = ''
 			end
+
 		end
 		
 		
@@ -322,10 +326,10 @@ class PostsController < ApplicationController
 			#save an article only when it doesnt already exist
 			if @article == nil
 				@article = Article.new(article_params)
-				if params[:article][:image].to_s == "no_image"
+				if params[:article][:image].to_s == ''
 					@article.image = "no_image.jpeg"
 				else
-					@article.remote_image_url = params[:article][:image]
+					@article.remote_image_url = params[:article][:image].gsub('http:','https:')
 				end
 				@article.category_id = params[:post][:category_id].to_i
 				@article.country_id = @country.id
@@ -346,6 +350,7 @@ class PostsController < ApplicationController
 						flash[:alert] = @article.errors.full_messages
 					end
 				end
+				binding.pry
 			end
 	
 			shared_article = current_user.posts.where(article_id: @article.id, content: "").any?

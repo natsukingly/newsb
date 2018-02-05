@@ -518,7 +518,7 @@ class SchneiderController < ApplicationController
 	
 	
 	def netarika_health
-		utoPostRecord.where(site_name: "netarika_health").delete_all
+		AutoPostRecord.where(site_name: "netarika_health").delete_all
 		AutoPostRecord.create(site_name: "netarika_health")
 		set_doc("https://netallica.yahoo.co.jp/news/beauty/")
 		
@@ -940,6 +940,9 @@ class SchneiderController < ApplicationController
 			elsif !(doc.css('//meta[name="epoch-publish-date-seconds"]/@content').empty?)
 				time = doc.css('//meta[name="epoch-publish-date-seconds"]/@content').to_s
 				@article_published_time = Time.at(time.to_i)
+			#for techcrunch
+			elsif !(doc.css('//meta[name="sailthru.date"]/@content').empty?)
+				@article_published_time = doc.css('//meta[name="sailthru.date"]/@content').to_s
 			#for NHK
 			elsif !(doc.css('#main article.module--detail time').empty?)
 				@article_published_time = doc.css('#main article.module--detail time').attribute("datetime").to_s
