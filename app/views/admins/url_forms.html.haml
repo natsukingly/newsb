@@ -1,0 +1,39 @@
+.sub_function_wrapper
+	.sub_function_main_section
+		.sub_function_nav
+			%h2
+				ADMIN URL FORMS
+		#main_contents
+			=form_tag custom_path, autocomplete: :off, class: "admin_url_forms" do
+				.admin_url_form_block
+					= url_field_tag "article[url1]", "", placeholder: "https://example.com", class: "admin_url_form"
+					= select_tag "article[category1]", options_from_collection_for_select(Category.all, :id, :translated_name), prompt: t('form.post.selectbox_placeholder')
+				.admin_url_form_block
+					= url_field_tag "article[url2]", "", placeholder: "https://example.com", class: "admin_url_form"
+					= select_tag "article[category2]", options_from_collection_for_select(Category.all, :id, :translated_name), prompt: t('form.post.selectbox_placeholder')
+				.admin_url_form_block
+					= url_field_tag "article[url3]", "", placeholder: "https://example.com", class: "admin_url_form"
+					= select_tag "article[category3]", options_from_collection_for_select(Category.all, :id, :translated_name), prompt: t('form.post.selectbox_placeholder')
+				.admin_url_form_block
+					= url_field_tag "article[url4]", "", placeholder: "https://example.com", class: "admin_url_form"
+					= select_tag "article[category4]", options_from_collection_for_select(Category.all, :id, :translated_name), prompt: t('form.post.selectbox_placeholder')
+				.admin_url_form_block
+					= url_field_tag "article[url5]", "", placeholder: "https://example.com", class: "admin_url_form"
+					= select_tag "article[category5]", options_from_collection_for_select(Category.all, :id, :translated_name), prompt: t('form.post.selectbox_placeholder')
+				.admin_url_form_block
+					= url_field_tag "article[url6]", "", placeholder: "https://example.com", class: "admin_url_form"
+					= select_tag "article[category6]", options_from_collection_for_select(Category.all, :id, :translated_name), prompt: t('form.post.selectbox_placeholder')
+				.admin_url_form_block
+					= url_field_tag "article[url7]", "", placeholder: "https://example.com", class: "admin_url_form"
+					= select_tag "article[category7]", options_from_collection_for_select(Category.all, :id, :translated_name), prompt: t('form.post.selectbox_placeholder')
+				.admin_url_form_block
+					= url_field_tag "article[url8]", "", placeholder: "https://example.com", class: "admin_url_form"
+					= select_tag "article[category8]", options_from_collection_for_select(Category.all, :id, :translated_name), prompt: t('form.post.selectbox_placeholder')
+				.admin_url_form_block
+					= url_field_tag "article[url9]", "", placeholder: "https://example.com", class: "admin_url_form"
+					= select_tag "article[category9]", options_from_collection_for_select(Category.all, :id, :translated_name), prompt: t('form.post.selectbox_placeholder')
+				.admin_url_form_block
+					= url_field_tag "article[url10]", "", placeholder: "https://example.com", class: "admin_url_form"
+					= select_tag "article[category10]", options_from_collection_for_select(Category.all, :id, :translated_name), prompt: t('form.post.selectbox_placeholder')
+
+				= submit_tag "CREATE", class: "form_btn btn url_submit_btn"	

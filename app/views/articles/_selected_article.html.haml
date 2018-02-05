@@ -23,7 +23,12 @@
 								#{time_ago_in_words(article.published_time)}
 							
 							
-
+				-if current_user && current_user.admin == true
+					.article_admin_menu
+						= form_tag change_category_admin_path(article.id) do
+							= select_tag "article[category_id]", options_from_collection_for_select(Category.all, :id, :translated_name), prompt: t('form.post.selectbox_placeholder'), class: "form-control selectpicker"
+							= submit_tag "CHANGE CATEGORY"	
+							
 				.article_menu
 					=link_to article.url, class: "read_article_btn article_item", target: "_blank" do
 						=render 'svg/article_menu/read'
@@ -39,11 +44,7 @@
 							=render 'svg/article_menu/comment'
 							%span
 								=t('article.comment')
-				-if current_user && current_user.admin == true
-					.article_admin_menu
-						= form_tag change_category_admin_path(article.id) do
-							= select_tag "article[category_id]", options_from_collection_for_select(Category.all, :id, :translated_name), prompt: t('form.post.selectbox_placeholder'), class: "form-control selectpicker"
-							= submit_tag "CHANGE CATEGORY"	
+
 						
 
 	

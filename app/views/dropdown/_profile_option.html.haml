@@ -23,7 +23,8 @@
 				=link_to t('dropdown.profile_option.social_media'), edit_sns_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
 			-if current_user.admin == true
 				.admin_option_block
-					=link_to "Admin_drafts", drafts_admins_path
+					=link_to "Auto Post", drafts_admins_path
+					=link_to "Manual Post", url_forms_admins_path
 					=link_to "Reports", reports_admins_path
 					=link_to "Announcement", newsb_notifications_index_admins_path
 			.footer

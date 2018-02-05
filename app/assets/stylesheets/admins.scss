@@ -80,6 +80,23 @@
 }
 
 
+.admin_url_forms{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: white;
+    .admin_url_form_block{
+        margin-bottom: 20px;
+        display: flex;
+    }
+    .admin_url_form{
+        flex: 1;
+        padding: 5px;
+        margin-right: 12px;
+    }
+}
+
+
 .newsb_notification_form_section{
     background-color: white;
     padding: 20px;

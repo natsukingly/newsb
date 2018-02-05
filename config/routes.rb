@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 		end
 		collection do
 			get 'drafts'
+			get 'url_forms'
 			get 'reports'
 			get 'unchecked_reports'
 			get 'all_reports'
@@ -43,13 +44,16 @@ Rails.application.routes.draw do
 		end
 	end
 	
+	
+	
 	#scheneider##########==========================================================
 	get '/schneider/crawl' => 'schneider#crawl', as: :crawl
+	post '/schneider/custom' => 'schneider#custom', as: :custom
 	
 	#business
 	post '/schneider/forbes_business', as: :forbes_business
 	post '/schneider/jcast_business', as: :jcast_business
-	post '/schneider/gendai_business', as: :gendai_business
+	# post '/schneider/gendai_business', as: :gendai_business
 	
 	#startup
 	post '/schneider/forbes_startup', as: :forbes_startup
@@ -88,7 +92,13 @@ Rails.application.routes.draw do
 	#health
 	post '/schneider/netarika_health', as: :netarika_health
 	post '/schneider/jcast_health', as: :jcast_health
-	# post '/schneider/yahoo_health', as: :yahoo_health
+	
+	#relationships
+	post '/schneider/googirl_relationships', as: :googirl_relationships
+	post '/schneider/honnest_relationships', as: :honnest_relationships
+	post '/schneider/howcollect_relationships', as: :howcollect_relationships
+	post '/schneider/tabilabo_relationships', as: :tabilabo_relationships
+	# post '/schneider/yahoo_relationships', as: :yahoo_relationships
 	
 	#food
 	post '/schneider/netarika_food', as: :netarika_food	

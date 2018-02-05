@@ -28,6 +28,9 @@ class AdminsController < ApplicationController
 		@post_draft.save
 	end
 	
+	def url_forms
+	end
+	
 	def reports
 		@reports = Report.all.includes(:user, :country, :reportable).order(created_at: :desc).limit(20)
 		@reports_count = @reports.count

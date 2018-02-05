@@ -11,6 +11,32 @@ class SchneiderController < ApplicationController
 		@urls = @doc.css('.stream-article .article-image').map{ |url| url.attribute("href").to_s}
 	end
 	
+	def custom
+		@urls = [	{ :url => params[:article][:url1], :category_id => params[:article][:category1]	},
+					{ :url => params[:article][:url2], :category_id => params[:article][:category2]	},
+					{ :url => params[:article][:url3], :category_id => params[:article][:category3]	},
+					{ :url => params[:article][:url4], :category_id => params[:article][:category4]	},
+					{ :url => params[:article][:url5], :category_id => params[:article][:category5]	},
+					{ :url => params[:article][:url6], :category_id => params[:article][:category6]	},
+					{ :url => params[:article][:url7], :category_id => params[:article][:category7]	},
+					{ :url => params[:article][:url8], :category_id => params[:article][:category8]	},
+					{ :url => params[:article][:url9], :category_id => params[:article][:category9]	},
+					{ :url => params[:article][:url10], :category_id => params[:article][:category10]	},
+				]
+
+		country_id = @country.id
+		
+		@urls.each do |url|
+			unless url[:url] == '' && url[:category_id] == ''
+				parseURL(url[:url])
+				create_article(url[:url], url[:category_id], country_id)
+				create_shares(@article)
+			end
+		end	
+		redirect_to url_forms_admins_path
+	end
+	
+	
 	def prepare_admin_posts
 		
 		# forbes_business
@@ -498,6 +524,39 @@ class SchneiderController < ApplicationController
 		redirect_to drafts_admins_path
 	end		
 	
+	def googirl_relationships
+		
+	end
+	
+	def honnest_relationships
+		
+	end
+	
+	def howcollect_relationships
+		
+	end
+	
+	def tabilabo_relationships
+		AutoPostRecord.where(site_name: "tabilabo_relationships").delete_all
+		AutoPostRecord.create(site_name: "tabilabo_relationships")
+		set_doc("https://tabi-labo.com/category/love")
+		
+		@urls = @doc.css('#main a').map{ |url| url.attribute("href").to_s}.uniq
+		@urls.delete('/category/love')
+
+		category_id = Category.find_by(name: "Relationships").id
+		country_id = Country.find_by(name: "Japan").id
+		
+		@urls.each do |url|
+			url = "https://tabi-labo.com" + url 
+			parseURL(url)
+			create_article(url, category_id, country_id)
+			create_shares(@article)
+		end	
+		redirect_to drafts_admins_path		
+	end
+	
+	
 	def gunosy_movie
 		AutoPostRecord.where(site_name: "gunosy_movie").delete_all
 		AutoPostRecord.create(site_name: "gunosy_movie")
@@ -555,10 +614,6 @@ class SchneiderController < ApplicationController
 		end	
 		redirect_to drafts_admins_path
 	end		
-	
-	
-	
-	
 	
 	def netarika_food
 		AutoPostRecord.where(site_name: "netarika_food").delete_all
@@ -839,7 +894,7 @@ class SchneiderController < ApplicationController
 				if article.keywords.nil?
 					keywords = ''
 				else
-					keywords = article.keywords.delete("{}").split(',').map{ |keyword| "#" + keyword.delete('[ ,！,・,、,。]')}.join(' ') 
+					keywords = article.keywords.delete("{}").split(',').map{ |keyword| "#" + keyword.delete('[ ,！,・,、,。,.,/]')}.join(' ') 
 				end	
 				
 				
@@ -866,7 +921,7 @@ class SchneiderController < ApplicationController
 			
 			random_user = [user, user2].sample
 			
-			if article && article.posts.where(user_id: random_user.id).nil?
+			if article && article.posts.where(user_id: [user.id, user2.id]).nil?
 				content = ''
 				if user 
 					post = article.posts.build(user_id: random_user.id,

@@ -280,6 +280,10 @@ class PostsController < ApplicationController
 			#for excite news and gunosy
 			elsif !(doc.css('//meta[itemprop="datePublished"]/@content').empty?)
 				@article_published_time = doc.css('//meta[itemprop="datePublished"]/@content').to_s
+			#for tabilabo
+			elsif !(doc.css('.contents-container .article-date').empty?)
+				time = doc.css('.contents-container .article-date').to_s
+				@article_published_time = DateTime.parse(time)
 			else
 				@article_published_time = ''
 			end

@@ -32,6 +32,11 @@
 				=render 'svg/categories/technology'
 				%span
 					=t('categories.technology')
+		
+			=link_to categorized_articles_path("Web"), class: "category_btn", data: {category: 'Web'} do
+				=render 'svg/categories/web'
+				%span
+					=t('categories.web')
 					
 			=link_to categorized_articles_path("Sports"), class: "category_btn", data: {category: 'Sports'} do
 				=render 'svg/categories/sports'
@@ -43,9 +48,15 @@
 					=t('categories.startup')
 			
 			=link_to categorized_articles_path("Entertainment"), class: "category_btn", data: {category: 'Entertainment'} do
-				=render 'svg/categories/feed'
+				=render 'svg/categories/entertainment'
 				%span
 					=t('categories.entertainment')
+					
+			=link_to categorized_articles_path("Relationships"), class: "category_btn", data: {category: 'Relationships'} do
+				=render 'svg/categories/relationships'
+				%span
+					=t('categories.relationships')
+					
 			=link_to categorized_articles_path("Food"), class: "category_btn", data: {category: 'Food'} do
 				=render 'svg/categories/food'
 				%span

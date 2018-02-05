@@ -27,10 +27,12 @@ Category.find_or_create_by(name: "Entertainment", ja_name: "エンタメ")
 Category.find_or_create_by(name: "Sports", ja_name: "スポーツ")
 Category.find_or_create_by(name: "Funny", ja_name: "おもしろ")
 Category.find_or_create_by(name: "Startup", ja_name: "スタートアップ")
-Category.find_or_create_by(name: "Lifestyle", ja_name: "暮らし")
 Category.find_or_create_by(name: "Food", ja_name: "グルメ")
 Category.find_or_create_by(name: "Movies・Music", ja_name: "映画・音楽")
-Category.find_or_create_by(name: "Health", ja_name: "健康")
+Category.find_or_create_by(name: "Health", ja_name: "美容・健康")
+Category.find_or_create_by(name: "Relationships", ja_name: "人間関係")
+Category.find_or_create_by(name: "Web", ja_name: "デザイン・開発")
+
 
 
 # @available_languages = { en: "English", ja: "Japanese"}
