@@ -431,8 +431,27 @@
 .article_menu{
 	display: flex;
 	flex-direction: column;
-	// justify-content: space-between;
-	// margin-right: 12px;
+	margin-left: 20px;
+
+}
+
+.article_admin_menu{
+	margin-left: 20px;
+	input[type="submit"]{
+		border-radius: 3px;
+		border: #eee;
+		margin-top: 8px;
+		width: 100%;
+	    background-color: grey;
+   		color: white;
+	}
+}
+
+@media(max-width: 768px){
+	.article_admin_menu{
+		margin-left: 0;
+		margin-top: 12px;
+	}
 }
 
 .article_item, a.article_item{

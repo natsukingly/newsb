@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203181456) do
+ActiveRecord::Schema.define(version: 20180205045801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20180203181456) do
     t.integer "e_indecator", default: 0
     t.string "keywords"
     t.text "description"
+    t.boolean "category_lock", default: false
   end
 
   create_table "auto_post_records", force: :cascade do |t|

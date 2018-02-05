@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 			post 'publish_draft'
 			post 'check_report'
 			post 'uncheck_report'
+			post 'change_category'
 			delete 'delete_newsb_notification'
 		end
 		collection do
@@ -48,6 +49,7 @@ Rails.application.routes.draw do
 	#business
 	post '/schneider/forbes_business', as: :forbes_business
 	post '/schneider/jcast_business', as: :jcast_business
+	post '/schneider/gendai_business', as: :gendai_business
 	
 	#startup
 	post '/schneider/forbes_startup', as: :forbes_startup

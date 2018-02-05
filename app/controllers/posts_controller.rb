@@ -358,7 +358,9 @@ class PostsController < ApplicationController
 				@post.country_id = @country.id
 				@post.content = params[:post][:content]
 				if @post.save
-					decide_category
+					unless @post.article.category_lock == true
+						decide_category
+					end
 					flash[:notice] = t('flash.post.create_success')
 					redirect_to article_path(@post.article_id)
 				else

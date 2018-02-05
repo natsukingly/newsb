@@ -29,6 +29,7 @@ class SchneiderController < ApplicationController
 	end
 	
 	def forbes_business
+		AutoPostRecord.where(site_name: "forbes_business").delete_all
 		AutoPostRecord.create(site_name: "forbes_business")
 		set_doc("https://forbesjapan.com/category/lists/business?cx_hamburger=business")
 		
@@ -47,7 +48,28 @@ class SchneiderController < ApplicationController
 		redirect_to drafts_admins_path
 	end
 	
+	def gendai_business
+		AutoPostRecord.where(site_name: "gendai_business").delete_all
+		AutoPostRecord.create(site_name: "gendai_business")
+		set_doc("http://gendai.ismedia.jp/list/genre/economics")
+		
+		@count = @doc.css('.stream-article .article-image').count
+		@urls = @doc.css('.stream-article .article-image').map{ |url| url.attribute("href").to_s}	
+		
+		category_id = Category.find_by(name: "Business").id
+		country_id = Country.find_by(name: "Japan").id
+		
+		@urls.each do |url|
+			parseURL(url)
+			create_article(url, category_id, country_id)
+			create_shares(@article)
+		end
+		
+		redirect_to drafts_admins_path
+	end	
+	
 	def jcast_business
+		AutoPostRecord.where(site_name: "jcast_business").delete_all
 		AutoPostRecord.create(site_name: "jcast_business")
 		set_doc("https://www.j-cast.com/economy/")
 		
@@ -67,6 +89,7 @@ class SchneiderController < ApplicationController
 	end		
 	
 	def forbes_startup
+		AutoPostRecord.where(site_name: "forbes_startup").delete_all
 		AutoPostRecord.create(site_name: "forbes_startup")
 		set_doc("https://forbesjapan.com/category/lists/entrepreneurs?cx_hamburger=entrepreneurs")
 		
@@ -87,6 +110,7 @@ class SchneiderController < ApplicationController
 	
 	
 	def bridge_startup
+		AutoPostRecord.where(site_name: "bridge_startup").delete_all
 		AutoPostRecord.create(site_name: "bridge_startup")
 		set_doc("http://thebridge.jp/")
 		
@@ -105,6 +129,7 @@ class SchneiderController < ApplicationController
 	end
 	
 	def itmedia_tech
+		AutoPostRecord.where(site_name: "itmedia_tech").delete_all
 		AutoPostRecord.create(site_name: "itmedia_tech")
 		set_doc("http://www.itmedia.co.jp/")
 		
@@ -123,6 +148,7 @@ class SchneiderController < ApplicationController
 	end
 
 	def techcrunch_startup
+		AutoPostRecord.where(site_name: "techcrunch_startup").delete_all
 		AutoPostRecord.create(site_name: "techcrunch_startup")
 		set_doc("http://jp.techcrunch.com/startups/")
 		
@@ -141,6 +167,7 @@ class SchneiderController < ApplicationController
 	end
 
 	def techcrunch_tech1
+		AutoPostRecord.where(site_name: "techcrunch_tech1").delete_all
 		AutoPostRecord.create(site_name: "techcrunch_tech1")
 		set_doc("http://jp.techcrunch.com/mobile/")
 		
@@ -159,6 +186,7 @@ class SchneiderController < ApplicationController
 	end	
 	
 	def techcrunch_tech2
+		AutoPostRecord.where(site_name: "techcrunch_tech2").delete_all
 		AutoPostRecord.create(site_name: "techcrunch_tech2")
 		set_doc("http://jp.techcrunch.com/%E3%82%AC%E3%82%B8%E3%82%A7%E3%83%83%E3%83%88/")
 		
@@ -177,6 +205,7 @@ class SchneiderController < ApplicationController
 	end	
 	
 	def jcast_tech
+		AutoPostRecord.where(site_name: "jcast_tech").delete_all
 		AutoPostRecord.create(site_name: "jcast_tech")
 		set_doc("https://www.j-cast.com/it/")
 		
@@ -198,6 +227,7 @@ class SchneiderController < ApplicationController
 	
 	
 	def asahi_politics
+		AutoPostRecord.where(site_name: "asahi_politics").delete_all
 		AutoPostRecord.create(site_name: "asahi_politics")
 		set_doc("http://www.asahi.com/politics/list/")
 		
@@ -234,6 +264,7 @@ class SchneiderController < ApplicationController
 	# 	redirect_to drafts_admins_path
 	# end	
 	def jcast_politics
+		AutoPostRecord.where(site_name: "jcast_politics").delete_all
 		AutoPostRecord.create(site_name: "jcast_politics")
 		set_doc("https://www.j-cast.com/politics/")
 		
@@ -253,6 +284,7 @@ class SchneiderController < ApplicationController
 	end	
 	
 	def excite_news_politics
+		AutoPostRecord.where(site_name: "excite_news_politics").delete_all
 		AutoPostRecord.create(site_name: "excite_news_politics")
 		set_doc("https://www.excite.co.jp/News/politics_g/")
 		
@@ -272,6 +304,7 @@ class SchneiderController < ApplicationController
 	
 	
 	def  excite_news_sports
+		AutoPostRecord.where(site_name: "excite_news_sports").delete_all
 		AutoPostRecord.create(site_name: "excite_news_sports")
 		set_doc("https://www.excite.co.jp/News/sports_g/")
 		
@@ -290,6 +323,7 @@ class SchneiderController < ApplicationController
 	end
 	
 	def  excite_news_sports2
+		AutoPostRecord.where(site_name: "excite_news_sports2").delete_all
 		AutoPostRecord.create(site_name: "excite_news_sports2")
 		set_doc("https://www.excite.co.jp/News/soccer/")
 		
@@ -332,6 +366,7 @@ class SchneiderController < ApplicationController
 	
 	
 	def rocket_news_funny
+		AutoPostRecord.where(site_name: "rocket_news_funny").delete_all
 		AutoPostRecord.create(site_name: "rocket_news_funny")
 		set_doc("https://rocketnews24.com/")
 		
@@ -350,6 +385,7 @@ class SchneiderController < ApplicationController
 	end		
 	
 	def buzzfeed_funny
+		AutoPostRecord.where(site_name: "buzzfeed_funny").delete_all
 		AutoPostRecord.create(site_name: "buzzfeed_funny")
 		set_doc("https://www.buzzfeed.com/jp")
 		
@@ -370,6 +406,7 @@ class SchneiderController < ApplicationController
 	
 	
 	def yahoo_entertainment
+		AutoPostRecord.where(site_name: "yahoo_entertainment").delete_all
 		AutoPostRecord.create(site_name: "yahoo_entertainment")
 		set_doc("https://news.yahoo.co.jp/list/?c=entertainment")
 		
@@ -388,6 +425,7 @@ class SchneiderController < ApplicationController
 	end
 	
 	def netarika_entertainment
+		AutoPostRecord.where(site_name: "netarika_entertainment").delete_all
 		AutoPostRecord.create(site_name: "netarika_entertainment")
 		set_doc("https://netallica.yahoo.co.jp/news/geinou/")
 		
@@ -406,6 +444,7 @@ class SchneiderController < ApplicationController
 	end	
 	
 	def gunosy_entertainment
+		AutoPostRecord.where(site_name: "gunosy_entertainment").delete_all
 		AutoPostRecord.create(site_name: "gunosy_entertainment")
 		set_doc("https://gunosy.com/categories/9")
 		
@@ -423,6 +462,7 @@ class SchneiderController < ApplicationController
 	end		
 	
 	def netarika_music
+		AutoPostRecord.where(site_name: "netarika_music").delete_all
 		AutoPostRecord.create(site_name: "netarika_music")
 		set_doc("https://netallica.yahoo.co.jp/news/entertainment/")
 		
@@ -441,6 +481,7 @@ class SchneiderController < ApplicationController
 	end	
 	
 	def gunosy_music
+		AutoPostRecord.where(site_name: "gunosy_music").delete_all
 		AutoPostRecord.create(site_name: "gunosy_music")
 		set_doc("https://gunosy.com/categories/11")
 		
@@ -458,6 +499,7 @@ class SchneiderController < ApplicationController
 	end		
 	
 	def gunosy_movie
+		AutoPostRecord.where(site_name: "gunosy_movie").delete_all
 		AutoPostRecord.create(site_name: "gunosy_movie")
 		set_doc("https://gunosy.com/categories/10")
 		
@@ -476,6 +518,7 @@ class SchneiderController < ApplicationController
 	
 	
 	def netarika_health
+		utoPostRecord.where(site_name: "netarika_health").delete_all
 		AutoPostRecord.create(site_name: "netarika_health")
 		set_doc("https://netallica.yahoo.co.jp/news/beauty/")
 		
@@ -494,6 +537,7 @@ class SchneiderController < ApplicationController
 	end	
 	
 	def jcast_health
+		AutoPostRecord.where(site_name: "jcast_health").delete_all
 		AutoPostRecord.create(site_name: "jcast_health")
 		set_doc("https://www.j-cast.com/health/")
 		
@@ -517,6 +561,7 @@ class SchneiderController < ApplicationController
 	
 	
 	def netarika_food
+		AutoPostRecord.where(site_name: "netarika_food").delete_all
 		AutoPostRecord.create(site_name: "netarika_food")
 		set_doc("https://netallica.yahoo.co.jp/news/gourmet/")
 		
@@ -535,6 +580,7 @@ class SchneiderController < ApplicationController
 	end		
 	
 	def gunosy_food
+		AutoPostRecord.where(site_name: "gunosy_food").delete_all
 		AutoPostRecord.create(site_name: "gunosy_food")
 		set_doc("https://gunosy.com/categories/8")
 		

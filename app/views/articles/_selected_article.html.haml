@@ -39,6 +39,11 @@
 							=render 'svg/article_menu/comment'
 							%span
 								=t('article.comment')
+				-if current_user && current_user.admin == true
+					.article_admin_menu
+						= form_tag change_category_admin_path(article.id) do
+							= select_tag "article[category_id]", options_from_collection_for_select(Category.all, :id, :translated_name), prompt: t('form.post.selectbox_placeholder'), class: "form-control selectpicker"
+							= submit_tag "CHANGE CATEGORY"	
 						
 
 	

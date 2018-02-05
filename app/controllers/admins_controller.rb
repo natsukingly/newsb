@@ -56,6 +56,19 @@ class AdminsController < ApplicationController
 		@newsb_notifications = Notification.where(everyone: true).order(created_at: :desc).offset(@existing_notifications).limit(30)
 	end
 	
+	def change_category
+		article = Article.find(params[:id])
+		article.category_id = params[:article][:category_id]
+		article.category_lock = true
+		if article.save
+			flash[:notice] = "successfully changed category"
+			redirect_to article
+		else
+			flash[:alert] = "couldn't changed category"
+			redirect_to article	
+		end
+	end
+	
 	def create_newsb_notification
 		
 		title = params[:notification][:title]
