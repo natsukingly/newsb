@@ -7,19 +7,19 @@
 			
 	.icon#mobile_locale_link.mobile_icon
 		%span
-			=render "svg/locale_icon"
+			=render "svg/mobile_footer/locale_icon"
 			
 	.icon#mobile_post_link.mobile_icon
 		%span.show_post_modal_btn
-			=render 'svg/create_post_icon'
+			=render 'svg/mobile_footer/create_icon'
 			
 	.icon#mobile_notification_link.mobile_icon.mobile_notification_icon
 		%span
-			=render "shared/mobile_notification_icon"
+			=render "svg/mobile_footer/notification_icon"
 
 	.icon.mobile_icon#mobile_menu_link
 		%span
-			=render "svg/menu_icon"			
+			=render "svg/mobile_footer/menu_icon"			
 	
 	
 -else
@@ -30,19 +30,19 @@
 		
 	.icon#mobile_locale_link.mobile_icon
 		%span
-			=render "svg/locale_icon"
+			=render "svg/mobile_footer/locale_icon"
 			
 	.icon#mobile_post_link.mobile_icon.login_signup_link
 		%span
-			=render 'svg/create_post_icon'
+			=render 'svg/mobile_footer/create_icon'
 			
 	.icon.mobile_icon.login_signup_link
 		%span
-			=render "svg/mobile_notification_icon"
+			=render "svg/mobile_footer/notification_icon"
 			
 	.icon.mobile_icon#mobile_menu_link
 		%span
-			=render "svg/menu_icon"
+			=render "svg/mobile_footer/menu_icon"
 
 :javascript
 	$('.mobile_notification_icon').click(function () {

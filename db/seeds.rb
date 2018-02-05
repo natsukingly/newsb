@@ -23,7 +23,6 @@
 Category.find_or_create_by(name: "Business", ja_name: "ビジネス")
 Category.find_or_create_by(name: "Tech", ja_name: "テクノロジー")
 Category.find_or_create_by(name: "Politics", ja_name: "政治")
-Category.find_or_create_by(name: "Economy", ja_name: "経済")
 Category.find_or_create_by(name: "Entertainment", ja_name: "エンタメ")
 Category.find_or_create_by(name: "Sports", ja_name: "スポーツ")
 Category.find_or_create_by(name: "Funny", ja_name: "おもしろ")

@@ -47,14 +47,14 @@ class SchneiderController < ApplicationController
 		redirect_to drafts_admins_path
 	end
 	
-	def jcast_economy
-		AutoPostRecord.create(site_name: "jcast_economy")
+	def jcast_business
+		AutoPostRecord.create(site_name: "jcast_business")
 		set_doc("https://www.j-cast.com/economy/")
 		
 		@urls = @doc.css('.category-entry-list li.entry-item >a').map{ |url| url.attribute("href").to_s}	
 		
 		
-		category_id = Category.find_by(name: "Economy").id
+		category_id = Category.find_by(name: "Business").id
 		country_id = Country.find_by(name: "Japan").id
 		
 		@urls.each do |url|
@@ -72,7 +72,8 @@ class SchneiderController < ApplicationController
 		
 		@count = @doc.css('.stream-article .article-image').count
 		@urls = @doc.css('.stream-article .article-image').map{ |url| url.attribute("href").to_s}	
-		
+
+
 		category_id = Category.find_by(name: "Startup").id
 		country_id = Country.find_by(name: "Japan").id
 		
@@ -315,7 +316,7 @@ class SchneiderController < ApplicationController
 
 
 
-	# 	binding.pry
+	# 	
 		
 	# 	category_id = Category.find_by(name: "Politics").id
 	# 	country_id = Country.find_by(name: "Japan").id
@@ -745,6 +746,7 @@ class SchneiderController < ApplicationController
 				
 				# check if the article already exist
 				if @article == nil
+					
 					@article = Article.new(title: @article_title, 
 											source: @article_source, 
 											url: url, 
@@ -760,6 +762,7 @@ class SchneiderController < ApplicationController
 					end
 					@article.save
 				end
+				
 				
 				
 				
@@ -781,40 +784,46 @@ class SchneiderController < ApplicationController
 		
 		def create_shares(article)
 			user = User.find_by(email: "newsb.sns@gmail.com")
+			user2 = User.find_by(email: "paprikamajorika@gmail.com")
 			
-			if article
+			random_user = [user, user2].sample
+			
+			if article && article.posts.where(user_id: random_user.id).empty?
+				
 				if article.keywords.nil?
 					keywords = ''
 				else
-					keywords = article.keywords.delete("{}").split(',').map{ |keyword| "#" + keyword}.join(' ') 
+					keywords = article.keywords.delete("{}").split(',').map{ |keyword| "#" + keyword.delete('[ ,！,・,、,。]')}.join(' ') 
 				end	
+				
 				
 				if article.description.nil? || article.description == ' ' 
 					description = ''
 				else
-					description = '> ' + article.description
+					description = '> ' + article.description + '          '
 				end
 				
-				content = description + '       ' + keywords
-				
-				if user 
-					post = article.posts.build(user_id: user.id,
-												country_id: article.country_id,
-												category_id: article.category_id,
-												content: content,
-												comment_permission: false)
-					post.save
-				end
+				content = description + keywords
+
+				post = article.posts.build(user_id: random_user.id,
+											country_id: article.country_id,
+											category_id: article.category_id,
+											content: content,
+											comment_permission: false)
+				post.save
 			end
 		end
 		
 		def create_shares_wo_tags(article)
 			user = User.find_by(email: "newsb.sns@gmail.com")
+			user2 = User.find_by(email: "paprikamajorika@gmail.com")
 			
-			if article
+			random_user = [user, user2].sample
+			
+			if article && article.posts.where(user_id: random_user.id).nil?
 				content = ''
 				if user 
-					post = article.posts.build(user_id: user.id,
+					post = article.posts.build(user_id: random_user.id,
 												country_id: article.country_id,
 												category_id: article.category_id,
 												content: content,
@@ -864,9 +873,12 @@ class SchneiderController < ApplicationController
 				@article_keywords = doc.css('//meta[name="keywords"]/@content').to_s
 			end		
 			
-			unless doc.css('//meta[name="description"]/@content').empty?
+			if !(doc.css('//meta[name="description"]/@content').empty?)
 				@article_description = doc.css('//meta[name="description"]/@content').to_s
+			elsif !(doc.css('//meta[property="og:description"]/@content').empty?)
+				@article_description = doc.css('//meta[property="og:description"]/@content').to_s
 			end	
+
 			
 			#PUBLISHED_TIME
 			if !(doc.css('//meta[property="article:published_time"]/@content').empty?)

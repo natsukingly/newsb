@@ -23,7 +23,7 @@
 		}
 	}
 	.star{
-	    padding: 0 8px;
+	    padding: 0 5px;
 	    line-height: 22px;
 	    vertical-align: top;
 	    background-color: $newsb_grey;
@@ -47,7 +47,7 @@
 	background-color: $newsb_grey;
 	color: white;
 	font-size: 14px;
-	background-image: linear-gradient(90deg,rgba(0,0,0,.9), rgba(0,0,0,.9)), url('/images/bkg_img.jpeg');
+	background-image: linear-gradient(90deg,rgba(0,0,0,.9), rgba(0,0,0,.9)), url('/images/profile_bkg_img.jpeg');
 	background-size: cover;
 	background-position: center;
 	.user_profile_container{

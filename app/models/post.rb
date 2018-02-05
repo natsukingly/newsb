@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
 	belongs_to :user
 	belongs_to :country
-	belongs_to :category
-	belongs_to :article
+	belongs_to :category, optional: true
+	belongs_to :article, optional: true
 	
 	counter_culture :article
 	has_many :likes, as: :likeable, dependent: :delete_all

@@ -10,10 +10,7 @@ class CategoriesController < ApplicationController
 		@posts = Post.where(country_id: @country.id).order(created_at: :desc).includes(:user, :article).limit(30)
 
 		if current_user && current_user.feed_notifications.any?
-			current_user.feed_notifications.each do |notification|
-				notification.check = "True"
-				notification.save
-			end
+			current_user.feed_notifications.delete_all
 		end
 	end
 	

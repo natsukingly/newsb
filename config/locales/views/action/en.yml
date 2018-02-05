@@ -36,6 +36,8 @@ en:
   state:
     turned_off: "Off"
     coming_soon: "coming soon"
+    shared: "shared"
+    popular: "BEST"
 
     
     

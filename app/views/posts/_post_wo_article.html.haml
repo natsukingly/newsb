@@ -10,8 +10,8 @@
 						.user_info_for_share
 							%span
 								=link_to post.user.name, post.user, class: "user_name"
-								%i.fa.fa-share
-								shared
+								%i.fa.fa-share-square
+								=t('state.shared')
 								%span.time
 									・#{time_ago_in_words(post.created_at)}
 						-if post.user != current_user
@@ -32,7 +32,7 @@
 				.user_info
 					=link_to post.user  do
 						%span.star
-							BEST
+							=t('state.popular')
 						%span.user_name 
 							=post.user.name
 					%p.user_credential

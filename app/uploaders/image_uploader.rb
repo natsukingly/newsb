@@ -49,6 +49,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   version :profile_sm do
     process resize_to_fill: [50, 50, gravity = ::Magick::CenterGravity]
   end
+  
+  version :profile_md do
+    process resize_to_fill: [200, 200, gravity = ::Magick::CenterGravity]
+  end  
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

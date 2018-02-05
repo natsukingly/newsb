@@ -49,6 +49,14 @@ module ApplicationHelper
         end
     end
     
+    def user_image_md_helper(user)
+        if user && user.image.url.nil? == false
+            image_tag user.image.profile_md.url, class: "img-circle"
+        elsif user
+            render 'svg/user_icon_sub'
+        end
+    end       
+    
     def user_image_lg_helper(user)
         if user && user.image.url.nil? == false
             image_tag user.image.url, class: "img-circle"

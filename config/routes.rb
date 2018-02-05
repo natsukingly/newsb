@@ -47,14 +47,13 @@ Rails.application.routes.draw do
 	
 	#business
 	post '/schneider/forbes_business', as: :forbes_business
+	post '/schneider/jcast_business', as: :jcast_business
 	
 	#startup
 	post '/schneider/forbes_startup', as: :forbes_startup
 	post '/schneider/bridge_startup', as: :bridge_startup
 	post '/schneider/techcrunch_startup', as: :techcrunch_startup
 	
-	#economy
-	post '/schneider/jcast_economy', as: :jcast_economy
 	
 	# tech
 	post '/schneider/techcrunch_tech1', as: :techcrunch_tech1

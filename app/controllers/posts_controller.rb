@@ -112,10 +112,18 @@ class PostsController < ApplicationController
 		@post.content = params[:post][:content] 
 		if @post.save
 			flash[:notice] = t('flash.post.update_success')
-			redirect_to article_path(@post.article_id)
+			if @post.article
+				redirect_to article_path(@post.article_id)
+			else
+				redirect_to @post
+			end
 		else
 			flash[:alert] = t('flash.post.update_fail')
-			redirect_to article_path(@post.article_id)
+			if @post.article
+				redirect_to article_path(@post.article_id)
+			else
+				redirect_to @post
+			end
 		end
 		
 	end
@@ -387,6 +395,10 @@ class PostsController < ApplicationController
 		# end
 		
 		def set_side_articles
-			@side_articles = Article.where(category_id: @post.article.category_id, country_id: @post.country_id).where.not(id: @post.article.id).order(likes_count: :desc).limit(5)
+			if @post.article
+				@side_articles = Article.where(category_id: @post.article.category_id, country_id: @post.country_id).where.not(id: @post.article.id).order(e_indecator: :desc).limit(5)
+			else
+				@side_articles = Article.where(country_id: @post.country_id).order(e_indecator: :desc).limit(5)	
+			end
 		end
 end
