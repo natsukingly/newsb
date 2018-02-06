@@ -258,6 +258,8 @@ class PostsController < ApplicationController
 			#PUBLISHED_TIME
 			if !(doc.css('//meta[property="article:published_time"]/@content').empty?)
 				@article_published_time = doc.css('//meta[property="article:published_time"]/@content').to_s
+				binding.pry
+					
 			elsif !(doc.css('//meta[property="article:published"]/@content').empty?)
 				@article_published_time = doc.css('//meta[property="article:published"]/@content').to_s
 			elsif !(doc.css('//meta[name="pubdate"]/@content').empty?)
@@ -287,7 +289,9 @@ class PostsController < ApplicationController
 			else
 				@article_published_time = ''
 			end
-
+			if DateTime.parse(@article_published_time) < Time.now.ago(50.years)
+				@article_published_time = Time.at(@article_published_time.to_i)
+			end
 		end
 		
 		

@@ -529,7 +529,21 @@ class SchneiderController < ApplicationController
 	end
 	
 	def honnest_relationships
+		AutoPostRecord.where(site_name: "honnest_relationships").delete_all
+		AutoPostRecord.create(site_name: "honnest_relationships")
+		set_doc("https://zexy-enmusubi.net/honnest/")
 		
+		@urls = @doc.css('ul.recent-entries a.recent-entries-title-link').map{ |url| url.attribute("href").to_s}
+		
+		category_id = Category.find_by(name: "Relationships").id
+		country_id = Country.find_by(name: "Japan").id
+		
+		@urls.each do |url|
+			parseURL(url)
+			create_article(url, category_id, country_id)
+			create_shares(@article)
+		end	
+		redirect_to drafts_admins_path		
 	end
 	
 	def howcollect_relationships
@@ -1004,9 +1018,18 @@ class SchneiderController < ApplicationController
 			#for excite news
 			elsif !(doc.css('//meta[itemprop="datePublished"]/@content').empty?)
 				@article_published_time = doc.css('//meta[itemprop="datePublished"]/@content').to_s
-		
+			#for tabilabo
+			elsif !(doc.css('.contents-container .article-date').empty?)
+				time = doc.css('.contents-container .article-date').to_s
+				@article_published_time = DateTime.parse(time)	
+			elsif !(doc.css('//meta[name="article:published_time"]/@content').empty?)
+				time = doc.css('//meta[name="article:published_time"]/@content').to_s
+				@article_published_time = Time.at(time)
 			else
 				@article_published_time = ''
+			end
+			if DateTime.parse(@article_published_time) < Time.now.ago(50.years)
+				@article_published_time = Time.at(@article_published_time.to_i)
 			end
 		end
 		
