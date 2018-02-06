@@ -2,7 +2,16 @@
 .article{class: "article_#{article.id}"}
 	=link_to article.url, class: "direct_article_link", target: "_blank" do
 		=render 'svg/window_icon'
-		
+	
+	-if current_user && current_user.admin == true
+		.priority_btn_group
+			=link_to increase_priority_admin_path(article.id), class: "decrease_priority_btn priority_btn", method: :post, remote: true do
+				%i.fa.fa-angle-up
+			.priority_level_counter
+				=article.priority_level
+			=link_to decrease_priority_admin_path(article.id), class: "decrease_priority_btn priority_btn", method: :post, remote: true do
+				%i.fa.fa-angle-down
+
 	=link_to article do
 		.article_wrapper
 			.article_block

@@ -3,6 +3,14 @@
 	.article_wrapper.image{style: "background-image: url(#{article_image_helper article.image.url});"}
 		.overlay
 			.article_container	
+				-if current_user && current_user.admin == true
+					.priority_btn_group
+						=link_to increase_priority_admin_path(article.id), class: "decrease_priority_btn priority_btn", method: :post, remote: true do
+							%i.fa.fa-angle-up
+						.priority_level_counter
+							=article.priority_level
+						=link_to decrease_priority_admin_path(article.id), class: "decrease_priority_btn priority_btn", method: :post, remote: true do
+							%i.fa.fa-angle-down
 				.featured_article_content
 					%h2.featured_article_title
 						=link_to universal_truncate(article.title.html_safe, 150), article_path(article)
@@ -46,6 +54,7 @@
 						.article_image{style: "background-image: url(#{article_image_helper article.image.url});"}
 							%span
 								=t('action_cap.more')
+				
 
 											
 						

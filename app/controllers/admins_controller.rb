@@ -55,6 +55,19 @@ class AdminsController < ApplicationController
 		@report.save
 	end
 	
+	def increase_priority
+		@article = Article.find(params[:id])
+		@article.priority_level = @article.priority_level + 10
+		@article.save
+	end
+	
+	def decrease_priority
+		@article = Article.find(params[:id])
+		@article.priority_level = @article.priority_level - 10
+		@article.save
+	end
+	
+	
 	def newsb_notifications_index
 		@newsb_notifications = Notification.where(everyone: true).order(created_at: :desc).offset(@existing_notifications).limit(30)
 	end

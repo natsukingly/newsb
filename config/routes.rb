@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 			post 'check_report'
 			post 'uncheck_report'
 			post 'change_category'
+			post 'decrease_priority'
+			post 'increase_priority'
 			delete 'delete_newsb_notification'
 		end
 		collection do
