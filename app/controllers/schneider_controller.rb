@@ -537,7 +537,7 @@ class SchneiderController < ApplicationController
 		
 		category_id = Category.find_by(name: "Relationships").id
 		country_id = Country.find_by(name: "Japan").id
-		
+
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
@@ -995,9 +995,13 @@ class SchneiderController < ApplicationController
 			end	
 
 			
+			
 			#PUBLISHED_TIME
 			if !(doc.css('//meta[property="article:published_time"]/@content').empty?)
 				@article_published_time = doc.css('//meta[property="article:published_time"]/@content').to_s
+				if @article_source == "ホンネスト - produced by 婚活サイト ゼクシィ縁結び"
+					@article_published_time = Time.at(@article_published_time.to_i)
+				end
 			elsif !(doc.css('//meta[property="article:published"]/@content').empty?)
 				@article_published_time = doc.css('//meta[property="article:published"]/@content').to_s
 			elsif !(doc.css('//meta[name="pubdate"]/@content').empty?)
@@ -1028,10 +1032,8 @@ class SchneiderController < ApplicationController
 			else
 				@article_published_time = ''
 			end
-			if DateTime.parse(@article_published_time) < Time.now.ago(50.years)
-				@article_published_time = Time.at(@article_published_time.to_i)
-			end
 		end
+		
 		
 		def decide_category
 			post = @post || @post_draft

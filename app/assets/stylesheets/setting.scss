@@ -26,6 +26,7 @@ input[type="file"] {
     }
     .sns_setting_wrapper{
         padding: 12px;
+        min-width: auto;
     }
 }
 
@@ -240,7 +241,6 @@ input[type="file"] {
     }
     .sns_link{
         .sns_btn{
-            width: 200px;
             padding: 8px;
             border-radius: 3px;
             width: 135px;
@@ -271,5 +271,20 @@ input[type="file"] {
             }
         }
         
+    }
+}
+
+@media(max-width: 768px){
+    .sns_block {
+        .sns_title{
+            .sns_icon{
+                margin-right: 8px;
+            }
+        }
+        .sns_link{
+            .sns_btn{
+                width: 100px;
+            }
+        }
     }
 }

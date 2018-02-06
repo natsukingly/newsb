@@ -12,7 +12,7 @@ class TagsController < ApplicationController
     def index
         # sort them by the number of posts in the future
         @current_topic = t('nav.topic.tags')
-        @tags = Tag.where(country_id: @country.id).order(created_at: :desc).limit(30)
+        @tags = Tag.where(country_id: @country.id).order(posts_count: :desc).limit(30)
     end
     
     def favorite_index
