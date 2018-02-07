@@ -21,7 +21,7 @@ class SchneiderController < ApplicationController
 					{ :url => params[:article][:url7], :category_id => params[:article][:category7]	},
 					{ :url => params[:article][:url8], :category_id => params[:article][:category8]	},
 					{ :url => params[:article][:url9], :category_id => params[:article][:category9]	},
-					{ :url => params[:article][:url10], :category_id => params[:article][:category10]	},
+					{ :url => params[:article][:url10], :category_id => params[:article][:category10] },
 				]
 
 		country_id = @country.id
@@ -39,24 +39,13 @@ class SchneiderController < ApplicationController
 	
 	def prepare_admin_posts
 		
-		# forbes_business
-		# forbes_startup
-		# bridge_startup
-		# techcrunch_startup
-		# itmedia_tech
-		# techcrunch_tech1
-		# techcrunch_tech2
-		# asahi_politics
-		
-		# cannot be loaded==============
-		# yomiuri_politics
+
 		
 		redirect_to drafts_admins_path
 	end
 	
 	def forbes_business
 		AutoPostRecord.where(site_name: "forbes_business").delete_all
-		AutoPostRecord.create(site_name: "forbes_business")
 		set_doc("https://forbesjapan.com/category/lists/business?cx_hamburger=business")
 		
 		@count = @doc.css('.stream-article .article-image').count
@@ -65,18 +54,19 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Business").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end
 		
+		AutoPostRecord.create(site_name: "forbes_business", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end
 	
 	def gendai_business
 		AutoPostRecord.where(site_name: "gendai_business").delete_all
-		AutoPostRecord.create(site_name: "gendai_business")
 		set_doc("http://gendai.ismedia.jp/list/genre/economics")
 		
 		@count = @doc.css('.stream-article .article-image').count
@@ -85,18 +75,20 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Business").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end
 		
+		AutoPostRecord.create(site_name: "forbes_business", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end	
 	
 	def jcast_business
 		AutoPostRecord.where(site_name: "jcast_business").delete_all
-		AutoPostRecord.create(site_name: "jcast_business")
 		set_doc("https://www.j-cast.com/economy/")
 		
 		@urls = @doc.css('.category-entry-list li.entry-item >a').map{ |url| url.attribute("href").to_s}	
@@ -105,18 +97,42 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Business").id
 		country_id = Country.find_by(name: "Japan").id
 		
+
+		@articles_count = 0
 		@urls.each do |url|
 			# url = "https://www.excite.co.jp" + url 
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "jcast_business", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end		
 	
+	def huffpost_society
+		AutoPostRecord.where(site_name: "huffpost_society").delete_all
+		set_doc("https://www.j-cast.com/economy/")
+		
+		@urls = @doc.css('.category-entry-list li.entry-item >a').map{ |url| url.attribute("href").to_s}	
+		
+		
+		category_id = Category.find_by(name: "Business").id
+		country_id = Country.find_by(name: "Japan").id
+		
+		@articles_count = 0
+		@urls.each do |url|
+			# url = "https://www.excite.co.jp" + url 
+			parseURL(url)
+			create_article(url, category_id, country_id)
+			create_shares(@article)
+		end	
+		AutoPostRecord.create(site_name: "huffpost_society", shared: @articles_count)
+		redirect_to drafts_admins_path
+	end
+	
+	
 	def forbes_startup
 		AutoPostRecord.where(site_name: "forbes_startup").delete_all
-		AutoPostRecord.create(site_name: "forbes_startup")
 		set_doc("https://forbesjapan.com/category/lists/entrepreneurs?cx_hamburger=entrepreneurs")
 		
 		@count = @doc.css('.stream-article .article-image').count
@@ -126,18 +142,19 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Startup").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end
+		AutoPostRecord.create(site_name: "forbes_startup", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end
 	
 	
 	def bridge_startup
 		AutoPostRecord.where(site_name: "bridge_startup").delete_all
-		AutoPostRecord.create(site_name: "bridge_startup")
 		set_doc("http://thebridge.jp/")
 		
 		@count = @doc.css('.post .entry-title a').count
@@ -146,17 +163,18 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Startup").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "bridge_startup", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end
 	
 	def itmedia_tech
 		AutoPostRecord.where(site_name: "itmedia_tech").delete_all
-		AutoPostRecord.create(site_name: "itmedia_tech")
 		set_doc("http://www.itmedia.co.jp/")
 		
 		@count = @doc.css('#colBoxTopStoriesTop .colBoxTitle a').count
@@ -165,17 +183,18 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Tech").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "itmedia_tech", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end
 
 	def techcrunch_startup
 		AutoPostRecord.where(site_name: "techcrunch_startup").delete_all
-		AutoPostRecord.create(site_name: "techcrunch_startup")
 		set_doc("http://jp.techcrunch.com/startups/")
 		
 		@count = @doc.css('li.river-block .post-title a').count
@@ -184,17 +203,18 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Startup").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "techcrunch_startup", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end
 
 	def techcrunch_tech1
 		AutoPostRecord.where(site_name: "techcrunch_tech1").delete_all
-		AutoPostRecord.create(site_name: "techcrunch_tech1")
 		set_doc("http://jp.techcrunch.com/mobile/")
 		
 		@count = @doc.css('li.river-block .post-title a').count
@@ -203,17 +223,18 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Tech").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "techcrunch_tech1", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end	
 	
 	def techcrunch_tech2
 		AutoPostRecord.where(site_name: "techcrunch_tech2").delete_all
-		AutoPostRecord.create(site_name: "techcrunch_tech2")
 		set_doc("http://jp.techcrunch.com/%E3%82%AC%E3%82%B8%E3%82%A7%E3%83%83%E3%83%88/")
 		
 		@count = @doc.css('li.river-block .post-title a').count
@@ -222,17 +243,18 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Tech").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "techcrunch_tech2", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end	
 	
 	def jcast_tech
 		AutoPostRecord.where(site_name: "jcast_tech").delete_all
-		AutoPostRecord.create(site_name: "jcast_tech")
 		set_doc("https://www.j-cast.com/it/")
 		
 		@urls = @doc.css('.category-entry-list li.entry-item >a').map{ |url| url.attribute("href").to_s}	
@@ -241,97 +263,83 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Tech").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			# url = "https://www.excite.co.jp" + url 
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "jcast_tech", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end			
 	
 	
 	
-	def asahi_politics
-		AutoPostRecord.where(site_name: "asahi_politics").delete_all
-		AutoPostRecord.create(site_name: "asahi_politics")
+	def asahi_society
+		AutoPostRecord.where(site_name: "asahi_society").delete_all
 		set_doc("http://www.asahi.com/politics/list/")
-		
+
 		@asahi_count = @doc.css('.SectionFst li a').count
 		@urls = @doc.css('.SectionFst li a').map{ |url| url.attribute("href").to_s}
 
-		category_id = Category.find_by(name: "Politics").id
+		category_id = Category.find_by(name: "Society").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			url = "https://www.asahi.com" + url 
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "asahi_society", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end	
 	
-	# def jiji_politics
-	# 	AutoPostRecord.create(site_name: "jiji_politics")
-	# 	set_doc("https://www.jiji.com/jc/list?g=pol")
-		
-	# 	@urls = @doc.css('.MainInner a').map{ |url| url.attribute("href").to_s}
-
-	# 	category_id = Category.find_by(name: "Politics").id
-	# 	country_id = Country.find_by(name: "Japan").id
-		
-	# 	@urls.each do |url|
-	# 		url = "https://www.jiji.com" + url 
-	# 		parseURL(url)
-	# 		create_article(url, category_id, country_id)
-	# 		create_shares(@article)
-	# 	end	
-	# 	redirect_to drafts_admins_path
-	# end	
-	def jcast_politics
-		AutoPostRecord.where(site_name: "jcast_politics").delete_all
-		AutoPostRecord.create(site_name: "jcast_politics")
-		set_doc("https://www.j-cast.com/politics/")
+	def jcast_society
+		AutoPostRecord.where(site_name: "jcast_society").delete_all
+		set_doc("https://www.j-cast.com/society/")
 		
 		@urls = @doc.css('.category-entry-list li.entry-item >a').map{ |url| url.attribute("href").to_s}	
 		
-		
-		category_id = Category.find_by(name: "Politics").id
+		category_id = Category.find_by(name: "Society").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			# url = "https://www.excite.co.jp" + url 
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "jcast_society", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end	
 	
-	def excite_news_politics
-		AutoPostRecord.where(site_name: "excite_news_politics").delete_all
-		AutoPostRecord.create(site_name: "excite_news_politics")
-		set_doc("https://www.excite.co.jp/News/politics_g/")
+	def excite_news_society
+		AutoPostRecord.where(site_name: "excite_news_society").delete_all
+		set_doc("https://www.excite.co.jp/News/society_g/")
 		
 		@urls = @doc.css('.newsList dt.clear >a').map{ |url| url.attribute("href").to_s}	
 		
-		category_id = Category.find_by(name: "Politics").id
+		category_id = Category.find_by(name: "Society").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			url = "https://www.excite.co.jp" + url 
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "excite_news_society", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end		
 	
 	
 	def  excite_news_sports
 		AutoPostRecord.where(site_name: "excite_news_sports").delete_all
-		AutoPostRecord.create(site_name: "excite_news_sports")
 		set_doc("https://www.excite.co.jp/News/sports_g/")
 		
 		@urls = @doc.css('.newsList dt.clear >a').map{ |url| url.attribute("href").to_s}
@@ -339,18 +347,19 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Sports").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			url = "https://www.excite.co.jp" + url 
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "excite_news_sports", shared: @articles_count)
 		redirect_to drafts_admins_path		
 	end
 	
 	def  excite_news_sports2
 		AutoPostRecord.where(site_name: "excite_news_sports2").delete_all
-		AutoPostRecord.create(site_name: "excite_news_sports2")
 		set_doc("https://www.excite.co.jp/News/soccer/")
 		
 		@urls = @doc.css('.newsList dt.clear >a').map{ |url| url.attribute("href").to_s}
@@ -358,42 +367,19 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Sports").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			url = "https://www.excite.co.jp" + url 
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "excite_news_sports2", shared: @articles_count)
 		redirect_to drafts_admins_path		
 	end	
 	
-	# def nhk_politics
-	# 	AutoPostRecord.create(site_name: "nhk_politics")
-	# 	set_doc("https://www3.nhk.or.jp/news/cat04.html")
-		
-	# #########下の表記のみ有効　href取得できず
-	# 	@urls = @doc.css('a')
-
-
-
-	# 	
-		
-	# 	category_id = Category.find_by(name: "Politics").id
-	# 	country_id = Country.find_by(name: "Japan").id
-		
-	# 	@urls.each do |url|
-	# 		url = "https://www3.nhk.or.jp" + url
-	# 		parseURL(url)
-	# 		create_article(url, category_id, country_id)
-	# 		create_shares(@article)
-	# 	end	
-	# 	redirect_to drafts_admins_path
-	# end		
-	
-	
 	def rocket_news_funny
 		AutoPostRecord.where(site_name: "rocket_news_funny").delete_all
-		AutoPostRecord.create(site_name: "rocket_news_funny")
 		set_doc("https://rocketnews24.com/")
 		
 		@count = @doc.css('div.post.type-post .post-header .entry-title a').count
@@ -402,17 +388,18 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Funny").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "rocket_news_funny", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end		
 	
 	def buzzfeed_funny
 		AutoPostRecord.where(site_name: "buzzfeed_funny").delete_all
-		AutoPostRecord.create(site_name: "buzzfeed_funny")
 		set_doc("https://www.buzzfeed.com/jp")
 		
 		@count = @doc.css('div.feed-cards .story-card >a').count
@@ -421,19 +408,20 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Funny").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			url = "https://www.buzzfeed.com" + url 
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares_wo_tags(@article)
 		end	
+		AutoPostRecord.create(site_name: "buzzfeed_funny", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end		
 	
 	
 	def yahoo_entertainment
 		AutoPostRecord.where(site_name: "yahoo_entertainment").delete_all
-		AutoPostRecord.create(site_name: "yahoo_entertainment")
 		set_doc("https://news.yahoo.co.jp/list/?c=entertainment")
 		
 		@count = @doc.css('div.mainBox li.ListBoxwrap a').count
@@ -442,17 +430,18 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Entertainment").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "yahoo_entertainment", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end
 	
 	def netarika_entertainment
 		AutoPostRecord.where(site_name: "netarika_entertainment").delete_all
-		AutoPostRecord.create(site_name: "netarika_entertainment")
 		set_doc("https://netallica.yahoo.co.jp/news/geinou/")
 		
 		@count = @doc.css('ul.js-articleList li.js-article a').count
@@ -461,17 +450,18 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Entertainment").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "netarika_entertainment", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end	
 	
 	def gunosy_entertainment
 		AutoPostRecord.where(site_name: "gunosy_entertainment").delete_all
-		AutoPostRecord.create(site_name: "gunosy_entertainment")
 		set_doc("https://gunosy.com/categories/9")
 		
 		@urls = @doc.css('.article_list .list_title a').map{ |url| url.attribute("href").to_s}
@@ -479,48 +469,13 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Entertainment").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
-		redirect_to drafts_admins_path
-	end		
-	
-	def netarika_music
-		AutoPostRecord.where(site_name: "netarika_music").delete_all
-		AutoPostRecord.create(site_name: "netarika_music")
-		set_doc("https://netallica.yahoo.co.jp/news/entertainment/")
-		
-		@count = @doc.css('ul.js-articleList li.js-article a').count
-		@urls = @doc.css('ul.js-articleList li.js-article a').map{ |url| url.attribute("href").to_s}	
-		
-		category_id = Category.find_by(name: "Movies・Music").id
-		country_id = Country.find_by(name: "Japan").id
-		
-		@urls.each do |url|
-			parseURL(url)
-			create_article(url, category_id, country_id)
-			create_shares(@article)
-		end	
-		redirect_to drafts_admins_path
-	end	
-	
-	def gunosy_music
-		AutoPostRecord.where(site_name: "gunosy_music").delete_all
-		AutoPostRecord.create(site_name: "gunosy_music")
-		set_doc("https://gunosy.com/categories/11")
-		
-		@urls = @doc.css('.article_list .list_title a').map{ |url| url.attribute("href").to_s}
-
-		category_id = Category.find_by(name: "Movies・Music").id
-		country_id = Country.find_by(name: "Japan").id
-		
-		@urls.each do |url|
-			parseURL(url)
-			create_article(url, category_id, country_id)
-			create_shares(@article)
-		end	
+		AutoPostRecord.create(site_name: "gunosy_entertainment", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end		
 	
@@ -530,7 +485,6 @@ class SchneiderController < ApplicationController
 	
 	def honnest_relationships
 		AutoPostRecord.where(site_name: "honnest_relationships").delete_all
-		AutoPostRecord.create(site_name: "honnest_relationships")
 		set_doc("https://zexy-enmusubi.net/honnest/")
 		
 		@urls = @doc.css('ul.recent-entries a.recent-entries-title-link').map{ |url| url.attribute("href").to_s}
@@ -538,17 +492,18 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Relationships").id
 		country_id = Country.find_by(name: "Japan").id
 
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "honnest_relationships", shared: @articles_count)
 		redirect_to drafts_admins_path		
 	end
 	
 	def howcollect_relationships
 		AutoPostRecord.where(site_name: "howcollect_relationships").delete_all
-		AutoPostRecord.create(site_name: "howcollect_relationships")
 		set_doc("http://howcollect.jp/list/index/category/1")
 		
 		@urls = @doc.css('.main-container .line-article >a').map{ |url| url.attribute("href").to_s}.uniq
@@ -557,18 +512,19 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Relationships").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			url = "http://howcollect.jp/" + url 
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "howcollect_relationships", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end
 	
 	def tabilabo_relationships
 		AutoPostRecord.where(site_name: "tabilabo_relationships").delete_all
-		AutoPostRecord.create(site_name: "tabilabo_relationships")
 		set_doc("https://tabi-labo.com/category/love")
 		
 		@urls = @doc.css('#main a').map{ |url| url.attribute("href").to_s}.uniq
@@ -577,12 +533,14 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Relationships").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			url = "https://tabi-labo.com" + url 
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "tabilabo_relationships", shared: @articles_count)
 		redirect_to drafts_admins_path		
 	end
 
@@ -608,11 +566,11 @@ class SchneiderController < ApplicationController
 	# 	end	
 	# 	redirect_to drafts_admins_path
 	# end
-	
-	
+
+
+#MOVIE MUSIC
 	def gunosy_movie
 		AutoPostRecord.where(site_name: "gunosy_movie").delete_all
-		AutoPostRecord.create(site_name: "gunosy_movie")
 		set_doc("https://gunosy.com/categories/10")
 		
 		@urls = @doc.css('.article_list .list_title a').map{ |url| url.attribute("href").to_s}
@@ -620,18 +578,57 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Movies・Music").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "gunosy_movie", shared: @articles_count)
+		redirect_to drafts_admins_path
+	end		
+
+	def netarika_music
+		AutoPostRecord.where(site_name: "netarika_music").delete_all
+		set_doc("https://netallica.yahoo.co.jp/news/entertainment/")
+		
+		@count = @doc.css('ul.js-articleList li.js-article a').count
+		@urls = @doc.css('ul.js-articleList li.js-article a').map{ |url| url.attribute("href").to_s}	
+		
+		category_id = Category.find_by(name: "Movies・Music").id
+		country_id = Country.find_by(name: "Japan").id
+		
+		@articles_count = 0
+		@urls.each do |url|
+			parseURL(url)
+			create_article(url, category_id, country_id)
+			create_shares(@article)
+		end	
+		AutoPostRecord.create(site_name: "netarika_music", shared: @articles_count)
+		redirect_to drafts_admins_path
+	end	
+	
+	def gunosy_music
+		AutoPostRecord.where(site_name: "gunosy_music").delete_all
+		set_doc("https://gunosy.com/categories/11")
+		
+		@urls = @doc.css('.article_list .list_title a').map{ |url| url.attribute("href").to_s}
+
+		category_id = Category.find_by(name: "Movies・Music").id
+		country_id = Country.find_by(name: "Japan").id
+		
+		@articles_count = 0
+		@urls.each do |url|
+			parseURL(url)
+			create_article(url, category_id, country_id)
+			create_shares(@article)
+		end	
+		AutoPostRecord.create(site_name: "gunosy_music", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end		
 	
-	
 	def netarika_health
 		AutoPostRecord.where(site_name: "netarika_health").delete_all
-		AutoPostRecord.create(site_name: "netarika_health")
 		set_doc("https://netallica.yahoo.co.jp/news/beauty/")
 		
 		@count = @doc.css('ul.js-articleList li.js-article a').count
@@ -640,17 +637,18 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Health").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "netarika_health", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end	
 	
 	def jcast_health
 		AutoPostRecord.where(site_name: "jcast_health").delete_all
-		AutoPostRecord.create(site_name: "jcast_health")
 		set_doc("https://www.j-cast.com/health/")
 		
 		@urls = @doc.css('.category-entry-list li.entry-item >a').map{ |url| url.attribute("href").to_s}	
@@ -659,18 +657,19 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Health").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			# url = "https://www.excite.co.jp" + url 
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "jcast_health", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end		
 	
 	def netarika_food
 		AutoPostRecord.where(site_name: "netarika_food").delete_all
-		AutoPostRecord.create(site_name: "netarika_food")
 		set_doc("https://netallica.yahoo.co.jp/news/gourmet/")
 		
 		@count = @doc.css('ul.js-articleList li.js-article a').count
@@ -679,17 +678,18 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Food").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "netarika_food", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end		
 	
 	def gunosy_food
 		AutoPostRecord.where(site_name: "gunosy_food").delete_all
-		AutoPostRecord.create(site_name: "gunosy_food")
 		set_doc("https://gunosy.com/categories/8")
 		
 		@urls = @doc.css('.article_list .list_title a').map{ |url| url.attribute("href").to_s}
@@ -697,191 +697,17 @@ class SchneiderController < ApplicationController
 		category_id = Category.find_by(name: "Food").id
 		country_id = Country.find_by(name: "Japan").id
 		
+		@articles_count = 0
 		@urls.each do |url|
 			parseURL(url)
 			create_article(url, category_id, country_id)
 			create_shares(@article)
 		end	
+		AutoPostRecord.create(site_name: "gunosy_food", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end		
-	
-	# def yahoo_health
-	# 	AutoPostRecord.create(site_name: "yahoo_health")
-	# 	set_doc("https://news.yahoo.co.jp/hl?c=c_life&p=1")
-		
-	# 	@count = @doc.css('ul.listBd li span.thumb a').count
-	# 	@urls = @doc.css('ul.listBd li span.thumb a').map{ |url| url.attribute("href").to_s}	
-		
-	# 	category_id = Category.find_by(name: "Health").id
-	# 	country_id = Country.find_by(name: "Japan").id
-		
-	# 	@urls.each do |url|
-	# 		parseURL(url)
-	# 		create_article(url, category_id, country_id)
-	# 		create_shares(@article)
-	# 	end	
-	# 	redirect_to drafts_admins_path
-	# end	
-	
 
 	private 
-		# def forbes_business
-		# 	set_doc("https://forbesjapan.com/category/lists/business?cx_hamburger=business")
-			
-		# 	@count = @doc.css('.stream-article .article-image').count
-		# 	@urls = @doc.css('.stream-article .article-image').map{ |url| url.attribute("href").to_s}	
-			
-		# 	category_id = Category.find_by(name: "Business").id
-		# 	country_id = Country.find_by(name: "Japan").id
-			
-		# 	@urls.each do |url|
-		# 		parseURL(url)
-		# 		create_article(url, category_id, country_id)
-		# 	end
-		# end
-		
-		# def forbes_startup
-		# 	set_doc("https://forbesjapan.com/category/lists/entrepreneurs?cx_hamburger=entrepreneurs")
-			
-		# 	@count = @doc.css('.stream-article .article-image').count
-		# 	@urls = @doc.css('.stream-article .article-image').map{ |url| url.attribute("href").to_s}	
-			
-		# 	category_id = Category.find_by(name: "Startup").id
-		# 	country_id = Country.find_by(name: "Japan").id
-			
-		# 	@urls.each do |url|
-		# 		parseURL(url)
-		# 		create_article(url, category_id, country_id)
-		# 	end
-		# end
-		
-		
-		# def bridge_startup
-		# 	set_doc("http://thebridge.jp/")
-			
-		# 	@count = @doc.css('.post .entry-title a').count
-		# 	@urls = @doc.css('.post .entry-title a').map{ |url| url.attribute("href").to_s}	
-			
-		# 	category_id = Category.find_by(name: "Startup").id
-		# 	country_id = Country.find_by(name: "Japan").id
-			
-		# 	@urls.each do |url|
-		# 		parseURL(url)
-		# 		create_article(url, category_id, country_id)
-		# 	end			
-		# end
-		
-		# def itmedia_tech
-		# 	set_doc("http://www.itmedia.co.jp/")
-			
-		# 	@count = @doc.css('#colBoxTopStoriesTop .colBoxTitle a').count
-		# 	@urls = @doc.css('#colBoxTopStoriesTop .colBoxTitle a').map{ |url| url.attribute("href").to_s}	
-			
-		# 	category_id = Category.find_by(name: "Tech").id
-		# 	country_id = Country.find_by(name: "Japan").id
-			
-		# 	@urls.each do |url|
-		# 		parseURL(url)
-		# 		create_article(url, category_id, country_id)
-		# 	end		
-		# end
-
-		# def techcrunch_startup
-		# 	set_doc("http://jp.techcrunch.com/startups/")
-			
-		# 	@count = @doc.css('li.river-block .post-title a').count
-		# 	@urls = @doc.css('li.river-block .post-title a').map{ |url| url.attribute("href").to_s}	
-			
-		# 	category_id = Category.find_by(name: "Startup").id
-		# 	country_id = Country.find_by(name: "Japan").id
-			
-		# 	@urls.each do |url|
-		# 		parseURL(url)
-		# 		create_article(url, category_id, country_id)
-		# 	end		
-		# end
-
-		# def techcrunch_tech1
-		# 	set_doc("http://jp.techcrunch.com/mobile/")
-			
-		# 	@count = @doc.css('li.river-block .post-title a').count
-		# 	@urls = @doc.css('li.river-block .post-title a').map{ |url| url.attribute("href").to_s}	
-			
-		# 	category_id = Category.find_by(name: "Tech").id
-		# 	country_id = Country.find_by(name: "Japan").id
-			
-		# 	@urls.each do |url|
-		# 		parseURL(url)
-		# 		create_article(url, category_id, country_id)
-		# 	end		
-		# end	
-		
-		# def techcrunch_tech2
-		# 	set_doc("http://jp.techcrunch.com/%E3%82%AC%E3%82%B8%E3%82%A7%E3%83%83%E3%83%88/")
-			
-		# 	@count = @doc.css('li.river-block .post-title a').count
-		# 	@urls = @doc.css('li.river-block .post-title a').map{ |url| url.attribute("href").to_s}	
-			
-		# 	category_id = Category.find_by(name: "Tech").id
-		# 	country_id = Country.find_by(name: "Japan").id
-			
-		# 	@urls.each do |url|
-		# 		parseURL(url)
-		# 		create_article(url, category_id, country_id)
-		# 	end		
-		# end	
-		
-		# def asahi_politics
-		# 	set_doc("http://www.asahi.com/politics/list/")
-			
-		# 	@asahi_count = @doc.css('.SectionFst li a').count
-		# 	@urls = @doc.css('.SectionFst li a').map{ |url| url.attribute("href").to_s}
-			
-			
-		# 	category_id = Category.find_by(name: "Politics").id
-		# 	country_id = Country.find_by(name: "Japan").id
-			
-		# 	@urls.each do |url|
-		# 		url = "https://www.asahi.com" + url 
-		# 		parseURL(url)
-		# 		create_article(url, category_id, country_id)
-		# 	end		
-		# end	
-		
-		# def yomiuri_politics
-		# 	set_doc("http://www.yomiuri.co.jp/politics/")
-			
-		# 	@asahi_count = @doc.css('.span-main-inr li > a').count
-		# 	@urls = @doc.css('.span-main-inr li > a').map{ |url| url.attribute("href").to_s}
-			
-			
-		# 	category_id = Category.find_by(name: "Politics").id
-		# 	country_id = Country.find_by(name: "Japan").id
-			
-		# 	@urls.each do |url|
-		# 		parseURL(url)
-		# 		create_article(url, category_id, country_id)
-		# 	end		
-		# end	
-		
-		# def hhk_politics
-		# 	set_doc("https://www3.nhk.or.jp/news/cat04.html?utm_int=all_header_menu_news-politics")
-			
-		# 	@nhk_count = @doc.css('#main li a').count
-		# 	@urls = @doc.css('#main li a').map{ |url| url.attribute("href").to_s}
-			
-		# 	category_id = Category.find_by(name: "Politics").id
-		# 	country_id = Country.find_by(name: "Japan").id
-			
-		# 	flash[:notice] = @nhk_count
-			
-		# 	@urls.each do |url|
-		# 		url = "https://www3.nhk.or.jp" + url 
-		# 		parseURL(url)
-		# 		create_article(url, category_id, country_id)
-		# 	end		
-		# end	
-
 		
 		
 		def set_doc(site_url)
@@ -916,23 +742,6 @@ class SchneiderController < ApplicationController
 					end
 					@article.save
 				end
-				
-				
-				
-				
-				# Create post_draft for all admin users
-				# User.where(admin: true).each do |user|
-				# 	unless PostDraft.where(user_id: user.id, article_id: @article.id).any? || Post.where(user_id: user.id, article_id: @article.id).any?
-				# 		@post_draft = user.post_drafts.build(article_id: @article.id)
-				# 		@post_draft.category_id = category_id
-				# 		@post_draft.country_id = country_id
-				# 		@post_draft.save
-					
-				# 		decide_category
-				# 	end
-				# end
-				
-				
 			end
 		end
 		
@@ -942,7 +751,7 @@ class SchneiderController < ApplicationController
 			
 			random_user = [user, user2].sample
 			
-			if article && article.posts.where(user_id: random_user.id).empty?
+			if article && !(article.posts.where(user_id: [user.id, user2.id]).nil?)
 				
 				if article.keywords.nil?
 					keywords = ''
@@ -964,7 +773,9 @@ class SchneiderController < ApplicationController
 											category_id: article.category_id,
 											content: content,
 											comment_permission: false)
-				post.save
+				if post.save
+					@articles_count = @articles_count + 1
+				end
 			end
 		end
 		
@@ -974,7 +785,7 @@ class SchneiderController < ApplicationController
 			
 			random_user = [user, user2].sample
 			
-			if article && article.posts.where(user_id: [user.id, user2.id]).nil?
+			if article && !(article.posts.where(user_id: [user.id, user2.id]).nil?)
 				content = ''
 				if user 
 					post = article.posts.build(user_id: random_user.id,

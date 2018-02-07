@@ -1,6 +1,7 @@
 ja:
   categories:
     feed: "投稿"
+    international: "国際"
     business: "ビジネス"
     technology: "テクノロジー"
     tech: "テクノロジー"
@@ -17,3 +18,4 @@ ja:
     funny: "おもしろ"
     relationships: "人間関係"
     web: "デザイン・開発"
+    society: "国内"

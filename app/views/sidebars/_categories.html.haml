@@ -17,16 +17,31 @@
 						%span.feed_notifications_count
 							(#{current_user.feed_notifications.where(check: false).count})
 		
-			
+			=link_to categorized_articles_path("Society"), class: "category_btn", data: {category: 'Society'} do
+				=render 'svg/categories/society'
+				%span
+					=t('categories.society')
+					
+			=link_to categorized_articles_path("International"), class: "category_btn", data: {category: 'International'} do
+				=render 'svg/categories/international'
+				%span
+					=t('categories.international')	
+					
 			=link_to categorized_articles_path("Business"), class: "category_btn", data: {category: 'Business'} do
 				=render 'svg/categories/business'
 				%span
 					=t('categories.business')
 					
-			=link_to categorized_articles_path("Politics"), class: "category_btn", data: {category: 'Politics'} do
-				=render 'svg/categories/politics'
+					
+			=link_to categorized_articles_path("Entertainment"), class: "category_btn", data: {category: 'Entertainment'} do
+				=render 'svg/categories/entertainment'
 				%span
-					=t('categories.politics')
+					=t('categories.entertainment')
+					
+			=link_to categorized_articles_path("Funny"), class: "category_btn", data: {category: 'Funny'} do 
+				=render 'svg/categories/funny'
+				%span
+					=t('categories.funny')		
 					
 			=link_to categorized_articles_path("Tech"), class: "category_btn", data: {category: 'Tech'} do
 				=render 'svg/categories/technology'
@@ -42,15 +57,11 @@
 				=render 'svg/categories/sports'
 				%span
 					=t('categories.sports')
+					
 			=link_to categorized_articles_path("Startup"), class: "category_btn", data: {category: 'Startup'} do
 				=render 'svg/categories/startup'
 				%span
 					=t('categories.startup')
-			
-			=link_to categorized_articles_path("Entertainment"), class: "category_btn", data: {category: 'Entertainment'} do
-				=render 'svg/categories/entertainment'
-				%span
-					=t('categories.entertainment')
 					
 			=link_to categorized_articles_path("Relationships"), class: "category_btn", data: {category: 'Relationships'} do
 				=render 'svg/categories/relationships'
@@ -69,10 +80,7 @@
 				=render 'svg/categories/music'
 				%span
 					=t('categories.movies')
-			=link_to categorized_articles_path("Funny"), class: "category_btn", data: {category: 'Funny'} do 
-				=render 'svg/categories/funny'
-				%span
-					=t('categories.funny')
+
 -if @category
 	:javascript
 		$('.category_menu').find('.category_btn[data-category="#{@category.name}"]').addClass("active");

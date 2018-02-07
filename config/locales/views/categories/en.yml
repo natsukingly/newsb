@@ -1,6 +1,7 @@
 en:
   categories:
     feed: "Feed"
+    international: "International"
     business: "Business"
     technology: "Technology"
     tech: "Technology"
@@ -17,3 +18,4 @@ en:
     funny: "Funny"
     relationships: "Relationships"
     web: "Web・Dev"
+    society: "Society"

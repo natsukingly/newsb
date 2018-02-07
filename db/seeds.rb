@@ -20,18 +20,19 @@
 #     end
 # end
 
-Category.find_or_create_by(name: "Business", ja_name: "ビジネス")
-Category.find_or_create_by(name: "Tech", ja_name: "テクノロジー")
-Category.find_or_create_by(name: "Politics", ja_name: "政治")
-Category.find_or_create_by(name: "Entertainment", ja_name: "エンタメ")
-Category.find_or_create_by(name: "Sports", ja_name: "スポーツ")
-Category.find_or_create_by(name: "Funny", ja_name: "おもしろ")
-Category.find_or_create_by(name: "Startup", ja_name: "スタートアップ")
-Category.find_or_create_by(name: "Food", ja_name: "グルメ")
-Category.find_or_create_by(name: "Movies・Music", ja_name: "映画・音楽")
-Category.find_or_create_by(name: "Health", ja_name: "美容・健康")
-Category.find_or_create_by(name: "Relationships", ja_name: "人間関係")
-Category.find_or_create_by(name: "Web", ja_name: "デザイン・開発")
+Category.find_or_create_by(name: "Business")
+Category.find_or_create_by(name: "Tech")
+Category.find_or_create_by(name: "Entertainment")
+Category.find_or_create_by(name: "Sports")
+Category.find_or_create_by(name: "Funny")
+Category.find_or_create_by(name: "Startup")
+Category.find_or_create_by(name: "Food")
+Category.find_or_create_by(name: "Movies・Music")
+Category.find_or_create_by(name: "Health")
+Category.find_or_create_by(name: "Relationships")
+Category.find_or_create_by(name: "Web")
+Category.find_or_create_by(name: "Society")
+Category.find_or_create_by(name: "International")
 
 
 

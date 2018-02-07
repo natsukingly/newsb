@@ -162,7 +162,7 @@ module ApplicationHelper
                 og: {
                   title: :title,
                   type: "article",
-                  url: "http://www.newsbeee.com/#{article.country.name}/articles/#{article.id}",
+                  url: "http://www.newsbeee.com/#{article.country.name}/articles/#{article.id}", 
                   image: article.image.url || "http://www.newsbeee.com/images/newsb_image.png",
                   site_name: "Newsb!",
                   description: :description,
@@ -179,21 +179,25 @@ module ApplicationHelper
         end
     end
     
-    
-    
-    
-    TIME_PATTERN = { ' months'=>'mo', ' hours'=>'h', ' minutes'=>'m', ' days'=>'d', ' seconds' => 's', ' month'=>'mo', ' hour'=>'h', ' minute'=>'m', ' day'=>'d', ' second' => 's'}
-    # or make use of locale:
-    # TIME_PATTERN = {' hour'=> I18n.t('h'), ' minute'=> I18n.t('m'), ' day'=> I18n.t('d'), ' hours'=> I18n.t('h'), ' minutes'=> I18n.t('m'), ' days'=> I18n.t('d')}
-    
-    def time_ago_in_words_short(time)
-        if time == nil
-            word = " "
-        else
-            word = time_ago_in_words(time)
-            TIME_PATTERN.each_pair{ |k, v| word.gsub!(k, v) }
-        end
-        word
+    def articles_count_by_category(category_name, country_id)
+ 		Article.all.where(category_id: Category.find_by(name: category_name).id, country_id: country_id).where("published_time >= ?", Time.now.ago(2.days)).where.not(posts_count: 0).count
     end
+
+    def admin_auto_post_record(site_name)
+        records = AutoPostRecord.where(site_name: site_name)
+    	if AutoPostRecord.where(site_name: site_name).any?
+    		"#{time_ago_in_words(records.last.created_at)}/#{records.last.shared}"
+    	end
+    end
+
+    # def time_ago_in_words_short(time)
+    #     if time == nil
+    #         word = " "
+    #     else
+    #         word = time_ago_in_words(time)
+    #         TIME_PATTERN.each_pair{ |k, v| word.gsub!(k, v) }
+    #     end
+    #     word
+    # end
      
 end

@@ -57,6 +57,20 @@ Rails.application.routes.draw do
 	post '/schneider/jcast_business', as: :jcast_business
 	# post '/schneider/gendai_business', as: :gendai_business
 	
+	#society 国内
+	post '/schneider/huffpost_society', as: :huffpost_society
+	post '/schneider/asahi_society', as: :asahi_society
+	post '/schneider/excite_news_society', as: :excite_news_society
+	post '/schneider/jcast_society', as: :jcast_society
+
+	# International
+	# post '/schneider/asahi_politics', as: :asahi_politics
+	# post '/schneider/nhk_politics', as: :nhk_politics
+	# post '/schneider/jiji_politics', as: :jiji_politics
+	# post '/schneider/excite_news_politics', as: :excite_news_politics
+	# post '/schneider/jcast_politics', as: :jcast_politics
+
+	
 	#startup
 	post '/schneider/forbes_startup', as: :forbes_startup
 	post '/schneider/bridge_startup', as: :bridge_startup
@@ -69,12 +83,6 @@ Rails.application.routes.draw do
 	post '/schneider/itmedia_tech', as: :itmedia_tech
 	post '/schneider/jcast_tech', as: :jcast_tech
 	
-	# politics
-	post '/schneider/asahi_politics', as: :asahi_politics
-	# post '/schneider/nhk_politics', as: :nhk_politics
-	# post '/schneider/jiji_politics', as: :jiji_politics
-	post '/schneider/excite_news_politics', as: :excite_news_politics
-	post '/schneider/jcast_politics', as: :jcast_politics
 	
 	# funny
 	post '/schneider/rocket_news_funny', as: :rocket_news_funny

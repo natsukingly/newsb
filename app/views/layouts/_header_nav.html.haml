@@ -11,14 +11,16 @@
 			%span.feed_notifications_count
 				(#{current_user.feed_notifications.where(check: false).count})
 
-	
+	=link_to t('categories.society'), categorized_articles_path("Society"), class: "category_nav_btn", data: {category: 'Society'}
+	=link_to t('categories.international'), categorized_articles_path("International"), class: "category_nav_btn", data: {category: 'International'}
 	=link_to t('categories.business'), categorized_articles_path("Business"), class: "category_nav_btn", data: {category: 'Business'}
-	=link_to t('categories.politics'), categorized_articles_path("Politics"), class: "category_nav_btn", data: {category: 'Politics'}
+	=link_to t('categories.entertainment'), categorized_articles_path("Entertainment"), class: "category_nav_btn", data: {category: 'Entertainment'}
+	=link_to t('categories.funny'), categorized_articles_path("Funny"), class: "category_nav_btn", data: {category: 'Funny'}
 	=link_to t('categories.technology'), categorized_articles_path("Tech"), class: "category_nav_btn", data: {category: 'Tech'} 
+	=link_to t('categories.web'), categorized_articles_path("Web"), class: "category_nav_btn", data: {category: 'Web'} 
 	=link_to t('categories.sports'), categorized_articles_path("Sports"), class: "category_nav_btn", data: {category: 'Sports'}
 	=link_to t('categories.startup'), categorized_articles_path("Startup"), class: "category_nav_btn", data: {category: 'Startup'}
-	=link_to t('categories.entertainment'), categorized_articles_path("Entertainment"), class: "category_nav_btn", data: {category: 'Entertainment'}
+	=link_to t('categories.relationships'), categorized_articles_path("Relationships"), class: "category_nav_btn",  data: {category: 'Relationships'}
 	=link_to t('categories.food'), categorized_articles_path("Food"), class: "category_nav_btn",  data: {category: 'Food'}
 	=link_to t('categories.health'), categorized_articles_path("Health"), class: "category_nav_btn", data: {category: 'Health'}
 	=link_to t('categories.movies'), categorized_articles_path("Movies・Music"), class: "category_nav_btn", data: {category: 'Movies・Music'}
-	=link_to t('categories.funny'), categorized_articles_path("Funny"), class: "category_nav_btn", data: {category: 'Funny'}
