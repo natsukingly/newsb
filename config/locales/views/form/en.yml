@@ -3,7 +3,7 @@ en:
     url:
       caption: "What's happening in the world today?"
       placeholder: "paste an url to start"
-      note: "Note: newsb!'s index page only show the articles published within 3 days."
+      note: "Note: newsb!'s index page only show the articles published within 2 days."
       error: "Error: this article cannot be uploaded."
     post:
       title: "Create post"
@@ -26,9 +26,9 @@ en:
       setting_page: "Setting page"
     post_errors:
       category_undecided: "Please select a category."
-      too_long: "Your post exceeded maximum length(1000). Right now you have"
+      too_long: "Your post exceeded its maximum length(1000). Right now you have"
     comment_errors:  
-      too_long: "Your post exceeded maximum length(500). Right now you have"
+      too_long: "Your post exceeded its maximum length(500). Right now you have"
       blank: "You can't post a blank content"
     cancel: "CANCEL"
     report:
@@ -41,8 +41,8 @@ en:
       about: "ABOUT"
       language: "LANGUAGE"
       location: "LOCATION"
-      credential_error: "Your post exceeded maximum length(50). Right now you have"
-      about_error: "Your post exceeded maximum length(1000). Right now you have"
+      credential_error: "Your post exceeded its maximum length(50). Right now you have"
+      about_error: "Your post exceeded its maximum length(1000). Right now you have"
       name_error: "You cannot leave your name blank."
       
       

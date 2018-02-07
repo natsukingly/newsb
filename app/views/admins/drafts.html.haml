@@ -214,6 +214,13 @@
 						%span
 							-if AutoPostRecord.where(site_name: "honnest_relationships").any? != false
 								=time_ago_in_words(AutoPostRecord.where(site_name: "honnest_relationships").last.created_at)
+								
+					=link_to howcollect_relationships_path, class: "schneider_btn", method: :post do
+						%span
+							howcollect_relationships
+						%span
+							-if AutoPostRecord.where(site_name: "howcollect_relationships").any? != false
+								=time_ago_in_words(AutoPostRecord.where(site_name: "howcollect_relationships").last.created_at)								
 
 								
 			.auto_post_btn_group
@@ -234,7 +241,17 @@
 							-if AutoPostRecord.where(site_name: "gunosy_food").any? != false
 								=time_ago_in_words(AutoPostRecord.where(site_name: "gunosy_food").last.created_at)						
 
-
+			.auto_post_btn_group
+				.title
+					Web
+				.btns		
+					=link_to lig_web_path, class: "schneider_btn", method: :post do
+						%span
+							lig_web
+						%span
+							-if AutoPostRecord.where(site_name: "lig_web").any? != false
+								=time_ago_in_words(AutoPostRecord.where(site_name: "lig_web").last.created_at)
+								
 			.auto_post_btn_group
 				.title
 					Sports

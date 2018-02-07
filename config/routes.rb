@@ -106,6 +106,10 @@ Rails.application.routes.draw do
 	post '/schneider/netarika_food', as: :netarika_food	
 	post '/schneider/gunosy_food', as: :gunosy_food
 	
+	#web
+	post '/schneider/lig_web', as: :lig_web	
+
+	
 	#lifestyle
 	
 	

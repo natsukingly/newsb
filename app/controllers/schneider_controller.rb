@@ -547,7 +547,23 @@ class SchneiderController < ApplicationController
 	end
 	
 	def howcollect_relationships
+		AutoPostRecord.where(site_name: "howcollect_relationships").delete_all
+		AutoPostRecord.create(site_name: "howcollect_relationships")
+		set_doc("http://howcollect.jp/list/index/category/1")
 		
+		@urls = @doc.css('.main-container .line-article >a').map{ |url| url.attribute("href").to_s}.uniq
+		# @urls.delete('/category/love')
+
+		category_id = Category.find_by(name: "Relationships").id
+		country_id = Country.find_by(name: "Japan").id
+		
+		@urls.each do |url|
+			url = "http://howcollect.jp/" + url 
+			parseURL(url)
+			create_article(url, category_id, country_id)
+			create_shares(@article)
+		end	
+		redirect_to drafts_admins_path
 	end
 	
 	def tabilabo_relationships
@@ -569,6 +585,29 @@ class SchneiderController < ApplicationController
 		end	
 		redirect_to drafts_admins_path		
 	end
+
+
+###WEB ###########################
+	# def lig_web
+	# 	AutoPostRecord.where(site_name: "lig_web").delete_all
+	# 	AutoPostRecord.create(site_name: "lig_web")
+	# 	set_doc("https://gunosy.com/categories/10")
+		
+	# 	@urls = @doc.css('#js_main .l-article-list .l-article-list-left >a').map{ |url| url.attribute("href").to_s}
+	# 	@urls1 = @doc.css('a.gtm_archive_link').map{ |url| url.attribute("href").to_s}
+		
+	# 	category_id = Category.find_by(name: "Web").id
+	# 	country_id = Country.find_by(name: "Japan").id
+		
+	# 	binding.pry
+		
+	# 	@urls.each do |url|
+	# 		parseURL(url)
+	# 		create_article(url, category_id, country_id)
+	# 		create_shares(@article)
+	# 	end	
+	# 	redirect_to drafts_admins_path
+	# end
 	
 	
 	def gunosy_movie

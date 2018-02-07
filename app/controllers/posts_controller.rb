@@ -258,9 +258,6 @@ class PostsController < ApplicationController
 			#PUBLISHED_TIME
 			if !(doc.css('//meta[property="article:published_time"]/@content').empty?)
 				@article_published_time = doc.css('//meta[property="article:published_time"]/@content').to_s
-				if @article_source == "ホンネスト - produced by 婚活サイト ゼクシィ縁結び"
-					@article_published_time = Time.at(@article_published_time.to_i)
-				end					
 			elsif !(doc.css('//meta[property="article:published"]/@content').empty?)
 				@article_published_time = doc.css('//meta[property="article:published"]/@content').to_s
 			elsif !(doc.css('//meta[name="pubdate"]/@content').empty?)
@@ -290,7 +287,9 @@ class PostsController < ApplicationController
 			else
 				@article_published_time = ''
 			end
-
+			if  @article_published_time.to_i > 3000
+				 @article_published_time = Time.at(@article_published_time.to_i)
+			end
 		end
 		
 		
