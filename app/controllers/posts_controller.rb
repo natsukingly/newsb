@@ -262,7 +262,6 @@ class PostsController < ApplicationController
 				@article_published_time = doc.css('//meta[property="article:published"]/@content').to_s
 			elsif !(doc.css('//meta[name="pubdate"]/@content').empty?)
 				@article_published_time = doc.css('//meta[name="pubdate"]/@content').to_s
-			
 			#for buzzfeed
 			elsif !(doc.css('header.buzz-header').empty?)
 				@article_published_time = Date.parse(doc.css('header.buzz-header time.buzz-timestamp__time').text)
