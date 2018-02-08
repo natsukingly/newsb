@@ -784,7 +784,6 @@ class SchneiderController < ApplicationController
 		end		
 		
 	#############SPORTS@#############################################
-		
 		def  excite_news_sports
 			AutoPostRecord.where(site_name: "excite_news_sports").delete_all
 			set_doc("https://www.excite.co.jp/News/sports_g/")
