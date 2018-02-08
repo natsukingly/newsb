@@ -31,6 +31,12 @@
 				=link_to t('dropdown.profile_option.contact'), contact_page_path, class: "profile_option", target: "_blank"
 				=link_to t('dropdown.profile_option.terms'), terms_page_path, class: "profile_option", target: "_blank"
 				=link_to t('dropdown.profile_option.logout'), destroy_user_session_path, class: "profile_option" 
+			-if current_user.admin == true
+				.admin_option_block
+					=link_to "Auto Post", drafts_admins_path, class: "profile_option ddm_btn" 
+					=link_to "Manual Post", url_forms_admins_path, class: "profile_option ddm_btn" 
+					=link_to "Reports", reports_admins_path, class: "profile_option ddm_btn" 
+					=link_to "Announcement", newsb_notifications_index_admins_path, class: "profile_option ddm_btn" 
 			.copy_right_statement
 				&copy; 2017 NEWSB
 			

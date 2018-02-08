@@ -46,90 +46,14 @@ Rails.application.routes.draw do
 		end
 	end
 	
-	
-	
 	#scheneider##########==========================================================
 	get '/schneider/crawl' => 'schneider#crawl', as: :crawl
 	post '/schneider/custom' => 'schneider#custom', as: :custom
 	
-	#business
-	post '/schneider/forbes_business', as: :forbes_business
-	post '/schneider/jcast_business', as: :jcast_business
-	# post '/schneider/gendai_business', as: :gendai_business
 	
-	#society 国内
-	post '/schneider/huffpost_society', as: :huffpost_society
-	post '/schneider/asahi_society', as: :asahi_society
-	post '/schneider/excite_news_society', as: :excite_news_society
-	post '/schneider/jcast_society', as: :jcast_society
-
-	# International
-	post '/schneider/afp_international', as: :afp_international
-	post '/schneider/record_china_international', as: :record_china_international
-	# post '/schneider/jiji_politics', as: :jiji_politics
-	# post '/schneider/excite_news_politics', as: :excite_news_politics
-	# post '/schneider/jcast_politics', as: :jcast_politics
-
-	
-	#startup
-	post '/schneider/forbes_startup', as: :forbes_startup
-	post '/schneider/bridge_startup', as: :bridge_startup
-	post '/schneider/techcrunch_startup', as: :techcrunch_startup
-	
-	
-	# tech
-	post '/schneider/techcrunch_tech1', as: :techcrunch_tech1
-	post '/schneider/techcrunch_tech2', as: :techcrunch_tech2
-	post '/schneider/itmedia_tech', as: :itmedia_tech
-	post '/schneider/jcast_tech', as: :jcast_tech
-	
-	
-	# funny
-	post '/schneider/rocket_news_funny', as: :rocket_news_funny
-	post '/schneider/buzzfeed_funny', as: :buzzfeed_funny
-	
-	# entertainment
-	post '/schneider/yahoo_entertainment', as: :yahoo_entertainment
-	post '/schneider/netarika_entertainment', as: :netarika_entertainment
-	post '/schneider/gunosy_entertainment', as: :gunosy_entertainment
-	
-	#Movies.music
-	post '/schneider/netarika_music', as: :netarika_music
-	post '/schneider/gunosy_music', as: :gunosy_music
-	post '/schneider/gunosy_movie', as: :gunosy_movie
-	
-	
-	#health
-	post '/schneider/netarika_health', as: :netarika_health
-	post '/schneider/jcast_health', as: :jcast_health
-	
-	#relationships
-	post '/schneider/googirl_relationships', as: :googirl_relationships
-	post '/schneider/honnest_relationships', as: :honnest_relationships
-	post '/schneider/howcollect_relationships', as: :howcollect_relationships
-	post '/schneider/tabilabo_relationships', as: :tabilabo_relationships
-	# post '/schneider/yahoo_relationships', as: :yahoo_relationships
-	
-	#food
-	post '/schneider/netarika_food', as: :netarika_food	
-	post '/schneider/gunosy_food', as: :gunosy_food
-	
-	#web
-	post '/schneider/lig_web', as: :lig_web	
-
-	
-	#lifestyle
-	
-	
-	#sports
-	post '/schneider/excite_news_sports', as: :excite_news_sports
-	post '/schneider/excite_news_sports2', as: :excite_news_sports2
-	
-	#all
-	post '/schneider/prepare_admin_posts', as: :prepare_admin_posts
-	
-	# ===============================================================================
-	
+	post '/schneider/auto_post_by_item/:item' => 'schneider#auto_post_by_item', as: :auto_post_by_item
+	post '/schneider/auto_post_by_category/:category' => 'schneider#auto_post_by_category', as: :auto_post_by_category
+	post '/schneider/auto_post' => 'schneider#auto_post', as: :auto_post
 	
 	
 
