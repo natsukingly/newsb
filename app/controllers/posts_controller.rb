@@ -94,8 +94,8 @@ class PostsController < ApplicationController
 				flash[:notice] = t('flash.post.create_success')
 				redirect_to article_path(@article.id)
 			else 
-				flash[:alert] = t('flash.post.create_fail')
 				
+				flash[:alert] = t('flash.post.create_fail')
 				redirect_to article_path(@article.id)
 			end
 		end		
@@ -128,12 +128,6 @@ class PostsController < ApplicationController
 		
 	end
 	
-	# def update_article_post
-	# 	@post.content = params[:post][:content] 
-	# 	@post.save
-	# 	flash[:notice] = "Your post has been updated."
-	# 	redirect_to article_path(@post.article.id)
-	# end
 	def change_comment_permission
 		@post = Post.find(params[:id])
 		if @post.comment_permission == true
@@ -159,18 +153,6 @@ class PostsController < ApplicationController
 			redirect_to article_path(article_id)
 		end
 	end
-
-	# def create_report
-	# 	@report = @post.reports.build(	user_id: current_user.id, 
-	# 									content: params[:report][:content],
-	# 									country_id: params[:report][:country_id])
-	# 	if @report.save
-	# 		flash[:notice] = t('flash.post.report_success')
-	# 	else
-	# 		flash[:alert] = t('flash.post.report_fail')
-	# 	end
-	# end
-
 
 
 	private
@@ -209,6 +191,7 @@ class PostsController < ApplicationController
 		
 		#get article info using nokogiri gem
 		def parseURL
+			
 			@article_url = params[:placeholder_url]
 			url = @article_url
 			charset = nil
@@ -256,7 +239,9 @@ class PostsController < ApplicationController
 			end			
 			
 			#PUBLISHED_TIME
-			if !(doc.css('//meta[property="article:published_time"]/@content').empty?)
+			if !(doc.css('//meta[property="article:modified_time"]/@content').empty?)
+				@article_published_time = doc.css('//meta[property="article:modified_time"]/@content').to_s
+			elsif !(doc.css('//meta[property="article:published_time"]/@content').empty?)
 				@article_published_time = doc.css('//meta[property="article:published_time"]/@content').to_s
 			elsif !(doc.css('//meta[property="article:published"]/@content').empty?)
 				@article_published_time = doc.css('//meta[property="article:published"]/@content').to_s
@@ -283,6 +268,9 @@ class PostsController < ApplicationController
 			elsif !(doc.css('.contents-container .article-date').empty?)
 				time = doc.css('.contents-container .article-date').to_s
 				@article_published_time = DateTime.parse(time)
+			#for record china
+			elsif !(doc.css('#contents #microtime/@value').empty?)
+				@article_published_time = doc.css('#contents #microtime/@value').to_s
 			else
 				@article_published_time = ''
 			end
@@ -334,7 +322,7 @@ class PostsController < ApplicationController
 				if params[:article][:image].to_s == ''
 					@article.image = "no_image.jpeg"
 				else
-					@article.remote_image_url = params[:article][:image].gsub('http:','https:')
+					@article.remote_image_url = params[:article][:image]
 				end
 				@article.category_id = params[:post][:category_id].to_i
 				@article.country_id = @country.id

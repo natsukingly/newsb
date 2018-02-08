@@ -32,7 +32,7 @@
 								[ This article has been deleted ]
 						%p.sm.grey
 							- if article.published_time
-								#{time_ago_in_words(article.published_time)}
+								#{time_in_newsb_locale_short(@country.name, article.published_time)}
 							= universal_truncate_with_omission(article.source, 50, "")
 
 				

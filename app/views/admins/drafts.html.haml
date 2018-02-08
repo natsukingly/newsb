@@ -7,15 +7,14 @@
 			%h2
 				AUTO POST STATION
 		#main_contents
-			.auto_post_btn_group
+			.auto_post_btn_group.business
 				.title
 					Business  (#{articles_count_by_category("Business", @country.id)})
 				.btns	
 					=render 'admins/auto_post_btn', site_name: "jcast_business", path: jcast_business_path
 					=render 'admins/auto_post_btn', site_name: "forbes_business", path: forbes_business_path
 
-
-			.auto_post_btn_group
+			.auto_post_btn_group.society
 				.title
 					Society  (#{articles_count_by_category("Society", @country.id)})
 				.btns				
@@ -23,14 +22,14 @@
 					=render 'admins/auto_post_btn', site_name: "excite_news_society", path: excite_news_society_path
 					=render 'admins/auto_post_btn', site_name: "jcast_society", path: jcast_society_path
 					
-
-			.auto_post_btn_group
+			.auto_post_btn_group.international
 				.title
 					International  (#{articles_count_by_category("International", @country.id)})
 				.btns															
-			
-			
-			.auto_post_btn_group
+					=render 'admins/auto_post_btn', site_name: "afp_international", path: afp_international_path
+					=render 'admins/auto_post_btn', site_name: "record_china_international", path: record_china_international_path
+
+			.auto_post_btn_group.startup
 				.title
 					Startup  (#{articles_count_by_category("Startup", @country.id)})
 				.btns			
@@ -38,7 +37,7 @@
 					=render 'admins/auto_post_btn', site_name: "bridge_startup", path: bridge_startup_path
 					=render 'admins/auto_post_btn', site_name: "techcrunch_startup", path: techcrunch_startup_path
 
-			.auto_post_btn_group
+			.auto_post_btn_group.tech
 				.title
 					Tech  (#{articles_count_by_category("Tech", @country.id)})
 				.btns	
@@ -47,14 +46,14 @@
 					=render 'admins/auto_post_btn', site_name: "techcrunch_tech2", path: techcrunch_tech2_path
 					=render 'admins/auto_post_btn', site_name: "jcast_tech", path: jcast_tech_path
 							
-			.auto_post_btn_group
+			.auto_post_btn_group.funny
 				.title
 					Funny  (#{articles_count_by_category("Funny", @country.id)})
 				.btns		
 					=render 'admins/auto_post_btn', site_name: "rocket_news_funny", path: rocket_news_funny_path
 					=render 'admins/auto_post_btn', site_name: "buzzfeed_funny", path: buzzfeed_funny_path
 
-			.auto_post_btn_group
+			.auto_post_btn_group.entertainment
 				.title
 					Entertainment  (#{articles_count_by_category("Entertainment", @country.id)})
 				.btns		
@@ -62,7 +61,7 @@
 					=render 'admins/auto_post_btn', site_name: "netarika_entertainment", path: netarika_entertainment_path
 					=render 'admins/auto_post_btn', site_name: "gunosy_entertainment", path: gunosy_entertainment_path
 			
-			.auto_post_btn_group
+			.auto_post_btn_group.movie
 				.title
 					Music&Movies  (#{articles_count_by_category("Movies・Music", @country.id)})
 				.btns	
@@ -70,16 +69,14 @@
 					=render 'admins/auto_post_btn', site_name: "gunosy_music", path: gunosy_music_path
 					=render 'admins/auto_post_btn', site_name: "gunosy_movie", path: gunosy_movie_path
 								
-								
-			.auto_post_btn_group
+			.auto_post_btn_group.health
 				.title
 					Health  (#{articles_count_by_category("Health", @country.id)})
 				.btns			
 					=render 'admins/auto_post_btn', site_name: "netarika_health", path: netarika_health_path
 					=render 'admins/auto_post_btn', site_name: "jcast_health", path: jcast_health_path
 
-								
-			.auto_post_btn_group
+			.auto_post_btn_group.relationships
 				.title
 					Relationships  (#{articles_count_by_category("Relationships", @country.id)})
 				.btns	
@@ -87,21 +84,19 @@
 					=render 'admins/auto_post_btn', site_name: "honnest_relationships", path: honnest_relationships_path
 					=render 'admins/auto_post_btn', site_name: "howcollect_relationships", path: howcollect_relationships_path
 
-								
-			.auto_post_btn_group
+			.auto_post_btn_group.food
 				.title
 					Food  (#{articles_count_by_category("Food", @country.id)})
 				.btns	
 					=render 'admins/auto_post_btn', site_name: "netarika_food", path: netarika_food_path
-					=render 'admins/auto_post_btn', site_name: "gunosy_food_path", path: gunosy_food_path
+					=render 'admins/auto_post_btn', site_name: "gunosy_food", path: gunosy_food_path
 		
-			.auto_post_btn_group
+			.auto_post_btn_group.web
 				.title
 					Web  (#{articles_count_by_category("Web", @country.id)})
 				.btns	
 
-								
-			.auto_post_btn_group
+			.auto_post_btn_group.sports
 				.title
 					Sports  (#{articles_count_by_category("Sports", @country.id)})
 				.btns	

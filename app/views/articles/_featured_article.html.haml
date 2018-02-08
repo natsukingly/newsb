@@ -23,7 +23,7 @@
 								
 						-if article.published_time
 							%span.time
-								#{time_ago_in_words(article.published_time)}	
+								#{time_in_newsb_locale_short(@country.name, article.published_time)}	
 								
 						%span.featured_article_source
 							=article.source

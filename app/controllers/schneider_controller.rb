@@ -44,6 +44,8 @@ class SchneiderController < ApplicationController
 		redirect_to drafts_admins_path
 	end
 	
+##########BUSINESS########################################################
+	
 	def forbes_business
 		AutoPostRecord.where(site_name: "forbes_business").delete_all
 		set_doc("https://forbesjapan.com/category/lists/business?cx_hamburger=business")
@@ -108,6 +110,8 @@ class SchneiderController < ApplicationController
 		AutoPostRecord.create(site_name: "jcast_business", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end		
+
+##########society########################################################
 	
 	def huffpost_society
 		AutoPostRecord.where(site_name: "huffpost_society").delete_all
@@ -129,8 +133,49 @@ class SchneiderController < ApplicationController
 		AutoPostRecord.create(site_name: "huffpost_society", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end
+
+#international!!!################################################
+	def afp_international
+		AutoPostRecord.where(site_name: "afp_international").delete_all
+		set_doc("http://www.afpbb.com/list/latest?cx_part=nav")
+		
+		@urls = @doc.css('main.main li.li-thumb >a').map{ |url| url.attribute("href").to_s}	
+		
+		category_id = Category.find_by(name: "International").id
+		country_id = Country.find_by(name: "Japan").id
+		
+		@articles_count = 0
+		@urls.each do |url|
+			# url = "https://www.excite.co.jp" + url 
+			parseURL(url)
+			create_article(url, category_id, country_id)
+			create_shares(@article)
+		end	
+		AutoPostRecord.create(site_name: "afp_international", shared: @articles_count)
+		redirect_to drafts_admins_path
+	end	
 	
+	def record_china_international
+		AutoPostRecord.where(site_name: "record_china_international").delete_all
+		set_doc("http://www.recordchina.co.jp/latest.php")
+		
+		@urls = @doc.css('#contents ul.news_list a.title').map{ |url| url.attribute("href").to_s}	
+		
+		category_id = Category.find_by(name: "International").id
+		country_id = Country.find_by(name: "Japan").id
+		
+		@articles_count = 0
+		@urls.each do |url|
+			url = "http://www.recordchina.co.jp" + url 
+			parseURL(url)
+			create_article(url, category_id, country_id)
+			create_shares(@article)
+		end	
+		AutoPostRecord.create(site_name: "record_china_international", shared: @articles_count)
+		redirect_to drafts_admins_path
+	end		
 	
+#######start up #####################################################	
 	def forbes_startup
 		AutoPostRecord.where(site_name: "forbes_startup").delete_all
 		set_doc("https://forbesjapan.com/category/lists/entrepreneurs?cx_hamburger=entrepreneurs")
@@ -173,25 +218,7 @@ class SchneiderController < ApplicationController
 		redirect_to drafts_admins_path
 	end
 	
-	def itmedia_tech
-		AutoPostRecord.where(site_name: "itmedia_tech").delete_all
-		set_doc("http://www.itmedia.co.jp/")
-		
-		@count = @doc.css('#colBoxTopStoriesTop .colBoxTitle a').count
-		@urls = @doc.css('#colBoxTopStoriesTop .colBoxTitle a').map{ |url| url.attribute("href").to_s}	
-		
-		category_id = Category.find_by(name: "Tech").id
-		country_id = Country.find_by(name: "Japan").id
-		
-		@articles_count = 0
-		@urls.each do |url|
-			parseURL(url)
-			create_article(url, category_id, country_id)
-			create_shares(@article)
-		end	
-		AutoPostRecord.create(site_name: "itmedia_tech", shared: @articles_count)
-		redirect_to drafts_admins_path
-	end
+
 
 	def techcrunch_startup
 		AutoPostRecord.where(site_name: "techcrunch_startup").delete_all
@@ -213,6 +240,27 @@ class SchneiderController < ApplicationController
 		redirect_to drafts_admins_path
 	end
 
+############TECH########################################
+	def itmedia_tech
+		AutoPostRecord.where(site_name: "itmedia_tech").delete_all
+		set_doc("http://www.itmedia.co.jp/")
+		
+		@count = @doc.css('#colBoxTopStoriesTop .colBoxTitle a').count
+		@urls = @doc.css('#colBoxTopStoriesTop .colBoxTitle a').map{ |url| url.attribute("href").to_s}	
+		
+		category_id = Category.find_by(name: "Tech").id
+		country_id = Country.find_by(name: "Japan").id
+		
+		@articles_count = 0
+		@urls.each do |url|
+			parseURL(url)
+			create_article(url, category_id, country_id)
+			create_shares(@article)
+		end	
+		AutoPostRecord.create(site_name: "itmedia_tech", shared: @articles_count)
+		redirect_to drafts_admins_path
+	end
+	
 	def techcrunch_tech1
 		AutoPostRecord.where(site_name: "techcrunch_tech1").delete_all
 		set_doc("http://jp.techcrunch.com/mobile/")
@@ -274,7 +322,7 @@ class SchneiderController < ApplicationController
 		redirect_to drafts_admins_path
 	end			
 	
-	
+########society###################################################	
 	
 	def asahi_society
 		AutoPostRecord.where(site_name: "asahi_society").delete_all
@@ -299,7 +347,7 @@ class SchneiderController < ApplicationController
 	
 	def jcast_society
 		AutoPostRecord.where(site_name: "jcast_society").delete_all
-		set_doc("https://www.j-cast.com/society/")
+		set_doc("https://www.j-cast.com/politics/")
 		
 		@urls = @doc.css('.category-entry-list li.entry-item >a').map{ |url| url.attribute("href").to_s}	
 		
@@ -337,6 +385,7 @@ class SchneiderController < ApplicationController
 		redirect_to drafts_admins_path
 	end		
 	
+#############SPORTS@#############################################
 	
 	def  excite_news_sports
 		AutoPostRecord.where(site_name: "excite_news_sports").delete_all
@@ -377,6 +426,8 @@ class SchneiderController < ApplicationController
 		AutoPostRecord.create(site_name: "excite_news_sports2", shared: @articles_count)
 		redirect_to drafts_admins_path		
 	end	
+
+############FUNNY########################################################
 	
 	def rocket_news_funny
 		AutoPostRecord.where(site_name: "rocket_news_funny").delete_all
@@ -419,7 +470,8 @@ class SchneiderController < ApplicationController
 		redirect_to drafts_admins_path
 	end		
 	
-	
+#######ENTERTAINMENT#####################################################
+
 	def yahoo_entertainment
 		AutoPostRecord.where(site_name: "yahoo_entertainment").delete_all
 		set_doc("https://news.yahoo.co.jp/list/?c=entertainment")
@@ -478,6 +530,8 @@ class SchneiderController < ApplicationController
 		AutoPostRecord.create(site_name: "gunosy_entertainment", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end		
+
+#####RELATIONSHIPS####################################################
 	
 	def googirl_relationships
 		
@@ -544,7 +598,6 @@ class SchneiderController < ApplicationController
 		redirect_to drafts_admins_path		
 	end
 
-
 ###WEB ###########################
 	# def lig_web
 	# 	AutoPostRecord.where(site_name: "lig_web").delete_all
@@ -557,8 +610,7 @@ class SchneiderController < ApplicationController
 	# 	category_id = Category.find_by(name: "Web").id
 	# 	country_id = Country.find_by(name: "Japan").id
 		
-	# 	binding.pry
-		
+
 	# 	@urls.each do |url|
 	# 		parseURL(url)
 	# 		create_article(url, category_id, country_id)
@@ -566,7 +618,6 @@ class SchneiderController < ApplicationController
 	# 	end	
 	# 	redirect_to drafts_admins_path
 	# end
-
 
 #MOVIE MUSIC
 	def gunosy_movie
@@ -626,7 +677,8 @@ class SchneiderController < ApplicationController
 		AutoPostRecord.create(site_name: "gunosy_music", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end		
-	
+
+####HEALTH####################################################
 	def netarika_health
 		AutoPostRecord.where(site_name: "netarika_health").delete_all
 		set_doc("https://netallica.yahoo.co.jp/news/beauty/")
@@ -667,7 +719,8 @@ class SchneiderController < ApplicationController
 		AutoPostRecord.create(site_name: "jcast_health", shared: @articles_count)
 		redirect_to drafts_admins_path
 	end		
-	
+
+#######FOOODDDD########################################################	
 	def netarika_food
 		AutoPostRecord.where(site_name: "netarika_food").delete_all
 		set_doc("https://netallica.yahoo.co.jp/news/gourmet/")
@@ -707,9 +760,8 @@ class SchneiderController < ApplicationController
 		redirect_to drafts_admins_path
 	end		
 
+##############PRIVATE###############################
 	private 
-		
-		
 		def set_doc(site_url)
 			charset = nil
 			html = open(site_url, 'User-Agent' => 'firefox', redirect: true) do |f|
@@ -751,7 +803,7 @@ class SchneiderController < ApplicationController
 			
 			random_user = [user, user2].sample
 			
-			if article && !(article.posts.where(user_id: [user.id, user2.id]).nil?)
+			if article && article.posts.where(user_id: [user.id, user2.id]).nil?
 				
 				if article.keywords.nil?
 					keywords = ''
@@ -785,7 +837,7 @@ class SchneiderController < ApplicationController
 			
 			random_user = [user, user2].sample
 			
-			if article && !(article.posts.where(user_id: [user.id, user2.id]).nil?)
+			if article && article.posts.where(user_id: [user.id, user2.id]).nil?
 				content = ''
 				if user 
 					post = article.posts.build(user_id: random_user.id,
@@ -797,8 +849,6 @@ class SchneiderController < ApplicationController
 				end
 			end
 		end		
-		
-		
 		
 		def parseURL(url)
 			charset = nil
@@ -844,14 +894,11 @@ class SchneiderController < ApplicationController
 				@article_description = doc.css('//meta[property="og:description"]/@content').to_s
 			end	
 
-			
-			
 			#PUBLISHED_TIME
-			if !(doc.css('//meta[property="article:published_time"]/@content').empty?)
+			if !(doc.css('//meta[property="article:modified_time"]/@content').empty?)
+				@article_published_time = doc.css('//meta[property="article:modified_time"]/@content').to_s
+			elsif !(doc.css('//meta[property="article:published_time"]/@content').empty?)
 				@article_published_time = doc.css('//meta[property="article:published_time"]/@content').to_s
-				if @article_source == "ホンネスト - produced by 婚活サイト ゼクシィ縁結び"
-					@article_published_time = Time.at(@article_published_time.to_i)
-				end
 			elsif !(doc.css('//meta[property="article:published"]/@content').empty?)
 				@article_published_time = doc.css('//meta[property="article:published"]/@content').to_s
 			elsif !(doc.css('//meta[name="pubdate"]/@content').empty?)
@@ -876,14 +923,16 @@ class SchneiderController < ApplicationController
 			elsif !(doc.css('.contents-container .article-date').empty?)
 				time = doc.css('.contents-container .article-date').to_s
 				@article_published_time = DateTime.parse(time)	
-			elsif !(doc.css('//meta[name="article:published_time"]/@content').empty?)
-				time = doc.css('//meta[name="article:published_time"]/@content').to_s
-				@article_published_time = Time.at(time)
+			#for record china
+			elsif !(doc.css('#contents #microtime/@value').empty?)
+				@article_published_time = doc.css('#contents #microtime/@value').to_s
 			else
 				@article_published_time = ''
 			end
+			if  @article_published_time.to_i > 3000
+				 @article_published_time = Time.at(@article_published_time.to_i)
+			end
 		end
-		
 		
 		def decide_category
 			post = @post || @post_draft

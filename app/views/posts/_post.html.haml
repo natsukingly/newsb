@@ -28,7 +28,7 @@
 					=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
 			-if post.article == nil
 				%p.deleted_article	
-					This article has been deleted.
+					=t('state.deleted_article')
 			-else
 				=link_to article_path(post.article_id), class: "post_article" do
 					-if post.article.image

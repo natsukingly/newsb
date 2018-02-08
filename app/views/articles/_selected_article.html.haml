@@ -6,7 +6,7 @@
 				.image{style: "background-image: url(#{article_image_helper article.image.url});"}
 				.article_title
 					-if article.title.empty? 
-						This article has been deleted.
+						=t('deleted_article')
 					-else
 						=article.title.html_safe
 					%br	
@@ -20,9 +20,8 @@
 						
 						- if article.published_time
 							%span.time
-								#{time_ago_in_words(article.published_time)}
-							
-							
+								#{time_in_newsb_locale(@country.name, article.published_time)}
+
 				-if current_user && current_user.admin == true
 					.article_admin_menu
 						= form_tag change_category_admin_path(article.id) do

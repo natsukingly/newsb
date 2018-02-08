@@ -64,8 +64,8 @@ Rails.application.routes.draw do
 	post '/schneider/jcast_society', as: :jcast_society
 
 	# International
-	# post '/schneider/asahi_politics', as: :asahi_politics
-	# post '/schneider/nhk_politics', as: :nhk_politics
+	post '/schneider/afp_international', as: :afp_international
+	post '/schneider/record_china_international', as: :record_china_international
 	# post '/schneider/jiji_politics', as: :jiji_politics
 	# post '/schneider/excite_news_politics', as: :excite_news_politics
 	# post '/schneider/jcast_politics', as: :jcast_politics

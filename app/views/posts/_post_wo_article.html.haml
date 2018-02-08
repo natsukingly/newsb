@@ -40,6 +40,8 @@
 							#{post.user.credential}・
 						%span.time
 							#{time_ago_in_words(post.created_at)}
+							
+							
 				.user_option.follow_switch
 					=render "/shared/follow_form_icon.html.haml", user: post.user
 			

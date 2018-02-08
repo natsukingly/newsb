@@ -190,6 +190,59 @@ module ApplicationHelper
     	end
     end
 
+    def time_in_newsb_locale(country_name, time)
+        case country_name
+        when "Japan" then
+            Time.at(time).in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M TOKYO')
+        when "Australia" then
+            Time.at(time).in_time_zone('Sydney').strftime('%Y/%m/%d %H:%M SYDNEY')
+        when "United States" then
+            Time.at(time).in_time_zone('Eastern Time (US & Canada)').strftime('%Y/%m/%d %H:%M EST')
+        when "Singapore" then
+            Time.at(time).in_time_zone('Singapore').strftime('%Y/%m/%d %H:%M SG')
+        else
+            Time.at(time).in_time_zone('Eastern Time (US & Canada)').strftime('%Y/%m/%d %H:%M EST')
+        end
+    end
+
+    def time_in_newsb_locale_short(country_name, time)
+        case country_name
+        when "Japan" then
+            if Time.at(time).in_time_zone('Tokyo') >  Time.now.in_time_zone('Tokyo').beginning_of_day
+                Time.at(time).in_time_zone('Tokyo').strftime('%H:%M')
+            else
+                day = %w(日 月 火 水 木 金 土)[Time.at(time).in_time_zone('Tokyo').wday]
+                Time.at(time).in_time_zone('Tokyo').strftime(day + ' %H:%M')
+            end
+        when "Australia" then
+            if Time.at(time).in_time_zone('Sydney') >  Time.now.in_time_zone('Sydney').beginning_of_day
+                Time.at(time).in_time_zone('Sydney').strftime('%H:%M')
+            else
+                Time.at(time).in_time_zone('Sydney').strftime('%d, %H:%M')
+            end
+        when "United States" then
+            if Time.at(time).in_time_zone('Eastern Time (US & Canada)') >  Time.now.in_time_zone('Eastern Time (US & Canada)').beginning_of_day
+                Time.at(time).in_time_zone('Eastern Time (US & Canada)').strftime('%H:%M')
+            else
+                Time.at(time).in_time_zone('Eastern Time (US & Canada)').strftime('%d, %H:%M')
+            end
+        when "Singapore" then
+            if Time.at(time).in_time_zone('Singapore') >  Time.now.in_time_zone('Singapore').beginning_of_day
+                Time.at(time).in_time_zone('Singapore').strftime('%H:%M')
+            else
+                Time.at(time).in_time_zone('Eastern Time (US & Canada)').strftime('%d, %H:%M')
+            end
+        else
+            if Time.at(time).in_time_zone('Eastern Time (US & Canada)') >  Time.now.in_time_zone('Eastern Time (US & Canada)').beginning_of_day
+                Time.at(time).in_time_zone('Eastern Time (US & Canada)').strftime('%H:%M')
+            else
+                Time.at(time).in_time_zone('Eastern Time (US & Canada)').strftime('%d, %H:%M')
+            end
+        end
+    end    
+    
+    
+    
     # def time_ago_in_words_short(time)
     #     if time == nil
     #         word = " "
