@@ -73,6 +73,12 @@
 	}
 }
 
+@media(max-width: 768px){
+	.user_image_xl_circle{
+		margin: 8px;
+	}
+}
+
 .user_image_xl_square{
 	@include flex_center;
 	background-color: #eee;
