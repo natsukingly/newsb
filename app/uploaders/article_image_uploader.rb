@@ -22,7 +22,11 @@ class ArticleImageUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
   # 画像の上限を700pxにする
-  process :resize_to_limit => [1000, 1000]
+  if Rails.env == 'production'
+    process :resize_to_limit => [500, 500]
+  else
+    process :resize_to_limit => [200, 200]
+  end
   
   
   process :convert => 'jpg'
@@ -39,9 +43,9 @@ class ArticleImageUploader < CarrierWave::Uploader::Base
   #   process resize_to_fill: [300, 300, gravity = ::Magick::CenterGravity]
   # endふぉrm
   
-  version :index do
-    process :resize_to_fill => [500, 500, ::Magick::CenterGravity]
-  end
+  # version :index do
+  #   process :resize_to_fill => [500, 500, ::Magick::CenterGravity]
+  # end
   
 
   # Add a white list of extensions which are allowed to be uploaded.

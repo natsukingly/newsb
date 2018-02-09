@@ -1,0 +1,1 @@
+Rails.application.config.session_store :cookie_store, key: '_newsb_session', expire_after: 6.months

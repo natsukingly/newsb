@@ -15,7 +15,6 @@
 	-if post.comment_permission == false
 		.comment_link.link_btn.comment_blocked
 			=render 'svg/chat_icon_circle'	
-			・
 			%span.comment_count	
 				=t('state.turned_off')
 	-else

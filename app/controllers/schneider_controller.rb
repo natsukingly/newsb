@@ -382,7 +382,9 @@ class SchneiderController < ApplicationController
 			end
 			
 			#keywords
-			unless doc.css('//meta[name="keywords"]/@content').empty?
+			if doc.css('//meta[name="keywords"]/@content').empty?
+				@article_keywords = ''
+			else
 				@article_keywords = doc.css('//meta[name="keywords"]/@content').to_s
 			end		
 			
