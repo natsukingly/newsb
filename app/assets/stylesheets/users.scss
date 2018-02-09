@@ -186,13 +186,14 @@
 			}
 			.user_info{
 				// flex-direction: column;
+				padding: 0 8px;
 				.user_name{
 					h2{
-						font-size: 20px;
+						font-size: 16px;
 						color: #000;
 					}
 					p{
-						font-size: 14px;
+						font-size: 12px;
 						color: #696969;
 					}
 				}
