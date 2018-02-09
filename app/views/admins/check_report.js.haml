@@ -1,4 +1,4 @@
-$('.notice_bar.for_js').fadeIn().delay(4000).fadeOut('slow'); 
+$('.notice_bar.for_js').css("display", "flex").delay(4000).fadeOut('slow'); 
 $('.notice_bar.for_js').text("You changed the report's status as [checked]"); 
 $(".report_#{@report.id}").find("span.status").text("STATUS: CHECKED");
 $(".report_#{@report.id}").find(".report_menu").html("#{escape_javascript( link_to 'UNCHECK', uncheck_report_admin_path(@report.id), remote: true, class: 'uncheck_report_btn report_btn', method: :post)}");	

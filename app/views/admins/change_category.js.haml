@@ -1,0 +1,8 @@
+-if @error
+    $('.alert_bar.for_js').css("display", "flex").delay(4000).fadeOut('slow'); 
+    $('.alert_bar.for_js').text("You changed the report's status as [checked]"); 
+    $('.alert_bar.for_js').text("Failed"); 
+-else
+    $('.notice_bar.for_js').css("display", "flex").delay(4000).fadeOut('slow'); 
+    $('.notice_bar.for_js').text("You changed the report's status as [checked]"); 
+    $('.notice_bar.for_js').text("Category changed"); 

@@ -456,6 +456,9 @@ hr.modal_content_divider{
 			// background-color: indianred;
 			color: indianred;
 			font-size: 14px;
+			&.in_yellow{
+				color: orange;
+			}
 		}
 	}
 }

@@ -76,12 +76,18 @@ class AdminsController < ApplicationController
 		article = Article.find(params[:id])
 		article.category_id = params[:article][:category_id]
 		article.category_lock = true
+		
 		if article.save
-			flash[:notice] = "successfully changed category"
-			redirect_to article
+			respond_to do |format|
+			  format.js{}
+			  format.html{redirect_to article, notice: "successfully changed category"}
+			end
 		else
-			flash[:alert] = "couldn't changed category"
-			redirect_to article	
+			respond_to do |format|
+				@error = true
+				format.js{}
+				format.html{ redirect_to article, alert: "couldn't changed category"}
+			end
 		end
 	end
 	

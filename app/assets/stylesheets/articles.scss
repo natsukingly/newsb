@@ -184,12 +184,22 @@
 	}
 }
 
+.change_category_menu{
+    display: none;
+    position: absolute;
+    right: -210px;
+    padding: 14px;
+    padding-left: 0;
+    background-color: #aaa;
+}
+
 
 .article{
 	position: relative;
 	&:first-child{
 		// padding-top: 20px;
 	}
+
 	.article_wrapper{
 		padding-bottom: 0;
 		padding: 20px;
@@ -324,14 +334,13 @@
 	}
 }
 
-.article:hover{
-	.sub_info{
-		.best_post_btn{
+@media(min-width: 1080px){
+	.article:hover{
+		.change_category_menu{
 			display: block;
-		}
-	}
+		}	
+	}	
 }
-
 
 .priority_btn_group{
 	position: absolute;

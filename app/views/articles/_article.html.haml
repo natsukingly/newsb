@@ -11,6 +11,12 @@
 				=article.priority_level
 			=link_to decrease_priority_admin_path(article.id), class: "decrease_priority_btn priority_btn", method: :post, remote: true do
 				%i.fa.fa-angle-down
+		.change_category_menu
+			.article_admin_menu
+				= form_tag change_category_admin_path(article.id), remote: true do
+					= select_tag "article[category_id]", options_from_collection_for_select(Category.all, :id, :translated_name), prompt: t('form.post.selectbox_placeholder'), class: "form-control selectpicker"
+					= submit_tag "CHANGE CATEGORY"	
+							
 
 	=link_to article do
 		.article_wrapper
