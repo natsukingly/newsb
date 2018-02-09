@@ -124,13 +124,16 @@ input[type="text"]:focus {
 	flex: 1;
 	display: flex;
 	margin: 0 auto;
+	width: 100%;
+    max-width: 1080px;
 	// justify-content: center;
 	
 }
 
 
-@media(max-width: 1170px){
+@media(max-width: 1080px){
 	.flex_wrapper{
+		max-width: 768px;
 	}
 }
 
