@@ -234,9 +234,8 @@ class SchneiderController < ApplicationController
 		#music movie		
 		when "gunosy_movie" then
 			gunosy_movie
-		when "jcast_health" then
-			jcast_health
-			
+		when "netarika_music" then
+			netarika_music
 		when "gunosy_music" then
 			gunosy_music
 			
@@ -249,8 +248,6 @@ class SchneiderController < ApplicationController
 		#food	
 		when "netarika_food" then
 			netarika_food
-		when "netarika_music" then
-			gunosy_food
 		when "gunosy_food" then
 			gunosy_food
 		else
@@ -1041,7 +1038,7 @@ class SchneiderController < ApplicationController
 			
 			@count = @doc.css('ul.js-articleList li.js-article a').count
 			@urls = @doc.css('ul.js-articleList li.js-article a').map{ |url| url.attribute("href").to_s}	
-			
+		
 			category_id = Category.find_by(name: "Movies・Music").id
 			country_id = Country.find_by(name: "Japan").id
 			

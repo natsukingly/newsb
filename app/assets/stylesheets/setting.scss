@@ -65,6 +65,9 @@ input[type="file"] {
     &.current_password{
         margin-bottom: 12px;
     }
+    &.location{
+        align-items: center;
+    }
     &.image{
         align-items: center;
         .current.content{
