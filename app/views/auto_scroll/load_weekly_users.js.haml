@@ -1,8 +1,8 @@
-$('.scroll_btn').before('#{ escape_javascript(render @loaded_users)}');
-$('.scroll_btn').html("#{t('scroll.load')}");
-$('.scroll_btn').removeClass('loading');
+$('.scroll_btn.weekly_users').before('#{ escape_javascript(render @loaded_users)}');
+$('.scroll_btn.weekly_users').html("#{t('scroll.load')}");
+$('.scroll_btn.weekly_users').removeClass('loading');
 -if @loaded_users.empty? || @loaded_users.count < 30
-    $('.scroll_btn').html("#{t('scroll.no_more')}");
-    $('.scroll_btn').addClass('stop_loading');
+    $('.scroll_btn.weekly_users').html("#{t('scroll.no_more')}");
+    $('.scroll_btn.weekly_users').addClass('stop_loading');
     
 loading = false;

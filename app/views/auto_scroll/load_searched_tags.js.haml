@@ -1,8 +1,8 @@
-$('.scroll_btn').before('#{ escape_javascript(render @loaded_tags)}');
-$('.scroll_btn').html("#{t('scroll.load')}");
-$('.scroll_btn').removeClass('loading');
+$('.scroll_btn.searched_tags').before('#{ escape_javascript(render @loaded_tags)}');
+$('.scroll_btn.searched_tags').html("#{t('scroll.load')}");
+$('.scroll_btn.searched_tags').removeClass('loading');
 -if @loaded_tags.empty? || @loaded_tags.count < 30
-    $('.scroll_btn').html("#{t('scroll.no_more')}");
-    $('.scroll_btn').addClass('stop_loading');
+    $('.scroll_btn.searched_tags').html("#{t('scroll.no_more')}");
+    $('.scroll_btn.searched_tags').addClass('stop_loading');
     
 loading = false;

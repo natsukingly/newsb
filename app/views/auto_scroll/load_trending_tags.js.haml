@@ -1,8 +1,8 @@
-$('.scroll_btn').before('#{ escape_javascript(render @loaded_tags)}');
-$('.scroll_btn').html("#{t('scroll.load')}");
-$('.scroll_btn').removeClass('loading');
+$('.scroll_btn.tags').before('#{ escape_javascript(render @loaded_tags)}');
+$('.scroll_btn.tags').html("#{t('scroll.load')}");
+$('.scroll_btn.tags').removeClass('loading');
 -if @loaded_tags.empty? || @loaded_tags.count < 30
-    $('.scroll_btn').html("#{t('scroll.no_more')}");
-    $('.scroll_btn').addClass('stop_loading');
+    $('.scroll_btn.tags').html("#{t('scroll.no_more')}");
+    $('.scroll_btn.tags').addClass('stop_loading');
     
 loading = false;

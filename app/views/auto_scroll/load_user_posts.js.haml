@@ -1,8 +1,8 @@
-$('.scroll_btn').before('#{ escape_javascript(render @loaded_posts)}');
-$('.scroll_btn').html("#{t('scroll.load')}");
-$('.scroll_btn').removeClass('loading');
+$('.scroll_btn.user_posts').before('#{ escape_javascript(render @loaded_posts)}');
+$('.scroll_btn.user_posts').html("#{t('scroll.load')}");
+$('.scroll_btn.user_posts').removeClass('loading');
 -if @loaded_posts.empty? || @loaded_posts.count < 30
-    $('.scroll_btn').html("#{t('scroll.no_more')}");
-    $('.scroll_btn').addClass('stop_loading');
+    $('.scroll_btn.user_posts').html("#{t('scroll.no_more')}");
+    $('.scroll_btn.user_posts').addClass('stop_loading');
     
 loading = false;

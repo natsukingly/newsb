@@ -1,8 +1,8 @@
-$('.scroll_btn').before('#{ escape_javascript(render partial: "admins/report", collection: @reports, as: :report)}');
-$('.scroll_btn').html("#{t('scroll.load')}");
-$('.scroll_btn').removeClass('loading');
+$('.scroll_btn.reports').before('#{ escape_javascript(render partial: "admins/report", collection: @reports, as: :report)}');
+$('.scroll_btn.reports').html("#{t('scroll.load')}");
+$('.scroll_btn.reports').removeClass('loading');
 -if @loaded_reports.empty?
-    $('.scroll_btn').html("#{t('scroll.no_more')}");
-    $('.scroll_btn').addClass('stop_loading');
+    $('.scroll_btn.reports').html("#{t('scroll.no_more')}");
+    $('.scroll_btn.reports').addClass('stop_loading');
     
 loading = false;
