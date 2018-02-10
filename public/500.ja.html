@@ -1,61 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>We're sorry, but something went wrong (500)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Supermercado+One" rel="stylesheet">
-  <style>
-  html, body{
-    height: 100%;
-  }
-  .newsb_error_page{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    
-  }
-  .error_page_block{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 200px;
-    max-width: 500px;
-  }
-  .logo{
-    font-family: 'Supermercado One', cursive;
-    font-size: 50px;
-    margin-bottom: 0;
-    color: orange;
-  }
-  .error_title{
-    margin: 0;
-    font-size: 20px;
-  }
-  .error_description{
-    color: #696969;
-  }
-  .beta_notice{
-    color: orange;
-  }
-  </style>
+	<title>We're sorry, but something went wrong (500)</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Supermercado+One" rel="stylesheet">
+	<style>
+	html, body{
+		height: 100%;
+	}
+	.newsb_error_page{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		
+	}
+	.error_page_block{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 100px;
+		max-width: 500px;
+	}
+	
+	.logo{
+		font-family: 'Supermercado One', cursive;
+		font-size: 50px;
+		margin-bottom: 0;
+		color: orange;
+	}
+	
+	.error_title{
+		margin: 0;
+		font-size: 20px;
+	}
+	
+	.error_description{
+		color: #696969;
+	}
+	.beta_notice{
+		color: orange;
+	}
+	</style>
 </head>
 
 <body class="newsb_error_page">
-  <!-- This file lives in public/500.html -->
-  <div class="error_page_block">
-    <h1 class="logo">newsb!</h1>
-    <h2 class="error_title">一時的なエラーが発生しました。</h2>
-    <p class="error_description">
-      大変申し訳ございません。ただ今障害が発生しております。
-      <br>
-      後ほどアクセスしなおしてください。
-    </p>
-    <p class="beta_notice">
+	<!-- This file lives in public/500.html -->
+	<div class="error_page_block">
+		<h1 class="logo">newsb!</h1>
+		<h2 class="error_title">一時的なエラーが発生しました。</h2>
+		<p class="error_description">
+			大変申し訳ございません。ただ今障害が発生しております。
+			<br>
+			後ほどアクセスしなおしてください。
+		</p>
+		<!--marginbottomも変更する-->
+		<p class="beta_notice">
 				newsb!は現在ベータ版として実験的に運営しています。
 				緊急なメインテナンスやシステム障害の可能性をご了承の上ご利用ください。
-    </p>
-  </div>
+		</p>
+	</div>
 
 </body>
 </html>

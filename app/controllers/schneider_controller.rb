@@ -29,7 +29,7 @@ class SchneiderController < ApplicationController
 			unless url[:url] == '' && url[:category_id] == ''
 				parseURL(url[:url])
 				create_article(url[:url], url[:category_id], country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end
 		end	
 		redirect_to url_forms_admins_path
@@ -293,26 +293,25 @@ class SchneiderController < ApplicationController
 			end
 		end
 		
-		def create_shares(article)
+		def create_shares(article, skip_tag, skip_desc)
 			user = User.find_by(email: "newsb.sns@gmail.com")
 			user2 = User.find_by(email: "paprikamajorika@gmail.com")
-			
 			random_user = [user, user2].sample
 			
 			if article && article.posts.where(user_id: [user.id, user2.id]).empty?
-				if article.keywords.nil?
+				if article.keywords.nil? || skip_tag == true
+				
 					keywords = ''
 				else
 					keywords = article.keywords.delete("{}").split(',').map{ |keyword| "#" + keyword.delete('[ ,！,・,、,。,.,/]')}.join(' ') 
 				end	
 				
 				
-				if article.description.nil? || article.description == ' ' 
+				if article.description.nil? || article.description == ' ' || skip_tag == true
 					description = ''
 				else
 					description = '> ' + article.description + '          '
 				end
-				
 				content = description + keywords
 
 				post = article.posts.build(user_id: random_user.id,
@@ -325,6 +324,7 @@ class SchneiderController < ApplicationController
 				end
 			end
 		end
+		
 		
 		def create_shares_wo_tags(article)
 			user = User.find_by(email: "newsb.sns@gmail.com")
@@ -457,7 +457,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end
 			
 			AutoPostRecord.create(site_name: "forbes_business", shared: @articles_count)
@@ -479,7 +479,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end
 			
 			AutoPostRecord.create(site_name: "forbes_business", shared: @articles_count)
@@ -502,7 +502,7 @@ class SchneiderController < ApplicationController
 				# url = "https://www.excite.co.jp" + url 
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "jcast_business", shared: @articles_count)
 			
@@ -525,7 +525,7 @@ class SchneiderController < ApplicationController
 				# url = "https://www.excite.co.jp" + url 
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "huffpost_society", shared: @articles_count)
 			
@@ -546,7 +546,7 @@ class SchneiderController < ApplicationController
 				# url = "https://www.excite.co.jp" + url 
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "afp_international", shared: @articles_count)
 			
@@ -566,7 +566,7 @@ class SchneiderController < ApplicationController
 				url = "http://www.recordchina.co.jp" + url 
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "record_china_international", shared: @articles_count)
 			
@@ -588,7 +588,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end
 			AutoPostRecord.create(site_name: "forbes_startup", shared: @articles_count)
 			
@@ -609,7 +609,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "bridge_startup", shared: @articles_count)
 			
@@ -631,7 +631,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "techcrunch_startup", shared: @articles_count)
 			
@@ -652,7 +652,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "itmedia_tech", shared: @articles_count)
 			
@@ -672,7 +672,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "techcrunch_tech1", shared: @articles_count)
 			
@@ -692,7 +692,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "techcrunch_tech2", shared: @articles_count)
 			
@@ -713,7 +713,7 @@ class SchneiderController < ApplicationController
 				# url = "https://www.excite.co.jp" + url 
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "jcast_tech", shared: @articles_count)
 			
@@ -736,7 +736,7 @@ class SchneiderController < ApplicationController
 				url = "https://www.asahi.com" + url 
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "asahi_society", shared: @articles_count)
 			
@@ -756,7 +756,7 @@ class SchneiderController < ApplicationController
 				# url = "https://www.excite.co.jp" + url 
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "jcast_society", shared: @articles_count)
 			
@@ -776,7 +776,7 @@ class SchneiderController < ApplicationController
 				url = "https://www.excite.co.jp" + url 
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "excite_news_society", shared: @articles_count)
 			
@@ -797,7 +797,7 @@ class SchneiderController < ApplicationController
 				url = "https://www.excite.co.jp" + url 
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "excite_news_sports", shared: @articles_count)
 					
@@ -817,7 +817,7 @@ class SchneiderController < ApplicationController
 				url = "https://www.excite.co.jp" + url 
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "excite_news_sports2", shared: @articles_count)
 					
@@ -838,7 +838,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "rocket_news_funny", shared: @articles_count)
 			
@@ -880,7 +880,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "yahoo_entertainment", shared: @articles_count)
 			
@@ -900,7 +900,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, true)
 			end	
 			AutoPostRecord.create(site_name: "netarika_entertainment", shared: @articles_count)
 			
@@ -919,7 +919,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "gunosy_entertainment", shared: @articles_count)
 			
@@ -943,7 +943,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "honnest_relationships", shared: @articles_count)
 					
@@ -964,7 +964,7 @@ class SchneiderController < ApplicationController
 				url = "http://howcollect.jp/" + url 
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "howcollect_relationships", shared: @articles_count)
 			
@@ -985,7 +985,7 @@ class SchneiderController < ApplicationController
 				url = "https://tabi-labo.com" + url 
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "tabilabo_relationships", shared: @articles_count)
 					
@@ -1007,7 +1007,7 @@ class SchneiderController < ApplicationController
 		# 	@urls.each do |url|
 		# 		parseURL(url)
 		# 		create_article(url, category_id, country_id)
-		# 		create_shares(@article)
+		# 		create_shares(@article, false, false)
 		# 	end	
 		# 	
 		# end
@@ -1026,7 +1026,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "gunosy_movie", shared: @articles_count)
 			
@@ -1046,7 +1046,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, true)
 			end	
 			AutoPostRecord.create(site_name: "netarika_music", shared: @articles_count)
 			
@@ -1065,7 +1065,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "gunosy_music", shared: @articles_count)
 			
@@ -1086,7 +1086,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, true)
 			end	
 			AutoPostRecord.create(site_name: "netarika_health", shared: @articles_count)
 			
@@ -1107,7 +1107,7 @@ class SchneiderController < ApplicationController
 				# url = "https://www.excite.co.jp" + url 
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "jcast_health", shared: @articles_count)
 			
@@ -1128,7 +1128,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, true)
 			end	
 			AutoPostRecord.create(site_name: "netarika_food", shared: @articles_count)
 			
@@ -1147,7 +1147,7 @@ class SchneiderController < ApplicationController
 			@urls.each do |url|
 				parseURL(url)
 				create_article(url, category_id, country_id)
-				create_shares(@article)
+				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "gunosy_food", shared: @articles_count)
 			

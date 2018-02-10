@@ -3,7 +3,6 @@
 		#main_contents
 			.post{class: "post post_#{@post.id}", data: {post_id: "#{@post.id}"}}
 				.body
-		
 					.user_block{class: "user_#{@post.user.id}"}
 						.user_image
 							=user_image_helper(@post.user)
@@ -11,33 +10,43 @@
 							=link_to @post.user, class: "user_name" do
 								.give_me_short_ellipsis.bold
 									=@post.user.name
-							%p.user_credential.sm.grey
-								=@post.user.credential
+							%p.user_credential
+								-unless @post.user.credential.nil?
+									#{@post.user.credential}・
 								%span.time
-									#{time_ago_in_words_short(@post.created_at)}
+									#{time_ago_in_words(@post.created_at)}
 						.user_option.follow_switch
+						
 							=render "/shared/follow_form_icon.html.haml", user: @post.user
 					
 					.content_block	
+						
 						%p.opinion.post_opinion
-							=render_with_hashtags(@post.content.gsub(/\n/, '<br />'))
-						=render "posts/edit", post: @post
+							-if @post.content.nil? || @post.content.empty?
+								%span.opinion_for_share
+									%i.fa.fa-share-square
+									=t('state.shared')
+							-else
+								=render_with_hashtags(@post.content.gsub(/\n/, '<br />'))
 						-if @post.article == nil
 							%p.deleted_article	
-								This article has been deleted.
+								=t('state.deleted_article')
 						-else
 							=link_to article_path(@post.article_id), class: "post_article" do
 								-if @post.article.image
 									.image{ style: "background-image: url(#{article_image_helper @post.article.image.url });"}
 								.article_info
 									%h2.bold
-										= universal_truncate(@post.article.title, 120) do
+										= universal_truncate(@post.article.title.html_safe, 120) do
 											%span ...
 									%p.xs.grey
 										= @post.article.source
-									
-					.status.md
-						=render 'posts/post_menu', post: @post
+				
+					-unless @post.content.nil? || @post.content.empty?			
+						.status.md
+							=render 'posts/post_menu', post: @post
+										
+
 				
 		
 				.comment_index_wrapper
