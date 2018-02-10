@@ -24,12 +24,7 @@
 	    border: 1px solid orange;
 	    padding: 2px;
 	    margin-right: 8px;
-		img{
-			margin: 0;
-			width: 65px;
-			height: 65px;
-		}
-		svg{
+		img, svg{
 			width: 40px;
 			height: 40px;	
 		}
@@ -87,9 +82,9 @@
 	.notification{
 		padding: 8px 5px;
 		.image_wrapper{
-			svg{
-				width: 40px;
-				height: 40px;	
+			img, svg{
+				width: 65px;
+				height: 65px;	
 			}
 		}
 	}
