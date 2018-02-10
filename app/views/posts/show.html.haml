@@ -52,7 +52,7 @@
 				.comment_index_wrapper
 					.comment_index
 						.comments
-							=render @post.comments.includes(:user)
+							=render @post.comments.includes(:user).order(created_at: :desc) 
 						
 
 	
