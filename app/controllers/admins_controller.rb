@@ -132,6 +132,7 @@ class AdminsController < ApplicationController
 		
 	end
 	
+	
 	private
 		def authenticate_admin
 			if current_user

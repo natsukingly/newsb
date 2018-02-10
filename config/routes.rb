@@ -41,6 +41,10 @@ Rails.application.routes.draw do
 			get 'unchecked_reports'
 			get 'all_reports'
 			post 'publish'
+			get 'fix'
+			post 'fix_followers_count'
+			post 'fix_following_count'
+			post 'fix_liked_count'
 			get 'newsb_notifications_index'
 			post 'create_newsb_notification'
 		end

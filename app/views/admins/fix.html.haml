@@ -1,0 +1,15 @@
+-content_for(:sidebar) do
+	"Don't show"
+
+.sub_function_wrapper.post_drafts
+	.sub_function_main_section
+		#main_contents
+			.fix_btn_group.all
+				.title.main_title
+					ADMIN FIX
+				.btns
+					=link_to "all", fix_all_admins_path, class: "schneider_btn for_all", method: :post
+					=link_to "followers_count", fix_followers_count_admins_path, class: "schneider_btn for_category", method: :post
+					=link_to "following_count", fix_following_count_admins_path, class: "schneider_btn for_category", method: :post
+					=link_to "liked_count", fix_liked_count_admins_path, class: "schneider_btn for_category", method: :post
+

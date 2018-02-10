@@ -261,6 +261,9 @@ class PostsController < ApplicationController
 			#for excite news and gunosy
 			elsif !(doc.css('//meta[itemprop="datePublished"]/@content').empty?)
 				@article_published_time = doc.css('//meta[itemprop="datePublished"]/@content').to_s
+			#for line blog
+			elsif !(doc.css('time[itemprop="datePublished"]/@datetime').empty?)
+				@article_published_time = doc.css('time[itemprop="datePublished"]/@datetime').to_s
 			#for tabilabo
 			elsif !(doc.css('.contents-container .article-date').empty?)
 				time = doc.css('.contents-container .article-date').to_s
@@ -274,6 +277,7 @@ class PostsController < ApplicationController
 			if  @article_published_time.to_i > 3000
 				 @article_published_time = Time.at(@article_published_time.to_i)
 			end
+			binding.pry
 		end
 		
 		
