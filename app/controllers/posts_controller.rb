@@ -277,7 +277,6 @@ class PostsController < ApplicationController
 			if  @article_published_time.to_i > 3000
 				 @article_published_time = Time.at(@article_published_time.to_i)
 			end
-			binding.pry
 		end
 		
 		
