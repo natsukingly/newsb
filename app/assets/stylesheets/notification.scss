@@ -24,10 +24,14 @@
 	    border: 1px solid orange;
 	    padding: 2px;
 	    margin-right: 8px;
-		img, svg{
+		img{
 			margin: 0;
 			width: 65px;
 			height: 65px;
+		}
+		svg{
+			width: 40px;
+			height: 40px;	
 		}
 	}
 	&:first-child{
@@ -82,5 +86,11 @@
 	}
 	.notification{
 		padding: 8px 5px;
+		.image_wrapper{
+			svg{
+				width: 40px;
+				height: 40px;	
+			}
+		}
 	}
 }
