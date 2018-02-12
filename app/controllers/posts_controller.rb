@@ -192,7 +192,7 @@ class PostsController < ApplicationController
 		#get article info using nokogiri gem
 		def parseURL
 			
-			@article_url = params[:placeholder_url]
+			@article_url = params[:placeholder_url].delete(' ,　')
 			url = @article_url
 			charset = nil
 			html = open(url, 'User-Agent' => 'firefox', :read_timeout => 10) do |f|

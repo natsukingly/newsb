@@ -12,7 +12,7 @@
 						%p.user_credential.sm.grey
 							=post_draft.user.credential
 							%i.fa.fa-clock-o
-							#{time_ago_in_words_short(post_draft.created_at)}
+							#{time_ago_in_words(post_draft.created_at)}
 					.user_option.follow_switch.pull-right
 						=render "/shared/follow_form_icon.html.haml", user: post_draft.user
 				%p.opinion

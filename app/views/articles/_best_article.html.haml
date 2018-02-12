@@ -13,7 +13,7 @@
 									= article.source
 									- if article.published_time
 										%i.fa.fa-clock-o
-										#{time_ago_in_words_short(article.published_time)}				
+										#{time_ago_in_words(article.published_time)}				
 							.best_article_bottom
 								.stats
 									%p.counts
@@ -64,7 +64,7 @@
 							= article.source
 							- if article.published_time
 								%i.fa.fa-clock-o
-								#{time_ago_in_words_short(article.published_time)}
+								#{time_ago_in_words(article.published_time)}
 								
 	
 											

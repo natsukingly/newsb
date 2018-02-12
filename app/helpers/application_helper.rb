@@ -240,17 +240,5 @@ module ApplicationHelper
             end
         end
     end    
-    
-    
-    
-    # def time_ago_in_words_short(time)
-    #     if time == nil
-    #         word = " "
-    #     else
-    #         word = time_ago_in_words(time)
-    #         TIME_PATTERN.each_pair{ |k, v| word.gsub!(k, v) }
-    #     end
-    #     word
-    # end
-     
+
 end

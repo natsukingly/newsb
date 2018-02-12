@@ -10,7 +10,7 @@
 				// 		= article.source
 				// 		- if article.published_time
 				// 			%i.fa.fa-clock-o
-				// 			#{time_ago_in_words_short(article.published_time)}				
+				// 			#{time_ago_in_words(article.published_time)}				
 				.stats
 					%p.counts
 						#{article.posts_count}
@@ -24,7 +24,7 @@
 					= article.source
 					- if article.published_time
 						%i.fa.fa-clock-o
-						#{time_ago_in_words_short(article.published_time)}
+						#{time_ago_in_words(article.published_time)}
 						
 	.best_posts
 		.info
@@ -35,7 +35,7 @@
 					= article.source
 					- if article.published_time
 						%i.fa.fa-clock-o
-						#{time_ago_in_words_short(article.published_time)}
+						#{time_ago_in_words(article.published_time)}
 		-posts = article.posts.order(likes_count: :desc).limit(2)
 		
 		- unless posts.first.nil?
@@ -97,7 +97,7 @@
 					= article.source
 					- if article.published_time
 						%i.fa.fa-clock-o
-						#{time_ago_in_words_short(article.published_time)}
+						#{time_ago_in_words(article.published_time)}
 						
 	.best_post
 		-post = article.posts.order(likes_count: :desc).first
