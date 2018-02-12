@@ -94,7 +94,7 @@ module ApplicationHelper
               title: :title,
               type: "website",
               url: request.original_url,
-              image: "https://news-party-natsukingly.c9users.io/images/newsb_image.png",
+              image: "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
               site_name: "newsb!",
               description: :description,
             }
@@ -115,7 +115,7 @@ module ApplicationHelper
               title: :title,
               type: "website",
               url: request.original_url,
-              image: "http://www.newsbeee.com/images/newsb_image.png",
+              image: "http://www.newsbeee.com/images/newsb_img.png",
               site_name: "Newsb!",
               description: :description,
             }
@@ -128,7 +128,7 @@ module ApplicationHelper
             {
                 title: article.title,
                 description: "Newsb! みんなで考えるニュース",
-                image_src: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_image.png",
+                image_src: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
                 keywords: "",
                 fa: {
                     app_id: ENV['FACEBOOK_KEY']
@@ -137,7 +137,7 @@ module ApplicationHelper
                   title: :title,
                   type: "article",
                   url: "https://news-party-natsukingly.c9users.io/#{article.country.name}/articles/#{article.id}",
-                  image: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_image.png",
+                  image: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
                   site_name: "Newsb!",
                   description: :description,
                 },
@@ -147,14 +147,14 @@ module ApplicationHelper
                     creater: "Newsb!",
                     title: :title,
                     description: :description,
-                    image: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_image.png",
+                    image: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
                 }
             }
         elsif Rails.env.production?
             {
                 title: article.title,
                 description: "Newsb! みんなで考えるニュース",
-                image_src: article.image.url || "http://www.newsbeee.com/images/newsb_image.png",
+                image_src: article.image.url || "http://www.newsbeee.com/images/newsb_img.png",
                 keywords: "",
                 fa: {
                     app_id: ENV['FACEBOOK_KEY']
@@ -163,7 +163,7 @@ module ApplicationHelper
                   title: :title,
                   type: "article",
                   url: "http://www.newsbeee.com/#{article.country.name}/articles/#{article.id}", 
-                  image: article.image.url || "http://www.newsbeee.com/images/newsb_image.png",
+                  image: article.image.url || "http://www.newsbeee.com/images/newsb_img.png",
                   site_name: "Newsb!",
                   description: :description,
                 },
@@ -173,7 +173,7 @@ module ApplicationHelper
                     creater: "Newsb!",
                     title: :title,
                     description: :description,
-                    image: article.image.url || "http://www.newsbeee.com/images/newsb_image.png",
+                    image: article.image.url || "http://www.newsbeee.com/images/newsb_img.png",
                 }
             }
         end
