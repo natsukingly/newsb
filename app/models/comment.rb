@@ -24,7 +24,7 @@ class Comment < ApplicationRecord
 		when "en"
 			message = "<span> #{self.user.name} </span>#{ I18n.t('notification.comment', locale: :en)}<span> \"#{news_title}\" </span>"
 		end
-		# unless self.user_id == self.post.user_id
+		unless self.user_id == self.post.user_id
 			post_path = Rails.application.routes.url_helpers.post_path(country: self.post.country.name, id: self.post.id)
 			notification = Notification.new(user_id: self.post.user_id,
 											path: post_path,
@@ -34,7 +34,7 @@ class Comment < ApplicationRecord
 											message: message,
 											comment_id: self.id)
 			notification.save
-		# end
+		end
 	end
 	
 	def issue_notification_for_comments

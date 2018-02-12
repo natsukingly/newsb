@@ -188,6 +188,8 @@ class SchneiderController < ApplicationController
 			bridge_startup
 		when "techcrunch_startup" then
 			techcrunch_startup
+		when "startup_startup" then
+			startup_startup		
 		
 		#tech	
 		when "itmedia_tech" then
@@ -695,6 +697,7 @@ class SchneiderController < ApplicationController
 		end
 		
 		
+		
 		def bridge_startup
 			AutoPostRecord.where(site_name: "bridge_startup").delete_all
 			set_doc("http://thebridge.jp/")
@@ -715,7 +718,26 @@ class SchneiderController < ApplicationController
 			
 		end
 		
-	
+		def startup_startup
+			AutoPostRecord.where(site_name: "startup_startup").delete_all
+			set_doc("http://startuptimes.jp/")
+			
+			@count = @doc.css('#main article.post-list >a').count
+			@urls = @doc.css('#main article.post-list >a').map{ |url| url.attribute("href").to_s}	
+			binding.pry
+			
+			category_id = Category.find_by(name: "Startup").id
+			country_id = Country.find_by(name: "Japan").id
+			
+			@articles_count = 0
+			@urls.each do |url|
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares(@article, false, false)
+			end	
+			AutoPostRecord.create(site_name: "startup_startup", shared: @articles_count)
+		end
+			
 	
 		def techcrunch_startup
 			AutoPostRecord.where(site_name: "techcrunch_startup").delete_all
@@ -1271,6 +1293,7 @@ class SchneiderController < ApplicationController
 			forbes_startup
 			bridge_startup
 			techcrunch_startup
+			startup_startup
 		end
 		
 		def tech
