@@ -94,71 +94,7 @@ class SchneiderController < ApplicationController
 		end	
 		redirect_to drafts_admins_path
 	end
-	# def auto_post_by_category
-	# 	category = params[:category]
-	# 	case category
-	# 	#business
-	# 	when "Business" then 
-	# 		forbes_business
-	# 		gendai_business
-	# 		jcast_business
-			
-	# 	when "International" then
-	# 		afp_international
-	# 		record_china_international
-			
-	# 	when "Startup" then
-	# 		forbes_startup
-	# 		bridge_startup
-	# 		techcrunch_startup
-		
-	# 	when "Tech" then
-	# 		itmedia_tech
-	# 		techcrunch_tech1
-	# 		techcrunch_tech2
-	# 		jcast_tech
-		
-	# 	when "Society" then
-	# 		asahi_society
-	# 		jcast_society
-	# 		excite_news_society
-	# 		huffpost_society
-		
-	# 	when "Sports" then
-	# 		excite_news_sports
-	# 		excite_news_sports2
-		
-	# 	when "Funny" then
-	# 		rocket_news_funny
-	# 		buzzfeed_funny
-		
-	# 	when "Entertainment" then
-	# 		yahoo_entertainment
-	# 		netarika_entertainment
-	# 		gunosy_entertainment
-		
-	# 	when "Relationships" then
-	# 		honnest_relationships
-	# 		howcollect_relationships
-	# 		tabilabo_relationships
-		
-	# 	when "Music" then
-	# 		gunosy_movie
-	# 		jcast_health
-	# 		gunosy_music
 
-	# 	when "Health" then
-	# 		netarika_health
-	# 		jcast_health
-		
-	# 	when "Food" then
-	# 		netarika_food
-	# 		gunosy_food
-	# 	when "gunosy_food" then
-	# 		gunosy_food
-	# 	else
-	# 	end	
-	# end
 	def auto_post_by_item
 		item = params[:item]
 		case item 

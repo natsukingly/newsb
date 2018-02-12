@@ -15,9 +15,7 @@
 							#{time_ago_in_words(comment.created_at)}
 		.content_block
 			%span.opinion.comment_opinion
-				=truncate( simple_format(comment.content), escape: false, length: 200) do
-					%span.light_navy.read_more{class: "comment_read_more_#{comment.id}"}
-						Raed more
+				=simple_format(comment.content)
 			.status
 				.comment_like_block
 					=render '/likes/like_comment', comment: comment
@@ -29,9 +27,9 @@
 						%i.fa.fa-ellipsis-v.comment_option_link.login_signup_link
 			
 :javascript 
-	$(".comment_read_more_#{comment.id}").click(function(){
-		$(this).parents('.content').html("#{ escape_javascript(simple_format(comment.content))}");
-	});
+	// $(".comment_read_more_#{comment.id}").click(function(){
+	// 	$(this).parents('.content').html("#{ escape_javascript(simple_format(comment.content))}");
+	// });
 
 	$('.comment_option_link').click(function () {
 			var height = $(this).parents(".comment").find('.opinion').css("height");
