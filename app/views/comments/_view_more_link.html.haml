@@ -1,4 +1,4 @@
 =link_to view_more_comment_path(post.id), remote: true do
 	
-	VIEW ALL #{post.comments_count} COMMENTS 
+	=t('action_cap.view_all', :count => post.comments_count)
 	%i.fa.fa-angle-down

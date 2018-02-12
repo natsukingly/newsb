@@ -33,6 +33,8 @@ ja:
     more: "詳細"
     allow_comments: "返信オン"
     block_comments: "返信オフ"
+    view_all: "全てのコメントを表示"
+    hide_all: "コメントを隠す"
   state:
     turned_off: "オフ"
     coming_soon: "近日公開予定"

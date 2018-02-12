@@ -33,6 +33,8 @@ en:
     more: "MORE"
     allow_comments: "COMMENTS ON"
     block_comments: "COMMENTS OFF"
+    view_all: "VIEW ALL COMMENTS"
+    hide_all: "HIDE COMMENTS"
   state:
     turned_off: "Off"
     coming_soon: "coming soon"

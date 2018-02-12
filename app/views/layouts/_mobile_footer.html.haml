@@ -16,6 +16,10 @@
 	.icon#mobile_notification_link.mobile_icon.mobile_notification_icon
 		%span
 			=render "svg/mobile_footer/notification_icon"
+			-if current_user && current_user.notifications.where(check: false).count > 0
+				.notifications_count
+					=current_user.notifications.where(check: false).count
+
 
 	.icon.mobile_icon#mobile_menu_link
 		%span

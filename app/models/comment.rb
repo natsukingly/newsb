@@ -50,11 +50,11 @@ class Comment < ApplicationRecord
 		comment_user_ids = self.post.comments.pluck(:user_id).uniq
 		if comment_user_ids.any?
 			comment_user_ids.each do |comment_user_id|
-				unless comment_user_id == self.post.user_id || comment_user_id == self.user_id
-					notification = Notification.new(user_id: self.user_id,
+				unless comment_user_id == self.user_id
+					notification = Notification.new(user_id: comment_user_id,
 													path: post_path,
 													notification_type: "Comment-Comment",
-													target_user_id: comment_user_id,
+													target_user_id: self.user_id,
 													post_id: self.post.id,
 													message: comment_comment_message,
 													comment_id: self.id)

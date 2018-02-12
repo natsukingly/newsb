@@ -1,2 +1,2 @@
 $(".post_<%=@post.id%>").find(".view_link").html('<%= escape_javascript(render("comments/view_less_link", post: @post))%>');
-$(".post_<%=@post.id%>").find(".comments").html('<%= escape_javascript(render @post.comments.includes(:user).order(created_at: :desc) )%>'); 
+$(".post_<%=@post.id%>").find(".comments").html('<%= escape_javascript(render @post.comments.includes(:user).order(created_at: :asc) )%>'); 

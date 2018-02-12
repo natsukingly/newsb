@@ -169,11 +169,17 @@ class SchneiderController < ApplicationController
 			gendai_business
 		when "jcast_business" then
 			jcast_business
+		when "president_business" then
+			president_business
+		when "diamond_business" then
+			diamond_business
 			
 		when "afp_international" then
 			afp_international
 		when "record_china_international" then
 			record_china_international
+		when "diamond_international" then
+			diamond_international
 			
 		#startup	
 		when "forbes_startup" then
@@ -202,6 +208,8 @@ class SchneiderController < ApplicationController
 			excite_news_society
 		when "huffpost_society" then
 			huffpost_society
+		when "president_society" then
+			president_society
 		
 		#sports	
 		when "excite_news_sports" then
@@ -420,6 +428,10 @@ class SchneiderController < ApplicationController
 			#for record china
 			elsif !(doc.css('#contents #microtime/@value').empty?)
 				@article_published_time = doc.css('#contents #microtime/@value').to_s
+			#for diamond online
+			elsif !(doc.css('header.article-header time').empty?)
+				time = doc.css('header.article-header time').to_s
+				@article_published_time = DateTime.parse(time)
 			else
 				@article_published_time = ''
 			end
@@ -442,6 +454,50 @@ class SchneiderController < ApplicationController
 		
 #============ auto_post_method==================================================
 	##########BUSINESS########################################################
+		
+		def diamond_business
+			AutoPostRecord.where(site_name: "diamond_business").delete_all
+			set_doc("http://diamond.jp/subcategory/%E7%B5%8C%E5%96%B6%E3%83%BB%E6%88%A6%E7%95%A5")
+			
+			@count = @doc.css('.article-list article >a').count
+			@urls = @doc.css('.article-list article >a').map{ |url| url.attribute("href").to_s}	
+			
+			category_id = Category.find_by(name: "Business").id
+			country_id = Country.find_by(name: "Japan").id
+			
+			@articles_count = 0
+			@urls.each do |url|
+				url = "http://diamond.jp" + url 
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares(@article, false, false)
+			end
+			
+			AutoPostRecord.create(site_name: "diamond_business", shared: @articles_count)
+		end
+		
+		
+		def president_business
+			AutoPostRecord.where(site_name: "president_business").delete_all
+			set_doc("http://president.jp/subcategory/%E3%83%9E%E3%83%8D%E3%83%BC")
+			
+			@count = @doc.css('.mod-list li >a').count
+			@urls = @doc.css('.mod-list li >a').map{ |url| url.attribute("href").to_s}	
+			
+			
+			category_id = Category.find_by(name: "Business").id
+			country_id = Country.find_by(name: "Japan").id
+			
+			@articles_count = 0
+			@urls.each do |url|
+				url = "http://president.jp" + url 
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares(@article, false, false)
+			end
+			
+			AutoPostRecord.create(site_name: "president_business", shared: @articles_count)
+		end
 		
 		def forbes_business
 			AutoPostRecord.where(site_name: "forbes_business").delete_all
@@ -509,6 +565,28 @@ class SchneiderController < ApplicationController
 		end		
 	
 	##########society########################################################
+	
+		def president_society
+			AutoPostRecord.where(site_name: "president_society").delete_all
+			set_doc("http://president.jp/subcategory/%E6%94%BF%E6%B2%BB%E3%83%BB%E7%A4%BE%E4%BC%9A")
+			
+			@count = @doc.css('.mod-list li >a').count
+			@urls = @doc.css('.mod-list li >a').map{ |url| url.attribute("href").to_s}	
+			
+			binding.pry
+			category_id = Category.find_by(name: "Society").id
+			country_id = Country.find_by(name: "Japan").id
+			
+			@articles_count = 0
+			@urls.each do |url|
+				url = "http://president.jp" + url 
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares(@article, false, false)
+			end
+			
+			AutoPostRecord.create(site_name: "president_society", shared: @articles_count)
+		end
 		
 		def huffpost_society
 			AutoPostRecord.where(site_name: "huffpost_society").delete_all
@@ -571,6 +649,28 @@ class SchneiderController < ApplicationController
 			AutoPostRecord.create(site_name: "record_china_international", shared: @articles_count)
 			
 		end		
+		
+		def diamond_international
+			AutoPostRecord.where(site_name: "diamond_international").delete_all
+			set_doc("http://diamond.jp/subcategory/%E5%9B%BD%E9%9A%9B")
+			
+			@count = @doc.css('.article-list article >a').count
+			@urls = @doc.css('.article-list article >a').map{ |url| url.attribute("href").to_s}	
+			
+			category_id = Category.find_by(name: "International").id
+			country_id = Country.find_by(name: "Japan").id
+			
+			@articles_count = 0
+			@urls.each do |url|
+				url = "http://diamond.jp" + url 
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares(@article, false, false)
+			end
+			
+			AutoPostRecord.create(site_name: "diamond_international", shared: @articles_count)
+
+		end
 		
 	#######start up #####################################################	
 		def forbes_startup
@@ -720,7 +820,6 @@ class SchneiderController < ApplicationController
 		end			
 		
 	########society###################################################	
-		
 		def asahi_society
 			AutoPostRecord.where(site_name: "asahi_society").delete_all
 			set_doc("http://www.asahi.com/politics/list/")
@@ -1158,11 +1257,14 @@ class SchneiderController < ApplicationController
 			forbes_business
 			# gendai_business
 			jcast_business
+			president_business
+			diamond_business
 		end
 				
 		def international
 			afp_international
 			record_china_international
+			diamond_international
 		end
 		
 		def startup

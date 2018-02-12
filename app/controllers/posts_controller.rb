@@ -271,6 +271,10 @@ class PostsController < ApplicationController
 			#for record china
 			elsif !(doc.css('#contents #microtime/@value').empty?)
 				@article_published_time = doc.css('#contents #microtime/@value').to_s
+			#for diamond online
+			elsif !(doc.css('header.article-header time').empty?)
+				time = doc.css('header.article-header time').to_s
+				@article_published_time = DateTime.parse(time)
 			else
 				@article_published_time = ''
 			end

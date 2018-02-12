@@ -87,7 +87,7 @@ module ApplicationHelper
             description: "Newsb! みんなで考えるニュース",
             keywords: "",
             viewport: "width=device-width, initial-scale=1.0" ,
-            fa: {
+            fb: {
                 app_id: ENV['FACEBOOK_KEY']
             },
             og: {
@@ -108,7 +108,7 @@ module ApplicationHelper
             description: "Newsb! みんなで考えるニュース",
             keywords: "",
             viewport: "width=device-width, initial-scale=1.0" ,
-            fa: {
+            fb: {
                 app_id: ENV['FACEBOOK_KEY']
             },
             og: {
@@ -130,7 +130,7 @@ module ApplicationHelper
                 description: "Newsb! みんなで考えるニュース",
                 image_src: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
                 keywords: "",
-                fa: {
+                fb: {
                     app_id: ENV['FACEBOOK_KEY']
                 },
                 og: {
@@ -156,7 +156,7 @@ module ApplicationHelper
                 description: "Newsb! みんなで考えるニュース",
                 image_src: article.image.url || "http://www.newsbeee.com/images/newsb_img.png",
                 keywords: "",
-                fa: {
+                fb: {
                     app_id: ENV['FACEBOOK_KEY']
                 },
                 og: {
