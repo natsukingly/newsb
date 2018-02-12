@@ -511,7 +511,6 @@ class SchneiderController < ApplicationController
 			@count = @doc.css('.mod-list li >a').count
 			@urls = @doc.css('.mod-list li >a').map{ |url| url.attribute("href").to_s}	
 			
-			binding.pry
 			category_id = Category.find_by(name: "Society").id
 			country_id = Country.find_by(name: "Japan").id
 			
@@ -660,8 +659,7 @@ class SchneiderController < ApplicationController
 			
 			@count = @doc.css('#main article.post-list >a').count
 			@urls = @doc.css('#main article.post-list >a').map{ |url| url.attribute("href").to_s}	
-			binding.pry
-			
+
 			category_id = Category.find_by(name: "Startup").id
 			country_id = Country.find_by(name: "Japan").id
 			
