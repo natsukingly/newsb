@@ -281,6 +281,7 @@ class PostsController < ApplicationController
 			if  @article_published_time.to_i > 3000
 				 @article_published_time = Time.at(@article_published_time.to_i)
 			end
+			
 		end
 		
 		
@@ -341,13 +342,17 @@ class PostsController < ApplicationController
 				@article.description = params[:article][:description].to_s
 				
 				if @article.save
-				
+					
 				else
-					if Rails.env.development?
-						flash[:alert] = @article.errors.full_messages
+					if @article.errors[:image].any?
+						@article.remote_image_url = "http://www.newsbeee.com/images/no_image.jpeg"
+						@article.save
+					else
+							
+						
 					end
 				end
-				
+
 			end
 	
 			shared_article = current_user.posts.where(article_id: @article.id, content: "").any?

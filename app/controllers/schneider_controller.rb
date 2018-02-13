@@ -229,64 +229,74 @@ class SchneiderController < ApplicationController
 											description: @article_description,
 											country_id: country_id,
 											category_id: category_id)
-					if @article_image == nil
-						@article.image = "no_image.jpeg"
+					@article.remote_image_url = @article_image
+					
+					if @article.save
+						
 					else
-						@article.remote_image_url = @article_image
+						if @article.errors[:image].any?
+							@article.remote_image_url = "http://www.newsbeee.com/images/no_image.jpeg"
+							@article.save
+						else
+							@article_error = true
+						end
 					end
-					@article.save
 				end
 			end
 		end
 		
 		def create_shares(article, skip_tag, skip_desc)
-			user = User.find_by(email: "newsb.sns@gmail.com")
-			user2 = User.find_by(email: "paprikamajorika@gmail.com")
-			random_user = [user, user2].sample
-			
-			if article && article.posts.where(user_id: [user.id, user2.id]).empty?
-				if article.keywords.nil? || skip_tag == true
+			unless @article_error == true
+				user = User.find_by(email: "newsb.sns@gmail.com")
+				user2 = User.find_by(email: "paprikamajorika@gmail.com")
+				random_user = [user, user2].sample
 				
-					keywords = ''
-				else
-					keywords = article.keywords.delete("{}").split(',').map{ |keyword| "#" + keyword.delete('[ ,！,・,、,。,.,/]')}.join(' ') 
-				end	
-				
-				
-				if article.description.nil? || article.description == ' ' || skip_tag == true
-					description = ''
-				else
-					description = '> ' + article.description + '          '
-				end
-				content = description + keywords
-
-				post = article.posts.build(user_id: random_user.id,
-											country_id: article.country_id,
-											category_id: article.category_id,
-											content: content,
-											comment_permission: false)
-				if post.save
-					@articles_count = @articles_count + 1
+				if article && article.posts.where(user_id: [user.id, user2.id]).empty?
+					if article.keywords.nil? || skip_tag == true
+					
+						keywords = ''
+					else
+						keywords = article.keywords.delete("{}").split(',').map{ |keyword| "#" + keyword.delete('[ ,！,・,、,。,.,/]')}.join(' ') 
+					end	
+					
+					
+					if article.description.nil? || article.description == ' ' || skip_tag == true
+						description = ''
+					else
+						description = '> ' + article.description + '          '
+					end
+					content = description + keywords
+	
+					post = article.posts.build(user_id: random_user.id,
+												country_id: article.country_id,
+												category_id: article.category_id,
+												content: content,
+												comment_permission: false)
+					if post.save
+						@articles_count = @articles_count + 1
+					end
 				end
 			end
 		end
 		
 		
 		def create_shares_wo_tags(article)
-			user = User.find_by(email: "newsb.sns@gmail.com")
-			user2 = User.find_by(email: "paprikamajorika@gmail.com")
-			
-			random_user = [user, user2].sample
-			
-			if article && article.posts.where(user_id: [user.id, user2.id]).empty?
-				content = ''
-				if user 
-					post = article.posts.build(user_id: random_user.id,
-												country_id: article.country_id,
-												category_id: article.category_id,
-												content: content,
-												comment_permission: false)
-					post.save
+			unless @article_error == true
+				user = User.find_by(email: "newsb.sns@gmail.com")
+				user2 = User.find_by(email: "paprikamajorika@gmail.com")
+				
+				random_user = [user, user2].sample
+				
+				if article && article.posts.where(user_id: [user.id, user2.id]).empty?
+					content = ''
+					if user 
+						post = article.posts.build(user_id: random_user.id,
+													country_id: article.country_id,
+													category_id: article.category_id,
+													content: content,
+													comment_permission: false)
+						post.save
+					end
 				end
 			end
 		end		
