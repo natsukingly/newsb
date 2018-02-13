@@ -630,8 +630,7 @@ span.overlay{
 			padding: 16px 8px;
 			.article_block{
 				.image{
-					// width: 80px;
-					// height: 80px;
+					border-radius: 3px;
 				}
 				.info{
 					margin-left: 5px;
@@ -650,8 +649,8 @@ span.overlay{
 		    padding: 20px 12px 12px;
 		    margin-top: 24px;
 		    margin-left: 0;
-		    border-radius: 8px;
-		    box-shadow: 2px 4px 0 #ccc;
+		    border-radius: 3px;
+		    // box-shadow: 2px 4px 0 #ccc;
 		    
 		    .user_details{
 		    	position: absolute;

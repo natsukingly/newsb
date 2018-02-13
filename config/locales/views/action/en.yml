@@ -37,6 +37,7 @@ en:
     hide_all: "HIDE COMMENTS"
   state:
     turned_off: "Off"
+    connected: "CONNECTED"
     coming_soon: "coming soon"
     shared: "shared"
     popular: "BEST"
