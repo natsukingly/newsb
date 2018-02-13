@@ -46,22 +46,20 @@
 				-post = article.posts.order(likes_count: :desc).first
 				- if post != nil && post.content.empty? != true
 					.best_post
-						.body
-							.user_block
-								.user_details
-									.user_image_sm
-										=user_image_helper(post.user)
-									%p
-										%span.user_name
-											=post.user.name
-										%span.user_credential
-											=post.user.credential
-								%p.content
-									-if post.content.empty?
-										%span.shared_message
-											> Shared this article
-									-else
-										= universal_truncate(post.content, 200) do
-											%span ...
-				
-									
+						.user_details
+							.user_image_xs
+								=user_image_helper(post.user)
+							%p
+								%span.user_name
+									=post.user.name
+								%span.user_credential
+									=post.user.credential
+						%p.content
+							-if post.content.empty?
+								%span.shared_message
+									> Shared this article
+							-else
+								= universal_truncate(post.content, 120) do
+									%span ...
+			
+								
