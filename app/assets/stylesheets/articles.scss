@@ -392,7 +392,7 @@
 	align-items: center;
 	justify-content: center;
 	background-color: rgba(0,0,0,0);
-	top: 21px;
+	top: 20px;
 	left: 20px;
 	border-radius: 50%;
 	font-size: 12px;
@@ -621,8 +621,8 @@ span.overlay{
 			}
 		}
 		.direct_article_link{
-			// padding: 32px;
-			// left: 8px;
+			 top: 16px;
+   			 left: 8px;
 		}
 
 
@@ -649,15 +649,17 @@ span.overlay{
 		    background-color: #eee;
 		    padding: 20px 12px 12px;
 		    margin-top: 24px;
-		    margin-left: 30px;
+		    margin-left: 0;
 		    border-radius: 8px;
+		    box-shadow: 2px 4px 0 #ccc;
 		    
 		    .user_details{
 		    	position: absolute;
 		    	top: -12px;
-		    	left: -12px;
+		    	left: 0px;
 		    	p{
 		    		line-height: 12px;
+		    		font-size: 12px;
 		    	}
 		    }
 		    p.content{
