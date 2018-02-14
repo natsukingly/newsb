@@ -3,6 +3,8 @@ en:
     title:
       comment: "COMMENT ON"
       comment_off: "COMMENT OFF"
+      jikkuri: "details"
+      zakkuri: "overview"
       week: "ARTICLES OF THE WEEK"
       your_posts: "YOUR POSTS"
       followers_posts: "FOLLOWERS POSTS"

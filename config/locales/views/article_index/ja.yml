@@ -1,8 +1,10 @@
 ja:
   article_index:
     title:
-      comment: "ジックリ"
-      comment_off: "ザックリ"
+      comment: "コメントON"
+      comment_off: "コメントOFF"
+      jikkuri: "ジックリ"
+      zakkuri: "ザックリ"
       week: "注目の記事 - 週間"
       your_posts: "あなたの投稿"
       followers_posts: "フォロワーの投稿"

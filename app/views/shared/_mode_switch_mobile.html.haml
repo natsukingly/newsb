@@ -1,11 +1,23 @@
 
--if mode == "off"
-	.mode_switch.left.on
-		=t('article_index.title.comment')
-	.mode_switch.active.off
-		=t('article_index.title.comment_off')
+-if I18n.locale == :ja
+	-if mode == "off"
+		.mode_switch.left.on.ja
+			=t('article_index.title.jikkuri')
+		.mode_switch.active.off.ja
+			=t('article_index.title.zakkuri')
+	-else
+		.mode_switch.active.left.on.ja
+			=t('article_index.title.jikkuri')
+		.mode_switch.off.ja
+			=t('article_index.title.zakkuri')
 -else
-	.mode_switch.active.left.on
-		=t('article_index.title.comment')
-	.mode_switch.off
-		=t('article_index.title.comment_off')
+	-if mode == "off"
+		.mode_switch.left.on
+			=t('article_index.title.jikkuri')
+		.mode_switch.active.off
+			=t('article_index.title.zakkuri')
+	-else
+		.mode_switch.active.left.on
+			=t('article_index.title.jikkuri')
+		.mode_switch.off
+			=t('article_index.title.zakkuri')
