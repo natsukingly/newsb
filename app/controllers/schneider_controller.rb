@@ -152,7 +152,7 @@ class SchneiderController < ApplicationController
 		#sports	
 		when "excite_news_sports" then
 			excite_news_sports
-		when "xcite_news_sports2" then
+		when "excite_news_sports2" then
 			excite_news_sports2
 		
 		#funny	

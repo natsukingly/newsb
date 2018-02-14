@@ -318,7 +318,37 @@
 				font-weight: 600;
 			}
 		}
-
+		// &:before{
+		//   content: '';
+		//   position: absolute;
+		//   display: block;
+		//   width: 0;
+		//   height: 0;
+		//   border-radius: 50%;
+		//   transform: rotate(45deg);
+		//   left: 20px;
+		//   top: -15px;
+		//   border-left: 20px solid #107b5e;
+		//   border-top: 20px solid #107b5e;
+		//   border-right: 20px solid transparent;
+		//   border-bottom: 20px solid transparent;
+		// }
+		// /* 白い半円 */
+		// &:after{
+		//   content: '';
+		//   position: absolute;
+		//   display: block;
+		//   width: 0;
+		//   height: 0;
+		//   border-radius: 50%;
+		//   transform: rotate(45deg);
+		//   left: 35px;
+		//   top: -20px;
+		//   border-left: 20px solid #ffffff;
+		//   border-top: 20px solid #ffffff;
+		//   border-right: 20px solid transparent;
+		//   border-bottom: 20px solid transparent;
+		// }
 		
 		.content{
 			color: #696969;
@@ -633,7 +663,7 @@ span.overlay{
 					border-radius: 3px;
 				}
 				.info{
-					margin-left: 5px;
+					margin-left: 8px;
 					.title h2{
 						font-size: 14px;
 					}

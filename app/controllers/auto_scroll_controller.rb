@@ -24,8 +24,10 @@ class AutoScrollController < ApplicationController
 	# posts
 
 	def load_posts
+		user = User.find_by(email: "newsb.sns@gmail.com")
+		user2 = User.find_by(email: "paprikamajorika@gmail.com")
 		@existing_posts = params[:existing_posts].to_i
-		@loaded_posts = Post.where(country_id: @country.id).order(created_at: :desc).includes(:user, :article).offset(@existing_posts).limit(30)
+		@loaded_posts = Post.where(country_id: @country.id).where.not(user_id: [user, user2]).order(created_at: :desc).includes(:user, :article).offset(@existing_posts).limit(30)
 	end
 	
 	def load_article_posts

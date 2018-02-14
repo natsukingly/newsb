@@ -91,7 +91,8 @@
 					%span 
 						=t('form.setting.location')
 				.content
-					=select_tag "user[country_name]", options_for_select([[t('country.united_states'), "United States"], [t('country.japan'), "Japan"]], @current_user.country.name), class: "content form-control country_selection"     
+					#{t('country.japan')}
+					// =select_tag "user[country_name]", options_for_select([[t('country.united_states'), "United States"], [t('country.japan'), "Japan"]], @current_user.country.name), class: "content form-control country_selection"     
 			.setting_block.credential{data: {original_credential: "#{current_user.credential}"}}
 				.title_block
 					.title

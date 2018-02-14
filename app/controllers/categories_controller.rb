@@ -7,7 +7,9 @@ class CategoriesController < ApplicationController
 	
 	
 	def all_posts
-		@posts = Post.where(country_id: @country.id).order(created_at: :desc).includes(:user, :article).limit(30)
+		user = User.find_by(email: "newsb.sns@gmail.com")
+		user2 = User.find_by(email: "paprikamajorika@gmail.com")
+		@posts = Post.where(country_id: @country.id).where.not(user_id: [user, user2]).order(created_at: :desc).includes(:user, :article).limit(30)
 
 		if current_user && current_user.feed_notifications.any?
 			current_user.feed_notifications.delete_all
@@ -20,7 +22,7 @@ class CategoriesController < ApplicationController
 	
 	def top
 		@sns_mode = cookies[:sns_mode] || "on"
-		@articles = Article.all.where(category_id: Category.all.pluck(:id), country_id: @country.id).where("published_time >= ?", Time.now.ago(2.days)).where.not(posts_count: 0).order(priority_level: :desc, e_indecator: :desc, published_time: :asc).limit(30)
+		@articles = Article.all.where(category_id: Category.all.pluck(:id), country_id: @country.id).where("published_time >= ?", Time.now.ago(2.days)).where.not(posts_count: 0).order(priority_level: :desc, e_indecator: :desc, published_time: :desc).limit(30)
 		@featured_article = @articles.first
 		unless @featured_article.nil?
 			@best_post = @articles.first.posts.order(likes_count: :desc).includes(:user).limit(1).first
@@ -31,7 +33,7 @@ class CategoriesController < ApplicationController
 	
 	def articles
 		@sns_mode = cookies[:sns_mode] || "on"
-		@articles = @category.articles.where(country_id: @country.id).where("published_time >= ?", Time.now.ago(2.days)).where.not(posts_count: 0).order(priority_level: :desc, e_indecator: :desc, published_time: :asc).limit(30)
+		@articles = @category.articles.where(country_id: @country.id).where("published_time >= ?", Time.now.ago(2.days)).where.not(posts_count: 0).order(priority_level: :desc, e_indecator: :desc, published_time: :desc).limit(30)
 		@featured_article = @articles.first
 		unless @featured_article.nil?
 			@best_post = @articles.first.posts.order(likes_count: :desc).includes(:user).limit(1).first

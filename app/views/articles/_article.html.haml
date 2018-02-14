@@ -54,12 +54,12 @@
 									=post.user.name
 								%span.user_credential
 									=post.user.credential
-						%p.content
+						%p.content.give_me_ellipsis
 							-if post.content.empty?
 								%span.shared_message
 									> Shared this article
 							-else
-								= universal_truncate(post.content, 120) do
+								= universal_truncate(post.content, 200) do
 									%span ...
 			
 								

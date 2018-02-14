@@ -84,8 +84,8 @@ module ApplicationHelper
             "google-site-verification" => "mKpyaltoD8JmVXTMskfu7YXb5soQsBaUGS39Zd71QfE",
             reverse: true,
             title: "Newsb!",
-            description: "Newsb! みんなで考えるニュース",
-            keywords: "",
+            description: "Newsb! みんなで考えるニュース　毎日２００＋の記事を共有",
+            keywords: "News,ニュース,Newsb",
             viewport: "width=device-width, initial-scale=1.0" ,
             fb: {
                 app_id: ENV['FACEBOOK_KEY']
@@ -105,8 +105,8 @@ module ApplicationHelper
             "google-site-verification" => "mKpyaltoD8JmVXTMskfu7YXb5soQsBaUGS39Zd71QfE",
             reverse: true,
             title: "Newsb!",
-            description: "Newsb! みんなで考えるニュース",
-            keywords: "",
+            description: "Newsb! みんなで考えるニュース　毎日２００＋の記事を共有",
+            keywords: "News,ニュース,Newsb",
             viewport: "width=device-width, initial-scale=1.0" ,
             fb: {
                 app_id: ENV['FACEBOOK_KEY']
@@ -127,9 +127,9 @@ module ApplicationHelper
         if Rails.env.development?
             {
                 title: article.title,
-                description: "Newsb! みんなで考えるニュース",
+                description: "Newsb! みんなで考えるニュース　毎日２００＋の記事を共有",
                 image_src: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
-                keywords: "",
+                keywords: "News,ニュース,Newsb",
                 fb: {
                     app_id: ENV['FACEBOOK_KEY']
                 },
@@ -153,9 +153,9 @@ module ApplicationHelper
         elsif Rails.env.production?
             {
                 title: article.title,
-                description: "Newsb! みんなで考えるニュース",
+                description: "Newsb! みんなで考えるニュース　毎日２００＋の記事を共有",
                 image_src: article.image.url || "http://www.newsbeee.com/images/newsb_img.png",
-                keywords: "",
+                keywords: "News,ニュース,Newsb",
                 fb: {
                     app_id: ENV['FACEBOOK_KEY']
                 },
