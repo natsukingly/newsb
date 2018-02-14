@@ -1,20 +1,66 @@
 
 
-.social_mode_switch_block{
+.mode_switch_block{
 	display: flex;
 	align-items: center;
 	cursor: pointer;
-	.social_mode_switch{
+	&.mobile{
+		display: none;
+	}
+	.mode_switch{
+		
 		i{
 			margin-right: 5px;
 			&.active{
 				color: $newsb;
 			}
 		}
+		// svg{
+		// 	width: 20px;
+		// 	height: 20px;
+		// 	fill: grey;
+		// }
+		&.active{
+			svg{
+				fill: $newsb;
+			}
+		}
 	}
-	.social_mode_title{
+	.mode_title{
 		
 	}
+}
+
+@media(max-width: 768px){
+
+	.mode_switch_block{
+		display: none;
+		cursor: default;
+		&.mobile{
+		    display: flex;
+		    justify-content: space-around;
+		    align-items: center;
+		    flex: 1;
+		    // padding: 5px 0;
+		}
+		.mode_switch{
+			display: flex;
+			flex: 1;
+   			justify-content: center;
+   			cursor: pointer;
+   			// font-family: 'Nikukyu';
+   			font-family: 'Nico Moji';
+   			font-size: 20px;
+   			&.left{
+   				border-right: 1px solid #eee;
+   			}
+   			&.active{
+   				color: $newsb;
+   				font-weight: 600;
+   				pointer-events: none;
+   			}
+		}
+	}	
 }
 
 
@@ -24,6 +70,7 @@
 	flex-direction: column;
 	>.title{
 	    padding: 8px 20px;
+	    // margin-bottom: 3px;
 	    background-color: white;
 	    color: #696969;
 	    border-bottom: 1px solid #eee;
@@ -41,6 +88,7 @@
 			margin-top: 0;
 		    align-items: center;
 		    padding: 5px 8px;
+		    margin-bottom: 5px;
 		    .divider{
 		    	// padding: 0 12px;
 		    	// display: block;
@@ -196,6 +244,11 @@
 
 .article{
 	position: relative;
+	&.on{
+		.best_post{
+			display: block;
+		}
+	}
 	&:first-child{
 		// padding-top: 20px;
 	}
@@ -210,94 +263,94 @@
 		&:hover{
 			background-color: #f9f9f9;
 		}
-		.article_block{
-			display: flex;
-			flex: 1;
-			flex-direction: row;
-			.image{
-				display: block;
-				position: relative;
-				height: 60px;
-			    width: 60px;
-			    border-radius: 50%;
-				background-size: cover;
-				background-position: center;
-				box-shadow: 0 0 2px #bbb;
-				span.posts_count, span.e_counter{
-					display: inline-block;
-					border-radius: 50px;
-					min-width: 20px;
-					height: 20px;
-					line-height: 14px;
-					padding: 3px;
-					text-align: center;
-					position: absolute;
-					left: -3px;
-					&.posts_count{
-						background-color: $newsb;
-						// border: 1px solid $newsb_grey;
-						color: white;
-						top: -3px;
-					}
-					&.e_counter{
-
-						background-color: white;
-						color: darkred;
-						bottom: -12px;
-					}
-				}
-				.overlay{
-					background-color: rgba($newsb_grey, .05);
-					padding: 5px;
-					height: 100%;
-				}
-				.stats{
-					text-shadow: 0 0 5px #000;
+	}
+	.article_block{
+		display: flex;
+		flex: 1;
+		flex-direction: row;
+		.image{
+			display: block;
+			position: relative;
+			height: 60px;
+		    width: 60px;
+		    border-radius: 50%;
+			background-size: cover;
+			background-position: center;
+			box-shadow: 0 0 2px #bbb;
+			span.posts_count, span.e_counter{
+				display: inline-block;
+				border-radius: 50px;
+				min-width: 20px;
+				height: 20px;
+				line-height: 14px;
+				padding: 3px;
+				text-align: center;
+				position: absolute;
+				left: -3px;
+				&.posts_count{
+					background-color: $newsb;
+					// border: 1px solid $newsb_grey;
 					color: white;
+					top: -3px;
+				}
+				&.e_counter{
+
+					background-color: white;
+					color: darkred;
+					bottom: -12px;
+				}
+			}
+			.overlay{
+				background-color: rgba($newsb_grey, .05);
+				padding: 5px;
+				height: 100%;
+			}
+			.stats{
+				text-shadow: 0 0 5px #000;
+				color: white;
+				display: inline-block;
+				p{
+					text-align: center;
 					display: inline-block;
-					p{
-						text-align: center;
-						display: inline-block;
-						padding: 5px;  
-						font-size: 20px;
-						line-height: 12px;
-						.counts{
-							border: 1px solid #bbb;
-							background-color: rgba(0,0,0,.2);
-						}
-						span{
-							font-size: 10px;
-						}
+					padding: 5px;  
+					font-size: 20px;
+					line-height: 12px;
+					.counts{
+						border: 1px solid #bbb;
+						background-color: rgba(0,0,0,.2);
+					}
+					span{
+						font-size: 10px;
 					}
 				}
 			}
-			.info{
-				position: relative;
-				margin-left: 12px;
-				flex: 1;
-				display: flex;
-				flex-direction: column;
-				justify-content: space-around;
-				.title{   
-					 h2{
-						line-height: 20px;
-						font-size: 16px;
-						font-weight: 600;
-						color: black;
-					}
+		}
+		.info{
+			position: relative;
+			margin-left: 12px;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			.title{   
+				 h2{
+					line-height: 20px;
+					font-size: 16px;
+					font-weight: 600;
+					color: black;
 				}
-				.stats{
-					color: $newsb_grey;
-	
-				}
-				.mini_image{
-					display: none;
-					width: 100px;
-					height: 100px;
-					background-position: center;
-					background-size: cover;
-					margin-right: 12px;
-				}
+			}
+			.stats{
+				color: $newsb_grey;
+
+			}
+			.mini_image{
+				display: none;
+				width: 100px;
+				height: 100px;
+				background-position: center;
+				background-size: cover;
+				margin-right: 12px;
 			}
 		}
 	}
@@ -309,6 +362,7 @@
 	    margin-top: 5px;
 	    padding: 0 0 12px 12px;
 	    position: relative;
+	    display: none;
 		.user_details{
 			display: flex;
 			flex-direction: row;
@@ -643,6 +697,31 @@ span.overlay{
 
 @media(max-width: 768px){
 	.article{
+		&.on{
+			margin-bottom: 5px;
+			.article_wrapper{
+				padding: 12px 8px;
+				.best_post{
+					display: block;
+				}
+			} 
+			.article_block{
+				flex-direction: column;
+				.image{
+					height: 120px;
+					width: auto;
+					margin-bottom: 12px;
+					span.posts_count{
+						top: 0px;
+					    left: 0px;
+					    
+					}
+				}		
+				.info{
+					margin-left: 0;
+				}
+			}
+		}
 		&:hover{
 			.sub_info{
 				.best_post_btn{
@@ -658,18 +737,26 @@ span.overlay{
 
 		.article_wrapper{
 			padding: 16px 8px;
-			.article_block{
-				.image{
+			//ex
+			// border-radius: 3px;
+		}
+		.article_block{
+			//experiment
+			// flex-direction: column;
+			.image{
+				border-radius: 3px;
+				span.posts_count{
 					border-radius: 3px;
+				    
 				}
-				.info{
-					margin-left: 8px;
-					.title h2{
-						font-size: 14px;
-					}
+			}
+			.info{
+				margin-left: 8px;
+				.title h2{
+					font-size: 14px;
 				}
-				.mobile_posts_count{
-				}
+			}
+			.mobile_posts_count{
 			}
 		}
 

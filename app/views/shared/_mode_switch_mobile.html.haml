@@ -1,0 +1,11 @@
+
+-if mode == "off"
+	.mode_switch.left.on
+		=t('article_index.title.comment')
+	.mode_switch.active.off
+		=t('article_index.title.comment_off')
+-else
+	.mode_switch.active.left.on
+		=t('article_index.title.comment')
+	.mode_switch.off
+		=t('article_index.title.comment_off')

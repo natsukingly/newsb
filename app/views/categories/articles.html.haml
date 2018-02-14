@@ -14,17 +14,21 @@
 	.sub_function_main_section
 		#main_contents.articles
 			.title
-				.social_mode_switch_block
-					-if @sns_mode == "on"
-						.social_mode_switch
-							%i.fa.fa-toggle-on.fa-2x.fa-rotate-180.active
-						.social_model_title
-							=t('article_index.title.comment')
-					-else
-						.social_mode_switch
+				.mode_switch_block.desktop
+					-if @mode == "off"
+						.mode_switch
 							%i.fa.fa-toggle-on.fa-2x
-						.social_model_title
+						.model_title
 							=t('article_index.title.comment_off')
+							
+					-else
+						.mode_switch
+							%i.fa.fa-toggle-on.fa-2x.fa-rotate-180.active
+						.model_title
+							=t('article_index.title.comment')
+							
+				.mode_switch_block.mobile
+					=render 'shared/mode_switch_mobile', mode: @mode
 
 			-if @articles.offset(1).empty?
 				.result_not_found
@@ -55,39 +59,55 @@
 			-else
 				= render partial: "articles/side_recent_article", collection: @recent_articles, as: :article
 
-:javascript
 
-	$('.scroll_btn.categorized_articles').click(function(){
+-if @mode == "on"
+	:javascript
+		$('.article').addClass('on');
+		
+:javascript
+	$('.scroll_btn.articles').click(function(){
 		var stop_loading = $(this).hasClass('stop_loading');
 		if(!(stop_loading)){
 			$.ajax({
-				url: "#{load_categorized_articles_path}",
+				url: "#{load_articles_path}",
 				type: "GET",
-				data: {existing_articles : $('#main_contents').find('.article').length,
-						category_id : "#{@category.id}"},
+				data: {existing_articles : $('#main_contents').find('.article').length },
 				dataType: 'script',
 			})
 			$(this).html("<i class='fa fa-spinner fa-pulse'></i>")
 			$(this).addClass("loading");
 		}
 	})
-
-	if(#{@sns_mode != "on"}){
-		$('.article .best_post').hide();
-	}
-
-	$('.social_mode_switch_block').click(function(){
+	$('.mode_switch_block.desktop').click(function(){
 		var $switch = $(this).find('i');
-		var $state = $(this).find('.social_model_title');
+		var $state = $(this).find('.model_title');
 		if($switch.hasClass('active')){
 			$switch.removeClass('active').removeClass('fa-rotate-180');
-			$state.text('COMMENTS OFF');
-			$('.article .best_post').hide();
-			Cookies.set('sns_mode', "off");
+			$state.text("#{t('article_index.title.comment_off')}");
+			$('.article').removeClass('on');
+			Cookies.set('mode', "off");
 		} else{
 			$switch.addClass('active').addClass('fa-rotate-180');
-			$state.text('COMMENTS');	
-			$('.article .best_post').fadeIn();
-			Cookies.set('sns_mode', "on");
+			$state.text("#{t('article_index.title.comment')}");	
+			$('.article').addClass('on');
+			Cookies.set('mode', "on");
+		}
+	});
+	
+	$('.mode_switch_block.mobile .mode_switch').click(function(){
+		if($(this).hasClass('active')){
+			return false;
+			
+		} else{
+			$('.mode_switch_block.mobile .mode_switch').removeClass('active');
+			$(this).addClass('active');
+			
+			if($(this).hasClass('on')){
+				$('.article').addClass('on');
+				Cookies.set('mode', "on");
+			} else{
+				$('.article').removeClass('on');
+				Cookies.set('mode', "on");
+			}
 		}
 	});
