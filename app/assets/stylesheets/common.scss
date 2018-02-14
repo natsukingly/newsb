@@ -198,6 +198,15 @@ input[type="text"]:focus {
    max-height: 2*1.2;       /* fallback */
 }
 
+.give_me_long_ellipsis{
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3; /* number of lines to show */
+//   line-height: 1.2;        /* fallback */
+   max-height: 2*1.2;       /* fallback */
+}
 
 
 // main_container starts here

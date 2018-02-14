@@ -2,22 +2,30 @@
 -if I18n.locale == :ja
 	-if mode == "off"
 		.mode_switch.left.on.ja
+			=render 'svg/mode/on'
 			=t('article_index.title.jikkuri')
 		.mode_switch.active.off.ja
+			=render 'svg/mode/off'
 			=t('article_index.title.zakkuri')
 	-else
 		.mode_switch.active.left.on.ja
+			=render 'svg/mode/on'
 			=t('article_index.title.jikkuri')
 		.mode_switch.off.ja
+			=render 'svg/mode/off'
 			=t('article_index.title.zakkuri')
 -else
 	-if mode == "off"
 		.mode_switch.left.on
+			=render 'svg/mode/on'
 			=t('article_index.title.jikkuri')
 		.mode_switch.active.off
+			=render 'svg/mode/off'
 			=t('article_index.title.zakkuri')
 	-else
 		.mode_switch.active.left.on
+			=render 'svg/mode/on'
 			=t('article_index.title.jikkuri')
 		.mode_switch.off
+			=render 'svg/mode/off'
 			=t('article_index.title.zakkuri')

@@ -32,7 +32,7 @@
 			
 				.info
 					.title
-						%h2.give_me_ellipsis
+						%h2.give_me_long_ellipsis
 							= article.title
 							- if article.title.empty?
 								[ This article has been deleted ]
@@ -54,12 +54,12 @@
 									=post.user.name
 								%span.user_credential
 									=post.user.credential
-						%p.content.give_me_ellipsis
+						%p.content.give_me_long_ellipsis
 							-if post.content.empty?
 								%span.shared_message
 									> Shared this article
 							-else
-								= universal_truncate(post.content, 200) do
-									%span ...
+								=post.content
+									
 			
 								
