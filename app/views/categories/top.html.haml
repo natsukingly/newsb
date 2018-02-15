@@ -42,8 +42,9 @@
 				= render partial: "articles/side_recent_article", collection: @recent_articles, as: :article
 
 -if @mode == "on"
-	:javascript
+	:javascript 
 		$('.article').addClass('on');
+
 		
 :javascript
 	$('.scroll_btn.articles').click(function(){

@@ -60,6 +60,7 @@
 									> Shared this article
 							-else
 								=post.content
-									
-			
-								
+
+-if @mode == "on"								
+	:javascript 
+		$('.article').addClass('on');

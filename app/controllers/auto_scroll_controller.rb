@@ -4,6 +4,7 @@ class AutoScrollController < ApplicationController
 	
 	def load_articles
 		#featured_article = 1
+		@mode = cookies[:mode] || "on"
 		@existing_articles = params[:existing_articles].to_i + 1
 		@loaded_articles = Article.all.where(country_id: @country.id).where("published_time >= ?", Time.zone.now.ago(2.days)).order(priority_level: :desc, e_indecator: :desc, published_time: :desc).offset(@existing_articles).limit(30)
 	end

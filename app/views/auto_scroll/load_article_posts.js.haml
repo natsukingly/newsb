@@ -2,7 +2,7 @@ $('.scroll_btn.article_posts').before('#{ escape_javascript(render  partial: "po
 $('.scroll_btn.article_posts').html("#{t('scroll.load')}");
 $('.scroll_btn.article_posts').removeClass('loading');
 -if @loaded_posts.empty? || @loaded_posts.count < 30
-    $('.scroll_btn.article_posts').html("#{t('scroll.no_more')}");
-    $('.scroll_btn.article_posts').addClass('stop_loading');
-    
+	$('.scroll_btn.article_posts').html("#{t('scroll.no_more')}");
+	$('.scroll_btn.article_posts').addClass('stop_loading');
+
 loading = false;
