@@ -25,7 +25,7 @@
 		color: white;
 	    font-size: 12px;
 	    position: absolute;
-	    bottom: 8px;
+	    top: 28px;
 	    right: 8px;
 	    display: flex;
 	    align-items: center;
@@ -110,7 +110,7 @@
 		span.notification_type_icon{
 			width: 25px;
 			height: 25px;
-			bottom: 0;
+			top: 48px;
 		}
 		.image_wrapper{
 			img, svg{
