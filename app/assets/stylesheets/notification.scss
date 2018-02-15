@@ -18,12 +18,38 @@
 	padding: 12px;
 	min-height: 80px;
 	background-color: white;
-	
+	a{
+		position: relative;	
+	}
+	span.notification_type_icon{
+		color: white;
+	    font-size: 12px;
+	    position: absolute;
+	    bottom: 8px;
+	    right: 8px;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    height: 20px;
+	    width: 20px;
+	    border-radius: 50%;
+	    z-index: 10;
+	    &.pink{
+	    	background-color: lightpink;
+	    }
+	    &.orange{
+	    	background-color: orange;
+	    }
+	    &.blue{
+	    	background-color: cornflowerblue;
+	    }
+	}
 	.image_wrapper{
 		border-radius: 50%;
 	    border: 1px solid orange;
 	    padding: 2px;
 	    margin-right: 8px;
+	    position: relative;
 		img, svg{
 			width: 40px;
 			height: 40px;	
@@ -81,6 +107,11 @@
 	}
 	.notification{
 		padding: 8px 5px;
+		span.notification_type_icon{
+			width: 25px;
+			height: 25px;
+			bottom: 0;
+		}
 		.image_wrapper{
 			img, svg{
 				width: 65px;

@@ -239,6 +239,6 @@ module ApplicationHelper
                 Time.at(time).in_time_zone('Eastern Time (US & Canada)').strftime('%d, %H:%M')
             end
         end
-    end    
-
+    end   
+    
 end

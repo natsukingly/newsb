@@ -2,6 +2,7 @@
 -if !(notification.path.nil? || notification.path == "")
 	.notification{data: {notification_id: "#{notification.id}"}}
 		=link_to notification.target_user, class: "notification_target_user_link user_image_lg" do
+			=render 'shared/notification_type_icon', type: notification.notification_type
 			.image_wrapper
 				=user_image_md_helper(notification.target_user)
 		=link_to notification.path do
@@ -10,6 +11,8 @@
 					=notification.message.html_safe
 				%p
 					#{time_ago_in_words(notification.created_at)}
+		
+			
 					
 -else
 	.notification.disabled{data: {notification_id: "#{notification.id}"}}

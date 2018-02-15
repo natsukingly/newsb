@@ -108,7 +108,7 @@ class AdminsController < ApplicationController
 										path: path,
 										link: link,
 										message: message,
-										notification_type: "public",
+										notification_type: "Public",
 										country_id: country_id,
 										language_id: language_id)
 		if @notification.save
