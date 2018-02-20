@@ -21,5 +21,5 @@ set :environment, :production
 # Learn more: http://github.com/javan/whenever
 
 every 2.minutes do
-  runner 'Schneider.hello'
+  bundle exec rails runner 'Schneider.hello'
 end
