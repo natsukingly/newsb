@@ -19,11 +19,9 @@ class Schneider
 			music
 			health
 			food
-			
 		end
-		
-		def auto_post_by_category
-			category = params[:category]
+
+		def auto_post_by_category(category)
 			case category
 			#business
 			when "Business" then 
@@ -52,7 +50,6 @@ class Schneider
 				food
 			else
 			end	
-			
 		end
 
 		def auto_post_by_item(item)
@@ -64,11 +61,17 @@ class Schneider
 				gendai_business
 			when "jcast_business" then
 				jcast_business
+			when "president_business" then
+				president_business
+			when "diamond_business" then
+				diamond_business
 				
 			when "afp_international" then
 				afp_international
 			when "record_china_international" then
 				record_china_international
+			when "diamond_international" then
+				diamond_international
 				
 			#startup	
 			when "forbes_startup" then
@@ -77,6 +80,8 @@ class Schneider
 				bridge_startup
 			when "techcrunch_startup" then
 				techcrunch_startup
+			when "startup_startup" then
+				startup_startup		
 			
 			#tech	
 			when "itmedia_tech" then
@@ -97,11 +102,13 @@ class Schneider
 				excite_news_society
 			when "huffpost_society" then
 				huffpost_society
+			when "president_society" then
+				president_society
 			
 			#sports	
 			when "excite_news_sports" then
 				excite_news_sports
-			when "xcite_news_sports2" then
+			when "excite_news_sports2" then
 				excite_news_sports2
 			
 			#funny	
@@ -147,7 +154,6 @@ class Schneider
 				gunosy_food
 			else
 			end
-			
 		end
 
 	##############PRIVATE###############################
@@ -178,64 +184,75 @@ class Schneider
 												description: @article_description,
 												country_id: country_id,
 												category_id: category_id)
-						if @article_image == nil
-							@article.image = "no_image.jpeg"
+						@article.remote_image_url = @article_image
+						
+						if @article.save
+							
 						else
-							@article.remote_image_url = @article_image
+							if @article.errors[:image].any?
+								@article.remote_image_url = "http://www.newsbeee.com/images/no_image.jpeg"
+								@article.save
+							else
+								@article_error = true
+							end
 						end
-						@article.save
 					end
 				end
 			end
 			
 			def create_shares(article, skip_tag, skip_desc)
-				user = User.find_by(email: "newsb.sns@gmail.com")
-				user2 = User.find_by(email: "paprikamajorika@gmail.com")
-				random_user = [user, user2].sample
-				
-				if article && article.posts.where(user_id: [user.id, user2.id]).empty?
-					if article.keywords.nil? || skip_tag == true
+				unless @article_error == true
+					user = User.find_by(email: "newsb.sns@gmail.com")
+					user2 = User.find_by(email: "paprikamajorika@gmail.com")
+					random_user = [user, user2].sample
 					
-						keywords = ''
-					else
-						keywords = article.keywords.delete("{}").split(',').map{ |keyword| "#" + keyword.delete('[ ,！,・,、,。,.,/]')}.join(' ') 
-					end	
-					
-					
-					if article.description.nil? || article.description == ' ' || skip_tag == true
-						description = ''
-					else
-						description = '> ' + article.description + '          '
-					end
-					content = description + keywords
-	
-					post = article.posts.build(user_id: random_user.id,
-												country_id: article.country_id,
-												category_id: article.category_id,
-												content: content,
-												comment_permission: false)
-					if post.save
-						@articles_count = @articles_count + 1
+					if article && article.posts.where(user_id: [user.id, user2.id]).empty?
+						if article.keywords.nil? || skip_tag == true
+						
+							keywords = ''
+						else
+							keywords = article.keywords.delete("{}").split(',').map{ |keyword| "#" + keyword.delete('[ ,！,・,、,。,.,/]')}.join(' ') 
+						end	
+						
+						
+						if article.description.nil? || article.description == ' ' || skip_tag == true
+							description = ''
+						else
+							description = '> ' + article.description + '          '
+						end
+						content = description + keywords
+		
+						post = article.posts.build(user_id: random_user.id,
+													country_id: article.country_id,
+													category_id: article.category_id,
+													content: content,
+													comment_permission: false)
+						if post.save
+							@articles_count = @articles_count + 1
+						end
 					end
 				end
 			end
 			
 			
 			def create_shares_wo_tags(article)
-				user = User.find_by(email: "newsb.sns@gmail.com")
-				user2 = User.find_by(email: "paprikamajorika@gmail.com")
-				
-				random_user = [user, user2].sample
-				
-				if article && article.posts.where(user_id: [user.id, user2.id]).empty?
-					content = ''
-					if user 
-						post = article.posts.build(user_id: random_user.id,
-													country_id: article.country_id,
-													category_id: article.category_id,
-													content: content,
-													comment_permission: false)
-						post.save
+				unless @article_error == true
+					
+					user = User.find_by(email: "newsb.sns@gmail.com")
+					user2 = User.find_by(email: "paprikamajorika@gmail.com")
+					
+					random_user = [user, user2].sample
+					
+					if article && article.posts.where(user_id: [user.id, user2.id]).empty?
+						content = ''
+						if user 
+							post = article.posts.build(user_id: random_user.id,
+														country_id: article.country_id,
+														category_id: article.category_id,
+														content: content,
+														comment_permission: false)
+							post.save
+						end
 					end
 				end
 			end		
@@ -335,8 +352,51 @@ class Schneider
 				end
 			end
 			
-	#============ auto_post_method==================================================
-		##########BUSINESS########################################################
+			#============ auto_post_method==================================================
+			##########BUSINESS########################################################
+			def diamond_business
+				AutoPostRecord.where(site_name: "diamond_business").delete_all
+				set_doc("http://diamond.jp/subcategory/%E7%B5%8C%E5%96%B6%E3%83%BB%E6%88%A6%E7%95%A5")
+				
+				@count = @doc.css('.article-list article >a').count
+				@urls = @doc.css('.article-list article >a').map{ |url| url.attribute("href").to_s}	
+				
+				category_id = Category.find_by(name: "Business").id
+				country_id = Country.find_by(name: "Japan").id
+				
+				@articles_count = 0
+				@urls.each do |url|
+					url = "http://diamond.jp" + url 
+					parseURL(url)
+					create_article(url, category_id, country_id)
+					create_shares(@article, false, false)
+				end
+				
+				AutoPostRecord.create(site_name: "diamond_business", shared: @articles_count)
+			end
+			
+			
+			def president_business
+				AutoPostRecord.where(site_name: "president_business").delete_all
+				set_doc("http://president.jp/subcategory/%E3%83%9E%E3%83%8D%E3%83%BC")
+				
+				@count = @doc.css('.mod-list li >a').count
+				@urls = @doc.css('.mod-list li >a').map{ |url| url.attribute("href").to_s}	
+				
+				
+				category_id = Category.find_by(name: "Business").id
+				country_id = Country.find_by(name: "Japan").id
+				
+				@articles_count = 0
+				@urls.each do |url|
+					url = "http://president.jp" + url 
+					parseURL(url)
+					create_article(url, category_id, country_id)
+					create_shares(@article, false, false)
+				end
+				
+				AutoPostRecord.create(site_name: "president_business", shared: @articles_count)
+			end
 			
 			def forbes_business
 				AutoPostRecord.where(site_name: "forbes_business").delete_all
@@ -403,7 +463,28 @@ class Schneider
 				
 			end		
 		
-		##########society########################################################
+			##########society########################################################
+		
+			def president_society
+				AutoPostRecord.where(site_name: "president_society").delete_all
+				set_doc("http://president.jp/subcategory/%E6%94%BF%E6%B2%BB%E3%83%BB%E7%A4%BE%E4%BC%9A")
+				
+				@count = @doc.css('.mod-list li >a').count
+				@urls = @doc.css('.mod-list li >a').map{ |url| url.attribute("href").to_s}	
+				
+				category_id = Category.find_by(name: "Society").id
+				country_id = Country.find_by(name: "Japan").id
+				
+				@articles_count = 0
+				@urls.each do |url|
+					url = "http://president.jp" + url 
+					parseURL(url)
+					create_article(url, category_id, country_id)
+					create_shares(@article, false, false)
+				end
+				
+				AutoPostRecord.create(site_name: "president_society", shared: @articles_count)
+			end
 			
 			def huffpost_society
 				AutoPostRecord.where(site_name: "huffpost_society").delete_all
@@ -426,7 +507,7 @@ class Schneider
 				
 			end
 		
-		#international!!!################################################
+			#international!!!################################################
 			def afp_international
 				AutoPostRecord.where(site_name: "afp_international").delete_all
 				set_doc("http://www.afpbb.com/list/latest?cx_part=nav")
@@ -444,6 +525,7 @@ class Schneider
 					create_shares(@article, false, false)
 				end	
 				AutoPostRecord.create(site_name: "afp_international", shared: @articles_count)
+				
 			end	
 			
 			def record_china_international
@@ -463,9 +545,32 @@ class Schneider
 					create_shares(@article, false, false)
 				end	
 				AutoPostRecord.create(site_name: "record_china_international", shared: @articles_count)
+				
 			end		
 			
-		#######start up #####################################################	
+			def diamond_international
+				AutoPostRecord.where(site_name: "diamond_international").delete_all
+				set_doc("http://diamond.jp/subcategory/%E5%9B%BD%E9%9A%9B")
+				
+				@count = @doc.css('.article-list article >a').count
+				@urls = @doc.css('.article-list article >a').map{ |url| url.attribute("href").to_s}	
+				
+				category_id = Category.find_by(name: "International").id
+				country_id = Country.find_by(name: "Japan").id
+				
+				@articles_count = 0
+				@urls.each do |url|
+					url = "http://diamond.jp" + url 
+					parseURL(url)
+					create_article(url, category_id, country_id)
+					create_shares(@article, false, false)
+				end
+				
+				AutoPostRecord.create(site_name: "diamond_international", shared: @articles_count)
+	
+			end
+			
+			#######start up #####################################################	
 			def forbes_startup
 				AutoPostRecord.where(site_name: "forbes_startup").delete_all
 				set_doc("https://forbesjapan.com/category/lists/entrepreneurs?cx_hamburger=entrepreneurs")
@@ -488,6 +593,7 @@ class Schneider
 			end
 			
 			
+			
 			def bridge_startup
 				AutoPostRecord.where(site_name: "bridge_startup").delete_all
 				set_doc("http://thebridge.jp/")
@@ -508,7 +614,25 @@ class Schneider
 				
 			end
 			
-		
+			def startup_startup
+				AutoPostRecord.where(site_name: "startup_startup").delete_all
+				set_doc("http://startuptimes.jp/")
+				
+				@count = @doc.css('#main article.post-list >a').count
+				@urls = @doc.css('#main article.post-list >a').map{ |url| url.attribute("href").to_s}	
+	
+				category_id = Category.find_by(name: "Startup").id
+				country_id = Country.find_by(name: "Japan").id
+				
+				@articles_count = 0
+				@urls.each do |url|
+					parseURL(url)
+					create_article(url, category_id, country_id)
+					create_shares(@article, false, false)
+				end	
+				AutoPostRecord.create(site_name: "startup_startup", shared: @articles_count)
+			end
+				
 		
 			def techcrunch_startup
 				AutoPostRecord.where(site_name: "techcrunch_startup").delete_all
@@ -530,7 +654,7 @@ class Schneider
 				
 			end
 		
-		############TECH########################################
+			############TECH########################################
 			def itmedia_tech
 				AutoPostRecord.where(site_name: "itmedia_tech").delete_all
 				set_doc("http://www.itmedia.co.jp/")
@@ -612,8 +736,7 @@ class Schneider
 				
 			end			
 			
-		########society###################################################	
-			
+			########society###################################################	
 			def asahi_society
 				AutoPostRecord.where(site_name: "asahi_society").delete_all
 				set_doc("http://www.asahi.com/politics/list/")
@@ -675,7 +798,7 @@ class Schneider
 				
 			end		
 			
-		#############SPORTS@#############################################
+			#############SPORTS@#############################################
 			def  excite_news_sports
 				AutoPostRecord.where(site_name: "excite_news_sports").delete_all
 				set_doc("https://www.excite.co.jp/News/sports_g/")
@@ -716,7 +839,7 @@ class Schneider
 						
 			end	
 		
-		############FUNNY########################################################
+			############FUNNY########################################################
 			def rocket_news_funny
 				AutoPostRecord.where(site_name: "rocket_news_funny").delete_all
 				set_doc("https://rocketnews24.com/")
@@ -758,7 +881,7 @@ class Schneider
 				
 			end		
 			
-		#######ENTERTAINMENT#####################################################
+			#######ENTERTAINMENT#####################################################
 			def yahoo_entertainment
 				AutoPostRecord.where(site_name: "yahoo_entertainment").delete_all
 				set_doc("https://news.yahoo.co.jp/list/?c=entertainment")
@@ -818,7 +941,7 @@ class Schneider
 				
 			end		
 		
-		############RELATIONSHIPS####################################################
+			############RELATIONSHIPS####################################################
 			def googirl_relationships
 				
 			end
@@ -884,7 +1007,7 @@ class Schneider
 						
 			end
 		
-		##########WEB ###########################
+			##########WEB ###########################
 			# def lig_web
 			# 	AutoPostRecord.where(site_name: "lig_web").delete_all
 			# 	AutoPostRecord.create(site_name: "lig_web")
@@ -905,7 +1028,7 @@ class Schneider
 			# 	
 			# end
 		
-		########MOVIE MUSIC
+			########MOVIE MUSIC
 			def gunosy_movie
 				AutoPostRecord.where(site_name: "gunosy_movie").delete_all
 				set_doc("https://gunosy.com/categories/10")
@@ -964,7 +1087,7 @@ class Schneider
 				
 			end		
 		
-		####HEALTH####################################################
+			####HEALTH####################################################
 			def netarika_health
 				AutoPostRecord.where(site_name: "netarika_health").delete_all
 				set_doc("https://netallica.yahoo.co.jp/news/beauty/")
@@ -1006,7 +1129,7 @@ class Schneider
 				
 			end		
 		
-		#######FOOODDDD########################################################	
+			#######FOOODDDD########################################################	
 			def netarika_food
 				AutoPostRecord.where(site_name: "netarika_food").delete_all
 				set_doc("https://netallica.yahoo.co.jp/news/gourmet/")
@@ -1043,25 +1166,28 @@ class Schneider
 					create_shares(@article, false, false)
 				end	
 				AutoPostRecord.create(site_name: "gunosy_food", shared: @articles_count)
-				
 			end		
 	
-		#category==================================================================
+			#category==================================================================
 			def business
 				forbes_business
 				# gendai_business
 				jcast_business
+				president_business
+				diamond_business
 			end
 					
 			def international
 				afp_international
 				record_china_international
+				diamond_international
 			end
 			
 			def startup
 				forbes_startup
 				bridge_startup
 				techcrunch_startup
+				startup_startup
 			end
 			
 			def tech
@@ -1075,6 +1201,7 @@ class Schneider
 				asahi_society
 				jcast_society
 				excite_news_society
+				president_society
 				huffpost_society
 			end
 			
@@ -1116,5 +1243,6 @@ class Schneider
 				gunosy_food
 				gunosy_food
 			end	
+	
 	end
 end

@@ -1,0 +1,108 @@
+-content_for(:sidebar) do
+	"Don't show"
+
+.sub_function_wrapper.post_drafts
+	.sub_function_main_section
+		#main_contents
+			.auto_post_btn_group.all
+				.title.main_title
+					AUTO POST STATION: USA
+				.btns
+
+			.auto_post_btn_group.business
+				.title
+					Business  (#{articles_count_by_category("Business", @country.id)})
+				.btns	
+					=link_to "Business", auto_post_by_category_path("Business"), class: "schneider_btn for_category", method: :post
+					=render 'admins/auto_post_btn', site_name: "forbes_business_usa"
+
+			.auto_post_btn_group.society
+				.title
+					Society  (#{articles_count_by_category("Society", @country.id)})
+				.btns	
+					=link_to "Society", auto_post_by_category_path("Society"), class: "schneider_btn for_category", method: :post
+
+
+					
+			.auto_post_btn_group.international
+				.title
+					International  (#{articles_count_by_category("International", @country.id)})
+				.btns	
+					=link_to "International", auto_post_by_category_path("International"), class: "schneider_btn for_category", method: :post
+
+
+
+			.auto_post_btn_group.startup
+				.title
+					Startup  (#{articles_count_by_category("Startup", @country.id)})
+				.btns	
+					=link_to "Startup", auto_post_by_category_path("Startup"), class: "schneider_btn for_category", method: :post
+
+
+
+			.auto_post_btn_group.tech
+				.title
+					Tech  (#{articles_count_by_category("Tech", @country.id)})
+				.btns
+					=link_to "Tech", auto_post_by_category_path("Tech"), class: "schneider_btn for_category", method: :post
+
+
+							
+			.auto_post_btn_group.funny
+				.title
+					Funny  (#{articles_count_by_category("Funny", @country.id)})
+				.btns	
+					=link_to "Funny", auto_post_by_category_path("Funny"), class: "schneider_btn for_category", method: :post
+
+
+
+			.auto_post_btn_group.entertainment
+				.title
+					Entertainment  (#{articles_count_by_category("Entertainment", @country.id)})
+				.btns	
+					=link_to "Entertainment", auto_post_by_category_path("Entertainment"), class: "schneider_btn for_category", method: :post
+
+
+			
+			.auto_post_btn_group.movie
+				.title
+					Music&Movies  (#{articles_count_by_category("Movies・Music", @country.id)})
+				.btns
+					=link_to "Music", auto_post_by_category_path("Music"), class: "schneider_btn for_category", method: :post
+
+
+			.auto_post_btn_group.health
+				.title
+					Health  (#{articles_count_by_category("Health", @country.id)})
+				.btns	
+					=link_to "Health", auto_post_by_category_path("Health"), class: "schneider_btn for_category", method: :post
+
+
+
+			.auto_post_btn_group.relationships
+				.title
+					Relationships  (#{articles_count_by_category("Relationships", @country.id)})
+				.btns
+					=link_to "Relationships", auto_post_by_category_path("Relationships"), class: "schneider_btn for_category", method: :post
+
+			.auto_post_btn_group.food
+				.title
+					Food  (#{articles_count_by_category("Food", @country.id)})
+				.btns	
+					=link_to "Food", auto_post_by_category_path("Food"), class: "schneider_btn for_category", method: :post
+
+
+		
+			.auto_post_btn_group.web
+				.title
+					Web  (#{articles_count_by_category("Web", @country.id)})
+				.btns
+
+
+			.auto_post_btn_group.sports
+				.title
+					Sports  (#{articles_count_by_category("Sports", @country.id)})
+				.btns	
+					=link_to "Sports", auto_post_by_category_path("Sports"), class: "schneider_btn for_category", method: :post
+
+

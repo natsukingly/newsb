@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 		end
 		collection do
 			get 'drafts'
+			get 'auto_post_usa'
 			get 'url_forms'
 			get 'reports'
 			get 'unchecked_reports'
@@ -58,6 +59,12 @@ Rails.application.routes.draw do
 	post '/schneider/auto_post_by_item/:item' => 'schneider#auto_post_by_item', as: :auto_post_by_item
 	post '/schneider/auto_post_by_category/:category' => 'schneider#auto_post_by_category', as: :auto_post_by_category
 	post '/schneider/auto_post' => 'schneider#auto_post', as: :auto_post
+	
+	
+	#USA scheneider##########==========================================================
+	post '/schneider_usa/auto_post_by_item/:item' => 'schneider_usa#auto_post_by_item', as: :usa_auto_post_by_item
+	post '/schneider_usa/auto_post_by_category/:category' => 'schneider_usa#auto_post_by_category', as: :usa_auto_post_by_category
+	post '/schneider_usa/auto_post' => 'schneider_usa#auto_post', as: :usa_auto_post	
 	
 	
 

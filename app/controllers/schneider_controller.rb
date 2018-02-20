@@ -1,14 +1,5 @@
 class SchneiderController < ApplicationController
-	# def fetch_articles
-	# end
-	# def crawl
 
-	# 	#forbes
-	# 	set_doc("https://forbesjapan.com/category/lists/business?cx_hamburger=business")
-		
-	# 	@count = @doc.css('.stream-article .article-image').count
-	# 	@urls = @doc.css('.stream-article .article-image').map{ |url| url.attribute("href").to_s}
-	# end
 	
 	def custom
 		@urls = [	{ :url => params[:article][:url1], :category_id => params[:article][:category1]	},
@@ -1215,7 +1206,6 @@ class SchneiderController < ApplicationController
 				create_shares(@article, false, false)
 			end	
 			AutoPostRecord.create(site_name: "gunosy_food", shared: @articles_count)
-			
 		end		
 
 	#category==================================================================

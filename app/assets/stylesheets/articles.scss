@@ -780,11 +780,13 @@ span.overlay{
 		    	p{
 		    		line-height: 12px;
 		    		font-size: 12px;
+		    		word-break: break-all;
 		    	}
 		    }
 		    p.content{
 		    	font-size: 12px;
 		    	color: black;
+		    	word-break: break-all;
 		    }
 		 //   &:before{
 			// 	content: '';

@@ -15,7 +15,7 @@
 					.feed_block
 						=t('categories.feed')
 						%span.feed_notifications_count
-							(#{current_user.feed_notifications.where(check: false).count})
+							(#{current_user.feed_notifications.where(check: false, country_id: @country.id).count})
 		
 			=link_to categorized_articles_path("Society"), class: "category_btn", data: {category: 'Society'} do
 				=render 'svg/categories/society'
@@ -31,7 +31,6 @@
 				=render 'svg/categories/business'
 				%span
 					=t('categories.business')
-					
 					
 			=link_to categorized_articles_path("Entertainment"), class: "category_btn", data: {category: 'Entertainment'} do
 				=render 'svg/categories/entertainment'
@@ -80,6 +79,8 @@
 				=render 'svg/categories/music'
 				%span
 					=t('categories.movies')
+					
+					
 
 -if @category
 	:javascript

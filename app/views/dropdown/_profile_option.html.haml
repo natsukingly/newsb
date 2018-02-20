@@ -21,9 +21,13 @@
 				=link_to t('dropdown.profile_option.profile'), user_path(current_user), class: "profile_option ddm_btn" 
 				=link_to t('dropdown.profile_option.setting'), edit_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
 				=link_to t('dropdown.profile_option.social_media'), edit_sns_setting_user_path(current_user.id), class: "profile_option ddm_btn" 
+
 			-if current_user.admin == true
 				.admin_option_block
-					=link_to "Auto Post", drafts_admins_path
+					-if current_user.country.name == "Japan"
+						=link_to "Auto Post", drafts_admins_path
+					-elsif current_user.country.name == "United States"
+						=link_to "Auto Post USA", auto_post_usa_admins_path					
 					=link_to "Manual Post", url_forms_admins_path
 					=link_to "Reports", reports_admins_path
 					=link_to "Announcement", newsb_notifications_index_admins_path

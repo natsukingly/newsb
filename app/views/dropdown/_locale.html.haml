@@ -11,6 +11,12 @@
 				=t('country.united_states')
 			%span.coming_soon
 				=t('state.coming_soon')
+		
+		-if current_user && current_user.admin == true
+			=link_to change_country_path(country_name: "United States"), class: "country_link menu_item", data: {country_name: "United States"}, method: :post do
+				=render "svg/flags/usa"
+				%span
+					=t('country.united_states') 
 				
 		=link_to change_country_path(country_name: "Japan"), class: "country_link menu_item disabled", data: {country_name: "United Kingdom"}, method: :post do
 			=render "svg/flags/uk"

@@ -11,8 +11,10 @@ class AutoScrollController < ApplicationController
 	
 	def load_categorized_articles
 		#featured_article = 1
+		@mode = cookies[:mode] || "on"
 		@existing_articles = params[:existing_articles].to_i + 1
-		@loaded_articles = Article.where(country_id: @country.id, category_id: params[:category_id]).where("published_time >= ?", Time.zone.now.ago(2.days)).order(priority_level: :desc, e_indecator: :desc, published_time: :desc).offset(@existing_articles).limit(30)
+		@loaded_articles = Article.where(country_id: @country.id, category_id: params[:category_id].to_i).where("published_time >= ?", Time.zone.now.ago(2.days)).order(priority_level: :desc, e_indecator: :desc, published_time: :desc).offset(@existing_articles).limit(30)
+		
 	end
 	
 	def load_searched_articles

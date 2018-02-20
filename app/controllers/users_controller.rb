@@ -227,7 +227,7 @@ class UsersController < ApplicationController
       cookies.delete :previous_url
       if @user.save
         I18n.locale = @user.language.code
-        flash[:notice] = t('flash.user.language_change_success')
+        flash[:notice] = t('flash.user.language_change_success', country: @user.country.name)
         redirect_to redirect_url
       else
         flash[:alert] = t('flash.general_error')

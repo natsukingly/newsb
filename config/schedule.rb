@@ -5,8 +5,9 @@
 
 # Example:
 #
-# set :output, "/path/to/my/cron_log.log"
+set :output, 'log/crontab.log'
 #
+set :environment, :production
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
 #   runner "MyModel.some_method"
@@ -19,10 +20,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every :monday, at: '12:00 am' do
-  runner "User.reset_weekly_liked_count"
-end
-
-every 1.minute do
-  runner "User.reset_weekly_liked_count"
+every 2.minutes do
+  runner 'Schneider.hello'
 end

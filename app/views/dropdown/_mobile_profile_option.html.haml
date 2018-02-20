@@ -33,7 +33,10 @@
 				=link_to t('dropdown.profile_option.logout'), destroy_user_session_path, class: "profile_option" 
 			-if current_user.admin == true
 				.admin_option_block
-					=link_to "Auto Post", drafts_admins_path, class: "profile_option ddm_btn" 
+					-if current_user.country.name == "Japan"
+						=link_to "Auto Post", drafts_admins_path, class: "profile_option ddm_btn" 
+					-elsif current_user.country.name == "United States"
+						=link_to "Auto Post USA", auto_post_usa_admins_path, class: "profile_option ddm_btn" 	
 					=link_to "Manual Post", url_forms_admins_path, class: "profile_option ddm_btn" 
 					=link_to "Reports", reports_admins_path, class: "profile_option ddm_btn" 
 					=link_to "Announcement", newsb_notifications_index_admins_path, class: "profile_option ddm_btn" 
