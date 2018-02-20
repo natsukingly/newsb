@@ -6,6 +6,10 @@ class Schneider
 			puts 'hello world'
 		end
 		
+		def auto_post_business
+			forbes_business
+		end
+		
 		def auto_post
 			business
 			international
