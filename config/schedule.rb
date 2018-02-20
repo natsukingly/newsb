@@ -2,7 +2,7 @@
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
 # http://en.wikipedia.org/wiki/Cron
-
+require File.expand_path(File.dirname(__FILE__) + "/environment")
 # Example:
 #
 set :output, 'log/crontab.log'
@@ -21,5 +21,5 @@ set :environment, :production
 # Learn more: http://github.com/javan/whenever
 
 every 2.minutes do
-  runner Schneider.hello
+  runner 'Schneider.hello'
 end
