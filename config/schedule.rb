@@ -20,6 +20,7 @@ set :environment, :production
 
 # Learn more: http://github.com/javan/whenever
 
-every 2.minutes do
+every 12.hours do
   runner 'Schneider.hello'
+  runner 'Schneider.auto_post'
 end
