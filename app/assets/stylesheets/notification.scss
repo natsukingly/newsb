@@ -21,6 +21,9 @@
 	a{
 		position: relative;	
 	}
+	&.new{
+		background-color: rgba(255,165,0,.1);
+	}
 	span.notification_type_icon{
 		color: white;
 	    font-size: 12px;

@@ -26,4 +26,7 @@
 				%p
 					#{time_ago_in_words(notification.created_at)}
 
+-unless notification.new == false
+	:javascript
+		$('.notification[data-notification-id = #{notification.id}]').addClass('new');
 			

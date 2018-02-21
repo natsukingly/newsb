@@ -250,9 +250,16 @@ class UsersController < ApplicationController
   def check_notifications
     notifications = current_user.notifications.where(check: false)
     notifications.each do |notification|
+      notification.new = true
       notification.check = true
       notification.save
     end
+    new_notifications = current_user.notifications.where(new: true)
+    new_notifications.each do |new_notification|
+      new_notification.new = false
+      new_notification.save
+    end    
+    
   end
 
 
