@@ -44,4 +44,5 @@ ja:
     deleted_article: "この記事は削除されました。"
     too_many_tagged_users: '６人以上はタグできません。'
     no_users_found: '該当するユーザーは見つかりませんでした。'
+    no_followers: 'タグできるフォロワーはまだいません。'
     selected: '選択済み'

@@ -1,6 +1,9 @@
 .search_users_to_tag_input
 	=text_field_tag 'user[name]', '', placeholder: "タグ付けしたいフォロワーの名前", class: "user_search_by_name for_article_post", autocomplete: :off
-	
+
+-if current_user.followers.count == 0
+	.no_followers
+		=t('state.no_followers')
 .error_message.too_many_tagged_users
 	=t('state.too_many_tagged_users')
 .error_message.no_users_found

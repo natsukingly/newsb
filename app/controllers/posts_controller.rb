@@ -152,11 +152,11 @@ class PostsController < ApplicationController
 		selected_user_ids = params[:selected_users].split(',')
 		
 		if keyword == ''
-			@users_to_tag = User.all.where.not(id: selected_user_ids).limit(20)
+			@users_to_tag = current_user.followers.where.not(id: selected_user_ids).limit(20)
 			@selected_users = User.all.where(id: selected_user_ids)
 			suggestion = true
 		else
-			@users_to_tag = User.all.where('LOWER(name) LIKE(?)', "%#{keyword.downcase}%").where.not(id: selected_user_ids).where.not(id: current_user.id).limit(20)
+			@users_to_tag = current_user.followers.where('LOWER(name) LIKE(?)', "%#{keyword.downcase}%").where.not(id: selected_user_ids).limit(20)
 			@selected_users = User.all.where(id: selected_user_ids)
 		end
 	end

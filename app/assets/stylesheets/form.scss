@@ -346,12 +346,16 @@ form{
 		    background-color: #eee;
 		    margin-bottom: 5px;
 		}
-		.error_message{
+		.error_message, .no_followers{
 			color: indianred;
 			border-radius: 3px;
-			margin: 5px 0;
+			margin: 5px;
 			font-size: 14px;
 			display: none;
+		}
+		.no_followers{
+			color: grey;
+			display: block;
 		}
 		.user_list_section{
 			overflow-y: scroll;
