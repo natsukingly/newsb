@@ -13,7 +13,7 @@
 								%i.fa.fa-share-square
 								=t('state.shared')
 								%span.time
-									・#{time_ago_in_words(post.created_at)}
+									#{time_ago_in_words(post.created_at)}
 						-if post.user != current_user
 							.user_option.follow_switch
 								=render "/shared/follow_form_icon.html.haml", user: post.user
@@ -21,6 +21,8 @@
 							.option
 								%i.fa.fa-ellipsis-v.lg.option_link
 								=render 'dropdown/post_option_for_share', post: post
+					-unless post.tagged_user_ids.empty?
+						=render 'posts/tagged_users_block', post: post
 								
 
 -else				
@@ -37,7 +39,7 @@
 							=post.user.name
 					%p.user_credential
 						-unless post.user.credential.nil?
-							#{post.user.credential}・
+							#{post.user.credential}
 						%span.time
 							#{time_ago_in_words(post.created_at)}
 							
@@ -48,9 +50,13 @@
 			.content_block
 				%p.opinion.post_opinion
 					=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
-	
+					-unless post.tagged_user_ids.empty?
+						=render 'posts/tagged_users_block', post: post
+					
+					
 				.status.md
 					=render 'posts/post_menu', post: post
+			
 
 		.comment_index_wrapper
 			-unless post.comments_count == 0

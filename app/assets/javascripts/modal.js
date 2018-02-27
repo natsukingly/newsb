@@ -13,11 +13,10 @@ $(document).on('turbolinks:load', function() {
 		$('.post_form_modal_via_url').hide();
 	});
 	
-	
-	
 	// post_form from article show page
 	$('.show_article_post_modal_btn').click(function () {
 		initializeModal();
+		initializeTaggedUser()
 		$(".article_post_modal_wrapper").show();
 		var article_title = $('#selected_article').find('.article_title').text();
 		var article_id = $('#selected_article').attr('data-article-id');
@@ -34,6 +33,7 @@ $(document).on('turbolinks:load', function() {
 	// post_form from header or feed
 	$('.show_post_modal_btn').click(function () {
 		initializeModal();
+		initializeTaggedUser()
 		$(".post_modal_wrapper").show();
 
 		if(windowWidth < 768){
@@ -132,6 +132,7 @@ $(document).on('turbolinks:load', function() {
 	
 	$(".post_ddm .show_article_post_edit_modal_btn").click(function(){
 		initializeModal();
+		initializeTaggedUser()
 		var opinion_height = $(this).parents(".post").find(".opinion").css("height");
 		var opinion_form_height = parseInt(opinion_height) + 50;
 		$(".article_post_edit_form").find("textarea").css("height", opinion_form_height + "px");
@@ -163,11 +164,6 @@ $(document).on('turbolinks:load', function() {
 		}  
 	});
 	
-	
-	
-	
-	
-	
 	$('.close_modal_btn, .mobile_modal_back_btn, .cancel_modal_btn').click(function (event) {
 		$(".modal_wrapper, .ddm, .mobile_ddm_header").hide();
 		$('.flex_container').show();
@@ -182,6 +178,21 @@ $(document).on('turbolinks:load', function() {
 		$('.modal_wrapper').attr('data-position', position);
 		$(".modal_wrapper, .ddm, .mobile_ddm_header").hide();
 		$('html').addClass('stretch');
-		
+	}
+	
+	function initializeTaggedUser(){
+		//user search form を隠す
+		$('.user_search_block').hide();
+		$('span.tagged_user_counter').text("0");
+		$('span.tagged_user_counter_on_menu').text("0");
+		$('span.tagged_user_counter_on_menu').hide();
+		$('input.tagged_user_ids').val('');
+		$('.user_add_icon').text("+");
+		$('.user_sm').removeClass('selected');
+		$('.tagged_user_reset_btn').removeClass('on');
+		$('.error_message').hide();
+		$('.tag_user_btn.form_btn span.opened').hide();
+		$('.tag_user_btn.form_btn span.closed').css("display", "flex");
+		$('.post_submit_btn').removeClass("disabled");
 	}
 });

@@ -42,7 +42,9 @@ en:
     shared: "shared"
     popular: "BEST"
     deleted_article: "This article has been deleted."
-
+    too_many_tagged_users: 'You can only tag 5 users at max.'
+    no_users_found: 'No users matched'
+    selected: 'selected'
     
     
     

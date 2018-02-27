@@ -12,6 +12,53 @@
 	font-weight: normal;
 }
 
+.user_sm{
+	display: flex;
+	align-items: center;
+	color: #aaa;
+	padding: 5px;
+	min-height: 50px;
+	border-bottom: 1px solid #eee;
+	&.selected{
+		color: black;
+		font-weight: 900;
+	}
+	.user_name{
+		flex: 1;
+		font-size: 14px;
+	}
+	.user_add_icon{
+		width: 20px;
+	}
+}
+@media(min-width: 768px){
+	.user_sm{
+		cursor: pointer;
+		&:hover{
+			background-color: #f9f9f9;
+		}
+	}	
+}
+
+
+.tagged_user{
+	display: flex;
+	align-items: center;
+	font-weight: 900;
+	padding: 5px 0;
+	font-size: 12px;
+	.user_name{
+	}
+}
+@media(min-width: 768px){
+	.tagged_user{
+		cursor: pointer;
+		&:hover{
+			color: orange;
+		}
+	}	
+}
+
 
 .user_block{
 	display: flex;

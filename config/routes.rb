@@ -118,6 +118,8 @@ Rails.application.routes.draw do
 				get 'load_more'
 			end
 		end
+
+		get '/posts/search_users_to_tag' => 'posts#search_users_to_tag', as: :search_users_to_tag
 		
 		resources :posts, except: [:new, :update, :destroy] do
 			member do
@@ -126,6 +128,7 @@ Rails.application.routes.draw do
 				get 'edit_article_post', as: :edit_article
 				post 'update_article_post', as: :update_article
 				get 'cancel_edit_article_post', as: :cancel_edit_article
+				
 			end
 			collection do
 				post 'update', as: :update
@@ -138,9 +141,9 @@ Rails.application.routes.draw do
 				get 'load_url_mobile'
 				get 'load_url_feed'
 				post 'create_report'
-			
 			end
 		end
+
 		
 		resources :comments, except: [:new, :update, :destroy] do
 			member do 

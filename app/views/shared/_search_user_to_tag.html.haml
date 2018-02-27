@@ -1,0 +1,52 @@
+.search_users_to_tag_input
+	=text_field_tag 'user[name]', '', placeholder: "タグ付けしたいフォロワーの名前", class: "user_search_by_name for_article_post", autocomplete: :off
+	
+.error_message.too_many_tagged_users
+	=t('state.too_many_tagged_users')
+.error_message.no_users_found
+	=t('state.no_users_found')
+%span.loading_icon
+	%i.fa.fa-spinner.fa-pulse.loading_mobile
+.user_list_section
+	.user_list
+		= render partial: "users/user_sm", collection: users, as: :user
+
+	%span.selected_user_title
+		=t('state.selected')
+	.selected_user_list
+	
+
+.tagged_user_reset_btn
+	%span.tagged_user_counter
+		0
+	=t('action_cap.reset')
+
+:javascript
+	
+	$('input.user_search_by_name').keyup(function(e) {
+		var flag = true;
+		if(e.keyCode === 32){
+			return false;
+		}
+		if(flag && $(this).val().length != 1){
+			$('.error_message.no_users_found').hide();
+			$('.user_list').html('');
+			$('.selected_user_title').hide();
+			$('.selected_user_list').html('');
+			flag == false;
+			$.ajax({
+				url: "#{search_users_to_tag_path}",
+				type: "GET",
+				data: {keyword: $(this).val(), selected_users: $('input.tagged_user_ids').val()},
+				dataType: 'script',
+				timeout: 10000
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+				$('.error_message.no_users_found').show();
+				$('span.loading_icon').hide();
+				flag == false;
+			})
+			$('span.loading_icon').show();
+			return false;
+		}
+
+	});

@@ -63,42 +63,42 @@ en:
   datetime:
     distance_in_words:
       about_x_hours:
-        one: about 1 hour
-        other: about %{count} hours
+        one: 1h
+        other: "%{count}h"
       about_x_months:
-        one: about 1 month
-        other: about %{count} months
+        one: 1mo
+        other: "%{count}mo"
       about_x_years:
-        one: about 1 year
-        other: about %{count} years
+        one: 1y
+        other: "%{count}y"
       almost_x_years:
-        one: almost 1 year
-        other: almost %{count} years
-      half_a_minute: half a minute
+        one: 1y
+        other: "%{count}y"
+      half_a_minute: 1m
       less_than_x_minutes:
-        one: less than a minute
-        other: less than %{count} minutes
+        one: 1m
+        other: "%{count}m"
       less_than_x_seconds:
-        one: less than 1 second
-        other: less than %{count} seconds
+        one: 1s        
+        other: "%{count}s"
       over_x_years:
-        one: over 1 year
-        other: over %{count} years
+        one: 1y
+        other: "%{count}y"
       x_days:
-        one: 1 day
-        other: "%{count} days"
+        one: 1d
+        other: "%{count}d"
       x_minutes:
-        one: 1 minute
-        other: "%{count} minutes"
+        one: 1m
+        other: "%{count}m"
       x_months:
-        one: 1 month
-        other: "%{count} months"
+        one: 1mo
+        other: "%{count}mo"
       x_years:
-        one: 1 year
-        other: "%{count} years"
+        one: 1y
+        other: "%{count}y"
       x_seconds:
-        one: 1 second
-        other: "%{count} seconds"
+        one: 1s
+        other: "%{count}s"
     prompts:
       day: Day
       hour: Hour

@@ -90,6 +90,9 @@ class PostsController < ApplicationController
 							country_id: @country.id,
 							content: params[:post][:content],
 							category_id: @article.category_id)	
+			unless params[:post][:tagged_user_ids].nil?
+				@post.tagged_user_ids = params[:post][:tagged_user_ids].split(",")
+			end
 			if @post.save
 				flash[:notice] = t('flash.post.create_success')
 				redirect_to article_path(@article.id)
@@ -142,7 +145,23 @@ class PostsController < ApplicationController
 		redirect_to @post
 	end
 	
-
+	def search_users_to_tag
+		keyword = params[:keyword].delete(' ,　')
+		# @users_to_tag = User.all
+		suggestion = false
+		selected_user_ids = params[:selected_users].split(',')
+		
+		if keyword == ''
+			@users_to_tag = User.all.where.not(id: selected_user_ids).limit(20)
+			@selected_users = User.all.where(id: selected_user_ids)
+			suggestion = true
+		else
+			@users_to_tag = User.all.where('LOWER(name) LIKE(?)', "%#{keyword.downcase}%").where.not(id: selected_user_ids).where.not(id: current_user.id).limit(20)
+			@selected_users = User.all.where(id: selected_user_ids)
+		end
+	end
+	
+	
 	def destroy
 		article_id = @post.article_id
 		if @post.destroy
@@ -193,6 +212,7 @@ class PostsController < ApplicationController
 		def parseURL
 			
 			@article_url = params[:placeholder_url].delete(' ,　')
+			
 			url = @article_url
 			charset = nil
 			html = open(url, 'User-Agent' => 'firefox', :read_timeout => 10) do |f|
@@ -360,10 +380,14 @@ class PostsController < ApplicationController
 				flash[:notice] = t('flash.post.already_shared')
 				redirect_to root_path
 			else
+				
 				@post = current_user.posts.build(article_id: @article.id)
 				@post.category_id = params[:post][:category_id].to_i
 				@post.country_id = @country.id
 				@post.content = params[:post][:content]
+				unless params[:post][:tagged_user_ids].nil?
+					@post.tagged_user_ids = params[:post][:tagged_user_ids].split(",")
+				end
 				if @post.save
 					unless @post.article.category_lock == true
 						decide_category

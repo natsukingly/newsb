@@ -64,6 +64,7 @@
             font-size: 14px;
             word-break: break-all;
         }
+        
         span.opinion_for_share{
             color: grey;
         }
@@ -242,6 +243,34 @@
         }
     }
 }
+
+.tagged_users_block{
+    margin-bottom: 8px;
+    margin-top: 0px;
+    .tagged_users_title{
+        font-size: 12px;
+        font-weight: 600;
+        margin-top: 12px;
+    }
+    .tagged_icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg{
+        width: 12px;
+        height: 20px;
+        margin-right: 5px;
+        }
+    }
+}
+
+.post.share{
+    .tagged_users_block{
+        margin-top: 20px;
+        margin-bottom: 0px;
+    }
+}
+
 
 .post_article{
     margin-bottom: 12px;

@@ -42,3 +42,6 @@ ja:
     connected: "接続済"
     popular: "注目"
     deleted_article: "この記事は削除されました。"
+    too_many_tagged_users: '６人以上はタグできません。'
+    no_users_found: '該当するユーザーは見つかりませんでした。'
+    selected: '選択済み'

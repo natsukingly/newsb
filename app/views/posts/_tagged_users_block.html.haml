@@ -1,0 +1,14 @@
+.tagged_users_block
+    .tagged_users_list
+        -post.tagged_user_ids.each do |user_id|
+            -user = User.find(user_id)
+            =link_to user, class: "tagged_user" do
+                .tagged_icon
+                    =render 'svg/posts/right_arrow'
+                .user_image_xxs
+                    =user_image_helper(user)
+                .user_name
+                    =user.name
+                    
+                
+                

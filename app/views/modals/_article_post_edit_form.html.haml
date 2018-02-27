@@ -7,7 +7,7 @@
 	.post_form{data: {form: "article", country: "#{@country.id}"}}
 		.body 
 			.form_main 
-				= form_tag update_posts_path do
+				= form_tag update_posts_path, class: "post_form to_edit" do
 							
 					-if current_user
 						.field.form-group.textarea_wrapper 
@@ -15,9 +15,12 @@
 								= text_area_tag 'post[content]', '', placeholder: "#{t ('form.post.placeholder')}", class: "article_post_content large"
 								%p.textarea_error_message.too_long
 									=t('form.post_errors.too_long') 
+					
 									%span.letter_count
 								%p.textarea_error_message.category_undecided
 									=t('form.post_errors.category_undecided')
+							.user_search_block
+								=render '/shared/search_user_to_tag', users: User.all.where.not(id: current_user.id)
 							= hidden_field_tag 'post[id]', '', id: "edit_target_post_id"
 							
 							#autocomplete_tags
@@ -28,6 +31,13 @@
 								=render 'snss/sns_post_form_menu', facebook_post: current_user.facebook_post, twitter_post: current_user.twitter_post
 		
 							.submit_btn_group
+								.tag_user_btn.form_btn.to_edit
+									%span.closed
+										=render 'svg/follow_icon'	
+										%span.tagged_user_counter_on_menu
+											0
+									%span.opened
+										%i.fa.fa-pencil
 								= submit_tag "#{t ('form.post.update')}", class: "form_btn post_submit_btn"	
 
 

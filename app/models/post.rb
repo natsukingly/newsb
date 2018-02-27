@@ -12,9 +12,12 @@ class Post < ApplicationRecord
 	has_many :reports, as: :reportable, dependent: :delete_all
 	
 	after_create :issue_feed_notifications
+	after_create :issue_notifications
 	after_create :post_on_sns
 	after_create :add_e_indecator
+	before_update :destroy_notifications
 	
+	after_destroy :destroy_notifications
 	after_destroy :reduce_e_indecator
 
 	after_create do
@@ -53,6 +56,34 @@ class Post < ApplicationRecord
 			end
 		end
 	end
+	
+	def issue_notifications
+		news_title = self.article.title.truncate(30)
+		unless self.tagged_user_ids.empty?
+			post_path = Rails.application.routes.url_helpers.post_path(country: self.country.name, id: self.id)
+			self.tagged_user_ids.each do |tagged_user_id|
+				case User.find(tagged_user_id).language.code
+				when "ja"
+					message = "<span> #{self.user.name} </span>#{ I18n.t('notification.tagged', locale: :ja)}<span> \"#{news_title}\" </span>"
+				when "en"
+					message = "<span> #{self.user.name} </span>#{ I18n.t('notification.tagged', locale: :en)}<span> \"#{news_title}\" </span>"
+				end
+				notification = Notification.new(user_id: tagged_user_id,
+												path: post_path,
+												notification_type: "Tagged",
+												target_user_id: self.user_id,
+												post_id: self.id,
+												message: message)
+				notification.save
+			end
+		end
+	end
+	
+	def destroy_notifications
+		notifications = Notification.all.where(notification_type: "Tagged", post_id: self.id)
+		notifications.delete_all
+	end
+	
 	
 	def add_e_indecator
 		if self.article != nil && Post.where(article_id: self.article_id, user_id: self.user_id).count <= 1 

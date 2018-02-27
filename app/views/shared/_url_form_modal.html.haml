@@ -38,10 +38,11 @@
 	
 	$('.load_url_btn').click(function(){
 		$('.post_form_block .error_message').hide();
+		var keyword = $(this).parents('.post_url_form.on_modal').find('input.url_form').val();
 		$.ajax({
 			url: "#{load_url_modal_posts_path}",
 			type: "GET",
-			data: {placeholder_url: $(this).val()},
+			data: {placeholder_url: keyword},
 			dataType: 'script',
 		}).fail(function(jqXHR, textStatus, errorThrown) {
 				$('.post_form_block .error_message').show();

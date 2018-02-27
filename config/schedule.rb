@@ -24,3 +24,8 @@ every 8.hours do
   runner 'Schneider.hello'
   runner 'Schneider.auto_post'
 end
+
+every 24.hours do
+  runner 'Fix.followers_count'
+  runner 'Fix.following_count'
+end

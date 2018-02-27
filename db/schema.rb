@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180221024855) do
+ActiveRecord::Schema.define(version: 20180225102913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(version: 20180221024855) do
     t.integer "country_id"
     t.boolean "fake_news_report", default: false
     t.boolean "comment_permission", default: true
+    t.string "tagged_user_ids", default: [], array: true
   end
 
   create_table "relationships", force: :cascade do |t|

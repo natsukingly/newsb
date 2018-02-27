@@ -8,18 +8,18 @@ en:
     post:
       title: "Create post"
       fake_news_checkbox: "POST AS FAKE NEWS REPORT"
-      placeholder: "COMMENT *optional"
+      placeholder: "Comment *optional"
       selectbox_placeholder: "select a category"
-      submit: "POST"
-      save: "SAVE"
+      submit: "Post"
+      save: "Save"
       cancel: "CANCEL"
       update: "UPDATE"
       
       
     comment:
       placeholder: "What do you think?"
-      submit: "COMMENT"
-      cancel: "CANCEL"
+      submit: "Comment"
+      cancel: "Cancel"
     sns:
       setting_popup: "You haven't registered this social media account."
       later: "Maybe, later"
@@ -30,7 +30,7 @@ en:
     comment_errors:  
       too_long: "Your post exceeded its maximum length(500). Right now you have"
       blank: "You can't post a blank content"
-    cancel: "CANCEL"
+    cancel: "Cancel"
     report:
       placeholder: "Help us understand the problem. What is going on with this post? You won't get any replies for this message."
     setting:
