@@ -91,7 +91,7 @@ class PostsController < ApplicationController
 							content: params[:post][:content],
 							category_id: @article.category_id)	
 			unless params[:post][:tagged_user_ids].nil?
-				@post.tagged_user_ids = params[:post][:tagged_user_ids].split(",")
+				@post.tagged_user_ids = params[:post][:tagged_user_ids].split(",").delete_if{|id| id == ''}
 			end
 			if @post.save
 				flash[:notice] = t('flash.post.create_success')
@@ -113,6 +113,9 @@ class PostsController < ApplicationController
 
 	def update
 		@post.content = params[:post][:content] 
+		unless params[:post][:tagged_user_ids].nil?
+			@post.tagged_user_ids  = params[:post][:tagged_user_ids].split(",").delete_if{|id| id == ''}
+		end
 		if @post.save
 			flash[:notice] = t('flash.post.update_success')
 			if @post.article
@@ -392,7 +395,7 @@ class PostsController < ApplicationController
 				@post.country_id = @country.id
 				@post.content = params[:post][:content]
 				unless params[:post][:tagged_user_ids].nil?
-					@post.tagged_user_ids = params[:post][:tagged_user_ids].split(",")
+					@post.tagged_user_ids = params[:post][:tagged_user_ids].split(",").delete_if{|id| id == ''}
 				end
 
 				if @post.save

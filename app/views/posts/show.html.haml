@@ -28,6 +28,9 @@
 									=t('state.shared')
 							-else
 								=render_with_hashtags(@post.content.gsub(/\n/, '<br />'))
+						-unless @post.tagged_user_ids.empty?
+							=render 'posts/tagged_users_block', post: @post
+							
 						-if @post.article == nil
 							%p.deleted_article	
 								=t('state.deleted_article')

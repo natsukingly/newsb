@@ -198,11 +198,11 @@ $(document).on('turbolinks:load', function() {
 		//user search form を隠す
 		var already_tagged_users_count = $post.attr('data-tagged-users-count');
 		var already_tagged_uesrs_ids = $post.attr('data-tagged-users');
-		$('.recommended_user_list').hide();
 		$('.user_search_block').hide();
 		$('span.tagged_user_counter').text(already_tagged_users_count);
 		$('span.tagged_user_counter_on_menu').text(already_tagged_users_count);
 		if(already_tagged_users_count != 0){
+			$('.recommended_user_list').hide();
 			$('span.tagged_user_counter_on_menu').show();
 			$('input.tagged_user_ids').val(already_tagged_uesrs_ids);
 			$('.tagged_user_reset_btn').addClass('on');
@@ -211,6 +211,7 @@ $(document).on('turbolinks:load', function() {
 			$('input.tagged_user_ids').val('');
 			$('.user_add_icon').text("+");
 			$('.user_sm').removeClass('selected');
+			$('.recommended_user_list').show();
 			$('.tagged_user_reset_btn').removeClass('on');
 		}
 		$('.error_message').hide();
