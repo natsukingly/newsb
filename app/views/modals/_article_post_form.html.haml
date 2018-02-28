@@ -37,14 +37,3 @@
 										%i.fa.fa-pencil
 								= submit_tag "#{t ('form.post.submit')}", class: "form_btn post_submit_btn"	
 				
-:javascript
-
-
-
-	
-	$('.post_form').submit(function(){
-		var tagMode = $(this).find('.tag_user_btn.form_btn.for_article_post span.opened').css("display") == "flex"
-		if(tagMode){
-			return false;
-		}
-	});

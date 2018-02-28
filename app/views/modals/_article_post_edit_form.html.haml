@@ -22,6 +22,8 @@
 							.user_search_block
 								=render '/shared/search_user_to_tag', users: current_user.followers
 							= hidden_field_tag 'post[id]', '', id: "edit_target_post_id"
+							= hidden_field_tag 'post[tagged_user_ids]', '', class: "tagged_user_ids"
+							
 							
 							#autocomplete_tags
 								.autocomplete_tags_block

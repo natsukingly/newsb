@@ -120,6 +120,7 @@ Rails.application.routes.draw do
 		end
 
 		get '/posts/search_users_to_tag' => 'posts#search_users_to_tag', as: :search_users_to_tag
+		get '/posts/already_tagged_users' => 'posts#already_tagged_users', as: :already_tagged_users
 		
 		resources :posts, except: [:new, :update, :destroy] do
 			member do

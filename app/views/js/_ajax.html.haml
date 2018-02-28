@@ -1,0 +1,16 @@
+:javascript
+	$(".post_ddm .show_article_post_edit_modal_btn").click(function(){
+		var post_id = $(this).parents('.post').attr('data-post-id');
+		$(this).parents('.post').find('.post_form span.loading_icon').show();
+		$('.user_search_block .user_list').html('');
+		$('.user_search_block .selected_user_list').html('');
+		$.ajax({
+			url: "#{already_tagged_users_path}",
+			type: "GET",
+			data: {post_id: post_id},
+			dataType: 'script',
+			timeout: 10000
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+
+		})
+	});

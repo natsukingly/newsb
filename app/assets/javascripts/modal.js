@@ -114,10 +114,6 @@ $(document).on('turbolinks:load', function() {
 		}
 	});	
 	
-	
-	
-	
-	
 	// delete comment modal	
 	$(".comment_ddm .comment_delete_btn").click(function(){
 		initializeModal();
@@ -132,7 +128,7 @@ $(document).on('turbolinks:load', function() {
 	
 	$(".post_ddm .show_article_post_edit_modal_btn").click(function(){
 		initializeModal();
-		initializeTaggedUser()
+		initializeTaggedUserToEdit($(this).parents('.post'));
 		var opinion_height = $(this).parents(".post").find(".opinion").css("height");
 		var opinion_form_height = parseInt(opinion_height) + 50;
 		$(".article_post_edit_form").find("textarea").css("height", opinion_form_height + "px");
@@ -182,6 +178,9 @@ $(document).on('turbolinks:load', function() {
 	
 	function initializeTaggedUser(){
 		//user search form を隠す
+		$('.recommended_user_list').show();
+		$('.selected_user_title').hide();
+		$('.selected_user_list').html('');
 		$('.user_search_block').hide();
 		$('span.tagged_user_counter').text("0");
 		$('span.tagged_user_counter_on_menu').text("0");
@@ -190,6 +189,30 @@ $(document).on('turbolinks:load', function() {
 		$('.user_add_icon').text("+");
 		$('.user_sm').removeClass('selected');
 		$('.tagged_user_reset_btn').removeClass('on');
+		$('.error_message').hide();
+		$('.tag_user_btn.form_btn span.opened').hide();
+		$('.tag_user_btn.form_btn span.closed').css("display", "flex");
+		$('.post_submit_btn').removeClass("disabled");
+	}
+	function initializeTaggedUserToEdit($post){
+		//user search form を隠す
+		var already_tagged_users_count = $post.attr('data-tagged-users-count');
+		var already_tagged_uesrs_ids = $post.attr('data-tagged-users');
+		$('.recommended_user_list').hide();
+		$('.user_search_block').hide();
+		$('span.tagged_user_counter').text(already_tagged_users_count);
+		$('span.tagged_user_counter_on_menu').text(already_tagged_users_count);
+		if(already_tagged_users_count != 0){
+			$('span.tagged_user_counter_on_menu').show();
+			$('input.tagged_user_ids').val(already_tagged_uesrs_ids);
+			$('.tagged_user_reset_btn').addClass('on');
+		} else {
+			$('span.tagged_user_counter_on_menu').hide();
+			$('input.tagged_user_ids').val('');
+			$('.user_add_icon').text("+");
+			$('.user_sm').removeClass('selected');
+			$('.tagged_user_reset_btn').removeClass('on');
+		}
 		$('.error_message').hide();
 		$('.tag_user_btn.form_btn span.opened').hide();
 		$('.tag_user_btn.form_btn span.closed').css("display", "flex");

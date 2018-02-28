@@ -12,9 +12,11 @@
 	%i.fa.fa-spinner.fa-pulse.loading_mobile
 .user_list_section
 	.user_list
+		
+	.recommended_user_list
 		= render partial: "users/user_sm", collection: users, as: :user
-
-	%span.selected_user_title
+		
+	%span.selected_user_title{data: {tagged_users: ''}}
 		=t('state.selected')
 	.selected_user_list
 	
@@ -28,12 +30,13 @@
 	
 	$('input.user_search_by_name').keyup(function(e) {
 		var flag = true;
-		if(e.keyCode === 32){
+		if(e.keyCode === 32 || e.keyCode === 13){
 			return false;
 		}
 		if(flag && $(this).val().length != 1){
 			$('.error_message.no_users_found').hide();
 			$('.user_list').html('');
+			$('.recommended_user_list').hide();
 			$('.selected_user_title').hide();
 			$('.selected_user_list').html('');
 			flag == false;
@@ -46,6 +49,7 @@
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				$('.error_message.no_users_found').show();
 				$('span.loading_icon').hide();
+				$('.recommended_user_list').show();
 				flag == false;
 			})
 			$('span.loading_icon').show();

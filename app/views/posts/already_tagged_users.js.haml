@@ -1,0 +1,6 @@
+$('span.loading_icon').hide();
+$('span.selected_user_title').show();
+$('.user_search_block .selected_user_list').html('#{escape_javascript(render partial: "users/user_sm", collection: @already_tagged_users, as: :user)}');
+$('.user_search_block .selected_user_list').attr('data-tagged-users', '#{@already_tagged_users_ids_json}');
+$('.user_search_block .selected_user_list .user_sm').addClass('selected');
+$('.user_search_block .selected_user_list .user_add_icon').text("-");

@@ -1,5 +1,5 @@
 
-.post{class: "post post_#{post.id}", data: {post_id: "#{post.id}"}}
+.post{class: "post post_#{post.id}", data: {post_id: "#{post.id}", tagged_users: "#{post.tagged_user_ids.join(',')}", tagged_users_count: "#{post.tagged_user_ids.count}"}}
 	.body
 		.user_block{class: "user_#{post.user.id}"}
 			.user_image
