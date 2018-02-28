@@ -148,10 +148,10 @@ class PostsController < ApplicationController
 	def search_users_to_tag
 		keyword = params[:keyword].delete(' ,　')
 		# @users_to_tag = User.all
-		suggestion = false
 		selected_user_ids = params[:selected_users].split(',')
 		
 		if keyword == ''
+			@no_keyword = true
 			@users_to_tag = []
 			@selected_users = User.all.where(id: selected_user_ids)
 		else

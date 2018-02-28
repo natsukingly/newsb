@@ -1,13 +1,16 @@
 $('span.loading_icon').hide();
 -if @users_to_tag.empty?
-    $('.error_message.no_users_found').show();
-    -if @selected_users.empty?
-        $('span.selected_user_title').hide();
+    -if @no_keyword
+        $('.recommended_user_list').show(); 
     -else
-        $('span.selected_user_title').show();
-        $('.user_search_block .selected_user_list').html('#{escape_javascript(render partial: "users/user_sm", collection: @selected_users, as: :user)}');
-        $('.user_search_block .selected_user_list').find('.user_sm').addClass('selected');
-        $('.user_search_block .selected_user_list').find('.user_add_icon').text("-");
+        $('.error_message.no_users_found').show();
+        -if @selected_users.empty?
+            $('span.selected_user_title').hide();
+        -else
+            $('span.selected_user_title').show();
+            $('.user_search_block .selected_user_list').html('#{escape_javascript(render partial: "users/user_sm", collection: @selected_users, as: :user)}');
+            $('.user_search_block .selected_user_list').find('.user_sm').addClass('selected');
+            $('.user_search_block .selected_user_list').find('.user_add_icon').text("-");
 -else
     $('.user_search_block .user_list').html('#{escape_javascript(render partial: "users/user_sm", collection: @users_to_tag, as: :user)}');
     -if @selected_users.empty?
