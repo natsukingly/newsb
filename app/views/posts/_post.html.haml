@@ -27,8 +27,8 @@
 				-else
 					=render_with_hashtags(post.content.gsub(/\n/, '<br />'))
 					
-		-unless post.tagged_user_ids.nil? || post.tagged_user_ids.empty?
-			=render 'posts/tagged_users_block', post: post	
+			-unless post.tagged_user_ids.nil? || post.tagged_user_ids.empty?
+				=render 'posts/tagged_users_block', post: post	
 					
 					
 			-if post.article == nil
