@@ -155,6 +155,7 @@ class PostsController < ApplicationController
 		
 		if keyword == ''
 			@no_keyword = true
+			@recommended_users_to_tag = current_user.followers.where.not(id: selected_user_ids).limit(20)
 			@users_to_tag = []
 			@selected_users = User.all.where(id: selected_user_ids)
 		else

@@ -179,6 +179,7 @@ $(document).on('turbolinks:load', function() {
 	function initializeTaggedUser(){
 		//user search form を隠す
 		$('.recommended_user_list').show();
+		$('.user_list').html('');
 		$('.selected_user_title').hide();
 		$('.selected_user_list').html('');
 		$('.user_search_block').hide();
@@ -198,6 +199,7 @@ $(document).on('turbolinks:load', function() {
 		//user search form を隠す
 		var already_tagged_users_count = $post.attr('data-tagged-users-count');
 		var already_tagged_uesrs_ids = $post.attr('data-tagged-users');
+		$('.user_list').html('');
 		$('.user_search_block').hide();
 		$('span.tagged_user_counter').text(already_tagged_users_count);
 		$('span.tagged_user_counter_on_menu').text(already_tagged_users_count);

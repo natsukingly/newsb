@@ -1,21 +1,34 @@
 $('span.loading_icon').hide();
 -if @users_to_tag.empty?
     -if @no_keyword
-        $('.recommended_user_list').show(); 
+        console.log('0');
+        $('.user_search_block .user_list').html('#{escape_javascript(render partial: "users/user_sm", collection: @recommended_users_to_tag, as: :user)}');
+        $('.error_message.no_users_found').hide();
+        $('span.selected_user_title').show();
+        $('.user_search_block .selected_user_list').html('#{escape_javascript(render partial: "users/user_sm", collection: @selected_users, as: :user)}');
+        $('.user_search_block .selected_user_list').find('.user_sm').addClass('selected');
+        $('.user_search_block .selected_user_list').find('.user_add_icon').text("-");
+        -if @selected_users.empty?
+            $('span.selected_user_title').hide();
     -else
         $('.error_message.no_users_found').show();
         -if @selected_users.empty?
+            console.log('1');
             $('span.selected_user_title').hide();
         -else
+            console.log('2');
             $('span.selected_user_title').show();
             $('.user_search_block .selected_user_list').html('#{escape_javascript(render partial: "users/user_sm", collection: @selected_users, as: :user)}');
             $('.user_search_block .selected_user_list').find('.user_sm').addClass('selected');
             $('.user_search_block .selected_user_list').find('.user_add_icon').text("-");
 -else
+    $('.error_message.no_users_found').hide();
     $('.user_search_block .user_list').html('#{escape_javascript(render partial: "users/user_sm", collection: @users_to_tag, as: :user)}');
     -if @selected_users.empty?
+        console.log('3');
         $('span.selected_user_title').hide();
     -else
+        console.log('4');
         $('span.selected_user_title').show();
         $('.user_search_block .selected_user_list').html('#{escape_javascript(render partial: "users/user_sm", collection: @selected_users, as: :user)}');
         $('.user_search_block .selected_user_list').find('.user_sm').addClass('selected');
