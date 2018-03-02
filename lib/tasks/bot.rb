@@ -1,10 +1,14 @@
 class Bot
 	class << self
-		def hello(time)
+		def hello
 			puts 'hello world'
 		end
 		def time
 			puts Time.now
+		end
+		
+		def env
+			puts Rails.env.development?
 		end
 		
 		def twitter_business
