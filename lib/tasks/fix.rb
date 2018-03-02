@@ -1,5 +1,4 @@
 class Fix
-	require File.expand_path(File.dirname(__FILE__) + "/environment")
     class << self
         def hello
             puts 'hello world'
