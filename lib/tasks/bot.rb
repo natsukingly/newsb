@@ -38,9 +38,9 @@ class Bot
 				config.access_token_secret  = access_secret
 			end
 			if Rails.env.development?
-				client.update(">" + article.description.truncate(70) + " " + "https://news-party-natsukingly.c9users.io/#{self.country.name}/articles/#{self.article.id}" + " " + "#NEWSB #BusinessNews")
+				client.update(">" + article.description.truncate(70) + " " + "https://news-party-natsukingly.c9users.io/#{country.name}/articles/#{article.id}" + " " + "#NEWSB #BusinessNews")
 			elsif Rails.env.production?
-				client.update(">" + article.description.truncate(70) + " " + "http://www.newsbeee.com/#{self.country.name}/articles/#{self.article.id}" + " " + "#NEWSB #BusinessNews")
+				client.update(">" + article.description.truncate(70) + " " + "http://www.newsbeee.com/#{country.name}/articles/#{article.id}" + " " + "#NEWSB #BusinessNews")
 			end	
 			TwitterBotLog.create(article_id: article.id)
 		end 
