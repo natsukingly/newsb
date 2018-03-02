@@ -29,3 +29,31 @@ every 24.hours do
   runner 'Fix.followers_count'
   runner 'Fix.following_count'
 end
+
+every 1.day, at: '8:00 pm' do
+  runner 'Bot.twitter_business'
+end
+
+every 1.day, at: '9:00 pm' do
+  runner 'Bot.twitter_business'
+end
+
+every 1.day, at: '10:00 pm' do
+  runner 'Bot.twitter_business'
+end
+
+every 1.day, at: '9:30 am' do
+  runner 'Bot.twitter_business'
+end
+
+every 1.day, at: '10:30 am' do
+  runner 'Bot.twitter_business'
+end
+
+every 1.day, at: '11:30 am' do
+  runner 'Bot.twitter_business'
+end
+
+every 1.day, at: '7:35 am' do
+  runner 'Bot.twitter_business'
+end
