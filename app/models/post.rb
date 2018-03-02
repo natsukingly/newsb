@@ -22,7 +22,7 @@ class Post < ApplicationRecord
 
 	after_create do
 		post = Post.find_by(id: self.id)
-        hashtag_regex = /[#＃][Ａ-Ｚａ-ｚA-Za-z一-鿆0-9０-９ぁ-ヶｦ-ﾟー]+/
+		hashtag_regex = /[#＃][Ａ-Ｚａ-ｚA-Za-z一-鿆0-9０-９ぁ-ヶｦ-ﾟー]+/
 		hashtags = self.content.scan(hashtag_regex)
 		hashtags.uniq.map do |hashtag|
 		  tag = Tag.find_or_create_by(name: hashtag.downcase.delete('#').delete('＃'), country_id: post.country.id)
@@ -35,7 +35,7 @@ class Post < ApplicationRecord
 	before_update do
 		post = Post.find_by(id: self.id)
 		post.tags.clear
-        hashtag_regex = /[#＃][Ａ-Ｚａ-ｚA-Za-z一-鿆0-9０-９ぁ-ヶｦ-ﾟー]+/
+		hashtag_regex = /[#＃][Ａ-Ｚａ-ｚA-Za-z一-鿆0-9０-９ぁ-ヶｦ-ﾟー]+/
 		hashtags = self.content.scan(hashtag_regex)
 		hashtags.uniq.map do |hashtag|
 		  tag = Tag.find_or_create_by(name: hashtag.downcase.delete('#').delete('＃'), country_id: post.country.id)
@@ -124,20 +124,20 @@ class Post < ApplicationRecord
 		end
 		if self.user.twitter_post == true
 			require "twitter"
-		    client = Twitter::REST::Client.new do |config|
+			client = Twitter::REST::Client.new do |config|
 				# applicationの設定
 				config.consumer_key         = ENV['TWITTER_KEY']
 				config.consumer_secret      = ENV['TWITTER_SECRET']
 				# ユーザー情報の設定
 				access_token = self.user.social_profile(:twitter).access_token
 				access_secret = self.user.social_profile(:twitter).access_secret
-			    config.access_token         = access_token
-			    config.access_token_secret  = access_secret
-		    end
-		    if Rails.env.development?
-		    	client.update(self.content.truncate(70) + " " + "https://news-party-natsukingly.c9users.io/#{self.country.name}/articles/#{self.article.id}" + " " + "#NEWSB!")
-		    elsif Rails.env.production?
-		    	client.update(self.content.truncate(70) + " " + "http://www.newsbeee.com/#{self.country.name}/articles/#{self.article.id}" + " " + "#NEWSB!")
+				config.access_token         = access_token
+				config.access_token_secret  = access_secret
+			end
+			if Rails.env.development?
+				client.update(self.content.truncate(70) + " " + "https://news-party-natsukingly.c9users.io/#{self.country.name}/articles/#{self.article.id}" + " " + "#NEWSB!")
+			elsif Rails.env.production?
+				client.update(self.content.truncate(70) + " " + "http://www.newsbeee.com/#{self.country.name}/articles/#{self.article.id}" + " " + "#NEWSB!")
 			end	
 		end
 	end
