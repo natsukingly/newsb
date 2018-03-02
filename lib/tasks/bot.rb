@@ -17,7 +17,7 @@ class Bot
 			country = Country.find_by(name: "Japan") 
 			category = Category.find_by(name: "Business")
 			todays_articles = category.articles.where(country_id: country.id).where("published_time >= ?", Time.now.ago(2.days)).where.not(posts_count: 0).order(priority_level: :desc, e_indecator: :desc, published_time: :desc).limit(10)
-			invalid_ids = TwitterBotLog.all.order(created_at: :asc).limit(30)
+			invalid_ids = TwitterBotLog.all.order(created_at: :asc).limit(30).pluck(:article_id)
 			article = todays_articles.where.not(id: invalid_ids).first
 			
 			puts user.name
@@ -26,6 +26,7 @@ class Bot
 			puts todays_articles.first.title
 			puts article.title
 			
+			# TwitterBotLog.create(article_id: article.id)
 			require "twitter"
 			client = Twitter::REST::Client.new do |config|
 				# applicationの設定
