@@ -20,6 +20,7 @@ class Bot
 			invalid_ids = TwitterBotLog.all.order(created_at: :asc).limit(30).pluck(:article_id)
 			article = todays_articles.where.not(id: invalid_ids).first
 			
+			puts Time.now
 			puts user.name
 			puts country.name
 			puts category.name
