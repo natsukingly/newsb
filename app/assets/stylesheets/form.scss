@@ -231,7 +231,7 @@ form{
 				    span.tagged_user_counter_on_menu{
 				    	display: none;
 					    position: absolute;
-					    background-color: orange;
+					    background-color: $newsb;
 					    color: white;
 					    top: -5px;
 					    right: -4px;
@@ -371,7 +371,7 @@ form{
 			font-size: 12px;
 		    font-weight: 600;
 		    padding: 12px 5px 0;
-		    color: orange;
+		    color: $newsb;
 		}
 		span.loading_icon{
 			display: none;
@@ -399,11 +399,11 @@ form{
 			    background-color: white;
 		    }
 		    &.on{
-		    	background-color: orange;
+		    	background-color: $newsb;
 		    	color: white;
 		    	cursor: pointer;
 		    	span{
-		    		color: orange;
+		    		color: $newsb;
 		    	}
 		    	
 		    }
@@ -940,7 +940,7 @@ form{
 			display: inline-block;
 		    flex: none;
 		    height: 35px;
-		    background-color: orange;
+		    background-color: $newsb;
 		    opacity: .8;
 		    border: none;
 		    color: white;

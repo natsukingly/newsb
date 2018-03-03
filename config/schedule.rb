@@ -53,7 +53,3 @@ end
 every 1.day, at: '11:30 am' do
   runner 'Bot.twitter_business'
 end
-
-every 3.minutes do
-  runner 'Bot.twitter_business'
-end

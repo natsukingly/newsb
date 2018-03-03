@@ -51,15 +51,22 @@
 a.logo{
 	display: inline-block;
 	color: $newsb_grey;
-	// background-color: $newsb;
-	// font-family: 'Knewave', cursive;
-	// font-family: 'Titan One', cursive;
 	// font-family: 'Mogra', cursive;
 	font-family: 'Supermercado One', cursive;
-	// font-family: 'VT323', monospace;
+	// font-family: 'Bungee Shade', cursive;
+	// font-family: 'Ewert', cursive;
+	// font-family: 'Lily Script One', cursive;
+	// font-family: 'Faster One', cursive;
+	// font-family: 'Flavors', cursive;
+	// font-family: 'Bowlby One SC', cursive;
+	// font-family: 'Plaster', cursive;
 	// font-family: 'Press Start 2P', cursive;
-	// font-family: 'Modak', cursive;
-	// font-family: 'Chela One', cursive;
+	// font-family: 'Oleo Script', cursive;
+	// font-family: 'Sigmar One', cursive;
+	// font-family: 'Lalezar', cursive;
+	// font-family: 'Bungee Inline', cursive;
+	// font-family: 'Lemon', cursive;
+	// font-family: 'Monoton', cursive;
 	// font-family: 'Permanent Marker', cursive;
 	// font-family: 'Gochi Hand', cursive;
 
@@ -324,12 +331,27 @@ header{
 		border-radius: 3px;
 		background-color: rgba(0,0,0,0);
 		color: white;
-		font-family: 'Mogra', cursive;
+		// font-family: 'Mogra', cursive;
 		font-family: 'Supermercado One', cursive;
+		// font-family: 'Bungee Shade', cursive;
+		// font-family: Ewert;
+		// font-family: 'Ewert', cursive;
+		// font-family: 'Lily Script One', cursive;
+		// font-family: 'Faster One', cursive;
+		// font-family: 'Flavors', cursive;
+		// font-family: 'Bowlby One SC', cursive;
+		// font-family: 'Plaster', cursive;
+		// font-family: 'Press Start 2P', cursive;
+		// font-family: 'Oleo Script', cursive;
+		// font-family: 'Sigmar One', cursive;
+		// font-family: 'Lalezar', cursive;
+		// font-family: 'Bungee Inline', cursive;
+		// font-family: 'Lemon', cursive;
+		// font-family: 'Monoton', cursive;
 		// font-family: 'Permanent Marker', cursive;
 		// font-family: 'Gochi Hand', cursive;
 		ont-weight: 900;
-		font-size: 28px;
+		font-size: 20px;
 		&.active{
 			background-color: white;
 			color: $newsb;
@@ -440,7 +462,7 @@ header{
 		display: none;
 	}
 	#header_nav{
-		background-color: rgba($newsb, .95);
+		background-color: black;
 		height: 50px;
 		position: fixed;
 		display: flex;
@@ -568,7 +590,7 @@ header{
 	.notice_bar{
 		background-color: white;
 		color: $newsb;
-		border-bottom: 1px solid orange;
+		border-bottom: 1px solid $newsb;
 		svg{
 			fill: $newsb;
 		}

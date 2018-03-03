@@ -233,16 +233,15 @@
     }
 }
 
-@media(max-width: 768px){
-    .comment{
-        
-        .content_block{
-            margin-left: 15px;
-            padding-left: 20px;
-            border-left: 2px solid $newsb_grey;
-        }
-    }
-}
+// @media(max-width: 768px){
+//     .comment{
+//         // .content_block{
+//         //     margin-left: 15px;
+//         //     padding-left: 20px;
+//         //     border-left: 2px solid $newsb_grey;
+//         }
+//     }
+// }
 
 .tagged_users_block{
     margin-bottom: 8px;

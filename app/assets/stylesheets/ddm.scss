@@ -83,13 +83,13 @@
 		cursor: pointer;
 		&:hover{
 			// background-color: #eee;
-			color: darkorange;
+			color: $newsb;
 		}
 		&.selected:after{
 			font-family: FontAwesome;
 			content: "\f00c";
 			margin-left: 12px;
-			color: darkorange;
+			color: $newsb;
 			font-size: 10px;
 		}
 	
@@ -200,7 +200,7 @@
 		padding: 0;
 		&:hover{
 			background-color: rgba(0,0,0,0);
-			color: darkorange;
+			color: $newsb;
 		}
 	}
 	a:not(:last-child){
@@ -224,7 +224,7 @@
 			top: 12px;
 			left: 32px;
 			font-size: 10px;
-			color: orange;
+			color: $newsb;
 		}
 		&.disabled{
 			color: #aaa;

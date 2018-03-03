@@ -42,7 +42,7 @@ class Bot
 			if Rails.env.development?
 				client.update(">" + article.description.truncate(70) + " " + "https://news-party-natsukingly.c9users.io/#{country.name}/articles/#{article.id}" + " " + "#NEWSB #BusinessNews")
 			elsif Rails.env.production?
-				client.update(">" + article.description.truncate(70) + " " + "http://www.newsbeee.com/#{country.name}/articles/#{article.id}" + " " + "#NEWSB #BusinessNews")
+				client.update(">" + article.description.truncate(70) + " " + "http://www.newsbeee.com/#{country.name}/articles/#{article.id}" + " " + "#NEWSB #BusinessNews #" + article.source)
 			end	
 			TwitterBotLog.create(article_id: article.id)
 		end 
