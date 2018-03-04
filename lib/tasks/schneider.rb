@@ -537,6 +537,13 @@ class Schneider
 				set_doc("http://www.recordchina.co.jp/latest.php")
 				
 				@urls = @doc.css('#contents ul.news_list a.title').map{ |url| url.attribute("href").to_s}	
+				@urls = @urls.map do |url|
+					if url.match('photos.php')
+						url = "/" + url
+					else
+						url
+					end
+				end
 				
 				category_id = Category.find_by(name: "International").id
 				country_id = Country.find_by(name: "Japan").id
