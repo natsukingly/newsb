@@ -12,7 +12,7 @@
 									=@post.user.name
 							%p.user_credential
 								-unless @post.user.credential.nil?
-									#{@post.user.credential}・
+									#{@post.user.credential}
 								%span.time
 									#{time_ago_in_words(@post.created_at)}
 						.user_option.follow_switch
