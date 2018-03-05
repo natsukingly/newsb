@@ -24,6 +24,7 @@
 				.btns	
 					=link_to "Society", usa_auto_post_by_category_path("Society"), class: "schneider_btn for_category", method: :post
 					=render 'admins/auto_post_btn_usa', site_name: "huffpost_society_usa"
+					=render 'admins/auto_post_btn_usa', site_name: "abc_society_usa"
 
 
 					
@@ -33,6 +34,7 @@
 				.btns	
 					=link_to "International", usa_auto_post_by_category_path("International"), class: "schneider_btn for_category", method: :post
 					=render 'admins/auto_post_btn_usa', site_name: "huffpost_international_usa"
+					=render 'admins/auto_post_btn_usa', site_name: "abc_international_usa"
 
 
 
@@ -41,6 +43,8 @@
 					Startup  (#{articles_count_by_category("Startup", @country.id)})
 				.btns	
 					=link_to "Startup", usa_auto_post_by_category_path("Startup"), class: "schneider_btn for_category", method: :post
+					=render 'admins/auto_post_btn_usa', site_name: "techcrunch_startup_usa"
+					=render 'admins/auto_post_btn_usa', site_name: "techinasia_startup_usa"
 
 
 
@@ -50,13 +54,14 @@
 				.btns
 					=link_to "Tech", usa_auto_post_by_category_path("Tech"), class: "schneider_btn for_category", method: :post
 					=render 'admins/auto_post_btn_usa', site_name: "nypost_tech_usa"
-
+					=render 'admins/auto_post_btn_usa', site_name: "techcrunch_tech_usa"
 							
 			.auto_post_btn_group.funny
 				.title
 					Funny  (#{articles_count_by_category("Funny", @country.id)})
 				.btns	
 					=link_to "Funny", usa_auto_post_by_category_path("Funny"), class: "schneider_btn for_category", method: :post
+					=render 'admins/auto_post_btn_usa', site_name: "buzzfeed_funny_usa"
 
 
 
@@ -66,7 +71,7 @@
 				.btns	
 					=link_to "Entertainment", usa_auto_post_by_category_path("Entertainment"), class: "schneider_btn for_category", method: :post
 					=render 'admins/auto_post_btn_usa', site_name: "huffpost_entertainment_usa"
-
+					=render 'admins/auto_post_btn_usa', site_name: "popsugar_entertainment_usa"
 
 			
 			.auto_post_btn_group.movie
@@ -81,6 +86,8 @@
 					Health  (#{articles_count_by_category("Health", @country.id)})
 				.btns	
 					=link_to "Health", usa_auto_post_by_category_path("Health"), class: "schneider_btn for_category", method: :post
+					=render 'admins/auto_post_btn_usa', site_name: "popsugar_health_usa"
+					=render 'admins/auto_post_btn_usa', site_name: "buzzfeed_health_usa"
 
 
 
@@ -89,13 +96,17 @@
 					Relationships  (#{articles_count_by_category("Relationships", @country.id)})
 				.btns
 					=link_to "Relationships", usa_auto_post_by_category_path("Relationships"), class: "schneider_btn for_category", method: :post
+					=render 'admins/auto_post_btn_usa', site_name: "popsugar_relationships_usa"
+
 
 			.auto_post_btn_group.food
 				.title
 					Food  (#{articles_count_by_category("Food", @country.id)})
 				.btns	
 					=link_to "Food", usa_auto_post_by_category_path("Food"), class: "schneider_btn for_category", method: :post
-
+					=render 'admins/auto_post_btn_usa', site_name: "buzzfeed_food_usa"
+		
+					=render 'admins/auto_post_btn_usa', site_name: "popsugar_food_usa"
 
 		
 			.auto_post_btn_group.web

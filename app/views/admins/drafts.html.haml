@@ -132,9 +132,10 @@
 					Sports  (#{articles_count_by_category("Sports", @country.id)})
 				.btns	
 					=link_to "Sports", auto_post_by_category_path("Sports"), class: "schneider_btn for_category", method: :post
+					=render 'admins/auto_post_btn', site_name: "livedoor_sports"
 
-					=render 'admins/auto_post_btn', site_name: "excite_news_sports"
-					=render 'admins/auto_post_btn', site_name: "excite_news_sports2"
+					// =render 'admins/auto_post_btn', site_name: "excite_news_sports"
+					// =render 'admins/auto_post_btn', site_name: "excite_news_sports2"
 
 
 :javascript

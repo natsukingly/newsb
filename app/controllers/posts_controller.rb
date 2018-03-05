@@ -221,6 +221,9 @@ class PostsController < ApplicationController
 		#get article info using nokogiri gem
 		def parseURL
 			
+			#posts_controller #shneider_controller #shneider_usa_controller #tasks/shneider.rb #tasks/shneider_usa.rb
+			
+			
 			@article_url = params[:placeholder_url].delete(' ,　')
 			
 			url = @article_url
@@ -301,17 +304,28 @@ class PostsController < ApplicationController
 			#for record china
 			elsif !(doc.css('#contents #microtime/@value').empty?)
 				@article_published_time = doc.css('#contents #microtime/@value').to_s
+			#for buzzfeed usa
+			elsif !(doc.css('header.buzz-header time').empty?)
+				@article_published_time = doc.css('header.buzz-header time').attribute("data-unix").to_s
 			#for diamond online
 			elsif !(doc.css('header.article-header time').empty?)
 				time = doc.css('header.article-header time').to_s
 				@article_published_time = DateTime.parse(time)
+			#for abc news
+			elsif !(doc.css('//meta[name="Last-Modified"]/@content').empty?)
+				@article_published_time = doc.css('//meta[name="Last-Modified"]/@content').to_s
+				
+			#for livedoor 
+			elsif !(doc.css('#main .topicsHeader time').empty?)
+				time = doc.css('#main .topicsHeader time.topicsTime').inner_html
+				@article_published_time = Time.strptime(time,"%Y年 %m月 %d日 %H時%M分")
 			else
 				@article_published_time = ''
 			end
 			if  @article_published_time.to_i > 3000
 				 @article_published_time = Time.at(@article_published_time.to_i)
 			end
-			
+
 		end
 		
 		

@@ -95,34 +95,53 @@ class SchneiderUsaController < ApplicationController
         when "nypost_business_usa" then
             nypost_business_usa
 		#startup	
-
+        when "techcrunch_startup_usa" then
+            techcrunch_startup_usa	
+        when "techinasia_startup_usa" then
+            techinasia_startup_usa	
 		#tech	
         when "nypost_tech_usa" then
             nypost_tech_usa
-
+        when "techcrunch_tech_usa" then
+            techcrunch_tech_usa
 		#society	
         when "huffpost_society_usa" then
             huffpost_society_usa
+        when "abc_society_usa" then
+            abc_society_usa         
             
         #international
         when "huffpost_international_usa" then
             huffpost_international_usa
+        when "abc_international_usa" then
+            abc_international_usa          
 		#sports	
         when "nypost_sports_usa" then
             nypost_sports_usa
 		#funny	
-
+		when "buzzfeed_funny_usa" then
+			buzzfeed_funny_usa
 		#entertainment	
         when "huffpost_entertainment_usa" then
             huffpost_society_usa
+            
+        when "popsugar_entertainment_usa" then
+        	 popsugar_entertainment_usa
 		#relatinships	
-
+		when "popsugar_relationships_usa" then
+			popsugar_relationships_usa
 		#music movie		
 
 		#health	
-
-		
-		#food	
+		when "popsugar_health_usa" then
+			popsugar_health_usa
+		when "buzzfeed_health_usa" then
+			buzzfeed_health_usa
+		#food
+		when "popsugar_food_usa" then
+			popsugar_food_usa
+		when "buzzfeed_food_usa" then
+			buzzfeed_food_usa
 		else
 		end
 		
@@ -230,6 +249,8 @@ class SchneiderUsaController < ApplicationController
 		end		
 		
 		def parseURL(url)
+			#posts_controller #shneider_controller #shneider_usa_controller #tasks/shneider.rb #tasks/shneider_usa.rb
+
 			charset = nil
 			html = open(url, 'User-Agent' => 'firefox') do |f|
 				charset = f.charset # 文字種別を取得
@@ -308,12 +329,23 @@ class SchneiderUsaController < ApplicationController
 			elsif !(doc.css('header.article-header time').empty?)
 				time = doc.css('header.article-header time').to_s
 				@article_published_time = DateTime.parse(time)
+			#for buzzfeed usa
+			elsif !(doc.css('header.buzz-header time').empty?)
+				@article_published_time = doc.css('header.buzz-header time').attribute("data-unix").to_s
+			#for abc news
+			elsif !(doc.css('//meta[name="Last-Modified"]/@content').empty?)
+				@article_published_time = doc.css('//meta[name="Last-Modified"]/@content').to_s
+			#for livedoor 
+			elsif !(doc.css('#main .topicsHeader time').empty?)
+				time = doc.css('#main .topicsHeader time.topicsTime').inner_html
+				@article_published_time = Time.strptime(time,"%Y年 %m月 %d日 %H時%M分")
 			else
 				@article_published_time = ''
 			end
 			if  @article_published_time.to_i > 3000
 				 @article_published_time = Time.at(@article_published_time.to_i)
 			end
+		
 		end
 		
 		def decide_category
@@ -392,13 +424,40 @@ class SchneiderUsaController < ApplicationController
 			
 			AutoPostRecord.create(site_name: "huffpost_society_usa", shared: @articles_count)
 		end	
+		
+		def abc_society_usa
+			AutoPostRecord.where(site_name: "abc_society_usa").delete_all
+			set_doc("http://abcnews.go.com/US")
+			
+			@urls = @doc.css('body #main-container .def-band article.headlines .headlines-ul li a').map{ |url| url.attribute("href").to_s}	
+			
+			category_id = Category.find_by(name: "Society").id
+			country_id = Country.find_by(name: "United States").id
+			
+			@articles_count = 0
+			@urls.each do |url|
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares(@article, false, false)
+			end
+			
+			set_doc("http://abcnews.go.com/Politics")
+			@urls.each do |url|
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares(@article, false, false)
+			end
+			
+			AutoPostRecord.create(site_name: "abc_society_usa", shared: @articles_count)
+		end			
+		
 	#international!!!################################################
 		def huffpost_international_usa
 			AutoPostRecord.where(site_name: "huffpost_international_usa").delete_all
 			set_doc("https://www.huffingtonpost.com/section/world-news")
 			
 			@urls = @doc.css('#main .a-page__content .zone--original-center .bn-card a.card__image__wrapper').map{ |url| url.attribute("href").to_s}	
-			binding.pry
+			
 
 			category_id = Category.find_by(name: "International").id
 			country_id = Country.find_by(name: "United States").id
@@ -412,8 +471,47 @@ class SchneiderUsaController < ApplicationController
 			end
 			
 			AutoPostRecord.create(site_name: "huffpost_international_usa", shared: @articles_count)
-		end			
+		end	
+		
+		def abc_international_usa
+			AutoPostRecord.where(site_name: "abc_international_usa").delete_all
+			set_doc("http://abcnews.go.com/International")
+			
+			@urls = @doc.css('body #main-container .def-band article.headlines .headlines-ul li a').map{ |url| url.attribute("href").to_s}	
+			
+			binding.pry
+			category_id = Category.find_by(name: "International").id
+			country_id = Country.find_by(name: "United States").id
+			
+			@articles_count = 0
+			@urls.each do |url|
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares(@article, false, false)
+			end
+			
+			AutoPostRecord.create(site_name: "abc_international_usa", shared: @articles_count)
+		end	
 	#######start up #####################################################	
+		def techcrunch_startup_usa
+			AutoPostRecord.where(site_name: "techcrunch_startup_usa").delete_all
+			set_doc("https://beta.techcrunch.com/startups/")
+			
+			@urls = @doc.css('div.content  a.post-block__title__link').map{ |url| url.attribute("href").to_s}   	
+			
+			category_id = Category.find_by(name: "Startup").id
+			country_id = Country.find_by(name: "United States").id
+			
+			@articles_count = 0
+			@urls.each do |url|
+				url = url
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares(@article, false, false)
+			end
+			
+			AutoPostRecord.create(site_name: "techcrunch_startup_usa", shared: @articles_count)
+		end	
 
 	############TECH########################################
 		def nypost_tech_usa
@@ -436,8 +534,40 @@ class SchneiderUsaController < ApplicationController
 			
 			AutoPostRecord.create(site_name: "nypost_tech_usa", shared: @articles_count)
 		end		
-	########society###################################################	
-	
+		
+		def techcrunch_tech_usa
+			AutoPostRecord.where(site_name: "techcrunch_tech_usa").delete_all
+			
+			#gadgets======
+			set_doc("https://beta.techcrunch.com/gadgets/")
+			
+			@urls = @doc.css('div.content  a.post-block__title__link').map{ |url| url.attribute("href").to_s}   	
+			
+			category_id = Category.find_by(name: "Tech").id
+			country_id = Country.find_by(name: "United States").id
+			
+			@articles_count = 0
+			@urls.each do |url|
+				url = url
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares(@article, false, false)
+			end
+			
+			#apps======
+			set_doc("https://beta.techcrunch.com/apps/")
+			
+			@urls = @doc.css('div.content  a.post-block__title__link').map{ |url| url.attribute("href").to_s}   	
+			
+			@urls.each do |url|
+				url = url
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares(@article, false, false)
+			end
+			
+			AutoPostRecord.create(site_name: "techcrunch_tech_usa", shared: @articles_count)
+		end	
 		
 	#############SPORTS@#############################################
 		def nypost_sports_usa
@@ -462,7 +592,27 @@ class SchneiderUsaController < ApplicationController
 			AutoPostRecord.create(site_name: "nypost_sports_usa", shared: @articles_count)
 		end	
 	############FUNNY########################################################
+		def buzzfeed_funny_usa
+			AutoPostRecord.where(site_name: "buzzfeed_funny_usa").delete_all
+			set_doc("https://www.buzzfeed.com/news")
+			
+			@count = @doc.css('div.feed-cards .story-card >a').count
+			@urls = @doc.css('div.feed-cards .story-card >a').map{ |url| url.attribute("href").to_s}	
+			
+			category_id = Category.find_by(name: "Funny").id
+			country_id = Country.find_by(name: "United States").id
+			
 
+			@articles_count = 0
+			@urls.each do |url|
+				url = "https://www.buzzfeed.com" + url 
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares_wo_tags(@article)
+			end	
+			AutoPostRecord.create(site_name: "buzzfeed_funny_usa", shared: @articles_count)
+			
+		end	
 	#######ENTERTAINMENT#####################################################
 		def huffpost_entertainment_usa
 			AutoPostRecord.where(site_name: "huffpost_entertainment_usa").delete_all
@@ -483,10 +633,49 @@ class SchneiderUsaController < ApplicationController
 			end
 			
 			AutoPostRecord.create(site_name: "huffpost_entertainment_usa", shared: @articles_count)
-		end		
+		end	
+		
+		def popsugar_entertainment_usa
+			AutoPostRecord.where(site_name: "popsugar_entertainment_usa").delete_all
+			set_doc("https://www.popsugar.com/celebrity/")
+			
+			@urls = @doc.css('#content-wrapper article .post-image >a').map{ |url| url.attribute("href").to_s}	
+			
+
+			category_id = Category.find_by(name: "Entertainment").id
+			country_id = Country.find_by(name: "United States").id
+			
+			@articles_count = 0
+			@urls.each do |url|
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares(@article, false, false)
+			end
+			
+			AutoPostRecord.create(site_name: "popsugar_entertainment_usa", shared: @articles_count)
+		end	
 	
 	############RELATIONSHIPS####################################################
+		def popsugar_relationships_usa
+			AutoPostRecord.where(site_name: "popsugar_relationships_usa").delete_all
+			set_doc("https://www.popsugar.com/love/")
+			
+			@urls = @doc.css('#content-wrapper article .post-image >a').map{ |url| url.attribute("href").to_s}	
+			
 
+			category_id = Category.find_by(name: "Relationships").id
+			country_id = Country.find_by(name: "United States").id
+			
+			@articles_count = 0
+			@urls.each do |url|
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares(@article, false, false)
+			end
+			
+			AutoPostRecord.create(site_name: "popsugar_relationships_usa", shared: @articles_count)
+		end		
+	
 
 	##########WEB ###########################
 
@@ -495,10 +684,91 @@ class SchneiderUsaController < ApplicationController
 	
 	
 	####HEALTH####################################################
+		def popsugar_health_usa
+			AutoPostRecord.where(site_name: "popsugar_health_usa").delete_all
+			set_doc("https://www.popsugar.com/Healthy-Living")
+			
+			@urls = @doc.css('#content-wrapper .ikb-post >a').map{ |url| url.attribute("href").to_s}	
+			
 
+			category_id = Category.find_by(name: "Health").id
+			country_id = Country.find_by(name: "United States").id
+			
+			@articles_count = 0
+			@urls.each do |url|
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares(@article, false, false)
+			end
+			
+			AutoPostRecord.create(site_name: "popsugar_health_usa", shared: @articles_count)
+		end	
+		def buzzfeed_health_usa
+			AutoPostRecord.where(site_name: "buzzfeed_health_usa").delete_all
+			set_doc("https://www.buzzfeed.com/health")
+			
+			@count = @doc.css('ul.grid-posts .grid-posts__item a.lede__link').count
+			@urls = @doc.css('ul.grid-posts .grid-posts__item a.lede__link').map{ |url| url.attribute("href").to_s}	
+			binding.pry
+			
+			category_id = Category.find_by(name: "Health").id
+			country_id = Country.find_by(name: "United States").id
+			
+
+			@articles_count = 0
+			@urls.each do |url|
+				url = "https://www.buzzfeed.com" + url 
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares_wo_tags(@article)
+			end	
+			AutoPostRecord.create(site_name: "buzzfeed_health_usa", shared: @articles_count)
+			
+		end	
 	
 	#######FOOODDDD########################################################	
+		def popsugar_food_usa
+			AutoPostRecord.where(site_name: "popsugar_food_usa").delete_all
+			set_doc("https://www.popsugar.com/food/")
+			
+			@urls = @doc.css('#content-wrapper article .post-image >a').map{ |url| url.attribute("href").to_s}	
+			
 
+			category_id = Category.find_by(name: "Food").id
+			country_id = Country.find_by(name: "United States").id
+			
+			@articles_count = 0
+			@urls.each do |url|
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares(@article, false, false)
+			end
+			
+			AutoPostRecord.create(site_name: "popsugar_food_usa", shared: @articles_count)
+		end	
+		
+		def buzzfeed_food_usa
+			AutoPostRecord.where(site_name: "buzzfeed_food_usa").delete_all
+			set_doc("https://www.buzzfeed.com/food")
+			
+			@count = @doc.css('ul.grid-posts .grid-posts__item a.lede__link').count
+			@urls = @doc.css('ul.grid-posts .grid-posts__item a.lede__link').map{ |url| url.attribute("href").to_s}	
+			binding.pry
+			
+			category_id = Category.find_by(name: "Food").id
+			country_id = Country.find_by(name: "United States").id
+			
+
+			@articles_count = 0
+			@urls.each do |url|
+				url = "https://www.buzzfeed.com" + url 
+				parseURL(url)
+				create_article(url, category_id, country_id)
+				create_shares_wo_tags(@article)
+			end	
+			AutoPostRecord.create(site_name: "buzzfeed_food_usa", shared: @articles_count)
+			
+		end	
 
 	#category==================================================================
 		def business

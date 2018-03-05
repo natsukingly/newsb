@@ -325,17 +325,35 @@ class Schneider
 					@article_published_time = doc.css('//meta[name="sailthru.date"]/@content').to_s
 				#for NHK
 				elsif !(doc.css('#main article.module--detail time').empty?)
+	
 					@article_published_time = doc.css('#main article.module--detail time').attribute("datetime").to_s
-				#for excite news
+				#for excite news and gunosy
 				elsif !(doc.css('//meta[itemprop="datePublished"]/@content').empty?)
 					@article_published_time = doc.css('//meta[itemprop="datePublished"]/@content').to_s
+				#for line blog
+				elsif !(doc.css('time[itemprop="datePublished"]/@datetime').empty?)
+					@article_published_time = doc.css('time[itemprop="datePublished"]/@datetime').to_s
 				#for tabilabo
 				elsif !(doc.css('.contents-container .article-date').empty?)
 					time = doc.css('.contents-container .article-date').to_s
-					@article_published_time = DateTime.parse(time)	
+					@article_published_time = DateTime.parse(time)
 				#for record china
 				elsif !(doc.css('#contents #microtime/@value').empty?)
 					@article_published_time = doc.css('#contents #microtime/@value').to_s
+				#for buzzfeed usa
+				elsif !(doc.css('header.buzz-header time').empty?)
+					@article_published_time = doc.css('header.buzz-header time').attribute("data-unix").to_s
+				#for diamond online
+				elsif !(doc.css('header.article-header time').empty?)
+					time = doc.css('header.article-header time').to_s
+					@article_published_time = DateTime.parse(time)
+				#for abc news
+				elsif !(doc.css('//meta[name="Last-Modified"]/@content').empty?)
+					@article_published_time = doc.css('//meta[name="Last-Modified"]/@content').to_s
+				#for livedoor 
+				elsif !(doc.css('#main .topicsHeader time').empty?)
+					time = doc.css('#main .topicsHeader time.topicsTime').inner_html
+					@article_published_time = Time.strptime(time,"%Y年 %m月 %d日 %H時%M分")
 				else
 					@article_published_time = ''
 				end
@@ -810,46 +828,63 @@ class Schneider
 			end		
 			
 			#############SPORTS@#############################################
-			def  excite_news_sports
-				AutoPostRecord.where(site_name: "excite_news_sports").delete_all
-				set_doc("https://www.excite.co.jp/News/sports_g/")
+			# def  excite_news_sports
+			# 	AutoPostRecord.where(site_name: "excite_news_sports").delete_all
+			# 	set_doc("https://www.excite.co.jp/News/sports_g/")
 				
-				@urls = @doc.css('.newsList dt.clear >a').map{ |url| url.attribute("href").to_s}
+			# 	@urls = @doc.css('.newsList dt.clear >a').map{ |url| url.attribute("href").to_s}
 		
-				category_id = Category.find_by(name: "Sports").id
-				country_id = Country.find_by(name: "Japan").id
+			# 	category_id = Category.find_by(name: "Sports").id
+			# 	country_id = Country.find_by(name: "Japan").id
 				
-				@articles_count = 0
-				@urls.each do |url|
-					url = "https://www.excite.co.jp" + url 
-					parseURL(url)
-					create_article(url, category_id, country_id)
-					create_shares(@article, false, false)
-				end	
-				AutoPostRecord.create(site_name: "excite_news_sports", shared: @articles_count)
+			# 	@articles_count = 0
+			# 	@urls.each do |url|
+			# 		url = "https://www.excite.co.jp" + url 
+			# 		parseURL(url)
+			# 		create_article(url, category_id, country_id)
+			# 		create_shares(@article, false, false)
+			# 	end	
+			# 	AutoPostRecord.create(site_name: "excite_news_sports", shared: @articles_count)
 						
-			end
+			# end
 			
-			def  excite_news_sports2
-				AutoPostRecord.where(site_name: "excite_news_sports2").delete_all
-				set_doc("https://www.excite.co.jp/News/soccer/")
+			# def  excite_news_sports2
+			# 	AutoPostRecord.where(site_name: "excite_news_sports2").delete_all
+			# 	set_doc("https://www.excite.co.jp/News/soccer/")
 				
-				@urls = @doc.css('.newsList dt.clear >a').map{ |url| url.attribute("href").to_s}
+			# 	@urls = @doc.css('.newsList dt.clear >a').map{ |url| url.attribute("href").to_s}
+		
+			# 	category_id = Category.find_by(name: "Sports").id
+			# 	country_id = Country.find_by(name: "Japan").id
+				
+			# 	@articles_count = 0
+			# 	@urls.each do |url|
+			# 		url = "https://www.excite.co.jp" + url 
+			# 		parseURL(url)
+			# 		create_article(url, category_id, country_id)
+			# 		create_shares(@article, false, false)
+			# 	end	
+			# 	AutoPostRecord.create(site_name: "excite_news_sports2", shared: @articles_count)
+						
+			# end	
+		
+			def livedoor_sports
+				AutoPostRecord.where(site_name: "livedoor_sports").delete_all
+				set_doc("http://news.livedoor.com/topics/category/sports/")
+				@urls = @doc.css('body#page-topics_category #container #main .mainBody li >a').map{ |url| url.attribute("href").to_s}
 		
 				category_id = Category.find_by(name: "Sports").id
 				country_id = Country.find_by(name: "Japan").id
 				
 				@articles_count = 0
 				@urls.each do |url|
-					url = "https://www.excite.co.jp" + url 
 					parseURL(url)
 					create_article(url, category_id, country_id)
 					create_shares(@article, false, false)
 				end	
-				AutoPostRecord.create(site_name: "excite_news_sports2", shared: @articles_count)
-						
+				AutoPostRecord.create(site_name: "livedoor_sports", shared: @articles_count)
 			end	
-		
+			
 			############FUNNY########################################################
 			def rocket_news_funny
 				AutoPostRecord.where(site_name: "rocket_news_funny").delete_all
@@ -1217,8 +1252,7 @@ class Schneider
 			end
 			
 			def sports
-				excite_news_sports
-				excite_news_sports2
+				livedoor_sports
 			end
 			
 			def funny
