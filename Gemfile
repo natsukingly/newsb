@@ -36,7 +36,7 @@ gem "jquery-turbolinks" # Turbolinksで遷移したときもjQuery.ready()を呼
 gem 'bootstrap-select-rails'
 gem 'counter_culture'
 gem 'whenever', require: false
-gem 'geocoder'
+gem 'geocoder', '~> 1.4.5'
 gem 'dotenv-rails'
 gem 'meta-tags'
 gem 'fog'
