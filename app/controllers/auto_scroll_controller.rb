@@ -114,12 +114,12 @@ class AutoScrollController < ApplicationController
 	#user
 	def load_weekly_users
 		@existing_users = params[:existing_users].to_i
-		@loaded_users = User.where(country_id: @country.id).order(weekly_liked_count: :desc).offset(@existing_users).limit(30)
+		@loaded_users = User.where(country_id: @country.id).order(liked_count: :desc, followers_count: :desc, created_at: :asc).offset(@existing_users).limit(30)
 	end
 	
 	def load_all_time_users
 		@existing_users = params[:existing_users].to_i
-		@loaded_users = User.where(country_id: @country.id).order(liked_count: :desc).offset(@existing_users).limit(30)
+		@loaded_users = User.where(country_id: @country.id).order(liked_count: :desc, followers_count: :desc, created_at: :asc).offset(@existing_users).limit(30)
 	end
 	
 	def load_followers
