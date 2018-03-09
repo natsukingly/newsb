@@ -44,10 +44,10 @@ class UsersController < ApplicationController
     if @user.save
       I18n.locale = @user.language.code
       flash[:notice] = t('flash.user.update_setting_success')
-      redirect_to cookies[:previous_url] || root_path
+      redirect_to root_path(country: @user.country.name)
     else
       flash[:alert] = t('flash.general_error')
-      redirect_to cookies[:previous_url] || root_path
+      redirect_to cookies[:previous_url] || root_path(country: @country.name)
     end
   end
   
@@ -206,7 +206,7 @@ class UsersController < ApplicationController
       @user.country_id = @country.id
       if @user.save
         flash[:notice] = t('flash.user.country_change_success')
-        redirect_to root_path
+        redirect_to root_path(country: @country.name)
       else
         flash[:alert] = t('flash.general_error')
         redirect_to root_path
