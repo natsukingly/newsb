@@ -208,7 +208,7 @@ module ApplicationHelper
             else
                 {
                     title: article.title,
-                    description: "Newsb! is the only social media platform specialized in news sharing. Ask questions and output your opinions.",
+                    description: "Newsb! is the social media platform specialized in news sharing. Ask questions and output your opinions.",
                     image_src: article.image.url || "http://www.newsbeee.com/images/newsb_img.png",
                     keywords: "News,ニュース,Newsb",
                     fb: {
