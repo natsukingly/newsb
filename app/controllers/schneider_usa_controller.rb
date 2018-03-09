@@ -97,8 +97,7 @@ class SchneiderUsaController < ApplicationController
 		#startup	
         when "techcrunch_startup_usa" then
             techcrunch_startup_usa	
-        when "techinasia_startup_usa" then
-            techinasia_startup_usa	
+
 		#tech	
         when "nypost_tech_usa" then
             nypost_tech_usa
@@ -479,7 +478,6 @@ class SchneiderUsaController < ApplicationController
 			
 			@urls = @doc.css('body #main-container .def-band article.headlines .headlines-ul li a').map{ |url| url.attribute("href").to_s}	
 			
-			binding.pry
 			category_id = Category.find_by(name: "International").id
 			country_id = Country.find_by(name: "United States").id
 			
@@ -709,7 +707,7 @@ class SchneiderUsaController < ApplicationController
 			
 			@count = @doc.css('ul.grid-posts .grid-posts__item a.lede__link').count
 			@urls = @doc.css('ul.grid-posts .grid-posts__item a.lede__link').map{ |url| url.attribute("href").to_s}	
-			binding.pry
+
 			
 			category_id = Category.find_by(name: "Health").id
 			country_id = Country.find_by(name: "United States").id
@@ -753,7 +751,7 @@ class SchneiderUsaController < ApplicationController
 			
 			@count = @doc.css('ul.grid-posts .grid-posts__item a.lede__link').count
 			@urls = @doc.css('ul.grid-posts .grid-posts__item a.lede__link').map{ |url| url.attribute("href").to_s}	
-			binding.pry
+
 			
 			category_id = Category.find_by(name: "Food").id
 			country_id = Country.find_by(name: "United States").id
@@ -773,38 +771,43 @@ class SchneiderUsaController < ApplicationController
 	#category==================================================================
 		def business
             huffpost_business_usa
+            nypost_business_usa
 		end
 				
 		def international
-
+			huffpost_international_usa
+			abc_international_usa 
 		end
 		
 		def startup
-
+			techcrunch_startup_usa	
 		end
 		
 		def tech
-
+			nypost_tech_usa
+			techcrunch_tech_usa
 		end
 		
 		def society
             huffpost_society_usa
+            abc_society_usa 
 		end
 		
 		def sports
-
+			nypost_sports_usa
 		end
 		
 		def funny
-
+			buzzfeed_funny_usa
 		end
 		
 		def entertainment
             huffpost_entertainment_usa
+            popsugar_entertainment_usa
 		end
 		
 		def relationships
-
+			popsugar_relationships_usa
 		end
 		
 		def music
@@ -812,10 +815,13 @@ class SchneiderUsaController < ApplicationController
 		end
 
 		def health
-
+			popsugar_health_usa
+			buzzfeed_health_usa
 		end
 		
 		def food
-
+			popsugar_food_usa
+			buzzfeed_food_usa
 		end	
+		
 end

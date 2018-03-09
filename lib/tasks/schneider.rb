@@ -621,8 +621,6 @@ class Schneider
 				
 			end
 			
-			
-			
 			def bridge_startup
 				AutoPostRecord.where(site_name: "bridge_startup").delete_all
 				set_doc("http://thebridge.jp/")

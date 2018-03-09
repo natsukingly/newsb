@@ -23,6 +23,8 @@ set :environment, :production
 every 8.hours do
   runner 'Schneider.hello'
   runner 'Schneider.auto_post'
+  runner 'SchneiderUsa.hello'
+  runner 'SchneiderUsa.auto_post'
 end
 
 every 24.hours do
