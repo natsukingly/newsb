@@ -84,7 +84,7 @@ module ApplicationHelper
             "google-site-verification" => "mKpyaltoD8JmVXTMskfu7YXb5soQsBaUGS39Zd71QfE",
             reverse: true,
             title: "Newsb!",
-            description: "Newsb! みんなで考えるニュース　毎日２００＋の記事を共有",
+            description: "Newsb! is the social media platform specialized in news sharing. Ask questions and output your opinions.",
             keywords: "News,ニュース,Newsb",
             viewport: "width=device-width, initial-scale=1.0" ,
             fb: {
@@ -105,7 +105,7 @@ module ApplicationHelper
             "google-site-verification" => "mKpyaltoD8JmVXTMskfu7YXb5soQsBaUGS39Zd71QfE",
             reverse: true,
             title: "Newsb!",
-            description: "Newsb! みんなで考えるニュース　毎日２００＋の記事を共有",
+            description: "Newsb! is the social media platform specialized in news sharing. Ask questions and output your opinions.",
             keywords: "News,ニュース,Newsb",
             viewport: "width=device-width, initial-scale=1.0" ,
             fb: {
@@ -123,59 +123,115 @@ module ApplicationHelper
         end
     end
     
-    def article_meta_tags(article)
+    def article_meta_tags(article, country)
         if Rails.env.development?
-            {
-                title: article.title,
-                description: "Newsb! みんなで考えるニュース　毎日２００＋の記事を共有",
-                image_src: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
-                keywords: "News,ニュース,Newsb",
-                fb: {
-                    app_id: ENV['FACEBOOK_KEY']
-                },
-                og: {
-                  title: :title,
-                  type: "article",
-                  url: "https://news-party-natsukingly.c9users.io/#{article.country.name}/articles/#{article.id}",
-                  image: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
-                  site_name: "Newsb!",
-                  description: :description,
-                },
-                twitter: {
-                    card: "summary_large_image",
-                    site: "Newsb!",
-                    creater: "Newsb!",
-                    title: :title,
-                    description: :description,
-                    image: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
+            if country == 'Japan'
+                {
+                    title: article.title,
+                    description: "Newsb! みんなで考えるニュース　毎日２００＋の記事を共有",
+                    image_src: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
+                    keywords: "News,ニュース,Newsb",
+                    fb: {
+                        app_id: ENV['FACEBOOK_KEY']
+                    },
+                    og: {
+                      title: :title,
+                      type: "article",
+                      url: "https://news-party-natsukingly.c9users.io/#{article.country.name}/articles/#{article.id}",
+                      image: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
+                      site_name: "Newsb!",
+                      description: :description,
+                    },
+                    twitter: {
+                        card: "summary_large_image",
+                        site: "Newsb!",
+                        creater: "Newsb!",
+                        title: :title,
+                        description: :description,
+                        image: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
+                    }
                 }
-            }
+            else
+                {
+                    title: article.title,
+                    description: "Newsb! is the social media platform specialized in news sharing. Ask questions and output your opinions.",
+                    image_src: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
+                    keywords: "News, Social Media,Newsb",
+                    fb: {
+                        app_id: ENV['FACEBOOK_KEY']
+                    },
+                    og: {
+                      title: :title,
+                      type: "article",
+                      url: "https://news-party-natsukingly.c9users.io/#{article.country.name}/articles/#{article.id}",
+                      image: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
+                      site_name: "Newsb!",
+                      description: :description,
+                    },
+                    twitter: {
+                        card: "summary_large_image",
+                        site: "Newsb!",
+                        creater: "Newsb!",
+                        title: :title,
+                        description: :description,
+                        image: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
+                    }
+                }   
+            end
         elsif Rails.env.production?
-            {
-                title: article.title,
-                description: "Newsb! みんなで考えるニュース　毎日２００＋の記事を共有",
-                image_src: article.image.url || "http://www.newsbeee.com/images/newsb_img.png",
-                keywords: "News,ニュース,Newsb",
-                fb: {
-                    app_id: ENV['FACEBOOK_KEY']
-                },
-                og: {
-                  title: :title,
-                  type: "article",
-                  url: "http://www.newsbeee.com/#{article.country.name}/articles/#{article.id}", 
-                  image: article.image.url || "http://www.newsbeee.com/images/newsb_img.png",
-                  site_name: "Newsb!",
-                  description: :description,
-                },
-                twitter: {
-                    card: "summary_large_image",
-                    site: "Newsb!",
-                    creater: "Newsb!",
-                    title: :title,
-                    description: :description,
-                    image: article.image.url || "http://www.newsbeee.com/images/newsb_img.png",
+            if country == "Japan"
+                {
+                    title: article.title,
+                    description: "Newsb! みんなで考えるニュース　毎日２００＋の記事を共有",
+                    image_src: article.image.url || "http://www.newsbeee.com/images/newsb_img.png",
+                    keywords: "News,ニュース,Newsb",
+                    fb: {
+                        app_id: ENV['FACEBOOK_KEY']
+                    },
+                    og: {
+                      title: :title,
+                      type: "article",
+                      url: "http://www.newsbeee.com/#{article.country.name}/articles/#{article.id}", 
+                      image: article.image.url || "http://www.newsbeee.com/images/newsb_img.png",
+                      site_name: "Newsb!",
+                      description: :description,
+                    },
+                    twitter: {
+                        card: "summary_large_image",
+                        site: "Newsb!",
+                        creater: "Newsb!",
+                        title: :title,
+                        description: :description,
+                        image: article.image.url || "http://www.newsbeee.com/images/newsb_img.png",
+                    }
                 }
-            }
+            else
+                {
+                    title: article.title,
+                    description: "Newsb! is the only social media platform specialized in news sharing. Ask questions and output your opinions.",
+                    image_src: article.image.url || "http://www.newsbeee.com/images/newsb_img.png",
+                    keywords: "News,ニュース,Newsb",
+                    fb: {
+                        app_id: ENV['FACEBOOK_KEY']
+                    },
+                    og: {
+                      title: :title,
+                      type: "article",
+                      url: "http://www.newsbeee.com/#{article.country.name}/articles/#{article.id}", 
+                      image: article.image.url || "http://www.newsbeee.com/images/newsb_img.png",
+                      site_name: "Newsb!",
+                      description: :description,
+                    },
+                    twitter: {
+                        card: "summary_large_image",
+                        site: "Newsb!",
+                        creater: "Newsb!",
+                        title: :title,
+                        description: :description,
+                        image: article.image.url || "http://www.newsbeee.com/images/newsb_img.png",
+                    }
+                }
+            end
         end
     end
     
