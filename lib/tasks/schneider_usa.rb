@@ -56,67 +56,6 @@ class SchneiderUsa
 			end	
 		end
 
-		def auto_post_by_item
-			item = params[:item]
-			case item 
-			#business
-			when "huffpost_business_usa" then 
-				huffpost_business_usa
-	        when "nypost_business_usa" then
-	            nypost_business_usa
-			#startup	
-	        when "techcrunch_startup_usa" then
-	            techcrunch_startup_usa	
-	
-			#tech	
-	        when "nypost_tech_usa" then
-	            nypost_tech_usa
-	        when "techcrunch_tech_usa" then
-	            techcrunch_tech_usa
-			#society	
-	        when "huffpost_society_usa" then
-	            huffpost_society_usa
-	        when "abc_society_usa" then
-	            abc_society_usa         
-	            
-	        #international
-	        when "huffpost_international_usa" then
-	            huffpost_international_usa
-	        when "abc_international_usa" then
-	            abc_international_usa          
-			#sports	
-	        when "nypost_sports_usa" then
-	            nypost_sports_usa
-			#funny	
-			when "buzzfeed_funny_usa" then
-				buzzfeed_funny_usa
-			#entertainment	
-	        when "huffpost_entertainment_usa" then
-	            huffpost_society_usa
-	            
-	        when "popsugar_entertainment_usa" then
-	        	 popsugar_entertainment_usa
-			#relatinships	
-			when "popsugar_relationships_usa" then
-				popsugar_relationships_usa
-			#music movie		
-	
-			#health	
-			when "popsugar_health_usa" then
-				popsugar_health_usa
-			when "buzzfeed_health_usa" then
-				buzzfeed_health_usa
-			#food
-			when "popsugar_food_usa" then
-				popsugar_food_usa
-			when "buzzfeed_food_usa" then
-				buzzfeed_food_usa
-			else
-			end
-			
-			
-		end
-
 	##############PRIVATE###############################
 		private 
 			def set_doc(site_url)
