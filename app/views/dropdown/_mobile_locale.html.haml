@@ -35,14 +35,12 @@
 						=render "svg/flags/japan"
 						%span.country_name
 							=t('country.japan')
-				=link_to change_country_path(country_name: "United States"), class: "disabled country_link menu_item", data: {country_name: "United States"}, method: :post do
+				=link_to change_country_path(country_name: "United States"), class: "country_link menu_item", data: {country_name: "United States"}, method: :post do
 					.menu_item_left
 						=render "svg/flags/usa"
 						%span.country_name
 							=t('country.united_states')
-					%span.coming_soon
-						=t('state.coming_soon')
-							
+
 				=link_to change_country_path(country_name: "United States"), class: "disabled country_link menu_item", data: {country_name: "United Kingdom"}, method: :post do
 					.menu_item_left
 						=render "svg/flags/uk"
