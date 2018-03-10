@@ -128,7 +128,7 @@ module ApplicationHelper
             if country == 'Japan'
                 {
                     title: article.title,
-                    description: "Newsb! みんなで考えるニュース　毎日２００＋の記事を共有",
+                    description: "配信元： #{article.source}, リンク先：Newsb!ニュースの為のSNS",
                     image_src: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
                     keywords: "News,ニュース,Newsb",
                     fb: {
@@ -154,7 +154,7 @@ module ApplicationHelper
             else
                 {
                     title: article.title,
-                    description: "Newsb! is the social media platform specialized in news sharing. Ask questions and output your opinions.",
+                    description: "Source： #{article.source}, Link：Newsb! the social media specialized in news sharing.",
                     image_src: article.image.url || "https://news-party-natsukingly.c9users.io/images/newsb_img.png",
                     keywords: "News, Social Media,Newsb",
                     fb: {
