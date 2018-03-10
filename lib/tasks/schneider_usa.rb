@@ -692,12 +692,10 @@ class SchneiderUsa
 			end
 			
 			def startup
-				# techcrunch_startup_usa	
 			end
 			
 			def tech
 				nypost_tech_usa
-				# techcrunch_tech_usa
 			end
 			
 			def society
