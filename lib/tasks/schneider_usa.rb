@@ -708,7 +708,7 @@ class SchneiderUsa
 			end
 			
 			def funny
-				buzzfeed_funny_usa
+				# buzzfeed_funny_usa
 			end
 			
 			def entertainment
