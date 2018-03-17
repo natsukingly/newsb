@@ -1230,14 +1230,14 @@ class Schneider
 			def startup
 				forbes_startup
 				bridge_startup
-				techcrunch_startup
+				# techcrunch_startup
 				startup_startup
 			end
 			
 			def tech
 				itmedia_tech
-				techcrunch_tech1
-				techcrunch_tech2
+				# techcrunch_tech1
+				# techcrunch_tech2
 				jcast_tech
 			end
 			
