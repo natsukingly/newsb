@@ -1,49 +1,50 @@
-.comment{class: "comment_#{comment.id}", data: {comment_id: "#{comment.id}"}}
-	.body
-		.user_block
-			.user_image_sm
-				=user_image_helper(comment.user)
-			.user_info
-				.user_name
-					=link_to comment.user do
-						%span.user_name.bold
-							=comment.user.name
-					%p.user_credential
-						-unless comment.user.credential.nil?
-							#{comment.user.credential}
-						%span.time
-							#{time_ago_in_words(comment.created_at)}
-		.content_block
-			%span.opinion.comment_opinion
-				=simple_format(comment.content)
-			.status
-				.comment_like_block
-					=render '/likes/like_comment', comment: comment
-				.option
-					-if current_user
-						%i.fa.fa-ellipsis-v.comment_option_link
-						=render 'dropdown/comment_option', comment: comment
-					-else
-						%i.fa.fa-ellipsis-v.comment_option_link.login_signup_link
-			
-:javascript 
-	// $(".comment_read_more_#{comment.id}").click(function(){
-	// 	$(this).parents('.content').html("#{ escape_javascript(simple_format(comment.content))}");
-	// });
-
-	$('.comment_option_link').click(function () {
-			var height = $(this).parents(".comment").find('.opinion').css("height");
-			$(this).parents(".comment").find('.opinion').attr("data-height", height);
-			// ボタンが押されたら、モーダルウィンドウを表示
-			$(".ddm").hide();
-			$(this).parents(".comment").find('.comment_ddm').css("display", "flex");
-			
-			return false;
-	});
+-if comment.user != nil
+	.comment{class: "comment_#{comment.id}", data: {comment_id: "#{comment.id}"}}
+		.body
+			.user_block
+				.user_image_sm
+					=user_image_helper(comment.user)
+				.user_info
+					.user_name
+						=link_to comment.user do
+							%span.user_name.bold
+								=comment.user.name
+						%p.user_credential
+							-unless comment.user.credential.nil?
+								#{comment.user.credential}
+							%span.time
+								#{time_ago_in_words(comment.created_at)}
+			.content_block
+				%span.opinion.comment_opinion
+					=simple_format(comment.content)
+				.status
+					.comment_like_block
+						=render '/likes/like_comment', comment: comment
+					.option
+						-if current_user
+							%i.fa.fa-ellipsis-v.comment_option_link
+							=render 'dropdown/comment_option', comment: comment
+						-else
+							%i.fa.fa-ellipsis-v.comment_option_link.login_signup_link
+				
+	:javascript 
+		// $(".comment_read_more_#{comment.id}").click(function(){
+		// 	$(this).parents('.content').html("#{ escape_javascript(simple_format(comment.content))}");
+		// });
 	
-	$('body').click(function (event) {
-	  if(!$(event.target).closest('.comment_ddm').length && !$(event.target).is('.comment_ddm')) {
-			$(".comment_ddm").hide();
-	  }     
-	});
-
+		$('.comment_option_link').click(function () {
+				var height = $(this).parents(".comment").find('.opinion').css("height");
+				$(this).parents(".comment").find('.opinion').attr("data-height", height);
+				// ボタンが押されたら、モーダルウィンドウを表示
+				$(".ddm").hide();
+				$(this).parents(".comment").find('.comment_ddm').css("display", "flex");
+				
+				return false;
+		});
+		
+		$('body').click(function (event) {
+		  if(!$(event.target).closest('.comment_ddm').length && !$(event.target).is('.comment_ddm')) {
+				$(".comment_ddm").hide();
+		  }     
+		});
+	
