@@ -9,7 +9,7 @@ class User < ApplicationRecord
 	has_many :social_profiles, dependent: :destroy
 	has_many :posts, dependent: :destroy
 	has_many :post_drafts, dependent: :delete_all
-	has_many :comments
+	has_many :comments, dependent: :delete_all
 	has_many :replies
 	has_many :likes, dependent: :delete_all
 	has_many :notifications, dependent: :nullify
